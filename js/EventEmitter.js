@@ -1,7 +1,10 @@
 /**
  * @author 어진석(Eo Jinseok)
  * @date 2020.10.30
+ * @version v1.0.0
  * @description
+ * v1.0.0(2020.10.30)
+ *  -
  * @example
  * 
  * const emitter = new EventEmitter();
