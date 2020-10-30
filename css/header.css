@@ -1,6 +1,6 @@
 header {
     width: var(--main-container-width);
-    height: 4em;
+    height: 8em;
     background: linear-gradient(to bottom, #FFFFFF 0%, #F1F1F1 100%);
     overflow: hidden;
     position: fixed;
@@ -9,7 +9,19 @@ header {
     top: 0;
     bottom : 0;
 
+    background: #F3F7FA;
+}
+
+.header-wrapper {
+    width: var(--main-container-width);
+    height: 4em;
+
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center;   
+    
+    background-color: #fff;
+
+    border: 1px solid #E5E5E5;
 }
+
