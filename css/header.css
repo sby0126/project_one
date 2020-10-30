@@ -1,0 +1,15 @@
+header {
+    width: var(--main-container-width);
+    height: 4em;
+    background: linear-gradient(to bottom, #FFFFFF 0%, #F1F1F1 100%);
+    overflow: hidden;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom : 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
