@@ -1,3 +1,11 @@
+/**
+ * @version 1.0.0
+ * @author 
+ *         Eo Jinseok
+ *
+ *
+ */
+
 header {
     width: var(--main-container-width);
     height: 8em;
@@ -24,6 +32,11 @@ header {
 
     border: 1px solid #E5E5E5;
     border-top: 0;
+}
+
+.header-left {
+    height: 4em;
+    line-height: 4em;;
 }
 
 .header-right {
