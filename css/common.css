@@ -1,0 +1,40 @@
+/**
+ * @version 1.0.0
+ * @author 
+ *         Eo Jinseok
+ *
+ *
+ */
+
+:root {
+    --main-container-width: 100vw;
+    --main-container-height: auto;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: var(--main-container-width);
+    height: var(--main-container-height);
+    margin: 0 auto;
+    padding: 0;
+    border: 1px solid #ccc;
+    overflow: hidden;
+    position: relative;
+}
+
+header {
+    width: var(--main-container-width);
+    height: 3em;
+    background: linear-gradient(to bottom, #FFFFFF 0%, #F1F1F1 100%);
+    overflow: hidden;
+    position: relative;
+}
+
+a {
+    color: var(--text-color);
+    text-decoration: #bebebe;
+}
