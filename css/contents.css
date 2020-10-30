@@ -1,6 +1,37 @@
 /**
  * @version 1.0.0
  * @author 
+ *          Eo Jinseok
  *         
  * 본문 영역에 적용될 CSS를 적용해주세요.
  */
+
+section {
+    width: 100vw;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.contents-wrapper {
+    width: 60%;
+    margin-top: var(--header-box-height);
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.card-container {
+    width: 100%;
+    display: flex;
+    flex: 1 1 0;
+    justify-content: space-between;
+    margin-bottom: 1em;
+}
+
+.card-container > .card {
+    min-width: 200px;
+    height: 180px;
+    background: #fff;
+    border-bottom: 1px solid #E0E4E6;
+}

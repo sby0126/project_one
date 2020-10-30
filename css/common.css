@@ -11,6 +11,8 @@
 :root {
     --main-container-width: 100vw;
     --main-container-height: auto;
+    
+    --header-box-height: 10em;
 }
 
 * {

@@ -8,7 +8,7 @@
 
 header {
     width: var(--main-container-width);
-    height: 8em;
+    height: var(--header-box-height);
     background: linear-gradient(to bottom, #FFFFFF 0%, #F1F1F1 100%);
     overflow: hidden;
     position: fixed;
@@ -16,6 +16,8 @@ header {
     right: 0;
     top: 0;
     bottom : 0;
+
+    opacity: 0.6;
 
     background: #F3F7FA;
 }
