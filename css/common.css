@@ -9,9 +9,8 @@
  */
 
 :root {
-    --main-container-width: 100vw;
-    --main-container-height: auto;
-    
+    --main-container-width: 100%;
+    --main-container-height: auto;    
     --header-box-height: 12em;
 }
 
@@ -21,6 +20,7 @@
 }
 
 body {
+    width: var(--main-container-width);
     margin: 0;
     padding: 0;
     background-color: #F3F7FA;
@@ -31,7 +31,6 @@ body {
     height: var(--main-container-height);
     margin: 0 auto;
     padding: 0;
-    border: 1px solid #ccc;
     overflow: hidden;
     position: relative;
 }

@@ -7,3 +7,24 @@
  * 우측 로그인 바에 대한 스타일 시트를 적용해주세요.
  * 이 요소는 처음에는 보이지 않으며 z-index가 다른 요소보다 높아야 합니다.
  */
+
+#light-box-container {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #252526;
+    opacity: 0.4;
+    z-index: 100;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    display: none;
+}
+
+.light-box-container.active {
+    display: block;
+}
