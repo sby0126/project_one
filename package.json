@@ -1,0 +1,28 @@
+{
+  "name": "project_one",
+  "version": "1.0.0",
+  "description": "분할 작업을 할 수 있게 CSS 파일을 분할하였습니다.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/biud436/project_one.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/biud436/project_one/issues"
+  },
+  "homepage": "https://github.com/biud436/project_one#readme",
+  "devDependencies": {
+    "css-loader": "^4.3.0",
+    "file-loader": "^6.1.0",
+    "html-webpack-plugin": "^4.5.0",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
+  }
+}
