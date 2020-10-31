@@ -30,8 +30,8 @@ section {
 }
 
 .card-container > .card {
-    min-width: 200px;
-    height: 180px;
+    min-width: 12em;
+    height: 11em;
     background: #fff;
     border-bottom: 1px solid #E0E4E6;
 }
@@ -44,8 +44,8 @@ section {
 
 .card-container > .card p::before {
     content: "";
-    width: 128px;
-    height: 128px;
+    width: 8em;
+    height: 8em;
     background: url("https://dummyimage.com/128x128/000/fff");
     position: absolute;
     border-radius: 50%;

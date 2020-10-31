@@ -38,12 +38,31 @@ header {
 }
 
 .header-left {
+    width: 12em;
     height: 4em;
-    line-height: 4em;;
+    line-height: 4em;
+    display: flex;
+    flex-direction: row;
+}
+
+.header-left img {
+    display: inline;
+    height: auto;
+}
+
+.header-left a {
+    margin: 0 auto;
 }
 
 .header-right {
     height: 100%;
+}
+
+.header-right-login-button {
+    outline: none;
+    background: #fff;
+    border: none;
+    cursor: pointer;
 }
 
 input[type="text"] {
@@ -67,4 +86,81 @@ input[type="text"]:focus {
 
 ::placeholder {
     color: #999999;
+}
+
+.header-filter-box {
+    width: 100vw;
+    height: 25vh;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.header-filter-box-wrapper {
+    width: 60%;
+    height: 6em; /** 6em = 96px */
+    overflow: hidden;
+    padding: 0;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.header-filter-box-header {
+    min-width: 100%;
+    line-height: 2em; /** 2em = 32px */
+    margin-bottom: 0.5em; /** 0.5em = 8px */
+    display: table;
+    border-collapse: collapse;     
+    justify-content: stretch;
+    overflow: hidden; 
+}
+
+.header-filter-box-header > button {
+    width: calc(50% - 0.3125rem); /** 0.3125rem = 5px */
+    height: 3em;
+    line-height: 3em; /** 3em = 48px */
+    padding: 0;
+    margin: 0;
+    outline: none;
+    border: 1px solid #E0E4E6;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.header-filter-box-header > button.active {
+    background-color: #FFFFFF;
+    color: #FF6B00;
+}
+
+.header-filter-box-footer {
+    width: 100%;
+    line-height: 2em;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-filter-box-footer-right {
+    display: flex;
+    justify-content: space-around;
+}
+
+.header-filter-box-footer-right span {
+    width: 4em;
+    min-height: 4em;
+    font-size: 0.5em;
+    line-height: 4em;
+    border: 1px solid #E0E4E6;
+    background-color: #F3F7FA;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.header-filter-box-footer-right span.active {
+    background-color: #fff;
+    color: #FF6B00;
 }
