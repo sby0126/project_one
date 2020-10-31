@@ -33,7 +33,7 @@ section {
 
 .card-container > .card {
     min-width: 12em;
-    height: 11em;
+    height: 18em;
     background: #fff;
     border-bottom: 1px solid #E0E4E6;
 }
