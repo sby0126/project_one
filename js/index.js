@@ -16,7 +16,33 @@ class App extends EventEmitter {
         this._pendingList = [
             `view/login.html`,
         ];
-        
+
+        this.addEventListeners();
+    }
+
+    addEventListeners() {
+        this.on("loginView:ready", () => {
+            const loginButton = document.querySelector(".header-right-login-button");
+            const loginView = document.querySelector(".floating-login-view-wrapper");
+            loginButton.addEventListener("click", () => {
+                const styled = getComputedStyle(loginView);
+
+                if(parseInt(styled.left) != 0) {
+                    loginView.style.left = "0";
+                } else {
+                    loginView.style.left = "9999px";
+                }
+            });
+
+            const btn = document.querySelector("#close-login-view");
+            btn.addEventListener("click", () => {
+                loginView.style.left = "9999px";
+            })
+        });        
+    }
+
+    onLoad() {
+        this.emit("loginView:ready");
     }
 
     /**
@@ -26,21 +52,21 @@ class App extends EventEmitter {
         const idx = location.href.lastIndexOf("/");
         const path = location.href.substring(0, idx);
 
-        this._pendingList.forEach(async (i) => {
+        for await(let i of this._pendingList) {
             await this.loadHTML(`${path}/${i}`)
             .then(result => {
                 const container = document.querySelector(".container");
                 const divElem = document.createElement("div");
                 divElem.innerHTML = result;
     
-                divElem.style.display = "none";
-    
                 container.appendChild(divElem);
     
             }).catch(err => {
                 console.warn(err);
             })
-        });
+        }
+
+        this.onLoad();
     }
 
     /**

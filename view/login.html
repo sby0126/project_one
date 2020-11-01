@@ -9,7 +9,7 @@
         
         .floating-login-view-wrapper {
             position: fixed;
-            left: 0;
+            left: 9999px;
             right: 0;
             top: 0;
             bottom: 0;
@@ -20,6 +20,7 @@
             flex-direction: row-reverse;
             justify-content: right;
             align-items: flex-start;
+            transition: all .3s ease-in;
         }
 
         .floating-login-view {
@@ -29,11 +30,28 @@
             opacity: 0.8;
         } 
 
+        .floating-login-view-right {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+        }
+
+        #close-login-view {
+            background: none;
+            border: none;
+            outline: none;
+            padding: 0.5em;
+            font-size: 1em;
+        }
+
     </style>
 </head>
 <body>
     <div class="floating-login-view-wrapper">
         <div class="floating-login-view">
+            <div class="floating-login-view-right">
+                <button id="close-login-view">X</button>
+            </div>
             <form action="login.jsp">
                 <legend>로그인 폼</legend>
                 <p><label for="id">ID : </label><input type="text" name="id" id="floating-login-view-login-id"></p>
@@ -41,7 +59,6 @@
                 <p><input type="submit" value="Login"></p>
             </form>
         </div>
-
     </div>
 </body>
 </html>
