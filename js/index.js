@@ -31,11 +31,16 @@ class App extends EventEmitter {
 
         // 가상 요소의 스타일을 변경합니다.
         const menuItems = Array.from(document.querySelectorAll(".header-center > a"));
-        menuItems.forEach(i => {
+        menuItems.forEach((i, idx) => {
             i.addEventListener("click", ev => {
                 const parentRect = document.querySelector(".header-center").getBoundingClientRect();
                 const rect = i.getBoundingClientRect();
-                cssRuleSet(".header-center::after", "left", (rect.left - parentRect.x) + "px");
+                const pos = (rect.left - parentRect.x);
+                const targetRect = menuItems[menuItems.length - idx - 1].getBoundingClientRect();
+                const targetPos = (targetRect.left - parentRect.x);
+                const color = (180 + Math.floor(75 * targetPos / parentRect.width)).toString(16);
+                cssRuleSet(".header-center::after", "border-bottom", `4px solid #${color}6B00`);
+                cssRuleSet(".header-center::after", "left", pos + "px");
             });
         });
     }
