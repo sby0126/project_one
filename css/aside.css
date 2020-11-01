@@ -8,6 +8,7 @@
  * 이 요소는 처음에는 보이지 않으며 z-index가 다른 요소보다 높아야 합니다.
  */
 
+/* 화면을 어둡게 만드는 라이트 박스 컨테이너입니다. */
 #light-box-container {
     width: 100vw;
     height: 100vh;
@@ -26,4 +27,47 @@
 
 #light-box-container.active {
     left: 0;
+}
+
+/* 우측 로그인 바를 감싸고 있는 래퍼입니다 */
+.floating-login-view-wrapper {
+    position: fixed;
+    left: 9999px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 200;
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: row-reverse;
+    justify-content: right;
+    align-items: flex-start;
+    transition: all .4s ease-in;
+}
+
+.floating-login-view {
+    width: max-content;
+    min-height: 100%;
+    background-color: #fff;
+    opacity: 0.8;
+} 
+
+.floating-login-view input {
+    background: #d2d2d2;
+}
+
+.floating-login-view-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+/** 로그인 페이지에서 우측 상단 닫기 버튼 */
+#close-login-view {
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0.5em;
+    font-size: 1em;
 }
