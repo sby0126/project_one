@@ -29,17 +29,15 @@ class App extends EventEmitter {
 
         this.addEventListeners();
 
+        // 가상 요소의 스타일을 변경합니다.
         const menuItems = Array.from(document.querySelectorAll(".header-center > a"));
-        const slideBar = getComputedStyle(document.querySelector(".header-center"), "::after")
         menuItems.forEach(i => {
             i.addEventListener("click", ev => {
-                ev.preventDefault();
                 const parentRect = document.querySelector(".header-center").getBoundingClientRect();
                 const rect = i.getBoundingClientRect();
                 cssRuleSet(".header-center::after", "left", (rect.left - parentRect.x) + "px");
-                console.log( (rect.left - parentRect.x) );
             });
-        })
+        });
     }
 
     addEventListeners() {
