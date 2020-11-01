@@ -1,4 +1,5 @@
 import {EventEmitter} from "./EventEmitter.js";
+import {cssRuleSet} from "./styleRules.js";
 
 /**
  * @author Eo Jinseok
@@ -27,6 +28,18 @@ class App extends EventEmitter {
         ];
 
         this.addEventListeners();
+
+        const menuItems = Array.from(document.querySelectorAll(".header-center > a"));
+        const slideBar = getComputedStyle(document.querySelector(".header-center"), "::after")
+        menuItems.forEach(i => {
+            i.addEventListener("click", ev => {
+                ev.preventDefault();
+                const parentRect = document.querySelector(".header-center").getBoundingClientRect();
+                const rect = i.getBoundingClientRect();
+                cssRuleSet(".header-center::after", "left", (rect.left - parentRect.x) + "px");
+                console.log( (rect.left - parentRect.x) );
+            });
+        })
     }
 
     addEventListeners() {

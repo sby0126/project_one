@@ -57,6 +57,18 @@ header {
 /* 헤더 중앙에 있는 메뉴 아이템 */
 .header-center {
     margin-left: 2em;
+    position: relative;
+}
+
+.header-center::after {
+    content: "";
+    width: 2.6em;
+    height: 0;
+    position: absolute;
+    left: 0;
+    bottom: calc(-1.5em + 4px / 2);
+    border-bottom: 4px solid #FF6B00;
+    transition: all .2s ease-in;
 }
 
 .header-center > a {
