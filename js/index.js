@@ -14,7 +14,16 @@ class App extends EventEmitter {
          * 동적으로 삽입할 페이지의 경로를 기입해주세요.
          */
         this._pendingList = [
-            `view/login.html`,
+            {
+                src: `view/login.html`,
+                parent: ".container",
+                isCreateNewDiv: true,
+            },
+            {
+                src: `view/shop.html`,
+                parent: ".contents-wrapper",
+                isCreateNewDiv: false,
+            }
         ];
 
         this.addEventListeners();
@@ -42,11 +51,17 @@ class App extends EventEmitter {
                 lightBox.classList.remove("active");
                 loginView.style.left = "9999px";
             })
-        });        
+        });      
+        
+        this.on("shop:ready", () => {
+            const wrapper = document.querySelector(".contents-wrapper");
+            // wrapper.remove();
+        });
     }
 
     onLoad() {
         this.emit("loginView:ready");
+        this.emit("shop:ready");
     }
 
     /**
@@ -57,13 +72,17 @@ class App extends EventEmitter {
         const path = location.href.substring(0, idx);
 
         for await(let i of this._pendingList) {
-            await this.loadHTML(`${path}/${i}`)
+            await this.loadHTML(`${path}/${i.src}`)
             .then(result => {
-                const container = document.querySelector(".container");
-                const divElem = document.createElement("div");
-                divElem.innerHTML = result;
-    
-                container.appendChild(divElem);
+                const container = document.querySelector(i.parent);
+
+                if(i.isCreateNewDiv) {
+                    const newDiv = document.createElement("div");
+                    newDiv.innerHTML = result;
+                    container.appendChild(newDiv);
+                } else {
+                    container.innerHTML = result;
+                }
     
             }).catch(err => {
                 console.warn(err);
