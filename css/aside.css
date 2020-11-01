@@ -12,19 +12,18 @@
     width: 100vw;
     height: 100vh;
     position: fixed;
-    left: 0;
+    left: -9999px;
     top: 0;
     right: 0;
     bottom: 0;
     background-color: #252526;
     opacity: 0.4;
-    z-index: 100;
+    z-index: 150;
     padding: 0;
     margin: 0;
     overflow: hidden;
-    display: none;
 }
 
-.light-box-container.active {
-    display: block;
+#light-box-container.active {
+    left: 0;
 }

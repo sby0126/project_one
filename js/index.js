@@ -24,18 +24,22 @@ class App extends EventEmitter {
         this.on("loginView:ready", () => {
             const loginButton = document.querySelector(".header-right-login-button");
             const loginView = document.querySelector(".floating-login-view-wrapper");
+            const lightBox = document.querySelector("#light-box-container");
             loginButton.addEventListener("click", () => {
                 const styled = getComputedStyle(loginView);
 
                 if(parseInt(styled.left) != 0) {
+                    lightBox.classList.add("active");
                     loginView.style.left = "0";
                 } else {
+                    lightBox.classList.remove("active");
                     loginView.style.left = "9999px";
                 }
             });
 
             const btn = document.querySelector("#close-login-view");
             btn.addEventListener("click", () => {
+                lightBox.classList.remove("active");
                 loginView.style.left = "9999px";
             })
         });        
