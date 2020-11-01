@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        
+        .floating-login-view-wrapper {
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            z-index: 200;
+            display: flex;
+            flex: 1 1 0;
+            flex-direction: row-reverse;
+            justify-content: right;
+            align-items: flex-start;
+        }
+
+        .floating-login-view {
+            width: max-content;
+            min-height: 100%;
+            background-color: #D2D2D2;
+            opacity: 0.8;
+        } 
+
+    </style>
+</head>
+<body>
+    <div class="floating-login-view-wrapper">
+        <div class="floating-login-view">
+            <form action="login.jsp">
+                <legend>로그인 폼</legend>
+                <p><label for="id">ID : </label><input type="text" name="id" id="floating-login-view-login-id"></p>
+                <p><label for="pw">PW : </label><input type="password" name="id" id="floating-login-view-login-pw"></p>
+                <p><input type="submit" value="Login"></p>
+            </form>
+        </div>
+
+    </div>
+</body>
+</html>

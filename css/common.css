@@ -8,6 +8,8 @@
  * 
  */
 
+
+/* 모든 CSS 파일에서 공통적으로 사용할 수 있는 CSS 변수입니다. */
 :root {
     --main-container-width: 100%;
     --main-container-height: auto;    
@@ -26,6 +28,7 @@ body {
     background-color: #F3F7FA;
 }
 
+/* 컨테이너입니다 */
 .container {
     width: var(--main-container-width);
     height: var(--main-container-height);

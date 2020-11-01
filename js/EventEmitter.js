@@ -1,5 +1,5 @@
 /**
- * @author 어진석(Eo Jinseok)
+ * @author Eo Jinseok
  * @date 2020.10.30
  * @version v1.0.0
  * @description
@@ -16,7 +16,7 @@
  *  emitter.emit("ready", "테스트");
  * }
  */
-class EventEmitter {
+export class EventEmitter {
 
     constructor() {
         this._events = {};

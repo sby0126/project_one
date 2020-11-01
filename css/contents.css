@@ -6,6 +6,8 @@
  * 본문 영역에 적용될 CSS를 적용해주세요.
  */
 
+
+/* 전체 본문 섹션의 크기를 지정합니다. */
 section {
     width: 100%;
     margin: 0 auto;
@@ -16,6 +18,9 @@ section {
     justify-content: center;
 }
 
+/* 본문 섹션을 감싸고 있는 래퍼입니다.
+   플렉스 박스의 아이템 정렬을 위해 존재합니다. 
+ */
 .contents-wrapper {
     width: 60%;
     margin-top: var(--header-box-height);
@@ -23,6 +28,7 @@ section {
     flex-direction: column;
 }
 
+/* 그리드 아이템의 정렬 방법을 지정하는 컨테이너입니다. */
 .card-container {
     width: 100%;
     display: flex;
@@ -31,6 +37,7 @@ section {
     margin-bottom: 1em;
 }
 
+/* 그리드 카드의 크기를 지정합니다. */
 .card-container > .card {
     min-width: 12em;
     height: 18em;
@@ -44,6 +51,8 @@ section {
     position: relative;
 }
 
+/* 그리드 카드 중앙의 원형 이미지를 나타내는 가상 요소입니다.
+레이아웃을 잡기 위해 임의로 만들어진 것으로 추후 삭제가 필요합니다. */
 .card-container > .card p::before {
     content: "";
     width: 8em;
