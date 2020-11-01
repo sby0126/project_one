@@ -15,12 +15,12 @@ class App extends EventEmitter {
          */
         this._pendingList = [
             {
-                src: `view/login.html`,
+                src: `pages/login.html`,
                 parent: ".container",
                 isCreateNewDiv: true,
             },
             {
-                src: `view/shop.html`,
+                src: `pages/shop.html`,
                 parent: ".contents-wrapper",
                 isCreateNewDiv: false,
             }
