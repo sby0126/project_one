@@ -35,6 +35,8 @@ section {
     flex: 1 1 0;
     justify-content: space-around;
     margin-bottom: 1em;
+    flex-direction: column;
+    flex-flow: wrap;
 }
 
 /* 그리드 카드의 크기를 지정합니다. */
@@ -65,7 +67,7 @@ section {
     z-index: 0;
 }
 
-@media only screen and (min-width: 320px) {
+/* @media only screen and (min-width: 320px) {
     .card-container > .card {
         min-width: 3em;
         height: 4em; 
@@ -76,7 +78,11 @@ section {
     }
 }
 
-@media only screen and (min-width: 480px) {
+@media only screen and (max-width: 480px) {
+    .card-container {
+        display: flex;
+        flex-direction: row;
+    }          
     .card-container > .card {
         min-width: 4em;
         height: 5em; 
@@ -85,9 +91,13 @@ section {
         width: 2em;
         height: 2em;
     }
+    .card-container {
+        flex-direction: row;
+    }  
+}
 }
 
-@media only screen and (min-width: 640px) {
+@media only screen and (max-width: 640px) {
     .card-container > .card {
         min-width: 7em;
         height: 18em; 
@@ -96,6 +106,10 @@ section {
         width: 4em;
         height: 4em;
     }
+    .card-container {
+        flex-direction: row;
+    }  
+}
 }
 
 @media only screen and (min-width: 720px) {
@@ -107,4 +121,4 @@ section {
         width: 8em;
         height: 8em;
     }
-}
+} */

@@ -195,7 +195,7 @@ input[type="text"]:focus, input[type="password"]:focus {
     color: #FF6B00;
 }
 
-@media only screen and (min-width: 320px) {
+@media only screen and (max-width: 320px) {
     .header-wrapper {
         justify-content: center;
     }
@@ -211,7 +211,7 @@ input[type="text"]:focus, input[type="password"]:focus {
     }   
 }
 
-@media only screen and (min-width: 480px) {
+@media only screen and (max-width: 480px) {
     .header-wrapper {
         justify-content: center;
     }
@@ -219,7 +219,7 @@ input[type="text"]:focus, input[type="password"]:focus {
         text-overflow: clip;
         overflow: hidden;
     }
-    .header-left > a {
+    .header-left {
         display: none;
     }
     .header-right {
@@ -227,10 +227,26 @@ input[type="text"]:focus, input[type="password"]:focus {
     }
 }
 
-@media only screen and (min-width: 640px) {
-
+@media only screen and (max-width: 640px) {
+    .header-wrapper {
+        justify-content: space-between;
+    }
+    .header-left > a {
+        display: block;
+    }
+    .header-right {
+        display: none;
+    }
 }
 
 @media only screen and (min-width: 720px) {
-
+    .header-wrapper {
+        justify-content: space-between;
+    }    
+    .header-left {
+        display: block;
+    }
+    .header-right {
+        display: block;
+    }
 }
