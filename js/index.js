@@ -3,14 +3,6 @@ import {cssRuleSet} from "./styleRules.js";
 import {parseBodyFromString} from  "./bodyParser.js";
 import {data, blobData, base64toBlob} from "./data.js";
 
-// const e = React.createElement;
-
-// class CardContainer extends React.Component {
-//     render() {
-//         return React.createElement('div', null, `안녕하세요. ${this.props.toWhat}`);
-//     }
-// }
-
 window.imageBlobs = [];
 
 /**
@@ -22,6 +14,16 @@ class App extends EventEmitter {
 
     constructor() {
         super();
+
+        this.initMembers();
+        this.addEventListeners();
+        this.initWithNav();
+    }
+    
+    /**
+     * 멤버 변수를 초기화합니다.
+     */
+    initMembers() {
 
         /**
          * 동적으로 삽입할 페이지의 경로를 기입해주세요.
@@ -39,8 +41,17 @@ class App extends EventEmitter {
             }
         ];
 
-        this.addEventListeners();
+        /**
+         * 동적으로 생성한 스타일 시트를 삭제하기 위해 인스턴스 변수(주소값 = 래퍼런스) 값을 저장해둡니다.
+         */
+        this.headStyleSheets = [];
 
+    }
+
+    /**
+     * 네비게이션의 슬라이드 막대 이동 이벤트를 정의합니다.
+     */
+    initWithNav() {
         // 메뉴 슬라이드가 정의된 코드입니다.
         // 메뉴 슬라이드 바는 가상 요소로 정의되어있습니다.
         // 하지만 가상 요소는 DOM 쿼리 선택자로 선택이 되지 않습니다.
@@ -71,8 +82,7 @@ class App extends EventEmitter {
                 cssRuleSet(".header-center::after", "border-bottom", `4px solid #${color}6B00`);
                 cssRuleSet(".header-center::after", "left", pos + "px");
             });
-        });
-
+        });        
     }
 
     addEventListeners() {
@@ -127,6 +137,10 @@ class App extends EventEmitter {
     }
 
     /**
+     * CSS를 자바스크립트에서 동적으로 생성합니다.
+     * 이 메소드는 가상 요소로 만든 둥근 이미지를 변경하기 위해 정의하였습니다.
+     * <p></p> 요소는 각각 특정 dataID를 attribute로 가집니다.
+     * 
      * @link https://stackoverflow.com/a/524721
      * @param {String} dataId 
      * @param {String} imagePath 
@@ -150,25 +164,20 @@ class App extends EventEmitter {
             z-index: 0;
         }`;
 
-        if (style.styleSheet){
+        if (style.styleSheet) {
             // IE 8
             style.styleSheet.cssText = css;
-          } else {
-            style.appendChild(document.createTextNode(css));
-          }        
-
+        } else {
+            const child = document.createTextNode(css);
+            style.appendChild(child);
+            this.headStyleSheets.push(child);
+        }
     }
 
     onLoad() {
+        // 미리 정의해놓은 이벤트 함수를 호출합니다. (제이쿼리의 trigger와 유사합니다);
         this.emit("loginView:ready");
-        this.emit("contents:ready");  
-        
-        // ReactDOM.render(
-        //     React.createElement(CardContainer, {
-        //         toWhat: "React 테스트 중입니다."
-        //     }, null),
-        //     document.querySelector('.card-container')
-        // );        
+        this.emit("contents:ready");    
     }
 
     /**
@@ -270,8 +279,6 @@ class App extends EventEmitter {
         });
     }
 }
-
-
 
 const app = new App();
 app.on("ready", async () => {
