@@ -51,10 +51,15 @@
     min-height: 100%;
     background-color: #fff;
     opacity: 0.8;
+    display: flex;
+    justify-content: center;
+    padding-top: 3em;
+    line-height: 2em;
 } 
 
+
 .floating-login-view-wrapper input[type="submit"] {
-    width: 100%;
+    width: 90%;
     height: 3em;
     line-height: 3em;
     text-align: center;
@@ -63,14 +68,21 @@
 }
 
 .floating-login-view-button-panel {
+    width: 90%;
     display: flex;
     justify-content: space-between;
 }
 
 .floating-login-view-right {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.floating-login-view-wrapper button {
+    color: black;
+    width: 2em;
 }
 
 /** 로그인 페이지에서 우측 상단 닫기 버튼 */
