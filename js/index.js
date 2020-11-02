@@ -1,6 +1,7 @@
 import {EventEmitter} from "./EventEmitter.js";
 import {cssRuleSet} from "./styleRules.js";
 import {parseBodyFromString} from  "./bodyParser.js";
+import {data, blobData, base64toBlob} from "./data.js";
 
 // const e = React.createElement;
 
@@ -9,6 +10,8 @@ import {parseBodyFromString} from  "./bodyParser.js";
 //         return React.createElement('div', null, `안녕하세요. ${this.props.toWhat}`);
 //     }
 // }
+
+window.imageBlobs = [];
 
 /**
  * @author Eo Jinseok
@@ -108,8 +111,52 @@ class App extends EventEmitter {
         // 하위 컨텐츠를 모두 지우고 새로운 카드를 불러오기 위한 이벤트입니다.
         this.on("contents:ready", (htmlTexts) => {
             const items = Array.from(document.querySelectorAll(".card-container .card"));
-            items.forEach((card, idx) => card.querySelector("p").setAttribute("d-"+idx, ""));
+            items.forEach((card, idx) => {
+                card.querySelector("p").setAttribute("d-"+idx, "");
+                
+                // let myImgData = data[idx].imgPath;
+                let myImgData = blobData[idx];
+
+                if(data[idx]) {
+                    // const filename = "./test/" + myImgData.substr(myImgData.lastIndexOf("/") + 1, myImgData.length);
+                    const filename = myImgData;
+                    this.createNewStyleSheet("d-"+idx, filename);                     
+                }
+            });
         });
+    }
+
+    /**
+     * @link https://stackoverflow.com/a/524721
+     * @param {String} dataId 
+     * @param {String} imagePath 
+     */
+    createNewStyleSheet(dataID, imagePath) {
+        const head = document.head || document.getElementsByTagName('head')[0];
+        const style = document.createElement('style');
+
+        head.appendChild(style);
+
+        const css = `.card p[${dataID}]::before {
+            content: "";
+            width: 8em;
+            height: 8em;
+            background: url("${imagePath}") center;
+            background-size: cover;
+            position: absolute;
+            border-radius: 50%;
+            left: 20%;
+            top: 10%;
+            z-index: 0;
+        }`;
+
+        if (style.styleSheet){
+            // IE 8
+            style.styleSheet.cssText = css;
+          } else {
+            style.appendChild(document.createTextNode(css));
+          }        
+
     }
 
     onLoad() {

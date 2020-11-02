@@ -55,7 +55,7 @@ section {
 
 /* 그리드 카드 중앙의 원형 이미지를 나타내는 가상 요소입니다.
 레이아웃을 잡기 위해 임의로 만들어진 것으로 추후 삭제가 필요합니다. */
-.card-container > .card p::before {
+.card p::before {
     content: "";
     width: 8em;
     height: 8em;

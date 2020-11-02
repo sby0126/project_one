@@ -1,5 +1,6 @@
 # Introduction
-본 페이지는 <a href="https://biud436.github.io/project_one/">https://biud436.github.io/project_one/</a>에서 호스팅되고 있습니다.
+본 페이지는 쇼핑몰 클론 프로젝트이며,
+<a href="https://biud436.github.io/project_one/">https://biud436.github.io/project_one/</a>에서 호스팅되고 있습니다.
 
 # To-do list
 
