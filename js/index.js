@@ -180,6 +180,12 @@ class App extends EventEmitter {
                 style.removeChild(child);
                 const idx = this._headStyleSheets.indexOf(dataID);
                 delete this._headStyleSheets[idx];
+
+                // 등록된 이벤트를 제거합니다.
+                setTimeout(() => {
+                    this.off(`card:${dataID}`);
+                }, 0);
+                
             });
         }
     }
