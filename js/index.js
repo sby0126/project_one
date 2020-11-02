@@ -42,9 +42,9 @@ class App extends EventEmitter {
         ];
 
         /**
-         * 동적으로 생성한 스타일 시트를 삭제하기 위해 인스턴스 변수(주소값 = 래퍼런스) 값을 저장해둡니다.
+         * 동적으로 생성한 스타일 시트를 삭제하기 위해 ID 값을 저장해둡니다.
          */
-        this.headStyleSheets = [];
+        this._headStyleSheets = [];
 
     }
 
@@ -170,7 +170,17 @@ class App extends EventEmitter {
         } else {
             const child = document.createTextNode(css);
             style.appendChild(child);
-            this.headStyleSheets.push(child);
+            this._headStyleSheets.push(dataID);
+
+            // 삭제 이벤트를 정의합니다.
+            // 사용 예: 
+            //  this.emit("card:d-0"); 
+            //  this.emit("card:d-1");
+            this.on(`card:${dataID}`, () => {
+                style.removeChild(child);
+                const idx = this._headStyleSheets.indexOf(dataID);
+                delete this._headStyleSheets[idx];
+            });
         }
     }
 

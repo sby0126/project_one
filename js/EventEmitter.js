@@ -23,6 +23,7 @@ export class EventEmitter {
     }
 
     /**
+     * 이벤트를 등록합니다.
      * 
      * @param {String} name 등록할 이벤트 명을 기입하세요.
      * @param {Function} listeners 콜백 함수를 등록하세요.
@@ -40,6 +41,7 @@ export class EventEmitter {
     }
 
     /**
+     * 등록된 이벤트를 호출합니다.
      * 
      * @param {String} name 호출할 이벤트 명을 기입하세요.
      * @param  {...any} args 전달할 이벤트 매개변수를 기입하세요.
@@ -58,6 +60,19 @@ export class EventEmitter {
                 func.call(this, ...args);
             }
         });
+    }
+
+    /**
+     * 등록된 이벤트를 삭제합니다.
+     * 
+     * @param {String}} name 
+     */
+    off(name) {
+        if(!this._events[name]) {
+            return;
+        }        
+
+        delete this._events[name];
     }
 
 }
