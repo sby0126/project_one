@@ -2,6 +2,14 @@ import {EventEmitter} from "./EventEmitter.js";
 import {cssRuleSet} from "./styleRules.js";
 import {parseBodyFromString} from  "./bodyParser.js";
 
+const e = React.createElement;
+
+class CardContainer extends React.Component {
+    render() {
+        return React.createElement('div', null, `안녕하세요. ${this.props.toWhat}`);
+    }
+}
+
 /**
  * @author Eo Jinseok
  * @date 2020.11.01
@@ -61,6 +69,7 @@ class App extends EventEmitter {
                 cssRuleSet(".header-center::after", "left", pos + "px");
             });
         });
+
     }
 
     addEventListeners() {
@@ -106,7 +115,14 @@ class App extends EventEmitter {
 
     onLoad() {
         this.emit("loginView:ready");
-        this.emit("contents:clear");
+        this.emit("contents:clear");  
+        
+        ReactDOM.render(
+            React.createElement(CardContainer, {
+                toWhat: "React 테스트 중입니다."
+            }, null),
+            document.querySelector('.card-container')
+        );        
     }
 
     /**
@@ -134,7 +150,7 @@ class App extends EventEmitter {
                 } else {
                     // <div></div>를 만들지 않고 하위 내용을 새로 변경합니다.
                     // 제이쿼리의 .html() 또는 .text()와 같습니다.
-                    container.innerHTML = body;
+                    container.innerHTML = body;       
                 }
     
             }).catch(err => {
@@ -208,6 +224,8 @@ class App extends EventEmitter {
         });
     }
 }
+
+
 
 const app = new App();
 app.on("ready", async () => {
