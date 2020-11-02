@@ -1,5 +1,6 @@
 import {EventEmitter} from "./EventEmitter.js";
 import {cssRuleSet} from "./styleRules.js";
+import {parseBodyFromString} from  "./bodyParser.js";
 
 /**
  * @author Eo Jinseok
@@ -123,16 +124,17 @@ class App extends EventEmitter {
             await this.loadHTML(`${path}/${i.src}`)
             .then(result => {
                 const container = document.querySelector(i.parent);
+                const body = parseBodyFromString(result);
 
                 // 새로운 <div></div>에 특정 요소를 생성합니다.
                 if(i.isCreateNewDiv) {
                     const newDiv = document.createElement("div");
-                    newDiv.innerHTML = result;
+                    newDiv.innerHTML = body;
                     container.appendChild(newDiv);
                 } else {
                     // <div></div>를 만들지 않고 하위 내용을 새로 변경합니다.
                     // 제이쿼리의 .html() 또는 .text()와 같습니다.
-                    container.innerHTML = result;
+                    container.innerHTML = body;
                 }
     
             }).catch(err => {
