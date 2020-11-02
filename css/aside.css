@@ -53,8 +53,9 @@
     opacity: 0.8;
 } 
 
-.floating-login-view input {
-    background: #d2d2d2;
+.floating-login-view-button-panel {
+    display: flex;
+    justify-content: space-between;
 }
 
 .floating-login-view-right {
