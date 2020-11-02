@@ -106,16 +106,15 @@ class App extends EventEmitter {
         });      
         
         // 하위 컨텐츠를 모두 지우고 새로운 카드를 불러오기 위한 이벤트입니다.
-        // 현재는 비어있으며 메인 페이지의 카드만 표시됩니다.
-        this.on("contents:clear", (htmlTexts) => {
-            const wrapper = document.querySelector(".contents-wrapper");
-            // wrapper.remove();
+        this.on("contents:ready", (htmlTexts) => {
+            const items = Array.from(document.querySelectorAll(".card-container .card"));
+            items.forEach((card, idx) => card.querySelector("p").setAttribute("d-"+idx, ""));
         });
     }
 
     onLoad() {
         this.emit("loginView:ready");
-        this.emit("contents:clear");  
+        this.emit("contents:ready");  
         
         // ReactDOM.render(
         //     React.createElement(CardContainer, {
