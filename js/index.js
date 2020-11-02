@@ -174,8 +174,8 @@ class App extends EventEmitter {
 
             // 삭제 이벤트를 정의합니다.
             // 사용 예: 
-            //  this.emit("card:d-0"); 
-            //  this.emit("card:d-1");
+            //  this.emit("card:d-0"); // 1번 카드의 스타일을 지운다.
+            //  this.emit("card:d-1"); // 2번 카드의 스타일을 지운다.
             this.on(`card:${dataID}`, () => {
                 style.removeChild(child);
                 const idx = this._headStyleSheets.indexOf(dataID);
