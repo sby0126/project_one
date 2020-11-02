@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="../css/style.css">
+    <script src="https://kit.fontawesome.com/a99df0f94f.js" crossorigin="anonymous"></script>
     <script>
 
         /**
@@ -15,8 +16,10 @@
             const loginView = document.querySelector(".floating-login-view-wrapper");
             loginView.style.left = "0";
         });
-
     </script>
+    <style>
+        
+    </style>
 </head>
 <body>
     <div class="floating-login-view-wrapper">
@@ -26,8 +29,8 @@
             </div>
             <form action="login.jsp">
                 <legend>로그인 폼</legend>
-                <p><label for="id">ID : </label><input type="text" name="id" id="floating-login-view-login-id"></p>
-                <p><label for="pw">PW : </label><input type="password" name="id" id="floating-login-view-login-pw"></p>
+                <p><label for="id"><i class="fas fa-user-alt"></i></label><input type="text" name="id" id="floating-login-view-login-id"></p>
+                <p><label for="pw"><i class="fas fa-lock"></i></label><input type="password" name="id" id="floating-login-view-login-pw"></p>
                 <p><input type="submit" value="Login"></p>
             </form>
         </div>

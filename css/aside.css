@@ -47,7 +47,7 @@
 }
 
 .floating-login-view {
-    width: max-content;
+    width: 18em;
     min-height: 100%;
     background-color: #fff;
     opacity: 0.8;
