@@ -49,7 +49,7 @@ export function cssRuleSet(selector, property, value) {
         for (let i = 0; i < root.length; i++) {
 
             const elem = root[i];
-            const files = elem.rules;
+            const files = elem.rules || elem.cssRules;
 
             for(let j = 0; j < files.length; j++) {
 
@@ -68,6 +68,6 @@ export function cssRuleSet(selector, property, value) {
         }
 
     } catch (e) {
-        console.warn(e);
+        // console.warn(e);
     }
 }
