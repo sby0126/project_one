@@ -1,4 +1,5 @@
 /**
+ * HTML 파일을 파싱하여 <body></body> 부분만 반환합니다.
  * 
  * @param {String} raw 
  * @return html
