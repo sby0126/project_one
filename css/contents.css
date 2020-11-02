@@ -22,7 +22,7 @@ section {
    플렉스 박스의 아이템 정렬을 위해 존재합니다. 
  */
 .contents-wrapper {
-    width: 60%;
+    width: 50%;
     margin-top: var(--header-box-height);
     display: flex;
     flex-direction: column;
@@ -33,7 +33,7 @@ section {
     width: 100%;
     display: flex;
     flex: 1 1 0;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-bottom: 1em;
 }
 
@@ -66,17 +66,45 @@ section {
 }
 
 @media only screen and (min-width: 320px) {
-    
+    .card-container > .card {
+        min-width: 3em;
+        height: 4em; 
+    }
+    .card-container > .card p::before {
+        width: 2em;
+        height: 2em;
+    }
 }
 
 @media only screen and (min-width: 480px) {
-
+    .card-container > .card {
+        min-width: 4em;
+        height: 5em; 
+    }
+    .card-container > .card p::before {
+        width: 2em;
+        height: 2em;
+    }
 }
 
 @media only screen and (min-width: 640px) {
-
+    .card-container > .card {
+        min-width: 7em;
+        height: 18em; 
+    }
+    .card-container > .card p::before {
+        width: 4em;
+        height: 4em;
+    }
 }
 
 @media only screen and (min-width: 720px) {
-
+    .card-container > .card {
+        min-width: 12em;
+        height: 18em; 
+    }
+    .card-container > .card p::before {
+        width: 8em;
+        height: 8em;
+    }
 }
