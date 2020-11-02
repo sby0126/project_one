@@ -2,13 +2,13 @@ import {EventEmitter} from "./EventEmitter.js";
 import {cssRuleSet} from "./styleRules.js";
 import {parseBodyFromString} from  "./bodyParser.js";
 
-const e = React.createElement;
+// const e = React.createElement;
 
-class CardContainer extends React.Component {
-    render() {
-        return React.createElement('div', null, `안녕하세요. ${this.props.toWhat}`);
-    }
-}
+// class CardContainer extends React.Component {
+//     render() {
+//         return React.createElement('div', null, `안녕하세요. ${this.props.toWhat}`);
+//     }
+// }
 
 /**
  * @author Eo Jinseok
@@ -117,12 +117,12 @@ class App extends EventEmitter {
         this.emit("loginView:ready");
         this.emit("contents:clear");  
         
-        ReactDOM.render(
-            React.createElement(CardContainer, {
-                toWhat: "React 테스트 중입니다."
-            }, null),
-            document.querySelector('.card-container')
-        );        
+        // ReactDOM.render(
+        //     React.createElement(CardContainer, {
+        //         toWhat: "React 테스트 중입니다."
+        //     }, null),
+        //     document.querySelector('.card-container')
+        // );        
     }
 
     /**
