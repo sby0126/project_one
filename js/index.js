@@ -52,6 +52,8 @@ class App extends EventEmitter {
             child: null
         };
 
+        this._isOpenModalDialog = false;
+
     }
 
     /**
@@ -227,6 +229,8 @@ class App extends EventEmitter {
             };
 
             container.appendChild(newDiv);
+
+            this._isOpenModalDialog = true;
         });
     }
 
@@ -241,8 +245,14 @@ class App extends EventEmitter {
             };
 
             this.hideLightBox();
+
+            this._isOpenModalDialog = false;
         }
 
+    }
+
+    isOpenModalDialog() {
+        return this._isOpenModalDialog;
     }
 
     /**
@@ -304,9 +314,24 @@ class App extends EventEmitter {
         this.emit("loginView:ready");
         this.emit("contents:ready"); 
         
+        // 회원 가입 버튼 이벤트 등록
         document.querySelector("#join-button").addEventListener("click", () => {
             this.openModalDialog("pages/join.html");
         });
+
+        window.addEventListener("keydown", ev => {
+            const keyCode = ev.key;
+            
+            /**
+             * ESC
+             */
+            if(keyCode === "Escape") {
+
+                if(this.isOpenModalDialog()) {
+                    this.closeModalDialog();
+                }
+            }
+        })
     }
 
     /**
