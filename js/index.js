@@ -319,7 +319,15 @@ class App extends EventEmitter {
             left: 20%;
             top: 10%;
             z-index: 0;
-        }`;
+        }
+
+        .card p[${dataID}]:hover::before {
+            filter: brightness(1.1);
+            border-radius: 25%;
+            transition: all .2s linear;
+        }
+        
+        `;
 
         if (style.styleSheet) {
             // IE 8
