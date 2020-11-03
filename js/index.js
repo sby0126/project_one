@@ -96,8 +96,20 @@ class App extends EventEmitter {
     addEventListeners() {
         this.on("loginView:ready", () => {
             const loginButton = document.querySelector(".header-right-login-button");
+            /**
+             * @type {HTMLDivElement}
+             */
             const loginView = document.querySelector(".floating-login-view-wrapper");
             const lightBox = document.querySelector("#light-box-container");
+
+            // loginView.addEventListener("transitionend", () => {
+            //     const transition = loginView.style.transition;
+            //     if(transition.includes("ease-in")) {
+            //         loginView.style.transition = "all .3s ease-out";
+            //     } else {
+            //         loginView.style.transition = "all .8s ease-in";
+            //     }
+            // })
 
             loginButton.addEventListener("click", () => {
 
@@ -110,11 +122,8 @@ class App extends EventEmitter {
                 if(parseInt(styled.left) != 0) {
                     // active 클래스를 추가하면 화면에 라이트 박스가 표시됩니다.
                     lightBox.classList.add("active");
-                    loginView.style.left = "0";
-                } else {
-                    lightBox.classList.remove("active");
-                    // display:none은 브라우저 버그로 인해 동작하지 않습니다.
-                    loginView.style.left = "9999px";
+                    loginView.style.transition = "all .4s ease-out";
+                    loginView.style.left = "1px";
                 }
             });
 
@@ -122,6 +131,7 @@ class App extends EventEmitter {
             const btn = document.querySelector("#close-login-view");
             btn.addEventListener("click", () => {
                 lightBox.classList.remove("active");
+                loginView.style.transition = "all .8s ease-in-out";
                 loginView.style.left = "9999px";
             })
         });      

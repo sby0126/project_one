@@ -45,7 +45,7 @@
     flex-direction: row-reverse;
     justify-content: right;
     align-items: flex-start;
-    transition: all .4s ease-in;
+    transition: all .4s ease-out;
 }
 
 .floating-login-view {
