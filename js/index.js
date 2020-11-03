@@ -362,6 +362,16 @@ class App extends EventEmitter {
                 if(!target.classList.contains("active")) {
                     target.classList.add("active");
                     filterBoxButtons[(idx + 1) % filterBoxButtons.length].classList.remove("active");
+
+                    for(let i = 0; i < this._headStyleSheets.length; i++) {
+                        this.emit("card:d-" + i);
+                    }
+
+                    this.emit("contents:ready");
+
+                    const shuffle = arr => arr.sort(() => Math.random() - 0.5);
+                    shuffle(blobData);
+
                 }
             })
         })
