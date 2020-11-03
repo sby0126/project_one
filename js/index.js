@@ -2,6 +2,7 @@ import {EventEmitter} from "./EventEmitter.js";
 import {cssRuleSet} from "./styleRules.js";
 import {parseBodyFromString} from  "./bodyParser.js";
 import {data, blobData, base64toBlob} from "./data.js";
+import "./join.js";
 
 window.imageBlobs = [];
 
@@ -45,6 +46,11 @@ class App extends EventEmitter {
          * 동적으로 생성한 스타일 시트를 삭제하기 위해 ID 값을 저장해둡니다.
          */
         this._headStyleSheets = [];
+
+        this._lastModelElement = {
+            container: null,
+            child: null
+        };
 
     }
 
@@ -137,6 +143,109 @@ class App extends EventEmitter {
     }
 
     /**
+     * 라이트 박스를 표시합니다.
+     */
+    openLightBox() {
+        const lightBox = document.querySelector("#light-box-container");
+        if(!lightBox) return;
+        if(lightBox.classList.contains("active")) {
+            return;
+        }
+
+        lightBox.classList.add("active");
+    }
+
+    /**
+     * 라이트 박스를 감춥니다.
+     */
+    hideLightBox() {
+        const lightBox = document.querySelector("#light-box-container");
+        if(!lightBox) return;
+        if(!lightBox.classList.contains("active")) {
+            return;
+        }
+
+        lightBox.classList.remove("active");        
+    }
+
+    /**
+     * 라이트 박스를 감추거나 표시합니다.
+     */
+    toggleLightBox() {
+        const lightBox = document.querySelector("#light-box-container");
+        
+        if(!lightBox) {
+            return;
+        }
+
+        const isActivated = lightBox.classList.contains("active");
+
+        // 활성화 상태라면 제거하고, 활성화 상태가 아니면 다시 표시합니다.
+        if(isActivated) {
+            lightBox.classList.remove("active");        
+        } else {
+            lightBox.classList.add("active");
+        }
+    }
+
+    /**
+     * 
+     * @param {String} htmlFileName 
+     */
+    async openModalDialog(htmlFileName) {
+        await this.loadHTML(htmlFileName).then(resultText => {
+            const body = parseBodyFromString(resultText);
+            this.openLightBox();
+
+            const idx = location.href.lastIndexOf("/");
+            const path = location.href.substring(0, idx);            
+
+            const container = document.querySelector(`.contents-wrapper`);
+            if(!container) {
+                return;
+            }
+
+            const newDiv = document.createElement("div");
+            newDiv.style.position = "fixed";
+            newDiv.style.left = 0;
+            newDiv.style.right = 0;
+            newDiv.style.top = 0;
+            newDiv.style.bottom = 0;
+            newDiv.style.width = "100%";
+            newDiv.style.height = "100%";
+            newDiv.style.zIndex = 500;
+            newDiv.style.backgroundColor = "#fff";
+            newDiv.style.opacity = "0.9";
+            newDiv.innerHTML = body;
+            newDiv.style.display = "block";
+            newDiv.style.padding = "0";
+            newDiv.style.margin = "0";
+
+            this._lastModelElement = {
+                container: container,
+                child: newDiv
+            };
+
+            container.appendChild(newDiv);
+        });
+    }
+
+    closeModalDialog() {
+        const config = this._lastModelElement;
+
+        if(config.container) {
+            config.container.removeChild(config.child);
+            this._lastModelElement = {
+                container: null,
+                child: null
+            };
+
+            this.hideLightBox();
+        }
+
+    }
+
+    /**
      * CSS를 자바스크립트에서 동적으로 생성합니다.
      * 이 메소드는 가상 요소로 만든 둥근 이미지를 변경하기 위해 정의하였습니다.
      * <p></p> 요소는 각각 특정 dataID를 attribute로 가집니다.
@@ -193,7 +302,11 @@ class App extends EventEmitter {
     onLoad() {
         // 미리 정의해놓은 이벤트 함수를 호출합니다. (제이쿼리의 trigger와 유사합니다);
         this.emit("loginView:ready");
-        this.emit("contents:ready");    
+        this.emit("contents:ready"); 
+        
+        document.querySelector("#join-button").addEventListener("click", () => {
+            this.openModalDialog("pages/join.html");
+        });
     }
 
     /**

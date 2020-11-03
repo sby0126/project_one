@@ -8,6 +8,8 @@
  * 이 요소는 처음에는 보이지 않으며 z-index가 다른 요소보다 높아야 합니다.
  */
 
+@import url("./join.css");
+
 /* 화면을 어둡게 만드는 라이트 박스 컨테이너입니다. */
 #light-box-container {
     width: 100vw;

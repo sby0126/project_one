@@ -43,7 +43,7 @@ a {
     text-decoration: #bebebe;
 }
 
-input[type="button"], input[type="submit"] {
+.input-button {
     width: max-content;
     outline: none;
     border: none;
