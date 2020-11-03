@@ -228,9 +228,11 @@ header ::placeholder {
     }          
 }
 
-@media only screen and (max-width: 640px) {
+@media only screen and (max-width: 720px) {
     .header-wrapper {
         justify-content: space-between;
+        background-color: #FF6B00;
+        color: #fff;
     }
     .header-left > a {
         display: flex;
@@ -238,9 +240,13 @@ header ::placeholder {
     .header-right {
         display: none;
     }
+    .header-center::after {
+        border-bottom: 4px solid #fff;
+    }
+    
 }
 
-@media only screen and (min-width: 720px) {
+@media only screen and (min-width: 767px) {
     .header-wrapper {
         justify-content: space-between;
     }    

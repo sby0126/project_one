@@ -310,8 +310,8 @@ class App extends EventEmitter {
 
         const css = `.card p[${dataID}]::before {
             content: "";
-            width: 8em;
-            height: 8em;
+            width: 5.5em;
+            height: 5.5em;
             background: url("${imagePath}") center;
             background-size: cover;
             position: absolute;
