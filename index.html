@@ -9,9 +9,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+    <!-- 컨테이너의 시작 -->
     <div class="container">
+        <!-- 헤더의 시작 -->
         <header>
             <div class="header-wrapper">
+                <!-- 헤더 왼쪽 : 로고 -->
                 <div class="header-left">
                     <div class="" id="logo">
                         <img src="https://dummyimage.com/64x64/000/fff" alt="">
@@ -19,24 +22,31 @@
                     <a href="#">WOMEN</a>
                     <a href="#">MEN</a>
                 </div>
+                <!-- 헤더 중앙 : 메뉴 -->
                 <div class="header-center">
                     <a href="#">SHOP</a>
                     <a href="#">ITEM</a>
                     <a href="#">SALE</a>
                     <a href="#">MORE</a>
                 </div>
+                <!-- 헤더 오른쪽 : 로그인 / 검색 -->
                 <div class="header-right">
                     <button class="header-right-login-button">로그인</button>
                     <input type="text" class="input-non-border-box" name="" id="" placeholder="검색어를 입력하세요">
                 </div>
             </div>
+            <!-- 검색 필터 -->
             <div class="header-filter-box">
+                <!-- 검색 필터 래퍼 -->
                 <div class="header-filter-box-wrapper">
+                    <!-- 검색 필터 : 소호/브랜드 탭 -->
                     <div class="header-filter-box-header">
                         <button class="active">소호</button>
                         <button>브랜드</button>
                     </div>
+                    <!-- 검색 필터 하단 : 대/중/소 분류 -->
                     <div class="header-filter-box-footer">
+                        <!-- 검색 필터 왼쪽 : 카테고리 선택 -->
                         <div class="header-filter-box-footer-left">
                             <select name="" id="">
                                 <option value="">샵 카테고리 전체(X)</option>
@@ -49,9 +59,11 @@
                                 <option value="">7</option>
                             </select>
                         </div>
+                        <!-- 검색 필터 중앙 : 검색 -->
                         <div class="header-filter-box-footer-center">
                             <label for="name-search"><i class="fas fa-search"></i></label><input class="input-non-border-box" type="text" placeholder="이름으로 검색">
                         </div>
+                        <!-- 검색 필터 오른쪽 : 분류 -->
                         <div class="header-filter-box-footer-right">
                             <span class="active">전체</span>
                             <span>10대</span>
@@ -61,15 +73,19 @@
                     </div>
                 </div>
             </div>
-
         </header>
+
+        <!-- 본문의 시작 -->
         <section>
+            <!-- 본문이 들어가는 래퍼 -->
             <div class="contents-wrapper">
             </div>
         </section>
     </div>
+    <!-- 라이트 박스-->
     <div id="light-box-container">
     </div>
+    <!-- 스크립트 -->
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>    
     <script type="module" src="js/index.js"></script>

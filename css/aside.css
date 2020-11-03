@@ -8,6 +8,7 @@
  * 이 요소는 처음에는 보이지 않으며 z-index가 다른 요소보다 높아야 합니다.
  */
 
+/* 회원 가입 창의 스타일 시트 로드 */
 @import url("./join.css");
 
 /* 화면을 어둡게 만드는 라이트 박스 컨테이너입니다. */
@@ -44,7 +45,7 @@
     flex: 1 1 0;
     flex-direction: row-reverse;
     justify-content: right;
-    align-items: flex-start;
+    align-items: flex-start; /** 왼쪽 정렬 **/
     transition: all .4s ease-out;
 }
 
@@ -60,6 +61,7 @@
 } 
 
 
+/* 로그인 버튼 */
 .floating-login-view-wrapper input[type="submit"] {
     width: 90%;
     height: 3em;
@@ -72,19 +74,14 @@
 .floating-login-view-button-panel {
     width: 90%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /**  요소들 사이에만 여유 공간을 두고 배치됩니다. **/
 }
 
 .floating-login-view-right {
     display: flex;
-    flex-direction: row-reverse;
-    justify-content: flex-start;
+    flex-direction: row-reverse; /** 플렉스 요소가 배치가 시작되는 축 변경 : 오른쪽에 배치됨 */
+    justify-content: flex-start; 
     align-items: flex-start;
-}
-
-.floating-login-view-wrapper button {
-    color: black;
-    width: 2em;
 }
 
 /** 로그인 페이지에서 우측 상단 닫기 버튼 */

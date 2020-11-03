@@ -22,16 +22,23 @@
     </style>
 </head>
 <body>
+    <!-- 모달로 구현된 로그인 페이지 -->
+    <!-- <body>와 </body> 사이의 태그만 삽입됩니다. -->
     <div class="floating-login-view-wrapper">
         <div class="floating-login-view">
+            <!-- 닫기 버튼 -->
             <div class="floating-login-view-right">
                 <button id="close-login-view">X</button>
             </div>
+            <!-- 로그인 폼 -->
             <form action="login.jsp">
                 <legend>로그인 폼</legend>
+                <!-- 아이디 및 비밀번호 입력 창 -->
                 <p><label for="id"><i class="fas fa-user-alt"></i></label><input type="text" name="id" class="input-non-border-box" id="floating-login-view-login-id"></p>
                 <p><label for="pw"><i class="fas fa-lock"></i></label><input type="password" name="id"  class="input-non-border-box" id="floating-login-view-login-pw"></p>
+                <!-- 로그인 버튼 -->
                 <input class="input-button" type="submit" value="Login">
+                <!-- 회원가입/비밀번호 찾기 버튼 -->
                 <div class="floating-login-view-button-panel">
                     <input class="input-button" id="join-button" type="button" value="회원가입">
                     <input class="input-button" type="button" value="비밀번호 찾기">
