@@ -225,7 +225,22 @@ class App extends EventEmitter {
             newDiv.style.flexDirection = "column";
             newDiv.style.padding = "0";
             newDiv.style.margin = "0";
-            
+
+            const closeButton = document.createElement("div");
+            closeButton.style.width = "4em";
+            closeButton.style.height = "4em";
+            closeButton.style.position = "absolute";
+            closeButton.style.top = "-4em";
+            closeButton.style.right = "-4em";
+            closeButton.style.cursor = "pointer";
+            closeButton.innerHTML = `
+                <i class="fas fa-times-circle fa-4x"></i>
+            `;
+
+            closeButton.addEventListener("click", () => {
+                this.closeModalDialog();
+            })
+ 
             newDiv.innerHTML = body;
 
             this._lastModelElement = {
@@ -234,6 +249,7 @@ class App extends EventEmitter {
             };
 
             container.appendChild(newDiv);
+            newDiv.appendChild(closeButton);
 
             this._isOpenModalDialog = true;
         });
