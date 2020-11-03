@@ -47,11 +47,15 @@ class App extends EventEmitter {
          */
         this._headStyleSheets = [];
 
+        // 마지막 노드 추적
         this._lastModelElement = {
             container: null,
             child: null
         };
 
+        /**
+         * 모달 대화 상자(dialog)가 열려있으면 참, 아니면 거짓
+         */
         this._isOpenModalDialog = false;
 
     }
@@ -207,48 +211,62 @@ class App extends EventEmitter {
     async openModalDialog(htmlFileName) {
         await this.loadHTML(htmlFileName).then(resultText => {
             const body = parseBodyFromString(resultText);
+
+            // 라이트 박스 화면에 표시
             this.openLightBox();
 
+            // 경로 획득
             const idx = location.href.lastIndexOf("/");
             const path = location.href.substring(0, idx);            
 
+            // 컨텐츠 삽입 위치 (부모 노드)
             const container = document.querySelector(`.contents-wrapper`);
             if(!container) {
                 return;
             }
 
-
+            // 모달을 만들 새로운 요소 추가
             const newDiv = document.createElement("div");
             newDiv.classList.add("modal-dialog-normal");
 
+            // 모달 우측에 닫기 버튼 추가
             const closeButton = document.createElement("div");
             closeButton.classList.add("modal-dialog-close-button-normal");
             closeButton.innerHTML = `
                 <i class="fas fa-times-circle fa-4x"></i>
             `;
 
+            // 닫기 버튼에 클릭 이벤트 추가
+            // 클릭하면 모달 상자가 닫힙니다.
             closeButton.addEventListener("click", () => {
                 this.closeModalDialog();
             })
  
             newDiv.innerHTML = body;
 
+            // 나중에 대화 상자를 제거하기 위해 마지막 대화 상자의 주소 값을 저장해둡니다.
             this._lastModelElement = {
                 container: container,
                 child: newDiv
             };
 
+            // 컨테이너에 추가
             container.appendChild(newDiv);
             newDiv.appendChild(closeButton);
 
+            // 대화상자를 오픈 상태로 바꿉니다.
             this._isOpenModalDialog = true;
         });
     }
 
+    /**
+     * 모달 대화 상자를 닫습니다.
+     */
     closeModalDialog() {
         const loginView = document.querySelector(".floating-login-view-wrapper");
         const config = this._lastModelElement;
 
+        // 마지막에 열린 대화 상자(노드)를 완전히 제거합니다.
         if(config.container) {
             config.container.removeChild(config.child);
             this._lastModelElement = {
@@ -256,14 +274,21 @@ class App extends EventEmitter {
                 child: null
             };
 
+            // 라이트 박스를 닫습니다.
             this.hideLightBox();
+            // 로그인 뷰를 제거합니다.
             loginView.style.left = "9999px";
-
+            // 대화 상자를 닫습니다.
             this._isOpenModalDialog = false;
         }
 
     }
 
+    /**
+     * 대화 상자가 열려있는가?
+     * 
+     * @return {Boolean}
+     */
     isOpenModalDialog() {
         return this._isOpenModalDialog;
     }
@@ -337,9 +362,6 @@ class App extends EventEmitter {
         window.addEventListener("keydown", ev => {
             const keyCode = ev.key;
             
-            /**
-             * ESC
-             */
             if(keyCode === "Escape") {
 
                 if(this.isOpenModalDialog()) {
@@ -349,26 +371,34 @@ class App extends EventEmitter {
         });
 
 
-        // 
+        // 검색 필터 박스에서 소호/브랜드 버튼 효과 구현
         const filterBoxButtons = Array.from(document.querySelector(".header-filter-box-header").children);
         filterBoxButtons.forEach((i, idx) => {
             i.addEventListener("click", (ev) => {
                 
                 /**
+                 * 화살표 함수에서는 this가 이벤트가 아니기 때문에 ev.currentTarget를 써야 합니다.
+                 * 이것은 제이쿼리 이벤트에서 this와 같습니다.
+                 * 
                  * @type {HTMLButtonElement}
                  */
                 const target = ev.currentTarget;
 
                 if(!target.classList.contains("active")) {
+
                     target.classList.add("active");
                     filterBoxButtons[(idx + 1) % filterBoxButtons.length].classList.remove("active");
 
+                    // 카드 이미지를 지웁니다.
+                    // 여기에서 d는 delete의 약자입니다.
                     for(let i = 0; i < this._headStyleSheets.length; i++) {
                         this.emit("card:d-" + i);
                     }
 
+                    // 카드 이미지를 생성합니다.
                     this.emit("contents:ready");
 
+                    // 카드 이미지를 뒤섞습니다.
                     const shuffle = arr => arr.sort(() => Math.random() - 0.5);
                     shuffle(blobData);
 
