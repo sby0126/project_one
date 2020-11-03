@@ -50,6 +50,7 @@ a {
     background: none;
     background-color: none;
     color: #909090;
+    cursor: pointer;
 }
 
 @media only screen and (min-width: 320px) {
