@@ -207,32 +207,12 @@ class App extends EventEmitter {
                 return;
             }
 
+
             const newDiv = document.createElement("div");
-            newDiv.style.position = "fixed";
-            newDiv.style.left = "50%";
-            newDiv.style.transform = "translateX(-50%) translateY(-50%)";
-            newDiv.style.right = 0;
-            newDiv.style.top = "50%";
-            newDiv.style.bottom = 0;
-            newDiv.style.width = "50%";
-            newDiv.style.height = "80%";
-            newDiv.style.zIndex = 500;
-            newDiv.style.backgroundColor = "#fff";
-            newDiv.style.opacity = "0.9";
-            newDiv.style.display = "flex";
-            newDiv.style.justifyContent = "space-around";
-            newDiv.style.alignItems = "center";
-            newDiv.style.flexDirection = "column";
-            newDiv.style.padding = "0";
-            newDiv.style.margin = "0";
+            newDiv.classList.add("modal-dialog-normal");
 
             const closeButton = document.createElement("div");
-            closeButton.style.width = "4em";
-            closeButton.style.height = "4em";
-            closeButton.style.position = "absolute";
-            closeButton.style.top = "-4em";
-            closeButton.style.right = "-4em";
-            closeButton.style.cursor = "pointer";
+            closeButton.classList.add("modal-dialog-close-button-normal");
             closeButton.innerHTML = `
                 <i class="fas fa-times-circle fa-4x"></i>
             `;
