@@ -346,7 +346,26 @@ class App extends EventEmitter {
                     this.closeModalDialog();
                 }
             }
+        });
+
+
+        // 
+        const filterBoxButtons = Array.from(document.querySelector(".header-filter-box-header").children);
+        filterBoxButtons.forEach((i, idx) => {
+            i.addEventListener("click", (ev) => {
+                
+                /**
+                 * @type {HTMLButtonElement}
+                 */
+                const target = ev.currentTarget;
+
+                if(!target.classList.contains("active")) {
+                    target.classList.add("active");
+                    filterBoxButtons[(idx + 1) % filterBoxButtons.length].classList.remove("active");
+                }
+            })
         })
+
     }
 
     /**
