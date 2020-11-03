@@ -85,7 +85,6 @@
 .floating-login-view-wrapper button {
     color: black;
     width: 2em;
-    cursor: pointer;
 }
 
 /** 로그인 페이지에서 우측 상단 닫기 버튼 */

@@ -209,19 +209,24 @@ class App extends EventEmitter {
 
             const newDiv = document.createElement("div");
             newDiv.style.position = "fixed";
-            newDiv.style.left = 0;
+            newDiv.style.left = "50%";
+            newDiv.style.transform = "translateX(-50%) translateY(-50%)";
             newDiv.style.right = 0;
-            newDiv.style.top = 0;
+            newDiv.style.top = "50%";
             newDiv.style.bottom = 0;
-            newDiv.style.width = "100%";
-            newDiv.style.height = "100%";
+            newDiv.style.width = "50%";
+            newDiv.style.height = "80%";
             newDiv.style.zIndex = 500;
             newDiv.style.backgroundColor = "#fff";
             newDiv.style.opacity = "0.9";
-            newDiv.innerHTML = body;
-            newDiv.style.display = "block";
+            newDiv.style.display = "flex";
+            newDiv.style.justifyContent = "space-around";
+            newDiv.style.alignItems = "center";
+            newDiv.style.flexDirection = "column";
             newDiv.style.padding = "0";
             newDiv.style.margin = "0";
+            
+            newDiv.innerHTML = body;
 
             this._lastModelElement = {
                 container: container,
@@ -235,6 +240,7 @@ class App extends EventEmitter {
     }
 
     closeModalDialog() {
+        const loginView = document.querySelector(".floating-login-view-wrapper");
         const config = this._lastModelElement;
 
         if(config.container) {
@@ -245,6 +251,7 @@ class App extends EventEmitter {
             };
 
             this.hideLightBox();
+            loginView.style.left = "9999px";
 
             this._isOpenModalDialog = false;
         }
@@ -316,7 +323,9 @@ class App extends EventEmitter {
         
         // 회원 가입 버튼 이벤트 등록
         document.querySelector("#join-button").addEventListener("click", () => {
-            this.openModalDialog("pages/join.html");
+            if(!this.isOpenModalDialog()) {
+                this.openModalDialog("pages/join.html");
+            }
         });
 
         window.addEventListener("keydown", ev => {
