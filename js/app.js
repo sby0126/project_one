@@ -93,6 +93,7 @@ class App extends EventEmitter {
                 // 가상 요소의 CSS 속성을 변경합니다.
                 cssRuleSet(".header-center::after", "border-bottom", `4px solid #${color}6B00`);
                 cssRuleSet(".header-center::after", "left", pos + "px");
+                
             });
         });        
     }
@@ -389,16 +390,16 @@ class App extends EventEmitter {
             }
         });
 
-        window.addEventListener("keydown", ev => {
-            const keyCode = ev.key;
+        // window.addEventListener("keydown", ev => {
+        //     const keyCode = ev.key;
             
-            if(keyCode === "Escape") {
+        //     if(keyCode === "Escape") {
 
-                if(this.isOpenModalDialog()) {
-                    this.closeModalDialog();
-                }
-            }
-        });
+        //         if(this.isOpenModalDialog()) {
+        //             this.closeModalDialog();
+        //         }
+        //     }
+        // });
 
 
         // 검색 필터 박스에서 소호/브랜드 버튼 효과 구현
