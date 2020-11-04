@@ -56,17 +56,7 @@ section {
 
 /* 그리드 카드 중앙의 원형 이미지를 나타내는 가상 요소입니다.
 레이아웃을 잡기 위해 임의로 만들어진 것으로 추후 삭제가 필요합니다. */
-.card p::before {
-    content: "";
-    width: 8em;
-    height: 8em;
-    background: url("https://dummyimage.com/128x128/000/fff");
-    position: absolute;
-    border-radius: 50%;
-    left: 20%;
-    top: 10%;
-    z-index: 0;
-}
+
 
 /* 모달 대화 상자의 기본 스타일 (화면 중앙에 정확히 정렬하는 코드) */
 .modal-dialog-normal {

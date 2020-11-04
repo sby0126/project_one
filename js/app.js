@@ -152,7 +152,11 @@ class App extends EventEmitter {
                 if(myImgData) {
                     // const filename = "./test/" + myImgData.substr(myImgData.lastIndexOf("/") + 1, myImgData.length);
                     const filename = myImgData;
-                    this.createNewStyleSheet("d-"+idx, filename.url);                     
+                    this.createNewStyleSheet("d-"+idx, filename.url);     
+                    $(card.querySelector("p")).append($(`
+                        <h2>${filename.shopName}</h2>
+                        <pre>${filename.texts}</pre>
+                    `));
                 }
             });
         });
@@ -308,7 +312,7 @@ class App extends EventEmitter {
 
         head.appendChild(style);
 
-        const css = `.card > p[${dataID}]::before {
+        const css = `.card p[${dataID}]::before {
             content: "";
             width: 5.5em;
             height: 5.5em;
@@ -352,7 +356,6 @@ class App extends EventEmitter {
                 setTimeout(() => {
                     this.off(`card:${dataID}`);
                 }, 0);
-                
             });
         }
     }
@@ -402,15 +405,15 @@ class App extends EventEmitter {
                     // 카드 이미지를 지웁니다.
                     // 여기에서 d는 delete의 약자입니다.
                     for(let i = 0; i < this._headStyleSheets.length; i++) {
-                        this.emit("card:d-" + i);
+                        // this.emit("card:d-" + i);
                     }
 
                     // 카드 이미지를 생성합니다.
-                    this.emit("contents:ready");
+                    // this.emit("contents:ready");
 
                     // 카드 이미지를 뒤섞습니다.
-                    const shuffle = arr => arr.sort(() => Math.random() - 0.5);
-                    shuffle(blobData);
+                    // const shuffle = arr => arr.sort(() => Math.random() - 0.5);
+                    // shuffle(blobData);
 
                 }
             })
