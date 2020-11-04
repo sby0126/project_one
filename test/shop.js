@@ -10,7 +10,7 @@ const {
 const {
   pathToFileURL
 } = require("url");
-const canvas = createCanvas(200, 200);
+const canvas = createCanvas(130, 130);
 const ctx = canvas.getContext('2d')
 const path = require('path');
 const fs = require("fs");
@@ -73,7 +73,7 @@ function load() {
       try {
         const image = await loadImage(path.basename(i.src));
         
-        ctx.drawImage(image, 0, 0, 70, 70);
+        ctx.drawImage(image, 0, 0, image.width, image.height);
         const item = {
           url: canvas.toDataURL(),
           shopName,

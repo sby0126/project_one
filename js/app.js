@@ -1,7 +1,7 @@
 import {EventEmitter} from "./EventEmitter.js";
 import {cssRuleSet} from "./styleRules.js";
 import {parseBodyFromString} from  "./bodyParser.js";
-import {data, blobData, base64toBlob} from "./data.js";
+import {blobData, base64toBlob} from "./data.js";
 import "./join.js";
 
 window.imageBlobs = [];
@@ -149,10 +149,10 @@ class App extends EventEmitter {
                 // let myImgData = data[idx].imgPath;
                 let myImgData = blobData[idx];
 
-                if(data[idx]) {
+                if(myImgData) {
                     // const filename = "./test/" + myImgData.substr(myImgData.lastIndexOf("/") + 1, myImgData.length);
                     const filename = myImgData;
-                    this.createNewStyleSheet("d-"+idx, filename);                     
+                    this.createNewStyleSheet("d-"+idx, filename.url);                     
                 }
             });
         });
@@ -308,7 +308,7 @@ class App extends EventEmitter {
 
         head.appendChild(style);
 
-        const css = `.card p[${dataID}]::before {
+        const css = `.card > p[${dataID}]::before {
             content: "";
             width: 5.5em;
             height: 5.5em;
@@ -316,14 +316,14 @@ class App extends EventEmitter {
             background-size: cover;
             position: absolute;
             border-radius: 50%;
-            left: 20%;
+            left: calc(50% - 5.5em / 2);
             top: 10%;
             z-index: 0;
         }
 
         .card p[${dataID}]:hover::before {
             filter: brightness(1.1);
-            border-radius: 25%;
+            border-radius: 0;
             transition: all .2s linear;
         }
         
@@ -342,9 +342,11 @@ class App extends EventEmitter {
             //  app.emit("card:d-0"); // 1번 카드의 스타일을 지운다.
             //  app.emit("card:d-1"); // 2번 카드의 스타일을 지운다.
             this.on(`card:${dataID}`, () => {
-                style.removeChild(child);
                 const idx = this._headStyleSheets.indexOf(dataID);
                 delete this._headStyleSheets[idx];
+
+                // removeChild를 쓰면 메모리에 남아서 안지워짐.
+                style.remove(child);
 
                 // 등록된 이벤트를 제거합니다.
                 setTimeout(() => {
