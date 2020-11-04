@@ -161,20 +161,17 @@ class App extends EventEmitter {
                     });
 
                     myCard.innerHTML = `
+                        <i class="shop-hot-icon"></i>
                         <h2 class="contents-shop-name">${filename.shopName}</h2>
                         <p class="shop-contents">${ lines }</p>
+                        <div class="shop-button-container">
+                            <button class="shop-button">전체 상품</button>
+                            <button class="shop-button">
+                                <p class="shop-button-text">마이샵</p>
+                                <i class="shop-button-icon"></i>
+                            </button>
+                        </div>
                     `;
-                    // const h2 = document.createElement("h2");
-                    // h2.textContent = filename.shopName;
-
-                    // const p1 = document.createElement("p");
-                    // p1.textContent = lines[0];
-                    // const p2 = document.createElement("p");
-                    // p2.textContent = lines[1];
-
-                    // myCard.appendChild(h2);
-                    // myCard.appendChild(p1);
-                    // myCard.appendChild(p2);
                 }
             });
         });
@@ -389,18 +386,6 @@ class App extends EventEmitter {
                 this.openModalDialog("pages/join.html");
             }
         });
-
-        // window.addEventListener("keydown", ev => {
-        //     const keyCode = ev.key;
-            
-        //     if(keyCode === "Escape") {
-
-        //         if(this.isOpenModalDialog()) {
-        //             this.closeModalDialog();
-        //         }
-        //     }
-        // });
-
 
         // 검색 필터 박스에서 소호/브랜드 버튼 효과 구현
         const filterBoxButtons = Array.from(document.querySelector(".header-filter-box-header").children);

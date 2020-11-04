@@ -50,11 +50,12 @@ section {
 }
 
 .card-container > .card p {
-    width: 100%;
+    width: auto;
     height: 100%;
     position: relative;
 }
 
+/* 상점 이름 */
 .contents-shop-name {
     padding-top: calc(65%);
     text-align: center;
@@ -65,6 +66,98 @@ section {
     margin-bottom: 1em;
 }
 
+.shop-hot-icon::after {
+    content: "HOT";
+    width: max-content;
+    height: 1em;
+    font-size: 0.75em;
+    color: #73DFF2;
+    position: absolute;
+    cursor: pointer;
+    line-height: 0.8125em;
+    left: 0.75em;
+    top: 0.75em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-style: normal;
+}
+
+.shop-button-container {
+    cursor: pointer;
+    width: 100%;
+    height: 2.5em;
+    border: none;
+    border-top: 1px solid #EDEFF0;
+    box-sizing: border-box;
+    color: #303030;
+    letter-spacing: -0.6;
+    position: absolute;
+    display: flex;
+    flex-grow: 0;
+    flex-shrink: 1;  
+    flex-wrap: nowrap;
+    align-items:center;
+    justify-content: center;
+    flex-direction: row;
+    outline: none;
+    bottom: 0;
+}
+
+.shop-button {
+    background-color: transparent;
+    box-sizing: border-box;
+    color: #909090;
+    border: none;
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-right-color: rgb(237, 239, 240);
+    display: flex;
+    flex-direction: row;
+    flex-basis: 0%;
+    flex-grow: 1;
+    flex-shrink: 1;  
+    flex-direction: row;
+    outline: none;
+    text-decoration-color: #909090;
+    text-decoration-style: solid;
+    line-height: 2.5em;
+    margin: 0;
+    font-size: 0.6875em; 
+    align-items:center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    height: 2.5em;
+    text-align: center;
+    -webkit-user-select: none;
+    cursor: pointer;
+}
+
+.shop-button-text {
+    width: 100%;
+    height: 2.5em;
+    text-align: center;
+    box-sizing: border-box;
+    color: #909090;
+}
+
+.shop-button-icon {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 0.6875em;
+    height: 0.6875em;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAhCAYAAABX5MJvAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAE5JREFUeNrs1jEKACAMQ9FGvP8ZclNdxbEWUfiZOpUHGVrZjoOMZVZ2SYsHAgIECBAgQHyJ6Ns5rjrr1JGuQ0UV8FmBAAECBAgQ1zMFGABYogYlJB84mgAAAABJRU5ErkJggg==);
+    background-size: cover;
+    background-origin: padding-box;
+    color: #909090;
+    line-height: 2.5em;
+    margin: 0;
+    margin-left: 0.4375em;
+    letter-spacing: normal;
+    text-indent: 0px;
+    text-align: center;
+}
+
+/* 상점 이름 밑 의류 종류 / 연령대 */
 .shop-contents {
     text-align: center;
     font-size: 0.8125em;
@@ -72,10 +165,6 @@ section {
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-
-/* 그리드 카드 중앙의 원형 이미지를 나타내는 가상 요소입니다.
-레이아웃을 잡기 위해 임의로 만들어진 것으로 추후 삭제가 필요합니다. */
-
 
 /* 모달 대화 상자의 기본 스타일 (화면 중앙에 정확히 정렬하는 코드) */
 .modal-dialog-normal {
