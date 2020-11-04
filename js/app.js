@@ -153,10 +153,27 @@ class App extends EventEmitter {
                     // const filename = "./test/" + myImgData.substr(myImgData.lastIndexOf("/") + 1, myImgData.length);
                     const filename = myImgData;
                     this.createNewStyleSheet("d-"+idx, filename.url);     
-                    $(card.querySelector(`p[d-${idx}]`)).append($(`
-                        <h2>${filename.shopName}</h2>
-                        <pre>${filename.texts}</pre>
-                    `));
+
+                    const myCard = card.querySelector("p");
+                    const lines = filename.texts.replace(/([\d]+대\,[\d]+대\,[\d]+대)|([\d]+대[ ]*\,[ ]*[\d]+대)/, function(...args) {
+                        return args[0] + "<br>";
+                    });
+
+                    myCard.innerHTML = `
+                        <h2 class="contents-shop-name">${filename.shopName}</h2>
+                        <p class="shop-contents">${ lines }</p>
+                    `;
+                    // const h2 = document.createElement("h2");
+                    // h2.textContent = filename.shopName;
+
+                    // const p1 = document.createElement("p");
+                    // p1.textContent = lines[0];
+                    // const p2 = document.createElement("p");
+                    // p2.textContent = lines[1];
+
+                    // myCard.appendChild(h2);
+                    // myCard.appendChild(p1);
+                    // myCard.appendChild(p2);
                 }
             });
         });

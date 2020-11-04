@@ -46,12 +46,22 @@ section {
     height: 18em;
     background: #fff;
     border-bottom: 1px solid #E0E4E6;
+    position: relative;
 }
 
 .card-container > .card p {
     width: 100%;
     height: 100%;
     position: relative;
+}
+
+.contents-shop-name {
+    padding-top: 6em;
+    text-align: center;
+}
+
+.shop-contents {
+    text-align: center;
 }
 
 /* 그리드 카드 중앙의 원형 이미지를 나타내는 가상 요소입니다.
