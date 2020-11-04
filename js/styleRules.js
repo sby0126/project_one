@@ -49,14 +49,27 @@ export function cssRuleSet(selector, property, value) {
         for (let i = 0; i < root.length; i++) {
 
             const elem = root[i];
+            if(!elem) {
+                continue;
+            }
             const files = elem.rules || elem.cssRules;
 
-            for(let j = 0; j < files.length; j++) {
+            if(!files) {
+                continue;
+            }
 
+            for(let j = 0; j < files.length; j++) {
+                if(!files[j]) {
+                    continue;
+                }
                 /**
                  * @type {CSSStyleSheet}
                  */
                 const styled = files[j].styleSheet;
+
+                if(!styled.rules) {
+                    continue;
+                }
                 
                 for(let rule of styled.rules) {
                     if(rule.selectorText === selector) {
