@@ -1,8 +1,7 @@
 import {EventEmitter} from "./EventEmitter.js";
 import {cssRuleSet} from "./styleRules.js";
-import {parseBodyFromString} from  "./bodyParser.js";
+import {parseBodyFromString, parseScriptFromString} from  "./bodyParser.js";
 import {blobData, base64toBlob} from "./data.js";
-import "./join.js";
 
 window.imageBlobs = [];
 
@@ -227,9 +226,10 @@ class App extends EventEmitter {
      * 
      * @param {String} htmlFileName 
      */
-    async openModalDialog(htmlFileName) {
+    async openModalDialog(htmlFileName, scriptSrc) {
         await this.loadHTML(htmlFileName).then(resultText => {
             const body = parseBodyFromString(resultText);
+            const scripts = parseScriptFromString(resultText);
 
             // 라이트 박스 화면에 표시
             this.openLightBox();
@@ -263,6 +263,12 @@ class App extends EventEmitter {
  
             newDiv.innerHTML = body;
 
+            setTimeout(() => {
+                const script = document.createElement('script');
+                script.src = scriptSrc;
+                document.body.appendChild(script);     
+            }, 0);
+       
             // 나중에 대화 상자를 제거하기 위해 마지막 대화 상자의 주소 값을 저장해둡니다.
             this._lastModelElement = {
                 container: container,
@@ -383,7 +389,7 @@ class App extends EventEmitter {
         // 회원 가입 버튼 이벤트 등록
         document.querySelector("#join-button").addEventListener("click", () => {
             if(!this.isOpenModalDialog()) {
-                this.openModalDialog("pages/join.html");
+                this.openModalDialog("pages/join.html", "js/join.js");
             }
         });
 
