@@ -23,5 +23,5 @@ export function parseScriptFromString(raw) {
     if(!doc.documentElement) return "";
     if(!doc.documentElement.querySelector("body")) return "";
     
-    return doc.documentElement.querySelectorAll("script");    
+    return doc.documentElement.querySelector("body").querySelector("script");    
 }
