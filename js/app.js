@@ -267,13 +267,17 @@ class App extends EventEmitter {
                 const script = document.createElement('script');
                 script.src = scriptSrc;
                 document.body.appendChild(script);     
+                
+                Object.assign(this._lastModelElement, {
+                    script: script,
+                });                       
             }, 0);
        
             // 나중에 대화 상자를 제거하기 위해 마지막 대화 상자의 주소 값을 저장해둡니다.
-            this._lastModelElement = {
+            Object.assign(this._lastModelElement, {
                 container: container,
                 child: newDiv
-            };
+            });
 
             // 컨테이너에 추가
             container.appendChild(newDiv);
@@ -294,9 +298,11 @@ class App extends EventEmitter {
         // 마지막에 열린 대화 상자(노드)를 완전히 제거합니다.
         if(config.container) {
             config.container.removeChild(config.child);
+            document.body.removeChild(config.script);
             this._lastModelElement = {
                 container: null,
-                child: null
+                child: null,
+                script: null,
             };
 
             // 라이트 박스를 닫습니다.
