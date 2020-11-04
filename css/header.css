@@ -76,6 +76,11 @@ header {
 .header-center > a {
     display: inline-block;
     width: 4em;
+    color: #707070;
+}
+
+.header-center > a.active {
+    color: #494949;
 }
 
 /* 헤더의 오른쪽 아이템 */

@@ -56,12 +56,21 @@ section {
 }
 
 .contents-shop-name {
-    padding-top: 6em;
+    padding-top: calc(65%);
     text-align: center;
+    font-size: 0.9375em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;    
+    margin-bottom: 1em;
 }
 
 .shop-contents {
     text-align: center;
+    font-size: 0.8125em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 /* 그리드 카드 중앙의 원형 이미지를 나타내는 가상 요소입니다.

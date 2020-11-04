@@ -53,7 +53,7 @@ function startPowershell(data) {
       } catch(e) {
         config.warn(e);
       }
-      
+      ``
   });
 }
 
