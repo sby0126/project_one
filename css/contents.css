@@ -46,6 +46,7 @@ section {
     background: #fff;
     border-bottom: 1px solid #E0E4E6;
     position: relative;
+    margin-bottom: 0.5em;
 }
 
 .card-container > .card p {
