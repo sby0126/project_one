@@ -57,10 +57,10 @@ function startPowershell(data) {
   });
 }
 
+/**
+ * 
+ */
 function load() {
-  // const list = fs.readdirSync(path.resolve("."), {
-  //   encoding: "utf-8"
-  // });
 
   const list = require("./output.json");
 

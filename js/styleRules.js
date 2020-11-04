@@ -38,7 +38,7 @@ function toSnakeCase(name) {
  */
 export function cssRuleSet(selector, property, value) {
     
-    try {
+    // try {
         const root = document.styleSheets;
 
         // 스네이크 표기법으로 변환
@@ -52,7 +52,16 @@ export function cssRuleSet(selector, property, value) {
             if(!elem) {
                 continue;
             }
-            const files = elem.rules || elem.cssRules;
+
+            // CORS로 인한 보안 문제 해결
+            if(elem.href) {
+                const url = new URL(elem.href);
+                if(url.host !== location.host) {
+                    continue;
+                }
+            }
+ 
+            let files = elem.rules || elem.cssRules;
 
             if(!files) {
                 continue;
@@ -67,6 +76,10 @@ export function cssRuleSet(selector, property, value) {
                  */
                 const styled = files[j].styleSheet;
 
+                if(!styled) {
+                    continue;
+                }
+
                 if(!styled.rules) {
                     continue;
                 }
@@ -80,7 +93,7 @@ export function cssRuleSet(selector, property, value) {
 
         }
 
-    } catch (e) {
-        // console.warn(e);
-    }
+    // } catch (e) {
+    //     console.warn(e);
+    // }
 }
