@@ -439,6 +439,20 @@ class App extends EventEmitter {
 
                 }
             })
+        });
+
+        // 드랍 박스 화살표 방향을 바꿉니다.
+        $(".header-filter-box-footer-left").on("mouseover", (ev) => {
+            const isVisible = $(".header-filter-box-left-dropdown-menu").is(":visible");
+            if(isVisible) {
+                $(ev.currentTarget).find("i").removeClass("fa-caret-down");
+                $(ev.currentTarget).find("i").addClass("fa-caret-up");
+            }
+        });
+
+        $(".header-filter-box-footer-left").on("mouseout", (ev) => {
+            $(ev.currentTarget).find("i").removeClass("fa-caret-up");
+            $(ev.currentTarget).find("i").addClass("fa-caret-down");
         })
 
     }
