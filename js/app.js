@@ -275,11 +275,26 @@ class App extends EventEmitter {
     }
 
     toResolvePath(url) {
-        if(this.isRoot()) {
-            return "pages/" + url;
-        } else {
-            return url;
+        
+        let items = url.split(".");
+        let ext = items.pop();
+        let rootFolder = "pages";
+        const isRoot = this.isRoot();
+        
+        switch(ext) {
+            default:
+            case 'html':
+                rootFolder = isRoot ? "pages/" : "";
+                break;
+            case 'js':
+                rootFolder = isRoot ? "js/" : "../js/";
+                break;
+            case 'css':
+                rootFolder = isRoot ? "css/" : "../css/";
+                break;
         }
+
+        return rootFolder + url;
     }
 
     onLoad() {
@@ -287,11 +302,7 @@ class App extends EventEmitter {
         // 회원 가입 버튼 이벤트 등록
         document.querySelector("#join-button").addEventListener("click", () => {
             if(!this.isOpenModalDialog()) {
-                if(this.isRoot()) {
-                    this.openModalDialog("pages/join.html", "js/join.js");
-                } else {
-                    this.openModalDialog("./join.html", "../js/join.js");
-                }   
+                this.openModalDialog(this.toResolvePath("join.html"), this.toResolvePath("join.js"));
             }
         });
 
