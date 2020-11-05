@@ -1,6 +1,7 @@
 import {App} from "./app.js";
 import {blobData, base64toBlob} from "./data.js";
 import {itemData} from "./itemData.js";
+import {parseBodyFromString, parseScriptFromString} from  "./bodyParser.js";
 
 /**
  * ==============================================
