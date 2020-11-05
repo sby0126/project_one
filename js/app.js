@@ -63,6 +63,7 @@ class App extends EventEmitter {
         // 메뉴를 다시 처음으로 되돌립니다.
         const slideUp = () => {
             $(".header-popup-container").slideUp();
+            cssRuleSet(".header-center::after", "border-bottom", `4px solid #FF6B00`);
             cssRuleSet(".header-center::after", "left", 0 + "px");
         };
 
