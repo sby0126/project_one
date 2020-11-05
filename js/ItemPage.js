@@ -5,7 +5,7 @@ import {parseBodyFromString, parseScriptFromString} from  "./bodyParser.js";
 
 /**
  * ==============================================
- * 메인 페이지 구현
+ * 아이템 페이지 구현
  * ==============================================
  */
 class ItemPage extends App {
