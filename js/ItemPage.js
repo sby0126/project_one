@@ -8,8 +8,7 @@ import {parseBodyFromString, parseScriptFromString} from  "./bodyParser.js";
  * 메인 페이지 구현
  * ==============================================
  */
-class MainPage extends App {
-
+class ItemPage extends App {
     initMembers() {
         super.initMembers();
 
@@ -28,6 +27,8 @@ class MainPage extends App {
                 isCreateNewDiv: false,
             }
         ];
+
+        this._menuIndex = 1;
         
     }
 
@@ -175,57 +176,15 @@ class MainPage extends App {
 
     onLoad() {
         super.onLoad();
-        
+
         // 미리 정의해놓은 이벤트 함수를 호출합니다. (제이쿼리의 trigger와 유사합니다);
         this.emit("loginView:ready");
         this.emit("contents:ready"); 
-
-        // 검색 필터 박스에서 소호/브랜드 버튼 효과 구현
-        const filterBoxButtons = Array.from(document.querySelector(".header-filter-box-header").children);
-        filterBoxButtons.forEach((i, idx) => {
-            i.addEventListener("click", async (ev) => {
-                
-                /**
-                 * 화살표 함수에서는 this가 이벤트가 아니기 때문에 ev.currentTarget를 써야 합니다.
-                 * 이것은 제이쿼리 이벤트에서 this와 같습니다.
-                 * 
-                 * @type {HTMLButtonElement}
-                 */
-                const target = ev.currentTarget;
-
-                if(!target.classList.contains("active")) {
-
-                    target.classList.add("active");
-                    filterBoxButtons[(idx + 1) % filterBoxButtons.length].classList.remove("active");
-
-                    // 카드 이미지를 지웁니다.
-                    // 여기에서 d는 delete의 약자입니다.
-                    for(let i = 0; i < this._headStyleSheets.length; i++) {
-                        this.emit("card:d-" + i);
-                    }
-
-                    document.querySelector(".contents-wrapper").innerHTML = "";
-
-                    // 카드 이미지를 생성합니다.
-                    await this.loadHTML("pages/shop.html").then(result => {
-                        const container = document.querySelector(".contents-wrapper");
-                        const body = parseBodyFromString(result);
-                        container.innerHTML = body;     
-                        this.emit("contents:ready");   
-                    });
-
-                    // 카드 이미지를 뒤섞습니다.
-                    // const shuffle = arr => arr.sort(() => Math.random() - 0.5);
-                    // shuffle(blobData);
-
-                }
-            })
-        });  
     }
 
 }
 
-const app = new MainPage();
+const app = new ItemPage();
 app.on("ready", async () => {
     app.createLazyLoader();
 });
