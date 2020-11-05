@@ -52,6 +52,7 @@ header {
     display: inline-block;
     width: 4em;
     margin-left: 1em;
+    font-size: 0.75em;
 }
 
 /* 헤더 중앙에 있는 메뉴 아이템 */
@@ -85,7 +86,12 @@ header {
 
 /* 헤더의 오른쪽 아이템 */
 .header-right {
+    /* width: 19.35em; */
     height: 100%;
+    /* display: flex;
+    flex-basis: 0%;
+    flex-shrink: 1;
+    flex-grow: 1; */
 }
 
 .header-right-login-button {
@@ -93,6 +99,8 @@ header {
     background: #fff;
     border: none;
     cursor: pointer;
+    font-size: 0.6875em;
+    margin-left: 0.625em;
 }
 
 .input-non-border-box {
@@ -106,6 +114,13 @@ header {
     box-sizing: border-box; /** 이 속성을 없애면 선이 1픽셀 정도 밖으로 빠져 나갑니다. */
     color: #999999;
     border-bottom: none;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAtCAYAAAA6GuKaAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAt9JREFUeNrMmD9oU1EUh99LoEMDgoHUQXFr6OZUyNYngQzaLUKFECenWoTg5OTYqRSkuHWxFKI0mzoEihkDTt1K3KRZEsggWKSQxN/Vn1Al5+bdP0negY+G3vvO+3jcd965Nxw/C+JGCkSgBAogD1ZAGgxBD3RAGzRBC4ymZj0YB6YRxpC+AbbBDrhtkLurlMAb8N2ndGrKeBV8BbuGwgHn7/L6auAxJOkMqIO3XAIuscI8deadiXQOfAZbgd/YYt6cb2n1JD6C9WA2sc78GZ/ShzGEVYV4BTbALXCTfzf4/04M8UMX6evVo8q1J8UFqIEG0L3yISiDfXBHM+8JOHKpHqqs7WnmnYJ74GSKcMDxE84/1czb432tpbc1L4i68QMwMMw94HWSeI73tVoeSvybUIcv+MQGDkswC86EpaI+QHexREamTzrSfDhqjsJ/n3hN8wGKbJZHSVMlGp5KXUNTVUo20gVh7DjGSxc3xsw3KQo20nlhrOX5wyLly9tIS73FuWfpc01vYiydFsauPEtL+dI20kNhbMmztJRvaCPdE8bWPEtL+Xo20lIpijxLR5rSaizdFsYqbH58RMh8k6JtI93UlKKyJ+myprQ1baRb7AEmxT57B5fIMo+0+W3ZSI+4a54Uqsl571BJlni91FcfmDZL11tTtc3vC3OK4JPFE8/yuqIw3ud9rftpdS7xQjOvyPbyUYyXM+S8M42wipfa8xCDw5p6jF14h81Pi5/mKy6DNZa1Ssx+Qu3MN7E8Ll2lM0w2q924F/H/d+M/wEPwZU7S98GHYCdcdj2s6TPZu6SKS8di6ok/5ja/5yilrn/KpeBFfNoB5BFY5ZveNZTt8rpVHs5s+hIP53w+vfxb7I+g9ctpIu0rnMVTwfzj0nWpLELaWXxR0k7ii5S2Fl+0dMCXzUh88dIW4smQNhN/nRzp+OKVZEnHFE+e9HTx42RK/yuumq2fRP1+/kuAAQAEq9U0xVoDAQAAAABJRU5ErkJggg==);
+    background-size: 0.9375em;
+    background-repeat: no-repeat;
+    background-position-x: 1.25em;
+    background-position-y: calc(50%);
+    text-align: start;
+    padding-left: 2.75em;
 }
 
 .input-non-border-box:focus {
