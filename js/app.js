@@ -274,6 +274,14 @@ class App extends EventEmitter {
         return location.pathname == "/";
     }
 
+    toResolvePath(url) {
+        if(this.isRoot()) {
+            return "pages/" + url;
+        } else {
+            return url;
+        }
+    }
+
     onLoad() {
 
         // 회원 가입 버튼 이벤트 등록
@@ -314,7 +322,7 @@ class App extends EventEmitter {
                     document.querySelector(".contents-wrapper").innerHTML = "";
 
                     // 카드 이미지를 생성합니다.
-                    await this.loadHTML("pages/shop.html").then(result => {
+                    await this.loadHTML(this.toResolvePath("shop.html")).then(result => {
                         const container = document.querySelector(".contents-wrapper");
                         const body = parseBodyFromString(result);
                         container.innerHTML = body;     
