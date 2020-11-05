@@ -39,6 +39,10 @@ body {
     position: relative;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 a {
     color: var(--text-color);
     text-decoration: #bebebe;

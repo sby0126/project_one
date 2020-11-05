@@ -21,7 +21,7 @@ let ret = [];
 // 크롤러 시작
 const getHtml = async () => {
   try {
-    return await axios.get("https://www.sta1.com/shops?gndr=M&shopType=S&pg=2");
+    return await axios.get("https://www.sta1.com/items?gndr=M&shopType=S");
   } catch (error) {
     console.error(error);
   }
@@ -67,18 +67,20 @@ function load() {
   return new Promise((resolve, reject) => {
     list.forEach(async i => {
 
-      const shopName = i.shopName;
-      const texts = i.texts;
+      const title = i.title;
+      const price = i.price;
+	  const shop = i.shop;
 
       try {
         const image = await loadImage(path.basename(i.src));
         
         ctx.drawImage(image, 0, 0, image.width, image.height);
         const item = {
-		  category: "shop",
+		  category: "item",
           url: canvas.toDataURL(),
-          shopName,
-          texts
+          title,
+          price,
+		  shop
         };
         ret.push(item);
 
@@ -95,17 +97,19 @@ if(argv.download) {
   getHtml().then(html => {
     let imgList = [];
     const $ = cheerio.load(html.data);
-    const info = $(".info");
-    const list = $(".img");
-  
+    const list = $(".product-item-container a");
+	
     list.each(function (i, elem) {
       var self = this;
       imgList.push({
-		category: "shop",
-        src: $(self).find('img').attr("src"),
-        shopName: $(self).parent().find("h2.shop-name").text(),
-        texts: $(self).parent().find("p").text(),
+		category: "item",
+        src: $(self).find('.image-ratio-wrapper img').attr("src"),
+        title: $(self).find(".content h2").text(),
+		price: $(self).find(".content .price").text(),
+		shop: $(self).find(".content .shop").text()
       });
+	  
+	  console.log(imgList[i]);
     });
   
     fs.writeFileSync("output.json", JSON.stringify(imgList), {

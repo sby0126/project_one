@@ -60,6 +60,11 @@
     line-height: 2em;
 } 
 
+/* 이미지로 선언한 아이콘을 감춥니다. */
+.floating-login-view input {
+    background-image: none;
+}
+
 
 /* 로그인 버튼 */
 .floating-login-view-wrapper input[type="submit"] {
