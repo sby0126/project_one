@@ -275,7 +275,13 @@ class App extends EventEmitter {
         // 회원 가입 버튼 이벤트 등록
         document.querySelector("#join-button").addEventListener("click", () => {
             if(!this.isOpenModalDialog()) {
-                this.openModalDialog("pages/join.html", "js/join.js");
+                const isRoot = location.pathname == "/";
+                if(isRoot) {
+                    this.openModalDialog("pages/join.html", "js/join.js");
+                } else {
+                    this.openModalDialog("./join.html", "../js/join.js");
+                }
+                
             }
         });
 
