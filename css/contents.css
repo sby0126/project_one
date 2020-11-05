@@ -22,7 +22,7 @@ section {
  */
 .contents-wrapper {
     width: 60%;
-    margin-top: calc(var(--header-box-height) + 4.8em);
+    margin-top: calc(var(--header-box-height) + 3.2em);
     display: flex;
     flex-direction: column;
 }
