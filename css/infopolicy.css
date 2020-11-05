@@ -1,0 +1,68 @@
+/* 정보 처리 약관 페이지 css */
+section {
+    background-color: rgb(243,247,250);
+}
+/* contents 영역의 메뉴바 속성 */
+.inner-menu {
+   display: flex;
+   position: relative;
+   top: -6em;
+   left: 6em;
+}
+/* contents 영역의 메뉴바 a의 태그 */
+.inner-menu a {
+   box-sizing: content-box;
+   height: 30px;
+   margin-right: 50px;
+   color: grey;
+   padding: 5px;
+   font-size: 12px;
+   font-family: 'Times New Roman', Times, serif;
+   line-height: 250%;
+   cursor: pointer;
+}
+
+.inner-menu a.active {
+   border: 2px solid #FF6B00;
+   border-radius: 25px;
+   padding: 2px 14px 2px 14px;
+   color:#FF6B00;
+   }
+
+/* content의 실제 영역. 약관 출력 영역의 최상위 wrapper */
+.inner-contents {
+   width: 960px;
+}
+/* 약관이 출력되는 pre의 wrapper */
+.desc {
+   position: relative;
+   width: 110%;
+   left: 20em;
+   top: 0;
+   box-sizing: content-box;
+   line-height: 1.1em;
+   height: auto;
+}
+
+.desc > pre {
+   background: rgb(255,255,255);
+   position: relative;
+   top: -5em;
+   left: -40em;
+   width: 70%;
+   white-space: pre-line;
+   box-sizing: border-box;
+   width: 90%;
+   height: auto;
+   font-size: 12px;
+   padding: 2em 5em;
+}
+
+.text-gray {
+    color: rgb(180, 179, 179);
+}
+
+.text-orange {
+    color:#FF6B00;
+    font-weight: bolder;
+}

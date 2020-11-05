@@ -1,0 +1,101 @@
+
+       section {
+        background-color: rgb(243,247,250);
+    }
+    
+    .inner-menu {
+        display: flex;
+        position: relative;
+        top: -13%;
+        left: 13%;
+    }
+
+    .inner-menu a {
+        box-sizing: content-box;
+        height: 30px;
+        margin-right: 50px;
+        color: grey;
+        padding: 5px;
+        font-size: 13px;
+        font-family: 'Times New Roman', Times, serif;
+        line-height: 250%;
+        cursor: pointer;
+    }
+
+    .inner-menu a.active {
+        border: 2px solid #FF6B00;
+        border-radius: 25px;
+        padding: 2px 15px 2px 15px;
+        color:#FF6B00;
+    }
+    
+    .inner-contents {
+        margin: 0 auto;
+        position: relative;
+        left: -22%;
+        top: -15%;
+        width: 130%;
+        height: 480px;
+        margin-top: 50px;
+        padding: 50px;
+        background-color: rgb(255,255,255);
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .inner-banner {
+        width: 37%;
+        height: 25%;
+        margin-right: 20px;
+        position: absolute;
+        top: 5.5em;
+        left: 8.5em;
+    }
+
+    .inner-info-desc {
+        position: relative;
+        float: right;
+        right: 20%;
+    }
+
+    .inner-info-desc-left{
+        position: relative;
+        float: right;
+        white-space: nowrap;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        width: 150px;
+        height: auto;
+        right: 30px;
+        margin-right: 5px;
+        font-size: 12px;
+        line-height: 2em;
+        color: rgb(150, 150, 151);
+    }
+
+    .inner-info-desc-right{
+        position: relative;
+        float: right;
+        white-space: pre-line;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        width: 190px;
+        height: 30px;
+        height: auto;
+        right: -250px;
+        font-size: 12px;
+        line-height: 2em;
+        
+    }
+    
+    #map {
+        position: absolute;
+        top: 17.5em;
+        width: 86%;
+        height: 45%;
+        bottom: 0;
+        background-color: rgb(245, 245, 245);
+    }
+
