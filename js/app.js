@@ -53,8 +53,10 @@ class App extends EventEmitter {
         // 메뉴 슬라이드 바는 가상 요소로 정의되어있습니다.
         // 하지만 가상 요소는 DOM 쿼리 선택자로 선택이 되지 않습니다.
         // 따라서 모든 CSS 속성을 검색하여 속성을 직접 변경하는 방법을 사용하였습니다.
-        // 메뉴 슬라이드 바는 색상, 위치가 클릭한 메뉴의 위치에 따라 변경됩니다.
+        // 메뉴 슬라이드 바는 색상, 위치가 클릭한 메뉴의 위치에 따라 변경됩니다.        
         const menuItems = Array.from(document.querySelectorAll(".header-center > a"));
+        const lastMenuIndex = menuItems.length - 1;
+
         menuItems.forEach((i, idx) => {
             i.addEventListener("click", ev => {
 
@@ -78,6 +80,20 @@ class App extends EventEmitter {
                 // 가상 요소의 CSS 속성을 변경합니다.
                 cssRuleSet(".header-center::after", "border-bottom", `4px solid #${color}6B00`);
                 cssRuleSet(".header-center::after", "left", pos + "px");
+
+                // 다른 메뉴를 선택하거나 다른 곳을 선택하면 닫습니다.
+                if(idx === lastMenuIndex) {
+                    $(".header-popup-container").slideDown();
+                    $(".container").not(".header-popup-container").on("mouseup", () => {
+                        if($(".header-popup-container").is(":visible")) {
+                            $(".header-popup-container").slideUp();
+                        }
+                    });
+                } else {
+                    if($(".header-popup-container").is(":visible")) {
+                        $(".header-popup-container").slideUp();
+                    }
+                }
                 
             });
         });        
