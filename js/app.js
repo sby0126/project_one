@@ -57,6 +57,12 @@ class App extends EventEmitter {
         const menuItems = Array.from(document.querySelectorAll(".header-center > a"));
         const lastMenuIndex = menuItems.length - 1;
 
+        // 메뉴를 다시 처음으로 되돌립니다.
+        const slideUp = () => {
+            $(".header-popup-container").slideUp();
+            cssRuleSet(".header-center::after", "left", 0 + "px");
+        };
+
         menuItems.forEach((i, idx) => {
             i.addEventListener("click", ev => {
 
@@ -86,15 +92,15 @@ class App extends EventEmitter {
                     $(".header-popup-container").slideDown();
                     $(".container").not(".header-popup-container").on("mouseup", (ev) => {
 
-                        // 클래스 목록에 menu가 포함되어있으면 슬라이드를 하지 않는다.
+                        // 클래스 목록에 menu가 포함되어있으면 슬라이드 업을 하지 않습니다.
                         const classFilter = Array.from(ev.target.classList).filter(i => i.indexOf("menu") >= 0)
                         if(classFilter.length == 0) {
-                            $(".header-popup-container").slideUp();
+                            slideUp();
                         }
                     });
                 } else {
                     if($(".header-popup-container").is(":visible")) {
-                        $(".header-popup-container").slideUp();
+                        slideUp();
                     }
                 }
                 
