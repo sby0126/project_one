@@ -84,8 +84,11 @@ class App extends EventEmitter {
                 // 다른 메뉴를 선택하거나 다른 곳을 선택하면 닫습니다.
                 if(idx === lastMenuIndex) {
                     $(".header-popup-container").slideDown();
-                    $(".container").not(".header-popup-container").on("mouseup", () => {
-                        if($(".header-popup-container").is(":visible")) {
+                    $(".container").not(".header-popup-container").on("mouseup", (ev) => {
+
+                        // 클래스 목록에 menu가 포함되어있으면 슬라이드를 하지 않는다.
+                        const classFilter = Array.from(ev.target.classList).filter(i => i.indexOf("menu") >= 0)
+                        if(classFilter.length == 0) {
                             $(".header-popup-container").slideUp();
                         }
                     });
