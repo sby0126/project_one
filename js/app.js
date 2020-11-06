@@ -279,6 +279,10 @@ class App extends EventEmitter {
     }
 
     toResolvePath(url) {
+
+        if(url.indexOf("pages") >= 0) {
+            return url;
+        }
         
         let items = url.split(".");
         let ext = items.pop();
@@ -310,7 +314,7 @@ class App extends EventEmitter {
         // 회원 가입 버튼 이벤트 등록
         document.querySelector("#join-button").addEventListener("click", () => {
             if(!this.isOpenModalDialog()) {
-                this.openModalDialog(this.toResolvePath("join.html"), this.toResolvePath("join.js"));
+                this.openModalDialog(this.toResolvePath("pages/join.html"), this.toResolvePath("join.js"));
             }
         });
 
@@ -341,7 +345,7 @@ class App extends EventEmitter {
                     document.querySelector(".contents-wrapper").innerHTML = "";
 
                     // 카드 이미지를 생성합니다.
-                    await this.loadHTML(this.toResolvePath("shop.html")).then(result => {
+                    await this.loadHTML(this.toResolvePath("pages/shop.html")).then(result => {
                         const container = document.querySelector(".contents-wrapper");
                         const body = parseBodyFromString(result);
                         container.innerHTML = body;     
