@@ -170,6 +170,7 @@ class ItemPage extends App {
                             <h2>${title}</h2>
                             <p>${price}</p>
                             <p>${shop}</p>
+                            <button class="like-button"></button>
                         </div>
                     `);
                 }
