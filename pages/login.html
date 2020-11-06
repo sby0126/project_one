@@ -29,15 +29,37 @@
                 <button id="close-login-view">X</button>
             </div>
             <!-- 로그인 폼 -->
+
+            <!-- <section class="login-container">
+                <form class="form">
+                    <div class="floating-login-view-input-group">
+                        <div class="append username"></div><input type="text"
+                            placeholder="아이디" class="input">
+                    </div>
+                    <div class="floating-login-view-input-group">
+                        <div class="append password"></div><input type="password"
+                            placeholder="비밀번호" class="input">
+                    </div><button class="email-button">이메일 로그인</button>
+                </form>
+                <div class="link-button-group"><button 
+                        class="link-button">회원가입</button><button class="link-button">비밀번호 찾기</button>
+                </div>
+                <div class="footer">
+                    <p >빠른 로그인</p><button class="sns-button kakao"></button><button
+                        class="sns-button facebook"></button><button id="naverIdLogin"
+                        class="sns-button naver"><a id="naverIdLogin_loginButton" href="#"><img
+                                src="https://static.nid.naver.com/oauth/button_g.PNG?version=js-2.0.0"
+                                height="36"></a></button>
+                </div>
+            </section> -->
+
             <form action="login.jsp">
-                <legend>로그인 폼</legend>
-                <!-- 아이디 및 비밀번호 입력 창 -->
-                <p><label for="id"><i class="fas fa-user-alt"></i></label><input type="text" name="id" class="input-non-border-box" id="floating-login-view-login-id"></p>
-                <p><label for="pw"><i class="fas fa-lock"></i></label><input type="password" name="id"  class="input-non-border-box" id="floating-login-view-login-pw"></p>
-                <!-- 로그인 버튼 -->
+                <p class="floating-login-view-input-group">
+                    <label for="id"><i class="fas fa-user-alt"></i></label><input type="text" name="id" class="input-non-border-box" id="floating-login-view-login-id">
+                </p>
+                <p class="floating-login-view-input-group"><label for="pw"><i class="fas fa-lock"></i></label><input type="password" name="id"  class="input-non-border-box" id="floating-login-view-login-pw"></p>
                 <input class="input-button" type="submit" value="Login">
-                <!-- 회원가입/비밀번호 찾기 버튼 -->
-                <div class="floating-login-view-button-panel">
+                <div class="floating-login-view-button-panel floating-login-view-input-group">
                     <input class="input-button" id="join-button" type="button" value="회원가입">
                     <input class="input-button" type="button" value="비밀번호 찾기">
                 </div>

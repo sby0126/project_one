@@ -50,21 +50,35 @@
 }
 
 .floating-login-view {
-    width: 18em;
+    width: 18.75em;
     min-height: 100%;
     background-color: #fff;
     opacity: 0.8;
     display: flex;
-    justify-content: center;
     padding-top: 3em;
     line-height: 2em;
+    padding-left: 2.5rem;
+    flex-direction: column;
 } 
 
 /* 이미지로 선언한 아이콘을 감춥니다. */
 .floating-login-view input {
     background-image: none;
+    height: 49px;
+    line-height: 50px;
+    text-indent: 0px;
+    text-align: left;
+    border: none;
 }
 
+.floating-login-view input:focus {
+    background: none;
+}
+
+.floating-login-view-input-group {
+    width: 90%;
+    border-bottom: 1px solid #E9EDEF;
+}
 
 /* 로그인 버튼 */
 .floating-login-view-wrapper input[type="submit"] {
@@ -96,6 +110,7 @@
     outline: none;
     padding: 0.5em;
     font-size: 1em;
+    justify-self: right;
 }
 
 @media only screen and (min-width: 320px) {
