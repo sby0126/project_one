@@ -17,12 +17,12 @@ class ItemPage extends App {
          */
         this._pendingList = [
             {
-                src: `/pages/login.html`,
+                src: `pages/login.html`,
                 parent: ".container",
                 isCreateNewDiv: true,
             },
             {
-                src: `/pages/shop.html`,
+                src: `pages/shop.html`,
                 parent: ".contents-wrapper",
                 isCreateNewDiv: false,
             }

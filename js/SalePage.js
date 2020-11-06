@@ -17,12 +17,12 @@ class SalePage extends App {
          */
         this._pendingList = [
             {
-                src: `/pages/login.html`,
+                src: `pages/login.html`,
                 parent: ".container",
                 isCreateNewDiv: true,
             },
             {
-                src: `/pages/shop.html`,
+                src: `pages/shop.html`,
                 parent: ".contents-wrapper",
                 isCreateNewDiv: false,
             }
@@ -187,7 +187,7 @@ class SalePage extends App {
         const link = document.createElement('link'); 
         link.rel = 'stylesheet';
         link.type = 'text/css'; 
-        link.href = './css/contents-sale.css';  
+        link.href = 'css/contents-sale.css';  
 
         head.after(link);
         

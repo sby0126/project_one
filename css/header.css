@@ -85,12 +85,7 @@ header {
 
 /* 헤더의 오른쪽 아이템 */
 .header-right {
-    /* width: 19.35em; */
     height: 100%;
-    /* display: flex;
-    flex-basis: 0%;
-    flex-shrink: 1;
-    flex-grow: 1; */
 }
 
 .header-right-login-button {
@@ -126,8 +121,12 @@ header {
     background: #FF6B00;
 }
 
-header ::placeholder {
+.input-non-border-box:not(:focus)::placeholder {
     color: #999999;
+}
+
+.input-non-border-box:focus::placeholder {
+    color: white;
 }
 
 /**********************************************************/
@@ -365,7 +364,7 @@ header ::placeholder {
     height: auto;
     display: block;
     border-top: none;
-    box-sizing: border-box;
+    transform: translateX(-1px);
 }
 
 .header-filter-box-footer-left:hover {
@@ -374,10 +373,11 @@ header ::placeholder {
     border-left: 1px solid #d2d2d2;
     border-right: 1px solid #d2d2d2;
     width: 13.31em;
+    color: transparent;
 }
 
 .header-filter-box-footer-left:hover em {
-    color: transparent;
+    border-color: transparent;
 }
 
 .header-filter-box-left-dropdown-menu {

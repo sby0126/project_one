@@ -389,7 +389,7 @@ class App extends EventEmitter {
          */
         for await(let i of this._pendingList) {
             const myPath = this.toResolvePath(i.src);
-            await this.loadHTML(myPath)
+            await this.loadHTML(`${path}/${i.src}`)
             .then(result => {
                 const container = document.querySelector(i.parent);
                 const body = parseBodyFromString(result);
