@@ -271,6 +271,10 @@ class App extends EventEmitter {
     }
 
     isRoot() {
+        const path = location.pathname;
+        if(path.indexOf("/") > -1 && path.indexOf("index.html")) {
+            return true;
+        }
         return location.pathname == "/";
     }
 
