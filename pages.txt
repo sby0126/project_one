@@ -1,0 +1,5 @@
+./pages/:
+find_password.html
+join.html
+login.html
+shop.html
