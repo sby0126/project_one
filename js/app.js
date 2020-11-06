@@ -272,8 +272,8 @@ class App extends EventEmitter {
 
     isRoot() {
         const path = location.pathname;
-        if(path.indexOf("/") > -1 && path.indexOf("index.html")) {
-            return true;
+        if(path.indexOf("pages") >= 0) {
+            return false;
         }
         return location.pathname == "/";
     }
@@ -383,7 +383,8 @@ class App extends EventEmitter {
          * this.loadHTML 메서드는 비동기 함수입니다.
          */
         for await(let i of this._pendingList) {
-            await this.loadHTML(`${path}/${i.src}`)
+            const myPath = this.toResolvePath(i.src);
+            await this.loadHTML(myPath)
             .then(result => {
                 const container = document.querySelector(i.parent);
                 const body = parseBodyFromString(result);
