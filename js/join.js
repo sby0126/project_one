@@ -3,7 +3,7 @@
  */
 
 function run() {
-    $("input").focus(function () {
+    $(".main .content_login input").focus(function () {
         var read = $(this).prop("readonly");
         if (!read) {
             $(this).parent().find(".label1").css("display", "none")
