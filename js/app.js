@@ -303,6 +303,10 @@ class App extends EventEmitter {
 
     onLoad() {
 
+        $('.header-filter-box-left-shop-categories').on('change', function() {
+            $('.header-filter-box-left-shop-categories').not(this).prop('checked', false);  
+        });
+
         // 회원 가입 버튼 이벤트 등록
         document.querySelector("#join-button").addEventListener("click", () => {
             if(!this.isOpenModalDialog()) {
