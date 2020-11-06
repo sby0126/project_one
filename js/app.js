@@ -300,13 +300,13 @@ class App extends EventEmitter {
         switch(ext) {
             default:
             case 'html':
-                rootFolder = isRoot ? "pages/" : "";
+                rootFolder = isRoot ? url + "pages/" : url;
                 break;
             case 'js':
-                rootFolder = isRoot ? "js/" : "../js/";
+                rootFolder = isRoot ? url + "js/" : "../js/";
                 break;
             case 'css':
-                rootFolder = isRoot ? "css/" : "../css/";
+                rootFolder = isRoot ? url + "css/" : "../css/";
                 break;
         }
 
