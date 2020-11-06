@@ -84,11 +84,19 @@ class MorePage extends App {
     }
 
     onLoad() {
-        super.onLoad();
+        $('.header-filter-box-left-shop-categories').on('change', function() {
+            $('.header-filter-box-left-shop-categories').not(this).prop('checked', false);  
+        });
+
+        // 회원 가입 버튼 이벤트 등록
+        document.querySelector("#join-button").addEventListener("click", () => {
+            if(!this.isOpenModalDialog()) {
+                this.openModalDialog(this.toResolvePath("join.html"), this.toResolvePath("join.js"));
+            }
+        });
 
         // 미리 정의해놓은 이벤트 함수를 호출합니다. (제이쿼리의 trigger와 유사합니다);
         this.emit("loginView:ready");
-        this.emit("contents:ready"); 
         
     }
 
