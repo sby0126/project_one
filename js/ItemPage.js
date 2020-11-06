@@ -47,16 +47,26 @@ class ItemPage extends App {
 
         head.appendChild(style);
 
-        const css = `.card p[${dataID}]::before {
+        const css = `
+        .card {
+            display: flex;
+            flex-wrap: wrap;
+            flex: auto 1 auto;
+            flex-direction: column;
+            border: 1px solid #F2F5F9;
+        }
+        
+        .card p[${dataID}]::before {
             content: "";
-            width: 5.5em;
-            height: 5.5em;
-            background: url("${imagePath}") center;
+            width: 100%;
+            height: 78%;
+            background: url("${imagePath}") left top;
             background-size: cover;
+            background-repeat: no-repeat;
             position: absolute;
-            border-radius: 50%;
-            left: calc(50% - 5.5em / 2);
-            top: 10%;
+            border-radius: 0;
+            left: 0;
+            top: 0;
             z-index: 0;
         }
 
@@ -65,7 +75,6 @@ class ItemPage extends App {
             border-radius: 0;
             transition: all .2s linear;
         }
-        
         `;
 
         if (style.styleSheet) {
@@ -145,7 +154,7 @@ class ItemPage extends App {
                 card.querySelector("p").setAttribute("d-"+idx, "");
                 
                 // let myImgData = data[idx].imgPath;
-                let myImgData = blobData[idx];
+                let myImgData = itemData[idx];
 
                 if(myImgData) {
                     // const filename = "./test/" + myImgData.substr(myImgData.lastIndexOf("/") + 1, myImgData.length);
@@ -153,22 +162,16 @@ class ItemPage extends App {
                     this.createNewStyleSheet("d-"+idx, filename.url);     
 
                     const myCard = card.querySelector("p");
-                    const lines = filename.texts.replace(/([\d]+대\,[\d]+대\,[\d]+대)|([\d]+대[ ]*\,[ ]*[\d]+대)/, function(...args) {
-                        return args[0] + "<br>";
-                    });
+                    const {title, price, shop} = myImgData;
 
-                    myCard.innerHTML = `
+                    card.insertAdjacentHTML( 'afterbegin', `
                         <i class="shop-hot-icon"></i>
-                        <h2 class="contents-shop-name">${filename.shopName}</h2>
-                        <p class="shop-contents">${ lines }</p>
-                        <div class="shop-button-container">
-                            <button class="shop-button">전체 상품</button>
-                            <button class="shop-button">
-                                <p class="shop-button-text">마이샵</p>
-                                <i class="shop-button-icon"></i>
-                            </button>
+                        <div class="item-button-container"> 
+                            <h2>${title}</h2>
+                            <p>${price}</p>
+                            <p>${shop}</p>
                         </div>
-                    `;
+                    `);
                 }
             });
         });        

@@ -25,6 +25,7 @@
     "axios": "^0.21.0",
     "canvas": "^2.6.1",
     "cheerio": "^1.0.0-rc.3",
+    "image-size": "^0.9.3",
     "minimist": "^1.2.5"
   }
 }

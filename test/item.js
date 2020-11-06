@@ -2,6 +2,9 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 const cp = require("child_process");
 const {promisify} = require("util");
+
+const sizeOf = require('image-size');
+
 const spwan = promisify(cp.spawn);
 const {
   createCanvas,
@@ -10,8 +13,6 @@ const {
 const {
   pathToFileURL
 } = require("url");
-const canvas = createCanvas(130, 130);
-const ctx = canvas.getContext('2d')
 const path = require('path');
 const fs = require("fs");
 const argv = require("minimist")(process.argv.slice(2));
@@ -73,6 +74,9 @@ function load() {
 
       try {
         const image = await loadImage(path.basename(i.src));
+        const dimensions = sizeOf(path.basename(i.src))
+        const canvas = createCanvas(dimensions.width, dimensions.height);
+        const ctx = canvas.getContext('2d')        
         
         ctx.drawImage(image, 0, 0, image.width, image.height);
         const item = {
