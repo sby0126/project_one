@@ -1,0 +1,16 @@
+name: Update Pages List
+on:
+  push
+jobs:
+  updateImageList: # you can put any name here
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2 # Checkout repo
+      - shell: bash
+        run: ls -Rpm1 ./pages/ > pages.txt # Saving file list into a file
+      - name: Save changes
+        uses: actions-go/push@v1 # pushing the changes to the repo
+        with:
+          force: true
+          commit-files: pages.txt
+          commit-message: Update Pages List
