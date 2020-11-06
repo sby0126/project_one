@@ -103,14 +103,14 @@ class MainPage extends App {
             const loginView = document.querySelector(".floating-login-view-wrapper");
             const lightBox = document.querySelector("#light-box-container");
 
-            // loginView.addEventListener("transitionend", () => {
-            //     const transition = loginView.style.transition;
-            //     if(transition.includes("ease-in")) {
-            //         loginView.style.transition = "all .3s ease-out";
-            //     } else {
-            //         loginView.style.transition = "all .8s ease-in";
-            //     }
-            // })
+            // 로그인 바가 열렸을 때 우측을 누르면 닫기
+            window.addEventListener("click", (ev) => {
+                if(ev.target == loginView && !$(".main .content_login").is(":visible")) {
+                    lightBox.classList.remove("active");
+                    loginView.style.transition = "all .8s ease-in-out";
+                    loginView.style.left = "9999px";
+                }
+            });
 
             loginButton.addEventListener("click", () => {
 
