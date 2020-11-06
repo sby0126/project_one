@@ -275,10 +275,18 @@ class App extends EventEmitter {
         if(path.indexOf("pages") >= 0) {
             return false;
         }
+
         return location.pathname == "/";
     }
 
     toResolvePath(url) {
+
+        if(location.host.indexOf("github.io") >= 0) {
+            const items = location.href.split("/").slice(2, -1);
+            if(items.includes("biud436.github.io")) {
+                url = location.protocol + "//" + items.join("/") + "/";
+            }
+        }
 
         if(url.indexOf("pages") >= 0) {
             return url;
