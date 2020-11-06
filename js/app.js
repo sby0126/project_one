@@ -315,7 +315,7 @@ class App extends EventEmitter {
         // 회원 가입 버튼 이벤트 등록
         document.querySelector("#join-button").addEventListener("click", () => {
             if(!this.isOpenModalDialog()) {
-                this.openModalDialog(this.toResolvePath("pages/join.html"), this.toResolvePath("join.js"));
+                this.openModalDialog(this.toResolvePath("pages/join.html"), this.toResolvePath("js/join.js"));
             }
         });
 
