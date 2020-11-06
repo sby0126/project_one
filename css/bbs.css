@@ -1,0 +1,132 @@
+.location {
+    position: absolute;
+    top: 18px;
+    right: 30px;
+}
+
+.location strong {
+    color: #45881b;
+}
+
+.contents-wrapper > h1 {
+    font-size: 18px;
+    font-family: nanumEX;
+    color: #ff3c00;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.2);
+    border-bottom: 2px solid #ff6738;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.boardname {
+    text-align: left;
+    margin: 0 0 0.8em 0.5em;
+}
+
+.boardtable {
+    width: 100%;
+    border-left: 1px dashed;
+    border-right: 1px dashed;
+}
+
+.bbs-number {
+    width: 15%;
+}
+
+.bbs-title {
+    width: 50%;
+}
+
+.bbs-date {
+    width: 20%;
+}
+
+.bbs-hit {
+    width: 15%;
+}
+
+.boardtable th{
+    background-color: rgb(165, 165, 165);
+    color: rgb(55, 55, 55);
+}
+
+.boardtable th, .boardtable td {
+    padding: 10px 0;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.boardtable td {
+    border-top: 1px double #999;
+    border-bottom: 1px solid #ccc;
+}
+
+.boardtable td:nth-child(2) {
+    text-align: left;
+}
+
+.boardtable a{
+    display: inline-block;
+    width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.boardtable span {
+    color: #f48002;
+    margin-left: 5px;
+}
+
+.btn-zone {
+    position: relative;
+    left: 67em;
+    bottom: -1em;
+}
+
+.bbs-write {
+    width: 60px;
+    box-sizing: border-box;
+    padding: 0.3em 0.7em;
+    border-radius: 0.2em;
+    background-color: rgb(200, 200, 200);
+    border: 1px solid black;
+}
+
+.paging {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.btnPrev, .btnNext {
+    display: inline-block;
+    vertical-align: middle;
+    width: 21px;
+    height: 20px;
+    padding: 0;
+    white-space: nowrap;
+    text-indent: 20px;
+    overflow: hidden;
+    background: url(images/backpage_forwardpage.png) no-repeat;
+}
+
+.btn-prev {
+    background-position: 0 0;
+}
+
+.btn-next {
+    background-position: 100% 0;
+}
+
+.paging a, .paging strong {
+    margin: 0 5px;
+    line-height: 20px;
+}
+
+.paging strong {
+    border-bottom: 1px solid red;
+    color: red;
+}

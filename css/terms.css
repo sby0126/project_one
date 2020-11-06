@@ -2,12 +2,21 @@
 section {
      background-color: rgb(243,247,250);
 }
+
+header {
+    /* z-index: 0; */
+    height: 65px;
+}
+
+.contents-wrapper {
+    width: 1024px;
+}
 /* contents 영역의 메뉴바 속성 */
 .inner-menu {
     display: flex;
     position: relative;
-    top: -6em;
-    left: 6em;
+    top: -9.2em;
+    left: 19.8em;
 }
 /* contents 영역의 메뉴바 a의 태그 */
 .inner-menu a {
@@ -31,14 +40,22 @@ section {
 
 /* content의 실제 영역. 약관 출력 영역의 최상위 wrapper */
 .inner-contents {
-    width: 960px;
+    margin: 0 auto;
+    position: relative;
+    width: 1256px;
+    max-width: 100%;
+    min-width: 560px;
+    width: 100%;
+    top: -7.4em;
+    left: 14.8em;
+}
  }
  /* 약관이 출력되는 pre의 wrapper */
  .desc {
     position: relative;
     width: 110%;
     left: 20em;
-    top: 0;
+    top: -3%;
     box-sizing: content-box;
     line-height: 1.1em;
     height: auto;
@@ -47,12 +64,12 @@ section {
  .desc > pre {
     background: rgb(255,255,255);
     position: relative;
-    top: -5em;
-    left: -40em;
+    top: -5%;
+    left: -24%;
     width: 70%;
     white-space: pre-line;
     box-sizing: border-box;
-    width: 90%;
+    width: 100%;
     height: auto;
     font-size: 12px;
     padding: 2em 5em;

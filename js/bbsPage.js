@@ -5,10 +5,10 @@ import {parseBodyFromString, parseScriptFromString} from  "./bodyParser.js";
 
 /**
  * ==============================================
- * 할인 페이지 구현
+ * 맵 페이지 구현
  * ==============================================
  */
-class MorePage extends App {
+class bbsPage extends App {
     initMembers() {
         super.initMembers();
 
@@ -20,7 +20,12 @@ class MorePage extends App {
                 src: `login.html`,
                 parent: ".container",
                 isCreateNewDiv: true,
-            }
+            },
+            // {
+            //     src: `/pages/shop.html`,
+            //     parent: ".contents-wrapper",
+            //     isCreateNewDiv: false,
+            // }
         ];
 
         this._menuIndex = 3;
@@ -37,7 +42,7 @@ class MorePage extends App {
      * @param {String} imagePath 
      */
     createNewStyleSheet(dataID, imagePath) {
-    }        
+    }    
 
     addEventListeners() {
         this.on("loginView:ready", () => {
@@ -80,25 +85,58 @@ class MorePage extends App {
                 loginView.style.transition = "all .8s ease-in-out";
                 loginView.style.left = "9999px";
             })
-        });          
+        });           
     }
 
     onLoad() {
-        // 회원 가입 버튼 이벤트 등록
-        document.querySelector("#join-button").addEventListener("click", () => {
-            if(!this.isOpenModalDialog()) {
-                this.openModalDialog(this.toResolvePath("join.html"), this.toResolvePath("join.js"));
-            }
-        });
+        super.onLoad();
 
         // 미리 정의해놓은 이벤트 함수를 호출합니다. (제이쿼리의 trigger와 유사합니다);
         this.emit("loginView:ready");
+
+        // CSS 파일 로드
         
+    }
+
+    /**
+     * 새로 고침을 하지 않고 페이지를 동적으로 만들 수 있는 비동기 페이지 로더입니다.
+     */
+    async createLazyLoader() {
+        const idx = location.href.lastIndexOf("/");
+        const path = location.href.substring(0, idx);
+
+        /**
+         * await는 비동기 함수가 끝날 때 까지 대기하는 명령입니다.
+         * this.loadHTML 메서드는 비동기 함수입니다.
+         */
+        for await(let i of this._pendingList) {
+            await this.loadHTML(`${path}/${i.src}`)
+            .then(result => {
+                const container = document.querySelector(i.parent);
+                const body = parseBodyFromString(result);
+
+                // 새로운 <div></div>에 특정 요소를 생성합니다.
+                if(i.isCreateNewDiv) {
+                    const newDiv = document.createElement("div");
+                    newDiv.innerHTML = body;
+                    container.appendChild(newDiv);
+                } else {
+                    // <div></div>를 만들지 않고 하위 내용을 새로 변경합니다.
+                    // 제이쿼리의 .html() 또는 .text()와 같습니다.
+                    container.innerHTML = body;       
+                }
+    
+            }).catch(err => {
+                console.warn(err);
+            })
+        }
+
+        this.onLoad();
     }
 
 }
 
-const app = new MorePage();
+const app = new bbsPage();
 app.on("ready", async () => {
     app.createLazyLoader();
 });

@@ -1,14 +1,13 @@
 import {App} from "./app.js";
 import {blobData, base64toBlob} from "./data.js";
-import {saleData} from "./saleData.js";
 import {parseBodyFromString, parseScriptFromString} from  "./bodyParser.js";
 
 /**
  * ==============================================
- * 할인 페이지 구현
+ * 아이템 페이지 구현
  * ==============================================
  */
-class MorePage extends App {
+class TermsPage extends App {
     initMembers() {
         super.initMembers();
 
@@ -17,7 +16,7 @@ class MorePage extends App {
          */
         this._pendingList = [
             {
-                src: `login.html`,
+                src: `/pages/login.html`,
                 parent: ".container",
                 isCreateNewDiv: true,
             }
@@ -27,18 +26,7 @@ class MorePage extends App {
         
     }
 
-    /**
-     * CSS를 자바스크립트에서 동적으로 생성합니다.
-     * 이 메소드는 가상 요소로 만든 둥근 이미지를 변경하기 위해 정의하였습니다.
-     * <p></p> 요소는 각각 특정 dataID를 attribute로 가집니다.
-     * 
-     * @link https://stackoverflow.com/a/524721
-     * @param {String} dataId 
-     * @param {String} imagePath 
-     */
-    createNewStyleSheet(dataID, imagePath) {
-    }        
-
+    
     addEventListeners() {
         this.on("loginView:ready", () => {
             const loginButton = document.querySelector(".header-right-login-button");
@@ -80,25 +68,21 @@ class MorePage extends App {
                 loginView.style.transition = "all .8s ease-in-out";
                 loginView.style.left = "9999px";
             })
-        });          
+        });      
+               
     }
 
     onLoad() {
-        // 회원 가입 버튼 이벤트 등록
-        document.querySelector("#join-button").addEventListener("click", () => {
-            if(!this.isOpenModalDialog()) {
-                this.openModalDialog(this.toResolvePath("join.html"), this.toResolvePath("join.js"));
-            }
-        });
+        super.onLoad();
 
         // 미리 정의해놓은 이벤트 함수를 호출합니다. (제이쿼리의 trigger와 유사합니다);
         this.emit("loginView:ready");
-        
+        this.emit("contents:ready"); 
     }
 
 }
 
-const app = new MorePage();
+const app = new TermsPage();
 app.on("ready", async () => {
     app.createLazyLoader();
 });
