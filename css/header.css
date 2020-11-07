@@ -54,6 +54,24 @@ header {
     font-size: 0.75em;
 }
 
+/* 헤더 왼쪽 메뉴 엑티브 상태 아이콘으로 표시 */
+.header-left > a.active {
+    display: block;
+    position: relative;
+}
+
+.header-left a.active::before {
+    content: "";
+    width: 0.5em;
+    height: 0.5em;
+    position: absolute;
+    border-radius: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #FF6B00;
+    top: 48px;
+}
+
 /* 헤더 중앙에 있는 메뉴 아이템 */
 .header-center {
     margin-left: 2em;
