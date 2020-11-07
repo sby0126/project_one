@@ -1,6 +1,12 @@
 import { Component } from "./Component.js";
 
 export class CardStyleSheetBuilder extends Component {
+    /**
+     * 
+     * @param {App} parent 
+     * @param {String} css 
+     * @param {String} dataID 
+     */
     constructor(parent, css, dataID) {
         super(parent);
         this._css = css;

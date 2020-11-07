@@ -1,6 +1,7 @@
 import {App} from "./app.js";
 import { LoginButton } from "./components/LoginButton.js";
 import { SaleContentLoader } from "./components/SaleContentLoader.js";
+import { CardStyleSheetBuilder } from "./components/CardStyleSheetBuilder.js";
 
 /**
  * ==============================================
@@ -41,59 +42,30 @@ class SalePage extends App {
      * @param {String} imagePath 
      */
     createNewStyleSheet(dataID, imagePath) {
-        const head = document.head || document.getElementsByTagName('head')[0];
-        const style = document.createElement('style');
 
-        head.appendChild(style);
+        CardStyleSheetBuilder.builder(this, `        
+            .card p[${dataID}]::before {
+                content: "";
+                width: 100%;
+                height: 78%;
+                background: url("${imagePath}") left top;
+                background-size: cover;
+                background-repeat: no-repeat;
+                position: absolute;
+                border-radius: 0;
+                left: 0;
+                top: 0;
+                z-index: 0;
+            }
 
-        const css = `        
-        .card p[${dataID}]::before {
-            content: "";
-            width: 100%;
-            height: 78%;
-            background: url("${imagePath}") left top;
-            background-size: cover;
-            background-repeat: no-repeat;
-            position: absolute;
-            border-radius: 0;
-            left: 0;
-            top: 0;
-            z-index: 0;
-        }
+            .card p[${dataID}]:hover::before {
+                filter: brightness(1.1);
+                border-radius: 0;
+                transition: all .2s linear;
+            }
+        `, dataID).run();
 
-        .card p[${dataID}]:hover::before {
-            filter: brightness(1.1);
-            border-radius: 0;
-            transition: all .2s linear;
-        }
-        `;
-
-        if (style.styleSheet) {
-            // IE 8
-            style.styleSheet.cssText = css;
-        } else {
-            const child = document.createTextNode(css);
-            style.appendChild(child);
-            this._headStyleSheets.push(dataID);
-
-            // 삭제 이벤트를 정의합니다.
-            // 사용 예: 
-            //  app.emit("card:d-0"); // 1번 카드의 스타일을 지운다.
-            //  app.emit("card:d-1"); // 2번 카드의 스타일을 지운다.
-            this.on(`card:${dataID}`, () => {
-                const idx = this._headStyleSheets.indexOf(dataID);
-                delete this._headStyleSheets[idx];
-
-                // removeChild를 쓰면 메모리에 남아서 안지워짐.
-                style.remove(child);
-
-                // 등록된 이벤트를 제거합니다.
-                setTimeout(() => {
-                    this.off(`card:${dataID}`);
-                }, 0);
-            });
-        }
-    }    
+    }
 
     addEventListeners() {
         this.on("loginView:ready", () => LoginButton.builder().run());      
