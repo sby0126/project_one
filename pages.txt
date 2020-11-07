@@ -1,5 +1,9 @@
 ./pages/:
 find_password.html
+infopolicy.html
 join.html
 login.html
+map.html
+payments.html
 shop.html
+terms.html
