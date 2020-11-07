@@ -46,8 +46,6 @@ function startAria2c(data) {
 // 파워쉘 시작
 function startPowershell(data) {
   data.forEach(async config => {
-      // const targetUrl = mainUrl + config.imgPath;
-      // const name = targetUrl.substring(targetUrl.lastIndexOf("/") + 1, targetUrl.length);
       const targetUrl = config.src;
       try {
         await spawn("powershell", ["wget", targetUrl, "-OutFile", name], {});
@@ -58,9 +56,6 @@ function startPowershell(data) {
   });
 }
 
-/**
- * 
- */
 function load() {
 
   const list = require("./output.json");
@@ -106,14 +101,14 @@ if(argv.download) {
     list.each(function (i, elem) {
       var self = this;
       imgList.push({
-		category: "item",
+        category: "item",
         src: $(self).find('.image-ratio-wrapper img').attr("src"),
         title: $(self).find(".content h2").text(),
-		price: $(self).find(".content .price").text(),
-		shop: $(self).find(".content .shop").text()
+        price: $(self).find(".content .price").text(),
+        shop: $(self).find(".content .shop").text()
       });
 	  
-	  console.log(imgList[i]);
+	    console.log(imgList[i]);
     });
   
     fs.writeFileSync("output.json", JSON.stringify(imgList), {
