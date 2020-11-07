@@ -1,7 +1,9 @@
-import {EventEmitter} from "./EventEmitter.js";
-import {cssRuleSet} from "./styleRules.js";
-import {parseBodyFromString, parseScriptFromString} from  "./bodyParser.js";
-import {blobData, base64toBlob} from "./data.js";
+import { parseBodyFromString, parseScriptFromString } from "./bodyParser.js";
+import { Category } from "./components/Category.js";
+import { JoinButton } from "./components/JoinButton.js";
+import { FilterBoxButtons } from "./components/FilterBoxButtons.js";
+import { EventEmitter } from "./EventEmitter.js";
+import { cssRuleSet } from "./styleRules.js";
 
 window.imageBlobs = [];
 
@@ -270,6 +272,9 @@ class App extends EventEmitter {
 
     }
 
+    /**
+     * 루트 폴더인지 확인합니다.
+     */
     isRoot() {
         const path = location.pathname;
         if(path.indexOf("pages") >= 0) {
@@ -279,6 +284,11 @@ class App extends EventEmitter {
         return location.pathname == "/";
     }
 
+    /**
+     * 경로를 반환합니다.
+     * 
+     * @param {String} url 
+     */
     toResolvePath(url) {
 
         if(url.indexOf("pages") >= 0) {
@@ -307,75 +317,11 @@ class App extends EventEmitter {
     }
 
     onLoad() {
-
-        $('.header-filter-box-left-shop-categories').on('change', function() {
-            $('.header-filter-box-left-shop-categories').not(this).prop('checked', false);  
-        });
-
-        // 회원 가입 버튼 이벤트 등록
-        document.querySelector("#join-button").addEventListener("click", () => {
-            if(!this.isOpenModalDialog()) {
-                this.openModalDialog(this.toResolvePath("pages/join.html"), this.toResolvePath("js/join.js"));
-            }
-        });
-
-        // 검색 필터 박스에서 소호/브랜드 버튼 효과 구현
-        const filterBoxButtons = Array.from(document.querySelector(".header-filter-box-header").children);
-        filterBoxButtons.forEach((i, idx) => {
-            i.addEventListener("click", async (ev) => {
-                
-                /**
-                 * 화살표 함수에서는 this가 이벤트가 아니기 때문에 ev.currentTarget를 써야 합니다.
-                 * 이것은 제이쿼리 이벤트에서 this와 같습니다.
-                 * 
-                 * @type {HTMLButtonElement}
-                 */
-                const target = ev.currentTarget;
-
-                if(!target.classList.contains("active")) {
-
-                    target.classList.add("active");
-                    filterBoxButtons[(idx + 1) % filterBoxButtons.length].classList.remove("active");
-
-                    // 카드 이미지를 지웁니다.
-                    // 여기에서 d는 delete의 약자입니다.
-                    for(let i = 0; i < this._headStyleSheets.length; i++) {
-                        this.emit("card:d-" + i);
-                    }
-
-                    document.querySelector(".contents-wrapper").innerHTML = "";
-
-                    // 카드 이미지를 생성합니다.
-                    await this.loadHTML(this.toResolvePath("pages/shop.html")).then(result => {
-                        const container = document.querySelector(".contents-wrapper");
-                        const body = parseBodyFromString(result);
-                        container.innerHTML = body;     
-                        this.emit("contents:ready");   
-                    });
-
-                    // 카드 이미지를 뒤섞습니다.
-                    // const shuffle = arr => arr.sort(() => Math.random() - 0.5);
-                    // shuffle(blobData);
-
-                }
-            })
-        });
-
-        // 드랍 박스 화살표 방향을 바꿉니다.
-        $(".header-filter-box-footer-left").on("mouseover", (ev) => {
-            const isVisible = $(".header-filter-box-left-dropdown-menu").is(":visible");
-            if(isVisible) {
-                $(ev.currentTarget).find("i").removeClass("fa-caret-down");
-                $(ev.currentTarget).find("i").addClass("fa-caret-up");
-            }
-        });
-
-        $(".header-filter-box-footer-left").on("mouseout", (ev) => {
-            $(ev.currentTarget).find("i").removeClass("fa-caret-up");
-            $(ev.currentTarget).find("i").addClass("fa-caret-down");
-        })                
+        Category.builder().run();
+        JoinButton.builder(this).run();
+        FilterBoxButtons.builder(this).run();
     }
-
+ 
     /**
      * 새로 고침을 하지 않고 페이지를 동적으로 만들 수 있는 비동기 페이지 로더입니다.
      */
@@ -383,34 +329,35 @@ class App extends EventEmitter {
         const idx = location.href.lastIndexOf("/");
         const path = location.href.substring(0, idx);
 
-        /**
-         * await는 비동기 함수가 끝날 때 까지 대기하는 명령입니다.
-         * this.loadHTML 메서드는 비동기 함수입니다.
-         */
-        for await(let i of this._pendingList) {
-            const myPath = this.toResolvePath(i.src);
-            await this.loadHTML(`${path}/${i.src}`)
-            .then(result => {
-                const container = document.querySelector(i.parent);
-                const body = parseBodyFromString(result);
+        Promise
+            .all(this._pendingList.map(i => this.loadHTML(`${path}/${i.src}`)))
+            .then(list => {
 
-                // 새로운 <div></div>에 특정 요소를 생성합니다.
-                if(i.isCreateNewDiv) {
-                    const newDiv = document.createElement("div");
-                    newDiv.innerHTML = body;
-                    container.appendChild(newDiv);
-                } else {
-                    // <div></div>를 만들지 않고 하위 내용을 새로 변경합니다.
-                    // 제이쿼리의 .html() 또는 .text()와 같습니다.
-                    container.innerHTML = body;       
-                }
+                list.forEach((elemRaw, i) => {
+                    const container = document.querySelector(this._pendingList[i].parent);
+                    const body = parseBodyFromString(elemRaw);
     
-            }).catch(err => {
-                console.warn(err);
-            })
-        }
+                    // 새로운 <div></div>에 특정 요소를 생성합니다.
+                    if(this._pendingList[i].isCreateNewDiv) {
+                        const newDiv = document.createElement("div");
+                        newDiv.innerHTML = body;
+                        container.appendChild(newDiv);
+                    } else {
+                        // <div></div>를 만들지 않고 하위 내용을 새로 변경합니다.
+                        // 제이쿼리의 .html() 또는 .text()와 같습니다.
+                        container.innerHTML = body;       
+                    }
 
-        this.onLoad();
+                });
+
+                this.onLoad();                
+
+            })
+            .catch(err => {
+                console.warn(err);
+                this.onLoad();
+            });
+
     }
 
     /**
@@ -477,4 +424,4 @@ class App extends EventEmitter {
     }
 }
 
-export {App};
+export { App };
