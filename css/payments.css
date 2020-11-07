@@ -1,0 +1,248 @@
+.container  {
+    width: 960px;
+    height: auto;
+    min-height: 1024px;
+}
+
+.hr-bdline {
+    width: 1020px;
+    height: 2px;
+    border: 1px solid black;
+    box-sizing: border-box;
+    left: -1em;
+    top: -5em;
+    position: relative;
+}
+
+.contents-page-upper {
+    display: flex;
+    position: relative;
+    top: -10.5em;
+    left: 90px;
+    padding-left: 3em;
+    width: 960px;
+    height: 130px;
+    text-align: center;
+    border-bottom: 2px double;
+}
+
+.contents-page-upper div {
+    box-sizing: border-box;
+    line-height: 1.8em;
+}
+
+.contents-page-upper div.active{
+    background-color: red;
+    color: white;
+}
+
+.contents-page-upper p {
+    font-weight: bold;
+}
+
+.page-info {
+    width: 240px;
+    font-size: 32px;
+    margin-top: 0.6em;
+    margin-right: 11em;
+}
+
+.progress-step1 {
+    width: 100px;
+    height: 100px;
+    padding: 22px 10px 12px 10px;
+    background-color: rgb(150,150,150);
+    color: white;
+    border-radius: 100px;
+    margin-right: 1.5em;
+}
+
+.progress-step2 {
+    width: 100px;
+    height: 100px;
+    padding: 22px 10px 12px 10px;
+    background-color: rgb(150,150,150);
+    color: white;
+    border-radius: 100px;
+    margin-right: 1.5em;
+}
+
+.progress-step3 {
+    width: 100px;
+    height: 100px;
+    padding: 22px 10px 12px 10px;
+    background-color: rgb(150,150,150);
+    color: white;
+    border-radius: 100px;
+}
+
+.contents-page-middle {
+    margin: 0 auto;
+    width: 60em;
+    position: relative;
+    top: -8.7em;
+    white-space: pre-wrap;
+    word-break: keep-all;
+}
+
+.contents-page-middle p {
+    margin-left: 5em;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.payments-terms {
+    margin: 0 auto;
+    padding-left: 0;
+    width: 960px;
+    position: relative;
+    top: -2em;
+}
+
+.payments-terms pre {
+    margin-left: 5.5em;
+    margin-top: -1em;
+    padding-left: 0;
+    padding-top: 1em;
+    width: 780px;
+    height: 180px;
+    position: relative;
+    box-sizing: border-box;
+    white-space: pre-wrap;
+    word-break: normal;
+    line-height: 1.3em;
+    font-size: 13px;
+    border: 2px inset;
+    overflow-y: scroll;
+}
+
+.ok-or-not {
+    position: relative;
+    left: -1.5em;
+    margin-right: 1em;
+}
+
+.contents-page-middle p:last-child {
+    position: relative;
+    top: -1.33em;
+    left: 3.5em;
+}
+
+.contents-page-middle p:last-child > span{
+    font-weight: normal;
+}
+
+.payments-item-info {
+    position: relative;
+    top: -6em;
+    left: -0.3em;
+}
+
+.cart-go {
+    position: absolute;
+    width: 120px;
+    height: 30px;
+    top: 3.5em;
+    right: 1.5em;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+.item {
+    width: 95%;
+    box-sizing: content-box;
+    position: relative;
+    top: -3.9em;
+    padding-left: 2.7em;
+}
+
+.item p {
+    margin: 0;
+    padding: 0;
+}
+
+.item-table {
+    width: 100%;
+}
+
+.item-img-zone {
+    width: 17%;
+}
+
+.item-img {
+    margin: 0 auto;
+    margin-left: 1.5em;
+    width: 100px;
+    height: 120px;
+}
+
+.item-name-zone {
+    width: 45%;
+    white-space: pre-wrap;
+    word-break: normal;
+}
+
+.item-name {
+    margin-left: 1em;
+}
+
+.item-num-zone {
+    width: 3em;
+}
+
+.item-num {
+    position: relative;
+    left: -1.8em;
+}
+
+.item-price-zone {
+    width: 6.2em;
+}
+
+.item-price {
+    position: relative;
+    left: -1.4em;
+}
+
+.item-discount-zone {
+    width: 5.5em;
+}
+
+.item-discount {
+    position: relative;
+    left: -1.4em;
+}
+
+.result-cost-zone {
+    width: 5.5em;
+}
+
+.result-cost {
+    position: relative;
+    left: -2.4em;
+}
+
+
+.item-table th{
+    background-color: rgb(165, 165, 165);
+    color: rgb(55, 55, 55);
+}
+
+.item-table th, .item-table td {
+    padding: 10px 0;
+}
+
+.item-table td:nth-child(2) {
+    text-align: left;
+}
+
+/* 결제 및 배송에 필요한 정보를 다루는 영역 wrapper */
+.contents-page-footer {
+
+}
+/* 상위 footer 페이지는 section과 aside로 나뉘어 있습니다 */
+/* 해당 section은 페이지 좌측 부분 */
+.page-footer-left {}
+
+/* 해당 aside는 페이지 우측 부분 */
+.page-footer-right{}

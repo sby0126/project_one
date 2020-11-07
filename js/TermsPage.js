@@ -1,13 +1,13 @@
 import {App} from "./app.js";
-import { JoinButton } from "./components/JoinButton.js";
+import {blobData, base64toBlob} from "./data.js";
 import {LoginButton} from "./components/LoginButton.js";
 
 /**
  * ==============================================
- * 할인 페이지 구현
+ * 아이템 페이지 구현
  * ==============================================
  */
-class MorePage extends App {
+class TermsPage extends App {
     initMembers() {
         super.initMembers();
 
@@ -22,25 +22,27 @@ class MorePage extends App {
             }
         ];
 
-        this._menuIndex = 3;
+        this._menuIndex = 4;
         
     }
 
-    createNewStyleSheet(dataID, imagePath) {
-    }        
-
+    
     addEventListeners() {
-        this.on("login:ready", () => LoginButton.builder().run());        
+        this.on("loginView:ready", () => LoginButton.builder().run());   
+               
     }
 
     onLoad() {
-        JoinButton.builder(this).run();
+        super.onLoad();
+
+        // 미리 정의해놓은 이벤트 함수를 호출합니다. (제이쿼리의 trigger와 유사합니다);
         this.emit("loginView:ready");
+        this.emit("contents:ready"); 
     }
 
 }
 
-const app = new MorePage();
+const app = new TermsPage();
 app.on("ready", async () => {
     app.createLazyLoader();
 });
