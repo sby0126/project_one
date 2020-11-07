@@ -16,7 +16,7 @@ class TermsPage extends App {
          */
         this._pendingList = [
             {
-                src: `/pages/login.html`,
+                src: `login.html`,
                 parent: ".container",
                 isCreateNewDiv: true,
             }
