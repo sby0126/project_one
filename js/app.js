@@ -1,9 +1,9 @@
-import { parseBodyFromString, parseScriptFromString } from "./bodyParser.js";
+import { parseBodyFromString, parseScriptFromString } from "./utils/bodyParser.js";
 import { Category } from "./components/Category.js";
 import { JoinButton } from "./components/JoinButton.js";
 import { FilterBoxButtons } from "./components/FilterBoxButtons.js";
 import { EventEmitter } from "./EventEmitter.js";
-import { cssRuleSet } from "./styleRules.js";
+import { cssRuleSet } from "./utils/styleRules.js";
 
 window.imageBlobs = [];
 

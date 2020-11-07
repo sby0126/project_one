@@ -1,16 +1,18 @@
-let map;
+window.map = null;
 
-        function initMap() {
+Object.assign(window, {
+    initMap() {
 
-            map = new google.maps.Map(document.getElementById("map"), {
-                center: { lat: 37.488167, lng: 127.120589 },
-                scrollwheel = false,
-                zoom: 8
-            });
-            
-            var marker = new google.maps.Marker({
-                map : map,
-                position : {lat: 37.488167, lng: 127.120589},
-            });
-                    
-        }
+        window.map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: 37.488167, lng: 127.120589 },
+            scrollwheel = false,
+            zoom: 8
+        });
+        
+        var marker = new google.maps.Marker({
+            map : window.map,
+            position : {lat: 37.488167, lng: 127.120589},
+        });
+                
+    }
+});

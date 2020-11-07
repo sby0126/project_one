@@ -1,6 +1,6 @@
 import {Component} from "./Component.js";
 import {App} from "../app.js";
-import { parseBodyFromString, parseScriptFromString } from "../bodyParser.js";
+import { parseBodyFromString, parseScriptFromString } from "../utils/bodyParser.js";
 
 export class FilterBoxButtons extends Component {
     run() {
