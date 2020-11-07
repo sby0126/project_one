@@ -267,7 +267,7 @@ header {
 
 /* 검색 필터링 박스를 감싼 래퍼의 크기와 위치를 지정합니다. */
 .header-filter-box-wrapper {
-    width: 60%;
+    width: 70%;
     height: 6.6em;
     padding: 0;
     margin: 0 auto;
@@ -282,7 +282,7 @@ header {
     width: 100%;
     height: auto;
     line-height: 2em; /** 2em = 32px */
-    margin-bottom: 0.5em; /** 0.5em = 8px */
+    margin-bottom: 1.3em; /** 0.5em = 8px */
     display: flex;
     border-collapse: collapse;     
     justify-content: stretch;
@@ -290,15 +290,17 @@ header {
 
 .header-filter-box-header > button {
     width: calc(50% - 0.3125rem); /** 0.3125rem = 5px */
-    height: 3em;
-    line-height: 3em; /** 3em = 48px */
+    height: 3.5em;
+    line-height: 3.5em; /** 3em = 48px */
     padding: 0;
     margin: 0;
     outline: none;
-    border: 1px solid #E0E4E6;
+    border: 1px solid #d9e0e2;
     box-sizing: border-box;
     cursor: pointer;
     font-weight: bold;
+    background-color: #F3F7FA;
+    margin: -1px 0 0 -1px; /* 선 겹침 제거 */
 }
 
 .header-filter-box-header > button.active {
