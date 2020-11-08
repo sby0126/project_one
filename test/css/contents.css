@@ -1,0 +1,290 @@
+@charset "UTF-8";
+/**
+ * @version 1.0.0
+ * @author 
+ *          Eo Jinseok
+ *         
+ * 본문 영역에 적용될 CSS를 적용해주세요.
+ */
+/* 전체 본문 섹션의 크기를 지정합니다. */
+section {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  border: none;
+  display: flex;
+  justify-content: center;
+  /**  요소를 가로 축의 가운데로 정렬합니다 (display: flex; 필요) */
+}
+
+/* 본문 섹션을 감싸고 있는 래퍼입니다.
+   플렉스 박스의 아이템 정렬을 위해 존재합니다. 
+ */
+.contents-wrapper {
+  width: 70%;
+  margin-top: calc(var(--header-box-height) + 3.2em);
+  display: flex;
+  flex-direction: column;
+}
+
+/* 그리드 아이템의 정렬 방법을 지정하는 컨테이너입니다. */
+.card-container {
+  display: flex;
+  flex: 1 1 0;
+  justify-content: space-between;
+  /** 앞, 뒤, 그리고 요소들 사이에도 모두 여유 공간을 두고 배치됩니다. */
+  flex-direction: column;
+  /** 플렉스의 방향을 지정합니다. */
+  flex-flow: wrap;
+  /** wrap이란 간단히 말하면 컨테이너의 폭을 넘길 경우, 줄바꿈 한다는 뜻입니다. */
+  margin-bottom: 1em;
+  width: 100%;
+}
+.card-container > .card {
+  flex-basis: 13.8em;
+  height: 18em;
+  background: #fff;
+  border-bottom: 1px solid #E0E4E6;
+  position: relative;
+  margin-bottom: 0.5em;
+  cursor: pointer;
+}
+.card-container > .card p {
+  width: auto;
+  height: 100%;
+  position: relative;
+}
+
+/* 상점 이름 */
+.contents-shop-name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-top: calc(65%);
+  text-align: center;
+  font-size: 0.9375em;
+  margin-bottom: 1em;
+}
+
+.shop-hot-icon::after {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  content: "HOT";
+  width: max-content;
+  height: 1em;
+  font-size: 0.75em;
+  color: #333333;
+  position: absolute;
+  cursor: pointer;
+  line-height: 0.8125em;
+  left: 0.75em;
+  top: 0.75em;
+}
+
+.shop-button-container {
+  display: flex;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  cursor: pointer;
+  width: 100%;
+  height: 2.5em;
+  border: none;
+  border-top: 1px solid #EDEFF0;
+  box-sizing: border-box;
+  color: #303030;
+  letter-spacing: -0.6;
+  position: absolute;
+  outline: none;
+  bottom: 0;
+}
+
+.shop-button {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  flex-basis: 0%;
+  background-color: transparent;
+  box-sizing: border-box;
+  color: #909090;
+  border: none;
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-right-color: #edeff0;
+  outline: none;
+  text-decoration-color: #909090;
+  text-decoration-style: solid;
+  line-height: 2.5em;
+  margin: 0;
+  font-size: 0.6875em;
+  height: 2.5em;
+  text-align: center;
+  -webkit-user-select: none;
+  cursor: pointer;
+}
+
+.item-button-container {
+  display: flex;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  cursor: pointer;
+  width: 100%;
+  height: 2.5em;
+  border: none;
+  border-top: 1px solid #EDEFF0;
+  box-sizing: border-box;
+  color: #303030;
+  letter-spacing: -0.6;
+  position: absolute;
+  outline: none;
+  bottom: 0;
+}
+
+.item-button {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  flex-basis: 0%;
+  box-sizing: border-box;
+  margin: 0;
+  height: 2.5em;
+  line-height: 2.5em;
+  font-size: 0.6875em;
+  color: #909090;
+  background-color: transparent;
+  border: none;
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-right-color: #edeff0;
+  outline: none;
+  text-decoration-color: #909090;
+  text-decoration-style: solid;
+  text-align: center;
+  -webkit-user-select: none;
+  cursor: pointer;
+}
+
+.item-button-container {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: flex;
+  width: 100%;
+  height: 5.5em;
+  line-height: 2em;
+  font-size: 0.675em;
+  margin-top: 1.375em;
+  padding-left: 1.375em;
+  flex-direction: column;
+  align-items: flex-start;
+  border: none;
+}
+
+.item-button-container h2 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+  height: 4em;
+  font-size: 0.875rem;
+}
+
+.shop-button-text {
+  width: 100%;
+  height: 2.5em;
+  text-align: center;
+  box-sizing: border-box;
+  color: #909090;
+}
+
+.shop-button-icon {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 0.6875em;
+  height: 0.6875em;
+  line-height: 2.5em;
+  margin-left: 0.4375em;
+  text-indent: 0px;
+  margin: 0;
+  color: #909090;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAhCAYAAABX5MJvAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAE5JREFUeNrs1jEKACAMQ9FGvP8ZclNdxbEWUfiZOpUHGVrZjoOMZVZ2SYsHAgIECBAgQHyJ6Ns5rjrr1JGuQ0UV8FmBAAECBAgQ1zMFGABYogYlJB84mgAAAABJRU5ErkJggg==);
+  background-size: cover;
+  background-origin: padding-box;
+  letter-spacing: normal;
+  text-align: center;
+}
+
+.item-button-container .like-button {
+  position: absolute;
+  box-sizing: border-box;
+  bottom: 1em;
+  right: 1em;
+  width: 1em;
+  height: 1em;
+  background-color: transparent;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAnCAYAAACbgcH8AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAqRJREFUeNrUmD1IHEEUx8cjgqCgElRUgiCChQdBEFtFgiIeiKiIjfZikY9GIlgIFlaCWtjaGEFsTi1MYVSwiAZEOEThDnLkLhKOmBwkFn6g/ydvRZZ1d2d31tt98OPYmdk3P5bZ23mT9z31UzwRlWAYdIDXoJTbf4FvYAN8An+FfJSAQdAFmkAFt/8BR2ATLNZUV54Z3ZxnIF0EJsEoyLeYPAumwAy4tiH7ArwD46DYYuwVmAcTkP9nJl0H1kG95JPbAb3gt8mYl2AVtEjmPgURiMe1htCjzlqw50BYsMg2KHuiv4z7WxzkJp+9ZPqsVi9dAKKgXDiPMNji9apfv1vc7zTIKwrxgsfSH0GDcB9hfom09VrM12EFuRvY835N07/CD1Ao1MU+6AcroFlh3v/gFb3NA4qFBYsee5CX8g3Q8ogIb6LQo7wRkm4UwYpGkq4KmHRVSAQwSPoiYM4XJH0SMOmTEH9egxTbJL0cMOllkj4AuwER3sVu70D793hrcz+cy7hmz4cN0yH44HPp93jKh/r99CyY9qnwNITnjIoAijEunfwUMxAe039c9EHLZMEnwgtGy9ZI+haM+ECc5h/BU761I62JUzW+lCNhmnfUSNhMmuIGDOVAnOYbgvCN2YZJ2BCPPpNw1ErYjrQmTvXemsfClL/fStiuNMUl6AOfPRKmvH0QvrS7nxYS4j3gi2JhytdjV1hWWnDBQIXwjiJhykNHXlKFiJNyiybo5rMNt2cj3bLCTqUp6LS03YX4Pt+fdVojChfinSAmeV+M78s6ndhtNX4O2iTEYzz+3G017jYyLJKwGJfgcRkVRwhCkXiriXiC+zMqJlN5WJNisaSuPcntKZWHNUKx+BuQ5us0X6dUTuLFsVicn+xX/o2rnuBOgAEA2tKY6yPZucMAAAAASUVORK5CYII=);
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+
+/* 상점 이름 밑 의류 종류 / 연령대 */
+.shop-contents {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 0.8125em;
+  text-align: center;
+}
+
+/* 모달 대화 상자의 기본 스타일 (화면 중앙에 정확히 정렬하는 코드) */
+.modal-dialog-normal {
+  transform: translateX(-50%) translateY(-50%);
+  top: 50%;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  height: 80%;
+  z-index: 500;
+  opacity: 0.9;
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-around;
+  /** 앞, 뒤, 그리고 요소들 사이에도 모두 여유 공간을 두고 배치됩니다. */
+  align-items: center;
+  /** 세로 축으로 가운데 정렬 (display: flex 필요) */
+  flex-direction: column;
+}
+
+/* 모달 대화 상자 닫기 버튼 */
+.modal-dialog-close-button-normal {
+  position: absolute;
+  width: 4em;
+  height: 4em;
+  top: -4em;
+  right: -4em;
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=contents.css.map */
