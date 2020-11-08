@@ -1,4 +1,5 @@
 ./pages/:
+detail.html
 find_password.html
 infopolicy.html
 join.html
