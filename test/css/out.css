@@ -1,0 +1,10 @@
+.btn:active + .progress > .progress__bar {
+  transform: scaleX(1);
+}
+
+.progress__bar {
+  transform: scaleX(0);
+  transition: transform 1000ms;
+}
+
+/*# sourceMappingURL=out.css.map */

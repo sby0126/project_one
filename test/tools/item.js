@@ -58,7 +58,7 @@ function startPowershell(data) {
 
 function load() {
 
-  const list = require("./output.json");
+  const list = require("../output.json");
 
   return new Promise((resolve, reject) => {
     list.forEach(async i => {
