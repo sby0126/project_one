@@ -90,7 +90,7 @@ $contents-wrapper-y: calc(var(--header-box-height) + 3.2em);
 
 /* 상점 이름 */
 .contents-shop-name {
-    @include boxed-text;
+    @include boxed-text();
 
     padding-top: calc(65%);
     text-align: center;
@@ -100,7 +100,7 @@ $contents-wrapper-y: calc(var(--header-box-height) + 3.2em);
 }
 
 .shop-hot-icon::after {
-    @include boxed-text;
+    @include boxed-text();
     
     content: $shop-upper-left-icon-text;
     width: max-content;
@@ -198,7 +198,7 @@ $contents-wrapper-y: calc(var(--header-box-height) + 3.2em);
 }
 
 .item-button-container {
-    @include boxed-text;
+    @include boxed-text();
 
     display: flex;
 
@@ -274,7 +274,7 @@ $contents-wrapper-y: calc(var(--header-box-height) + 3.2em);
 
 /* 상점 이름 밑 의류 종류 / 연령대 */
 .shop-contents {
-    @include boxed-text;
+    @include boxed-text();
 
     font-size: 0.8125em;
     text-align: center;
@@ -287,7 +287,7 @@ $contents-wrapper-y: calc(var(--header-box-height) + 3.2em);
 
 /* 모달 대화 상자의 기본 스타일 (화면 중앙에 정확히 정렬하는 코드) */
 .modal-dialog-normal {
-    @include center-modal;
+    @include center-modal();
 
     position: fixed;
 
