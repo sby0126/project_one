@@ -1,0 +1,322 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* 버튼클릭했을떄  */
+.click_button {
+  background-color : skyblue !important;
+}
+
+.infoArea > ul > li:nth-child(4) button[disabled] {
+  background-color:gray;
+}
+
+.item_content {
+  /* border: 4px solid black; */
+  width: 60%;
+  border-top: 2px solid gray;
+  margin: 150px auto;
+  padding: 10px 10px 50px 10px;
+  font-weight: bold; 
+}
+
+.productArea {
+  /* border: 2px solid green; */
+  width: 100%;
+  overflow: hidden;
+}
+
+.imgArea {
+  /* border: 1px solid black; */
+  width: 42%;
+  float: left;
+  height: 500px;
+  margin-right: 6%;
+}
+
+.imgArea > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.infoArea {
+  /* border: 2px solid green; */
+  width: 50%;
+  float: left;
+  min-height: 500px;
+}
+
+.infoArea > ul {
+  list-style-type: none;
+  /* border: 1px solid blue; */
+}
+
+.infoArea > ul > li {
+  border-top : 1px solid rgb(207, 203, 203);
+  position: relative;
+}
+
+/* 첫번째 li와 마지막li 보더 */
+.infoArea > ul > li:nth-child(1){
+  border-top:none;
+  border-bottom:2px solid black;
+}
+.infoArea > ul > li:nth-child(7){
+  border-top:2px solid black;
+}
+
+
+/* 색상과 사이즈 데이터를 가져왔을때 색상과 사이즈 버튼에 관한 CSS */
+.infoArea > ul > li:nth-child(3) button,
+.infoArea > ul > li:nth-child(4) button{
+  cursor: pointer;
+  margin-right: 10px;
+  border:1px solid gray;
+  border-radius: 3px;
+  background-color:white;
+  font-weight:bold;
+  color:black;
+}
+
+.infoArea > ul > li:nth-child(1),
+.infoArea > ul > li:nth-child(3),
+.infoArea > ul > li:nth-child(4),
+.infoArea > ul > li:nth-child(6) {
+   height: 60px; 
+}
+
+.infoArea > ul > li:nth-child(2) {
+  height: 40px;
+}
+
+.infoArea > ul > li:nth-child(7) {
+  height: 75px;
+}
+
+.infoArea > ul > li > span:nth-child(1) {
+  /* border: 2px solid black; */
+  display: inline-block;
+  position: absolute;
+  left: 2%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 15%;
+}
+
+.infoArea > ul > li > h2 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.infoArea > ul > li > span:nth-of-type(2) {
+  display: inline-block;
+  /* border: 2px solid black; */
+  position: absolute;
+  right: 30%;
+  width: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.infoArea > ul > li:nth-child(3) div,
+.infoArea > ul > li:nth-child(4) div {
+  display: inline-block;
+  /* border: 2px solid black;; */
+  position: absolute;
+  right: 20%;
+  width: 60%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.allPrice {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.infoArea > ul > li:nth-child(5) > ul {
+  list-style-type:none;
+}
+
+/* 상품선택했을때 리스트 */
+.infoArea > ul > li:nth-child(5) > ul > li {
+  padding: 10px;
+  color:gray;
+  font-size: 12px;
+}
+
+.infoArea > ul > li:nth-child(7) > div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.infoArea > ul > li:nth-child(7) > div > button {
+  width: 100px;
+  height: 50px;
+  border:none;
+  background-color: black;
+  font-size: 20px;
+  color:white;
+  font-weight:bold;
+}
+
+.infoArea > ul > li:nth-child(7) > div > button:nth-child(1) {
+  margin-right: 25px;
+}
+
+
+
+
+
+/* productArea  끝*/
+/* productArea2 시작 */
+
+
+
+
+
+.productArea2 {
+  width: 100%;
+  /* border: 1px solid black; */
+}
+
+.productArea2 > .productArea2_button {
+  position:relative;
+  height: 150px;
+}
+
+.productArea2 > .productArea2_button > .productArea2_buttonList {
+  list-style-type: none;
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+
+.productArea2 > .productArea2_button > .productArea2_buttonList > li {
+  display: inline-block;
+}
+
+.productArea2 > .productArea2_button > .productArea2_buttonList > li > a {
+  text-decoration: none;
+  /* border:5px dotted black; */
+  padding: 20px;
+  display: inline-block;
+  color:gray;
+  font-weight: bold;
+}
+
+.productArea2 > .productArea2_detailImg {
+  /* border: 3px solid black; */
+  width: 100%;
+  
+}
+
+.productArea2 > .productArea2_detailImg > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  
+}
+
+.productArea2 > .productPayInfo {
+  width: 100%;
+  /* border: 2px solid black; */
+  overflow: hidden;
+}
+
+.productArea2 > .productPayInfo > h3 {
+  /* border: 1px solid black; */
+  float: left;
+  width: 10%;
+}
+
+.productArea2 > .productPayInfo > div {
+  float: left;
+  /* border: 1px solid black; */
+
+}
+
+.productArea2 > .productPayInfo > div:nth-of-type(1) {
+  width: 38%; 
+  
+}
+
+.productArea2 > .productPayInfo > div span {
+  padding-left: 10px;
+  display: inline-block;
+  color: gray;
+  font-size: 14px;
+}
+
+
+
+.productArea2 > .productPayInfo > div:nth-of-type(2) {
+  width: 48%;
+  margin-bottom: 10px;
+  
+}
+
+
+
+.productArea2 > .productPayInfo > div:nth-of-type(3) {
+  width: 48%;
+ 
+} 
+
+
+
+
+/* productArea2 끝  */
+/* item_top_bottom 시작 */
+
+
+
+
+.item_top_bottom {
+  width: 50px;
+  height: 100px;
+  position:fixed;
+  bottom: 5%;
+  right: 5%;
+}
+
+.item_top_bottom > a {
+  text-decoration : none;
+  font-size: 13px;
+  height: 50px;
+  display:block;
+  position:relative;
+  border:1px solid black;
+  border-radius: 50px;
+  background-color: black;
+  color:white; 
+}
+
+.item_top_bottom > a:nth-child(1) {
+  margin-bottom:5px;
+}
+
+.item_top_button,
+.item_bottom_button{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform: translate(-50%, -50%);
+}
+
+
+
+
+
+
+
+
+

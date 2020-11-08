@@ -93,7 +93,7 @@ fieldset {
     border: none;
 }
 
-button {
+button:not(.detail_button){
     background-color: white;
     border-color: #dbdbdb;
     border-width: 1px;
