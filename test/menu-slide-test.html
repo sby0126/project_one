@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메뉴 테스트</title>
+    <style>
+        .container {
+            width: 960px;
+            margin: 0 auto;
+        }
+
+        .menu-wrapper {
+            width: 100%;
+            height: 10%;
+            background: #CFD8DC;
+            display: inline-flex;
+            justify-content: space-around;
+            position: relative;
+        }
+
+        .menu-ribon {
+            position: absolute;
+            left: 0px;
+            transition: all .400s;
+            transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+            background-color: #1E88E5;
+            width: 20px;
+            height: 2px;
+            top: 20px;
+            margin: 0;
+            display: none;
+        }
+
+        a {
+            color: #212121;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-shadow: 1px 1px 1px #03A9F4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="menu-wrapper">
+                <a href="#">메뉴1</a>
+                <a href="#">메뉴2</a>
+                <a href="#">메뉴3</a>
+                <a href="#">메뉴4</a>
+                <a href="#">메뉴5</a>
+                <div class="menu-ribon"></div>
+            </div>
+        </header>
+    </div>
+    <script>
+        document.querySelectorAll("a").forEach(i => {
+            i.addEventListener("mouseover", (ev) => {
+                let ribon = document.querySelector(".menu-ribon");
+
+                /**
+                 * @type {HTMLDivElement}
+                 */
+                const target = ev.currentTarget;
+                
+                const pivotX = document.querySelector(".menu-wrapper").getBoundingClientRect().x;
+
+                ribon.style.left = target.getBoundingClientRect().x - pivotX + "px";
+                ribon.style.width = target.getBoundingClientRect().width + "px";
+                ribon.style.display = "block";
+            })
+        })
+    </script>
+</body>
+</html>
