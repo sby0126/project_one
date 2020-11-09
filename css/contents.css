@@ -9,227 +9,268 @@
 
 /* 전체 본문 섹션의 크기를 지정합니다. */
 section {
+    display: flex;
+
     width: 100%;
     margin: 0 auto;
     padding:0;
-    border: none;
-    display: flex;
+
     justify-content: center; /**  요소를 가로 축의 가운데로 정렬합니다 (display: flex; 필요) */
+
+    border: none;
 }
 
 /* 본문 섹션을 감싸고 있는 래퍼입니다.
    플렉스 박스의 아이템 정렬을 위해 존재합니다. 
  */
 .contents-wrapper {
+    display: flex;
+
     width: 70%;
     margin-top: calc(var(--header-box-height) + 3.2em);
-    display: flex;
+
     flex-direction: column;
 }
 
 /* 그리드 아이템의 정렬 방법을 지정하는 컨테이너입니다. */
 .card-container {
-    width: 100%;
     display: flex;
+
+    width: 100%;
+    margin-bottom: 1em;
+    
     flex: 1 1 0;
     justify-content: space-between; /** 앞, 뒤, 그리고 요소들 사이에도 모두 여유 공간을 두고 배치됩니다. */
-    margin-bottom: 1em;
     flex-direction: column; /** 플렉스의 방향을 지정합니다. */
     flex-flow: wrap; /** wrap이란 간단히 말하면 컨테이너의 폭을 넘길 경우, 줄바꿈 한다는 뜻입니다. */
 }
 
 /* 그리드 카드의 크기를 지정합니다. */
 .card-container > .card {
-    /* min-width: 10em; */
+    position: relative;
+
     flex-basis: 13.8em;
     height: 18em;
+    margin-bottom: 0.5em;
+    
     background: #fff;
     border-bottom: 1px solid #E0E4E6;
-    position: relative;
-    margin-bottom: 0.5em;
+
     cursor: pointer;
 }
 
 .card-container > .card p {
+    position: relative;
+
     width: auto;
     height: 100%;
-    position: relative;
 }
 
 /* 상점 이름 */
 .contents-shop-name {
     padding-top: calc(65%);
-    text-align: center;
     font-size: 0.9375em;
+    margin-bottom: 1em;
+    
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;    
-    margin-bottom: 1em;
+
+    text-align: center;
 }
 
 .shop-hot-icon::after {
     content: "HOT";
+    
+    position: absolute;
+
     width: max-content;
     height: 1em;
     font-size: 0.75em;
-    color: #73DFF2;
-    position: absolute;
-    cursor: pointer;
     line-height: 0.8125em;
     left: 0.75em;
     top: 0.75em;
+
+    color: #73DFF2;
+    
     overflow: hidden;
     text-overflow: ellipsis;
     font-style: normal;
+
+    cursor: pointer;
 }
 
 .shop-button-container {
-    cursor: pointer;
+    display: flex;
+    position: absolute;
+    box-sizing: border-box;
+
     width: 100%;
     height: 2.5em;
     border: none;
-    border-top: 1px solid #EDEFF0;
-    box-sizing: border-box;
-    color: #303030;
     letter-spacing: -0.6;
-    position: absolute;
-    display: flex;
+    bottom: 0;
+
+    border-top: 1px solid #EDEFF0;
+    color: #303030;
+    
     flex-grow: 0;
     flex-shrink: 1;  
     flex-wrap: nowrap;
     align-items:center;
     justify-content: center;
     flex-direction: row;
-    outline: none;
-    bottom: 0;
+
+    outline: none;   
+    cursor: pointer;
 }
 
 .shop-button {
-    background-color: transparent;
+    display: flex;
     box-sizing: border-box;
+
+    height: 2.5em;
+    line-height: 2.5em;
+    margin: 0;
+    font-size: 0.6875em; 
+
     color: #909090;
     border: none;
+    background-color: transparent;
     border-right-style: solid;
     border-right-width: 1px;
     border-right-color: rgb(237, 239, 240);
-    display: flex;
+    text-decoration-color: #909090;
+    text-decoration-style: solid;
+
     flex-direction: row;
     flex-basis: 0%;
     flex-grow: 1;
     flex-shrink: 1;  
     flex-direction: row;
-    outline: none;
-    text-decoration-color: #909090;
-    text-decoration-style: solid;
-    line-height: 2.5em;
-    margin: 0;
-    font-size: 0.6875em; 
     align-items:center;
     justify-content: center;
     flex-wrap: nowrap;
-    height: 2.5em;
+
+    outline: none;
+    
     text-align: center;
     -webkit-user-select: none;
     cursor: pointer;
 }
 
 .item-button-container {
-    cursor: pointer;
+    display: flex;
+
     width: 100%;
     height: 2.5em;
+    letter-spacing: -0.6;
+    bottom: 0;
+
     border: none;
     border-top: 1px solid #EDEFF0;
     box-sizing: border-box;
     color: #303030;
-    letter-spacing: -0.6;
     position: absolute;
-    display: flex;
+    
     flex-grow: 0;
     flex-shrink: 1;  
     flex-wrap: nowrap;
     align-items:center;
     justify-content: center;
     flex-direction: row;
+
     outline: none;
-    bottom: 0;
+    cursor: pointer;
 }
 
 .item-button {
-    background-color: transparent;
+    display: flex;
     box-sizing: border-box;
+
+    line-height: 2.5em;
+    margin: 0;
+    font-size: 0.6875em; 
+    height: 2.5em;
+
+    background-color: transparent;
     color: #909090;
     border: none;
     border-right-style: solid;
     border-right-width: 1px;
     border-right-color: rgb(237, 239, 240);
-    display: flex;
+    text-decoration-color: #909090;
+    text-decoration-style: solid;
+    outline: none;
+    
     flex-direction: row;
     flex-basis: 0%;
     flex-grow: 1;
     flex-shrink: 1;  
     flex-direction: row;
-    outline: none;
-    text-decoration-color: #909090;
-    text-decoration-style: solid;
-    line-height: 2.5em;
-    margin: 0;
-    font-size: 0.6875em; 
+    flex-wrap: nowrap;
     align-items:center;
     justify-content: center;
-    flex-wrap: nowrap;
-    height: 2.5em;
+
     text-align: center;
     -webkit-user-select: none;
     cursor: pointer;
 }
 
 .item-button-container {
+    display: flex;
+
     width: 100%;
     height: 5.5em;
     line-height: 2em;
-    display: flex;
     font-size: 0.675em;
+    margin-top:  1.375em;
+    padding-left: 1.375em;
+
     flex-direction: column;
     align-items: flex-start;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
     border: none;
-    margin-top:  1.375em;
-    padding-left: 1.375em;
 }
 
 .item-button-container h2 {
     width: 100%;
     height: 4em;
+    font-size: 0.875rem;
+
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;    
-    font-size: 0.875rem;
 }
 
 .shop-button-text {
+    box-sizing: border-box;
+
     width: 100%;
     height: 2.5em;
     text-align: center;
-    box-sizing: border-box;
     color: #909090;
 }
 
 .shop-button-icon {
     display: inline-block;
     box-sizing: border-box;
+
     width: 0.6875em;
     height: 0.6875em;
+    line-height: 2.5em;
+    margin: 0;
+    margin-left: 0.4375em;
+    text-indent: 0px;
+
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAhCAYAAABX5MJvAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAE5JREFUeNrs1jEKACAMQ9FGvP8ZclNdxbEWUfiZOpUHGVrZjoOMZVZ2SYsHAgIECBAgQHyJ6Ns5rjrr1JGuQ0UV8FmBAAECBAgQ1zMFGABYogYlJB84mgAAAABJRU5ErkJggg==);
     background-size: cover;
     background-origin: padding-box;
     color: #909090;
-    line-height: 2.5em;
-    margin: 0;
-    margin-left: 0.4375em;
     letter-spacing: normal;
-    text-indent: 0px;
     text-align: center;
 }
 
@@ -239,14 +280,17 @@ section {
     right: 1em;
     width: 1em;
     height: 1em;
+
+    border: none;
+    outline: none;
+    background-color: transparent;
+
     box-sizing: border-box;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAnCAYAAACbgcH8AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAqRJREFUeNrUmD1IHEEUx8cjgqCgElRUgiCChQdBEFtFgiIeiKiIjfZikY9GIlgIFlaCWtjaGEFsTi1MYVSwiAZEOEThDnLkLhKOmBwkFn6g/ydvRZZ1d2d31tt98OPYmdk3P5bZ23mT9z31UzwRlWAYdIDXoJTbf4FvYAN8An+FfJSAQdAFmkAFt/8BR2ATLNZUV54Z3ZxnIF0EJsEoyLeYPAumwAy4tiH7ArwD46DYYuwVmAcTkP9nJl0H1kG95JPbAb3gt8mYl2AVtEjmPgURiMe1htCjzlqw50BYsMg2KHuiv4z7WxzkJp+9ZPqsVi9dAKKgXDiPMNji9apfv1vc7zTIKwrxgsfSH0GDcB9hfom09VrM12EFuRvY835N07/CD1Ao1MU+6AcroFlh3v/gFb3NA4qFBYsee5CX8g3Q8ogIb6LQo7wRkm4UwYpGkq4KmHRVSAQwSPoiYM4XJH0SMOmTEH9egxTbJL0cMOllkj4AuwER3sVu70D793hrcz+cy7hmz4cN0yH44HPp93jKh/r99CyY9qnwNITnjIoAijEunfwUMxAe039c9EHLZMEnwgtGy9ZI+haM+ECc5h/BU761I62JUzW+lCNhmnfUSNhMmuIGDOVAnOYbgvCN2YZJ2BCPPpNw1ErYjrQmTvXemsfClL/fStiuNMUl6AOfPRKmvH0QvrS7nxYS4j3gi2JhytdjV1hWWnDBQIXwjiJhykNHXlKFiJNyiybo5rMNt2cj3bLCTqUp6LS03YX4Pt+fdVojChfinSAmeV+M78s6ndhtNX4O2iTEYzz+3G017jYyLJKwGJfgcRkVRwhCkXiriXiC+zMqJlN5WJNisaSuPcntKZWHNUKx+BuQ5us0X6dUTuLFsVicn+xX/o2rnuBOgAEA2tKY6yPZucMAAAAASUVORK5CYII=);
     background-size: contain;
     background-repeat: no-repeat;
+    
     cursor: pointer;
-    outline: none;
-    border: none;
-    background-color: transparent;
 }
 
 /* 상점 이름 밑 의류 종류 / 연령대 */
@@ -260,30 +304,34 @@ section {
 
 /* 모달 대화 상자의 기본 스타일 (화면 중앙에 정확히 정렬하는 코드) */
 .modal-dialog-normal {
+    display: flex;
     position: fixed;
-    transform: translateX(-50%) translateY(-50%);
+    
     right: 0;
     top: 50%;
     bottom: 0;
     width: 50%;
     height: 80%;
     z-index: 500;
-    background-color: #fff;
     opacity: 0.9;
-    display: flex;
+    padding: 0;
+    margin: 0;
+
+    transform: translateX(-50%) translateY(-50%);
+    background-color: #fff;
     justify-content: space-around; /** 앞, 뒤, 그리고 요소들 사이에도 모두 여유 공간을 두고 배치됩니다. */
     align-items: center; /** 세로 축으로 가운데 정렬 (display: flex 필요) */
     flex-direction: column;
-    padding: 0;
-    margin: 0;
 }
 
 /* 모달 대화 상자 닫기 버튼 */
 .modal-dialog-close-button-normal {
+    position: absolute;
+
     width: 4em;
     height: 4em;
-    position: absolute;
     top: -4em;
     right: -4em;
+
     cursor: pointer;
 }
