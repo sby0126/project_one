@@ -104,7 +104,7 @@
                             <span>제목</span>                            
                         </div>
                         <div class="contents-item-title">
-                            <input type="number" id="input-item-price">
+                            <input type="number" id="input-item-price" step="1000" min="1000">
                             <span>가격</span>                            
                         </div>                        
                     </div>
@@ -184,8 +184,16 @@
         });
 
         document.querySelector("#upload-ok").onclick = function() {
+
+            const result = {
+                title: $("#input-item-title").val(),
+                price: $("#input-item-price").val(),
+                contents: quill.root.innerHTML
+            };
+
             alert("클립보드에 복사되었습니다.");
-            navigator.clipboard.writeText(quill.root.innerHTML);
+
+            navigator.clipboard.writeText(JSON.stringify(result));
         }
 
         $("#input-item-title").on("change", (ev) => {
