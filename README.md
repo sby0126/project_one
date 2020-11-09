@@ -17,3 +17,4 @@
 - jQuery (MIT) - https://jquery.org/license/
 - QuillJS (BSD 3-Clause)  - https://github.com/quilljs/quill/blob/develop/LICENSE
 - SCSS (MIT) - https://github.com/duojs/sass/blob/master/license
+- undercore.js(MIT) - https://github.com/jashkenas/underscore/blob/master/LICENSE
