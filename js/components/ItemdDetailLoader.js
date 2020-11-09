@@ -2,12 +2,14 @@ import { Component } from "./Component.js";
 import {itemData} from "../itemData.js";
 
 export class ItemDetailLoader extends Component {
+
     run() {
+
         const urlParams = new URLSearchParams(decodeURI(location.search));
 
         const dataId = parseInt(urlParams.get("dataId"));
 
-        const item = itemData[dataId];
+        const item = itemData[dataId]; // 여기엔 large image, content 정보가 없음.
         let content;
 
         if("content" in item) {
