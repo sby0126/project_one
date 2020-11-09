@@ -3,6 +3,20 @@ import {App} from "../app.js";
 import { parseBodyFromString, parseScriptFromString } from "../utils/bodyParser.js";
 
 export class FilterBoxButtons extends Component {
+
+    initMembers(...args) {
+        super.initMembers(...args);
+        
+        this._index = 0;
+    }
+
+    /**
+     * 현재 탭 인덱스를 반환합니다.
+     */
+    get index() {
+        return this._index;
+    }
+
     run() {
         /**
          * @type {App}
@@ -13,6 +27,8 @@ export class FilterBoxButtons extends Component {
         filterBoxButtons.forEach((i, idx) => {
             i.addEventListener("click", async (ev) => {
                 
+                this._index = idx;
+
                 /**
                  * 화살표 함수에서는 this가 이벤트가 아니기 때문에 ev.currentTarget를 써야 합니다.
                  * 이것은 제이쿼리 이벤트에서 this와 같습니다.
