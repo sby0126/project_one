@@ -19,8 +19,16 @@ export class ItemContentLoader extends Component {
                 const myCard = card.querySelector("p");
                 const {title, price, shop} = myImgData;
 
-                card.onclick = function() {
-                    location.href = "pages/detail.html";
+                card.onclick = function(ev) {
+                    /**
+                     * @type {HTMLDivElement}
+                     */
+                    const target = ev.currentTarget;
+                    const title = encodeURI(target.querySelector('h2').textContent);
+                    const price = target.querySelectorAll('p')[0].textContent;
+                    const shop = target.querySelectorAll('p')[1].textContent;
+
+                    location.href = `pages/detail.html?date=${Date.now()}&title=${title}&price=${price}&shop=${shop}`;
                 }
 
                 card.insertAdjacentHTML( 'afterbegin', `
