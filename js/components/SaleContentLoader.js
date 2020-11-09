@@ -12,6 +12,30 @@ export class SaleContentLoader extends Component {
         this._interval = 800;
     }
 
+    search(itemName) {
+        const collection = Array.from(document.querySelectorAll(".card")).map(i => {
+            return {
+                title: $(i).find(".item-button-container h2").text(),
+                parent: $(i)
+            }
+        });
+        const diff = _.find(collection, (elem) => elem.title.indexOf(itemName) >= 0);
+        let ret = _.difference(collection, diff);
+        ret = _.filter(ret, (e) => e.title == "")
+        _.each(ret, (elem) => {
+            try {
+                elem.parent.hide();
+            } catch(e) {
+
+            }
+        });
+
+        console.log(ret);
+        // _.each(diff, (elem) => {
+        //     elem.parent.show();
+        // })
+    }
+
     appendCards() {
         let currentCards = this._currentCards;
         const fetchCards = this._fetchCards;
@@ -55,6 +79,13 @@ export class SaleContentLoader extends Component {
 
     run() {
 
+        const onchange = _.throttle((ev) => {
+            const self = ev.currentTarget;
+            this.search($(self).val());
+        }, 100);
+
+        $(".header-filter-box-footer-center input").on("change", onchange);
+        
         this._items = Array.from(document.querySelectorAll(".card-container .card"));
 
         $(".card").css({
