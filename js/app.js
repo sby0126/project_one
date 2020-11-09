@@ -85,15 +85,21 @@ class App extends EventEmitter {
                 // 클래스 목록에 menu가 포함되어있으면 슬라이드 업을 하지 않습니다.
                 const classFilter = Array.from(ev.target.classList).filter(i => i.indexOf("menu") >= 0)
                 if(classFilter.length == 0) {
-                    slideUp();
+                    this.slideUp();
                 }
             });
         } else {
             if($(".header-popup-container").is(":visible")) {
-                slideUp();
+                this.slideUp();
             }
         }
 
+    }
+
+    slideUp() {
+        $(".header-popup-container").slideUp();
+        cssRuleSet(".header-center::after", "border-bottom", `4px solid #FF6B00`);
+        cssRuleSet(".header-center::after", "left", 0 + "px");
     }
 
     /**
@@ -107,13 +113,6 @@ class App extends EventEmitter {
         // 메뉴 슬라이드 바는 색상, 위치가 클릭한 메뉴의 위치에 따라 변경됩니다.        
         const menuItems = Array.from(document.querySelectorAll(".header-center > a"));
         const lastMenuIndex = menuItems.length - 1;
-
-        // 메뉴를 다시 처음으로 되돌립니다.
-        const slideUp = () => {
-            $(".header-popup-container").slideUp();
-            cssRuleSet(".header-center::after", "border-bottom", `4px solid #FF6B00`);
-            cssRuleSet(".header-center::after", "left", 0 + "px");
-        };
 
         menuItems.forEach((i, idx) => {
             i.addEventListener("click", ev => {

@@ -4,8 +4,9 @@
 
     .contents-item-information {
         display: flex;
-        flex-basis: 48%;
+        flex-basis: 0%;
         flex-direction: row;
+        flex: 1 1 0;
 
         .item {
             width: 48%;
@@ -29,7 +30,6 @@
                     &:focus ~ span {
                         visibility: hidden;
                     }
-                    
                 }
         
                 span {
@@ -79,4 +79,9 @@
         
     }
 
+}
+
+
+.ql-editor {
+    min-height: 250px;
 }

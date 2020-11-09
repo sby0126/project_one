@@ -65,6 +65,14 @@ class ItemPage extends App {
             }
 
         `, dataID).run();
+
+
+        const adminWrite = $("<div></div>", ".container");
+
+        adminWrite.css({
+            "borderRadius": "50%",
+            "backgroundColor": "gray"
+        });
     }    
 
     addEventListeners() {
