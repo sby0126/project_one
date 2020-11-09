@@ -6,6 +6,8 @@
  * 본문 영역에 적용될 CSS를 적용해주세요.
  */
 
+@use "sass:map";
+
 @mixin grid-card ($margin-b) {
     display: flex;
     flex: 1 1 0;
