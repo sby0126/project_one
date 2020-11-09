@@ -111,7 +111,9 @@
                 </div>
                 <div class="editor"></div>
                 <div class="contents-tail">
-                    <button id="upload-ok">글 작성</button>
+                    <button id="upload-ok">작성</button>
+                    <button id="upload-cancel">취소</button>
+
                 </div>
             </div>
 
@@ -222,6 +224,10 @@
                 $("#input-item-price ~ span").css("visibility", "visible");
             }
         });
+
+        $("upload-cancel").on("click", () => {
+            history.back();
+        }
 
     </script>
 </body>
