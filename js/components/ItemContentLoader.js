@@ -27,8 +27,9 @@ export class ItemContentLoader extends Component {
                     const title = encodeURI(target.querySelector('h2').textContent);
                     const price = target.querySelectorAll('p')[0].textContent;
                     const shop = target.querySelectorAll('p')[1].textContent;
+                    const dataId = idx;
 
-                    location.href = `pages/detail.html?date=${Date.now()}&title=${title}&price=${price}&shop=${shop}`;
+                    location.href = `pages/detail.html?date=${Date.now()}&title=${title}&price=${price}&shop=${shop}&dateId=${dateId}`;
                 }
 
                 card.insertAdjacentHTML( 'afterbegin', `
