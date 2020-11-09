@@ -31,6 +31,10 @@ export class ItemContentLoader extends Component {
             
             let myImgData = itemData[idx];
 
+            if(!card) {
+                continue;
+            }            
+
             if(myImgData) {
 
                 card.querySelector("p").setAttribute("d-"+idx, "");

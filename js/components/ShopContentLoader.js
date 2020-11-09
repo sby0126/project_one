@@ -27,6 +27,10 @@ export class ShopContentLoader extends Component {
             // let myImgData = data[idx].imgPath;
             let myImgData = blobData[idx];
 
+            if(!card) {
+                continue;
+            }
+
             if(myImgData) {
                 
                 card.querySelector("p").setAttribute("d-"+idx, "");
