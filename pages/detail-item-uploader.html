@@ -101,8 +101,12 @@
                     <div class="contents-item-information">
                         <div class="contents-item-title">
                             <input type="text" id="input-item-title">
-                            <span>제목</span>
+                            <span>제목</span>                            
                         </div>
+                        <div class="contents-item-title">
+                            <input type="number" id="input-item-price">
+                            <span>가격</span>                            
+                        </div>                        
                     </div>
                 </div>
                 <div class="editor"></div>
@@ -184,18 +188,31 @@
             navigator.clipboard.writeText(quill.root.innerHTML);
         }
 
-        document.querySelector("#input-item-title").addEventListener("input", (ev) => {
+        $("#input-item-title").on("change", (ev) => {
             /**
              * @type {HTMlInputElement
              */
             const target = ev.target;
             
             if(target.value && target.value.length > 0) {
-                document.querySelector("#input-item-title ~ span").style.visibility = "hidden";
+                $("#input-item-title ~ span").css(visibility, "hidden");
             } else {
-                document.querySelector("#input-item-title ~ span").style.visibility = "visible";
+                $("#input-item-title ~ span").css(visibility, "visible");
             }
             
+        });
+
+        $("#input-item-price").on("change", (ev) => {
+            /**
+             * @type {HTMlInputElement
+             */
+            const target = ev.target;
+            
+            if(target.value && target.value.length > 0) {
+                $("#input-item-price ~ span").css(visibility, "hidden");
+            } else {
+                $("#input-item-price ~ span").css(visibility, "visible");
+            }
         });
 
     </script>

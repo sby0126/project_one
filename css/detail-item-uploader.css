@@ -1,10 +1,12 @@
 .contents-header {
   margin-bottom: 2em;
   padding-bottom: 1em;
-  border-bottom: 1px solid #d2d2d2;
 }
 .contents-header .contents-item-title {
   position: relative;
+  padding-bottom: 1em;
+  margin-bottom: 2em;
+  border-bottom: 1px solid #d2d2d2;
 }
 .contents-header .contents-item-title input {
   width: 100%;
