@@ -23,8 +23,8 @@ export class FilterBoxButtons extends Component {
 
                 if(!target.classList.contains("active")) {
 
+                    filterBoxButtons.filter(e => e.classList.contains("active")).forEach(e => e.classList.remove("active"));
                     target.classList.add("active");
-                    filterBoxButtons[(idx + 1) % filterBoxButtons.length].classList.remove("active");
 
                     // 카드 이미지를 지웁니다.
                     // 여기에서 d는 delete의 약자입니다.
