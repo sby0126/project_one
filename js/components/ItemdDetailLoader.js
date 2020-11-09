@@ -18,6 +18,7 @@ export class ItemDetailLoader extends Component {
         
         $("#detail-item-title").text(item.title);
         $("#detail-item-price, .allPrice").text(item.price);
+        $(".imgArea > img").attr("src", itemData[dataId].url);
 
     }
 

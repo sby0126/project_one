@@ -50,6 +50,52 @@ class App extends EventEmitter {
 
     }
 
+    selectMenu(idx) {
+
+        const menuItems = Array.from(document.querySelectorAll(".header-center > a"));
+        const i = menuItems[idx];
+        const lastMenuIndex = menuItems.length - 1;
+
+        // 전체 메뉴 영역의 크기
+        const parentRect = document.querySelector(".header-center").getBoundingClientRect();
+
+        // 현재 메뉴 아이템의 크기
+        const rect = i.getBoundingClientRect();
+
+        // 현재 X 좌표 값입니다. 
+        // (현재 메뉴 아이템의 X좌표 - 전체 메뉴 영역의 X좌표)
+        const pos = (rect.left - parentRect.x);
+
+        // 현재 메뉴와 가장 멀리 떨어진 메뉴의 X 좌표 값입니다.
+        const targetRect = menuItems[menuItems.length - idx - 1].getBoundingClientRect();
+        const targetPos = (targetRect.left - parentRect.x);
+
+        // 180 ~ 255 사이의 색상값을 16진수로 변환합니다.
+        const color = (180 + Math.floor(75 * targetPos / parentRect.width)).toString(16);
+
+        // 가상 요소의 CSS 속성을 변경합니다.
+        cssRuleSet(".header-center::after", "border-bottom", `4px solid #${color}6B00`);
+        cssRuleSet(".header-center::after", "left", pos + "px");
+
+        // 다른 메뉴를 선택하거나 다른 곳을 선택하면 닫습니다.
+        if(idx === lastMenuIndex) {
+            $(".header-popup-container").slideDown();
+            $(".container").not(".header-popup-container").on("mouseup", (ev) => {
+
+                // 클래스 목록에 menu가 포함되어있으면 슬라이드 업을 하지 않습니다.
+                const classFilter = Array.from(ev.target.classList).filter(i => i.indexOf("menu") >= 0)
+                if(classFilter.length == 0) {
+                    slideUp();
+                }
+            });
+        } else {
+            if($(".header-popup-container").is(":visible")) {
+                slideUp();
+            }
+        }
+
+    }
+
     /**
      * 네비게이션의 슬라이드 막대 이동 이벤트를 정의합니다.
      */
@@ -71,49 +117,11 @@ class App extends EventEmitter {
 
         menuItems.forEach((i, idx) => {
             i.addEventListener("click", ev => {
-
-                // 전체 메뉴 영역의 크기
-                const parentRect = document.querySelector(".header-center").getBoundingClientRect();
-
-                // 현재 메뉴 아이템의 크기
-                const rect = i.getBoundingClientRect();
-
-                // 현재 X 좌표 값입니다. 
-                // (현재 메뉴 아이템의 X좌표 - 전체 메뉴 영역의 X좌표)
-                const pos = (rect.left - parentRect.x);
-
-                // 현재 메뉴와 가장 멀리 떨어진 메뉴의 X 좌표 값입니다.
-                const targetRect = menuItems[menuItems.length - idx - 1].getBoundingClientRect();
-                const targetPos = (targetRect.left - parentRect.x);
-
-                // 180 ~ 255 사이의 색상값을 16진수로 변환합니다.
-                const color = (180 + Math.floor(75 * targetPos / parentRect.width)).toString(16);
-
-                // 가상 요소의 CSS 속성을 변경합니다.
-                cssRuleSet(".header-center::after", "border-bottom", `4px solid #${color}6B00`);
-                cssRuleSet(".header-center::after", "left", pos + "px");
-
-                // 다른 메뉴를 선택하거나 다른 곳을 선택하면 닫습니다.
-                if(idx === lastMenuIndex) {
-                    $(".header-popup-container").slideDown();
-                    $(".container").not(".header-popup-container").on("mouseup", (ev) => {
-
-                        // 클래스 목록에 menu가 포함되어있으면 슬라이드 업을 하지 않습니다.
-                        const classFilter = Array.from(ev.target.classList).filter(i => i.indexOf("menu") >= 0)
-                        if(classFilter.length == 0) {
-                            slideUp();
-                        }
-                    });
-                } else {
-                    if($(".header-popup-container").is(":visible")) {
-                        slideUp();
-                    }
-                }
-                
+                this.selectMenu(idx);
             });
         });        
 
-        menuItems[this._menuIndex].click();
+        this.selectMenu(this._menuIndex);
     }
 
     addEventListeners() {
