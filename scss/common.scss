@@ -1,0 +1,114 @@
+
+$main-container-widith: 100%;
+$main-container-height: auto;
+$font-size-xs1: 1.6em;
+$font-size-s1: 1.0em;
+$font-size-s2: 0.9375em;
+$font-size-s3: 0.8125em;
+$font-size-s4: 0.875rem;
+$font-size-s5: 0.75em;
+$font-size-s6: 0.6875em;
+$background-color: #F3F7FA;
+
+* {
+    margin: 0;
+    padding: 0;  
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+body {
+    width: $main-container-widith;
+    margin: 0;
+    padding: 0;
+    background-color:$background-color;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+/* 가장 최상위 루트에 있는 컨테이너입니다 */
+.container {
+
+    
+    width: $main-container-widith; 
+    height: $main-container-height;
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+
+    a {
+        color: var(--text-color);
+        text-decoration: #bebebe;
+    }
+
+    /** <input type="button"> 형식에 지정하는 클래스입니다. */
+    .input-button {
+        width: max-content;
+        outline: none;
+        border: none;
+        background: none;
+        background-color: none;
+        color: #909090;
+        cursor: pointer;
+    }    
+
+    .button[disabled], .input[disabled], fieldset[disabled] .input {
+        cursor: not-allowed;    
+    }  
+    
+    ul {
+        list-style: none;
+    }
+    
+    *, *::before, *::after {
+        box-sizing: inherit;
+    }    
+
+    article,
+    aside,
+    figure,
+    footer,
+    header,
+    hgroup,
+    section {
+      display: block;
+    }
+    
+    fieldset {
+        border: none;
+    }
+    
+    button:not(.detail_button){
+        background-color: white;
+        border-color: #dbdbdb;
+        border-width: 1px;
+        color: #363636;
+        cursor: pointer;
+        justify-content: center;
+        padding-bottom: calc(0.5em - 1px);
+        padding-left: 1em;
+        padding-right: 1em;
+        padding-top: calc(0.5em - 1px);
+        text-align: center;
+        white-space: nowrap;
+    }    
+}
+
+@media only screen and (min-width: 320px) {
+    
+}
+
+@media only screen and (min-width: 480px) {
+
+}
+
+@media only screen and (min-width: 640px) {
+
+}
+
+@media only screen and (min-width: 720px) {
+
+}
