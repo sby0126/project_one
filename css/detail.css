@@ -110,6 +110,10 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  overflow:hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
 }
 
 .infoArea > ul > li > span:nth-of-type(2) {

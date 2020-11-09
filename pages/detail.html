@@ -98,8 +98,8 @@
                 </div>
                 <div class="infoArea">
                     <ul class>
-                        <li><h2>후드후드후드(데이터)</h2></li>
-                        <li><span>가격</span><span>가격(데이터)</span></li>
+                        <li><h2 id="detail-item-title">후드후드후드(데이터)</h2></li>
+                        <li><span>가격</span><span id="detail-item-price">가격(데이터)</span></li>
                         <li><span>색상</span><div class="color_option"><button class="detail_button">블랙(데이터)</button><button class="detail_button">화이트(데이터)</button></div></li>
                         <li><span>사이즈</span><div class="size_option"><button disabled="true" class="detail_button">FREE(데이터)</button><button disabled="true" class="detail_button">100(데이터)</button></div></li>
                         <li>
@@ -170,6 +170,19 @@
             
         </div>
         <script>
+
+            (function() {
+                // 상품 정보 데이터 수신 부분 추가 (임시)
+                "use strict";
+                const urlParams = new URLSearchParams(decodeURI(location.search));
+                const title = urlParams.get("title");
+                const price = urlParams.get("price");
+                const shop = urlParams.get("shop");
+
+                $("#detail-item-title").text(title);
+                $("#detail-item-price").text(price);
+            })();
+
             $(".infoArea > ul > li:nth-child(3) button").on("click",function(){
                 var idx = $(this).index();
                 var sameYn = true;
