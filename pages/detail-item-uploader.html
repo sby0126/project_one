@@ -105,8 +105,12 @@
                         </div>
                         <div class="contents-item-title">
                             <input type="number" id="input-item-price" step="1000" min="1000">
-                            <span>가격</span>                            
-                        </div>                        
+                            <span>상품 가격</span>                            
+                        </div>        
+                        <div class="contents-item-title">
+                            <span style="margin-right: 1em;">상품 썸네일</span>                            
+                            <input type="file" id="input-item-image" onchange="updateImage(this)">
+                        </div>                                                
                     </div>
                 </div>
                 <div class="editor"></div>
@@ -185,17 +189,50 @@
             theme: 'snow',
         });
 
+        function updateImage(src) {
+            const file = document.querySelector('#input-item-image').files[0];
+            const reader = new FileReader();
+            
+            reader.addEventListener("load", function () {
+                // const img = document.createElement("img");
+                // document.body.appendChild(img);
+                // img.src = reader.result;
+
+                localStorage.setItem("thum", reader.result);
+
+            }, false);
+
+            if(file) {
+                reader.readAsDataURL(file);
+            }
+        }
+
         document.querySelector("#upload-ok").onclick = function() {
+
+            if($("#input-item-image").val().length == 0) {
+                alert("썸네일 이미지가 업로드 되지 않았습니다.");
+                return false;
+            }
+
+            if($("#input-item-price, #input-item-price").val().length == 0) {
+                alert("제목 또는 상품 가격을 적지 않았습니다.");
+                return false;
+            }                            
 
             const result = {
                 title: $("#input-item-title").val(),
                 price: $("#input-item-price").val(),
+                src: localStorage.getItem("thum"),
                 contents: quill.root.innerHTML
             };
 
             alert("클립보드에 복사되었습니다.");
 
             navigator.clipboard.writeText(JSON.stringify(result));
+
+            if(localStorage.getItem("thum")) {
+                localStorage.removeItem("thum");
+            }
         }
 
         $("#input-item-title").on("change", (ev) => {
