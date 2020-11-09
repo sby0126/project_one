@@ -100,7 +100,7 @@
 
                     <div class="contents-item-information">
                         <div class="contents-item-title">
-                            <input type="text">
+                            <input type="text" id="input-item-title">
                             <span>제목</span>
                         </div>
                     </div>
@@ -183,6 +183,20 @@
             alert("클립보드에 복사되었습니다.");
             navigator.clipboard.writeText(quill.root.innerHTML);
         }
+
+        document.querySelector("#input-item-title").addEventListener("input", (ev) => {
+            /**
+             * @type {HTMlInputElement
+             */
+            const target = ev.target;
+            
+            if(target.value && target.value.length > 0) {
+                document.querySelector("#input-item-title ~ span").style.visibility = "hidden";
+            } else {
+                document.querySelector("#input-item-title ~ span").style.visibility = "visible";
+            }
+            
+        });
 
     </script>
 </body>
