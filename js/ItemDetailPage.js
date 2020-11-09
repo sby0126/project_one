@@ -2,6 +2,7 @@ import {App} from "./app.js";
 import { JoinButton } from "./components/JoinButton.js";
 import {LoginButton} from "./components/LoginButton.js";
 import {ItemDetailLoader} from "./components/ItemdDetailLoader.js";
+import {parseBodyFromString} from "./utils/bodyParser.js";
 
 /**
  * ==============================================
@@ -31,11 +32,11 @@ class ItemDetailPage extends App {
     }        
 
     addEventListeners() {
-        // this.on("loginView:ready", () => LoginButton.builder().run());        
+        this.on("loginView:ready", () => LoginButton.builder().run());        
     }
 
     onLoad() {
-        /** JoinButton.builder(this).run(); */
+        JoinButton.builder(this).run();
         this.emit("loginView:ready");
         ItemDetailLoader.builder(this).run();
     }
