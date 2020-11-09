@@ -1,6 +1,11 @@
 import { Component } from "./Component.js";
 import {itemData} from "../itemData.js";
 
+/**
+ * @author 어진석
+ * @class ItemContentLoader
+ * 
+ */
 export class ItemContentLoader extends Component {
     run() {
         const items = Array.from(document.querySelectorAll(".card-container .card"));
