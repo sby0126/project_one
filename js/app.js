@@ -21,7 +21,7 @@ class App extends EventEmitter {
         this.addEventListeners();
         this.initWithNav();
     }
-    
+
     /**
      * 멤버 변수를 초기화합니다.
      */

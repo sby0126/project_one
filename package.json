@@ -22,6 +22,8 @@
   },
   "homepage": "https://github.com/biud436/project_one#readme",
   "dependencies": {
+    "@types/jquery": "^3.5.4",
+    "@types/underscore": "^1.10.24",
     "axios": "^0.21.0",
     "canvas": "^2.6.1",
     "cheerio": "^1.0.0-rc.3",

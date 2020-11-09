@@ -1,15 +1,29 @@
 import { Component } from "./Component.js";
 import {blobData, base64toBlob} from "../data.js";
+import { getDataManager } from "../DataManager.js";
 
 export class ShopContentLoader extends Component {
+    
+    initMembers(parent) {
+        super.initMembers(parent);
 
-    run() {
+        this._currentCards = 0;
+        this._fetchCards = 5;
+        this._maxCards = 50;
+        this._interval = 800;
+    }
+
+    appendCards() {
+        let currentCards = this._currentCards;
+        const fetchCards = this._fetchCards;
+        const maxCards = this._maxCards   
+        const max = Math.min(currentCards + fetchCards, maxCards);
 
         const parent = this._parent;
 
-        const items = Array.from(document.querySelectorAll(".card-container .card"));
+        for(let idx = currentCards; idx < (currentCards + fetchCards); idx++) {
+            const card = this._items[idx];
 
-        items.forEach((card, idx) => {
             card.querySelector("p").setAttribute("d-"+idx, "");
             
             // let myImgData = data[idx].imgPath;
@@ -38,7 +52,25 @@ export class ShopContentLoader extends Component {
                     </div>
                 `;
             }
-        });        
+
+            if(this._currentCards < this._maxCards)
+                this._currentCards++;            
+        }
+
+    }
+
+    run() {
+
+        this._items = Array.from(document.querySelectorAll(".card-container .card"));
+
+        this.appendCards();
+        
+        const throttled  = _.throttle(() => {
+            this.appendCards();
+        }, this._interval);
+
+        $(window).scroll(throttled);        
+
     }
     
     static id() {

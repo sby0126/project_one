@@ -1,5 +1,6 @@
 import { Component } from "./Component.js";
 import {itemData} from "../itemData.js";
+import { getDataManager } from "../DataManager.js";
 
 /**
  * @author 어진석
@@ -7,11 +8,27 @@ import {itemData} from "../itemData.js";
  * 
  */
 export class ItemContentLoader extends Component {
-    run() {
-        const items = Array.from(document.querySelectorAll(".card-container .card"));
+
+    initMembers(parent) {
+        super.initMembers(parent);
+
+        this._currentCards = 0;
+        this._fetchCards = 5;
+        this._maxCards = 50;
+        this._interval = 800;
+    }
+
+    appendCards() {
+        let currentCards = this._currentCards;
+        const fetchCards = this._fetchCards;
+        const maxCards = this._maxCards   
+        const max = Math.min(currentCards + fetchCards, maxCards);
+
         const parent = this._parent;
 
-        items.forEach((card, idx) => {
+        for(let idx = currentCards; idx < (currentCards + fetchCards); idx++) {
+            const card = this._items[idx];
+
             card.querySelector("p").setAttribute("d-"+idx, "");
             
             let myImgData = itemData[idx];
@@ -47,8 +64,26 @@ export class ItemContentLoader extends Component {
                         <button class="like-button"></button>
                     </div>
                 `);
-            }
-        });
+
+                if(this._currentCards < this._maxCards)
+                    this._currentCards++;
+
+            }            
+        }
+
+
+    }
+
+    run() {
+        this._items = Array.from(document.querySelectorAll(".card-container .card"));
+
+        this.appendCards();
+
+        const throttled  = _.throttle(() => {
+            this.appendCards();
+        }, this._interval);
+
+        $(window).scroll(throttled);
     }
 
     static id() {
