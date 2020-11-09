@@ -24,12 +24,13 @@ export class ShopContentLoader extends Component {
         for(let idx = currentCards; idx < (currentCards + fetchCards); idx++) {
             const card = this._items[idx];
 
-            card.querySelector("p").setAttribute("d-"+idx, "");
-            
             // let myImgData = data[idx].imgPath;
             let myImgData = blobData[idx];
 
             if(myImgData) {
+                
+                card.querySelector("p").setAttribute("d-"+idx, "");
+
                 // const filename = "./test/" + myImgData.substr(myImgData.lastIndexOf("/") + 1, myImgData.length);
                 const filename = myImgData;
                 parent.createNewStyleSheet("d-"+idx, filename.url);     

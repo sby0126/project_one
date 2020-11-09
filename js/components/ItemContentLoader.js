@@ -28,12 +28,12 @@ export class ItemContentLoader extends Component {
 
         for(let idx = currentCards; idx < (currentCards + fetchCards); idx++) {
             const card = this._items[idx];
-
-            card.querySelector("p").setAttribute("d-"+idx, "");
             
             let myImgData = itemData[idx];
 
             if(myImgData) {
+
+                card.querySelector("p").setAttribute("d-"+idx, "");
         
                 const filename = myImgData;
                 parent.createNewStyleSheet("d-"+idx, filename.url);     
