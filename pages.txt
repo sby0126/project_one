@@ -1,4 +1,5 @@
 ./pages/:
+detail-item-uploader.html
 detail.html
 find_password.html
 infopolicy.html
