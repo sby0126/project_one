@@ -13,18 +13,20 @@
 
 /* 화면을 어둡게 만드는 라이트 박스 컨테이너입니다. */
 #light-box-container {
+    position: fixed;
+
     width: 100vw;
     height: 100vh;
-    position: fixed;
     left: -9999px;
     top: 0;
     right: 0;
     bottom: 0;
-    background-color: #252526;
     opacity: 0.4;
     z-index: 150;
     padding: 0;
     margin: 0;
+
+    background-color: #252526;
     overflow: hidden;
 }
 
@@ -34,41 +36,48 @@
 
 /* 우측 로그인 바를 감싸고 있는 래퍼입니다 */
 .floating-login-view-wrapper {
+    display: flex;
     position: fixed;
+
     left: 9999px;
     right: 0;
     top: 0;
     bottom: 0;
     width: 100%;
     z-index: 200;
-    display: flex;
+
     flex: 1 1 0;
     flex-direction: row-reverse;
     justify-content: right;
     align-items: flex-start; /** 왼쪽 정렬 **/
+
     transition: all .4s ease-out;
 }
 
 .floating-login-view {
+    display: flex;
+
     width: 18.75em;
     min-height: 100%;
-    background-color: #fff;
     opacity: 0.8;
-    display: flex;
     padding-top: 3em;
     line-height: 2em;
     padding-left: 2.5rem;
+    
     flex-direction: column;
+
+    background-color: #fff;
 } 
 
 /* 이미지로 선언한 아이콘을 감춥니다. */
 .floating-login-view input {
-    background-image: none;
     height: 49px;
     line-height: 50px;
     text-indent: 0px;
-    text-align: left;
+    
     border: none;
+    text-align: left;
+    background-image: none;
 }
 
 .floating-login-view input:focus {
@@ -85,19 +94,23 @@
     width: 90%;
     height: 3em;
     line-height: 3em;
-    text-align: center;
+
     background: #D0D0D0;
     color: #E4F3FC;
+    text-align: center;
 }
 
 .floating-login-view-button-panel {
-    width: 90%;
     display: flex;
+
+    width: 90%;
+
     justify-content: space-between; /**  요소들 사이에만 여유 공간을 두고 배치됩니다. **/
 }
 
 .floating-login-view-right {
     display: flex;
+
     flex-direction: row-reverse; /** 플렉스 요소가 배치가 시작되는 축 변경 : 오른쪽에 배치됨 */
     justify-content: flex-start; 
     align-items: flex-start;
@@ -105,11 +118,13 @@
 
 /** 로그인 페이지에서 우측 상단 닫기 버튼 */
 #close-login-view {
+    padding: 0.5em;
+    font-size: 1em;
+    
     background: none;
     border: none;
     outline: none;
-    padding: 0.5em;
-    font-size: 1em;
+
     justify-self: right;
 }
 
