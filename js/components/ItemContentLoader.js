@@ -30,7 +30,7 @@ export class ItemContentLoader extends Component {
 
                     const dataId = idx; // 기본키
 
-                    location.href = `pages/detail.html?date=${Date.now()}&title=${title}&price=${price}&shop=${shop}&dateId=${dateId}`;
+                    location.href = `pages/detail.html?date=${Date.now()}&title=${title}&price=${price}&shop=${shop}&dateId=${dataId}`;
                 }
 
                 card.insertAdjacentHTML( 'afterbegin', `
