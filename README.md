@@ -10,3 +10,9 @@
     - 주석을 철저하게 작성해주시기 바랍니다.
     - 자바스크립트 변수는 ```카멜 표기법```을 사용해주시기 바랍니다.
     - 파일 작성 시 상단에 작성자 명을 반드시 추가해주시기 바랍니다.
+
+
+# License
+
+- jQuery (MIT) - https://jquery.org/license/
+- QuillJS (BSD 3-Clause)  - https://github.com/quilljs/quill/blob/develop/LICENSE
