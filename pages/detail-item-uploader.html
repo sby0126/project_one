@@ -128,7 +128,7 @@
                 </div>
                 <div class="editor"></div>
                 <div class="contents-tail">
-                    <button>글 작성</button>
+                    <button id="upload-ok">글 작성</button>
                 </div>
             </div>
 
@@ -199,6 +199,12 @@
             placeholder: '상품 상세 정보를 작성하세요.',
             theme: 'snow',
         });
+
+        document.querySelector("#upload-ok").onclick = function() {
+            alert("클립보드에 복사되었습니다.");
+            navigator.clipboard.writeText(quill.root.innerHTML);
+        }
+
     </script>
 </body>
 
