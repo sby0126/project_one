@@ -15,11 +15,6 @@ export class ItemDetailLoader extends Component {
         const dataId = parseInt(urlParams.get("dataId"));
 
         const item = itemData[dataId]; // 여기엔 large image, content 정보가 없음.
-        let content;
-
-        if("content" in item) {
-            content = item.content;
-        }
         
         $("#detail-item-title").text(item.title);
         $("#detail-item-price, .allPrice").text(item.price);
