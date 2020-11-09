@@ -171,18 +171,6 @@
         </div>
         <script>
 
-            (function() {
-                // 상품 정보 데이터 수신 부분 추가 (임시)
-                "use strict";
-                const urlParams = new URLSearchParams(decodeURI(location.search));
-                const title = urlParams.get("title");
-                const price = urlParams.get("price");
-                const shop = urlParams.get("shop");
-
-                $("#detail-item-title").text(title);
-                $("#detail-item-price").text(price);
-            })();
-
             $(".infoArea > ul > li:nth-child(3) button").on("click",function(){
                 var idx = $(this).index();
                 var sameYn = true;
@@ -253,7 +241,7 @@
                     }
            
         </script>
-        <script type="module" src="../js/MorePage.js"></script>
+        <script type="module" src="../js/ItemDetailPage.js"></script>
     </body>
   
 </html>
