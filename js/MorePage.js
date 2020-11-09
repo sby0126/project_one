@@ -30,7 +30,7 @@ class MorePage extends App {
     }        
 
     addEventListeners() {
-        this.on("login:ready", () => LoginButton.builder().run());        
+        this.on("loginView:ready", () => LoginButton.builder().run());        
     }
 
     onLoad() {
