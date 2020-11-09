@@ -19,6 +19,10 @@ export class ItemContentLoader extends Component {
                 const myCard = card.querySelector("p");
                 const {title, price, shop} = myImgData;
 
+                card.onclick = function() {
+                    location.href = "pages/detail.html";
+                }
+
                 card.insertAdjacentHTML( 'afterbegin', `
                     <i class="shop-hot-icon"></i>
                     <div class="item-button-container"> 
