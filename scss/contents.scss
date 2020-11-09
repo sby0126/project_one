@@ -135,22 +135,28 @@ $contents-wrapper-y: calc(var(--header-box-height) + 3.2em);
 
 .shop-button {
     @include flexible-button2(1, 1, 0%);
-
-    background-color: transparent;
+    
     box-sizing: border-box;
-    color: #909090;
-    border: none;
-    border-right-style: solid;
-    border-right-width: 1px;
-    border-right-color: rgb(237, 239, 240);
-    outline: none;
-    text-decoration-color: #909090;
-    text-decoration-style: solid;
+
     line-height: 2.5em;
     margin: 0;
     font-size: 0.6875em; 
     height: 2.5em;
+
+    background-color: transparent;
+    color: #909090;
+
+    border: none;
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-right-color: rgb(237, 239, 240);
+
+    outline: none;
+
+    text-decoration-color: #909090;
+    text-decoration-style: solid;
     text-align: center;
+
     -webkit-user-select: none;
     cursor: pointer;
 }
@@ -158,17 +164,20 @@ $contents-wrapper-y: calc(var(--header-box-height) + 3.2em);
 .item-button-container {
     @include flexible-button(0, 1);
 
-    cursor: pointer;
+    position: absolute;
+    box-sizing: border-box;
+
     width: 100%;
     height: 2.5em;
+    bottom: 0;
+    letter-spacing: -0.6;
+
     border: none;
     border-top: 1px solid #EDEFF0;
-    box-sizing: border-box;
     color: #303030;
-    letter-spacing: -0.6;
-    position: absolute;
     outline: none;
-    bottom: 0;
+    
+    cursor: pointer;
 }
 
 .item-button {
