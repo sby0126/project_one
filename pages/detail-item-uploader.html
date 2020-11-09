@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/find-password.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a99df0f94f.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.quilljs.com/1.3.6/quill.core.css">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
+    <style>
+        .contents-header {
+            margin-bottom: 2em;
+            padding-bottom: 1em;
+            border-bottom: 1px solid #d2d2d2;
+        }
+
+        .contents-tail {
+            display: inline-block;
+            margin-top: 1em;
+            text-align: center;
+        }
+
+        .contents-tail button {
+            border-radius: 0;
+            color: #fff;
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+            outline: none;
+            border-width: 1px;
+        }
+
+        .contents-tail button:hover {
+            color: #fff;
+            background-color: #0b5ed7;
+            border-color: #0a58ca;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 컨테이너의 시작 -->
+    <div class="container">
+        <!-- 헤더의 시작 -->
+        <header>
+            <div class="header-wrapper">
+                <!-- 헤더 왼쪽 : 로고 -->
+                <div class="header-left">
+                    <div class="" id="logo">
+                        <a href="/"><img src="https://dummyimage.com/64x64/000/fff" alt=""></a>
+                    </div>
+                    <a href="#">WOMEN</a>
+                    <a href="#">MEN</a>
+                </div>
+                <!-- 헤더 중앙 : 메뉴 -->
+                <div class="header-center">
+                    <a href="/">SHOP</a>
+                    <a href="../item.html" target="_self">ITEM</a>
+                    <a href="../sale.html">SALE</a>
+                    <a href="#">MORE</a>
+                </div>
+                <!-- 헤더 오른쪽 : 로그인 / 검색 -->
+                <div class="header-right">
+                    <button class="header-right-login-button">로그인</button>
+                    <input type="text" class="input-non-border-box" name="" id="" placeholder="검색어를 입력하세요">
+                </div>
+            </div>
+            <!-- 숨겨진 메뉴 -->
+            <div class="header-popup-container">
+                <ul class="header-menu-list">
+                    <li class="menu">
+                        <a href="#" class="menu-link">
+                            <div class="menu-icon"></div>
+                            <p class="menu-title">최근 본 샵 <em>0</em></p>
+                        </a>
+                    </li>
+                    <li class="menu">
+                        <a href="#" class="menu-link">
+                            <div class="menu-icon"></div>
+                            <p class="menu-title">최근 본 상품 <em>0</em></p>
+                        </a>
+                    </li>
+                    <li class="menu">
+                        <a href="#" class="menu-link">
+                            <div class="menu-icon"></div>
+                            <p class="menu-title">MY SHOP</p>
+                        </a>
+                    </li>
+                    <li class="menu">
+                        <a href="#" class="menu-link">
+                            <div class="menu-icon"></div>
+                            <p class="menu-title">관심 상품</p>
+                        </a>
+                    </li>
+                    <li class="menu">
+                        <a href="#" class="menu-link">
+                            <div class="menu-icon"></div>
+                            <p class="menu-title">1:1 문의</p>
+                        </a>
+                    </li>
+                    <li class="menu">
+                        <a href="#" class="menu-link">
+                            <div class="menu-icon"></div>
+                            <p class="menu-title">소개 및 약관</p>
+                        </a>
+                    </li>
+                    <li class="menu">
+                        <a href="#" class="menu-link">
+                            <div class="menu-icon"></div>
+                            <p class="menu-title">마케팅 센터</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+
+        <!-- 본문의 시작 -->
+        <section>
+            <!-- 본문이 들어가는 래퍼 -->
+            <div class="contents-wrapper">
+                <div class="contents-header">
+                    <h2>상품 상세 페이지 작성</h2>
+                </div>
+                <div class="editor"></div>
+                <div class="contents-tail">
+                    <button>글 작성</button>
+                </div>
+            </div>
+
+        </section>
+    </div>
+    <!-- 라이트 박스-->
+    <div id="light-box-container">
+    </div>
+    <!-- 스크립트 -->
+    <script type="module" src="../js/MorePage.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    <script>
+        var quill = new Quill('.editor', {
+            modules: {
+                toolbar: [
+                    ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+                    ['blockquote', 'code-block'],
+
+                    [{
+                        'header': 1
+                    }, {
+                        'header': 2
+                    }], // custom button values
+                    [{
+                        'list': 'ordered'
+                    }, {
+                        'list': 'bullet'
+                    }],
+                    [{
+                        'script': 'sub'
+                    }, {
+                        'script': 'super'
+                    }], // superscript/subscript
+                    [{
+                        'indent': '-1'
+                    }, {
+                        'indent': '+1'
+                    }], // outdent/indent
+                    [{
+                        'direction': 'rtl'
+                    }], // text direction
+
+                    [{
+                        'size': ['small', false, 'large', 'huge']
+                    }], // custom dropdown
+                    [{
+                        'header': [1, 2, 3, 4, 5, 6, false]
+                    }],
+
+                    [{
+                        'color': []
+                    }, {
+                        'background': []
+                    }], // dropdown with defaults from theme
+                    [{
+                        'font': []
+                    }],
+                    [{
+                        'align': []
+                    }],
+                    ['image'],
+                    ['clean'] // remove formatting button
+                ]
+            },
+            placeholder: '상품 상세 정보를 작성하세요.',
+            theme: 'snow',
+        });
+    </script>
+</body>
+
+</html>
