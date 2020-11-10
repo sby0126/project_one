@@ -14,9 +14,6 @@ export class SaleContentLoader extends Component {
 
     search(itemName) {
 
-        /**
-         * https://stackoverflow.com/a/58768185
-         */
         $(".card")
             .hide()
             .filter(function() {

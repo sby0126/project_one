@@ -13,6 +13,19 @@ export class ShopContentLoader extends Component {
         this._interval = 800;
     }
 
+    search(itemName) {
+
+        $(".card")
+            .hide()
+            .filter(function() {
+                const cardTitle = $(this).find("h2").text().toLowerCase();
+
+                return cardTitle.includes(itemName);
+
+            })
+            .show();
+    }    
+
     appendCards() {
         let currentCards = this._currentCards;
         const fetchCards = this._fetchCards;
@@ -65,6 +78,13 @@ export class ShopContentLoader extends Component {
     }
 
     run() {
+
+        const onchange = _.throttle((ev) => {
+            const self = ev.currentTarget;
+            this.search($(self).val());
+        }, 100);
+
+        $(".header-filter-box-footer-center input").on("change", onchange);        
 
         this._items = Array.from(document.querySelectorAll(".card-container .card"));
 
