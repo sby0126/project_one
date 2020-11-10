@@ -572,7 +572,7 @@ header {
 
 @media only screen and (max-width: 720px) {
     .header-wrapper {
-        justify-content: space-between;
+        justify-content: center;
         background-color: #FF6B00;
         color: #fff;
     }
@@ -584,6 +584,10 @@ header {
     }
     .header-center::after {
         border-bottom: 4px solid #fff;
+    }
+    .header-center > a {
+        font-size: 1.1em;
+        color: #fff;
     }
     
 }

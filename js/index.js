@@ -33,6 +33,7 @@ class MainPage extends App {
 
     createNewStyleSheet(dataID, imagePath) {
 
+        // 카드 스타일 시트 빌더는 특정한 이미지를 원형으로 만들어냅니다.
         CardStyleSheetBuilder.builder(this, `
         
             .card p[${dataID}]::before {

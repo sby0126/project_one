@@ -7,12 +7,17 @@ export class ShopContentLoader extends Component {
     initMembers(parent) {
         super.initMembers(parent);
 
-        this._currentCards = 0;
-        this._fetchCards = 10;
-        this._maxCards = 50;
-        this._interval = 800;
+        this._currentCards = 0; // 현재 카드 갯수
+        this._fetchCards = 10; // 새로 가져올 카드 갯수
+        this._maxCards = 50; // 최대 카드 갯수
+        this._interval = 800; // 이벤트 과대 실행 방지 용 실행 간격 800ms
     }
 
+    /**
+     * 검색 기능입니다.
+     * 검색된 내용과 일치하는 카드를 찾습니다.
+     * @param {String}} itemName 
+     */
     search(itemName) {
 
         $(".card")
@@ -46,12 +51,14 @@ export class ShopContentLoader extends Component {
 
             if(myImgData) {
                 
+                // 카드의 데이터 ID를 설정합니다.
                 card.querySelector("p").setAttribute("d-"+idx, "");
 
-                // const filename = "./test/" + myImgData.substr(myImgData.lastIndexOf("/") + 1, myImgData.length);
                 const filename = myImgData;
                 parent.createNewStyleSheet("d-"+idx, filename.url);     
 
+                // 정규 표현식을 이용하여 한 줄로 되어있는 텍스트를 여러 줄로 잘라냅니다.
+                // 정규 표현식 문법 \d는 숫자를 나타냅니다.
                 const myCard = card.querySelector("p");
                 const lines = filename.texts.replace(/([\d]+대\,[\d]+대\,[\d]+대)|([\d]+대[ ]*\,[ ]*[\d]+대)/, function(...args) {
                     return args[0] + "<br>";
@@ -71,6 +78,7 @@ export class ShopContentLoader extends Component {
                 `;
             }
 
+            // 카드의 갯수를 1 증감시킵니다.
             if(this._currentCards < this._maxCards)
                 this._currentCards++;            
         }
@@ -79,6 +87,7 @@ export class ShopContentLoader extends Component {
 
     run() {
 
+        // 입력 중에 콜백 함수가 과다하게 실행되는 것을 방지하는 쓰로틀링 (또는 디바운스로 교체 가능) 함수입니다.
         const onchange = _.throttle((ev) => {
             const self = ev.currentTarget;
             this.search($(self).val());
@@ -88,8 +97,10 @@ export class ShopContentLoader extends Component {
 
         this._items = Array.from(document.querySelectorAll(".card-container .card"));
 
+        // 로딩 직후, 새로운 카드 이미지를 바로 생성합니다.
         this.appendCards();
         
+        // 스크롤 시 새로운 카드 이미지를 일정 간격마다 추가합니다.
         const throttled  = _.throttle(() => {
             this.appendCards();
         }, this._interval);
