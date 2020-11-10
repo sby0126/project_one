@@ -5,6 +5,7 @@ find_password.html
 infopolicy.html
 join.html
 login.html
+logout.html
 map.html
 payments.html
 shop.html
