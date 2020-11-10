@@ -8,13 +8,13 @@
 .header {
     width: 100%;
     height: 50px;
-    border:1px solid black;
+     /* border:1px solid black;  */
 }
 
 .main {
     width: 100%;
     height: 100%;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 .main > .content_login {

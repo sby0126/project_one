@@ -93,7 +93,7 @@ fieldset {
     border: none;
 }
 
-button:not(.detail_button){
+button:not(.detail_button, #bt_adr, #bt_bt_email){
     background-color: white;
     border-color: #dbdbdb;
     border-width: 1px;
