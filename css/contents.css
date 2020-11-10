@@ -37,9 +37,11 @@ section {
     display: flex;
 
     width: 100%;
-    margin-bottom: 1em;
+    row-gap: 1em;
+    column-gap: 0.5em;
     
-    flex: 1 1 0;
+    flex: 0 1 0;
+    flex-basis: 0;
     justify-content: space-between; /** 앞, 뒤, 그리고 요소들 사이에도 모두 여유 공간을 두고 배치됩니다. */
     flex-direction: column; /** 플렉스의 방향을 지정합니다. */
     flex-flow: wrap; /** wrap이란 간단히 말하면 컨테이너의 폭을 넘길 경우, 줄바꿈 한다는 뜻입니다. */
