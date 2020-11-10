@@ -13,24 +13,38 @@ export class SaleContentLoader extends Component {
     }
 
     search(itemName) {
-        const collection = Array.from(document.querySelectorAll(".card")).map(i => {
-            return {
-                title: $(i).find(".item-button-container h2").text(),
-                parent: $(i)
-            }
-        });
-        const diff = _.find(collection, (elem) => elem.title.indexOf(itemName) >= 0);
-        let ret = _.difference(collection, diff);
-        ret = _.filter(ret, (e) => e.title == "")
-        _.each(ret, (elem) => {
-            try {
-                elem.parent.hide();
-            } catch(e) {
 
-            }
-        });
+        /**
+         * https://stackoverflow.com/a/58768185
+         */
+        $(".card")
+            .hide()
+            .filter(function() {
+                const cardTitle = $(this).find(".item-button-container h2").text().toLowerCase();
 
-        console.log(ret);
+                return cardTitle.includes(itemName);
+
+            })
+            .show();
+
+        // const collection = Array.from(document.querySelectorAll(".card")).map(i => {
+        //     return {
+        //         title: $(i).find(".item-button-container h2").text(),
+        //         parent: $(i)
+        //     }
+        // });
+        // const diff = _.find(collection, (elem) => elem.title.indexOf(itemName) >= 0);
+        // let ret = _.difference(collection, diff);
+        // ret = _.filter(ret, (e) => e.title == "")
+        // _.each(ret, (elem) => {
+        //     try {
+        //         elem.parent.hide();
+        //     } catch(e) {
+
+        //     }
+        // });
+
+        // console.log(ret);
         // _.each(diff, (elem) => {
         //     elem.parent.show();
         // })
