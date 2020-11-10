@@ -63,16 +63,16 @@ section {
 /**
  * 화면 크기가 0 이상 539 이하
  */
-@media only screen and (min-width: 0px) and (max-width: 539px) {
+/* @media only screen and (min-width: 0px) and (max-width: 539px) {
     .card-container {
         justify-content: center;
     }
-}
+} */
 
 /**
  * 화면 크기가 540 이상 1023 이하
  */
- @media only screen and (min-width: 540px) and (max-width: 1023px) {
+ /* @media only screen and (min-width: 540px) and (max-width: 1023px) {
 
     .card-container > .card {
         position: relative;
@@ -86,12 +86,12 @@ section {
     
         cursor: pointer;
     }    
-}
+} */
 
 /**
  * 화면 크기가 1024 이상
  */
- @media only screen and (min-width: 1024px) {
+ /* @media only screen and (min-width: 1024px) {
     .card-container > .card {
         position: relative;
     
@@ -104,7 +104,7 @@ section {
     
         cursor: pointer;
     }    
-}
+} */
 
 
 .card-container > .card p {
