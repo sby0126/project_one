@@ -61,47 +61,18 @@ section {
 }    
 
 /**
- * 화면 크기가 1024 이상
+ * 화면 크기가 0 이상 539 이하
  */
- @media only screen and (min-width: 1025px) {
-    /* 그리드 카드의 크기를 지정합니다. */
-    .card-container > .card {
-        position: relative;
-
-        flex-basis: calc(100% / 5 - 0.25em);
-        height: calc(100% / 5 - 0.25em);
-        margin-bottom: 0.5em;
-        
-        background: #fff;
-        border-bottom: 1px solid #E0E4E6;
-
-        cursor: pointer;
+@media only screen and (min-width: 0px) and (max-width: 539px) {
+    .card-container {
+        justify-content: center;
     }
-  
 }
 
 /**
- * 화면 크기가 1024 이상
+ * 화면 크기가 540 이상 1023 이하
  */
-@media only screen and (min-width: 1024px) {
-    .card-container > .card {
-        position: relative;
-    
-        flex-basis: calc(100% / 4 - 0.25em);
-        height: calc(100% / 5 - 0.25em);
-        margin-bottom: 0.5em;
-        
-        background: #fff;
-        border-bottom: 1px solid #E0E4E6;
-    
-        cursor: pointer;
-    }    
-}
-
-/**
- * 화면 크기가 768 이상 1024 이하
- */
-@media only screen and (min-width: 540px) and (max-width: 1023px) {
+ @media only screen and (min-width: 540px) and (max-width: 1023px) {
 
     .card-container > .card {
         position: relative;
@@ -117,11 +88,24 @@ section {
     }    
 }
 
-@media only screen and (min-width: 0px) and (max-width: 539px) {
-    .card-container {
-        justify-content: center;
-    }
+/**
+ * 화면 크기가 1024 이상
+ */
+ @media only screen and (min-width: 1024px) {
+    .card-container > .card {
+        position: relative;
+    
+        flex-basis: calc(100% / 5 - 0.25em);
+        height: calc(100% / 5 - 0.25em);
+        margin-bottom: 0.5em;
+        
+        background: #fff;
+        border-bottom: 1px solid #E0E4E6;
+    
+        cursor: pointer;
+    }    
 }
+
 
 .card-container > .card p {
     position: relative;
