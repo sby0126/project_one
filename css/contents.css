@@ -37,8 +37,8 @@ section {
     display: flex;
 
     width: 100%;
-    row-gap: 1em;
-    column-gap: 0.5em;
+    row-gap: 0.25em;
+    column-gap: 0.25em;
     
     flex: 0 1 0;
     flex-basis: 0;
@@ -47,18 +47,80 @@ section {
     flex-flow: wrap; /** wrap이란 간단히 말하면 컨테이너의 폭을 넘길 경우, 줄바꿈 한다는 뜻입니다. */
 }
 
-/* 그리드 카드의 크기를 지정합니다. */
 .card-container > .card {
     position: relative;
 
-    flex-basis: 16.3em;
-    height: 19em;
+    flex-basis: 13.8em;
+    height: 18.3em;
     margin-bottom: 0.5em;
     
     background: #fff;
     border-bottom: 1px solid #E0E4E6;
 
     cursor: pointer;
+}    
+
+/**
+ * 화면 크기가 1024 이상
+ */
+ @media only screen and (min-width: 1025px) {
+    /* 그리드 카드의 크기를 지정합니다. */
+    .card-container > .card {
+        position: relative;
+
+        flex-basis: calc(100% / 5 - 0.25em);
+        height: calc(100% / 5 - 0.25em);
+        margin-bottom: 0.5em;
+        
+        background: #fff;
+        border-bottom: 1px solid #E0E4E6;
+
+        cursor: pointer;
+    }
+  
+}
+
+/**
+ * 화면 크기가 1024 이상
+ */
+@media only screen and (min-width: 1024px) {
+    .card-container > .card {
+        position: relative;
+    
+        flex-basis: calc(100% / 4 - 0.25em);
+        height: calc(100% / 5 - 0.25em);
+        margin-bottom: 0.5em;
+        
+        background: #fff;
+        border-bottom: 1px solid #E0E4E6;
+    
+        cursor: pointer;
+    }    
+}
+
+/**
+ * 화면 크기가 768 이상 1024 이하
+ */
+@media only screen and (min-width: 540px) and (max-width: 1023px) {
+
+    .card-container > .card {
+        position: relative;
+    
+        flex-basis: 13.8em;
+        height: 18.3em;
+        margin-bottom: 0.5em;
+        
+        background: #fff;
+        border-bottom: 1px solid #E0E4E6;
+    
+        cursor: pointer;
+    }    
+}
+
+@media only screen and (min-width: 0px) and (max-width: 539px) {
+    .card-container {
+        justify-content: center;
+    }
 }
 
 .card-container > .card p {
