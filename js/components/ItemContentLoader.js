@@ -13,7 +13,7 @@ export class ItemContentLoader extends Component {
         super.initMembers(parent);
 
         this._currentCards = 0;
-        this._fetchCards = 5;
+        this._fetchCards = 10;
         this._maxCards = 50;
         this._interval = 800;
     }
