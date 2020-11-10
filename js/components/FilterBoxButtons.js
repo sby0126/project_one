@@ -8,6 +8,7 @@ export class FilterBoxButtons extends Component {
         super.initMembers(...args);
         
         this._index = 0;
+        this._ageTabIndex = 0;
     }
 
     /**
@@ -22,7 +23,20 @@ export class FilterBoxButtons extends Component {
          * @type {App}
          */
         const parent = this._parent;
+        let self = this;
 
+        // 선택 버튼 추가
+        $(".header-filter-box-footer-right span")
+            .on("click", function() {
+                const container = $(".header-filter-box-footer-right span");
+
+                container.removeClass("active");
+                $(this).addClass("active");
+
+                // 선택 버튼에 메뉴 인덱스 설정
+                self._ageTabIndex = container.index($(this));
+            });
+            
         const filterBoxButtons = Array.from(document.querySelector(".header-filter-box-header").children);
         filterBoxButtons.forEach((i, idx) => {
             i.addEventListener("click", async (ev) => {
