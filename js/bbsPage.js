@@ -1,6 +1,4 @@
 import {App} from "./app.js";
-import {blobData, base64toBlob} from "./data.js";
-import {saleData} from "./saleData.js";
 import {LoginButton} from "./components/LoginButton.js";
 
 /**

@@ -1,6 +1,6 @@
 import { Component } from "./Component.js";
 import { getDataManager } from "../DataManager.js";
-import { itemData, imgSrc, itemImg } from "../itemData.js";
+import { itemData, imgSrc, itemImg } from "../services/itemData.js";
 
 /**
  * @author 어진석

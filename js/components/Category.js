@@ -1,5 +1,8 @@
 import {Component} from "./Component.js";
 
+/**
+ * 카테고리에 대한 모든 기능은 이 클래스에 구현됩니다.
+ */
 export class Category extends Component {
     run() {
         // 샵 카테고리의 드롭 박스 메뉴에 변화가 생겼을때 실행되는 이벤트입니다.

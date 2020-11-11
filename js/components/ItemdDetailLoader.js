@@ -1,5 +1,5 @@
 import { Component } from "./Component.js";
-import { itemData, imgSrc, itemImg } from "../itemData.js";
+import { itemData, imgSrc, itemImg } from "../services/itemData.js";
 
 /**
  * 주소에 있는 dataId 값을 인자를 파싱하여 id 값에 맞는 데이터를 동적으로 가져옵니다.
