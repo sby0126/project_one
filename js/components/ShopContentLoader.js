@@ -1,6 +1,4 @@
 import { Component } from "./Component.js";
-import {blobData, base64toBlob} from "../data.js";
-import { getDataManager } from "../DataManager.js";
 
 export class ShopContentLoader extends Component {
     
