@@ -28,7 +28,8 @@
     "canvas": "^2.6.1",
     "cheerio": "^1.0.0-rc.3",
     "image-size": "^0.9.3",
-    "minimist": "^1.2.5"
+    "minimist": "^1.2.5",
+    "sharp": "^0.26.2"
   },
   "devDependencies": {
     "compress-images": "^1.9.5",
