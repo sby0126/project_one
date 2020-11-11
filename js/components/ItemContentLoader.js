@@ -1,5 +1,6 @@
 import { Component } from "./Component.js";
 import { getDataManager } from "../DataManager.js";
+import { itemData } from "../itemData.js";
 
 /**
  * @author 어진석
@@ -40,7 +41,7 @@ export class ItemContentLoader extends Component {
             .show();
     }    
 
-    async appendCards() {
+     appendCards() {
         // 현재 카드 갯수
         let currentCards = this._currentCards;
 
@@ -54,8 +55,8 @@ export class ItemContentLoader extends Component {
         // 카드 컨테이너
         const parent = this._parent;
 
-        const blobData = await this.loadJsonAsync(`json/item/item_data${this._index++}.json`);
-        const first = currentCards;
+        // const blobData = await this.loadJsonAsync(`json/item/item_data${this._index++}.json`);
+        // const first = currentCards;
 
         // 카드를 새로 가져옵니다.
         for(let idx = currentCards; idx < (currentCards + fetchCards); idx++) {
@@ -65,7 +66,7 @@ export class ItemContentLoader extends Component {
                 continue;
             }            
             
-            let myImgData = blobData[idx - first];
+            let myImgData = itemData[idx];
 
             if(!card) {
                 continue;
