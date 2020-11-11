@@ -1,5 +1,4 @@
 import { Component } from "./Component.js";
-import {itemData} from "../itemData.js";
 import { getDataManager } from "../DataManager.js";
 
 /**
@@ -16,6 +15,8 @@ export class ItemContentLoader extends Component {
         this._fetchCards = 10;
         this._maxCards = 50;
         this._interval = 800;
+
+        this._loaders = {};
     }
 
     /**
@@ -38,7 +39,7 @@ export class ItemContentLoader extends Component {
             .show();
     }    
 
-    appendCards() {
+    async appendCards() {
         // 현재 카드 갯수
         let currentCards = this._currentCards;
 
@@ -55,14 +56,20 @@ export class ItemContentLoader extends Component {
         // 카드를 새로 가져옵니다.
         for(let idx = currentCards; idx < (currentCards + fetchCards); idx++) {
             const card = this._items[idx];
+
+            if(this._loaders[idx]) {
+                continue;
+            }            
             
-            let myImgData = itemData[idx];
+            let myImgData = await this.loadJsonAsync(`json/item/item_data${idx}.json`);
 
             if(!card) {
                 continue;
             }            
 
             if(myImgData) {
+
+                this._loaders[idx] = true;
 
                 card.querySelector("p").setAttribute("d-"+idx, "");
         
