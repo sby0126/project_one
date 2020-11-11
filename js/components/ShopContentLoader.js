@@ -1,4 +1,5 @@
 import { Component } from "./Component.js";
+import {blobData} from "../data.js";
 
 export class ShopContentLoader extends Component {
     
@@ -46,9 +47,9 @@ export class ShopContentLoader extends Component {
                 continue;
             }
 
-            // let myImgData = data[idx].imgPath;
-            let myImgData = await this.loadJsonAsync(`json/shop/shop_data${idx}.json`);
-            // blobData[idx];
+            // let myImgData = await this.loadJsonAsync(`json/shop/shop_data${idx}.json`);
+            let myImgData = blobData[idx];
+
             if(!card) {
                 continue;
             }
