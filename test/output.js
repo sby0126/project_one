@@ -5,7 +5,8 @@ const fs = require('fs');
 const output = item.map(i => {
     const raw = i.src.replace(/\?(.*)/g, "");
     const filename = path.basename(raw);
-    i.src = filename;
+    i.url = filename;
+    delete i.src;
     return i;
 });
 

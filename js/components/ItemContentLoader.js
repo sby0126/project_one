@@ -1,6 +1,6 @@
 import { Component } from "./Component.js";
 import { getDataManager } from "../DataManager.js";
-import { itemData } from "../itemData.js";
+import { itemData, imgSrc, itemImg } from "../itemData.js";
 
 /**
  * @author 어진석
@@ -83,7 +83,7 @@ export class ItemContentLoader extends Component {
                 card.querySelector("p").setAttribute("d-"+idx, "");
         
                 const filename = myImgData;
-                parent.createNewStyleSheet("d-"+idx, filename.url);     
+                parent.createNewStyleSheet("d-"+idx, imgSrc + itemImg[filename.url]);     
 
                 const myCard = card.querySelector("p");
                 const {title, price, shop} = myImgData;
