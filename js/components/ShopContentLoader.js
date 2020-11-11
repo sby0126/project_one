@@ -40,6 +40,10 @@ export class ShopContentLoader extends Component {
 
         const parent = this._parent;
 
+        if(currentCards > this._maxCards) {
+            return;
+        }
+
         for(let idx = currentCards; idx < (currentCards + fetchCards); idx++) {
             const card = this._items[idx];
 

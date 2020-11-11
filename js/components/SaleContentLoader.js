@@ -38,6 +38,10 @@ export class SaleContentLoader extends Component {
 
         const parent = this._parent;
 
+        if(currentCards > this._maxCards) {
+            return;
+        }
+
         // 새로운 카드를 여러장 추가합니다.
         for(let idx = currentCards; idx < (currentCards + fetchCards); idx++) {
             const card = this._items[idx];

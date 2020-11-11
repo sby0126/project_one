@@ -55,6 +55,10 @@ export class ItemContentLoader extends Component {
         // 카드 컨테이너
         const parent = this._parent;
 
+        if(currentCards > this._maxCards) {
+            return;
+        }
+
         // const blobData = await this.loadJsonAsync(`json/item/item_data${this._index++}.json`);
         // const first = currentCards;
 
