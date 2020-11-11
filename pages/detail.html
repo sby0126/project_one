@@ -91,29 +91,40 @@
                     </div>            
                
             </header>
+            
             <div class="item_content" id="item_content">
+                <!-- 상품이미지, 상품정보 -->
                 <div class="productArea">
+                    <!-- 상품이미지 -->
                     <div class="imgArea">
                         <img src="https://dummyimage.com/480x500/000/fff">
     
                     </div>
+                    <!-- 상품구매정보 -->
                     <div class="infoArea">
                         <ul class>
+                            <!-- 1. 상품명 -->
                             <li><h2 id="detail-item-title">후드후드후드(데이터)</h2></li>
-                            <li><span>가격</span><span id="detail-item-price">가격(데이터)</span></li>
+                            <!-- 2. 가격 -->
+                            <li><span>가격</span><span id="detail-item-price">가격(데이터)</span></li> 
+                            <!-- 3. 색상 -->
                             <li><span>색상</span><div class="color_option"><button class="detail_button">블랙(데이터)</button><button class="detail_button">화이트(데이터)</button></div></li>
+                            <!-- 4. 사이즈 -->
                             <li><span>사이즈</span><div class="size_option"><button disabled="true" class="detail_button">FREE(데이터)</button><button disabled="true" class="detail_button">100(데이터)</button></div></li>
+                            <!-- 5. 색상버튼과 사이즈버튼클릭시 동적으로 li태그와 버튼생성 -->
                             <li>
                                 <ul class="productlist_add">
                                    <!-- <li><span>상품 색상과 사이즈를 선택해주세요 (최소주문1개이상)</span></li>
                                     <li><span>상품 색상과 사이즈를 선택해주세요 (최소주문1개이상)</span></li>
                                     <li><span>상품 색상과 사이즈를 선택해주세요 (최소주문1개이상)</span></li>
                                     <li><span>상품 색상과 사이즈를 선택해주세요 (최소주문1개이상)</span></li>
-                                    <li><span>상품 색상과 사이즈를 선택해주세요 (최소주문1개이상)</span></li>-->
+                                    <li><span>상품 색상과 사이즈를 선택해주세요 (최소주문1개이상)</span></li> -->
                  
                                 </ul>
                             </li>
+                            <!-- 6. 총상품금액 -->
                             <li><span>총상품금액</span><span class="allPrice">종합가격(데이터)</span></li>
+                            <!-- 7. 구매하기.장바구니 버튼 -->
                             <li><div><button class="detail_button">구매하기</button><button class="detail_button">장바구니</button></div></li>
                         </ul>
                     </div>
@@ -122,15 +133,18 @@
     
                 
                 <div class="productArea2">
+                    <!-- 중간 상품상세설명, 상품결제정보 버튼 -->
                     <div class="productArea2_button">
                         <ul class="productArea2_buttonList">
                             <li><a href="#productArea2_detailImg">상품상세설명</a></li>
                             <li><a href="#productPayInfo" >상품결제정보</a></li>
                         </ul>
                     </div>
+                    <!-- 상품상세설명 -->
                     <div class="productArea2_detailImg" id="productArea2_detailImg">
                         <img src="../images/img1info.jpg">
                     </div>
+                    <!-- 상품결제정보 -->
                     <div class="productPayInfo" id="productPayInfo">
                         <h3>교환/반품</h3>
                         <div>
@@ -161,7 +175,7 @@
                         
                     </div>
                 </div>
-                
+                <!-- 오른쪽하단 top.bottom 버튼 -->
                 <div class="item_top_bottom">
                     <a href="#item_content" id="item_top"><span class="item_top_button">top</span></a>
                     <a href="#productPayInfo" id="item_bottom"><span class="item_bottom_button">bottom</span></a>
@@ -173,12 +187,15 @@
             </div>
 
         <script>
+            // 색상버튼은(ul태그안에 li목록중 3번째줄), 사이즈버튼은(ul태그안에 li목록중 4번째줄)
 
+            // 상품 색상버튼(3) 클릭시 발생하는 이벤트
             $(".infoArea > ul > li:nth-child(3) button").on("click",function(){
                 var idx = $(this).index();
                 var sameYn = true;
                 var clickYn = false;
 
+                // 색상버튼(3)이 현재 클릭되어있는지 확인
                 $.each($(".infoArea > ul > li:nth-child(3) button"),function(i){
                     if($(this).hasClass("click_button")){
                         $(this).removeClass("click_button");
@@ -187,25 +204,30 @@
                         }
                     }
                 });
-              
+                
+                // 색상버튼(3)을 클릭시 클래스 추가
                 if(sameYn){
                     $(this).addClass("click_button");
                     clickYn = true;
                 }
 
+                // 색상버튼(3) 클릭시 사이즈버튼(4) 활성화 
                 if(clickYn){
                     $(".infoArea > ul > li:nth-child(4) button").prop("disabled",false);
                 }else{
+                    //색상버튼(3) 클릭된걸 다시 클릭시 사이즈버튼(4) 비활성화 
                     $(".infoArea > ul > li:nth-child(4) button").removeClass("click_button");
                     $(".infoArea > ul > li:nth-child(4) button").prop("disabled",true);
                 }
             })
             
+            //사이즈버튼(4) 클릭시 발생하는 이벤트
             $(".infoArea > ul > li:nth-child(4) button").on("click",function(){
                 var idx = $(this).index();
                 var sameYn = true;
                 var clickYn = false;
 
+                //사이즈버튼이(4) 현재 클릭되어있는지 확인
                 $.each($(".infoArea > ul > li:nth-child(4) button"),function(i){
                     if($(this).hasClass("click_button")){
                         $(this).removeClass("click_button");
@@ -214,31 +236,38 @@
                         }
                     }
                 });
-              
+                
+                //사이즈버튼(4) 클릭시 클래스 추가 
                 if(sameYn){
                     $(this).addClass("click_button");
                     clickYn = true;
                 }
+                
+                // 사이즈버튼(4)은 색상버튼이 클릭되어야 활성화된다
 
+                //사이즈버튼(4)이 클릭되면 색상과 사이즈(텍스트)를 받는 li태그와 버튼을 동적으로 생성
                 if(clickYn){
 
-                    var colorNm = ""; //선택된 컬럼명
+                    var colorNm = ""; //선택된 색상명
                     var sizeNm  = ""; //선택된 사이즈명
                     
+                    //클릭된 색상버튼(3)의 텍스트를 변수 colorNm 에 저장
                     $.each($(".infoArea > ul > li:nth-child(3) button"),function(i){
                         if($(this).hasClass("click_button")){
                             colorNm = $(this).text();
                         }
                     });
-
+                    //클릭된 사이즈버튼(4)의 텍스트를 변수 sizeNm에 저장
                     sizeNm = $(this).text();
 
-                    var str = "<li><span>" + colorNm + "," + sizeNm + "</span><button class='del_button' onclick=del($(this));>X</button></li>";
+                    //동적으로 li태그와 버튼을 생성 (ul태그중 > 5번째 li안에)
+                    var str = "<li><span>" + colorNm + "," + sizeNm + "</span> <button class='del_button' onclick=del($(this));>X</button></li>";
                     $(".productlist_add").append(str);
                 }
 
 
             })
+                    //동적으로 생성된 li태그를 지운다(버튼클릭시)
                     function del(obj){
                         obj.parent("li").remove();
                     }
