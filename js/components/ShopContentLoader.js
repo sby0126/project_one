@@ -31,7 +31,7 @@ export class ShopContentLoader extends Component {
             .show();
     }    
 
-    appendCards() {
+    async appendCards() {
         let currentCards = this._currentCards;
         const fetchCards = this._fetchCards;
         const maxCards = this._maxCards   
@@ -43,8 +43,8 @@ export class ShopContentLoader extends Component {
             const card = this._items[idx];
 
             // let myImgData = data[idx].imgPath;
-            let myImgData = blobData[idx];
-
+            let myImgData = await this.loadJsonAsync(`json/shop/shop_data${idx}.json`);
+            // blobData[idx];
             if(!card) {
                 continue;
             }
