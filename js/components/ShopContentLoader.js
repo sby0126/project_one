@@ -1,5 +1,5 @@
 import { Component } from "./Component.js";
-import {blobData} from "../data.js";
+import {blobData, imgSrc, mainImg} from "../data.js";
 
 export class ShopContentLoader extends Component {
     
@@ -66,7 +66,7 @@ export class ShopContentLoader extends Component {
                 card.querySelector("p").setAttribute("d-"+idx, "");
 
                 const filename = myImgData;
-                parent.createNewStyleSheet("d-"+idx, filename.url);     
+                parent.createNewStyleSheet("d-"+idx, imgSrc + mainImg[filename.url]);     
 
                 // 정규 표현식을 이용하여 한 줄로 되어있는 텍스트를 여러 줄로 잘라냅니다.
                 // 정규 표현식 문법 \d는 숫자를 나타냅니다.
