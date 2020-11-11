@@ -1,7 +1,6 @@
 import {Component} from "./Component.js";
 import {App} from "../app.js";
 
-
 export class LoginButton extends Component {
     run() {
         const loginButton = document.querySelector(".header-right-login-button");

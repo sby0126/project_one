@@ -1,5 +1,5 @@
 import { Component } from "./Component.js";
-import {blobData, imgSrc, mainImg} from "../data.js";
+import {blobData, imgSrc, mainImg} from "../services/data.js";
 
 export class ShopContentLoader extends Component {
     

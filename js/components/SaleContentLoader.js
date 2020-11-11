@@ -1,5 +1,5 @@
 import { Component } from "./Component.js";
-import {saleData} from "../saleData.js";
+import {saleData, imgSrc, saleImg} from "../services/saleData.js";
 
 export class SaleContentLoader extends Component {
 
@@ -59,7 +59,7 @@ export class SaleContentLoader extends Component {
 
                 const filename = myImgData;
                 // 이미지 영역을 생성합니다.
-                parent.createNewStyleSheet("d-"+idx, filename.url);     
+                parent.createNewStyleSheet("d-"+idx, imgSrc + saleImg[filename.url]);     
 
                 const myCard = card.querySelector("p");
                 const {title, shop} = myImgData;
