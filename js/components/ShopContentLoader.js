@@ -9,6 +9,8 @@ export class ShopContentLoader extends Component {
         this._fetchCards = 10; // 새로 가져올 카드 갯수
         this._maxCards = 50; // 최대 카드 갯수
         this._interval = 800; // 이벤트 과대 실행 방지 용 실행 간격 800ms
+
+        this._loaders = {};
     }
 
     /**
@@ -40,6 +42,10 @@ export class ShopContentLoader extends Component {
         for(let idx = currentCards; idx < (currentCards + fetchCards); idx++) {
             const card = this._items[idx];
 
+            if(this._loaders[idx]) {
+                continue;
+            }
+
             // let myImgData = data[idx].imgPath;
             let myImgData = await this.loadJsonAsync(`json/shop/shop_data${idx}.json`);
             // blobData[idx];
@@ -48,6 +54,8 @@ export class ShopContentLoader extends Component {
             }
 
             if(myImgData) {
+
+                this._loaders[idx] = true;
                 
                 // 카드의 데이터 ID를 설정합니다.
                 card.querySelector("p").setAttribute("d-"+idx, "");
