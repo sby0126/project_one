@@ -39,7 +39,7 @@ export class ItemContentLoader extends Component {
             .show();
     }    
 
-    async appendCards() {
+    appendCards() {
         // 현재 카드 갯수
         let currentCards = this._currentCards;
 
@@ -60,60 +60,66 @@ export class ItemContentLoader extends Component {
             if(this._loaders[idx]) {
                 continue;
             }            
-            
-            let myImgData = await this.loadJsonAsync(`json/item/item_data${idx}.json`);
 
             if(!card) {
                 continue;
             }            
 
-            if(myImgData) {
+            this.loadJson(`json/item/item_data${idx}.json`, myImgData => {
 
-                this._loaders[idx] = true;
+                if(myImgData) {
+    
+                    this._loaders[idx] = true;
+    
+                    card.querySelector("p").setAttribute("d-"+idx, "");
+            
+                    const filename = myImgData;
+                    parent.createNewStyleSheet("d-"+idx, filename.url);     
+    
+                    const myCard = card.querySelector("p");
+                    const {title, price, shop} = myImgData;
+    
+                    card.onclick = function(ev) {
+                        /**
+                         * @type {HTMLDivElement}
+                         */
+                        const target = ev.currentTarget;
+    
+                        // 상품 명
+                        const title = encodeURI(target.querySelector('h2').textContent);
+                        // 상품 가격
+                        const price = target.querySelectorAll('p')[0].textContent;
+                        // 판매자 명
+                        const shop = target.querySelectorAll('p')[1].textContent;
+    
+                        const dataId = idx; // 기본키
+    
+                        // 주소에 데이터 ID를 포함시킵니다.
+                        // 이렇게 GET과 비슷한 식으로 URL을 만들면 로컬 스토리지 등을 이용하지 않아도 데이터를 간단히 전송할 수 있습니다.
+                        location.href = `pages/detail.html?date=${Date.now()}&title=${title}&price=${price}&shop=${shop}&dataId=${dataId}`;
+                    }
+    
+                    card.insertAdjacentHTML( 'afterbegin', `
+                        <i class="shop-hot-icon"></i>
+                        <div class="item-button-container"> 
+                            <h2>${title}</h2>
+                            <p>${price}</p>
+                            <p>${shop}</p>
+                            <button class="like-button"></button>
+                        </div>
+                    `);
+    
+                    // 카드의 갯수를 1 증감시킵니다.
+                    if(this._currentCards < this._maxCards)
+                        this._currentCards++;
+    
+                }            
+            }, err => {
+                console.warn(err);
+            });
+            
+            // let myImgData = ;
 
-                card.querySelector("p").setAttribute("d-"+idx, "");
-        
-                const filename = myImgData;
-                parent.createNewStyleSheet("d-"+idx, filename.url);     
-
-                const myCard = card.querySelector("p");
-                const {title, price, shop} = myImgData;
-
-                card.onclick = function(ev) {
-                    /**
-                     * @type {HTMLDivElement}
-                     */
-                    const target = ev.currentTarget;
-
-                    // 상품 명
-                    const title = encodeURI(target.querySelector('h2').textContent);
-                    // 상품 가격
-                    const price = target.querySelectorAll('p')[0].textContent;
-                    // 판매자 명
-                    const shop = target.querySelectorAll('p')[1].textContent;
-
-                    const dataId = idx; // 기본키
-
-                    // 주소에 데이터 ID를 포함시킵니다.
-                    // 이렇게 GET과 비슷한 식으로 URL을 만들면 로컬 스토리지 등을 이용하지 않아도 데이터를 간단히 전송할 수 있습니다.
-                    location.href = `pages/detail.html?date=${Date.now()}&title=${title}&price=${price}&shop=${shop}&dataId=${dataId}`;
-                }
-
-                card.insertAdjacentHTML( 'afterbegin', `
-                    <i class="shop-hot-icon"></i>
-                    <div class="item-button-container"> 
-                        <h2>${title}</h2>
-                        <p>${price}</p>
-                        <p>${shop}</p>
-                        <button class="like-button"></button>
-                    </div>
-                `);
-
-                // 카드의 갯수를 1 증감시킵니다.
-                if(this._currentCards < this._maxCards)
-                    this._currentCards++;
-
-            }            
         }
 
 
