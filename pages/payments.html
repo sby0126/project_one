@@ -180,11 +180,11 @@
                         </div> <!-- item 클래스 종료 -->
                     </div>    <!-- 구매 상품 표시 wrapper인 payments-item-info 클래스 종료 -->
                 </div>      <!-- 주요 약관 및 구매 상품 정보 영역인 contents-page-middle 클래스 종료 -->
-                <div class="contents-page-footer"> <!-- 최종 결제 정보와 그에 관한 정보를 담은 wrapper 클래스 --> 
+               <div class="contents-page-footer"> <!-- 최종 결제 정보와 그에 관한 정보를 담은 wrapper 클래스 --> 
                     <section class="page-footer-left">
                         <p>배송정보</p>
-                        <div>
-                            <table>
+                        <div> <!-- 배송에 필요한 고객 정보를 기입받는 영역 -->
+                            <table class="logistics-info"> 
                                 <tr>
                                     <td>* 주문하시는 분</td>
                                     <td>
@@ -203,16 +203,116 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>배송메세지</td><td><select></select></td>
+                                    <td>배송메세지</td>
+                                    <td>
+                                        <select name='ext-order'>
+                                            <option value="" selected>요구사항</option>
+                                            <option value="call">배송 전 연락주세요</option>
+                                            <option value="door">부재시 문 앞에 놓아주세요</option>
+                                            <option value="secureguard">부재시 경비실에 맡겨주세요</option>
+                                            <option value="becareful">파손에 주의해주세요</option>
+                                            <option value="self-input">직접 입력</option>
+                                            <div class="self-input"><input value="self" type="text"></div>
+                                        </select>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>총 배송비</td><td><p>n</p>원</td>
                                 </tr>
-                            </table>
+                            </table> 
+                        </div> <!-- 기입 영역 종료 -->
+                        <div class="payment-select">
+                            <p>결제 수단</p>
+                            <span>TEXT</span>
+                            <input type="checkbox"><p>지금 선택한 결제수단을 다음에도 사용</p>
+                            <div> <!-- 결제에 이용할 수단을 button을 이용해 정합니다 -->
+                                <button type="radio" value="creditcard">신용카드</button>
+                                <button type="radio" value="ontime-sand">실시간 계좌이체</button>
+                                <button type="radio" value="non-account">무통장 입금</button>
+                                <button type="radio" value="mobile-pay">휴대폰 결제</button>
+                                <button type="radio" value="toss">toss(img)</button>
+                                <button type="radio" value="naver-pay">naver pay(img)</button>
+                                <button type="radio" value="payco">payco(img?)</button>
+                                <button type="radio" value="kakao-pay">kakao pay(img)</button>
+                            </div>
+
+                            <div>
+                                <p>무이자할부 안내</p>
+                                <table class="creditcard-info">
+                                    <th>
+                                        <td>카드사</td>
+                                        <td>적용금액</td>
+                                        <td>할부개월</td>
+                                        <td>기간</td>
+                                    </th>
+                                    <tr>
+                                        <td></td>
+                                        <td>5만원 이상</td>
+                                        <td>2,3,4,5,6개월</td>
+                                        <td>2020.11.01
+                                            ~2020.11.30(총 30일)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>5만원 이상</td>
+                                        <td>2,3,4,5,6개월</td>
+                                        <td>2020.11.01
+                                            ~2020.11.30(총 30일)</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>5만원 이상</td>
+                                        <td>2,3,4,5,6개월</td>
+                                        <td>2020.11.01
+                                            ~2020.11.30(총 30일)</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>5만원 이상</td>
+                                        <td>2,3,4,5,6개월</td>
+                                        <td>2020.11.01
+                                            ~2020.11.30(총 30일)</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>5만원 이상</td>
+                                        <td>2,3,4,5,6개월</td>
+                                        <td>2020.11.01
+                                            ~2020.11.30(총 30일)</td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                     </section>
                     <aside class="page-footer-right">
-                        <div></div>
+                        <div class="cost-info-zone">
+                            <p>최종결제정보</p>
+                            <div>
+                                <table>
+                                    <th>
+                                        <td>
+                                            <p>상품금액</p> <p>Pr,ice원</p>
+                                        </td>
+                                        <td>
+                                            <p>쿠폰/할인금액</p> <p>0원</p>
+                                        </td>
+                                        <td>
+                                            <p>포인트/예치금 사용</p> <p>0원</p>
+                                        </td>
+                                        <td>
+                                            <p>배송비</p> <p>0원</p>
+                                        </td>
+                                        <td>
+                                            <span>총 결제금액</span>
+                                        </td>
+                                        <td>
+                                            <span>Pr,ice원</span>
+                                        </td>
+                                    </th>
+                                </div>
+                            </div>
+                        </div>
                         <button>구매하기</button>
                         <div></div>
                         <div></div>
@@ -225,6 +325,6 @@
     <div id="light-box-container">
     </div>
     <!-- 스크립트 --> 
-    <script type="module" src="js/index.js"></script>
+    <script type="module" src="../js/MorePage.js"></script>
 </body>
 </html>
