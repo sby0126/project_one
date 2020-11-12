@@ -154,7 +154,7 @@
                     <div class="hr-bdline"></div> <!-- 경계선 -->
                     <div class="payments-item-info"> <!-- 구매 상품의 표시  wrapper 영역 -->
                         <p>주문하실 상품</p>
-                        <button class="cart-go" href="../cart.html"><a href="../cart.html">장바구니 가기</a></button>
+                        <button class="cart-go" href="../cart.html">장바구니 가기</button>
                         <div class="item"> <!-- 상품 정보 표시 wrapper 영역 -->
                             <table class="item-table"> <!-- 상품 정보를 table 형식으로 불러오는 영역 -->
                                 <thead>
@@ -257,12 +257,12 @@
                             <div class="creditcard-info">
                                 <p>무이자할부 안내</p>
                                 <table>
-                                    <th>
+                                    <tr>
                                         <td>카드사</td>
                                         <td>적용금액</td>
                                         <td>할부개월</td>
                                         <td>기간</td>
-                                    </th>
+                                    </tr>
                                     <tr>
                                         <td><img src="../images/card_bn_bc.jpg"></td>
                                         <td>5만원 이상</td>
@@ -308,27 +308,47 @@
                             <p>최종결제정보</p>
                             <div>
                                 <table>
-                                    <th>
+                                    <tr>
                                         <td>
-                                            <p>상품금액</p> <p>Pr,ice원</p>
+                                            <p>상품금액</p>
                                         </td>
                                         <td>
-                                            <p>쿠폰/할인금액</p> <p>0원</p>
+                                            <p>Pr,ice원</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>쿠폰/할인금액</p>
                                         </td>
                                         <td>
-                                            <p>포인트/예치금 사용</p> <p>0원</p>
+                                            <p>0원</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>포인트/예치금 사용</p>
                                         </td>
                                         <td>
-                                            <p>배송비</p> <p>0원</p>
+                                            <p>0원</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>배송비</p>
                                         </td>
                                         <td>
-                                            <span>총 결제금액</span>
+                                            <p>0원</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>총 결제금액</p>
                                         </td>
                                         <td>
-                                            <span>Pr,ice원</span>
+                                            <span>Pri,ce원</span>
                                         </td>
-                                    </th>
-                                </div>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                         <button>구매하기</button>

@@ -1,9 +1,6 @@
-
-
 .container  {
     width: 960px;
     height: auto;
-    min-height: 1024px;
 }
 
 .contents-wrapper {
@@ -47,7 +44,7 @@
 
 .page-info {
     width: 240px;
-    font-size: 32px;
+    font-size: 30px;
     margin-top: 0.9em;
     margin-right: 10em;
 }
@@ -120,7 +117,7 @@
     word-break: normal;
     line-height: 1.3em;
     font-size: 13px;
-    border: 2px inset;
+    border: 2px solid;
     overflow-y: scroll;
 }
 
@@ -342,6 +339,7 @@
     position: relative;
     top: -0.4em;
     left: 11em;
+    font-size: 13px;
 }
 
 .logistics-info tr:nth-of-type(2) select {
@@ -357,22 +355,62 @@
 .logistics-info tr:nth-of-type(2) > td:nth-of-type(2) > input:nth-of-type(3) {
     position: relative;
     width: 140px;
-    top: -2.1em;
+    top: -2em;
 }
 
-p.right {
-    float: right;
-    font-size: 13px;
+.logistics-info tr:nth-of-type(2) > td:nth-of-type(2) > select:nth-of-type(2) {
+    position: relative;
+    top: -3.5em;
+    left: 16.7em;
+}
+
+.logistics-info tr:nth-of-type(2) > td:nth-of-type(2) > input:nth-of-type(4) {
+    position: relative;
+    width: 140px;
+    top: -3.3em;
+}
+
+.logistics-info tr:nth-of-type(2) > td:nth-of-type(2) > button {
+    position: relative;
+    top: -0.1em;
+    left: 5em;
+}
+
+.logistics-info tr:nth-of-type(2) > td:nth-of-type(2) > input:nth-of-type(5) {
+    position: relative;
+    width: 210px;
+    top: 0.2em;
+}
+
+.logistics-info tr:nth-of-type(3) > td:nth-of-type(2) > select {
+    position: relative;
+    top: 1.2em;
 }
 
 .self-input > input {
-    display: none;
+    float: right;
+    position: relative;
+    top: -1.3em;
+    width: 230px;
+    margin-right: 2em;
+}
+
+.logistics-info tr:last-of-type > td:nth-of-type(2) {
+    display: flexbox;
+    box-sizing: border-box;
+    padding: 1em 2em 1em 1em;
+    text-align: right;
+}
+
+.logistics-info tr:last-of-type > td:nth-of-type(2) > p{
+    display: inline-block;
 }
 
 .payment-select {
-    box-sizing: border-box;
+    position: relative;
+    top: -20em;    
     width: 100%;
-    border: 1px solid rgb(74, 187, 187);
+    box-sizing: border-box;
 }
 
 .payment-select > p:first-of-type {
@@ -412,28 +450,77 @@ p.right {
     margin-top: 1em;
 }
 
-.creditcard-info  > p{
+.creditcard-info > p{
     margin-left: 1.9em;
     font-size: 14px;
     font-weight: bold;
 }
 
-.creditcard-info > th > td {
-    width: 160px;
+.creditcard-info > table {
+    margin: 0 auto;
+    margin-top: 1em;
+    margin-left: 1em;
+}
+
+.creditcard-info > table tr td {
+    padding: 1em 2em 1em 2em;
+    border: 1px solid;
+    text-align: center;
+}
+
+.creditcard-info > table tr td:nth-of-type(2) {
+    width: 20%;
+}
+
+.creditcard-info > table tr td:nth-of-type(3) {
+    width: 20%;
+}
+
+.creditcard-info > table tr td:nth-of-type(4) {
+    width: 20%;
 }
 
 /* 해당 aside는 페이지 우측 부분 */
 .page-footer-right{
-    float: right;
+    position: relative;
+    float: right;    
     width: 25%;
-    height: 500px;
+    height: 400px;
+    top: 4.5em;
+    padding: 1em;
+    background-color: rgb(225, 225, 225);
     box-sizing: border-box;
-    border: 1px solid slateblue;
+    border: 1px solid black;
     text-align: center;
     display: flex;
     flex-flow: column;
 }
 
-.cost-info-zone {
-    flex-flow: column;
+.cost-info-zone > div > table tr td {
+    width: 50%;
+    text-align: left;    
+    font-size: 14px;
+    padding-bottom: 1em;
+}
+
+.cost-info-zone > div > table tr td:last-of-type {
+    text-align: right;
+}
+
+.cost-info-zone > p {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 3em;
+}
+
+.page-footer-right > button {
+    width: 100%;
+    height: 3.7em;
+    margin: 0 auto;
+    margin-top: 1.5em;
+    border: none;
+    background-color: rgb(255, 50, 50);
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    
 }
