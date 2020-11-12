@@ -142,8 +142,9 @@
 
 .payments-item-info {
     position: relative;
-    top: -6em;
-    left: -0.3em;
+    overflow: visible;
+    top: -5.5em;
+    left: -1.7em;
 }
 
 .cart-go {
@@ -230,7 +231,6 @@
     left: -2.4em;
 }
 
-
 .item-table th{
     background-color: rgb(165, 165, 165);
     color: rgb(55, 55, 55);
@@ -247,9 +247,8 @@
 /* 결제 및 배송에 필요한 정보를 다루는 영역 wrapper */
 .contents-page-footer {
     position: relative;
-    top: -15em;
-    margin-left: 1.7em;
-    width: 90%;
+    top: -17em;
+    width: 100%;
     height: auto;
     box-sizing: border-box;
     
@@ -258,52 +257,60 @@
 /* 해당 section은 페이지 좌측 부분 */
 .page-footer-left {
     float: left;
-    width: 70%;
+    width: 75%;
     display: flex;
     flex-flow: column;
-    box-sizing: border-box;    
-    padding-left: 1.9em;
+    box-sizing: border-box;
+    margin: 0;
 }
 
 .page-footer-left > p {
+    margin-left: 1.9em;
     font-size: 14px;
     font-weight: bold;
 }
 
 .page-footer-left > div {
-    width: 38em;
+    width: 90%;
     height: 80em;
     margin-top: 3em;
+    padding: 0 1em 0 1em;
     box-sizing: border-box;
-    border: 1px solid black;
 }
 
 .logistics-info {
-    margin-top: 2em;
+    width: 100%;
     box-sizing: border-box;
     white-space: pre-line;
 }
 
 .logistics-info td:first-child{
-    width: 100px;
-    height: 15em;
+    width: 150px;
+    height: 30%;
     box-sizing: border-box;
-    padding-left: 1.3em;
+    padding-right: 0.3em;
+    text-align: center;
+    font-size: 14px;
+    background-color: rgb(225, 225, 225);
+    border: 1px solid;
+    border-right: none;
 }
 
 .logistics-info td:last-child{
-    width: 65%;
+    width: 80%;
     height: 30%;
     box-sizing: border-box;
+    border: 1px solid;
     border-left: 1px solid grey;
-    padding-left: 1em;
+    border-bottom: 1px dotted grey; 
+    padding-left: 2em;
+    padding-bottom: 2em;
     line-height: 3em;
 }
 
 .logistics-info td:last-child > label {
     float: left;
 }
-
 
 .logistics-info td:last-child > input {
     float: right;
@@ -312,32 +319,119 @@
     margin-right: 2em;
 }
 
-.logistics-info tr:nth-of-type(2) > p {
+.logistics-info tr:nth-of-type(2) > td{
+    border-top: none;
+}
+
+.logistics-info tr:nth-of-type(3) > td{
+    border-top: none;
+}
+
+.logistics-info tr:nth-of-type(4) > td{
+    border-top: none;
+    border-bottom: 1px solid;
+}
+
+.logistics-info tr:nth-of-type(2) > td > input.chk {
+    position: relative;
+    left: -6.5em;
+}
+
+.logistics-info tr:nth-of-type(2) > td > p.right {
     float: right;
+    position: relative;
+    top: -0.4em;
+    left: 11em;
+}
+
+.logistics-info tr:nth-of-type(2) select {
+    position: relative;
+    top: -2.3em;
+    left: 9.2em;
+}
+
+.logistics-info tr:nth-of-type(2) > td:nth-of-type(2) > label:nth-of-type(2) {
+    margin-top: 1em;
+}
+
+.logistics-info tr:nth-of-type(2) > td:nth-of-type(2) > input:nth-of-type(3) {
+    position: relative;
+    width: 140px;
+    top: -2.1em;
+}
+
+p.right {
+    float: right;
+    font-size: 13px;
+}
+
+.self-input > input {
+    display: none;
 }
 
 .payment-select {
     box-sizing: border-box;
     width: 100%;
-    border: 1px solid blueviolet;
+    border: 1px solid rgb(74, 187, 187);
+}
+
+.payment-select > p:first-of-type {
+    margin-left: 1.9em;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.payment-select-right {
+    float: right;
+    width: 100%;
+    display: flex;
+    margin-bottom: 1em;
+    padding-left: 50%;
+    font-size: 14px;
+}
+
+.payment-select-right > input{
+    margin: 0.1em 0.7em 0 1em;
+}
+
+.payment-btn-zone {
+    display: flexbox;
+    padding-left: 0.5em;
+}
+
+.payment-btn-zone button {
+    width: 10em;
+    height: 4em;
+    margin: 0 0.3em 0.8em 0.5em;
+    background-color: white;
+    border: 1px solid rgb(225, 225, 225);
 }
 
 .creditcard-info {
     width: 10em;
+    margin-top: 1em;
+}
+
+.creditcard-info  > p{
+    margin-left: 1.9em;
+    font-size: 14px;
+    font-weight: bold;
 }
 
 .creditcard-info > th > td {
     width: 160px;
 }
 
-
 /* 해당 aside는 페이지 우측 부분 */
 .page-footer-right{
     float: right;
     width: 25%;
+    height: 500px;
     box-sizing: border-box;
     border: 1px solid slateblue;
-    
+    text-align: center;
+    display: flex;
+    flex-flow: column;
 }
 
 .cost-info-zone {

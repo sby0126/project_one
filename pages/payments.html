@@ -197,9 +197,24 @@
                                 <tr>
                                     <td>* 받으시는 분</td>
                                     <td>
-                                        <label>이름</label><input type="text"><input type="checkbox"><p>주문하시는 분과 동일</p>
-                                        <label>전화번호(선택)</label><select></select><input type="tel">
-                                        <label>휴대폰 번호</label><select></select><input type="tel">
+                                        <label>이름</label><input type="text"><input type="checkbox" class="chk"><p class="right">주문하시는 분과 동일</p>
+                                        <label>전화번호(선택)</label>
+                                        <select name='phone-head'>
+                                            <option value="" selected>선택</option>
+                                            <option value="02">02</option>
+                                            <option value="032">032</option>
+                                            <option value="033">033</option>
+                                            <option value="041">041</option>
+                                            <option value="042">042</option>
+                                        </select><input type="tel">
+                                        <label>휴대폰 번호</label>
+                                        <select name='phone-head'>
+                                            <option value="" selected>선택</option>
+                                            <option value="010">010</option>
+                                            <option value="011">011</option>
+                                            <option value="016">016</option>
+                                            <option value="017">017</option>
+                                        </select><input type="tel">
                                         <label>받으실 주소</label><input type="text"><button>주소 찾기</button>
                                     </td>
                                 </tr>
@@ -213,8 +228,8 @@
                                             <option value="secureguard">부재시 경비실에 맡겨주세요</option>
                                             <option value="becareful">파손에 주의해주세요</option>
                                             <option value="self-input">직접 입력</option>
-                                            <div class="self-input"><input value="self" type="text"></div>
                                         </select>
+                                        <div class="self-input"><input value="직접 입력" type="text"></div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -224,9 +239,11 @@
                         </div> <!-- 기입 영역 종료 -->
                         <div class="payment-select">
                             <p>결제 수단</p>
-                            <span>TEXT</span>
-                            <input type="checkbox"><p>지금 선택한 결제수단을 다음에도 사용</p>
-                            <div> <!-- 결제에 이용할 수단을 button을 이용해 정합니다 -->
+                            <div class="payment-select-right">
+                                <span>TEXT</span>
+                                <input type="checkbox"><p>지금 선택한 결제수단을 다음에도 사용</p>
+                            </div>
+                            <div class="payment-btn-zone"> <!-- 결제에 이용할 수단을 button을 이용해 정합니다 -->
                                 <button type="radio" value="creditcard">신용카드</button>
                                 <button type="radio" value="ontime-sand">실시간 계좌이체</button>
                                 <button type="radio" value="non-account">무통장 입금</button>
@@ -237,9 +254,9 @@
                                 <button type="radio" value="kakao-pay">kakao pay(img)</button>
                             </div>
 
-                            <div>
+                            <div class="creditcard-info">
                                 <p>무이자할부 안내</p>
-                                <table class="creditcard-info">
+                                <table>
                                     <th>
                                         <td>카드사</td>
                                         <td>적용금액</td>
