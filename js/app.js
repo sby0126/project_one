@@ -8,6 +8,13 @@ import { cssRuleSet } from "./utils/styleRules.js";
 window.imageBlobs = [];
 
 /**
+ * 이 클래스는 모든 페이지의 기본 부모 클래스입니다.
+ *
+ * 페이지에 새로운 기능을 넣으려면 이 클래스를 상속 받으십시오.
+ * 
+ * onLoad와 initMembers를 반드시 구현해주시기 바랍니다.
+ * 
+ * @class App
  * @author Eo Jinseok
  * @date 2020.11.01
  * @version v1.0.0

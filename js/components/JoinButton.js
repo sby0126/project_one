@@ -13,6 +13,21 @@ export class JoinButton extends Component {
             if(!parent.isOpenModalDialog()) {
                 parent.openModalDialog(parent.toResolvePath("pages/join.html"), parent.toResolvePath("join.js"));
             }
+        });       
+
+        $(".floating-login-view-wrapper input[type=submit]").on("click", (ev) => {
+            
+            const checker =[
+                $("#floating-login-view-login-id").val().length > 0,
+                $("#floating-login-view-login-pw").val().length > 0,
+            ];
+
+            // 아이디 또는 비밀번호를 입력하지 않았을 때, 경고창 띄우기
+            if(!checker.every(i => !!i)) {
+                alert("ID 또는 비밀번호를 입력하지 않았습니다.")
+                ev.preventDefault();
+            }
+            
         });        
     }
 
