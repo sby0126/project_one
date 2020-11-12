@@ -10,3 +10,4 @@ map.html
 payments.html
 shop.html
 terms.html
+test-board.html
