@@ -1,4 +1,5 @@
 ./pages/:
+board.html
 detail-item-uploader.html
 detail.html
 find_password.html
@@ -10,4 +11,3 @@ map.html
 payments.html
 shop.html
 terms.html
-test-board.html
