@@ -69,8 +69,13 @@
                 },
                 dom: `l<"toolbar">frtip`,
                 initComplete: function () {
-                    $("#example_info")
-                        .prepend(`<a id="write-button" href="#" class="primary-button">글쓰기</a>`);
+                    $("#example_info").prepend(`<a id="write-button" href="#" class="primary-button">글쓰기</a>`);
+                    $("#example tbody").on("click", '.click-post', function() {
+                        alert("글 번호는 " + $(this).parent().prev().text() + " 입니다.");
+                    });
+                },
+                onLoad: function() {
+                    alert("dk");
                 },
                 "responsive": true
             });
@@ -295,9 +300,6 @@
     <script type="module" src="../js/MorePage.js"></script>
     <script>
         $(function() {
-            $(".click-post").on("click", function() {
-                alert("글 번호는 " + $(this).parent().prev().text() + " 입니다.");
-            })
         });
     </script>
 </body>
