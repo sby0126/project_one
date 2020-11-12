@@ -42,43 +42,43 @@
 
     <script>
         $(document).ready(function () {
-                    const table = $('#example').DataTable({
-                        "language": {
-                            "decimal": "",
-                            "emptyTable": "데이터가 없습니다.",
-                            "info": "_START_ - _END_ (총 _TOTAL_ 개)",
-                            "infoEmpty": "0명",
-                            "infoFiltered": "(전체 _MAX_ 개 중 검색결과)",
-                            "infoPostFix": "",
-                            "thousands": ",",
-                            "lengthMenu": "_MENU_ 개씩 보기",
-                            "loadingRecords": "로딩중...",
-                            "processing": "처리중...",
-                            "search": "검색 : ",
-                            "zeroRecords": "검색된 게시물이 없습니다.",
-                            "paginate": {
-                                "first": "첫 페이지",
-                                "last": "마지막 페이지",
-                                "next": "다음",
-                                "previous": "이전"
-                            },
-                            "aria": {
-                                "sortAscending": " :  오름차순 정렬",
-                                "sortDescending": " :  내림차순 정렬"
-                            }
-                        },
-                        dom: `l<"toolbar">frtip`,
-                        initComplete: function () {
-                            $("#example_info")
-                                .prepend(`<a id="write-button" href="#" class="primary-button">글쓰기</a>`);
-                        },
-                        "responsive": true
-                    });
+            const table = $('#example').DataTable({
+                "language": {
+                    "decimal": "",
+                    "emptyTable": "데이터가 없습니다.",
+                    "info": "_START_ - _END_ (총 _TOTAL_ 개)",
+                    "infoEmpty": "0명",
+                    "infoFiltered": "(전체 _MAX_ 개 중 검색결과)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "_MENU_ 개씩 보기",
+                    "loadingRecords": "로딩중...",
+                    "processing": "처리중...",
+                    "search": "검색 : ",
+                    "zeroRecords": "검색된 게시물이 없습니다.",
+                    "paginate": {
+                        "first": "첫 페이지",
+                        "last": "마지막 페이지",
+                        "next": "다음",
+                        "previous": "이전"
+                    },
+                    "aria": {
+                        "sortAscending": " :  오름차순 정렬",
+                        "sortDescending": " :  내림차순 정렬"
+                    }
+                },
+                dom: `l<"toolbar">frtip`,
+                initComplete: function () {
+                    $("#example_info")
+                        .prepend(`<a id="write-button" href="#" class="primary-button">글쓰기</a>`);
+                },
+                "responsive": true
+            });
 
-                    $("#write-button").on("click", (ev) => {
-                        alert("글 작성");
-                    });
-                });
+            $("#write-button").on("click", (ev) => {
+                alert("글 작성");
+            });
+        });
                 
     </script>
 </head>
@@ -177,109 +177,109 @@
                     <tbody>
                         <tr>
                             <td>18</td>
-                            <td>반품 문의 합니다.</td>
+                            <td><a class="click-post"  href="#">반품 문의 합니다.</a></td>
                             <td>2020.11.20</td>
                             <td>kjkj****</td>
                         </tr>
                         <tr>
                             <td>17</td>
-                            <td>반품 관련으로 문의합니다.</td>
+                            <td><a class="click-post"  href="#">반품 관련으로 문의합니다.</a></td>
                             <td>2020.11.20</td>
                             <td>kjkj****</td>
                         </tr>
                         <tr>
                             <td>16</td>
-                            <td>걱정입니다.</td>
+                            <td><a class="click-post"  href="#">걱정입니다.</a></td>
                             <td>2020.11.20</td>
                             <td>kjkj****</td>
                         </tr>
                         <tr>
                             <td>15</td>
-                            <td>반품 문의 합니다.</td>
+                            <td><a class="click-post"  href="#">반품 문의 합니다.</a></td>
                             <td>2020.11.20</td>
                             <td>kjkj****</td>
                         </tr>
                         <tr>
                             <td>14</td>
-                            <td>반품 문의 합니다.</td>
+                            <td><a class="click-post"  href="#">반품 문의 합니다.</a></td>
                             <td>2020.11.20</td>
                             <td>kjkj****</td>
                         </tr>
                         <tr>
                             <td>13</td>
-                            <td>반품 관련으로 문의합니다.</td>
+                            <td><a class="click-post"  href="#">반품 관련으로 문의합니다.</a></td>
                             <td>2020.11.20</td>
                             <td>kjkj****</td>
                         </tr>
                         <tr>
                             <td>12</td>
-                            <td>걱정입니다.</td>
+                            <td><a class="click-post"  href="#">걱정입니다.</a></td>
                             <td>2020.11.20</td>
                             <td>kjkj****</td>
                         </tr>
                         <tr>
                             <td>11</td>
-                            <td>반품 문의 합니다.</td>
+                            <td><a class="click-post"  href="#">반품 문의 합니다.</a></td>
                             <td>2020.11.20</td>
                             <td>kjkj****</td>
                         </tr>
                         <tr>
                             <td>10</td>
-                            <td>반품 관련으로 문의합니다.</td>
+                            <td><a class="click-post"  href="#">반품 관련으로 문의합니다.</a></td>
                             <td>2020.11.20</td>
                             <td>kjkj****</td>
                         </tr>
                         <tr>
                             <td>9</td>
-                            <td>걱정입니다.</td>
+                            <td><a class="click-post"  href="#">걱정입니다.</a></td>
                             <td>2020.11.20</td>
                             <td>kjkj****</td>
                         </tr>
                         <tr>
                             <td>8</td>
-                            <td>반품 문의 합니다.</td>
+                            <td><a class="click-post"  href="#">반품 문의 합니다.</a></td>
                             <td>2020.11.20</td>
                             <td>kjkj****</td>
                         </tr>
                         <tr>
                             <td>7</td>
-                            <td>반품 관련으로 문의합니다.</td>
+                            <td><a class="click-post"  href="#">반품 관련으로 문의합니다.</a></td>
                             <td>2020.11.20</td>
                             <td>kjkj****</td>
                         </tr>
                         <tr>
                             <td>6</td>
-                            <td>걱정입니다.</td>
+                            <td><a class="click-post"  href="#">걱정입니다.</a></td>
                             <td>2020.11.20</td>
                             <td>kjkj****</td>
                         </tr>
                         <tr>
                             <td>5</td>
-                            <td>반품 문의 합니다.</td>
+                            <td><a class="click-post"  href="#">반품 문의 합니다.</a></td>
                             <td>2020.11.20</td>
                             <td>kjkj****</td>
                         </tr>
                         <tr>
                             <td>4</td>
-                            <td>반품 관련으로 문의합니다.</td>
+                            <td><a class="click-post"  href="#">반품 관련으로 문의합니다.</a></td>
                             <td>2020.11.20</td>
                             <td>kjkj****</td>
                         </tr>
                         <tr>
                             <td>3</td>
-                            <td>걱정입니다.</td>
+                            <td><a class="click-post"  href="#">걱정입니다.</a></td>
                             <td>2020.11.20</td>
                             <td>kjkj****</td>
                         </tr>
                         <tr>
                             <td>2</td>
-                            <td>반품 문의 합니다.</td>
+                            <td><a class="click-post"  href="#">반품 문의 합니다.</a></td>
                             <td>2020.11.20</td>
                             <td>kjkj****</td>
                         </tr>
                         <tr>
                             <td>1</td>
-                            <td>반품 관련으로 문의합니다.</td>
+                            <td><a class="click-post" href="#">반품 관련으로 문의합니다.</a></td>
                             <td>2020.11.20</td>
                             <td>kjkj****</td>
                         </tr>
@@ -293,6 +293,13 @@
     </div>
     <!-- 스크립트 -->
     <script type="module" src="../js/MorePage.js"></script>
+    <script>
+        $(function() {
+            $(".click-post").on("click", function() {
+                alert("글 번호는 " + $(this).parent().prev().text() + " 입니다.");
+            })
+        });
+    </script>
 </body>
 
 </html>
