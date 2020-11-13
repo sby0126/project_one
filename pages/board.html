@@ -38,54 +38,10 @@
 
             cursor: pointer;
         }
+        .contents-wrapper {
+            height: 540px;
+        }
     </style>
-
-    <script>
-        $(document).ready(function () {
-            const table = $('#example').DataTable({
-                "language": {
-                    "decimal": "",
-                    "emptyTable": "데이터가 없습니다.",
-                    "info": "_START_ - _END_ (총 _TOTAL_ 개)",
-                    "infoEmpty": "0명",
-                    "infoFiltered": "(전체 _MAX_ 개 중 검색결과)",
-                    "infoPostFix": "",
-                    "thousands": ",",
-                    "lengthMenu": "_MENU_ 개씩 보기",
-                    "loadingRecords": "로딩중...",
-                    "processing": "처리중...",
-                    "search": "검색 : ",
-                    "zeroRecords": "검색된 게시물이 없습니다.",
-                    "paginate": {
-                        "first": "첫 페이지",
-                        "last": "마지막 페이지",
-                        "next": "다음",
-                        "previous": "이전"
-                    },
-                    "aria": {
-                        "sortAscending": " :  오름차순 정렬",
-                        "sortDescending": " :  내림차순 정렬"
-                    }
-                },
-                dom: `l<"toolbar">frtip`,
-                initComplete: function () {
-                    $("#example_info").prepend(`<a id="write-button" href="#" class="primary-button">글쓰기</a>`);
-                    $("#example tbody").on("click", '.click-post', function() {
-                        alert("글 번호는 " + $(this).parent().prev().text() + " 입니다.");
-                    });
-                },
-                onLoad: function() {
-                    alert("dk");
-                },
-                "responsive": true
-            });
-
-            $("#write-button").on("click", (ev) => {
-                alert("글 작성");
-            });
-        });
-                
-    </script>
 </head>
 
 <body>
@@ -163,8 +119,6 @@
                 </ul>
             </div>
         </header>
-
-        <!-- https://editor.datatables.net/examples/styling/jqueryui.html -->
 
         <!-- 본문의 시작 -->
         <section>
@@ -297,11 +251,8 @@
     <div id="light-box-container">
     </div>
     <!-- 스크립트 -->
+    <script src="../js/boardMain.js"></script>    
     <script type="module" src="../js/MorePage.js"></script>
-    <script>
-        $(function() {
-        });
-    </script>
 </body>
 
 </html>
