@@ -476,6 +476,19 @@
         // 전체 페이지 수
         let pageCount = postCount / perPage;
 
+        // 게시판 데이터 스키마
+        let boardSchema = [
+            {
+                postNo: 0,
+                postType: 'N',
+                postTitle: "",
+                name: "",
+                create_at: new Date(),
+                view: 0,
+                recommandCount: 0
+            }
+        ]
+
         const Editor = {
             init() {
                 this.initWithPages();
