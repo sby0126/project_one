@@ -1,5 +1,6 @@
 import { Component } from "./Component.js";
 import {blobData, imgSrc, mainImg} from "../services/data.js";
+import { DataLoader } from "./DataLoader.js";
 
 export class ShopContentLoader extends Component {
     
@@ -12,6 +13,8 @@ export class ShopContentLoader extends Component {
         this._interval = 800; // 이벤트 과대 실행 방지 용 실행 간격 800ms
 
         this._loaders = {};
+        
+        this._dataLoader = DataLoader.builder(this);
     }
 
     /**
