@@ -485,13 +485,17 @@
         let perPage = (postCount / maxPostOfPage) + 1;
 
         // 전체 페이지 수
-        let pageCount = postCount / perPage;
+        let pageCount = Math.floor(postCount / perPage) + 1;
+
+        // TODO: 현재 페이지를 구하려면, maxPostOfPage + 1로 나누면 된다.
+        let currentPostNumber = 18;
+        let pageCount = (currentPostNumber / perPage) + 1;
 
         // 게시판 데이터 스키마
         let boardSchema = [
             {
                 postNo: 0,
-                postType: 'N',
+                postType: 'N', // Normal.
                 postTitle: "",
                 name: "",
                 create_at: new Date(),
@@ -518,7 +522,9 @@
                         .parent()
                         .parent()
                         .find("td").eq(0).text();
-                        
+
+                    // postNumber 전달
+                    // pageNumber도 전달해야 할 듯 한데...
                     let url = new URLSearchParams(location.search);
                     url.set("postNumber", postNumber);
 
