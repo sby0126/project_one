@@ -24,6 +24,22 @@ export class DataLoader extends Component {
         return ret;
     }
 
+    /**
+     * https://stackoverflow.com/a/56081995
+     * 
+     * @param {String} name
+     * @param {String} value
+     */
+    setParameter(name, value) {        
+        const searchParams = new URLSearchParams(window.location.search);
+        searchParams.set(name, value);
+
+        window.location.search = searchParams.toString();
+
+        // 빌더 패턴을 위해 this 반환
+        return this;
+    }
+
     run() {        
 
     }

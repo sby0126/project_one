@@ -53,6 +53,9 @@ export class Category extends Component {
     initMembers(...args) {
         super.initMembers(...args);
 
+        /**
+         * @type {DataLoader}
+         */
         this._urlParam = DataLoader.builder(this);
 
         // 주소에 카테고리 매개변수가 있으면 파싱하여 이에 맞는 카테고리로 변경합니다.
