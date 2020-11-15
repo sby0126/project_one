@@ -72,6 +72,10 @@ class MainPage extends App {
 
     }
 
+    fetchNewData() {
+        alert("마지막 데이터입니다.");
+    }
+
 }
 
 const app = new MainPage();
