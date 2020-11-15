@@ -6,7 +6,17 @@ import { EventEmitter } from "./EventEmitter.js";
 import { cssRuleSet } from "./utils/styleRules.js";
 import { ScrollEventBuilder } from "./components/ScrollEventBuilder.js";
 
-window.imageBlobs = [];
+// ID 상수 배열
+const ID = {
+    CONTAINER: ".container",
+    MENU: ".header-center",
+    MENU_ITEMS : ".header-center > a",
+    MENU_CURSOR: ".header-center::after",
+    SLIDE_POPUP_MENU : ".header-popup-container",
+    LIGHT_BOX_CONTAINER: "#light-box-container",
+    CONTENTS_WRAPPER: ".contents-wrapper",
+    LOGIN_VIEW: ".floating-login-view-wrapper",
+};
 
 /**
  * 이 클래스는 모든 페이지의 기본 부모 클래스입니다.
@@ -53,7 +63,6 @@ class App extends EventEmitter {
          */
         this._isOpenModalDialog = false;
 
-
         this._menuIndex = 0;
 
         // 스크롤 처리를 담당하는 컴포넌트입니다.
@@ -77,18 +86,17 @@ class App extends EventEmitter {
 
     selectMenu(idx) {
 
-        const menuItems = Array.from(document.querySelectorAll(".header-center > a"));
-        const i = menuItems[idx];
+        const menuItems = Array.from(document.querySelectorAll(ID.MENU_ITEMS));
+        const item = menuItems[idx];
         const lastMenuIndex = menuItems.length - 1;
 
         // 전체 메뉴 영역의 크기
-        const parentRect = document.querySelector(".header-center").getBoundingClientRect();
+        const parentRect = document.querySelector(ID.MENU).getBoundingClientRect();
 
         // 현재 메뉴 아이템의 크기
-        const rect = i.getBoundingClientRect();
+        const rect = item.getBoundingClientRect();
 
-        // 현재 X 좌표 값입니다. 
-        // (현재 메뉴 아이템의 X좌표 - 전체 메뉴 영역의 X좌표)
+        // 현재 X 좌표 값입니다(현재 메뉴 아이템의 X좌표 - 전체 메뉴 영역의 X좌표)
         const pos = (rect.left - parentRect.x);
 
         // 현재 메뉴와 가장 멀리 떨어진 메뉴의 X 좌표 값입니다.
@@ -99,22 +107,30 @@ class App extends EventEmitter {
         const color = (180 + Math.floor(75 * targetPos / parentRect.width)).toString(16);
 
         // 가상 요소의 CSS 속성을 변경합니다.
-        cssRuleSet(".header-center::after", "border-bottom", `4px solid #${color}6B00`);
-        cssRuleSet(".header-center::after", "left", pos + "px");
+        cssRuleSet(ID.MENU_CURSOR, 
+            "border-bottom", `4px solid #${color}6B00`
+        );
+        cssRuleSet(ID.MENU_CURSOR, 
+            "left", pos + "px");
 
         // 다른 메뉴를 선택하거나 다른 곳을 선택하면 닫습니다.
         if(idx === lastMenuIndex) {
-            $(".header-popup-container").slideDown();
-            $(".container").not(".header-popup-container").on("mouseup", (ev) => {
+            $(ID.SLIDE_POPUP_MENU).slideDown();
+            $(ID.CONTAINER)
+                .not(ID.SLIDE_POPUP_MENU)
+                .on("mouseup", (ev) => {
 
-                // 클래스 목록에 menu가 포함되어있으면 슬라이드 업을 하지 않습니다.
-                const classFilter = Array.from(ev.target.classList).filter(i => i.indexOf("menu") >= 0)
-                if(classFilter.length == 0) {
-                    this.slideUp();
+                    // 클래스 목록에 menu가 포함되어있으면 슬라이드 업을 하지 않습니다.
+                    const classFilter = Array.from(ev.target.classList)
+                                             .filter(i => i.indexOf("menu") >= 0);
+
+                    if(classFilter.length == 0) {
+                        this.slideUp();
+                    }
                 }
-            });
+            );
         } else {
-            if($(".header-popup-container").is(":visible")) {
+            if($(ID.SLIDE_POPUP_MENU).is(":visible")) {
                 this.slideUp();
             }
         }
@@ -122,9 +138,9 @@ class App extends EventEmitter {
     }
 
     slideUp() {
-        $(".header-popup-container").slideUp();
-        cssRuleSet(".header-center::after", "border-bottom", `4px solid #FF6B00`);
-        cssRuleSet(".header-center::after", "left", 0 + "px");
+        $(ID.SLIDE_POPUP_MENU).slideUp();
+        cssRuleSet(ID.MENU_CURSOR, "border-bottom", `4px solid #FF6B00`);
+        cssRuleSet(ID.MENU_CURSOR, "left", 0 + "px");
     }
 
     /**
@@ -136,7 +152,7 @@ class App extends EventEmitter {
         // 하지만 가상 요소는 DOM 쿼리 선택자로 선택이 되지 않습니다.
         // 따라서 모든 CSS 속성을 검색하여 속성을 직접 변경하는 방법을 사용하였습니다.
         // 메뉴 슬라이드 바는 색상, 위치가 클릭한 메뉴의 위치에 따라 변경됩니다.        
-        const menuItems = Array.from(document.querySelectorAll(".header-center > a"));
+        const menuItems = Array.from(document.querySelectorAll(ID.MENU_ITEMS));
         const lastMenuIndex = menuItems.length - 1;
 
         menuItems.forEach((i, idx) => {
@@ -156,7 +172,7 @@ class App extends EventEmitter {
      * 라이트 박스를 표시합니다.
      */
     openLightBox() {
-        const lightBox = document.querySelector("#light-box-container");
+        const lightBox = document.querySelector(ID.LIGHT_BOX_CONTAINER);
         if(!lightBox) return;
         if(lightBox.classList.contains("active")) {
             return;
@@ -169,7 +185,7 @@ class App extends EventEmitter {
      * 라이트 박스를 감춥니다.
      */
     hideLightBox() {
-        const lightBox = document.querySelector("#light-box-container");
+        const lightBox = document.querySelector(ID.LIGHT_BOX_CONTAINER);
         if(!lightBox) return;
         if(!lightBox.classList.contains("active")) {
             return;
@@ -182,7 +198,7 @@ class App extends EventEmitter {
      * 라이트 박스를 감추거나 표시합니다.
      */
     toggleLightBox() {
-        const lightBox = document.querySelector("#light-box-container");
+        const lightBox = document.querySelector(ID.LIGHT_BOX_CONTAINER);
         
         if(!lightBox) {
             return;
@@ -215,7 +231,7 @@ class App extends EventEmitter {
             const path = location.href.substring(0, idx);            
 
             // 컨텐츠 삽입 위치 (부모 노드)
-            const container = document.querySelector(`.contents-wrapper`);
+            const container = document.querySelector(ID.CONTENTS_WRAPPER);
             if(!container) {
                 return;
             }
@@ -268,7 +284,7 @@ class App extends EventEmitter {
      * 모달 대화 상자를 닫습니다.
      */
     closeModalDialog() {
-        const loginView = document.querySelector(".floating-login-view-wrapper");
+        const loginView = document.querySelector(ID.LOGIN_VIEW);
         const config = this._lastModelElement;
 
         // 마지막에 열린 대화 상자(노드)를 완전히 제거합니다.
