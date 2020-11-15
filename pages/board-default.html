@@ -464,5 +464,35 @@
     <!-- 스크립트 -->
     <!-- <script src="../js/boardMain.js"></script>     -->
     <script type="module" src="../js/MorePage.js"></script>    
+    <script>
+        let postCount = 100;
+
+        // 한 페이지에 표시되는 글의 수
+        let maxPostOfPage = 10;
+
+        // 전체 게시물 수 / 한 페이지에 표시되는 글의 수
+        let perPage = (postCount / maxPostOfPage) + 1;
+
+        // 전체 페이지 수
+        let pageCount = postCount / perPage;
+
+        const Editor = {
+            init() {
+                this.initWithPages();
+            },
+
+            initWithPages() {
+
+            },
+
+            nextPage() {
+
+            },
+
+            prevPage() {
+
+            }
+        };
+    </script>
 </body>
 </html>
