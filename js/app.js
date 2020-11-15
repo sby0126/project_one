@@ -476,4 +476,4 @@ class App extends EventEmitter {
     }
 }
 
-export { App };
+export { App, ID };

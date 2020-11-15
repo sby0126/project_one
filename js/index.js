@@ -1,4 +1,4 @@
-import {App} from "./app.js";
+import {App, ID} from "./app.js";
 import {LoginButton} from "./components/LoginButton.js";
 import { ShopContentLoader } from "./components/ShopContentLoader.js";
 import { CardStyleSheetBuilder } from "./components/CardStyleSheetBuilder.js";
@@ -19,12 +19,12 @@ class MainPage extends App {
         this._pendingList = [
             {
                 src: `pages/login.html`,
-                parent: ".container",
+                parent: ID.CONTAINER,
                 isCreateNewDiv: true,
             },
             {
                 src: `pages/shop.html`,
-                parent: ".contents-wrapper",
+                parent: ID.CONTENTS_WRAPPER,
                 isCreateNewDiv: false,
             }
         ];
@@ -75,11 +75,7 @@ class MainPage extends App {
 }
 
 const app = new MainPage();
-app.on("ready", async () => {
-    app.createLazyLoader();
-});
+app.on("ready", async () => app.createLazyLoader());
 
 window.app = app;
-window.addEventListener("load", () => {
-    app.emit("ready");
-});
+window.addEventListener("load", () => app.emit("ready"));
