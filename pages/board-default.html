@@ -167,6 +167,17 @@
             color: #E44F26;
             margin-left: 0.5em;
         }
+
+        @media screen and (max-width: 720px) {
+            .table {
+                table-layout: fixed;
+            }
+            .table td:first-child, .table td:nth-last-child(2), .table td:last-child, 
+            table th:first-child, .table th:nth-last-child(2), .table th:last-child  {
+                display: none;
+            }
+        }
+
     </style>
     <!-- 컨테이너의 시작 -->
     <div class="container">
@@ -432,12 +443,12 @@
                         <div>
                             <div class="board-search-box">
                                 <input type="text" name="" class="seach-box">
-                                <a href="#" class="button">검색</a>
+                                <a href="#" class="button" id="search-button">검색</a>
                             </div>
                         </div>
                         <div class="board-footer-page-buttons">
                             <div class="board-footer-pages-buttons-wrapper">
-                                <a href="#" class="button">이전</a>
+                                <a href="#" class="button" id="prev-button">이전</a>
                                 <a href="#" class="button">1</a>
                                 <a href="#" class="button">2</a>
                                 <a href="#" class="button">3</a>
@@ -447,7 +458,7 @@
                                 <a href="#" class="button">7</a>
                                 <a href="#" class="button">8</a>
                                 <a href="#" class="button">9</a>
-                                <a href="#" class="button">다음</a>
+                                <a href="#" class="button" id="next-button">다음</a>
                             </div>
                         </div>
                         <div>
@@ -491,8 +502,28 @@
 
         const Editor = {
             init() {
-                this._elem = $("#editor");
+                this.initWithEvent();
                 this.initWithPages();
+            },
+
+            isMobileDevice() {
+                return (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
+            },
+
+            initWithEvent() {
+                const self = this;
+                this._elem = $("#editor");
+                this._elem.find("a").on("click", function(ev) {
+                    const postNumber = $(this)
+                        .parent()
+                        .parent()
+                        .find("td").eq(0).text();
+                        
+                    let url = new URLSearchParams(location.search);
+                    url.set("postNumber", postNumber);
+
+                    location.search = url.toString();                    
+                });
             },
 
             initWithPages() {
@@ -507,6 +538,9 @@
 
             }
         };
+
+        Editor.init();
+
     </script>
 </body>
 </html>
