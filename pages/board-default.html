@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +13,11 @@
 </head>
 <body>
     <style>
+        /* 컨텐츠 상단 마진을 줄입니다 */
+        .contents-wrapper {
+            margin-top: 8em;
+        }
+
         .board-wrapper {
             font-family: 'Noto Serif KR', serif;
             font-size: 0.75em;
@@ -69,6 +74,7 @@
             min-width: 500px;
         }
 
+        /* 분류 부분을 파란색으로 강조합니다 */
         tbody tr td:nth-child(2) {
             width: 4.5em;
             color: #2255AA;
@@ -86,7 +92,20 @@
 
         tbody tr td:nth-child(3):hover {
             text-decoration: underline;
-        }        
+        }       
+
+        /* 게시판 상단 헤더 */
+        .board-header {
+            width: 100%;
+            height: 2.25em;
+            line-height: 2.25em;
+            padding-bottom: 4px;
+            margin-bottom: 1em;
+            border-bottom: 1px solid #d2d2d2;
+            color: #222222;
+            font-size: 2em;
+            font-family: 'Noto Serif KR', serif;
+        }
 
         .board-footer {
             width: 100%;
@@ -125,6 +144,7 @@
             background-color: #EFEFEF;
         }
 
+        /* 돋보기 아이콘을 표시합니다. */
         .board-search-box input {
             height: 2em;
             position: relative;
@@ -142,6 +162,7 @@
             background-position-y: calc(50%);
         }
 
+        /* 코멘트 색상을 변경합니다. */
         .comment {
             color: #E44F26;
             margin-left: 0.5em;
@@ -228,7 +249,7 @@
             <div class="contents-wrapper">    
                 <div class="board-wrapper">
                     <div class="board-header">
-
+                        <a href="#">게시판</a>
                     </div>
                     <table class="table">
                         <thead>
