@@ -38,6 +38,8 @@ export class EventEmitter {
         }
 
         this._events[name].push(listeners);
+
+        return this;
     }
 
     /**

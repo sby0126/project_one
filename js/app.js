@@ -4,6 +4,7 @@ import { JoinButton } from "./components/JoinButton.js";
 import { FilterBoxButtons } from "./components/FilterBoxButtons.js";
 import { EventEmitter } from "./EventEmitter.js";
 import { cssRuleSet } from "./utils/styleRules.js";
+import { ScrollEventBuilder } from "./components/ScrollEventBuilder.js";
 
 window.imageBlobs = [];
 
@@ -54,6 +55,23 @@ class App extends EventEmitter {
 
 
         this._menuIndex = 0;
+
+        // 스크롤 처리를 담당하는 컴포넌트입니다.
+        this._scrollComponent = 
+            ScrollEventBuilder
+                .builder(this)
+                .on("fetch", () => this.fetchNewData())
+                .run();
+
+    }
+
+    /**
+     * 스크롤 시, 스크롤바가 끝까지 내려진 경우 이 메서드가 실행됩니다.
+     * 
+     * 스크롤바를 끝까지 내렸을 때,
+     * 실행되어야 하는 기능이 있다면 이 메서드를 오버라이드 하시기 바랍니다.
+     */
+    fetchNewData() {
 
     }
 
@@ -329,6 +347,10 @@ class App extends EventEmitter {
 
         return rootFolder + url;
     }
+
+    scollEvent() {
+
+    }    
 
     onLoad() {
         Category.builder().run();

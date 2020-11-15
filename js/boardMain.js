@@ -28,6 +28,20 @@
             $("#write-button").on("click", (ev) => {
                 alert("글 작성");
             });                
+        },
+
+        createElement(targetName, attr) {
+            if(!targetName) return;
+            if(!attr) return
+
+            return Object.assign(document.createElement(targetName), attr);
+        },
+
+        changeStyle(elementName, styleProperties) {
+            const elem = document.querySelector(elementName);
+            if(!elem) return;
+
+            Object.assign(elem.style, styleProperties);
         }
     }
 
