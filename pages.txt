@@ -1,4 +1,5 @@
 ./pages/:
+board-default.html
 board.html
 detail-item-uploader.html
 detail.html
