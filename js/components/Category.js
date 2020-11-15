@@ -55,19 +55,24 @@ export class Category extends Component {
 
         this._urlParam = DataLoader.builder(this);
 
+        // 주소에 카테고리 매개변수가 있으면 파싱하여 이에 맞는 카테고리로 변경합니다.
         const category = this._urlParam.category;
         const key = getKeyByValue( _CATEGORY.Type, category );
         this._type = _CATEGORY.Type[ key ];
 
+        // 카테고리 인덱스를 0 ~ 9 사이로 변경합니다.
         this.changeIndex( parseInt(category) - _CATEGORY.Type.ALL );
     }
 
     changeIndex(idx) {            
+        // 카테고리 명을 변경합니다.
         $(`${BOX.BUTTON} em`).text( _CATEGORY.KEYS[idx] );   
-        const currentCategory = $($(BOX.CATEGORIES).eq(idx));
 
+        // 현재 카테고리 객체를 클릭 처리합니다.
+        const currentCategory = $($(BOX.CATEGORIES).eq(idx));
         currentCategory.trigger("click");
 
+        // 인덱스 값을 저장합니다.
         this._index = idx;
     }
 
