@@ -67,6 +67,8 @@ export class Category extends Component {
         const currentCategory = $($(BOX.CATEGORIES).eq(idx));
 
         currentCategory.trigger("click");
+
+        this._index = idx;
     }
 
     run() {
