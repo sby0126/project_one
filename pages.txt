@@ -1,5 +1,6 @@
 ./pages/:
 board-default.html
+board-smart-editor.html
 board.html
 detail-item-uploader.html
 detail.html
