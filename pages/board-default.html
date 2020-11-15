@@ -247,7 +247,7 @@
         <section>
             <!-- 본문이 들어가는 래퍼 -->
             <div class="contents-wrapper">    
-                <div class="board-wrapper">
+                <div class="board-wrapper" id="editor">
                     <div class="board-header">
                         <a href="#">게시판</a>
                     </div>
@@ -491,6 +491,7 @@
 
         const Editor = {
             init() {
+                this._elem = $("#editor");
                 this.initWithPages();
             },
 
