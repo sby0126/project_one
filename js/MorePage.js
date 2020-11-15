@@ -22,7 +22,7 @@ class MorePage extends App {
             }
         ];
 
-        this._menuIndex = 3;
+        this._menuIndex = 0;
         
     }
 
