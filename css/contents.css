@@ -128,7 +128,7 @@ section {
 }
 
 .shop-hot-icon::after {
-    content: "HOT";
+    content: attr(data-title);
     
     position: absolute;
 
