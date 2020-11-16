@@ -218,5 +218,10 @@ $article-content-area-height: 480px;
     width: 100%;
     margin-top: 1em;
     margin-bottom: 2em;
-    font-size: var(--font-size-s5);
+
+    a {
+        color: #9C9C9C;
+        font-size: var(--font-size-s4);
+        margin-right: 1em;
+    }
 }
