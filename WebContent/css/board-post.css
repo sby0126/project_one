@@ -52,7 +52,7 @@
   position: relative;
   text-align: center;
 }
-.detail-area .detail-area-date-panel > *::after {
+.detail-area .detail-area-date-panel > *:not(:last-child):after {
   content: "|";
   width: 0.5em;
   margin-left: 8px;

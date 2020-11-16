@@ -70,7 +70,7 @@ $article-content-area-height: 480px;
         position: relative;
         text-align: center;
 
-        &::after {
+        &:not(:last-child):after {
             content: "|";
             width: 0.5em;
             margin-left: 8px;
