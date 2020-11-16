@@ -510,8 +510,16 @@
                 this.initWithPages();
             },
 
+            /**
+             * 모바일에서 구동 중인지 확인합니다.
+             */
             isMobileDevice() {
-                return (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
+                // userAgent가 모바일이면 모바일 기기로 판단
+                const isMobile = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
+                if(isMobile) return true;
+                // 가로 길이가 720 이하라면 모바일 기기로 판단
+                isMobile = $(window).innerWidth() <= 720;
+                return isMobile;
             },
 
             initWithEvent() {
