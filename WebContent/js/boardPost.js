@@ -32,6 +32,7 @@ const ID = {
     POST_SHARE_BUTTON2: "#post-share-button2"
 };
 
+// 실행하기 위한 이벤트를 여기에 추가하세요.
 const FUNC = {
     POST_SHARE_BUTTON: function(ev) {
         alert("공유 버튼을 눌렀습니다");
@@ -43,10 +44,10 @@ const FUNC = {
         alert("더보기 버튼을 눌렀습니다");
     },
     REPLAY_OK: function(ev) {
-        alert("리플 OK 버튼을 눌렀습니다.");   
+        alert("대댓글 버튼을 눌렀습니다.");   
     },
     REPLAY_DELETE: function(ev) {
-        alert("리플 삭제 버튼을 눌렀습니다.");   
+        alert("댓글 삭제 버튼을 눌렀습니다.");   
     },
     COMMENT_OK: function(ev) {
         alert("코멘트 OK 버튼을 눌렀습니다.");   
