@@ -3,6 +3,7 @@ board-default.html
 board-post.html
 board-smart-editor.html
 board.html
+cart.html
 detail-item-uploader.html
 detail.html
 find_password.html
