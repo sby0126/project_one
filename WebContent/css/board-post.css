@@ -49,6 +49,15 @@
 .detail-area .detail-area-date-panel > * {
   font-size: var(--font-size-s6);
   color: #9C9C9C;
+  position: relative;
+  text-align: center;
+}
+.detail-area .detail-area-date-panel > *::after {
+  content: "|";
+  width: 0.5em;
+  margin-left: 8px;
+  margin-right: 8px;
+  display: inline-block;
 }
 
 .board-post-header-detail-info {
