@@ -21,7 +21,7 @@ let ret = [];
 // 크롤러 시작
 const getHtml = async () => {
   try {
-    return await axios.get("https://www.sta1.com/shops?gndr=M&shopType=S&pg=2");
+    return await axios.get("https://www.sta1.com/shops?gndr=M&shopType=B");
   } catch (error) {
     console.error(error);
   }
