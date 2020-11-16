@@ -18,13 +18,13 @@
   font-size: 1.875em;
   color: #141414;
 }
-.board-post-header .board-post-header-function a {
+.board-post-header .board-post-header-function i {
   font-size: 1.5em;
   margin-right: 1em;
-  color: #767676;
+  color: #DBDAE0;
 }
-.board-post-header .board-post-header-function a:hover {
-  color: #273238;
+.board-post-header .board-post-header-function i:hover {
+  color: #767676;
 }
 
 .board-post-container i {
@@ -56,16 +56,18 @@
   flex-direction: row;
 }
 .board-post-header-detail-info .board-post-header-function {
-  width: 10%;
+  flex-basis: 15%;
   justify-self: right;
 }
 
 .board-article {
   margin-top: 2em;
+  margin-bottom: 2em;
   position: relative;
 }
 .board-article .board-article-contents {
   width: 100%;
+  margin-top: 1em;
   height: auto;
   font-size: var(--font-size-s2);
 }
@@ -148,6 +150,12 @@
 }
 .add-comment-button-area #comment-ok-button:hover {
   text-decoration: underline;
+}
+
+.prev-list-panel {
+  width: 100%;
+  margin-top: 1em;
+  margin-bottom: 2em;
 }
 
 /*# sourceMappingURL=board-post.css.map */

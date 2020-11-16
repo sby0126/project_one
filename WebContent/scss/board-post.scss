@@ -23,14 +23,14 @@ $article-content-area-height: 480px;
     }    
 
     .board-post-header-function { 
-        a {
+        i {
             font-size: 1.5em;
             margin-right: 1em;
-            color:#767676;
+            color:#DBDAE0;
         }
 
-        a:hover {
-            color:#273238;
+        i:hover {
+            color:#767676;
         }
     }    
     
@@ -75,7 +75,7 @@ $article-content-area-height: 480px;
     flex-direction: row;
 
     .board-post-header-function {
-        width: 10%;
+        flex-basis: 15%;
         justify-self: right;
     }
 
@@ -83,10 +83,12 @@ $article-content-area-height: 480px;
 
 .board-article {
     margin-top: 2em;  
+    margin-bottom: 2em;
     position: relative;
 
     .board-article-contents {
-        width:100%;
+        width: 100%;
+        margin-top: 1em;
         height: auto;
         font-size: var(--font-size-s2);
     }
@@ -190,4 +192,11 @@ $article-content-area-height: 480px;
             text-decoration: underline;
         }
     }   
+}
+
+
+.prev-list-panel {
+    width: 100%;
+    margin-top: 1em;
+    margin-bottom: 2em;
 }
