@@ -149,6 +149,10 @@ $article-content-area-height: 480px;
         flex-direction: row;
         justify-content: center;
 
+        .detail-area {
+            margin-bottom: 2em;
+        }
+
         .profile-box {
             margin-bottom: 1em;
         }
@@ -161,7 +165,11 @@ $article-content-area-height: 480px;
             & i {
                 color: #b2b2b2;
             }
-        }           
+        }    
+        
+        .detail-area-date-panel {
+            height: 1.5em;
+        }
 
         .detail-area-contents {
             margin-top: 1em;
@@ -210,4 +218,5 @@ $article-content-area-height: 480px;
     width: 100%;
     margin-top: 1em;
     margin-bottom: 2em;
+    font-size: var(--font-size-s5);
 }
