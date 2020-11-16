@@ -16,7 +16,7 @@
     top: -5em;
     position: relative;
 }
-
+/* 본문 페이지 상단의 페이지 정보와 단계 정보를 나타내는 영역*/
 .contents-page-upper {
     display: flex;
     position: relative;
@@ -80,7 +80,9 @@
     border-radius: 100px;
     margin-top: 0.4em;
 }
+/* upper 영역 종료*/
 
+/* 페이지 중간의 영역으로 결제 상품의 정보 및 결제에 필요한 약관 등을 표시 */
 .contents-page-middle {
     margin: 0 auto;
     width: 60em;
@@ -95,7 +97,7 @@
     font-size: 14px;
     font-weight: bold;
 }
-
+/* 약관 text-box */
 .payments-terms {
     margin: 0 auto;
     padding-left: 0;
@@ -136,7 +138,7 @@
 .contents-page-middle p:last-child > span{
     font-weight: normal;
 }
-
+/* 구매한 상품 정보 등의 출력 영역 */
 .payments-item-info {
     position: relative;
     overflow: visible;
@@ -153,7 +155,7 @@
     border: 1px solid;
     border-radius: 5px;
 }
-
+/* 구매 상품의 정보를 table 형식으로 출력*/
 .item {
     width: 95%;
     box-sizing: content-box;
@@ -405,7 +407,7 @@
 .logistics-info tr:last-of-type > td:nth-of-type(2) > p{
     display: inline-block;
 }
-
+/* 결제수단 선택 버튼 */
 .payment-select {
     position: relative;
     top: -20em;    
@@ -418,7 +420,7 @@
     font-size: 14px;
     font-weight: bold;
 }
-
+/* 다음 이용시 재적용 여부를 묻는 text, checkbox를 포함한 영역 */
 .payment-select-right {
     float: right;
     width: 100%;
@@ -444,7 +446,7 @@
     background-color: white;
     border: 1px solid rgb(225, 225, 225);
 }
-
+/* 카드사 별 할부 이벤트 내용을 table 형식으로 출력 */
 .creditcard-info {
     width: 10em;
     margin-top: 1em;
