@@ -1,0 +1,153 @@
+[{
+    "postNumber": "글 번호",
+    "postType": "Normal",
+    "postTitle": "글 제목",
+    "name": "이름",
+    "create_at": "날짜",
+    "view": "조회",
+    "recommandCount": "추천"
+}, {
+    "postNumber": "18",
+    "postType": "Notice",
+    "postTitle": "공지사항입니다.",
+    "name": "관리자",
+    "create_at": "2020.11.20",
+    "view": "0",
+    "recommandCount": "0"
+}, {
+    "postNumber": "17",
+    "postType": "Normal",
+    "postTitle": "반품 관련으로 문의합니다.",
+    "name": "kjkj****",
+    "create_at": "2020.11.20",
+    "view": "0",
+    "recommandCount": "0"
+}, {
+    "postNumber": "16",
+    "postType": "Normal",
+    "postTitle": "걱정입니다.",
+    "name": "kjkj****",
+    "create_at": "2020.11.20",
+    "view": "0",
+    "recommandCount": "0"
+}, {
+    "postNumber": "15",
+    "postType": "Normal",
+    "postTitle": "반품 문의 합니다.",
+    "name": "kjkj****",
+    "create_at": "2020.11.20",
+    "view": "0",
+    "recommandCount": "0"
+}, {
+    "postNumber": "14",
+    "postType": "Normal",
+    "postTitle": "반품 문의 합니다.",
+    "name": "kjkj****",
+    "create_at": "2020.11.20",
+    "view": "0",
+    "recommandCount": "0"
+}, {
+    "postNumber": "13",
+    "postType": "Normal",
+    "postTitle": "반품 관련으로 문의합니다.",
+    "name": "kjkj****",
+    "create_at": "2020.11.20",
+    "view": "0",
+    "recommandCount": "0"
+}, {
+    "postNumber": "12",
+    "postType": "Normal",
+    "postTitle": "걱정입니다.[2]",
+    "name": "kjkj****",
+    "create_at": "2020.11.20",
+    "view": "0",
+    "recommandCount": "0"
+}, {
+    "postNumber": "11",
+    "postType": "Normal",
+    "postTitle": "반품 문의 합니다.",
+    "name": "kjkj****",
+    "create_at": "2020.11.20",
+    "view": "0",
+    "recommandCount": "0"
+}, {
+    "postNumber": "10",
+    "postType": "Normal",
+    "postTitle": "반품 관련으로 문의합니다.",
+    "name": "kjkj****",
+    "create_at": "2020.11.20",
+    "view": "0",
+    "recommandCount": "0"
+}, {
+    "postNumber": "9",
+    "postType": "Normal",
+    "postTitle": "걱정입니다.",
+    "name": "kjkj****",
+    "create_at": "2020.11.20",
+    "view": "0",
+    "recommandCount": "0"
+}, {
+    "postNumber": "8",
+    "postType": "Normal",
+    "postTitle": "반품 문의 합니다.",
+    "name": "kjkj****",
+    "create_at": "2020.11.20",
+    "view": "0",
+    "recommandCount": "0"
+}, {
+    "postNumber": "7",
+    "postType": "Normal",
+    "postTitle": "반품 관련으로 문의합니다.",
+    "name": "kjkj****",
+    "create_at": "2020.11.20",
+    "view": "0",
+    "recommandCount": "0"
+}, {
+    "postNumber": "6",
+    "postType": "Normal",
+    "postTitle": "걱정입니다.",
+    "name": "kjkj****",
+    "create_at": "2020.11.20",
+    "view": "0",
+    "recommandCount": "0"
+}, {
+    "postNumber": "5",
+    "postType": "Normal",
+    "postTitle": "반품 문의 합니다.",
+    "name": "kjkj****",
+    "create_at": "2020.11.20",
+    "view": "0",
+    "recommandCount": "0"
+}, {
+    "postNumber": "4",
+    "postType": "Normal",
+    "postTitle": "반품 관련으로 문의합니다.",
+    "name": "kjkj****",
+    "create_at": "2020.11.20",
+    "view": "0",
+    "recommandCount": "0"
+}, {
+    "postNumber": "3",
+    "postType": "Normal",
+    "postTitle": "걱정입니다.",
+    "name": "kjkj****",
+    "create_at": "2020.11.20",
+    "view": "0",
+    "recommandCount": "0"
+}, {
+    "postNumber": "2",
+    "postType": "Normal",
+    "postTitle": "반품 문의 합니다.",
+    "name": "kjkj****",
+    "create_at": "2020.11.20",
+    "view": "0",
+    "recommandCount": "0"
+}, {
+    "postNumber": "1",
+    "postType": "Normal",
+    "postTitle": "반품 관련으로 문의합니다.",
+    "name": "kjkj****",
+    "create_at": "2020.11.20",
+    "view": "0",
+    "recommandCount": "0"
+}]
