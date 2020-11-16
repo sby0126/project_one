@@ -1,7 +1,7 @@
 import {Component} from "../js/components/Component.js";
 
 (function() {
-    
+
     const postSchema = [{
         "type": "faq",
         "index" : "0",
@@ -29,4 +29,4 @@ import {Component} from "../js/components/Component.js";
         Component.prototype.constructor.call(this, ...args);
     }
     
-});
+})();
