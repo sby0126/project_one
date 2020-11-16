@@ -1,5 +1,6 @@
-./pages/:
+./WebContent/pages/:
 board-default.html
+board-post.html
 board-smart-editor.html
 board.html
 detail-item-uploader.html

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template</title>
+    <link rel="stylesheet" href="../css/cart.css">
+    <style>
+        /* 업 보더라인 자동 간격 정리 필요 */
+        .up-line-bd {
+            width: 75%;
+            height: 3px;
+            border: 1px solid rgb(rgb(128, 127, 128));
+            background-color: gray;
+            position: absolute;
+            top: 28%;
+            left: 15%;
+        }
+        
+        .down-line-bd {
+            clear: both;
+            width: 75%;
+            height: 3px;
+            border: 1px solid rgb(rgb(128, 127, 128));
+            background-color: gray;
+            position: absolute;
+            bottom: 22%;
+            left: 15%;
+        }
+
+        .contents-wrapper {
+            margin: 0;
+            padding: 0;
+            width: 85%;
+            height: auto;
+            min-height: 600px;
+            overflow: display;
+        }
+
+        .contents-wrapper h2 {
+            position: absolute;
+            left: 20%;
+            top: 17%;
+        }
+        /* 자동 높이 증감 구현 필요 */
+         /* 상품의 정보가 출력되는 영역의 wrapper 영역 */
+        .product-info-zone {
+            position: relative;
+            margin: 0 auto;
+            width: 90%;
+            top: 9.3em;
+            left: 1.7em;
+            height: auto;
+            min-height: 300px;
+        }
+        /* 장바구니 상품 정보의 저장 기능과 연동, 해당 정보의 자동 기입 기능 필요 */
+        /* 상품 정보 출력 영역 */
+        .product-info{
+            width: 100%;
+            height: 300px;
+            margin: 0;
+            padding-top: 5.5em;
+            padding-left: 6%;
+            box-sizing: border-box;
+            top: 1em;
+            display: flex;
+        }
+
+        .product-info div{
+            min-width: 150px;
+            width: auto;
+            box-sizing: content-box;
+        }
+
+        .product-info div p{
+            font-size: 20px;
+        }
+
+        .product{
+            display: flex;
+            width: 100%;
+            padding-top: 0.7em;
+        }
+
+        .chkbox {
+            position: relative;
+            top: 25%;
+            margin-right: 10%;
+        }
+        
+        .product-img {
+            width: 100px;
+            height: 100px;
+        }
+        .product-name {
+            min-width: 400px;
+            height: 80px;
+            margin-top: 0.5em;
+            margin-left: 10%;
+            padding-top: 1.4em;
+            box-sizing: border-box;
+        }
+        
+        .product-num {
+            position: absolute;
+            margin-left: 7%;
+            margin-top: 3em;
+            right: 25%;
+            width: 40px;
+            height: 30px;
+        }
+        
+        .product-price {
+            position: absolute;
+            width: 150px;
+            height: 50px;
+            right: 0;
+            margin-left: 8%;
+            margin-top: 2.3em;
+        }
+
+        /* product-info의 정보를 읽고 정산하는 하단 영역. 기능 구현 필요 */
+        .result-buy-cost {
+            position: relative;
+            margin: 0 auto;
+            width: 90%;
+            height: 150px;
+            clear: both;
+            bottom: -11.5em;
+        }
+
+        .result-buy-cost p{
+            float: left;
+            right: -77%;
+            position: relative;
+            margin-right: 67px;
+        }
+
+        .button-zone {      /* 맨 하단의 구매 및 삭제 버튼의 wrapper */
+            width: 150px;
+            height: 50px;
+            right: -81%;
+            bottom: -12%;
+            position: relative;
+            display: flex;
+        }
+
+        .buy-product {      /* 해당 영역의 구매 버튼 */
+            width: 60px;
+            height: 36px;
+            margin-right: 2em;
+            font-size: 0.8em;
+        }
+
+        .del-product {      /* 해당 영역의 삭제 버튼 */
+            width: 60px;
+            height: 36px;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-wrapper">
+                <div class="header-left">
+                    <div class="" id="logo">
+                        <img src="https://dummyimage.com/64x64/000/fff" alt="">
+                    </div>
+                    <a href="#">WOMEN</a>
+                    <a href="#">MEN</a>
+                </div>
+                <div class="header-center">
+                    <a href="#">SHOP</a>
+                    <a href="#">ITEM</a>
+                    <a href="#">SALE</a>
+                    <a href="#">MORE</a>
+                </div>
+                <div class="header-right">
+                    <button class="header-right-login-button">로그인</button>
+                    <input type="text" name="" id="" placeholder="검색어를 입력하세요">
+                </div>
+            </div>
+        </header>
+        <section> 
+            <div class="contents-wrapper"> <!-- 장바구니 정보 영역 -->
+                <h2>장바구니</h2>
+                <div class="up-line-bd"></div>
+                <div class="product-info-zone"> <!-- 실 상품 정보 영역 -->
+                    <form class="product-info">
+                        <input type="checkbox" class="chkbox">
+                        <div class="product">
+                            <div> <!-- 구매할 상품 이미지 -->
+                                <img src="#" class="product-img"> 
+                            </div>
+                            <div> <!-- 구매할 상품 이름 -->
+                                <a href="#"><p class="product-name">상품명 1234</p></a> 
+                            </div>
+                            <div> <!-- 구매 갯수 -->
+                                <input type="number" class="product-num" placeholder="1"> 
+                            </div>
+                            <div> <!-- 상품 금액 -->
+                                <P class="product-price">price 원</P> 
+                            </div>                        
+                        </div>
+                    </form>
+                </div>
+                <div class="down-line-bd"></div>
+                <div class="cart-result"> <!-- 장바구니 내 구매할 상품에 대한 총 정보 -->
+                    <div class="result-buy-cost">
+                        <p>총 </p>
+                        <p class="total-num">n개 상품</p>
+                        <p class="total-price">XXX원</p>
+                    </div>
+                </div>
+                <div class="button-zone"> <!-- 장바구니 내 추가 액션에 대한 버튼 -->
+                    <button class="buy-product">구매</button>
+                    <button class="del-product">삭제</button>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div id="light-box-container">
+    </div>
+</body>
+</html>
