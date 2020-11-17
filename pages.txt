@@ -13,5 +13,6 @@ login.html
 logout.html
 map.html
 payments.html
+recent-product-container.html
 shop.html
 terms.html
