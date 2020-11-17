@@ -19,6 +19,32 @@ const driver = new webdriver.Builder()
 // 데이터 수집 배열
 const data = [];
 
+function removeAbsolutePath(imageData) {
+    const output = imageData.map(i => {
+        const raw = i.src.replace(/\?(.*)/g, "");
+        const filename = path.basename(raw);
+        i.url = filename;
+        delete i.src;
+        return i;
+    });
+
+    return output;
+}
+
+function output(filename, e, myData) {
+    fs.writeFileSync(filename, JSON.stringify(myData), "utf-8");
+    e.getDriver().executeScript("alert('크롤링 완료')");
+    
+    if(argv.download) {
+        const Downloader = require("./downloader");
+        
+        // 깊은 복사...
+        Downloader.start(JSON.parse(JSON.stringify(myData)), () => {
+            fs.writeFileSync(filename, JSON.stringify(removeAbsolutePath(myData)), "utf-8");
+        });
+    }
+}
+
 function runShop() {
     const url = "https://www.sta1.com/shops/121?shopType=S&gndr=F";
     driver.get(url);
@@ -40,8 +66,7 @@ function runShop() {
                 data.push(newData);
 
                 if(lineNumber() == products.length - 1) {
-                    fs.writeFileSync("output_shop.json", JSON.stringify(data), "utf-8");
-                    e.getDriver().executeScript("alert('크롤링 완료')");
+                    output("output_shop.json", e, data);
                 }
 
             } catch(e) {
@@ -74,8 +99,7 @@ function runItem() {
                 data.push(newData);
 
                 if(lineNumber() == products.length - 1) {
-                    fs.writeFileSync("output_item.json", JSON.stringify(data), "utf-8");
-                    e.getDriver().executeScript("alert('크롤링 완료')");
+                    output("output_item.json", e, data);
                 }
 
             } catch(e) {
@@ -108,8 +132,7 @@ function runSale() {
                 data.push(newData);
 
                 if(lineNumber() == products.length - 1) {
-                    fs.writeFileSync("output_sale.json", JSON.stringify(data), "utf-8");
-                    e.getDriver().executeScript("alert('크롤링 완료')");
+                    output("output_sale.json", e, data);
                 }
 
             } catch(e) {
