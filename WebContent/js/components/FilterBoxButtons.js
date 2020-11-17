@@ -58,9 +58,9 @@ export class FilterBoxButtons extends Component {
                     const param = new URLSearchParams(location.search);
                     param.set("shopType", this._index > 0 ? "B" : "S");
 
+                    // 아예 새로 고침이므로 CSS를 지울 필요가 없음.
                     location.search = param.toString();
                 }
-
 
                 /**
                  * 화살표 함수에서는 this가 이벤트가 아니기 때문에 ev.currentTarget를 써야 합니다.
