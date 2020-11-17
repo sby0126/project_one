@@ -36,12 +36,31 @@ export class FilterBoxButtons extends Component {
                 // 선택 버튼에 메뉴 인덱스 설정
                 self._ageTabIndex = container.index($(this));
             });
-            
+
         const filterBoxButtons = Array.from(document.querySelector(".header-filter-box-header").children);
+
+        if(filterBoxButtons.length < 3) {
+            const param = new URLSearchParams(location.search);
+            filterBoxButtons.filter(e => e.classList.contains("active")).forEach(e => e.classList.remove("active"));
+            if(param.get("shopType") == "B") {
+                filterBoxButtons[1].classList.add("active");     
+            } else {
+                filterBoxButtons[0].classList.add("active");     
+            }
+        }
+
         filterBoxButtons.forEach((i, idx) => {
             i.addEventListener("click", async (ev) => {
-                
+
                 this._index = idx;
+
+                if(filterBoxButtons.length < 3) {
+                    const param = new URLSearchParams(location.search);
+                    param.set("shopType", this._index > 0 ? "B" : "S");
+
+                    location.search = param.toString();
+                }
+
 
                 /**
                  * 화살표 함수에서는 this가 이벤트가 아니기 때문에 ev.currentTarget를 써야 합니다.
@@ -56,21 +75,19 @@ export class FilterBoxButtons extends Component {
                     filterBoxButtons.filter(e => e.classList.contains("active")).forEach(e => e.classList.remove("active"));
                     target.classList.add("active");
 
-                    // 카드 이미지를 지웁니다.
-                    // 여기에서 d는 delete의 약자입니다.
-                    for(let i = 0; i < parent._headStyleSheets.length; i++) {
-                        parent.emit("card:d-" + i);
-                    }
+                    // // 카드 이미지를 지웁니다.
+                    // // 여기에서 d는 delete의 약자입니다.
+                    // for(let i = 0; i < parent._headStyleSheets.length; i++) {
+                    //     parent.emit("card:d-" + i);
+                    // }
 
-                    document.querySelector(".contents-wrapper").innerHTML = "";
-
-                    // 카드 이미지를 생성합니다.
-                    await parent.loadHTML(parent.toResolvePath("pages/shop.html")).then(result => {
-                        const container = document.querySelector(".contents-wrapper");
-                        const body = parseBodyFromString(result);
-                        container.innerHTML = body;     
-                        parent.emit("contents:ready");   
-                    });
+                    // // 카드 이미지를 생성합니다.
+                    // await parent.loadHTML(parent.toResolvePath("pages/shop.html")).then(result => {
+                    //     const container = document.querySelector(".contents-wrapper");
+                    //     const body = parseBodyFromString(result);
+                    //     container.innerHTML = body;     
+                    //     parent.emit("contents:ready");   
+                    // });
 
                 }
             })
