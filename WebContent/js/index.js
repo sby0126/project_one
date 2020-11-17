@@ -59,8 +59,14 @@ class MainPage extends App {
     }
 
     addEventListeners() {
+
+        /**
+         * @type {ShopContentLoader}
+         */
+        this._contentLoader = ShopContentLoader.builder(this);
+
         this.on("login:ready", () => LoginButton.builder().run());
-        this.on("contents:ready", () => ShopContentLoader.builder(this).run());
+        this.on("contents:ready", () => this._contentLoader.run());
     }
 
     onLoad() {
@@ -73,7 +79,9 @@ class MainPage extends App {
     }
 
     fetchNewData() {
-        alert("마지막 데이터입니다.");
+        if(this._contentLoader) {
+            this._contentLoader.addFetchData(10);
+        }
     }
 
 }

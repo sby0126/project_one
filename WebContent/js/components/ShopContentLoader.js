@@ -18,6 +18,29 @@ export class ShopContentLoader extends Component {
     }
 
     /**
+     * 무한 증식.....
+     * @param {Number} count 
+     */
+    addFetchData(count) {
+
+        if(this._currentCards >= this._maxCards) {
+            console.log("새로 가져올 데이터가 필요합니다.");
+        }
+
+        const parent = $(".card-container");
+
+        for(let i = 0; i < count; i++) {
+            setTimeout(() => {
+                const lastChildCount = document.querySelector(".card-container").children.length;
+                const cloneNode = document.querySelector(".card").cloneNode(true);
+                cloneNode.querySelector("p").setAttribute("d-"+(lastChildCount+i), "");
+                this._currentCards++;
+                parent.append(cloneNode);
+            }, 0);
+        }
+    }
+
+    /**
      * 검색 기능입니다.
      * 검색된 내용과 일치하는 카드를 찾습니다.
      * @param {String}} itemName 
