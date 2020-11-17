@@ -26,7 +26,7 @@ class MainPage extends App {
                 src: `pages/shop.html`,
                 parent: ID.CONTENTS_WRAPPER,
                 isCreateNewDiv: false,
-            }
+            }    
         ];
         
     }

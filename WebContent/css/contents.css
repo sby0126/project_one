@@ -383,3 +383,5 @@ section {
 
     cursor: pointer;
 }
+
+@import url("./recent-product-container.css")
