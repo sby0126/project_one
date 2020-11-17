@@ -3,6 +3,9 @@
  * 오라클 DB 연동
  * 
  * 데이터 삽입, 조회 가능
+ * 
+ * @see
+ * http://oracle.github.io/node-oracledb/doc/api.html
  */
 const oracledb = require("oracledb");
 
