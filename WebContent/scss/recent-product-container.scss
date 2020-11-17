@@ -1,0 +1,81 @@
+.recent-product-container {
+    width: 5rem;
+    height: 5rem;
+    position: fixed;
+    right: 2%;
+    top: 50%;
+    transform: translate(0,-50%);
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 1px solid #E0E4E6;
+    background-color: #FFFFFF;
+
+    div {
+        display: flex;
+        justify-content: center;
+    }
+
+    font-size: 0.775em;
+
+    strong {
+        font-weight: bold;
+        font-size: 50%;
+    }
+
+    button {
+        width: 2em;
+        height: 2em;
+        outline: none;
+        border: none;
+        background: transparent;
+        position: relative;
+
+        cursor: pointer;
+
+        &::after {
+            content: "";
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAVCAYAAAByrA+0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAKFJREFUeNpi/P//PwM+YGhoyAykZgJxAhBPZ8SnAap4ERBHQYX+4tSARTEIzMWqAYfiZUAcx0KK4vPnz6M6iZBiEAeugRjFcA3EKgZrMDAwACleDMSRhBSDAMjTl4BYixjFMBuQw/UBEKsDFf/CFZlMQHwNia8AxPOhfsKpQQ/qDBgAeXwRLk2khxJZ8UBWTJOVlojRRJ38QFaOw5WnAQIMAGDUhdqD+idkAAAAAElFTkSuQmCC);
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            width: 4px;
+            height: 7px;
+            background-size: cover;
+        }        
+
+    }
+
+    #btn-next {
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 11px;
+            background-color: #edeff0;
+
+            left: 0;            
+        }
+        &::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAVCAYAAAByrA+0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAALZJREFUeNqUk1EKwjAMhrMMPIcnkPY6gkPwYXgeH4YP4tiDHqdvgoeRmkgiHdY1Dfxso99HmpY1zrkTABwpI6UPIbxgoVDglnKgTN77tiSMyfe2JLHQU25WCWXPnVXiDlAjob5YJUxti9TEGH8Gk8VJYK07ZZcVFqTHX0GkFT2elHV2hkyHawpzB6zYDh/EBivgjk8Ra+DZDBb4K1jhz8XRD2SGtcPZCquwt8IqDBQGLiWY6y3AAFMfZzh4TDpKAAAAAElFTkSuQmCC);
+            transform: translate(-50%,-50%);
+            width: 4px;
+            height: 7px;
+            background-size: cover;
+        }
+    }    
+
+    em {
+        color: #FF994F;
+    }
+}
