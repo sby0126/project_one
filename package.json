@@ -8,7 +8,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cd tools && mocha test --reporter mochawesome --reporter-options autoOpen=true"
   },
   "repository": {
     "type": "git",
@@ -28,8 +28,10 @@
     "canvas": "^2.6.1",
     "cheerio": "^1.0.0-rc.3",
     "chromedriver": "^86.0.0",
+    "faker": "^5.1.0",
     "image-size": "^0.9.3",
     "minimist": "^1.2.5",
+    "mocha": "^8.2.1",
     "request": "^2.88.2",
     "selenium-webdriver": "^4.0.0-alpha.7",
     "sharp": "^0.26.2"
