@@ -39,6 +39,7 @@ export class FilterBoxButtons extends Component {
 
         const filterBoxButtons = Array.from(document.querySelector(".header-filter-box-header").children);
 
+        // 필터 버튼이 2개 있을 때 활성화 버튼을 토글 처리합니다.
         if(filterBoxButtons.length < 3) {
             const param = new URLSearchParams(location.search);
             filterBoxButtons.filter(e => e.classList.contains("active")).forEach(e => e.classList.remove("active"));
