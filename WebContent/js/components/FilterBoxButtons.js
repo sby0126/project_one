@@ -61,6 +61,11 @@ export class FilterBoxButtons extends Component {
 
                     // 아예 새로 고침이므로 CSS를 지울 필요가 없음.
                     location.search = param.toString();
+                } else {
+                    // 로그인 창을 켭니다.
+                    if(this._index > 0) {
+                        $(".header-right-login-button").trigger("click");
+                    }
                 }
 
                 /**
