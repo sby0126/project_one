@@ -22,6 +22,29 @@ export class ItemContentLoader extends Component {
     }
 
     /**
+     * 무한 증식.....
+     * @param {Number} count 
+     */
+    addFetchData(count) {
+
+        if(this._currentCards >= this._maxCards) {
+            console.log("새로 가져올 데이터가 필요합니다.");
+        }
+
+        const parent = $(".card-container");
+
+        for(let i = 0; i < count; i++) {
+            setTimeout(() => {
+                const lastChildCount = document.querySelector(".card-container").children.length;
+                const cloneNode = document.querySelector(".card").cloneNode(true);
+                cloneNode.querySelector("p").setAttribute("d-"+(lastChildCount+i), "");
+                this._currentCards++;
+                parent.append(cloneNode);
+            }, 0);
+        }
+    }    
+
+    /**
      * 특정 문자열이 카드에 포함되어있는 지 확인하고 해당 카드만 남깁니다.
      * @param {String} itemName 
      */

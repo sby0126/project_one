@@ -80,7 +80,7 @@ class MainPage extends App {
 
     fetchNewData() {
         if(this._contentLoader) {
-            this._contentLoader.addFetchData(10);
+            this._contentLoader.addFetchData(5);
         }
     }
 

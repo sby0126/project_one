@@ -68,8 +68,10 @@ class SalePage extends App {
     }
 
     addEventListeners() {
+        this._contentLoader = SaleContentLoader.builder(this);
+
         this.on("loginView:ready", () => LoginButton.builder().run());      
-        this.on("contents:ready", () => SaleContentLoader.builder(this).run());        
+        this.on("contents:ready", () => this._contentLoader.run());        
     }
 
     loadCSS() {
@@ -92,6 +94,12 @@ class SalePage extends App {
         this.loadCSS();
 
     }
+
+    fetchNewData() {
+        if(this._contentLoader) {
+            this._contentLoader.addFetchData(5);
+        }
+    }    
 
 }
 

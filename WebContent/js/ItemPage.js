@@ -76,8 +76,10 @@ class ItemPage extends App {
     }    
 
     addEventListeners() {
+        this._contentLoader = ItemContentLoader.builder(this);
+
         this.on("loginView:ready", () => LoginButton.builder().run());      
-        this.on("contents:ready", () => ItemContentLoader.builder(this).run());        
+        this.on("contents:ready", () => this._contentLoader.run());        
     }
 
     onLoad() {
@@ -86,6 +88,14 @@ class ItemPage extends App {
         this.emit("loginView:ready");
         this.emit("contents:ready"); 
     }
+
+
+    fetchNewData() {
+        if(this._contentLoader) {
+            this._contentLoader.addFetchData(5);
+        }
+    }    
+
 
 }
 
