@@ -1,5 +1,8 @@
-
-
+/**
+ * @author Eo Jinseok
+ * @descripption
+ * This class allows user to see certain post after getting a data from database.
+ */
 import java.io.IOException;
 import java.io.PrintWriter;
 
