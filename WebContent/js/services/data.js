@@ -665,7 +665,7 @@ const blobData = [{
     "category": "shop",
     "shopName": "맨스스토어",
     "texts": "20대스트릿·도매스틱",
-    "url": "1553761632154_mi.jpg"
+    "url": "1553761632154_mi.jpg",
 }];
   
 const mainImg = {
