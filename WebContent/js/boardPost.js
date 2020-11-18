@@ -49,7 +49,7 @@ const FUNC = {
     REPLAY_DELETE: function(ev) {
         const ret = window.confirm("댓글을 삭제하시겠습니까?");
 
-        if(ret === true) {
+        if(ret) {
             $(ev.target).parent().parent().parent().parent().remove();
             SDK.updateCommentsCount();
         }
@@ -161,12 +161,12 @@ const SDK = (() => {
 
             $(".add-comment-button-area").before(
                 $(`
-                <div class="comment-area panel-body">
+                <div class="comment-area">
                 <div class="comment-author well">
                     <div class="profile-box">
                         <span><i class="fas fa-user-circle fa-3x"></i></span>
                     </div>
-                    <div class="detail-area col-sm-1">
+                    <div class="detail-area">
                         <div class="detail-area-author-id">
                             <span>${authorId}</span>        
                         </div>
