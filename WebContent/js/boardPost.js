@@ -49,7 +49,7 @@ const FUNC = {
     REPLAY_DELETE: function(ev) {
         const ret = window.confirm("댓글을 삭제하시겠습니까?");
 
-        if(ret === true) {
+        if(ret) {
             $(ev.target).parent().parent().parent().parent().remove();
             SDK.updateCommentsCount();
         }
@@ -60,9 +60,11 @@ const FUNC = {
         ev.preventDefault();
 
         const texts = $("#comment-textarea").val();
-
-        alert(texts);
-
+        if(texts.length == 0) {
+            alert("댓글란이 비어있습니다.");
+            ev.preventDefault();
+            return false;
+        }
         if(texts.length > 0) {
             SDK.registerComment("테스터", texts);
         }
@@ -161,12 +163,12 @@ const SDK = (() => {
 
             $(".add-comment-button-area").before(
                 $(`
-                <div class="comment-area panel-body">
+                <div class="comment-area">
                 <div class="comment-author well">
                     <div class="profile-box">
                         <span><i class="fas fa-user-circle fa-3x"></i></span>
                     </div>
-                    <div class="detail-area col-sm-1">
+                    <div class="detail-area">
                         <div class="detail-area-author-id">
                             <span>${authorId}</span>        
                         </div>
