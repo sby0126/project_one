@@ -7,11 +7,15 @@
     <script src="https://kit.fontawesome.com/a99df0f94f.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a99df0f94f.js" crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>     -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/board-post.css">
+
 </head>
 <body>
     <!-- 컨테이너의 시작 -->
@@ -107,7 +111,7 @@
                             <div class="profile-box">
                                 <span><i class="fas fa-user-circle fa-3x"></i></span>
                             </div>
-                            <div class="detail-area">
+                            <div class="detail-area col-sm-1">
                                 <div class="detail-area-author-id">
                                     <span>biud436</span>        
                                 </div>
@@ -118,7 +122,7 @@
                                 </div>
                             </div>
                             <!-- 게시물 공유 및 삭제 버튼 -->
-                            <div class="board-post-header-function">
+                            <div class="board-post-header-function col-sm-1">
                                 <a href="" id="post-share-button"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
                                 <a href="" id="post-delete-button"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                 <a href="" id="post-more-function-button"><i class="fas fa-ellipsis-v"></i></a>
@@ -157,41 +161,41 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="board-post-comment">
-                            <div class="comment-header">
+                        <div class="board-post-comment panel panel-info">
+                            <div class="comment-header panel-heading">
                                 <!-- 댓글 갯수 -->
-                                <span><em>1</em> 개 댓글</span>
+                                <span><em class="badge">1</em> 개 댓글</span>
                             </div>
-                            <div class="comment-area">
-                                <div class="comment-author">
+                            <div class="comment-area panel-body">
+                                <div class="comment-author panel well">
                                     <div class="profile-box">
                                         <span><i class="fas fa-user-circle fa-3x"></i></span>
                                     </div>
-                                    <div class="detail-area">
+                                    <div class="detail-area col-sm-1">
                                         <div class="detail-area-author-id">
                                             <span>biud436</span>        
                                         </div>
                                         <div class="detail-area-date-panel">
                                             <span>1일 전</span>
-                                            <span style="cursor:pointer;"><a href="" id="replay-ok">답글</a></span>
-                                            <span style="cursor:pointer;"><a href="" id="replay-delete">삭제</a></span>
+                                            <span style="cursor:pointer;"><a href="" class="replay-ok">답글</a></span>
+                                            <span style="cursor:pointer;"><a href="" class="replay-delete">삭제</a></span>
                                         </div>
-                                        <div class="detail-area-contents">
-                                            <span>테스트</span>
+                                        <div class="detail-area-contentss">
+                                            <span>테스트1</span>
                                         </div>
                                     </div>       
                                 </div>
                                 <div class="add-comment-button-area">
-                                    <textarea name="" id=""></textarea>
-                                    <a href="#" id="comment-ok-button">등록</a>
+                                    <textarea name="" id="comment-textarea"></textarea>
+                                    <a href="#" id="comment-ok-button" class="btn btn-default">등록</a>
                                 </div>                         
                             </div>
                         </div>
                     </div>
-                    <div class="prev-list-panel">
-                        <a href="./board-default.html" id="list-button">목록</a>
-                        <a href="./board-smart-editor.html" id="modify-button">수정</a>
-                        <a href="#" id="delete-button">삭제</a>
+                    <div class="prev-list-panel btn-group">
+                        <a href="./board-default.html" id="list-button" class="btn btn-default">목록</a>
+                        <a href="./board-smart-editor.html" id="modify-button" class="btn btn-default">수정</a>
+                        <a href="#" id="delete-button" class="btn btn-default">삭제</a>
                     </div>
                 </div>  
             </div>
