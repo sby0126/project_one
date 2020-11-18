@@ -60,9 +60,11 @@ const FUNC = {
         ev.preventDefault();
 
         const texts = $("#comment-textarea").val();
-
-        alert(texts);
-
+        if(texts.length == 0) {
+            alert("댓글란이 비어있습니다.");
+            ev.preventDefault();
+            return false;
+        }
         if(texts.length > 0) {
             SDK.registerComment("테스터", texts);
         }
