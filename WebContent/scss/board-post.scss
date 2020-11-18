@@ -1,5 +1,11 @@
 $article-content-area-height: 480px;
 
+* {
+    margin: 0;
+    padding: 0;  
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
 .contents-wrapper {
     margin-top: 8.5em;
 }
