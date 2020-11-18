@@ -2,6 +2,7 @@ import {Component} from "./Component.js";
 import {App} from "../app.js";
 import { parseBodyFromString, parseScriptFromString } from "../utils/bodyParser.js";
 
+
 export class FilterBoxButtons extends Component {
 
     initMembers(...args) {
@@ -37,6 +38,9 @@ export class FilterBoxButtons extends Component {
                 self._ageTabIndex = container.index($(this));
             });
 
+        /**
+         * @type {HTMLDivElement[]}
+         */
         const filterBoxButtons = Array.from(document.querySelector(".header-filter-box-header").children);
 
         // 필터 버튼이 2개 있을 때 활성화 버튼을 토글 처리합니다.
@@ -49,6 +53,7 @@ export class FilterBoxButtons extends Component {
                 filterBoxButtons[0].classList.add("active");     
             }
         }
+
 
         filterBoxButtons.forEach((i, idx) => {
             i.addEventListener("click", async (ev) => {
