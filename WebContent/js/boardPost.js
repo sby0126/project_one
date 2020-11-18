@@ -70,10 +70,8 @@ const FUNC = {
         }
     },
     BACK_TO_LIST: function(ev) {
-        alert("목록 버튼을 눌렀습니다.");   
     },
     MODIFY: function(ev) {
-        alert("수정 버튼을 눌렀습니다.");   
     },
     DELETE: function(ev) {
         alert("삭제 버튼을 눌렀습니다.");   
