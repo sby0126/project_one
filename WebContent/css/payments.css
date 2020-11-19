@@ -242,6 +242,7 @@
 .item-table td:nth-child(2) {
     text-align: left;
 }
+/* middle 영역 종료 */
 
 /* 결제 및 배송에 필요한 정보를 다루는 영역 wrapper */
 .contents-page-footer {
