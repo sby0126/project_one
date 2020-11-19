@@ -18,7 +18,11 @@ public class Board extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		response.setContentType("application/x-www-form-urlencoded;charset=utf-8;");
+		
+		// 이 라인이 활성화하면 JSON이 아니라 파일 다운로드 처리가 됨
+//		response.setContentType("application/x-www-form-urlencoded;charset=utf-8;");
+		
+		response.setContentType("application/json;charset=utf-8;");
 		
 		PrintWriter out = response.getWriter();
 		
