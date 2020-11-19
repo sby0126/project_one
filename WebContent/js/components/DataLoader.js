@@ -9,8 +9,8 @@ export class DataLoader extends Component {
 
     initWithUrlParams() {
         const urlParams = new URLSearchParams(decodeURI(location.search));
-        const gndr = parseInt(urlParams.get("gndr")) || "M";
-        const shopType = parseInt(urlParams.get("shopType")) || "S";
+        const gndr = urlParams.get("gndr") || "M";
+        const shopType = urlParams.get("shopType") || "S";
         const category = parseInt(urlParams.get("category")) || 100;
         const pg = parseInt(urlParams.get("pg")) || 1;
         const ages = parseInt(urlParams.get("ages")) || 100;      
@@ -22,6 +22,56 @@ export class DataLoader extends Component {
         Object.assign(this, ret);
         
         return ret;
+    }
+
+    /**
+     * @param {String} pageType
+     */
+    async get(pageType, success) {
+
+        const data = this.loadJson(`json/prebuilt.json`, (data) => {
+            const matched = data.filter(e => {
+                return e.shopType === this.shopType && e.pageType === pageType;
+            });
+
+            console.log(data);
+    
+            const retData = matched.pop();
+
+            success(retData);
+        }, (err) => {
+            console.warn(err);
+        });
+        
+    }
+
+    load(pageType, success) {
+        const prom = new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", `json/prebuilt.json`);
+            xhr.onload = () => {
+                resolve(JSON.parse(xhr.responseText));
+            }
+            xhr.onerror = (err) => {
+                reject(err);
+            }
+            xhr.send();
+        });
+
+        prom.then(ret => {
+            
+            const matched = ret.filter(e => {
+                return e.shopType === this.shopType && e.pageType === pageType && e.genderType === this.gndr;
+            });
+
+            const retData = matched[0];
+
+            console.log(retData);
+            success(retData);
+
+        }).catch(err => {
+            console.warn(err);
+        })
     }
 
     /**

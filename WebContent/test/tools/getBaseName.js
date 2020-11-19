@@ -4,7 +4,347 @@ const argv = require("minimist")(process.argv.slice(2));
 
 const inputFile = argv.i || argv.input;
 
-let data = [{"category":"item","src":"http://cdn1-aka.makeshop.co.kr/shopimages/ssodo82/0020030001183.gif?1575520701","title":"베이직루즈기모후드집업(23차 재입고)","price":"35,500","shop":"갠소"},{"category":"item","src":"http://cdn1-aka.makeshop.co.kr/shopimages/ssodo82/0010040014743.gif?1603440269","title":"도톰USA박시롱니트티(3차 재입고)","price":"25,500","shop":"갠소"},{"category":"item","src":"http://cdn1-aka.makeshop.co.kr/shopimages/ssodo82/0020020013953.gif?1604487823","title":"헤어리울체크박시자켓","price":"69,900","shop":"갠소"},{"category":"item","src":"http://www.hypnotic.co.kr/shopimages/dnddl214/0010040001063.gif?1603438160","title":"크롭후드퍼양면 항공점퍼","price":"89,000","shop":"히프나틱"},{"category":"item","src":"http://www.hypnotic.co.kr/shopimages/dnddl214/0030060001013.gif?1602682503","title":"[기모]핏보장멀티 와이드팬츠","price":"24,000","shop":"히프나틱"},{"category":"item","src":"http://www.hypnotic.co.kr/shopimages/dnddl214/0010010006253.gif?1603983130","title":"퍼스트퍼 무스탕 [고퀄리티]","price":"122,000","shop":"히프나틱"},{"category":"item","src":"https://benito.co.kr/web/product/medium/202009/4d8fabde3bf6b034b3463c3b815429a1.jpg","title":"데일린 레터링 크롭 맨투맨데일리룩/스웨트셔츠/간절기맨투맨/크롭맨투맨/데일리룩/데일리맨투맨","price":"22,230","shop":"베니토"},{"category":"item","src":"https://benito.co.kr/web/product/medium/20200302/9b7a29feeeed9b71a3004cd3827e17dd.gif","title":"[only] #8천장판매, 솔리드 자켓 간절기/재킷/오피스룩/하객룩","price":"53,000","shop":"베니토"},{"category":"item","src":"https://benito.co.kr/web/product/medium/202010/8d3b19658f165a2107b6f7047e8ddc84.gif","title":"필링 꽈배기 랩 가디건 데일리룩/출근룩/가을가디건/신상가디건/꽈배기가디건/간절기가디건","price":"32,400","shop":"베니토"},{"category":"item","src":"https://www.choper.kr/web/product/medium/201910/71e05fbb2b711d9c01d44c671b7cc147.gif","title":"기모트윈스롱원피스","price":"25,000","shop":"쵸퍼"},{"category":"item","src":"https://www.choper.kr/web/product/medium/202010/52db3e4d30e52181995b9173f7a80034.webp","title":"루즈포켓체크남방","price":"19,000","shop":"쵸퍼"},{"category":"item","src":"https://www.hotping.co.kr/web/product/medium/202010/f18679fd2fb4591ce0583b8c8c0810d8.gif","title":"피플즈 투피스세트[44~100]","price":"19,800","shop":"핫핑"},{"category":"item","src":"https://www.hotping.co.kr/web/product/medium/202010/af5082ef239a8d37d9e448e1cd23716b.gif","title":"온도를더해 누빔조끼[44~100]","price":"19,800","shop":"핫핑"},{"category":"item","src":"https://www.hotping.co.kr/web/product/medium/202010/b61c8f7697a2ea6154eee9ea422f18b2.gif","title":"둘만의거리 체크긴팔셔츠[44~110]","price":"24,800","shop":"핫핑"},{"category":"item","src":"https://atimg.sonyunara.com/files/attrangs/goods/36170/5f7c229ee992f.gif","title":"op3916 카라 장식의 플레어 라인 랩 원피스","price":"37,800","shop":"아뜨랑스"},{"category":"item","src":"https://atimg.sonyunara.com/files/attrangs/goods/38305/1566386954_0.gif","title":"bs3099(A) 로맨틱함 가득한 레이스 벌룬소매 블라우스","price":"15,000","shop":"아뜨랑스"},{"category":"item","src":"https://atimg.sonyunara.com/files/attrangs/goods/42356/1604278936_0.gif","title":"ct894 트렌치코트 디자인의 핸드메이드 울코트","price":"189,000","shop":"아뜨랑스"},{"category":"item","src":"https://sedy.co.kr/web/product/medium/202009/59f4986f85d8b1f2c1eb1b9e95e5a340.gif","title":"꽈배기 두툼 벌룬 집업 니트 후드","price":"30,000","shop":"세디"},{"category":"item","src":"https://sedy.co.kr/web/product/medium/202009/4ffbe24dec39197428f047f93c450a1f.gif","title":"팝콘 파스텔 니트","price":"26,700","shop":"세디"},{"category":"item","src":"https://sedy.co.kr/web/product/medium/20191214/db84d4722ffaadc13debe0d49a2cb0bd.gif","title":"아가일 불규칙 패턴 패턴 니트 카디건","price":"18,000","shop":"세디"},{"category":"item","src":"http://maybe-baby.co.kr/web/product/tiny/201911/ecb209433ee1961eaf5b8d5be3276a43.gif","title":"[Dearest] Jella (cd) -파우더블루","price":"47,000","shop":"메이비베이비"},{"category":"item","src":"http://maybe-baby.co.kr/web/product/tiny/202008/f10d26e68da4dbdc3e6bf63fbb18bd69.gif","title":"MAYBE BABY DENIM / Urban (pt) (M사이즈 예약주문/상품준비기간이 5-7일이상 소요됩니다)","price":"34,000","shop":"메이비베이비"},{"category":"item","src":"https://akamai.poxo.com/djgirls/www.loveparis.net/web/product/medium/202009/adfd0cf102ab0554b6538d71be3fc3d7.gif","title":"아나운서 협찬굿텐션 머메이드 슬릿스커트(3color) 블랙,브라운,베이지","price":"29,000","shop":"러브패리스"},{"category":"item","src":"https://akamai.poxo.com/djgirls/www.loveparis.net/web/product/medium/202009/d21c4330b581ed1e1db19d9d0a11be41.gif","title":"레이먼 7부소매 니트(5color) 아이보리,베이지,인디핑크,블루,블랙","price":"24,000","shop":"러브패리스"},{"category":"item","src":"https://chaakan.co.kr/web/product/medium/202007/4afa2fe3b3052cc8decdbaf8eb754491.jpg","title":"네스티 뮬 스니커즈 SNFBR3c097","price":"14,900","shop":"착한구두"},{"category":"item","src":"https://chaakan.co.kr/web/product/medium/202009/c5c7aa34af36f9f7df39b9d1179c2c1f.jpg","title":"마티스 페니 로퍼 LFSDS3c141","price":"9,900","shop":"착한구두"},{"category":"item","src":"https://chaakan.co.kr/web/product/medium/202008/6163345ca470fc76b81472eace7cd897.jpg","title":"브롤리 스틸레토 슬링백 SBSDT3c158","price":"17,900","shop":"착한구두"},{"category":"item","src":"http://www.zemmaworld.com/web/product/medium/202008/aa22a47c7ed8b13279d0bcc2f823346a.gif","title":"Cheese Jean (ver.다크네이비부츠컷)[size:S,M,L,XL/밴딩]","price":"34,000","shop":"젬마월드"},{"category":"item","src":"http://www.zemmaworld.com/web/product/medium/202009/9caa007b316f727b97398a77921019ee.gif","title":"My-littleclassic/ 크레페 브이넥 플리츠원피스[size:44~통통66]","price":"55,000","shop":"젬마월드"},{"category":"item","src":"http://www.zemmaworld.com/web/product/medium/202008/7a471d916352833579aa490631850baa.gif","title":"PBP.클린핏 코튼셔츠 (바이오워싱)[size:S(44반~55반),M(66~77)]","price":"29,000","shop":"젬마월드"},{"category":"item","src":"http://www.pinkelephant.co.kr/shopimages/yeoek/0590050001643.gif?1603179974","title":"(쫀득몰드창) 슈라밸 스웨이드 스틸레토힐(5/7/9cm)","price":"32,220","shop":"분홍코끼리"},{"category":"item","src":"http://www.pinkelephant.co.kr/shopimages/yeoek/0590060001973.gif?1597996384","title":"독보적 메리제인힐(3/5/7cm)","price":"33,120","shop":"분홍코끼리"},{"category":"item","src":"http://www.pinkelephant.co.kr/shopimages/yeoek/0720010005963.gif?1599101637","title":"(쫀득몰드창) Vol.2 반해볼래 리본 플랫(1cm)","price":"19,800","shop":"분홍코끼리"},{"category":"item","src":"https://www.ririnco.com/web/product/medium/202010/79a12a0679a253c057be6cad8644f95d.gif","title":"보르네르 브이넥 버튼 롱 원피스","price":"38,800","shop":"리리앤코"},{"category":"item","src":"https://www.ririnco.com/web/product/medium/202009/74eeef2ef654ed3a2adbc971154c51bd.gif","title":"포푸니 브이넥 퍼프 니트 가디건","price":"26,800","shop":"리리앤코"},{"category":"item","src":"https://www.ririnco.com/web/product/medium/202010/6aa83d6329e6be43fa288f5146250db7.gif","title":"덴덴 퍼프 티셔츠","price":"17,800","shop":"리리앤코"},{"category":"item","src":"https://www.lagirl.co.kr/web/product/tiny/202008/99df92a9bfe3a78b02f0014dc2474da7.gif","title":"레오파드맥시-sk","price":"22,000","shop":"라걸"},{"category":"item","src":"https://www.lagirl.co.kr/web/product/tiny/202008/3b9497938c14cd179d047d4be4739a71.gif","title":"[1+1] 브이넥슬릿-t","price":"29,000","shop":"라걸"},{"category":"item","src":"https://www.lagirl.co.kr/web/product/tiny/202007/f5d723e33831556f987da772b08ccf9d.gif","title":"하리보썸머-knit","price":"19,000","shop":"라걸"},{"category":"item","src":"http://cdn1-aka.makeshop.co.kr/shopimages/label55/0480020006813.gif?1599552482","title":"타탄체크루즈핏셔츠","price":"19,500","shop":"시크릿라벨"},{"category":"item","src":"http://cdn1-aka.makeshop.co.kr/shopimages/label55/0510020008423.gif?1583133780","title":"스판부츠컷밴딩롱슬랙스","price":"30,900","shop":"시크릿라벨"},{"category":"item","src":"http://cdn1-aka.makeshop.co.kr/shopimages/label55/0540010002893.gif?1598605487","title":"하이웨스트일자핏랩롱스커트","price":"25,500","shop":"시크릿라벨"},{"category":"item","src":"http://www.sovomall.co.kr/web/product/medium/20200303/1a0c0b679c1a0d0aabbc91928d8a281d.gif","title":"베이직 레이스업 여성스니커즈 (2.5cm)","price":"29,900","shop":"소보제화"},{"category":"item","src":"http://www.sovomall.co.kr/web/product/medium/202009/f99d4b7e21c9ea16b552411b3dca5edf.gif","title":"2020 F/W SOVO 첫신상기획 블로퍼시리즈NO.2클래식 데일리 여성블로퍼 뮬 (2cm)","price":"39,900","shop":"소보제화"},{"category":"item","src":"http://www.sovomall.co.kr/web/product/medium/202011/a6aea4a9d498c49ce39e9519960cf291.gif","title":"★국민출근화 슬링백2탄!~이만한 간절기 슈즈는 없다!★17color 슬링백 여성펌프스 (5cm)","price":"42,500","shop":"소보제화"},{"category":"item","src":"http://justone.co.kr/shopimages/jojean/0340050001193.gif?1599467965","title":"5DA20878GG_고넝 울 옆트임 니트조끼","price":"26,900","shop":"저스트원"},{"category":"item","src":"http://justone.co.kr/shopimages/jojean/0430020020843.gif?1599522532","title":"9DA20869HH_주터 스트링 플리츠원피스","price":"28,900","shop":"저스트원"},{"category":"item","src":"https://www.fashion-full.com/web/product/tiny/202009/b6197caa85933d92374d9e6ca66c383d.gif","title":"OCJ24212 (55~66)후드 트렌치 코트","price":"35,800","shop":"패션풀"},{"category":"item","src":"https://www.fashion-full.com/web/product/tiny/202009/f674bc0a3d3e9b2aeb2db522f042363c.gif","title":"TKN24217 (55~66)모디 배색 니트 & 스커트 SET","price":"29,800","shop":"패션풀"},{"category":"item","src":"http://www.recipeofgirl.com/web/product/medium/202009/fe6dc8c6e46be498cd5097ff32850d46.gif","title":"[소녀made/3000장 판매돌파] 158cm 인디고 생지 하이웨스트 데님팬츠 2탄!(안감기모/기장추가!)(한정수량!)","price":"29,900","shop":"소녀레시피"},{"category":"item","src":"http://www.recipeofgirl.com/web/product/medium/202008/14dc74ef40dd80ea6d1e620fce0e921d.gif","title":"[소녀made/2000장 판매돌파] 모던 핀턱 와이드 슬랙스 sl (5color) (키작녀맞춤!)","price":"28,000","shop":"소녀레시피"},{"category":"item","src":"http://cocojane.net/web/product/medium/202009/dc92bb76e6b29f90509865edaddd350c.gif","title":"브레드 니트 벙거지(4color)","price":"15,000","shop":"코코제인"},{"category":"item","src":"http://cocojane.net/web/product/medium/202009/f22996990cdec0c3aa975e76db45e162.gif","title":"새틴 레오파드 스커트(3color)","price":"29,000","shop":"코코제인"},{"category":"item","src":"http://www.nanasalon.com/shopimages/nanasalon/0220030010773.gif?1587084035","title":"백 프린팅 루즈핏 TEE","price":"19,000","shop":"나나살롱"},{"category":"item","src":"http://www.nanasalon.com/shopimages/nanasalon/0190000006843.gif?1587024567","title":"베러걸 A라인 DRESS","price":"55,000","shop":"나나살롱"},{"category":"item","src":"http://www.mina-gram.com/web/product/tiny/202009/3ed43f6e0571b33c8eb8ace5185fc93a.gif","title":"티에르 셔츠 원피스","price":"38,200","shop":"미나그램"},{"category":"item","src":"http://www.mina-gram.com/web/product/tiny/202008/0f2853b7ba9ebac959aada4569734d21.gif","title":"페리시 레이스 원피스","price":"22,900","shop":"미나그램"},{"category":"item","src":"http://www.mina-gram.com/web/product/tiny/202008/02aac3c9a0a219740007ee9f188d21b4.gif","title":"제니브 브이넥 니트","price":"26,500","shop":"미나그램"},{"category":"item","src":"http://www.trendy-apparel.co.kr/web/product/medium/202009/3917b33f1fbc3783ed85068317730276.gif","title":"[MADE] 미네랄 크롭 후드 집업 ; 3 color","price":"29,000","shop":"트렌디어패럴"},{"category":"item","src":"http://www.trendy-apparel.co.kr/web/product/medium/202008/63f7d40354a382b06704ad0a43b61b3a.gif","title":"에스 니트 원피스\t; 2 color","price":"43,000","shop":"트렌디어패럴"}]
+let data = [{
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/store/2020/07/20/1595230830574.jpg",
+    "shopName": "갠소",
+    "texts": "20대,30대빅사이즈,심플베이직"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/store/2020/04/03/1585884760828.jpg",
+    "shopName": "히프나틱",
+    "texts": "10대,20대러블리,섹시"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/store/2020/01/23/1579748891347.jpg",
+    "shopName": "베니토",
+    "texts": "20대,30대럭셔리·명품,페미닌"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/store/2020/11/05/1604550809961.jpg",
+    "shopName": "쵸퍼",
+    "texts": "10대,20대러블리,섹시"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/store/2020/03/24/1585013479261.jpg",
+    "shopName": "핫핑",
+    "texts": "10대,20대빅사이즈,심플베이직"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/06/1559710017170_mi.jpg",
+    "shopName": "아뜨랑스",
+    "texts": "20대,30대러블리,럭셔리·명품"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/store/2020/04/03/1585884155892.jpg",
+    "shopName": "세디",
+    "texts": "10대,20대러블리,심플베이직"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/07/1562896371983_mi.jpg",
+    "shopName": "다바걸",
+    "texts": "20대,30대페미닌,심플베이직"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/02/1550650379618_mi.jpg",
+    "shopName": "젝시믹스",
+    "texts": "10대,20대,30대피트니스"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/06/1559710017170_mi.jpg",
+    "shopName": "아뜨랑스",
+    "texts": "20대,30대러블리,럭셔리·명품"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/05/1558940655652_mi.jpg",
+    "shopName": "안나키즈",
+    "texts": "30대미시스타일,심플베이직"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2018/04/1523865657097_mi.jpg",
+    "shopName": "스토리나인",
+    "texts": "30대미시스타일,심플베이직"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2017/06/1498199319872_mi.jpg",
+    "shopName": "난닝구",
+    "texts": "20대,30대유니크,심플베이직"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/05/1558940637449_mi.jpg",
+    "shopName": "리틀블랙",
+    "texts": "30대모던시크,미시스타일"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/store/2020/03/24/1585013479261.jpg",
+    "shopName": "핫핑",
+    "texts": "10대,20대빅사이즈,심플베이직"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2018/04/1523611595638_mi.jpg",
+    "shopName": "민스샵",
+    "texts": "20대,30대러블리,모던시크"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/05/1559199438213_mi.jpg",
+    "shopName": "로즈베이",
+    "texts": "30대미시스타일,심플베이직"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/store/2020/01/23/1579748891347.jpg",
+    "shopName": "베니토",
+    "texts": "20대,30대럭셔리·명품,페미닌"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/05/1559199498816_mi.jpg",
+    "shopName": "안나앤블루",
+    "texts": "30대미시스타일,심플베이직"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2018/10/1540963967874_mi.jpg",
+    "shopName": "메이블루",
+    "texts": "30대미시스타일,심플베이직"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2017/06/1498200476509_mi.jpg",
+    "shopName": "임블리",
+    "texts": "20대,30대러블리,모던시크"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/02/1550134164211_mi.jpg",
+    "shopName": "육육걸즈",
+    "texts": "10대,20대러블리,십대쇼핑몰"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/05/1559199409732_mi.jpg",
+    "shopName": "메이비베이비",
+    "texts": "20대,30대러블리,유니크"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2017/06/1498200350362_mi.jpg",
+    "shopName": "앙투",
+    "texts": "20대빅사이즈,심플베이직"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/store/2020/10/12/1602491137336.jpg",
+    "shopName": "사뿐",
+    "texts": "10대,20대,30대슈즈"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2017/06/1498200709781_mi.jpg",
+    "shopName": "홀릭홀릭",
+    "texts": "30대미시스타일,심플베이직"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/store/2020/05/04/1588564655149.jpg",
+    "shopName": "하나언니",
+    "texts": "20대,30대모던시크,심플베이직"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/05/1559199458372_mi.jpg",
+    "shopName": "리린",
+    "texts": "30대미시스타일,페미닌"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/04/1554714703489_mi.jpg",
+    "shopName": "썸제이",
+    "texts": "30대미시스타일,심플베이직"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/05/1559199475698_mi.jpg",
+    "shopName": "데일리룩",
+    "texts": "30대럭셔리·명품,미시스타일"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/06/1559709581930_mi.jpg",
+    "shopName": "안나앤모드",
+    "texts": "30대미시스타일,심플베이직"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/05/1558940626048_mi.jpg",
+    "shopName": "스타일난다",
+    "texts": "20대모던시크,유니크"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/05/1558940699601_mi.jpg",
+    "shopName": "미아마스빈",
+    "texts": "30대러블리,페미닌"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2018/10/1540799562640_mi.jpg",
+    "shopName": "러브패리스",
+    "texts": "20대,30대럭셔리·명품,페미닌"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2017/06/1498645196555_mi.jpg",
+    "shopName": "그레이시크",
+    "texts": "30대미시스타일,심플베이직"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/05/1559199565027_mi.jpg",
+    "shopName": "착한구두",
+    "texts": "10대,20대,30대슈즈"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2017/06/1498200583853_mi.jpg",
+    "shopName": "코코블랙",
+    "texts": "30대럭셔리·명품,미시스타일"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2018/08/1535359969762_mi.jpg",
+    "shopName": "조아맘",
+    "texts": "30대미시스타일,페미닌"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2018/08/1535449070736_mi.jpg",
+    "shopName": "젬마월드",
+    "texts": "20대,30대러블리,심플베이직"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/02/1550477167138_mi.jpg",
+    "shopName": "캔마트",
+    "texts": "30대미시스타일,심플베이직"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/02/1550477315290_mi.jpg",
+    "shopName": "슬로우앤드",
+    "texts": "10대,20대러블리,십대쇼핑몰"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/05/1558940595165_mi.jpg",
+    "shopName": "분홍코끼리",
+    "texts": "10대,20대,30대슈즈"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/02/1550135905880_mi.jpg",
+    "shopName": "프롬비기닝",
+    "texts": "10대,20대유니크,십대쇼핑몰"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2018/09/1536737424882_mi.jpg",
+    "shopName": "로미스토리",
+    "texts": "20대,30대러블리,빅사이즈"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2018/10/1540800106322_mi.jpg",
+    "shopName": "모코블링",
+    "texts": "20대모던시크,유니크"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/03/1553846080061_mi.jpg",
+    "shopName": "메이빈스",
+    "texts": "20대,30대러블리,모던시크"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2018/08/1535529139324_mi.jpg",
+    "shopName": "룸페커",
+    "texts": "20대,30대러블리,심플베이직"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/07/1562896371983_mi.jpg",
+    "shopName": "다바걸",
+    "texts": "20대,30대페미닌,심플베이직"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/05/1559199530243_mi.jpg",
+    "shopName": "라이크유",
+    "texts": "20대,30대모던시크,심플베이직"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/store/2020/07/20/1595230830574.jpg",
+    "shopName": "갠소",
+    "texts": "20대,30대빅사이즈,심플베이직"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/02/1550478264807_mi.jpg",
+    "shopName": "공구우먼",
+    "texts": "20대,30대빅사이즈,심플베이직"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2018/08/1535448868714_mi.jpg",
+    "shopName": "플라이모델",
+    "texts": "20대러블리,모던시크"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2017/06/1498200609701_mi.jpg",
+    "shopName": "파티수",
+    "texts": "20대,30대럭셔리·명품,모던시크"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2017/06/1498199908075_mi.jpg",
+    "shopName": "몸빼",
+    "texts": "30대유니크,심플베이직"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/04/1555991542202_mi.jpg",
+    "shopName": "커먼유니크",
+    "texts": "20대러블리,심플베이직"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2017/06/1498200221427_mi.jpg",
+    "shopName": "시크헤라",
+    "texts": "20대,30대럭셔리·명품,유니크"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2017/08/1503397701898_mi.jpg",
+    "shopName": "클릭앤퍼니",
+    "texts": "30대모던시크,심플베이직"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/05/1557820972028_mi.jpg",
+    "shopName": "리리앤코",
+    "texts": "20대,30대러블리,심플베이직"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/02/1550477272535_mi.jpg",
+    "shopName": "브론즈부부",
+    "texts": "30대미시스타일,페미닌"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2017/06/1498199686025_mi.jpg",
+    "shopName": "레미떼",
+    "texts": "30대미시스타일,페미닌"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2018/09/1536049182698_mi.jpg",
+    "shopName": "주줌",
+    "texts": "30대럭셔리·명품,미시스타일"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/02/1550135005288_mi.jpg",
+    "shopName": "메이썸",
+    "texts": "10대,20대모던시크,심플베이직"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/02/1550134144521_mi.jpg",
+    "shopName": "딘트",
+    "texts": "30대럭셔리·명품,모던시크"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2018/02/1517559459694_mi.jpg",
+    "shopName": "위드윤",
+    "texts": "10대십대쇼핑몰"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2018/01/1517370984614_mi.jpg",
+    "shopName": "로렌하이",
+    "texts": "10대,20대러블리,심플베이직"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/02/1550477194391_mi.jpg",
+    "shopName": "립합",
+    "texts": "20대,30대섹시,유니크"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/05/1559199596468_mi.jpg",
+    "shopName": "블랙업",
+    "texts": "10대,20대유니크,십대쇼핑몰"
+}, {
+    "category": "shop",
+    "src": "https://img.sta1.com/_up/shop/logo/2019/05/1559199613588_mi.jpg",
+    "shopName": "라걸",
+    "texts": "20대,30대유니크,심플베이직"
+}]
 data = data.map(card => {
     let imgRawSrc = card.src;
     let imgFileName = imgRawSrc.slice(imgRawSrc.lastIndexOf("/") + 1);

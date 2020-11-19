@@ -32,13 +32,37 @@ const ID = {
     POST_SHARE_BUTTON2: "#post-share-button2"
 };
 
+const AJAX = {
+    doPost(url, data, success) {
+        $.ajax({
+            "url":url,
+            "async": true,
+            "type":'POST',
+            "data": data,
+            "dataType":"json",// xml, json, script, html
+            success:success,
+        });
+    }
+}
+
 // 실행하기 위한 이벤트를 여기에 추가하세요.
 const FUNC = {
     POST_SHARE_BUTTON: function(ev) {
         alert("공유 버튼을 눌렀습니다");
     },
     POST_DELETE_BUTTON: function(ev) {
-        alert("삭제 버튼을 눌렀습니다");
+
+        const yesNo = confirm("정말로 삭제하시겠습니까?");
+        const YES = true;
+
+        if(yesNo == YES) {
+            const params = new URLSearchParams(location.search);
+            const postNumber = params.get("postNumber");
+
+            AJAX.doPost("delete.jsp", {"postNumber": postNumber}, (jqXHR) => {
+                history.back();
+            });
+        }   
     },
     POST_MORE_FUNCTION_BUTTON: function(ev) {
         alert("더보기 버튼을 눌렀습니다");
@@ -75,6 +99,22 @@ const FUNC = {
     },
     DELETE: function(ev) {
         alert("삭제 버튼을 눌렀습니다.");   
+
+        const yesNo = confirm("정말로 삭제하시겠습니까?");
+        const YES = true;
+
+        if(yesNo == YES) {
+            const params = new URLSearchParams(location.search);
+            const postNumber = params.get("postNumber");
+
+            AJAX.doPost("delete.jsp", {
+                "postNumber": postNumber,
+                ""
+            }, jqXHR => {
+                history.back();
+            });
+        }   
+
     },
     POST_RECOMMAND_BUTTON: function(ev) {
         alert("글 추천 버튼을 눌렀습니다.");   
