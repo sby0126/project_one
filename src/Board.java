@@ -12,29 +12,40 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
+
 @WebServlet("/board/*")
 public class Board extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final boolean isDownloaded = false;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		// 이 라인이 활성화하면 JSON이 아니라 파일 다운로드 처리가 됨
-//		response.setContentType("application/x-www-form-urlencoded;charset=utf-8;");
-		
-		response.setContentType("application/json;charset=utf-8;");
+		if(isDownloaded) {
+			response.setContentType("application/x-www-form-urlencoded;charset=utf-8;");	
+		} else {
+			response.setContentType("application/json;charset=utf-8;");	
+		}
 		
 		PrintWriter out = response.getWriter();
 		
 		String reqUrl = request.getRequestURI();
 		String mappingUrl = request.getServletPath();
+		
 		String pathInfo = request.getPathInfo();
 		
+		// Extract the post number from path info.
 		String postNumber = pathInfo.substring(1);
 		
-		out.print("{\"pathInfo\": \"" + pathInfo + ",");
-		out.print("\"content\": \"" + "테스트" + "\",");
-		out.print("\"postNumber\": \"" + postNumber + "\"}");
+		JSONObject json = new JSONObject();
+		json.put("pathInfo", pathInfo);
+		json.put("content", "테스트");
+		json.put("postNumber", postNumber);
+		
+		// Print out a json text to response header.
+		out.println(json.toJSONString());
 	}
 
 }
