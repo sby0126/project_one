@@ -1,4 +1,7 @@
 ./WebContent/pages/:
+Interested_item.html
+Recently_viewde_item.html
+Recently_viewed_shop.html
 board-default.html
 board-post.html
 board-smart-editor.html
