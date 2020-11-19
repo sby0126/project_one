@@ -201,6 +201,5 @@ local.properties
 #.project
 /build/
 
-.project
-.settings
-.classpath
+*.project
+*.classpath
