@@ -22,7 +22,7 @@ public class Login extends HttpServlet {
 
 	    HttpSession session = request.getSession();
 	    
-	    session.setAttribute("id", id);
+	    session.setAttribute("loginOK", id);
 	    
 	    PrintWriter out = response.getWriter();
 	    out.println("<html>");
