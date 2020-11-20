@@ -11,9 +11,13 @@ export class ShopContentLoader extends Component {
         this._fetchCards = 10; // 새로 가져올 카드 갯수
         this._maxCards = 50; // 최대 카드 갯수
         this._interval = 800; // 이벤트 과대 실행 방지 용 실행 간격 800ms
+        this._data = {};
 
         this._loaders = {};
         
+        /**
+         * @type {DataLoader}
+         */
         this._dataLoader = DataLoader.builder(this);
     }
 
@@ -78,7 +82,10 @@ export class ShopContentLoader extends Component {
             }
 
             // let myImgData = await this.loadJsonAsync(`json/shop/shop_data${idx}.json`);
-            let myImgData = blobData[idx];
+            // let myImgData = blobData[idx];
+            let myImgData = this._data.contentData[idx];
+            const imgSrc = this._data.imageUrl;
+            const mainImg = this._data.imageData;
 
             if(!card) {
                 continue;
@@ -134,15 +141,29 @@ export class ShopContentLoader extends Component {
 
         this._items = Array.from(document.querySelectorAll(".card-container .card"));
 
-        // 로딩 직후, 새로운 카드 이미지를 바로 생성합니다.
-        this.appendCards();
-        
-        // 스크롤 시 새로운 카드 이미지를 일정 간격마다 추가합니다.
-        const throttled  = _.throttle(() => {
-            this.appendCards();
-        }, this._interval);
+        $(".header-left a").eq(1).on("click", (ev) => {
+            this._dataLoader.setParameter("gndr", "F");
+        })
+        $(".header-left a").eq(2).on("click", (ev) => {
+            this._dataLoader.setParameter("gndr", "M");
+        })
 
-        $(window).scroll(throttled);        
+        // 데이터를 가져옵니다.
+        this._dataLoader.initWithUrlParams();
+        this._dataLoader.load("shop", (data) => {
+            
+            this._data = data;
+
+            // 로딩 직후, 새로운 카드 이미지를 바로 생성합니다.
+            this.appendCards();
+            
+            // 스크롤 시 새로운 카드 이미지를 일정 간격마다 추가합니다.
+            const throttled  = _.throttle(() => {
+                this.appendCards();
+            }, this._interval);
+
+            $(window).scroll(throttled);               
+        });
 
     }
     

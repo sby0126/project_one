@@ -11,6 +11,7 @@ header {
 .contents-wrapper {
     width: 1024px;
 }
+
 /* contents 영역의 메뉴바 속성 */
 .inner-menu {
     display: flex;
@@ -18,6 +19,7 @@ header {
     top: -9.2em;
     left: 19.8em;
 }
+
 /* contents 영역의 메뉴바 a의 태그 */
 .inner-menu a {
     box-sizing: content-box;
@@ -38,7 +40,7 @@ header {
     color:#FF6B00;
     }
 
-/* content의 실제 영역. 약관 출력 영역의 최상위 wrapper */
+/* content의 실제 영역. 약관 출력 영역의 최상위 wrapper */ 
 .inner-contents {
     margin: 0 auto;
     position: relative;
@@ -49,37 +51,37 @@ header {
     top: -7.4em;
     left: 14.8em;
 }
- }
- /* 약관이 출력되는 pre의 wrapper */
- .desc {
-    position: relative;
-    width: 110%;
-    left: 20em;
-    top: -3%;
-    box-sizing: content-box;
-    line-height: 1.1em;
-    height: auto;
- }
- 
- .desc > pre {
-    background: rgb(255,255,255);
-    position: relative;
-    top: -5%;
-    left: -24%;
-    width: 70%;
-    white-space: pre-line;
-    box-sizing: border-box;
-    width: 100%;
-    height: auto;
-    font-size: 12px;
-    padding: 2em 5em;
- }
 
- .text-gray {
-    color: rgb(180, 179, 179);
+ /* 약관이 출력되는 pre의 wrapper */
+.desc {
+   position: relative;
+   width: 110%;
+   left: 20em;
+   top: -3%;
+   box-sizing: content-box;
+   line-height: 1.1em;
+   height: auto;
+}
+ 
+.desc > pre {
+   background: rgb(255,255,255);
+   position: relative;
+   top: -5%;
+   left: -24%;
+   width: 70%;
+   white-space: pre-line;
+   box-sizing: border-box;
+   width: 100%;
+   height: auto;
+   font-size: 12px;
+   padding: 2em 5em;
+}
+
+.text-gray {
+   color: rgb(180, 179, 179);
 }
 
 .text-orange {
-    color:#FF6B00;
-    font-weight: bolder;
+   color:#FF6B00;
+   font-weight: bolder;
 }

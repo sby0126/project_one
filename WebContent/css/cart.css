@@ -1,0 +1,159 @@
+
+    /* 업 보더라인 자동 간격 정리 필요 */
+    .up-line-bd {
+        width: 75%;
+        height: 3px;
+        border: 1px solid rgb(rgb(128, 127, 128));
+        background-color: gray;
+        position: absolute;
+        top: 28%;
+        left: 15%;
+    }
+        
+    .down-line-bd {
+        clear: both;
+        width: 75%;
+        height: 3px;
+        border: 1px solid rgb(rgb(128, 127, 128));
+        background-color: gray;
+        position: absolute;
+        bottom: 22%;
+        left: 15%;
+    }
+
+    .contents-wrapper {
+        margin: 0;
+        padding: 0;
+        width: 85%;
+        height: auto;
+        min-height: 600px;
+        overflow: display;
+    }
+
+    .contents-wrapper h2 {
+        position: absolute;
+        left: 20%;
+        top: 17%;
+    }
+
+    /* 자동 높이 증감 구현 필요 */
+    /* 상품의 정보가 출력되는 영역의 wrapper 영역 */
+    .product-info-zone {
+       position: relative;
+        margin: 0 auto;
+        width: 90%;
+        top: 9.3em;
+        left: 1.7em;
+        height: auto;
+        min-height: 300px;
+    }
+
+    /* 장바구니 상품 정보의 저장 기능과 연동, 해당 정보의 자동 기입 기능 필요 */
+    /* 상품 정보 출력 영역 */
+    .product-info{
+        width: 100%;
+        height: 300px;
+        margin: 0;
+        padding-top: 5.5em;
+        padding-left: 6%;
+        box-sizing: border-box;
+        top: 1em;
+        display: flex;
+    }
+
+    .product-info div{
+        min-width: 150px;
+        width: auto;
+        box-sizing: content-box;
+    }
+
+    .product-info div p{
+        font-size: 20px;
+    }
+
+    .product{
+        display: flex;
+        width: 100%;
+        padding-top: 0.7em;
+    }
+
+    .chkbox {
+        position: relative;
+        top: 25%;
+        margin-right: 10%;
+    }
+        
+    .product-img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .product-name {
+        min-width: 400px;
+        height: 80px;
+        margin-top: 0.5em;
+        margin-left: 10%;
+        padding-top: 1.4em;
+        box-sizing: border-box;
+    }
+        
+    .product-num {
+        position: absolute;
+        margin-left: 7%;
+        margin-top: 3em;
+        right: 25%;
+        width: 40px;
+        height: 30px;
+    }
+        
+    .product-price {
+        position: absolute;
+        width: 150px;
+        height: 50px;
+        right: 0;
+        margin-left: 8%;
+        margin-top: 2.3em;
+    }
+
+    /* product-info의 정보를 읽고 정산하는 하단 영역. 기능 구현 필요 */
+    .result-buy-cost {
+        position: relative;
+        margin: 0 auto;
+        width: 90%;
+        height: 150px;
+        clear: both;
+        bottom: -11.5em;
+    }
+
+    .result-buy-cost p{
+        float: left;
+        right: -77%;
+        position: relative;
+        margin-right: 67px;
+    }
+
+    /* 맨 하단의 구매 및 삭제 버튼의 wrapper */
+    .button-zone {      
+        width: 150px;
+        height: 50px;
+        right: -81%;
+        bottom: -12%;
+        position: relative;
+        display: flex;
+    }
+
+    /* 해당 영역의 구매 버튼 */
+    .buy-product {      
+        width: 60px;
+        height: 36px;
+        margin-right: 2em;
+        font-size: 0.8em;
+    }
+
+    /* 해당 영역의 삭제 버튼 */
+    .del-product {      
+        width: 60px;
+        height: 36px;
+       font-size: 0.8em;
+    }
+    
