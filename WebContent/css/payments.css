@@ -154,6 +154,7 @@
     right: 1.5em;
     border: 1px solid;
     border-radius: 5px;
+    z-index: 1;
 }
 /* 구매 상품의 정보를 table 형식으로 출력*/
 .item {
