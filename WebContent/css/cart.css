@@ -61,20 +61,58 @@
         display: flex;
     }
 
-    .product-info div{
-        min-width: 150px;
-        width: auto;
-        box-sizing: content-box;
-    }
-
-    .product-info div p{
-        font-size: 20px;
-    }
-
-    .product{
-        display: flex;
+    .product {
+        margin: 0 auto;
+        margin-right: 7%;
         width: 100%;
-        padding-top: 0.7em;
+        text-align: center;
+    }
+
+    .product tr td { padding: 0.3em; }
+
+    .product tr td:nth-of-type(1) {width: 4%;}
+
+    .product tr td:nth-of-type(2) { width: 15%;}
+
+    .product tr td:nth-of-type(3) { width: 35%;}
+
+    .product tr td:nth-of-type(4) { width: 8%;}
+
+    .product tr td:nth-of-type(4) > input { width: 50px;}
+
+    .product tr td:nth-of-type(5) { width: 10%;}
+
+    .product tr td:nth-of-type(6) { width: 10%;}
+
+    .product tr td:nth-of-type(7) { width: 12%;}
+
+
+    .product tr:first-of-type td {
+        border: 1px solid grey;
+        border-left: none;
+    }
+
+    .product tr:first-of-type td:last-of-type {
+        border-right: none;
+    }
+    
+    .product tr:not(.label) td {
+        border: 1px solid grey;
+        border-left: none;
+        border-top: none;
+    }
+
+    .product tr:not(.label) td:last-of-type {
+        border-right: none;
+    }
+
+    .product tr:not(.label) td:nth-of-type(2) {
+        padding: 0.3em;
+    }
+
+    .product tr:not(.label) td:nth-of-type(3) {
+        text-align: left;
+        padding-left: 1em;
     }
 
     .chkbox {
@@ -84,37 +122,11 @@
     }
         
     .product-img {
-        width: 100px;
-        height: 100px;
+        width: 125px;
+        height: 125px;
     }
 
-    .product-name {
-        min-width: 400px;
-        height: 80px;
-        margin-top: 0.5em;
-        margin-left: 10%;
-        padding-top: 1.4em;
-        box-sizing: border-box;
-    }
-        
-    .product-num {
-        position: absolute;
-        margin-left: 7%;
-        margin-top: 3em;
-        right: 25%;
-        width: 40px;
-        height: 30px;
-    }
-        
-    .product-price {
-        position: absolute;
-        width: 150px;
-        height: 50px;
-        right: 0;
-        margin-left: 8%;
-        margin-top: 2.3em;
-    }
-
+    
     /* product-info의 정보를 읽고 정산하는 하단 영역. 기능 구현 필요 */
     .result-buy-cost {
         position: relative;
@@ -122,12 +134,12 @@
         width: 90%;
         height: 150px;
         clear: both;
-        bottom: -11.5em;
+        bottom: -11.9em;
     }
 
     .result-buy-cost p{
         float: left;
-        right: -77%;
+        right: -73%;
         position: relative;
         margin-right: 67px;
     }
@@ -136,24 +148,24 @@
     .button-zone {      
         width: 150px;
         height: 50px;
-        right: -81%;
-        bottom: -12%;
+        right: -79%;
+        bottom: -13.4%;
         position: relative;
         display: flex;
     }
 
     /* 해당 영역의 구매 버튼 */
     .buy-product {      
-        width: 60px;
-        height: 36px;
+        width: 55px;
+        height: 30px;
         margin-right: 2em;
         font-size: 0.8em;
     }
 
     /* 해당 영역의 삭제 버튼 */
     .del-product {      
-        width: 60px;
-        height: 36px;
+        width: 55px;
+        height: 30px;
        font-size: 0.8em;
     }
     
