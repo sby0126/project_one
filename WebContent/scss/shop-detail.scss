@@ -37,10 +37,14 @@
     overflow: hidden;
 
     .detail-trailer-list {
-        width: 5%;
         flex-basis: 0;
         display: flex;
         justify-content: center;
+        flex-direction: column;
+    }
+
+    .detail-trailer-list > div {
+        width: 100%;
     }
 
     ul {
