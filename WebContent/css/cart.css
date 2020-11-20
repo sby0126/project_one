@@ -1,5 +1,5 @@
-
-    /* 업 보더라인 자동 간격 정리 필요 */
+@charset "UTF-8";
+    /* 페이지 내의 상단 구분선 속성*/
     .up-line-bd {
         width: 75%;
         height: 3px;
@@ -36,8 +36,8 @@
         top: 17%;
     }
 
-    /* 자동 높이 증감 구현 필요 */
-    /* 상품의 정보가 출력되는 영역의 wrapper 영역 */
+    /* 아이템 정보를 받아 출력하는 기능 필요 */
+    /* 구매할 상품의 정보를 출력하는 영역의 wrapper  */
     .product-info-zone {
        position: relative;
         margin: 0 auto;
@@ -48,8 +48,8 @@
         min-height: 300px;
     }
 
-    /* 장바구니 상품 정보의 저장 기능과 연동, 해당 정보의 자동 기입 기능 필요 */
-    /* 상품 정보 출력 영역 */
+    /*  */
+    /* �긽�뭹 �젙蹂� 異쒕젰 �쁺�뿭 */
     .product-info{
         width: 100%;
         height: 300px;
@@ -126,8 +126,7 @@
         height: 125px;
     }
 
-    
-    /* product-info의 정보를 읽고 정산하는 하단 영역. 기능 구현 필요 */
+    /* product-info�쓽 �젙蹂대�� �씫怨� �젙�궛�븯�뒗 �븯�떒 �쁺�뿭. 湲곕뒫 援ы쁽 �븘�슂 */
     .result-buy-cost {
         position: relative;
         margin: 0 auto;
@@ -144,7 +143,7 @@
         margin-right: 67px;
     }
 
-    /* 맨 하단의 구매 및 삭제 버튼의 wrapper */
+    /* 留� �븯�떒�쓽 援щℓ 諛� �궘�젣 踰꾪듉�쓽 wrapper */
     .button-zone {      
         width: 150px;
         height: 50px;
@@ -154,7 +153,7 @@
         display: flex;
     }
 
-    /* 해당 영역의 구매 버튼 */
+    /* �빐�떦 �쁺�뿭�쓽 援щℓ 踰꾪듉 */
     .buy-product {      
         width: 55px;
         height: 30px;
@@ -162,7 +161,7 @@
         font-size: 0.8em;
     }
 
-    /* 해당 영역의 삭제 버튼 */
+    /* �빐�떦 �쁺�뿭�쓽 �궘�젣 踰꾪듉 */
     .del-product {      
         width: 55px;
         height: 30px;
