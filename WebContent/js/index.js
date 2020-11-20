@@ -2,6 +2,7 @@ import {App, ID} from "./app.js";
 import {LoginButton} from "./components/LoginButton.js";
 import { ShopContentLoader } from "./components/ShopContentLoader.js";
 import { CardStyleSheetBuilder } from "./components/CardStyleSheetBuilder.js";
+import {join} from "./join.js";
 
 /**
  * ==============================================

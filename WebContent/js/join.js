@@ -1,8 +1,5 @@
-/**
- * @author 한덕호
- */
 
-function run() {
+function join() {
     $(".main .content_login input").focus(function () {
         var read = $(this).prop("readonly");
         if (!read) {
@@ -21,4 +18,6 @@ function run() {
     });
 }
 
-run();
+window.join = join;
+
+export {join};
