@@ -1,5 +1,5 @@
-<!-- <%@ page language="java" contentType="text/html; charset=UTF-8" -->
-<!--     pageEncoding="UTF-8"%> -->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -13,8 +13,6 @@
     <script src="https://cdn.jsdelivr.net/npm/underscore@1.11.0/underscore-min.js"></script>
 </head>
 <body>
-    <!-- 컨테이너의 시작 -->
-    <div class="container">
         <!-- 헤더의 시작 -->
         <header>
             <div class="header-wrapper">
@@ -137,18 +135,5 @@
                 </div>
             </div>
         </header>
-
-        <!-- 본문의 시작 -->
-        <section>
-            <!-- 본문이 들어가는 래퍼 -->
-            <div class="contents-wrapper">
-            </div>
-        </section>
-    </div>
-    <!-- 라이트 박스-->
-    <div id="light-box-container">
-    </div>
-    <!-- index.js는 메인 용이므로 알맞은 스크립트를 사용해야 합니다-->
-    <script type="module" src="js/index.js"></script>
 </body>
 </html>

@@ -46,7 +46,7 @@ function output(filename, e, myData) {
 }
 
 function runShop() {
-    const url = "https://www.sta1.com/shops?gndr=F&shopType=B";
+    const url = "https://www.sta1.com/shops/121?shopType=S&gndr=F";
     driver.get(url);
 
     const items = driver.findElements(By.css(".product-item-container"));

@@ -39,7 +39,7 @@ class ItemPage extends App {
             .card {
                 display: flex;
                 flex-wrap: wrap;
-                flex: auto 1 auto;
+                flex: auto auto auto;
                 flex-direction: column;
                 border: 1px solid #F2F5F9;
             }
