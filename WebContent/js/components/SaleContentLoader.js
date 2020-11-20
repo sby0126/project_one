@@ -132,7 +132,8 @@ export class SaleContentLoader extends Component {
 
         $(".header-left a").eq(1).on("click", (ev) => {
             this._dataLoader.setParameter("gndr", "F");
-        })
+        });
+
         $(".header-left a").eq(2).on("click", (ev) => {
             this._dataLoader.setParameter("gndr", "M");
         });
