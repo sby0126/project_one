@@ -3,7 +3,7 @@
         background-color: rgb(243,247,250);
     }
     .header-center{
-        margin-right: 3.2em;
+        margin-right: 1em;
     }
 
     .contents-wrapper {
@@ -14,7 +14,7 @@
         display: flex;
         position: relative;
         top: -9.2em;
-        left: 17.8em;
+        left: 19em;
     }
 
     header {
