@@ -46,7 +46,7 @@ function output(filename, e, myData) {
 }
 
 function runShop() {
-    const url = "https://www.sta1.com/shops/121?shopType=S&gndr=F";
+    const url = "https://www.sta1.com/shops?gndr=F&shopType=B";
     driver.get(url);
 
     const items = driver.findElements(By.css(".product-item-container"));
@@ -78,8 +78,43 @@ function runShop() {
     })
 }
 
+
+function runShopWoman() {
+    const url = "https://www.sta1.com/shops?gndr=F&shopType=B";
+    driver.get(url);
+
+    const items = driver.findElements(By.css(".shop-card > .info"));
+    items.then(products => {
+
+        const lineNumber = ((i=0) => () => i++)();
+
+        products.forEach(async e => {
+            const newData = {};
+            try {
+                
+                newData.src = await e.findElement(By.css(".img > img")).getAttribute("src");
+                newData.texts = await e.findElement(By.css("p:nth-of-type(1)")).getText();
+                newData.texts += await e.findElement(By.css("p:nth-of-type(2)")).getText();
+                
+                newData.shop = await e.findElement(By.css(".shop-name")).getText();
+
+                data.push(newData);
+
+                if(lineNumber() == products.length - 1) {
+                    output("output_shop.json", e, data);
+                }
+
+            } catch(e) {
+                console.warn(e);
+            }
+        })
+    }).catch(err => {
+        console.warn(err);
+    })
+}
+
 function runItem() {
-    const url = "https://www.sta1.com/items?gndr=F&shopType=S";
+    const url = "https://www.sta1.com/items?gndr=F&shopType=B";
     driver.get(url);
 
     const items = driver.findElements(By.css(".product-item-container"));
@@ -112,7 +147,7 @@ function runItem() {
 }
 
 function runSale() {
-    const url = "https://www.sta1.com/sales/all?gndr=F&shopType=S";
+    const url = "https://www.sta1.com/sales/all?gndr=F&shopType=B";
     driver.get(url);
 
     const items = driver.findElements(By.css(".item > .sale-card > a"));
@@ -147,6 +182,9 @@ function runSale() {
 switch(argv.type.toLowerCase()) {
     case 'shop':
         runShop();
+        break;
+    case 'shopwoman':
+        runShopWoman();
         break;
     case 'item':
         runItem();
