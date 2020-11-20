@@ -72,6 +72,17 @@ class App extends EventEmitter {
                 .on("fetch", () => this.fetchNewData())
                 .run();
 
+
+        // 주소에 gndr 매개변수가 있는가?
+        const urlParams = new URLSearchParams(location.search);
+        let gndr = urlParams.get("gndr");
+        if(!gndr) {
+            gndr = "M";
+        }
+        
+        $(".header-left a").removeClass("active");
+        $(".header-left a").eq(gndr === "M" ? 2 : 1).addClass("active");
+
     }
 
     /**

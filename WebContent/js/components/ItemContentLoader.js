@@ -1,6 +1,7 @@
 import { Component } from "./Component.js";
 import { getDataManager } from "../DataManager.js";
 import { itemData, imgSrc, itemImg } from "../services/itemData.js";
+import { DataLoader } from "./DataLoader.js";
 
 /**
  * @author 어진석
@@ -19,6 +20,11 @@ export class ItemContentLoader extends Component {
 
         this._loaders = {};
         this._index = 0;
+
+        /**
+         * @type {DataLoader}
+         */
+        this._dataLoader = DataLoader.builder(this);        
     }
 
     /**
@@ -93,7 +99,10 @@ export class ItemContentLoader extends Component {
                 continue;
             }            
             
-            let myImgData = itemData[idx];
+            // let myImgData = itemData[idx];
+            let myImgData = this._data.contentData[idx];
+            const imgSrc = this._data.imageUrl;
+            const itemImg = this._data.imageData;            
 
             if(!card) {
                 continue;
@@ -163,19 +172,34 @@ export class ItemContentLoader extends Component {
 
         this._items = Array.from(document.querySelectorAll(".card-container .card"));
 
-        // 기본적으로 
-        this.appendCards();
+        $(".header-left a").eq(1).on("click", (ev) => {
+            this._dataLoader.setParameter("gndr", "F");
+        })
+        $(".header-left a").eq(2).on("click", (ev) => {
+            this._dataLoader.setParameter("gndr", "M");
+        });
 
-        // 전역 스크롤 이벤트 선언
-        // 스크롤 할 때 마다 많은 스크롤 이벤트가 실행됩니다.
-        // 그것을 막지하는 기법을 '쓰로틀링'이라고 하고, 언더스코어 라이브러리에서 지원하는 쓰토틀링 라이브러리로
-        // 문제를 해결했습니다.
-        const throttled  = _.throttle(() => {
+        // 데이터를 가져옵니다.
+        this._dataLoader.initWithUrlParams();
+        this._dataLoader.load("item", (data) => {
+            this._data = data;
+
+            // 기본적으로 
             this.appendCards();
-        }, this._interval);
 
-        // 쓰로틀링 함수는 반드시 개별 전달되어야 합니다.
-        $(window).scroll(throttled);
+            // 전역 스크롤 이벤트 선언
+            // 스크롤 할 때 마다 많은 스크롤 이벤트가 실행됩니다.
+            // 그것을 막지하는 기법을 '쓰로틀링'이라고 하고, 언더스코어 라이브러리에서 지원하는 쓰토틀링 라이브러리로
+            // 문제를 해결했습니다.
+            const throttled  = _.throttle(() => {
+                this.appendCards();
+            }, this._interval);
+
+            // 쓰로틀링 함수는 반드시 개별 전달되어야 합니다.
+            $(window).scroll(throttled);            
+        });
+
+
     }
 
     static id() {

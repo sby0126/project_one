@@ -1,5 +1,6 @@
 import { Component } from "./Component.js";
 import {saleData, imgSrc, saleImg} from "../services/saleData.js";
+import { DataLoader } from "./DataLoader.js";
 
 export class SaleContentLoader extends Component {
 
@@ -10,6 +11,11 @@ export class SaleContentLoader extends Component {
         this._fetchCards = 3; // 새로 가져올 카드 갯수
         this._maxCards = 50; // 최대 카드 갯수
         this._interval = 800; // 스크롤 이벤트 실행 간격 (과다 실행 방지용)
+
+        /**
+         * @type {DataLoader}
+         */
+        this._dataLoader = DataLoader.builder(this);           
     }
 
     /**
@@ -69,7 +75,10 @@ export class SaleContentLoader extends Component {
         for(let idx = currentCards; idx < (currentCards + fetchCards); idx++) {
             const card = this._items[idx];
 
-            let myImgData = saleData[idx];
+            // let myImgData = saleData[idx];
+            let myImgData = this._data.contentData[idx];
+            const imgSrc = this._data.imageUrl;
+            const saleImg = this._data.imageData;            
 
             if(!card) {
                 continue;
@@ -121,6 +130,14 @@ export class SaleContentLoader extends Component {
 
         this._items = Array.from(document.querySelectorAll(".card-container .card"));
 
+        $(".header-left a").eq(1).on("click", (ev) => {
+            this._dataLoader.setParameter("gndr", "F");
+        });
+
+        $(".header-left a").eq(2).on("click", (ev) => {
+            this._dataLoader.setParameter("gndr", "M");
+        });
+
         // 카드 이미지의 크기를 조절합니다.
         // 큰 해상도에서는 가로가 30% 입니다.
         const isMobileDevice = this.isMobileDevice();
@@ -129,15 +146,22 @@ export class SaleContentLoader extends Component {
             "height": "35rem",
         });
 
-        // 로딩 직후, 새로운 카드 이미지를 바로 생성합니다.
-        this.appendCards();
+        // 데이터를 가져옵니다.
+        this._dataLoader.initWithUrlParams();      
+        this._dataLoader.load("sale", (data) => {          
 
-        // 스크롤 시 새로운 카드 이미지를 일정 간격마다 추가합니다.
-        const throttled  = _.throttle(() => {
+            this._data = data;
+
+            // 로딩 직후, 새로운 카드 이미지를 바로 생성합니다.
             this.appendCards();
-        }, this._interval);
 
-        $(window).scroll(throttled);        
+            // 스크롤 시 새로운 카드 이미지를 일정 간격마다 추가합니다.
+            const throttled  = _.throttle(() => {
+                this.appendCards();
+            }, this._interval);
+
+            $(window).scroll(throttled);              
+        });
 
     }
 

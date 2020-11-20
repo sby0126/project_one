@@ -147,7 +147,7 @@ function runItem() {
 }
 
 function runSale() {
-    const url = "https://www.sta1.com/sales/all?gndr=F&shopType=B";
+    const url = "https://www.sta1.com/sales/all?gndr=F&shopType=S";
     driver.get(url);
 
     const items = driver.findElements(By.css(".item > .sale-card > a"));
