@@ -48,8 +48,8 @@
         min-height: 300px;
     }
 
-    /*  */
-    /* �긽�뭹 �젙蹂� 異쒕젰 �쁺�뿭 */
+    /* 장바구니 상품 정보의 저장 기능과 연동, 해당 정보의 자동 기입 기능 필요 */
+    /* 상품 정보 출력 영역 */
     .product-info{
         width: 100%;
         height: 300px;
@@ -126,7 +126,7 @@
         height: 125px;
     }
 
-    /* product-info�쓽 �젙蹂대�� �씫怨� �젙�궛�븯�뒗 �븯�떒 �쁺�뿭. 湲곕뒫 援ы쁽 �븘�슂 */
+    /* product-info의 정보를 읽고 정산하는 하단 영역. 기능 구현 필요 */
     .result-buy-cost {
         position: relative;
         margin: 0 auto;
@@ -143,7 +143,7 @@
         margin-right: 67px;
     }
 
-    /* 留� �븯�떒�쓽 援щℓ 諛� �궘�젣 踰꾪듉�쓽 wrapper */
+    /* 맨 하단의 구매 및 삭제 버튼의 wrapper */
     .button-zone {      
         width: 150px;
         height: 50px;
@@ -153,7 +153,7 @@
         display: flex;
     }
 
-    /* �빐�떦 �쁺�뿭�쓽 援щℓ 踰꾪듉 */
+    /* 해당 영역의 구매 버튼 */
     .buy-product {      
         width: 55px;
         height: 30px;
@@ -161,7 +161,7 @@
         font-size: 0.8em;
     }
 
-    /* �빐�떦 �쁺�뿭�쓽 �궘�젣 踰꾪듉 */
+    /* 해당 영역의 삭제 버튼 */
     .del-product {      
         width: 55px;
         height: 30px;
