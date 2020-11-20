@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Template</title>
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/cart.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a99df0f94f.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -75,27 +79,32 @@
                 </ul>
             </div>                                    
         </header>
-        <section> 
+        <section>
             <div class="contents-wrapper"> <!-- 장바구니 정보 영역 -->
                 <h2>장바구니</h2>
                 <div class="up-line-bd"></div>
                 <div class="product-info-zone"> <!-- 실 상품 정보 영역 -->
                     <form class="product-info">
-                        <input type="checkbox" class="chkbox">
-                        <div class="product">
-                            <div> <!-- 구매할 상품 이미지 -->
-                                <img src="#" class="product-img"> 
-                            </div>
-                            <div> <!-- 구매할 상품 이름 -->
-                                <a href="#"><p class="product-name">상품명 1234</p></a> 
-                            </div>
-                            <div> <!-- 구매 갯수 -->
-                                <input type="number" class="product-num" placeholder="1"> 
-                            </div>
-                            <div> <!-- 상품 금액 -->
-                                <P class="product-price">price 원</P> 
-                            </div>                        
-                        </div>
+                        <table class="product">
+                            <tr class="label">
+                                <td><input type="checkbox" name="chk"></td>
+                                <td><p name="product-img"> 상품 이미지 </td> <!-- 구매할 상품 이미지 -->
+                                <td><a href="#"><p name="product-name"> 상품명</p></a></td> <!-- 구매할 상품 이름 -->
+                                <td><p name="product-num"> 구매 갯수 </p></td> <!-- 구매 갯수 -->
+                                <td><P name="product-price"> 가격 </P></td> <!-- 상품 가격-->
+                                <td><P name="product-price"> 할인 </P></td> <!-- 할인 -->
+                                <td><P name="product-price"> 총 금액 </P></td> <!-- 상품 금액 -->
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="chkbox"></td>
+                                <td><img src="#" class="product-img"></td> <!-- 구매할 상품 이미지 -->
+                                <td><a href="#"><p class="product-name">상품명 1234</p></a> </td> <!-- 구매할 상품 이름 -->
+                                <td><input type="number" class="product-num" placeholder="1"></td> <!-- 구매 갯수 -->
+                                <td><P name="product-price"> 가격 </P></td> <!-- 상품 가격-->
+                                <td><P name="product-price"> 할인 </P></td> <!-- 할인 -->
+                                <td><P class="product-price">price 원</P> </td> <!-- 상품 금액 -->
+                            </tr>
+                        </table>
                     </form>
                 </div>
                 <div class="down-line-bd"></div>
@@ -113,7 +122,10 @@
             </div>
         </section>
     </div>
+    <!-- 라이트 박스-->
     <div id="light-box-container">
     </div>
+    <!-- 스크립트 --> 
+    <script type="module" src="../js/MorePage.js"></script>
 </body>
 </html>
