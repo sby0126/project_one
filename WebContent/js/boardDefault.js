@@ -31,15 +31,17 @@
         }
     ]
 
-    let boardData = [{
+    let columns = {
         "postNumber": "글 번호",
-        "postType": "Normal",
+        "postType": "분류",
         "postTitle": "글 제목",
         "name": "이름",
         "create_at": "날짜",
         "view": "조회",
-        "recommandCount": "추천"
-    }, {
+        "recommandCount": "추천"        
+    }
+
+    let boardData = [{
         "postNumber": "18",
         "postType": "Notice",
         "postTitle": "공지사항입니다.",
@@ -206,20 +208,31 @@
         initWithEvent() {
             const self = this;
             this._elem = $("#editor");
-            this._elem.find("a").on("click", function(ev) {
-                const postNumber = $(this)
-                    .parent()
-                    .parent()
-                    .find("td").eq(0).text();
 
-                // postNumber 전달
-                // pageNumber도 전달해야 할 듯 한데...
-                let url = new URLSearchParams(location.search);
-                url.set("postNumber", postNumber);
+            $("#editor .table").fancyTable({
+                sortColumn: 0,
+                sortOrder:'descending',
+                searchable:false,   
+                sortable: true,     
+                pagination: true,     
+                paginationElement: ".board-footer-pages-buttons-wrapper"
+            })
 
-                location.href = "board-post.html?&" + url.toString();
-                // location.search = ;
-            });
+            this._elem.filterTable(".search-box")
+                .find("td > a").on("click", function(ev) {
+                    const postNumber = $(this)
+                        .parent()
+                        .parent()
+                        .find("td").eq(0).text();
+
+                    // postNumber 전달
+                    // pageNumber도 전달해야 할 듯 한데...
+                    let url = new URLSearchParams(location.search);
+                    url.set("postNumber", postNumber);
+
+                    location.href = "board-post.html?&" + url.toString();
+                });
+  
         },
 
         initWithPages() {
