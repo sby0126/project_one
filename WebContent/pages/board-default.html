@@ -9,7 +9,11 @@
     <link rel="stylesheet" href="../css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a99df0f94f.js" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>   
+    <script src="../libs/filter-table.min.js"></script> 
+    <script src="../libs/fancyTable.js"></script> 
+    <!-- <link rel="stylesheet" href="../libs/table-sortable.css">
+    <script src="../libs/table-sortable.js"></script> -->
 </head>
 <body>
     <style>
@@ -438,11 +442,13 @@
                                 <td>0</td>
                             </tr>
                             </tbody>
+                            <tfoot>
+                            </tfoot>
                     </table>
                     <div class="board-footer">
                         <div>
                             <div class="board-search-box">
-                                <input type="text" name="" class="seach-box">
+                                <input type="text" name="" class="search-box">
                                 <a href="#" class="button" id="search-button">검색</a>
                             </div>
                         </div>
@@ -464,7 +470,7 @@
                         <div>
                             <a href="board-smart-editor.html" class="button">글쓰기</a>
                         </div>
-                    </div>
+                    </div>                                
                 </div>    
             </div>
         </section>

@@ -98,4 +98,15 @@ section {
   width: 100%;
 }
 
+.header-filter-box-footer-right {
+  width: 40%;
+}
+.header-filter-box-footer-right ul {
+  width: 100%;
+}
+
+#slide-bar {
+  width: 100%;
+}
+
 /*# sourceMappingURL=shop-detail.css.map */

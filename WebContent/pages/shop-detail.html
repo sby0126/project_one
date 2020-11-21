@@ -10,6 +10,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/underscore@1.11.0/underscore-min.js"></script>
     <link rel="stylesheet" href="../css/shop-detail.css">
+    <link rel="stylesheet" href="../libs/themes/wrunner-default-theme.css">
+    <script src="../libs/wrunner-jquery.js"></script>
 </head>
 <body>
     <!-- 컨테이너의 시작 -->
@@ -151,10 +153,16 @@
                                 </div>
                                 <!-- 검색 필터 오른쪽 : 분류 -->
                                 <div class="header-filter-box-footer-right">
-                                    <span class="active">전체</span>
-                                    <span>10대</span>
-                                    <span>20대</span>
-                                    <span>30대</span>                            
+                                    <ul>
+                                        <li></li>
+                                        <li>
+                                            <div id="slide-bar">
+
+                                            </div>
+                                        </li>
+                                        <li></li>
+                                        <li></li>
+                                    </ul>                         
                                 </div>
                             </div>
                         </div>
@@ -288,5 +296,48 @@
     </div>
     <!-- index.js는 메인 용이므로 알맞은 스크립트를 사용해야 합니다-->
     <script type="module" src="js/index.js"></script>
+    <script>
+        (function() {
+
+            const mySlider = $("#slide-bar").wRunner({
+                // step size
+                step: 100,
+
+                // or 'range'
+                type: "range",
+
+                // min/max values
+                limits: {
+                    minLimit: 0, 
+                    maxLimit: 128000
+                },
+
+                // default value
+                singleValue: 1000,
+                rangeValue: { 
+                    minValue: 20, 
+                    maxValue: 126000
+                },
+
+                // root element
+                sliderRoots: document.querySelector(".header-filter-box-footer-right"),
+
+                // the number of divisions
+                divisionsCount: 10,
+
+                // shows labels
+                valueNoteDisplay: true,
+
+                // theme name
+                theme: "default",
+
+                // or 'vertical'
+                direction: 'horizontal'
+
+            });        
+
+        })();
+
+    </script>
 </body>
 </html>    
