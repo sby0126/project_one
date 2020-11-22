@@ -225,6 +225,11 @@ class App extends EventEmitter {
         }
     }
 
+    openMoalDialog2(querySelectorAll) {
+        $(selector).addClass("active");
+        this._isOpenModalDialog = $(selector).is("active");
+    }
+
     /**
      * 
      * @param {String} htmlFileName 

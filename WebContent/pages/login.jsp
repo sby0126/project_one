@@ -7,20 +7,6 @@
     <title>Login</title>
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://kit.fontawesome.com/a99df0f94f.js" crossorigin="anonymous"></script>
-    <script>
-
-        /**
-         * 디자인을 보기 위해 넣은 코드입니다.
-         * 실제로는 삽입되지 않습니다.
-         */
-        window.addEventListener("load", () => {
-            const loginView = document.querySelector(".floating-login-view-wrapper");
-            loginView.style.left = "0";
-        });
-    </script>
-    <style>
-        
-    </style>
 </head>
 <body>
     <div class="floating-login-view-wrapper">

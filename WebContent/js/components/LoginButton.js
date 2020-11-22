@@ -16,6 +16,7 @@ export class LoginButton extends Component {
                 lightBox.classList.remove("active");
                 loginView.style.transition = "all .8s ease-in-out";
                 loginView.style.left = "9999px";
+                $(loginView).removeClass("active");
             }
         });
 
@@ -32,15 +33,16 @@ export class LoginButton extends Component {
                 lightBox.classList.add("active");
                 loginView.style.transition = "all .4s ease-out";
                 loginView.style.left = "1px";
+                $(loginView).addClass("active");
             }
         });
 
-        // 로그인 버튼을 누르면 우측에 로그인 바가 표시됩니다.
         const btn = document.querySelector("#close-login-view");
         btn.addEventListener("click", () => {
             lightBox.classList.remove("active");
             loginView.style.transition = "all .8s ease-in-out";
             loginView.style.left = "9999px";
+            $(loginView).removeClass("active");
         })      
     }
 
