@@ -10,6 +10,7 @@ cart.jsp
 detail-item-uploader.jsp
 detail.jsp
 find_password.jsp
+header.jsp
 infopolicy.jsp
 join.html
 join.jsp
