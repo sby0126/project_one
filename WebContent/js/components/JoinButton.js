@@ -11,7 +11,7 @@ export class JoinButton extends Component {
         // 회원 가입 버튼 이벤트 등록
         document.querySelector("#join-button").addEventListener("click", () => {
             if(!parent.isOpenModalDialog()) {
-                parent.openModalDialog(parent.toResolvePath("pages/join.html"), parent.toResolvePath("join.js"));
+                parent.openModalDialog("/pages/join.jsp", "/js/join.js");
             }
         });       
 

@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -18,16 +19,16 @@
                     <!-- 헤더 왼쪽 : 로고 -->
                     <div class="header-left">
                         <div class="" id="logo">
-                            <a href="../index.html"><img src="https://dummyimage.com/64x64/000/fff" alt=""></a>
+                            <a href="../index.jsp"><img src="https://dummyimage.com/64x64/000/fff" alt=""></a>
                         </div>
                         <a href="#">WOMEN</a>
                         <a href="#">MEN</a>
                     </div>
                     <!-- 헤더 중앙 : 메뉴 -->
                     <div class="header-center">
-                        <a href="../index.html">SHOP</a>
-                        <a href="../item.html" target="_self">ITEM</a>
-                        <a href="../sale.html">SALE</a>
+                        <a href="../index.jsp">SHOP</a>
+                        <a href="../item.jsp" target="_self">ITEM</a>
+                        <a href="../sale.jsp">SALE</a>
                         <a href="#">MORE</a>
                     </div>
                     <!-- 헤더 오른쪽 : 로그인 / 검색 -->
@@ -40,13 +41,13 @@
                     <div class="header-popup-container">
                         <ul class="header-menu-list">
                             <li class="menu">
-                                <a href="./Recently_viewed_shop.html" class="menu-link">
+                                <a href="./Recently_viewed_shop.jsp" class="menu-link">
                                     <div class="menu-icon"></div>
                                     <p class="menu-title">최근 본 샵 <em>0</em></p>
                                 </a>
                             </li>
                             <li class="menu">
-                                <a href="./Recently_viewde_item.html" class="menu-link">
+                                <a href="./Recently_viewde_item.jsp" class="menu-link">
                                     <div class="menu-icon"></div>
                                     <p class="menu-title">최근 본 상품 <em>0</em></p>
                                 </a>
@@ -58,25 +59,25 @@
                                 </a>
                             </li>
                             <li class="menu">
-                                <a href="./Interested_item.html" class="menu-link">
+                                <a href="./Interested_item.jsp" class="menu-link">
                                     <div class="menu-icon"></div>
                                     <p class="menu-title">관심 상품</p>
                                 </a>
                             </li>
                             <li class="menu">
-                                <a href="./board-default.html" class="menu-link">
+                                <a href="./board-default.jsp" class="menu-link">
                                     <div class="menu-icon"></div>
                                     <p class="menu-title">1:1 문의</p>
                                 </a>
                             </li>
                             <li class="menu">
-                                <a href="./map.html" class="menu-link">
+                                <a href="./map.jsp" class="menu-link">
                                     <div class="menu-icon"></div>
                                     <p class="menu-title">소개 및 약관</p>
                                 </a>
                             </li>
                             <li class="menu">
-                                <a href="./outer-link-page.html" class="menu-link">
+                                <a href="./outer-link-page.jsp" class="menu-link">
                                     <div class="menu-icon"></div>
                                     <p class="menu-title">마케팅 센터</p>
                                 </a>
@@ -119,7 +120,7 @@
                             <!-- 6. 총상품금액 -->
                             <li><span>총상품금액</span><span class="allPrice">종합가격(데이터)</span></li>
                             <!-- 7. 구매하기.장바구니 버튼 -->
-                            <li><div><button class="detail_button" type="button" onclick="location.href='payments.html'">구매하기</button><button class="detail_button" type="button" onclick="location.href='cart.html'">장바구니</button></div></li>
+                            <li><div><button class="detail_button" type="button" onclick="location.href='payments.jsp'">구매하기</button><button class="detail_button" type="button" onclick="location.href='cart.jsp'">장바구니</button></div></li>
                         </ul>
                     </div>
                     

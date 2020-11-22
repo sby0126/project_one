@@ -362,6 +362,7 @@ class App extends EventEmitter {
         switch(ext) {
             default:
             case 'html':
+            case 'jsp':
                 rootFolder = isRoot ? "pages/" : "";
                 break;
             case 'js':

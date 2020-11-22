@@ -1,17 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Template</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/find-password.css">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a99df0f94f.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/underscore@1.11.0/underscore-min.js"></script>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/interested_item.css">
 </head>
 <body>
+    <!-- 컨테이너의 시작 -->
     <div class="container">
         <!-- 헤더의 시작 -->
         <header>
@@ -19,16 +20,16 @@
                 <!-- 헤더 왼쪽 : 로고 -->
                 <div class="header-left">
                     <div class="" id="logo">
-                        <a href="./"><img src="https://dummyimage.com/64x64/000/fff" alt=""></a>
+                        <a href="../index.jsp"><img src="https://dummyimage.com/64x64/000/fff" alt=""></a>
                     </div>
                     <a href="#">WOMEN</a>
                     <a href="#">MEN</a>
                 </div>
                 <!-- 헤더 중앙 : 메뉴 -->
                 <div class="header-center">
-                    <a href="../index.html">SHOP</a>
-                    <a href="../item.html" target="_self">ITEM</a>
-                    <a href="../sale.html">SALE</a>
+                    <a href="../index.jsp">SHOP</a>
+                    <a href="../item.jsp" target="_self">ITEM</a>
+                    <a href="../sale.jsp">SALE</a>
                     <a href="#">MORE</a>
                 </div>
                 <!-- 헤더 오른쪽 : 로그인 / 검색 -->
@@ -41,13 +42,13 @@
                 <div class="header-popup-container">
                     <ul class="header-menu-list">
                         <li class="menu">
-                            <a href="./Recently_viewed_shop.html" class="menu-link">
+                            <a href="./Recently_viewed_shop.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">최근 본 샵 <em>0</em></p>
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="./Recently_viewde_item.html" class="menu-link">
+                            <a href="./Recently_viewde_item.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">최근 본 상품 <em>0</em></p>
                             </a>
@@ -59,69 +60,61 @@
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="#" class="menu-link">
+                            <a href="./Interested_item.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">관심 상품</p>
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="./board-default.html" class="menu-link">
+                            <a href="./board-default.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">1:1 문의</p>
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="./map.html" class="menu-link">
+                            <a href="./map.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">소개 및 약관</p>
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="./outer-link-page.html" class="menu-link">
+                            <a href="./outer-link-page.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">마케팅 센터</p>
                             </a>
                         </li>
                     </ul>
                 </div>            
-            <!-- 검색 필터 -->
-           
         </header>
 
         <!-- 본문의 시작 -->
         <section>
-
-
             <!-- 본문이 들어가는 래퍼 -->
             <div class="contents-wrapper">
-                <!-- 아이템 총-->
-                <div class="item_selected">
-                    <!-- 아이템-->
-                    <div class="item_selected_list">
-                        <img src="../images/img1.jpg">
-                        <div class="item_selected_list_info">
-                            <h3>하찌 트임 루즈 니트(데이터)</h3>
-                            <p>15000원</p>
-                            <p>제이브로스</p>
-                            <button></button>
+                <div class="find-password-wrapper">
+                    <h3>비밀번호 찾기</h3>
+                    <form action="findPassword.jsp">
+                        <ul>
+                            <li>
+                                <strong>회원 유형</strong>
+                                <span>
+                                    <select name="searchType" id="searchType">
+                                        <option value="public" selected="selected">개인 회원</option>
+                                        <option value="corp" selected="selected">법인 사원자 회원</option>
+                                    </select>
+                                </span>
+                            </li>
+                            <li>
+                                <strong>아이디</strong>
+                                <span><input type="text" id="id"></span>
+                            </li>
+                            <li><strong>이름</strong><span><input type="text" id="name"></span></li>
+                            <li><strong>이메일로 찾기</strong><span><input type="text" id="email"></span></li>
+                        </ul>
+                        <div class="find-password-button-container">
+                            <input type="submit" value="확인" id='ok'>
                         </div>
-                    </div>
-                   <!-- <div class="item_selected">
-                        <img src="../images/img1.jpg">
-                    </div>
-                    <div class="item_selected">
-                        <img src="../images/img1.jpg">
-                    </div>
-                    <div class="item_selected">
-                        <img src="../images/img1.jpg">
-                    </div>-->
-                </div>
-                <!-- 비어있을때-->
-                <div class="item_selected_none">
-                    <button class="item_selected_none_all_del">전체삭제</button>
-                    <img class="item_selected_none_img" src="../images/fbb847b.png">
-                    <div class="item_selected_none_sp">관심 상품이 없습니다.</div>
-                    <a href="../item.html"><button class="item_selected_none_button">아이템 메인으로 이동</button></a>
+                    </form>
                 </div>
             </div>
         </section>
@@ -129,8 +122,28 @@
     <!-- 라이트 박스-->
     <div id="light-box-container">
     </div>
-    <!-- index.js는 메인 용이므로 알맞은 스크립트를 사용해야 합니다-->
+    <!-- 스크립트 --> 
     <script type="module" src="../js/MorePage.js"></script>
-    
+    <script>        
+
+        // 작성되지 않은 항목 체크
+        $("#ok").on("click", (ev) => {
+            let list = [
+                document.querySelector("#id").value.length > 0,
+                document.querySelector("#name").value.length > 0,
+                document.querySelector("#email").value.length > 0,
+            ];
+
+            const isValid = list.every(e => !!e == true);
+
+            if(!isValid) {
+                ev.preventDefault();
+                ev.stopPropagation();
+
+                alert("작성되지 않은 항목이 있습니다.");
+            }
+        })
+        
+    </script>
 </body>
 </html>

@@ -137,7 +137,7 @@ export class ItemContentLoader extends Component {
 
                     // 주소에 데이터 ID를 포함시킵니다.
                     // 이렇게 GET과 비슷한 식으로 URL을 만들면 로컬 스토리지 등을 이용하지 않아도 데이터를 간단히 전송할 수 있습니다.
-                    location.href = `pages/detail.html?date=${Date.now()}&title=${title}&price=${price}&shop=${shop}&dataId=${dataId}`;
+                    location.href = `pages/detail.jsp?date=${Date.now()}&title=${title}&price=${price}&shop=${shop}&dataId=${dataId}`;
                 }
 
                 card.insertAdjacentHTML( 'afterbegin', `

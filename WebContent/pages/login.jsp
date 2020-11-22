@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -37,7 +38,7 @@
                 <input class="input-button" type="submit" value="Login">
                 <div class="floating-login-view-button-panel floating-login-view-input-group">
                     <input class="input-button" id="join-button" type="button" value="회원가입">
-                    <input class="input-button" id="find-password-button" type="button" value="비밀번호 찾기" onclick="location.href='pages/find_password.html'">
+                    <input class="input-button" id="find-password-button" type="button" value="비밀번호 찾기" onclick="location.href='/pages/find_password.jsp'">
                 </div>
             </form>
         </div>

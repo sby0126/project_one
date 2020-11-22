@@ -18,7 +18,7 @@ class ItemDetailPage extends App {
          */
         this._pendingList = [
             {
-                src: `login.html`,
+                src: `login.jsp`,
                 parent: ".container",
                 isCreateNewDiv: true,
             }

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -27,8 +26,8 @@
                 <!-- 헤더 중앙 : 메뉴 -->
                 <div class="header-center">
                     <a href="#">SHOP</a>
-                    <a href="item.html" target="_self">ITEM</a>
-                    <a href="sale.html">SALE</a>
+                    <a href="item.jsp" target="_self">ITEM</a>
+                    <a href="sale.jsp">SALE</a>
                     <a href="#">MORE</a>
                 </div>
                 <!-- 헤더 오른쪽 : 로그인 / 검색 -->
@@ -65,13 +64,13 @@
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="pages/board-default.html" class="menu-link">
+                            <a href="pages/board-default.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">1:1 문의</p>
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="pages/map.html" class="menu-link">
+                            <a href="pages/map.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">소개 및 약관</p>
                             </a>

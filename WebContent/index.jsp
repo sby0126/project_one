@@ -1,9 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Template</title>
+    <title>쇼핑몰 클론 프로젝트</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a99df0f94f.js" crossorigin="anonymous"></script>
@@ -26,9 +27,9 @@
                 </div>
                 <!-- 헤더 중앙 : 메뉴 -->
                 <div class="header-center">
-                    <a href="./index.html">SHOP</a>
-                    <a href="#" target="_self">ITEM</a>
-                    <a href="./sale.html">SALE</a>
+                    <a href="#">SHOP</a>
+                    <a href="item.jsp" target="_self">ITEM</a>
+                    <a href="sale.jsp">SALE</a>
                     <a href="#">MORE</a>
                 </div>
                 <!-- 헤더 오른쪽 : 로그인 / 검색 -->
@@ -41,13 +42,13 @@
                 <div class="header-popup-container">
                     <ul class="header-menu-list">
                         <li class="menu">
-                            <a href="pages/Recently_viewed_shop.html" class="menu-link">
+                            <a href="pages/Recently_viewde_shop.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">최근 본 샵 <em>0</em></p>
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="pages/Recently_viewde_item.html" class="menu-link">
+                            <a href="pages/Recently_viewde_item.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">최근 본 상품 <em>0</em></p>
                             </a>
@@ -59,25 +60,25 @@
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="pages/Interested_item.html" class="menu-link">
+                            <a href="pages/Interested_item.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">관심 상품</p>
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="pages/board-default.html" class="menu-link">
+                            <a href="pages/board-default.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">1:1 문의</p>
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="pages/map.html" class="menu-link">
+                            <a href="pages/map.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">소개 및 약관</p>
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="pages/outer-link-page.html" class="menu-link">
+                            <a href="pages/outer-link-page.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">마케팅 센터</p>
                             </a>
@@ -131,9 +132,11 @@
                             <span>30대</span>                            
                         </div>
                     </div>
+                    <div style="margin-top: 4px; text-align: center; font-size: 0.8em;">이 사이트는 포트폴리오 용으로 개발된 사이트로 실제 사이트가 아닙니다.</div>
                 </div>
             </div>
         </header>
+
         <!-- 본문의 시작 -->
         <section>
             <!-- 본문이 들어가는 래퍼 -->
@@ -144,7 +147,7 @@
     <!-- 라이트 박스-->
     <div id="light-box-container">
     </div>
-    <!-- 스크립트 --> 
-    <script type="module" src="js/ItemPage.js"></script>
+    <!-- index.js는 메인 용이므로 알맞은 스크립트를 사용해야 합니다-->
+    <script type="module" src="js/index.js"></script>
 </body>
 </html>

@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -19,16 +20,16 @@
                 <!-- 헤더 왼쪽 : 로고 -->
                 <div class="header-left">
                     <div class="" id="logo">
-                        <a href="../index.html"><img src="https://dummyimage.com/64x64/000/fff" alt=""></a>
+                        <a href="../index.jsp"><img src="https://dummyimage.com/64x64/000/fff" alt=""></a>
                     </div>
                     <a href="#">WOMEN</a>
                     <a href="#">MEN</a>
                 </div>
                 <!-- 헤더 중앙 : 메뉴 -->
                 <div class="header-center">
-                    <a href="../index.html">SHOP</a>
-                    <a href="../item.html" target="_self">ITEM</a>
-                    <a href="../sale.html">SALE</a>
+                    <a href="../index.jsp">SHOP</a>
+                    <a href="../item.jsp" target="_self">ITEM</a>
+                    <a href="../sale.jsp">SALE</a>
                     <a href="#">MORE</a>
                 </div>
                 <!-- 헤더 오른쪽 : 로그인 / 검색 -->
@@ -41,12 +42,12 @@
             <div class="header-popup-container">
                 <ul class="header-menu-list">
                     <li class="menu">
-                        <a href="./Recently_viewed_shop.html" class="menu-link">
+                        <a href="./Recently_viewed_shop.jsp" class="menu-link">
                             <div class="menu-icon"></div>
                             <p class="menu-title">최근 본 샵 <em>0</em></p>
                         </a>                        </li>
                     <li class="menu">
-                        <a href="./Recently_viewde_item.html" class="menu-link">
+                        <a href="./Recently_viewde_item.jsp" class="menu-link">
                             <div class="menu-icon"></div>
                             <p class="menu-title">최근 본 상품 <em>0</em></p>
                         </a>
@@ -58,25 +59,25 @@
                         </a>
                     </li>
                     <li class="menu">
-                        <a href="./Interested_item.html" class="menu-link">
+                        <a href="./Interested_item.jsp" class="menu-link">
                             <div class="menu-icon"></div>
                             <p class="menu-title">관심 상품</p>
                         </a>
                     </li>
                     <li class="menu">
-                        <a href="./board-default.html" class="menu-link">
+                        <a href="./board-default.jsp" class="menu-link">
                             <div class="menu-icon"></div>
                             <p class="menu-title">1:1 문의</p>
                         </a>
                     </li>
                     <li class="menu">
-                        <a href="./map.html" class="menu-link">
+                        <a href="./map.jsp" class="menu-link">
                             <div class="menu-icon"></div>
                             <p class="menu-title">소개 및 약관</p>
                         </a>
                     </li>
                     <li class="menu">
-                        <a href="./outer-link-page.html" class="menu-link">
+                        <a href="./outer-link-page.jsp" class="menu-link">
                             <div class="menu-icon"></div>
                             <p class="menu-title">마케팅 센터</p>
                         </a>
@@ -148,7 +149,7 @@
                     <div class="hr-bdline"></div> <!-- 경계선 -->
                     <div class="payments-item-info"> <!-- 구매 상품의 표시  wrapper 영역 -->
                         <p>주문하실 상품</p>
-                        <button class="cart-go" type="button" onclick="location.href='cart.html'">장바구니 가기</button>
+                        <button class="cart-go" type="button" onclick="location.href='cart.jsp'">장바구니 가기</button>
                         <div class="item"> <!-- 상품 정보 표시 wrapper 영역 -->
                             <table class="item-table"> <!-- 상품 정보를 table 형식으로 불러오는 영역 -->
                                 <thead>
