@@ -11,6 +11,7 @@ detail-item-uploader.jsp
 detail.jsp
 find_password.jsp
 infopolicy.jsp
+join.html
 join.jsp
 login.jsp
 logout.jsp
