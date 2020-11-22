@@ -10,9 +10,7 @@ export class JoinButton extends Component {
 
         // 회원 가입 버튼 이벤트 등록
         document.querySelector("#join-button").addEventListener("click", () => {
-            if(!parent.isOpenModalDialog2()) {
-                parent.openModalDialog2(".join-wrapper");
-            }
+            location.href = "/pages/join.jsp";
         });       
 
         $(".floating-login-view-wrapper input[type=submit]").on("click", (ev) => {
