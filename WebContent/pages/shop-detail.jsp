@@ -98,7 +98,7 @@
                     <div class="shop-detail">
                         <div class="detail-trailer-list">
                             <div>
-                                <center><p>비슷한 샵</p></center>
+                                <p>비슷한 샵</p>
                             </div>
                             <ul>
                                 <li>
