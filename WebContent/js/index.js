@@ -5,6 +5,7 @@ import { CardStyleSheetBuilder } from "./components/CardStyleSheetBuilder.js";
 import {join} from "./join.js";
 
 /**
+ * jshint esversion: 6
  * ==============================================
  * 메인 페이지 구현
  * ==============================================
