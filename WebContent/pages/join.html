@@ -6,6 +6,7 @@
         <title>Document</title>
         <link rel="stylesheet" href="../css/join.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     </head>
     <body>
         <div class="header"></div>
@@ -52,7 +53,7 @@
                         <li>
                             <!-- 주소 -->
                             <input type="text" name="user_adr1" readonly = "true" id="user_adr1" maxlength="40" placeholder="21500">
-                            <button id="bt_adr">주소검색하기</button>
+                            <button type="button" id="bt_adr">주소검색하기</button>
                             
                             <input type="text" name="user_adr2" readonly = "true" id="user_adr2" maxlength="40" placeholder="인천 남동구 백범로467번길 51 (간석동, OO빌라)">
                             
@@ -74,14 +75,105 @@
                             <span id="sp"></span>
                             
                             <input type="text" name="user_email2" id="user_email2" maxlength="30">
-                            <button id="bt_email">이메일인증</button>
+                            <button type="button" id="bt_email">이메일인증</button>
 
                             <div id="userEmailMsg" class="ability_chk"></div>
                         </li> 
 
                     </ul>
-                    <input type="submit" value="회원가입">
+                    <input id="join_button" type="submit" value="회원가입">
                     <img src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7' onload='join();this.parentNode.removeChild(this);'>
+
+                <script>
+
+                    // 주소  api
+                    $("#bt_adr").click(function(){
+                        new daum.Postcode({
+                                oncomplete: function(data) {
+                                   var postNo = data.zonecode;
+                                   var address =  data.roadAddress;
+                                    
+                                    $("#user_adr1").val(postNo);
+                                    $("#user_adr2").val(address);
+    
+                                }
+                            }).open();
+                    });
+                    
+                    // 올바른 이메일형식 체크
+                    $("#bt_email").click(function(){
+                        var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+                        var str = $("#user_email1").val() + "@" + $("#user_email2").val();
+                        if(!reg_email.test(str)) {                            
+                            alert("이메일형식이 잘못됬습니다.");
+                        }                           
+                    });
+
+                    function run() {
+    
+    $(".main .content_login input").focus(function () {
+        var read = $(this).prop("readonly");
+        if (!read) {
+            $(this).parent().find(".label1").css("display", "none")
+        }
+    }).blur(function () {
+        var value = $(this).val()
+        if (value == "")
+            $(this).parent().find(".label1").css("display", "block");
+    })
+    
+    $("#user_email1,#user_email2").focus(function () {
+        $("#sp").html("@")
+    }).blur(function () {
+        $("#sp").html(" ")
+    });
+}
+
+
+
+$("#join_button").on("click", function(){
+    if($("#login_id").val() == ""){
+        alert("아이디를 입력하세요");
+        return;
+    }
+    if($("#login_pwd1").val() == ""){
+        alert("비밀번호를 입력하세요");
+        return;
+    }
+    if($("#user_name").val() == ""){
+        alert("이름을 입력하세요");
+        return;
+    }
+    if($("#user_phoneNum").val() == ""){
+        alert("전화번호를 입력하세요");
+        return;
+    }
+    if($("#user_adr1").val() == ""){
+        alert("우편번호를 입력하세요");
+        return;
+    }
+    if($("#user_adr2").val() == ""){
+        alert("기본주소를 입력하세요");
+        return;
+    }
+    if($("#user_adr3").val() == ""){
+        alert("상세주소를 입력하세요");
+        return;
+    }
+    if($("#user_email1, user_email2").val() == ""){
+        alert("이메일를 입력하세요");
+        return;
+    }
+    
+})
+
+
+
+
+
+run();
+
+                </script>
                 </form>  
                 
             </div>
