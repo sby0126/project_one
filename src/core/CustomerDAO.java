@@ -44,6 +44,7 @@ public class CustomerDAO {
 				String email = rs.getString("EMAIL");
 				String isAdmin = rs.getString("isAdmin");
 				String joinDate = rs.getString("joinDate");
+				String salt = rs.getString("salt");
 				
 				CustomerVO c = new CustomerVO();
 				
@@ -56,7 +57,8 @@ public class CustomerDAO {
 					.setTel(tel)
 					.setEmail(email)
 					.setIsAdmin(isAdmin)
-					.setJoinDate(joinDate);
+					.setJoinDate(joinDate)
+					.setSalt(salt);
 				
 				customerList.add(c);
 			}
@@ -105,6 +107,7 @@ public class CustomerDAO {
 				String email = rs.getString("EMAIL");
 				String isAdmin = rs.getString("isAdmin");
 				String joinDate = rs.getString("joinDate");
+				String salt = rs.getString("salt");
 				
 				CustomerVO c = new CustomerVO();
 				
@@ -117,7 +120,8 @@ public class CustomerDAO {
 					.setTel(tel)
 					.setEmail(email)
 					.setIsAdmin(isAdmin)
-					.setJoinDate(joinDate);
+					.setJoinDate(joinDate)
+					.setSalt(salt);
 				
 				customerList.add(c);
 			}

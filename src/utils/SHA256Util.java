@@ -3,8 +3,6 @@ package utils;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /***
  * 256 bits (64자리)
@@ -78,24 +76,5 @@ public class SHA256Util {
 		
 		return sb.toString();
 	}	
-	
-	/**
-	 * 하나 이상의 알파벳을 포함해야 함
-	 * 하나 이상의 숫자를 포함해야 함
-	 * 하나 이상의 특수문자를 포함해야 함
-	 * 최소 8글자 이상 입력해야 함
-	 * 
-	 * @link https://minwoohi.tistory.com/98
-	 * @param password
-	 * @return
-	 */
-	public static boolean verify(String password) {
-		
-		String passwordPolicy = "((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9가-힣]).{8,})";
-		
-		Pattern pattern = Pattern.compile(passwordPolicy);
-		Matcher matcher = pattern.matcher(password);
-		return matcher.matches();
-	}	
-	
+
 }
