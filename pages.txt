@@ -19,6 +19,7 @@ logout.jsp
 map.jsp
 outer-link-page.jsp
 payments.jsp
+post.html
 recent-product-container.jsp
 shop-detail.jsp
 shop.jsp
