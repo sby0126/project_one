@@ -17,6 +17,7 @@ logout.html
 map.html
 outer-link-page.html
 payments.html
+post.html
 recent-product-container.html
 shop-detail.html
 shop.html
