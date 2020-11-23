@@ -17,6 +17,7 @@ join.jsp
 login.jsp
 logout.jsp
 map.jsp
+members.jsp
 outer-link-page.jsp
 payments.jsp
 post.html
