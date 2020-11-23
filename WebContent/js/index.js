@@ -4,6 +4,7 @@ import { ShopContentLoader } from "./components/ShopContentLoader.js";
 import { CardStyleSheetBuilder } from "./components/CardStyleSheetBuilder.js";
 
 /**
+ * jshint esversion: 6
  * ==============================================
  * 메인 페이지 구현
  * ==============================================
