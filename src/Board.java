@@ -41,7 +41,7 @@ public class Board extends HttpServlet {
 		
 		JSONObject json = new JSONObject();
 		json.put("pathInfo", pathInfo);
-		json.put("content", "�׽�Ʈ");
+		json.put("content", "뭐지");
 		json.put("postNumber", postNumber);
 		
 		// Print out a json text to response header.

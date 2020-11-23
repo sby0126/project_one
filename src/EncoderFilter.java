@@ -1,6 +1,7 @@
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -12,44 +13,29 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
 /**
- * ¼­ºí¸´ÀÌ³ª JSP¿¡¼­ °øÅëÀ¸·Î Ã³¸®ÇØ¾ß ÇÒ ÀÛ¾÷À» ÇÊÅÍ¿¡¼­ ¼³Á¤ÇÒ ¼ö ÀÖ½À´Ï´Ù.
- * ÀÌ Å¬·¡½º´Â ¸ðµç request Çì´õÀÇ ¹®ÀÚ ÀÎÄÚµùÀ» UTF-8·Î º¯°æÇÏ´Â ¿ªÇÒÀ» ÇÕ´Ï´Ù.
+ * ï¿½ï¿½ï¿½ï¿½ï¿½Ì³ï¿½ JSPï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½.
+ * ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ request ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ UTF-8ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Õ´Ï´ï¿½.
  */
 @WebFilter("/*")
 public class EncoderFilter implements Filter {
 	
 	private ServletContext mContext;
 
-    /**
-     * Default constructor. 
-     */
     public EncoderFilter() {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see Filter#destroy()
-	 */
 	public void destroy() {
-		// TODO Auto-generated method stub
+		
 	}
 
-	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
-
-		// ÀÎÄÚµù ¼³Á¤À» UTF-8·Î º¯°æÇÕ´Ï´Ù.
 		request.setCharacterEncoding("UTF-8");
 
-		// pass the request along the filter chain
 		chain.doFilter(request, response);
 	}
 
-	/**
-	 * @see Filter#init(FilterConfig)
-	 */
+
 	public void init(FilterConfig fConfig) throws ServletException {
 		mContext = fConfig.getServletContext();
 	}
