@@ -1,0 +1,101 @@
+package utils;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/***
+ * 256 bits (64자리)
+ * 
+ * @link 
+ * https://minwoohi.tistory.com/96
+ * https://steemit.com/kr/@esjung/sha-256-salt
+ */
+public class SHA256Util {
+	/**
+	 * SHA-256 암호화 함
+	 * @param source 원본
+	 * @param salt(String) SALT 값
+	 * @return
+	 */
+	public static String getEncrypt(String source, String salt) {
+		return getEncrypt(source, salt.getBytes());
+	}
+	
+	/**
+	 * SHA-256 암호화 함
+	 * @param source 원본
+	 * @param salt(byte[]) SALT 값
+	 * @return
+	 */
+	public static String getEncrypt(String source, byte[] salt) {
+		
+		String result = "";
+		
+		byte[] a = source.getBytes();
+		byte[] bytes = new byte[a.length + salt.length];
+		
+		System.arraycopy(a, 0, bytes, 0, a.length);
+		System.arraycopy(salt, 0, bytes, a.length, salt.length);
+		
+		try {
+			// 암호화 방식 지정 메소드
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
+			md.update(bytes);
+			
+			byte[] byteData = md.digest();
+			
+			StringBuffer sb = new StringBuffer();
+			for (int i = 0; i < byteData.length; i++) {
+				sb.append(Integer.toString((byteData[i] & 0xFF) + 256, 16).substring(1));
+			}
+			
+			result = sb.toString();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}	
+	
+	/**
+	 * SALT를 얻어온다.
+	 * @return
+	 */
+	public static String generateSalt() {
+		Random random = new Random();
+		
+		byte[] salt = new byte[8];
+		random.nextBytes(salt);
+		
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < salt.length; i++) {
+			// byte 값을 Hex 값으로 바꾸기.
+			sb.append(String.format("%02x",salt[i]));
+		}
+		
+		return sb.toString();
+	}	
+	
+	/**
+	 * 하나 이상의 알파벳을 포함해야 함
+	 * 하나 이상의 숫자를 포함해야 함
+	 * 하나 이상의 특수문자를 포함해야 함
+	 * 최소 8글자 이상 입력해야 함
+	 * 
+	 * @link https://minwoohi.tistory.com/98
+	 * @param password
+	 * @return
+	 */
+	public static boolean verify(String password) {
+		
+		String passwordPolicy = "((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9가-힣]).{8,})";
+		
+		Pattern pattern = Pattern.compile(passwordPolicy);
+		Matcher matcher = pattern.matcher(password);
+		return matcher.matches();
+	}	
+	
+}
