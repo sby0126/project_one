@@ -15,12 +15,12 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet Filter implementation class AppFilter
  */
 @WebFilter("/*")
-public class AppFilter implements Filter {
+public class Router implements Filter {
 
     /**
      * Default constructor. 
      */
-    public AppFilter() {
+    public Router() {
         // TODO Auto-generated constructor stub
     }
 
