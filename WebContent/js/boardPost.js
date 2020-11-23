@@ -108,8 +108,7 @@ const FUNC = {
             const postNumber = params.get("postNumber");
 
             AJAX.doPost("delete.jsp", {
-                "postNumber": postNumber,
-                ""
+                "postNumber": postNumber
             }, jqXHR => {
                 history.back();
             });
