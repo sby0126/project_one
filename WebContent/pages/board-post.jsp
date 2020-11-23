@@ -1,3 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%
+	response.setHeader("Cache-Control","no-store"); 
+	response.setHeader("Pragma","no-cache"); 
+	response.setDateHeader("Expires",0); 
+	if (request.getProtocol().equals("HTTP/1.1"))
+	        response.setHeader("Cache-Control", "no-cache");
+	%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -21,77 +29,8 @@
     <!-- 컨테이너의 시작 -->
     <div class="container">
         <!-- 헤더의 시작 -->
-        <header>
-            <div class="header-wrapper">
-                <!-- 헤더 왼쪽 : 로고 -->
-                <div class="header-left">
-                    <div class="" id="logo">
-                        <a href="../index.html"><img src="https://dummyimage.com/64x64/000/fff" alt=""></a>
-                    </div>
-                    <a href="#">WOMEN</a>
-                    <a href="#">MEN</a>
-                </div>
-                <!-- 헤더 중앙 : 메뉴 -->
-                <div class="header-center">
-                    <a href="../index.html">SHOP</a>
-                    <a href="../item.html" target="_self">ITEM</a>
-                    <a href="../sale.html">SALE</a>
-                    <a href="#">MORE</a>
-                </div>
-                <!-- 헤더 오른쪽 : 로그인 / 검색 -->
-                <div class="header-right">
-                    <button class="header-right-login-button">로그인</button>
-                    <input type="text" class="input-non-border-box" name="" id="" placeholder="검색어를 입력하세요">
-                </div>
-            </div>
-            <!-- 숨겨진 메뉴 -->
-            <div class="header-popup-container">
-                <ul class="header-menu-list">
-                    <li class="menu">
-                        <a href="#" class="menu-link">
-                            <div class="menu-icon"></div>
-                            <p class="menu-title">최근 본 샵 <em>0</em></p>
-                        </a>
-                    </li>
-                    <li class="menu">
-                        <a href="#" class="menu-link">
-                            <div class="menu-icon"></div>
-                            <p class="menu-title">최근 본 상품 <em>0</em></p>
-                        </a>
-                    </li>
-                    <li class="menu">
-                        <a href="#" class="menu-link">
-                            <div class="menu-icon"></div>
-                            <p class="menu-title">MY SHOP</p>
-                        </a>
-                    </li>
-                    <li class="menu">
-                        <a href="#" class="menu-link">
-                            <div class="menu-icon"></div>
-                            <p class="menu-title">관심 상품</p>
-                        </a>
-                    </li>
-                    <li class="menu">
-                        <a href="#" class="menu-link">
-                            <div class="menu-icon"></div>
-                            <p class="menu-title">1:1 문의</p>
-                        </a>
-                    </li>
-                    <li class="menu">
-                        <a href="./map.html" class="menu-link">
-                            <div class="menu-icon"></div>
-                            <p class="menu-title">소개 및 약관</p>
-                        </a>
-                    </li>
-                    <li class="menu">
-                        <a href="./outer-link-page.html" class="menu-link">
-                            <div class="menu-icon"></div>
-                            <p class="menu-title">마케팅 센터</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </header>
+       <jsp:include page="header.jsp"></jsp:include>
+       
         <!-- 본문의 시작 -->
         <section>
             <!-- 본문이 들어가는 래퍼 -->
@@ -185,18 +124,18 @@
                                         </div>
                                     </div>       
                                 </div>
-                                <form action="commentOK.jsp">
+                                <!-- <form action="commentOK.jsp"> -->
                                     <div class="add-comment-button-area">
                                         <textarea name="" id="comment-textarea" name="text"></textarea>
                                         <button href="#" type="submit" id="comment-ok-button" class="btn btn-default">등록</button>
                                     </div>                                                          
-                                </form>   
+                                <!-- </form>    -->
                             </div>
                         </div>
                     </div>
                     <div class="prev-list-panel btn-group">
-                        <a href="./board-default.html" id="list-button" class="btn btn-default">목록</a>
-                        <a href="./board-smart-editor.html" id="modify-button" class="btn btn-default">수정</a>
+                        <a href="./board-default.jsp" id="list-button" class="btn btn-default">목록</a>
+                        <a href="./board-smart-editor.jsp" id="modify-button" class="btn btn-default">수정</a>
                         <a href="#" id="delete-button" class="btn btn-default">삭제</a>
                     </div>
                 </div>  

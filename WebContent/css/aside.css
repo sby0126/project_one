@@ -54,6 +54,10 @@
     transition: all .4s ease-out;
 }
 
+.floating-login-view-wrapper.active {
+    left: 0;
+}
+
 .floating-login-view {
     display: flex;
 

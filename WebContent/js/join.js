@@ -19,5 +19,3 @@ function join() {
 }
 
 window.join = join;
-
-export {join};

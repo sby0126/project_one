@@ -230,7 +230,7 @@
                     let url = new URLSearchParams(location.search);
                     url.set("postNumber", postNumber);
 
-                    location.href = "board-post.html?&" + url.toString();
+                    location.href = "board-post.jsp?&" + url.toString();
                 });
   
         },

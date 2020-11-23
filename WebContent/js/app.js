@@ -246,6 +246,11 @@ class App extends EventEmitter {
         }
     }
 
+    openMoalDialog2(querySelectorAll) {
+        $(selector).addClass("active");
+        this._isOpenModalDialog = $(selector).is("active");
+    }
+
     /**
      * 
      * @param {String} htmlFileName 
@@ -383,6 +388,7 @@ class App extends EventEmitter {
         switch(ext) {
             default:
             case 'html':
+            case 'jsp':
                 rootFolder = isRoot ? "pages/" : "";
                 break;
             case 'js':

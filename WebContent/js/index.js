@@ -19,12 +19,12 @@ class MainPage extends App {
          */
         this._pendingList = [
             {
-                src: `pages/login.html`,
+                src: `pages/login.jsp`,
                 parent: ID.CONTAINER,
                 isCreateNewDiv: true,
             },
             {
-                src: `pages/shop.html`,
+                src: `pages/shop.jsp`,
                 parent: ID.CONTENTS_WRAPPER,
                 isCreateNewDiv: false,
             }    

@@ -1,3 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%
+	response.setHeader("Cache-Control","no-store"); 
+	response.setHeader("Pragma","no-cache"); 
+	response.setDateHeader("Expires",0); 
+	if (request.getProtocol().equals("HTTP/1.1"))
+	        response.setHeader("Cache-Control", "no-cache");
+	%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -26,9 +34,9 @@
                 </div>
                 <!-- 헤더 중앙 : 메뉴 -->
                 <div class="header-center">
-                    <a href="./index.html">SHOP</a>
+                    <a href="./index.jsp">SHOP</a>
                     <a href="#" target="_self">ITEM</a>
-                    <a href="./sale.html">SALE</a>
+                    <a href="./sale.jsp">SALE</a>
                     <a href="#">MORE</a>
                 </div>
                 <!-- 헤더 오른쪽 : 로그인 / 검색 -->
@@ -41,13 +49,13 @@
                 <div class="header-popup-container">
                     <ul class="header-menu-list">
                         <li class="menu">
-                            <a href="pages/Recently_viewed_shop.html" class="menu-link">
+                            <a href="pages/Recently_viewed_shop.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">최근 본 샵 <em>0</em></p>
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="pages/Recently_viewde_item.html" class="menu-link">
+                            <a href="pages/Recently_viewde_item.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">최근 본 상품 <em>0</em></p>
                             </a>
@@ -59,25 +67,25 @@
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="pages/Interested_item.html" class="menu-link">
+                            <a href="pages/Interested_item.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">관심 상품</p>
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="pages/board-default.html" class="menu-link">
+                            <a href="pages/board-default.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">1:1 문의</p>
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="pages/map.html" class="menu-link">
+                            <a href="pages/map.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">소개 및 약관</p>
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="pages/outer-link-page.html" class="menu-link">
+                            <a href="pages/outer-link-page.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">마케팅 센터</p>
                             </a>

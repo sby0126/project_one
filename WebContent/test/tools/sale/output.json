@@ -1,4 +1,4 @@
-    const imgList = [{
+[{
       "category": "sale",
       "src": "https://img.sta1.com/_up/sales/2020/11/1604551820253_m.jpg",
       "title": "인기슈즈 59% SALE",
@@ -179,4 +179,4 @@
       "shop": "자라",
       "term": "09.29 ~ 재고 소진시"
   }
-];
+]

@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -6,20 +7,6 @@
     <title>Login</title>
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://kit.fontawesome.com/a99df0f94f.js" crossorigin="anonymous"></script>
-    <script>
-
-        /**
-         * 디자인을 보기 위해 넣은 코드입니다.
-         * 실제로는 삽입되지 않습니다.
-         */
-        window.addEventListener("load", () => {
-            const loginView = document.querySelector(".floating-login-view-wrapper");
-            loginView.style.left = "0";
-        });
-    </script>
-    <style>
-        
-    </style>
 </head>
 <body>
     <div class="floating-login-view-wrapper">
@@ -37,7 +24,7 @@
                 <input class="input-button" type="submit" value="Login">
                 <div class="floating-login-view-button-panel floating-login-view-input-group">
                     <input class="input-button" id="join-button" type="button" value="회원가입">
-                    <input class="input-button" id="find-password-button" type="button" value="비밀번호 찾기" onclick="location.href='pages/find_password.html'">
+                    <input class="input-button" id="find-password-button" type="button" value="비밀번호 찾기" onclick="location.href='/pages/find_password.jsp'">
                 </div>
             </form>
         </div>

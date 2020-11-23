@@ -1,5 +1,18 @@
 /* @author : 한덕호 */
 
+.join-wrapper {
+    width: 70%;
+    height: 70%;
+    display: none;
+    justify-content: center;
+    position: fixed;
+    z-index: 20;
+}
+
+.join-wrapper.active {
+    display: flex;
+}
+
 .header {
     width: 100%;
     height: 50px;
