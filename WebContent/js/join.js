@@ -1,5 +1,5 @@
 
-export function join() {
+function join() {
     $(".main .content_login input").focus(function () {
         var read = $(this).prop("readonly");
         if (!read) {
