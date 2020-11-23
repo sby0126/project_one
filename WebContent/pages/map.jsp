@@ -13,73 +13,8 @@
 </head>
 <body>
     <div class="container">
-        <header>
-            <div class="header-wrapper">
-                <div class="header-left">
-                    <div class="" id="logo">
-                        <a href="../index.jsp"><img src="https://dummyimage.com/64x64/000/fff" alt=""></a>
-                    </div>
-                    <a href="#">WOMEN</a>
-                    <a href="#">MEN</a>
-                </div>
-                <div class="header-center">
-                    <a href="../index.jsp">SHOP</a>
-                    <a href="../item.jsp">ITEM</a>
-                    <a href="../sale.jsp">SALE</a>
-                    <a href="#">MORE</a>
-                </div>
-                <div class="header-right">
-                    <button class="header-right-login-button">로그인</button>
-                    <input type="text" name="" class="input-non-border-box" id="" placeholder="검색어를 입력하세요">
-                </div>
-            </div>
-            <div class="header-popup-container">
-                <ul class="header-menu-list">
-                    <li class="menu">
-                        <a href="./Recently_viewed_shop.jsp" class="menu-link">
-                            <div class="menu-icon"></div>
-                            <p class="menu-title">최근 본 샵 <em>0</em></p>
-                        </a>
-                    </li>
-                    <li class="menu">
-                        <a href="./Recently_viewde_item.jsp" class="menu-link">
-                            <div class="menu-icon"></div>
-                            <p class="menu-title">최근 본 상품 <em>0</em></p>
-                        </a>
-                    </li>
-                    <li class="menu">
-                        <a href="#" class="menu-link">
-                            <div class="menu-icon"></div>
-                            <p class="menu-title">MY SHOP</p>
-                        </a>
-                    </li>
-                    <li class="menu">
-                        <a href="./Interested_item.jsp" class="menu-link">
-                            <div class="menu-icon"></div>
-                            <p class="menu-title">관심 상품</p>
-                        </a>
-                    </li>
-                    <li class="menu">
-                        <a href="./board-default.jsp" class="menu-link">
-                            <div class="menu-icon"></div>
-                            <p class="menu-title">1:1 문의</p>
-                        </a>
-                    </li>
-                    <li class="menu">
-                        <a href="./map.jsp" class="menu-link">
-                            <div class="menu-icon"></div>
-                            <p class="menu-title">소개 및 약관</p>
-                        </a>
-                    </li>
-                    <li class="menu">
-                        <a href="./outer-link-page.jsp" class="menu-link">
-                            <div class="menu-icon"></div>
-                            <p class="menu-title">마케팅 센터</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>                                    
-        </header>
+        <jsp:include page="header.jsp"></jsp:include>
+        
         <section> 
             <div class="contents-wrapper"> 
                 <div class="inner-menu">
