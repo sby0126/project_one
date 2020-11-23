@@ -68,8 +68,9 @@ header {
 .desc > pre {
    background: rgb(255,255,255);
    position: relative;
-   top: -5%;
-   left: -24%;
+   margin-top: 6%;
+   top: 35%;
+   left: -52%;
    width: 70%;
    white-space: pre-line;
    box-sizing: border-box;

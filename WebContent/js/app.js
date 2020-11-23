@@ -5,6 +5,8 @@ import { FilterBoxButtons } from "./components/FilterBoxButtons.js";
 import { EventEmitter } from "./EventEmitter.js";
 import { cssRuleSet } from "./utils/styleRules.js";
 import { ScrollEventBuilder } from "./components/ScrollEventBuilder.js";
+import {join} from "./join.js";
+
 
 // ID 상수 배열
 const ID = {
@@ -83,6 +85,25 @@ class App extends EventEmitter {
         $(".header-left a").removeClass("active");
         $(".header-left a").eq(gndr === "M" ? 2 : 1).addClass("active");
 
+    }
+
+    initWithJoin() {
+        $(".main .content_login input").focus(function () {
+            var read = $(this).prop("readonly");
+            if (!read) {
+                $(this).parent().find(".label1").css("display", "none")
+            }
+        }).blur(function () {
+            var value = $(this).val()
+            if (value == "")
+                $(this).parent().find(".label1").css("display", "block")
+        });
+        
+        $("#user_email1,#user_email2").focus(function () {
+            $("#sp").html("@")
+        }).blur(function () {
+            $("#sp").html(" ")
+        });        
     }
 
     /**
@@ -345,7 +366,7 @@ class App extends EventEmitter {
             return false;
         }
 
-        return location.pathname == "/";
+        return location.pathname == "/ProjectOne/";
     }
 
     /**
