@@ -22,7 +22,6 @@ public class DataManager {
 		mConfig.put("테스트", "10");
 		
 		isReady = false;
-		
 	}
 	
 	public void setMainApplication(ServletContext context) {
