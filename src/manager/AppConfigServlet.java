@@ -27,6 +27,7 @@ public class AppConfigServlet extends HttpServlet {
 		context = config.getServletContext();
 		manager.DataManager.getInstance().setMainApplication(context);
 		System.out.println(manager.DataManager.getInstance().getApplicationPath());
+		DataManager.getInstance().makeConfigFile();
 		
 	}
 

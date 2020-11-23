@@ -1,6 +1,8 @@
 package manager;
 
 import java.io.FileWriter;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.servlet.ServletContext;
 
@@ -21,12 +23,6 @@ public class DataManager {
 		
 		isReady = false;
 		
-		try (FileWriter writer = new FileWriter("output.json")) {
-			writer.write(mConfig.toJSONString());	
-		} catch(Exception ex) {
-			
-		}
-		
 	}
 	
 	public void setMainApplication(ServletContext context) {
@@ -34,6 +30,19 @@ public class DataManager {
 		if(mContext != null) {
 			isReady = true;
 		}
+	}
+	
+	public void makeConfigFile() {
+		String root = getApplicationPath();
+		Path outputPath = Paths.get(root, "output.json");
+		
+		System.out.println(outputPath);
+		
+		try (FileWriter writer = new FileWriter(outputPath.toString())) {
+			writer.write(mConfig.toJSONString());	
+		} catch(Exception ex) {
+			
+		}		
 	}
 	
 	public String getApplicationPath() {
