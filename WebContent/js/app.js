@@ -5,7 +5,6 @@ import { FilterBoxButtons } from "./components/FilterBoxButtons.js";
 import { EventEmitter } from "./EventEmitter.js";
 import { cssRuleSet } from "./utils/styleRules.js";
 import { ScrollEventBuilder } from "./components/ScrollEventBuilder.js";
-import {join} from "./join.js";
 
 
 // ID 상수 배열

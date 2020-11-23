@@ -1,6 +1,7 @@
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
@@ -22,13 +23,16 @@ public class AppConfigServlet extends HttpServlet {
 	 */
 	public void init(ServletConfig config) throws ServletException {
 		mContext = getServletContext();
+		System.out.println("초기화 되었습니다!");
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+        PrintWriter out = response.getWriter();
+        out.println("<html><body>초기화 되었습니다!</body></html>");
+
 	}
 
 }
