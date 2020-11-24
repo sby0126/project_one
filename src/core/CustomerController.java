@@ -1,7 +1,6 @@
 package core;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -76,10 +75,6 @@ public class CustomerController extends HttpServlet {
 			
 			boolean isValid = true;
 			
-			PrintWriter out = response.getWriter();
-			out.println(id);
-			out.println(password);
-			
 			// ID 중복 여부 체크
 			if(customerDAO.isInvalidID(id)) {
 				// 회원 가입 실패 처리
@@ -89,14 +84,14 @@ public class CustomerController extends HttpServlet {
 				isValid = false;
 			}
 			
-			// 비밀번호 유효성 검사
-			if(!isValidPassword(password)) {
-				// 회원 가입 실패 처리
-				request.setAttribute("errorMessage", "[Error 2] 특수 문자나 영어 및 대 소문자 섞어야 합니다");
-				request.setAttribute("url", "/pages/join.jsp");
-				nextPage = "/pages/error.jsp";
-				isValid = false;
-			}
+//			// 비밀번호 유효성 검사
+//			if(!isValidPassword(password)) {
+//				// 회원 가입 실패 처리
+//				request.setAttribute("errorMessage", "[Error 2] 특수 문자나 영어 및 대 소문자 섞어야 합니다");
+//				request.setAttribute("url", "/pages/join.jsp");
+//				nextPage = "/pages/error.jsp";
+//				isValid = false;
+//			}
 			
 			if(isValid) {
 				CustomerVO c = new CustomerVO();
@@ -113,7 +108,12 @@ public class CustomerController extends HttpServlet {
 				c.setZipCode(zipcode);
 
 				customerDAO.addCustomer(c);
-				nextPage = "/pages/members.jsp"; // 회원 가입 환영 또는 최신 멤버 목록으로 이동 				
+				response.sendRedirect("/");
+				return;
+			} else {
+				request.setAttribute("errorMessage", "[Error 3]");
+				request.setAttribute("url", "/pages/join.jsp");
+				nextPage = "/pages/error.jsp";
 			}
 			
 		} else {

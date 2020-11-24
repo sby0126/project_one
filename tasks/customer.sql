@@ -5,8 +5,8 @@ create table tblCustomer (
     CTMID            VARCHAR2(15) NOT NULL,         -- ID (PK)
     CTMPW            VARCHAR2(64) NOT NULL,         -- 암호화된 비밀번호 (64자리)
     CTMNO            NUMBER(8) NOT NULL,            -- 번호
-    CTMNM            VARCHAR(15) NOT NULL,          -- 이름
-    ADDR             VARCHAR2(30),                  -- 주소
+    CTMNM            VARCHAR2(15) NOT NULL,          -- 이름
+    ADDR             VARCHAR2(100),                  -- 주소
     TEL              VARCHAR2(15),                  -- 전화번호
     EMAIL            VARCHAR2(30) NOT NULL,         -- 이메일
     ZIPCODE          CHAR(5),                       -- 새로운 우편번호 (5자리)

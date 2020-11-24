@@ -124,7 +124,7 @@ public class CustomerDAO implements AutoCloseable  {
 	public void addCustomer(CustomerVO c) {
 		try {
 			
-			conn = dataFactory.getConnection();
+			conn = pool.getConnection();
 			
 			String id = c.getId();
 			String hashedPassword = c.getPassword();
@@ -138,7 +138,7 @@ public class CustomerDAO implements AutoCloseable  {
 			String salt = c.getSalt();
 			
 			String query = "insert into tblCustomer (CTMID, CTMPW, CTMNO, CTMNM, ADDR, TEL, EMAIL, ZIPCODE, IS_ADMIN, JOINDATE, SALT)" + 
-					" values(?, ?, CUSTNO_SEQ.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?)";
+					" values(?, ?, CUSTNO_SEQ.NEXTVAL, ?, ?, ?, ?, ?, ?, sysdate, ?)";
 		
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, id);
@@ -150,11 +150,13 @@ public class CustomerDAO implements AutoCloseable  {
 			pstmt.setString(6, email);
 			pstmt.setString(7, zipcode);
 			pstmt.setString(8, isAdmin);
-			pstmt.setString(9, joinDate);
-			pstmt.setString(10, salt);
+			pstmt.setString(9, salt);
 			
-			pstmt.execute();
-			conn.commit();
+			if(pstmt.executeUpdate() > 0) {
+				conn.commit();
+				System.out.println("회원이 추가되었습니다.");
+				
+			};
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
