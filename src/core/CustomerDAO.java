@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class CustomerDAO implements AutoCloseable  {
@@ -108,7 +106,7 @@ public class CustomerDAO implements AutoCloseable  {
 			
 			pstmt.setString(1, id);
 			
-			rs =pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 			
 			isUnique = rs.next();
 			
@@ -128,7 +126,6 @@ public class CustomerDAO implements AutoCloseable  {
 			
 			conn = dataFactory.getConnection();
 			
-			String no = c.getNo();
 			String id = c.getId();
 			String hashedPassword = c.getPassword();
 			String name = c.getName();
@@ -139,23 +136,25 @@ public class CustomerDAO implements AutoCloseable  {
 			String isAdmin = c.getIsAdmin();
 			String joinDate = c.getJoinDate();
 			String salt = c.getSalt();
-			String lastLogin = c.getLastLogin();
-			String failedLoginCount = c.getFailedLoginCount();
-			String isLock = c.getIsLock();
 			
-			String query = "insert into tblCustomer" + 
-					" values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
+			String query = "insert into tblCustomer (CTMID, CTMPW, CTMNO, CTMNM, ADDR, TEL, EMAIL, ZIPCODE, IS_ADMIN, JOINDATE, SALT)" + 
+					" values(?, ?, CUSTNO_SEQ.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, id);
 			pstmt.setString(2, hashedPassword);
+			
 			pstmt.setString(3, name);
 			pstmt.setString(4, address);
 			pstmt.setString(5, tel);
 			pstmt.setString(6, email);
-			pstmt.setString(7, isAdmin);
-			pstmt.setString(8, joinDate);
-			pstmt.setString(9, salt);
+			pstmt.setString(7, zipcode);
+			pstmt.setString(8, isAdmin);
+			pstmt.setString(9, joinDate);
+			pstmt.setString(10, salt);
+			
+			pstmt.execute();
+			conn.commit();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -25,9 +25,6 @@ package core;
  */
 
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
@@ -37,11 +34,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 import java.util.Vector;
-
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import manager.*;
 /**
  * Manages a java.sql.Connection pool.
  *
@@ -51,36 +43,38 @@ public class DBConnectionMgr {
     private Vector connections = new Vector(10);
     private String _driver = "oracle.jdbc.driver.OracleDriver",
     _url = "jdbc:oracle:thin:@localhost:1521:orcl",
-    _user = "scott",
-    _password = "tiger";
+    _user = "admin",
+    _password = "admin";
     private boolean _traceOn = false;
     private boolean initialized = false;
     private int _openConnections = 10;
     private static DBConnectionMgr instance = null;
 
     public DBConnectionMgr() {
-    	JSONParser parser = new JSONParser();
-    	
-    	try {
-    		// 루트 폴더에서 admin.json 파일을 획득합니다.
-    		String root = DataManager.getInstance().getApplicationPath();
-    		String myConfigPath = Paths.get(Paths.get(root).getParent().toAbsolutePath().toString(), "admin.json").toString();
-    		JSONObject config = (JSONObject)parser.parse(new FileReader(myConfigPath));
-    		
-    		String userTemp = String.valueOf(config.get("user"));
-    		String passwordTemp = String.valueOf(config.get("password"));
-    		
-    		if(userTemp != null && !userTemp.isEmpty())
-    			_user = userTemp;
-    		
-    		if(passwordTemp != null && !passwordTemp.isEmpty())
-    			_password = passwordTemp;
-    		
-    	} catch(IOException ex) {
-    		ex.printStackTrace();
-    	} catch(ParseException ex) {
-    		ex.printStackTrace();
-    	}
+//    	JSONParser parser = new JSONParser();
+//    	
+//    	try {
+//    		// 루트 폴더에서 admin.json 파일을 획득합니다.
+//    		String root = DataManager.getInstance().getApplicationPath();
+//    		String myConfigPath = Paths.get(Paths.get(root).getParent().toAbsolutePath().toString(), "admin.json").toString();
+//    		JSONObject config = (JSONObject)parser.parse(new FileReader(myConfigPath));
+//    		
+//    		String userTemp = String.valueOf(config.get("user"));
+//    		String passwordTemp = String.valueOf(config.get("password"));
+//    		
+//    		System.out.println(passwordTemp);
+//    		
+//    		if(userTemp != null && !userTemp.isEmpty())
+//    			_user = userTemp;
+//    		
+//    		if(passwordTemp != null && !passwordTemp.isEmpty())
+//    			_password = passwordTemp;
+//    		
+//    	} catch(IOException ex) {
+//    		ex.printStackTrace();
+//    	} catch(ParseException ex) {
+//    		ex.printStackTrace();
+//    	}
     }
 
     /** Use this method to set the maximum number of open connections before

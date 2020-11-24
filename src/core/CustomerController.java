@@ -1,6 +1,7 @@
 package core;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -44,25 +45,45 @@ public class CustomerController extends HttpServlet {
 			request.setAttribute("customerList", customerList);		
 			nextPage = "/pages/members.jsp";
 			
-		} else if(act.equals("/signUp.do")) {
+		} else if(act.equals("/signUp.do")) { 
 			
-			// 이걸 줄이려면 마이바티스라는 프레임워크를 사용해야 한다.
+			// 회원 가입 폼에서 전달 받은 매개변수를 가져옵니다.
 			String id = request.getParameter("id");
-			String password = request.getParameter("password");
-			String no = request.getParameter("no");
+			String password = request.getParameter("pw");
 			String name = request.getParameter("name");
-			String address = request.getParameter("address");
+			
+			// 주소 
+			StringBuffer buff = new StringBuffer();
+			buff.append(request.getParameter("address1"));
+			buff.append(' ');
+			buff.append(request.getParameter("address2"));
+			
+			String address = buff.toString();
+			
 			String tel = request.getParameter("tel");
-			String email = request.getParameter("email");
+			String zipcode = request.getParameter("zipcode");
+			
+			// 이메일
+			buff = new StringBuffer();
+			buff.append(request.getParameter("email1"));
+			buff.append("@");
+			buff.append(request.getParameter("email2"));
+			
+			String email = buff.toString();
+			
 			String isAdmin = "N";
 			String joinDate = request.getParameter("joinDate");
 			
 			boolean isValid = true;
 			
+			PrintWriter out = response.getWriter();
+			out.println(id);
+			out.println(password);
+			
 			// ID 중복 여부 체크
 			if(customerDAO.isInvalidID(id)) {
 				// 회원 가입 실패 처리
-				request.setAttribute("errorMessage", "해당 아이디는 이미 사용 중입니다.");
+				request.setAttribute("errorMessage", "[Error 1] 해당 아이디는 이미 사용 중입니다.");
 				request.setAttribute("url", "/pages/join.jsp");
 				nextPage = "/pages/error.jsp";
 				isValid = false;
@@ -71,33 +92,30 @@ public class CustomerController extends HttpServlet {
 			// 비밀번호 유효성 검사
 			if(!isValidPassword(password)) {
 				// 회원 가입 실패 처리
-				request.setAttribute("errorMessage", "특수 문자나 영어 및 대 소문자 섞어야 합니다");
+				request.setAttribute("errorMessage", "[Error 2] 특수 문자나 영어 및 대 소문자 섞어야 합니다");
 				request.setAttribute("url", "/pages/join.jsp");
 				nextPage = "/pages/error.jsp";
 				isValid = false;
 			}
 			
-			// 이메일 중복 여부 체크
-			
-			
 			if(isValid) {
 				CustomerVO c = new CustomerVO();
 				
-				c
-					.setId(id)
-					.setPassword(password)
-					.setNo(no)
-					.setName(name)
-					.setAddress(address)
-					.setTel(tel)
-					.setEmail(email)
-					.setIsAdmin(isAdmin)
-					.setJoinDate(joinDate);		
+				c.setId(id)
+				 .setPassword(password)
+				 .setName(name)
+				 .setAddress(address)
+				 .setTel(tel)
+				 .setEmail(email)
+				 .setIsAdmin(isAdmin)
+				 .setJoinDate(joinDate);
 				
+				c.setZipCode(zipcode);
+
 				customerDAO.addCustomer(c);
 				nextPage = "/pages/members.jsp"; // 회원 가입 환영 또는 최신 멤버 목록으로 이동 				
 			}
-
+			
 		} else {
 			response.sendRedirect("/");
 		}

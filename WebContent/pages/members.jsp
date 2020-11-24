@@ -13,13 +13,16 @@
 	%>
 	
 	<%
-		for(CustomerVO c : customerList) {
+		if(customerList != null) 
+		{
+			for(CustomerVO c : customerList) {
 	%>
 		
 		회원 ID : <%= c.getId() %><br>
 		회원 주소 : <%= c.getAddress() %><br>
 		
 	<%
+			}
 		}
 	%>
 </body>
