@@ -3,23 +3,7 @@ package core;
 import utils.SHA256Util;
 
 public class CustomerVO {
-////	
-////	create table tblCustomer (
-////		    CTMID varchar2(15),
-////		    CTMPW varchar2(64),
-////		    CTMNO number(8) not null,
-////		    CTMNM varchar(15) not null,
-////		    ADDR varchar2(30) not null,
-////		    TEL varchar2(15),
-////		    EMAIL varchar2(20) not null,
-////		    IS_ADMIN char(1) default 'N',
-////		    JOINDATE date not null,
-////		    SALT varchar2(16) not null
-////		);
-////
-////		alter table tblCustomer add constraint tblCustomer_ctmno_pk primary key(ctmno);
-////	
-////	
+
 	private String id; // CTMID
 	private String password; // CTMPW
 	private String no; // CTMNO
@@ -27,9 +11,15 @@ public class CustomerVO {
 	private String address; // ADDR
 	private String tel; // TEL
 	private String email; // EMAIL
+	private String zipCode;
 	private String isAdmin; // IS_ADMIN
 	private String joinDate; // JoinDate
 	private String salt; 
+
+	private String lastLogin;
+	private String failedLoginCount;
+	private String isLock;	
+
 		
 	public String getId() {
 		return id;
@@ -112,6 +102,17 @@ public class CustomerVO {
 		return this;
 	}	
 	
+	public String getZipCode() {
+		return zipCode;
+	}
+
+	public CustomerVO setZipCode(String zipCode) {
+		this.zipCode = zipCode;
+		
+		return this;
+	}
+	
+	
 	public String getIsAdmin() {
 		return isAdmin;
 	}
@@ -142,5 +143,30 @@ public class CustomerVO {
 		
 		return this;
 	}	
+	
+	public String getLastLogin() {
+		return lastLogin;
+	}
+
+	public void setLastLogin(String lastLogin) {
+		this.lastLogin = lastLogin;
+	}
+
+	public String getFailedLoginCount() {
+		return failedLoginCount;
+	}
+
+	public void setFailedLoginCount(String failedLoginCount) {
+		this.failedLoginCount = failedLoginCount;
+	}
+
+	public String getIsLock() {
+		return isLock;
+	}
+
+	public void setIsLock(String isLock) {
+		this.isLock = isLock;
+	}
+
 	
 }

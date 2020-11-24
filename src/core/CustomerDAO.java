@@ -43,9 +43,13 @@ public class CustomerDAO implements AutoCloseable  {
 				String address = rs.getString("ADDR");
 				String tel = rs.getString("TEL");
 				String email = rs.getString("EMAIL");
+				String zipCode = rs.getString("ZIPCODE");
 				String isAdmin = rs.getString("isAdmin");
 				String joinDate = rs.getString("joinDate");
 				String salt = rs.getString("salt");
+				String lastLogin = rs.getString("LAST_LOGIN");
+				String failedLoginCount = rs.getString("FAILED_LOGIN_COUNT");
+				String isLock = rs.getString("IS_LOCK");
 				
 				CustomerVO c = new CustomerVO();
 				
@@ -57,9 +61,14 @@ public class CustomerDAO implements AutoCloseable  {
 					.setAddress(address)
 					.setTel(tel)
 					.setEmail(email)
+					.setZipCode(zipCode)
 					.setIsAdmin(isAdmin)
 					.setJoinDate(joinDate)
 					.setSalt(salt);
+				
+				c.setLastLogin(lastLogin);
+				c.setFailedLoginCount(failedLoginCount);
+				c.setIsLock(isLock);
 				
 				customerList.add(c);
 			}
@@ -126,12 +135,16 @@ public class CustomerDAO implements AutoCloseable  {
 			String address = c.getAddress();
 			String tel = c.getTel();
 			String email = c.getEmail();
+			String zipcode = c.getZipCode();
 			String isAdmin = c.getIsAdmin();
 			String joinDate = c.getJoinDate();
 			String salt = c.getSalt();
+			String lastLogin = c.getLastLogin();
+			String failedLoginCount = c.getFailedLoginCount();
+			String isLock = c.getIsLock();
 			
 			String query = "insert into tblCustomer" + 
-					" values(?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
+					" values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
 		
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, id);
