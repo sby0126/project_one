@@ -69,6 +69,7 @@ public class CustomerController extends HttpServlet {
 			if(customerDAO.isUniqueMember(id)) {
 				// 회원 가입 실패 처리
 				request.setAttribute("errorMessage", "해당 아이디는 이미 사용 중입니다.");
+				request.setAttribute("url", "/pages/join.jsp");
 				nextPage = "/pages/error.jsp";
 				isValid = false;
 			}
@@ -77,6 +78,7 @@ public class CustomerController extends HttpServlet {
 			if(!isValidPassword(password)) {
 				// 회원 가입 실패 처리
 				request.setAttribute("errorMessage", "특수 문자나 영어 및 대 소문자 섞어야 합니다");
+				request.setAttribute("url", "/pages/join.jsp");
 				nextPage = "/pages/error.jsp";
 				isValid = false;
 			}
