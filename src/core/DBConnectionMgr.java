@@ -315,6 +315,7 @@ public class DBConnectionMgr {
         if (_traceOn)
             System.err.println(s);
     }
+
 }
 
 class ConnectionObject {

@@ -11,7 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-public class CustomerDAO {
+public class CustomerDAO implements AutoCloseable  {
 	private DataSource dataFactory;
 	private Connection conn;
 	private PreparedStatement pstmt;
@@ -184,4 +184,13 @@ public class CustomerDAO {
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public void close() throws Exception {
+		if(pool != null) {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+	}
+	
 }

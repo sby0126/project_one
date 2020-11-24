@@ -18,4 +18,4 @@ create table tblCustomer (
 -- e87a4464fd60daa2
 -- 5667b4b360141072
 
-alter table tblCustomer add constraint tblCustomer_ctmno_pk primary key(ctmno);
+alter table tblCustomer add constraint tblCustomer_CTMID_pk primary key(CTMID);
