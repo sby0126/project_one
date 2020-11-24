@@ -66,7 +66,7 @@ public class CustomerController extends HttpServlet {
 			boolean isValid = true;
 			
 			// ID 중복 여부 체크
-			if(customerDAO.isUniqueMember(id)) {
+			if(customerDAO.isInvalidID(id)) {
 				// 회원 가입 실패 처리
 				request.setAttribute("errorMessage", "해당 아이디는 이미 사용 중입니다.");
 				request.setAttribute("url", "/pages/join.jsp");

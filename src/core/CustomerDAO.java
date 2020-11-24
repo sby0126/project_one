@@ -85,12 +85,13 @@ public class CustomerDAO implements AutoCloseable  {
 	 * @param id
 	 * @return
 	 */
-	public boolean isUniqueMember(String id) {
+	public boolean isInvalidID(String id) {
 		
 		List<CustomerVO> customerList = new ArrayList<CustomerVO>();
 		String query = "select * from tblCustomer where CTMID = ?";
 		
 		boolean isUnique = false;
+		ResultSet rs = null;
 				
 		try {
 			conn = pool.getConnection();
@@ -98,51 +99,16 @@ public class CustomerDAO implements AutoCloseable  {
 			
 			pstmt.setString(1, id);
 			
-			ResultSet rs = pstmt.executeQuery();
+			rs =pstmt.executeQuery();
 			
-			while(rs.next()) {
-				String _id = rs.getString("CTMID");
-				String hashedPassword = rs.getString("CTMPW");
-				String no = rs.getString("CTMNO");
-				String name = rs.getString("CTMNM");
-				String address = rs.getString("ADDR");
-				String tel = rs.getString("TEL");
-				String email = rs.getString("EMAIL");
-				String isAdmin = rs.getString("isAdmin");
-				String joinDate = rs.getString("joinDate");
-				String salt = rs.getString("salt");
-				
-				CustomerVO c = new CustomerVO();
-				
-				c
-					.setId(_id)
-					.setPassword(hashedPassword)
-					.setNo(no)
-					.setName(name)
-					.setAddress(address)
-					.setTel(tel)
-					.setEmail(email)
-					.setIsAdmin(isAdmin)
-					.setJoinDate(joinDate)
-					.setSalt(salt);
-				
-				customerList.add(c);
-			}
-			
-			if(customerList == null ) {
-				isUnique = true; // 유일한 아이디
-			} else {
-				isUnique = false; // 아이디가 이미 존재한다.
-			}
-			
-			rs.close();
-			pstmt.close();
-			conn.close();
+			isUnique = rs.next();
 			
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt, rs);
 		}
 		
 		return isUnique;
