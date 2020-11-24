@@ -16,11 +16,16 @@ public class CustomerDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
 	
+	private DBConnectionMgr pool;
+	
 	public CustomerDAO() {
 		try {
-			Context ctx = new InitialContext();
-			Context envContext = (Context)ctx.lookup("java:comp.env");
-			dataFactory = (DataSource) envContext.lookup("jbbc/oracle");
+//			Context ctx = new InitialContext();
+//			Context envContext = (Context)ctx.lookup("java:comp.env");
+//			dataFactory = (DataSource) envContext.lookup("jbbc/oracle");
+			
+			pool = DBConnectionMgr.getInstance();
+			
 		}  catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -30,7 +35,7 @@ public class CustomerDAO {
 		List<CustomerVO> customerList = new ArrayList<CustomerVO>();
 		String query = "select * from tblCustomer order by joinDate desc";
 		try {
-			conn = dataFactory.getConnection();
+			conn = pool.getConnection();
 			pstmt = conn.prepareStatement(query);
 			ResultSet rs = pstmt.executeQuery();
 			
@@ -68,6 +73,9 @@ public class CustomerDAO {
 			conn.close();
 			
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 		
