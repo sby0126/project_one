@@ -215,6 +215,7 @@
                 searchable:false,   
                 sortable: true,     
                 pagination: true,     
+                perPage: 10,
                 paginationElement: ".board-footer-pages-buttons-wrapper"
             })
 
