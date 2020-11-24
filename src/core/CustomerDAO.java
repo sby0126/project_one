@@ -75,9 +75,8 @@ public class CustomerDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
 		
 		return customerList;
 	}
@@ -98,7 +97,7 @@ public class CustomerDAO {
 		boolean isUnique = false;
 				
 		try {
-			conn = dataFactory.getConnection();
+			conn = pool.getConnection();
 			pstmt = conn.prepareStatement(query);	
 			
 			pstmt.setString(1, id);
@@ -146,6 +145,8 @@ public class CustomerDAO {
 			
 		} catch(SQLException e) {
 			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 		return isUnique;
@@ -182,7 +183,9 @@ public class CustomerDAO {
 			pstmt.setString(9, salt);
 			
 		} catch (SQLException e) {
-			
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }
