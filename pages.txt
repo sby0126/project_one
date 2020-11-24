@@ -9,6 +9,7 @@ board.jsp
 cart.jsp
 detail-item-uploader.jsp
 detail.jsp
+error.jsp
 find_password.jsp
 header.jsp
 infopolicy.jsp
