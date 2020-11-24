@@ -1,0 +1,1 @@
+sqlplus admin/admin@orcl
