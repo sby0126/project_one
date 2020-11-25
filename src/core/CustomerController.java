@@ -46,7 +46,9 @@ public class CustomerController extends HttpServlet {
 			List<CustomerVO> customerList = customerDAO.listMembers();  
 			request.setAttribute("customerList", customerList);		
 			nextPage = "/pages/members.jsp";
-		} else if(act.equals("/login.do")) {
+		} else if(act.equals("/login.do")) { 
+			
+			// 로그인 처리
 			
 			System.out.println("login.do 가 실행되었습니다");
 			
@@ -67,7 +69,8 @@ public class CustomerController extends HttpServlet {
 				nextPage = "/pages/error.jsp";
 			}
 			
-		} else if(act.equals("/logout.do")) {
+		} else if(act.equals("/logout.do")) { 
+			// 로그아웃 처리
 			
 			HttpSession session  = request.getSession();
 			session.invalidate();
