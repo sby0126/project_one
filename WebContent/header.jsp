@@ -25,7 +25,7 @@
                 </div>
                 <!-- 헤더 중앙 : 메뉴 -->
                 <div class="header-center">
-                    <a href="#">SHOP</a>
+                    <a href="/">SHOP</a>
                     <a href="item.jsp" target="_self">ITEM</a>
                     <a href="sale.jsp">SALE</a>
                     <a href="#">MORE</a>
