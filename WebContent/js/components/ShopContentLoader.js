@@ -15,7 +15,7 @@ export class ShopContentLoader extends Component {
 
         this._loaders = {};
 
-        this._isLocalMode = false;
+        this._isLocalMode = true;
         
         /**
          * @type {DataLoader}
