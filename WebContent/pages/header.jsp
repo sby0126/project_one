@@ -25,10 +25,21 @@
                    <a href="#">MORE</a>
                </div>
                <!-- 헤더 오른쪽 : 로그인 / 검색 -->
-               <div class="header-right">
-                   <button class="header-right-login-button">로그인</button>
-                   <input type="text" class="input-non-border-box" name="" id="" placeholder="검색어를 입력하세요">
-               </div>
+                <div class="header-right">
+                	<%
+                		String id = (String)session.getAttribute("id");
+                		if(id != null) {
+                	%>
+                    <button class="header-right-login-button" id="logout-button" onclick="javascript:location.href='/members/logout.do'">로그아웃</button>
+                    <%
+                		} else {
+                    %>
+                    <button class="header-right-login-button">로그인</button>	
+                    <%
+                		}
+                    %>
+                    <input type="text" class="input-non-border-box" name="" id="" placeholder="검색어를 입력하세요">
+                </div>
            </div>
            <!-- 숨겨진 메뉴 -->
            <div class="header-popup-container">
