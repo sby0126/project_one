@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/members/*")
 public class CustomerController extends HttpServlet {
@@ -38,11 +39,42 @@ public class CustomerController extends HttpServlet {
 		String act = request.getPathInfo();
 		String nextPage = null;
 		
+		System.out.println(act);
+		
 		if(act == null || act.equals("/members.do")) {
 			
 			List<CustomerVO> customerList = customerDAO.listMembers();  
 			request.setAttribute("customerList", customerList);		
 			nextPage = "/pages/members.jsp";
+		} else if(act.equals("/login.do")) {
+			
+			System.out.println("login.do 가 실행되었습니다");
+			
+			String id = request.getParameter("id");
+			String pw = request.getParameter("pw");
+			
+			boolean isValidLogin = customerDAO.processLogin(id, pw);
+			
+			// 로그인 성공 처리
+			if(isValidLogin) {
+				HttpSession session  = request.getSession();
+				session.setAttribute("id", id);
+				response.sendRedirect("/");
+				return;				
+			} else {
+				request.setAttribute("errorMessage", "[Error 4] 아이디 또는 비밀번호가 틀렸습니다.");
+				request.setAttribute("url", "/");
+				nextPage = "/pages/error.jsp";
+			}
+			
+		} else if(act.equals("/logout.do")) {
+			
+			HttpSession session  = request.getSession();
+			session.invalidate();
+			
+			response.sendRedirect("/");
+			
+			return;
 			
 		} else if(act.equals("/signUp.do")) { 
 			

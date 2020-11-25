@@ -9,6 +9,8 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import utils.SHA256Util;
+
 public class CustomerDAO implements AutoCloseable  {
 	private DataSource dataFactory;
 	private Connection conn;
@@ -82,6 +84,51 @@ public class CustomerDAO implements AutoCloseable  {
 		}
 		
 		return customerList;
+	}
+	
+	public boolean processLogin(String id, String pw) {
+		boolean ret = false;
+		ResultSet rs = null;
+		
+		try {
+			conn = pool.getConnection();
+			
+			String query = "select * from tblCustomer where CTMID = ?";
+			
+			String salt = "";
+			String targetPW = "";
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				targetPW = rs.getString("CTMPW");
+				salt = rs.getString("SALT");
+				
+				System.out.println(targetPW);
+				
+				// 비밀 번호가 맞는가?
+				String hashedPW = SHA256Util.getEncrypt(pw, salt);
+				
+				System.out.println("hashed : " + hashedPW);
+				if(hashedPW.equals(targetPW)) {
+					ret = true;
+				} else {
+					ret = false;
+				}				
+			}
+			
+			rs.close();
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ret;
 	}
 	
 	/**

@@ -16,7 +16,7 @@
                 <button id="close-login-view">X</button>
             </div>
             <!-- 로그인 폼 -->
-            <form method="POST" action="login">
+            <form method="POST" action="/members/login.do">
                 <p class="floating-login-view-input-group">
                     <label for="id"><i class="fas fa-user-alt"></i></label><input type="text" name="id" class="input-non-border-box" id="floating-login-view-login-id">
                 </p>
