@@ -23,6 +23,7 @@ outer-link-page.jsp
 payments.jsp
 post.html
 recent-product-container.jsp
+shop-detail.html
 shop-detail.jsp
 shop.jsp
 terms.jsp
