@@ -30,4 +30,4 @@ MINVALUE 1
 NOCYCLE;
 
 INSERT INTO tblCustomer (CTMID, CTMPW, CTMNO, CTMNM, EMAIL, IS_ADMIN, JOINDATE, SALT) 
-    VALUES('admin', 'admin', CUSTNO_SEQ.NEXTVAL, '包府磊', 'admin@projectone.co.kr', 'Y', sysdate, 'AAAABBBBCCCCDDDD');
+    VALUES('admin', '6df48b553264e6fd617d194e5afd76ba8d893cb0f54b1a7d8c6035317874e0b5', CUSTNO_SEQ.NEXTVAL, '包府磊', 'admin@projectone.co.kr', 'Y', sysdate, '0d6b91ff7ea2bd9d');
