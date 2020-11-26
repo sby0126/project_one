@@ -5,7 +5,8 @@
 	response.setDateHeader("Expires",0); 
 	if (request.getProtocol().equals("HTTP/1.1"))
 	        response.setHeader("Cache-Control", "no-cache");
-	%>
+	
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -23,7 +24,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/board-post.css">
-
 </head>
 <body>
     <!-- 컨테이너의 시작 -->

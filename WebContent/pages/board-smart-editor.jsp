@@ -5,7 +5,9 @@
 작성자 : 어진석
 상품 상세 정보를 업로드 하는 에디터입니다. 
 -->
-
+<%
+	String id = (String)session.getAttribute("id");	
+%>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,6 +51,15 @@
     </style>     
 </head>
 <body>   
+	<% if(id == null) { %>
+		<script>
+			setTimeout(function() {
+				alert("글 작성을 하려면 먼저 로그인이 되어있어야 합니다. 로그인을 해주십시오.");
+				location.href = "/";
+			}, 0);
+		</script>
+	<% 
+	} %>
     <!-- 컨테이너의 시작 -->
     <div class="container">
         <!-- 헤더의 시작 -->
@@ -171,6 +182,18 @@
                 alert("클립보드에 복사되었습니다.");
 
                 navigator.clipboard.writeText(prevJson);
+
+                const param = URLSearchParams(location.search);
+                const postNumber = param.get("postNumber");
+
+                // 폼을 동적으로 생성합니다.
+                const form = document.createElement("form");
+                form.setAttribute("postNumber", postNumber);
+                form.setAttribute("data", prevJson);
+                form.setAttribute("action", url);
+
+                document.body.appendChild(form);
+                form.submit();
             }
 
             // placeholder 제어

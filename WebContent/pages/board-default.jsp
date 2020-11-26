@@ -406,7 +406,13 @@
                             </div>
                         </div>
                         <div>
+                        	<!--  로그인이 되어있지 않으면 글쓰기 불가능 -->
+                        	<% 
+                        		String id = (String)session.getAttribute("id");
+                        		if(id != null) {  
+                        	%>
                             <a href="board-smart-editor.jsp" class="button">글쓰기</a>
+                            <% } %>
                         </div>
                     </div>                                
                 </div>    
