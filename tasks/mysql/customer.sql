@@ -6,7 +6,7 @@ DROP TABLE if EXISTS tblCustomer;
 CREATE TABLE tblCustomer (
     CTMID            VARCHAR(15) NOT NULL,         
     CTMPW            VARCHAR(64) NOT NULL,         
-    CTMNO            INT AUTO_INCREMENT UNIQUE NOT NULL, 
+    CTMNO            INT(8) AUTO_INCREMENT UNIQUE NOT NULL, 
     CTMNM            VARCHAR(15) NOT NULL,         
     ADDR             VARCHAR(100),                  
     TEL              VARCHAR(15),                  

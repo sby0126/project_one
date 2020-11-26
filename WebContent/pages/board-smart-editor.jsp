@@ -162,10 +162,15 @@
                     src: localStorage.getItem("thum"),
                     contents: quill.root.innerHTML
                 };
+                                
+                let prevJson = JSON.stringify(result);
+                
+                prevJson = prevJson.replace(/\</g, "&lt;");
+                prevJson = prevJson.replace(/\>/g, "&gt;");
 
                 alert("클립보드에 복사되었습니다.");
 
-                navigator.clipboard.writeText(JSON.stringify(result));
+                navigator.clipboard.writeText(prevJson);
             }
 
             // placeholder 제어

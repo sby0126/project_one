@@ -13,7 +13,7 @@
     margin-bottom: 0.5em;
     
     background: #fff;
-    border-bottom: 1px solid #E0E4E6;
+    // border-bottom: 1px solid #E0E4E6;
 
     cursor: pointer;    
 }
@@ -22,28 +22,38 @@
     margin-top: 8em;
 }
 
+.card-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;  
+    background-color: #fff;
+}
+
 .shop-detail {
     @include card-defailt();
 
     width: 100%;
-    flex: 1 1 0;
+    flex: 0.8 1 0;
 
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
+    // position: relative;
+    // left: 50%;
+    // transform: translateX(-50%);
 
     height: 15em;
     overflow: hidden;
 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;  
+    
     .detail-trailer-list {
         flex-basis: 0;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
     }
 
     .detail-trailer-list > div {
-        width: 100%;
+        width: 30%;
     }
 
     ul {
