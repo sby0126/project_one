@@ -185,7 +185,7 @@ public class CustomerDAO implements AutoCloseable  {
 			String salt = c.getSalt();
 			
 			String query = "insert into tblCustomer (CTMID, CTMPW, CTMNO, CTMNM, ADDR, TEL, EMAIL, ZIPCODE, IS_ADMIN, JOINDATE, SALT)" + 
-					" values(?, ?, CUSTNO_SEQ.NEXTVAL, ?, ?, ?, ?, ?, ?, sysdate, ?)";
+					" values(?, ?, null, ?, ?, ?, ?, ?, ?, CURDATE(), ?)";
 		
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, id);

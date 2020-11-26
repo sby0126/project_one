@@ -144,6 +144,6 @@
                     <div style="margin-top: 4px; text-align: center; font-size: 0.8em;">이 사이트는 포트폴리오 용으로 개발된 사이트로 실제 사이트가 아닙니다.</div>
                 </div>
             </div>
-        </header>
+        </header>        
 </body>
 </html>
