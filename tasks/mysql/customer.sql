@@ -19,7 +19,6 @@ CREATE TABLE tblCustomer (
     FAILED_LOGIN_COUNT TINYINT,                   
     IS_LOCK 			CHAR(1) DEFAULT 'N',
 	 
-	 
 	 CONSTRAINT PRIMARY KEY TBLCUSTOMER_CTMID_PK (CTMID),
 	 CONSTRAINT UNIQUE TBLCUSTOMER_EMAIL_UK (EMAIL)                  
 );
@@ -28,3 +27,5 @@ alter table tblCustomer AUTO_INCREMENT = 1;
 
 INSERT INTO tblCustomer (CTMID, CTMPW, CTMNO, CTMNM, EMAIL, IS_ADMIN, JOINDATE, SALT) 
     VALUES('admin', 'admin', null, '관리자', 'admin@projectone.co.kr', 'Y', CURDATE(), 'AAAABBBBCCCCDDDD');
+
+TRUNCATE tblCustomer;
