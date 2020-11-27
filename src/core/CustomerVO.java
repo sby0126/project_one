@@ -2,6 +2,12 @@ package core;
 
 import utils.SHA256Util;
 
+/**
+ * 아래 변수 명명법은 엄격히 말하면 잘못되었습니다.
+ * 
+ * TODO: 변수명은 테이블에 정의된 축약형 컬럼명과 정확히 일치해야 합니다.
+ * 
+ */
 public class CustomerVO {
 
 	private String id; // CTMID
