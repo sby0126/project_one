@@ -20,7 +20,15 @@ public class SQLHelper {
      * 
      * 그러나 별도의 프레임워크 없이도 반복되는 코드를 획기적으로 줄일 수 있게 합니다.
      * 
+     * 출처는 중국 사이트에서 크롤링된 데이터로 보여지는데 자세히 파악되진 않습니다.
+     * 
      * @link https://programming.vip/docs/java-jdbc-resultset-results-are-assigned-to-java-objects-through-java-reflection.html
+     * 
+     * 다만 규칙에 따라 테이블에 정의한 대로 컬럼명을 적어야 오류가 생기지 않게 됩니다.
+     * 
+     * @link http://commons.apache.org/proper/commons-dbutils/examples.html
+     * 
+     * 또한 아파치에서 지원하는 유틸도 있습니다.
      * 
      * @param <T>
      * @param rs
