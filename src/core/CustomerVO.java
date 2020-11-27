@@ -1,12 +1,8 @@
 package core;
 
-import java.lang.reflect.Field;
-
-import org.json.simple.JSONObject;
-
 import utils.SHA256Util;
 
-public class CustomerVO implements VO {
+public class CustomerVO {
 
 	private String id; // CTMID
 	private String password; // CTMPW

@@ -8,14 +8,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.sql.DataSource;
-
 import utils.SHA256Util;
 
-public class CustomerDAO extends DAO  {
+public class CustomerDAO {
 	
 	public static final String TABLE_NAME = "tblCustomer";
 	public static final String QL_VERSION = "mysql1";
+	
+	private DBConnectionMgr pool; 
+	private Connection conn;
+	private PreparedStatement pstmt;
 
 	private HashMap<String, String> qlNotes = new HashMap<String, String>();
 	
@@ -38,12 +40,37 @@ public class CustomerDAO extends DAO  {
 		
 	}
 	
+	public ArrayList<CustomerVO> test(String id) {
+		ResultSet rs = null;
+		ArrayList<CustomerVO> list = null;
+		
+		try {
+			String query = getQuery("getMember");
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();
+			
+			list = SQLHelper.putResult(rs, CustomerVO.class);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt, rs);
+		}
+		
+		return list;
+	}
+	
+	/**
+	 * 쿼리문을 가져옵니다.
+	 * @param command
+	 * @return
+	 */
 	public String getQuery(String command) {
 		String commandName = QL_VERSION + "." + command;
 		
 		return qlNotes.get(commandName);
 	}
-	
 	
 	public CustomerVO getMember(String custId) {
 		String query = getQuery("getMember");
