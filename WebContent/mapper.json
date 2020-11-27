@@ -1,0 +1,12 @@
+{
+    "SHOP": "index.jsp",
+    "ITEM": "item.jsp",
+    "SALE": "sale.jsp",
+    "S1": "Recently_viewed_shop.jsp",
+    "S2": "Recently_viewde_item.jsp",
+    "S3": "Recently_viewed_shop.jsp",
+    "S4": "Interested_item.jsp",
+    "S5": "board-default.jsp",
+    "S6": "map.jsp",
+    "S7": "outer-link-page.jsp"
+}

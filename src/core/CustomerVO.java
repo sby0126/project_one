@@ -6,7 +6,7 @@ import org.json.simple.JSONObject;
 
 import utils.SHA256Util;
 
-public class CustomerVO {
+public class CustomerVO implements VO {
 
 	private String id; // CTMID
 	private String password; // CTMPW
@@ -171,19 +171,5 @@ public class CustomerVO {
 	public void setIsLock(String isLock) {
 		this.isLock = isLock;
 	}
-	
-	@SuppressWarnings("unchecked")
-	public JSONObject toJson() throws IllegalArgumentException, IllegalAccessException {
-		JSONObject data = new JSONObject();
-		
-		Field[] fields = this.getClass().getDeclaredFields();
-		
-		for(Field field : fields) {
-			data.put(field.getName(), field.get(this));
-		}
-		
-		return data;
-	}
 
-	
 }

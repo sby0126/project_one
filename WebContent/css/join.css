@@ -105,7 +105,7 @@
     border-radius: 0 0 15px 15px;
 }
 
- .content_login > form > ul > li > label {
+.content_login > form > ul > li > label {
     display:block;
     position:absolute;
 }
@@ -174,4 +174,12 @@
     border-radius: 5px 5px 5px 5px;
     line-height: 12px;
     background-color: lightskyblue
+}
+
+.main span {
+	user-select: none;
+}
+
+.main input {
+	background-color: transparent;
 }

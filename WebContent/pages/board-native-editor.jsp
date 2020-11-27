@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="ko">
+<!-- 
+작성자 : 어진석
+상품 상세 정보를 업로드 하는 에디터입니다. 
+-->
 <%
-	String id = (String)session.getAttribute("id");
+	String id = (String)session.getAttribute("id");	
 %>
 <head>
     <meta charset="UTF-8">
