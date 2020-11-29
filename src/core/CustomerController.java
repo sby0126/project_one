@@ -1,9 +1,7 @@
 package core;
 
 import java.io.IOException;
-import java.net.URL;
-import java.net.URLDecoder;
-import java.util.HashMap;
+import java.sql.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -129,7 +127,7 @@ public class CustomerController extends HttpServlet {
 			String email = buff.toString();
 			
 			String isAdmin = "N";
-			String joinDate = request.getParameter("joinDate");
+			Date joinDate = Date.valueOf( request.getParameter("joinDate") );
 			
 			boolean isValid = true;
 			

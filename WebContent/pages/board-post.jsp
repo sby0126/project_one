@@ -55,9 +55,9 @@
                                     <span>biud436</span>        
                                 </div>
                                 <div class="detail-area-date-panel">
-                                    <span>2020.11.16</span>
-                                    <span>조회수 10</span>
-                                    <span>댓글수 1개</span>    
+                                    <span id="regdate">2020.11.16</span>
+                                    <span id="viewcount">조회수 10</span>
+                                    <span id="commentsCount">댓글수 1개</span>    
                                 </div>
                             </div>
                             <!-- 게시물 공유 및 삭제 버튼 -->
@@ -106,24 +106,24 @@
                                 <span><em class="badge">1</em> 개 댓글</span>
                             </div>
                             <div class="comment-area panel-body">
-                                <div class="comment-author well">
-                                    <div class="profile-box">
-                                        <span><i class="fas fa-user-circle fa-3x"></i></span>
-                                    </div>
-                                    <div class="detail-area col-sm-1">
-                                        <div class="detail-area-author-id">
-                                            <span>biud436</span>        
-                                        </div>
-                                        <div class="detail-area-date-panel">
-                                            <span>1일 전</span>
-                                            <span style="cursor:pointer;"><a href="" class="replay-ok">답글</a></span>
-                                            <span style="cursor:pointer;"><a href="" class="replay-delete">삭제</a></span>
-                                        </div>
-                                        <div class="detail-area-contentss">
-                                            <span>테스트1</span>
-                                        </div>
-                                    </div>       
-                                </div>
+<!--                                 <div class="comment-author well"> -->
+<!--                                     <div class="profile-box"> -->
+<!--                                         <span><i class="fas fa-user-circle fa-3x"></i></span> -->
+<!--                                     </div> -->
+<!--                                     <div class="detail-area col-sm-1"> -->
+<!--                                         <div class="detail-area-author-id"> -->
+<!--                                             <span>biud436</span>         -->
+<!--                                         </div> -->
+<!--                                         <div class="detail-area-date-panel"> -->
+<!--                                             <span>1일 전</span> -->
+<!--                                             <span style="cursor:pointer;"><a href="" class="replay-ok">답글</a></span> -->
+<!--                                             <span style="cursor:pointer;"><a href="" class="replay-delete">삭제</a></span> -->
+<!--                                         </div> -->
+<!--                                         <div class="detail-area-contentss"> -->
+<!--                                             <span>테스트1</span> -->
+<!--                                         </div> -->
+<!--                                     </div>        -->
+<!--                                 </div> -->
                                 <!-- <form action="commentOK.jsp"> -->
                                     <div class="add-comment-button-area">
                                         <textarea name="" id="comment-textarea" name="text"></textarea>

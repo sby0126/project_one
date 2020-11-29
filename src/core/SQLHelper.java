@@ -60,6 +60,8 @@ public class SQLHelper {
                     // getter & setter와 연결하기 위해 첫 글자를 대문자로 변경합니다.
                     name = toJavaField(name); 
                     
+                    System.out.println(name);
+                    
                     String substring = name.substring(0, 1);// title case
                     String replace = name.replaceFirst(substring, substring.toUpperCase());
                     Class<?> type = null;

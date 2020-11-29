@@ -189,7 +189,7 @@
 
     const Editor = {
         init() {
-            this.initWithEvent();
+            this.load(this.initWithEvent.bind(this));
             this.initWithPages();
         },
 
@@ -205,7 +205,21 @@
             return isMobile;
         },
 
-        initWithEvent() {
+        load(cb) {
+            $.ajax({
+                url: "/board/qna/listAll.do",
+                method: "GET",
+                contentType: "application/json",
+                success: function(data) {
+                    cb(data);
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            });
+        },
+
+        initWithEvent(data) {
             const self = this;
             this._elem = $("#editor");
 
@@ -218,6 +232,21 @@
                 perPage: 10,
                 paginationElement: ".board-footer-pages-buttons-wrapper"
             })
+
+            data.forEach(i => {
+                console.log(i);
+                $("#editor .table tbody").append(`
+                    <tr>
+                        <td>${i.postNumber}</td>
+                        <td>${i.postType}</td>
+                        <td><a href="#">${i.postTitle}</a></td>
+                        <td>${i.name}</td>
+                        <td>${i.create_at}</td>
+                        <td>${i.view}</td>
+                        <td>${i.recommandCount}</td>
+                    </tr>
+                `);
+            });
 
             this._elem.filterTable(".search-box")
                 .find("td > a").on("click", function(ev) {
