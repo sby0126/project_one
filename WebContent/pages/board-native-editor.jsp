@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="ko">
+<!-- 
+작성자 : 어진석
+상품 상세 정보를 업로드 하는 에디터입니다. 
+-->
 <%
-	String id = (String)session.getAttribute("id");
+	String id = (String)session.getAttribute("id");	
 %>
 <head>
     <meta charset="UTF-8">
@@ -175,16 +179,18 @@
                 prevJson = prevJson.replace(/\</g, "&lt;");
                 prevJson = prevJson.replace(/\>/g, "&gt;");
 
+                alert("클립보드에 복사되었습니다.");
+
                 navigator.clipboard.writeText(prevJson);
 
-                const param = new URLSearchParams(location.search);
-                const postNumber = param.get("postNumber") || 0;
+                const param = URLSearchParams(location.search);
+                const postNumber = param.get("postNumber");
 
                 // 폼을 동적으로 생성합니다.
                 const form = document.createElement("form");
                 form.setAttribute("postNumber", postNumber);
-                form.setAttribute("data", JSON.stringify(prevJson));
-                form.setAttribute("action", "/board/qna/writeForm.do");
+                form.setAttribute("data", prevJson);
+                form.setAttribute("action", url);
 
                 document.body.appendChild(form);
                 form.submit();

@@ -187,8 +187,8 @@ const SDK = (() => {
             return publishedTimeText;
         }
 
-        registerComment(authorId, texts) {
-            const timeText = this.getTimeText(new Date());
+        registerComment(authorId, texts, timer) {
+            const timeText = this.getTimeText(new Date(timer));
             let commentRaw = "";
             /**
              * @type {String[]}
@@ -243,6 +243,21 @@ class Editor extends Component {
         this.initWithData();
     }
 
+    load(postNumber, cb) {
+        $.ajax({
+            url: "/board/qna/postView.do",
+            method: "GET",
+            data: {postNumber: postNumber},
+            contentType: "application/json",
+            success: function(data) {
+                cb(data);
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+    }
+
     /**
      * 주소 값으로부터 매개변수를 가져옵니다.
      * 
@@ -259,21 +274,45 @@ class Editor extends Component {
     }
 
     run() {
-        for(let  i in FUNC) {
-            if(i === "REPLAY_DELETE") {
-                continue;
-            }
-            document.querySelector(ID[i]).onclick = FUNC[i];
-        }
+        this.load(this._postNumber, (data) => {
 
-        $(".board-post-comment").on("click", (ev) => {
-            if(ev.target.tagName === "A") {
-                if(ev.target.classList.contains("replay-delete")) {
-                    FUNC.REPLAY_DELETE(ev);
-                }
+            if(!data) {
+                return;
             }
-            ev.preventDefault();
-        })
+
+            // 제목
+            $("board-post-title span").text(data.title)
+
+            // 작성자
+            $(".detail-area-author-id span").text(data.author);
+
+            // 내용
+            $(".board-article-contents").text(data.contents);
+
+            $("#regdate").text(data.create_at);
+            $("#viewcount").text(`조회수 ${data.view}`);
+            $("#commentsCount").text(`댓글수 ${data.comments.length}개`);
+
+            data.comments.forEach(comment => {
+                SDK.registerComment(comment.author, comment.contents, comment.create_at);
+            })
+
+            for(let  i in FUNC) {
+                if(i === "REPLAY_DELETE") {
+                    continue;
+                }
+                document.querySelector(ID[i]).onclick = FUNC[i];
+            }
+    
+            $(".board-post-comment").on("click", (ev) => {
+                if(ev.target.tagName === "A") {
+                    if(ev.target.classList.contains("replay-delete")) {
+                        FUNC.REPLAY_DELETE(ev);
+                    }
+                }
+                ev.preventDefault();
+            })
+        });
     }
 
     static id() {

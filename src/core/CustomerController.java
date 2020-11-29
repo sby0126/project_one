@@ -1,6 +1,7 @@
 package core;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -37,16 +38,37 @@ public class CustomerController extends HttpServlet {
 		response.setContentType("text/html; utf-8");
 		
 		String act = request.getPathInfo();
+//		
+//		// 주소 값에서 매개변수를 파싱합니다.
+//		URL url = new URL(request.);
+//		String query = url.getQuery();
+//		String[] param = query.split("&");
+//		HashMap<String, String> paramMap = new HashMap<String, String>();
+//		
+//		for(String pair : param) {
+//			int idx = pair.indexOf("=");
+//			paramMap.put(
+//						URLDecoder.decode(pair.substring(0, idx), "UTF-8"), 
+//						URLDecoder.decode(pair.substring(idx + 1), "UTF-8")
+//					);
+//		}
+//				
+//		String root = url.getPath();
 		String nextPage = null;
-		
-		System.out.println(act);
 		
 		if(act == null || act.equals("/members.do")) {
 			
 			List<CustomerVO> customerList = customerDAO.listMembers();  
 			request.setAttribute("customerList", customerList);		
-			nextPage = "/pages/members.jsp";
-		} else if(act.equals("/login.do")) { 
+			
+			nextPage = "/pages/members.jsp";	
+			
+			// 리다이렉션할 페이지를 매개변수로부터 가져와 설정합니다.
+			if(request.getParameter("nextPage") != null) {
+				nextPage = request.getParameter("nextPage");
+			}
+			
+		}  else if(act.equals("/login.do")) { 
 			
 			// 로그인 처리
 			
@@ -75,8 +97,7 @@ public class CustomerController extends HttpServlet {
 			HttpSession session  = request.getSession();
 			session.invalidate();
 			
-			response.sendRedirect("/");
-			
+			response.sendRedirect("/");	
 			return;
 			
 		} else if(act.equals("/signUp.do")) { 
@@ -106,7 +127,7 @@ public class CustomerController extends HttpServlet {
 			String email = buff.toString();
 			
 			String isAdmin = "N";
-			String joinDate = request.getParameter("joinDate");
+			Date joinDate = Date.valueOf( request.getParameter("joinDate") );
 			
 			boolean isValid = true;
 			

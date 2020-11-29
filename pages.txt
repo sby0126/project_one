@@ -3,6 +3,7 @@ Interested_item.jsp
 Recently_viewde_item.jsp
 Recently_viewed_shop.jsp
 board-default.jsp
+board-native-editor.jsp
 board-post.jsp
 board-smart-editor.jsp
 board.jsp

@@ -1,23 +1,27 @@
 package core;
 
-import java.lang.reflect.Field;
-
-import org.json.simple.JSONObject;
+import java.sql.Date;
 
 import utils.SHA256Util;
 
+/**
+ * 아래 변수 명명법은 엄격히 말하면 잘못되었습니다.
+ * 
+ * TODO: 변수명은 테이블에 정의된 축약형 컬럼명과 정확히 일치해야 합니다.
+ * 
+ */
 public class CustomerVO {
 
 	private String id; // CTMID
 	private String password; // CTMPW
-	private String no; // CTMNO
+	private int no; // CTMNO
 	private String name; // CTMNM
 	private String address; // ADDR
 	private String tel; // TEL
 	private String email; // EMAIL
 	private String zipCode;
 	private String isAdmin; // IS_ADMIN
-	private String joinDate; // JoinDate
+	private Date joinDate; // JoinDate
 	private String salt; 
 
 	private String lastLogin;
@@ -56,11 +60,11 @@ public class CustomerVO {
 		return this;
 	}
 	
-	public String getNo() {
+	public int getNo() {
 		return no;
 	}
 	
-	public CustomerVO setNo(String no) {
+	public CustomerVO setNo(int no) {
 		this.no = no;
 		
 		return this;
@@ -127,12 +131,12 @@ public class CustomerVO {
 		return this;
 	}
 
-	public String getJoinDate() {
+	public Date getJoinDate() {
 		return joinDate;
 	}
 
-	public CustomerVO setJoinDate(String joinDate) {
-		this.joinDate = joinDate;
+	public CustomerVO setJoinDate(Date joinDate2) {
+		this.joinDate = joinDate2;
 		
 		return this;
 	}
@@ -152,38 +156,30 @@ public class CustomerVO {
 		return lastLogin;
 	}
 
-	public void setLastLogin(String lastLogin) {
+	public CustomerVO setLastLogin(String lastLogin) {
 		this.lastLogin = lastLogin;
+		
+		return this;
 	}
 
 	public String getFailedLoginCount() {
 		return failedLoginCount;
 	}
 
-	public void setFailedLoginCount(String failedLoginCount) {
+	public CustomerVO setFailedLoginCount(String failedLoginCount) {
 		this.failedLoginCount = failedLoginCount;
+		
+		return this;
 	}
 
 	public String getIsLock() {
 		return isLock;
 	}
 
-	public void setIsLock(String isLock) {
+	public CustomerVO setIsLock(String isLock) {
 		this.isLock = isLock;
-	}
-	
-	@SuppressWarnings("unchecked")
-	public JSONObject toJson() throws IllegalArgumentException, IllegalAccessException {
-		JSONObject data = new JSONObject();
 		
-		Field[] fields = this.getClass().getDeclaredFields();
-		
-		for(Field field : fields) {
-			data.put(field.getName(), field.get(this));
-		}
-		
-		return data;
+		return this;
 	}
 
-	
 }

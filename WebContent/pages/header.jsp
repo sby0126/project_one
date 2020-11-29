@@ -69,7 +69,7 @@
                        </a>
                    </li>
                    <li class="menu">
-                       <a href="#" class="menu-link">
+                       <a href="./board-default.jsp" class="menu-link">
                            <div class="menu-icon"></div>
                            <p class="menu-title">1:1 문의</p>
                        </a>
