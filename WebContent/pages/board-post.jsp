@@ -43,7 +43,7 @@
                         </div>
                         <!-- 게시물 제목 -->
                         <div class="board-post-title">
-                            <strong>반품 신청합니다...</strong>
+                            <strong></strong>
                         </div>
                         <!-- 작성자 프로필 / 작성 날짜 / 조회수 / 댓글수 -->
                         <div class="board-post-header-detail-info">
@@ -52,12 +52,12 @@
                             </div>
                             <div class="detail-area col-sm-1">
                                 <div class="detail-area-author-id">
-                                    <span>biud436</span>        
+                                    <span></span>        
                                 </div>
                                 <div class="detail-area-date-panel">
-                                    <span id="regdate">2020.11.16</span>
-                                    <span id="viewcount">조회수 10</span>
-                                    <span id="commentsCount">댓글수 1개</span>    
+                                    <span id="regdate"></span>
+                                    <span id="viewcount">조회수 0</span>
+                                    <span id="commentsCount">댓글수 0개</span>    
                                 </div>
                             </div>
                             <!-- 게시물 공유 및 삭제 버튼 -->
@@ -72,22 +72,7 @@
                         <div class="board-article">
                             <!-- 글 내용 -->
                             <div class="board-article-contents">
-                                <p>글 쓰기 내용</p><br>
-                                <p>글 쓰기 내용</p><br>
-                                <p>글 쓰기 내용</p><br>
-                                <p>글 쓰기 내용</p><br>
-                                <p>글 쓰기 내용</p><br>
-                                <p>글 쓰기 내용</p><br>
-                                <p>글 쓰기 내용</p><br>
-                                <p>글 쓰기 내용</p><br>
-                                <p>글 쓰기 내용</p><br>
-                                <p>글 쓰기 내용</p><br>
-                                <p>글 쓰기 내용</p><br>
-                                <p>글 쓰기 내용</p><br>
-                                <p>글 쓰기 내용</p><br>
-                                <p>글 쓰기 내용</p><br>
-                                <p>글 쓰기 내용</p><br>
-                                <p>글 쓰기 내용</p><br>
+                                <p></p><br>
                             </div>
                             <div class="board-article-footer">
                                 <!-- 추천 버튼 -->
@@ -103,33 +88,13 @@
                         <div class="board-post-comment panel panel-info">
                             <div class="comment-header panel-heading">
                                 <!-- 댓글 갯수 -->
-                                <span><em class="badge">1</em> 개 댓글</span>
+                                <span><em class="badge">0</em> 개 댓글</span>
                             </div>
                             <div class="comment-area panel-body">
-<!--                                 <div class="comment-author well"> -->
-<!--                                     <div class="profile-box"> -->
-<!--                                         <span><i class="fas fa-user-circle fa-3x"></i></span> -->
-<!--                                     </div> -->
-<!--                                     <div class="detail-area col-sm-1"> -->
-<!--                                         <div class="detail-area-author-id"> -->
-<!--                                             <span>biud436</span>         -->
-<!--                                         </div> -->
-<!--                                         <div class="detail-area-date-panel"> -->
-<!--                                             <span>1일 전</span> -->
-<!--                                             <span style="cursor:pointer;"><a href="" class="replay-ok">답글</a></span> -->
-<!--                                             <span style="cursor:pointer;"><a href="" class="replay-delete">삭제</a></span> -->
-<!--                                         </div> -->
-<!--                                         <div class="detail-area-contentss"> -->
-<!--                                             <span>테스트1</span> -->
-<!--                                         </div> -->
-<!--                                     </div>        -->
-<!--                                 </div> -->
-                                <!-- <form action="commentOK.jsp"> -->
                                     <div class="add-comment-button-area">
                                         <textarea name="" id="comment-textarea" name="text"></textarea>
                                         <button href="#" type="submit" id="comment-ok-button" class="btn btn-default">등록</button>
                                     </div>                                                          
-                                <!-- </form>    -->
                             </div>
                         </div>
                     </div>

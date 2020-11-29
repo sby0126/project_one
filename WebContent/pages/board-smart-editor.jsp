@@ -175,18 +175,16 @@
                 prevJson = prevJson.replace(/\</g, "&lt;");
                 prevJson = prevJson.replace(/\>/g, "&gt;");
 
-                alert("클립보드에 복사되었습니다.");
-
                 navigator.clipboard.writeText(prevJson);
 
-                const param = URLSearchParams(location.search);
-                const postNumber = param.get("postNumber");
+                const param = new URLSearchParams(location.search);
+                const postNumber = param.get("postNumber") || 0;
 
                 // 폼을 동적으로 생성합니다.
                 const form = document.createElement("form");
                 form.setAttribute("postNumber", postNumber);
-                form.setAttribute("data", prevJson);
-                form.setAttribute("action", url);
+                form.setAttribute("data", JSON.stringify(prevJson));
+                form.setAttribute("action", "/board/qna/writeForm.do");
 
                 document.body.appendChild(form);
                 form.submit();

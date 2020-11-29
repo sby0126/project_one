@@ -231,9 +231,9 @@
                 pagination: true,     
                 perPage: 10,
                 paginationElement: ".board-footer-pages-buttons-wrapper"
-            })
+            });
 
-            data.forEach(i => {
+            data.forEach((i, idx) => {
                 console.log(i);
                 $("#editor .table tbody").append(`
                     <tr>
@@ -246,23 +246,18 @@
                         <td>${i.recommandCount}</td>
                     </tr>
                 `);
-            });
 
-            this._elem.filterTable(".search-box")
-                .find("td > a").on("click", function(ev) {
-                    const postNumber = $(this)
-                        .parent()
-                        .parent()
-                        .find("td").eq(0).text();
-
+                this._elem.find("td > a").eq(idx).on("click", function(ev) {
                     // postNumber 전달
                     // pageNumber도 전달해야 할 듯 한데...
                     let url = new URLSearchParams(location.search);
-                    url.set("postNumber", postNumber);
+                    url.set("postNumber", i.postNumber);
 
-                    location.href = "board-post.jsp?&" + url.toString();
-                });
-  
+                    location.href = "board-post.jsp?" + url.toString();  
+                })
+
+            });
+
         },
 
         initWithPages() {
