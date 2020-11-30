@@ -17,6 +17,14 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+  	.left {
+  		position: fixed;
+  	}
+  	.right {
+  		float: right;
+  	}
+  </style>
 </head>
 <body>
     <div class="container col-md-12">
@@ -38,7 +46,7 @@
                     <li><a href="#log">접속 로그</a></li>
                   </ul>
             </div>
-            <div class="content-wrapper wall col-md-9">
+            <div class="right content-wrapper wall col-md-9">
                 <div id="main" class="content jumbotron media">
                     <p>관리자 페이지에 오신 것을 환영합니다.</p>
                     <p><span class="col-md-2"><%=id %></span>님 환영합니다. </p>
