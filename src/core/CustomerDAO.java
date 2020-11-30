@@ -1,7 +1,6 @@
 package core;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -146,7 +145,6 @@ public class CustomerDAO {
 				String tel = rs.getString("TEL");
 				String email = rs.getString("EMAIL");
 				String zipCode = rs.getString("ZIPCODE");
-				String isAdmin = rs.getString("isAdmin");
 				String joinDate = rs.getString("joinDate");
 				String salt = rs.getString("salt");
 				String lastLogin = rs.getString("LAST_LOGIN");
@@ -164,7 +162,6 @@ public class CustomerDAO {
 					.setTel(tel)
 					.setEmail(email)
 					.setZipCode(zipCode)
-					.setIsAdmin(isAdmin)
 					.setJoinDate(joinDate)
 					.setSalt(salt);
 				
