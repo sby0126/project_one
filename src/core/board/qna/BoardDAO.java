@@ -1,5 +1,11 @@
 package core.board.qna;
 
+import java.io.IOException;
+import java.nio.file.DirectoryIteratorException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
@@ -504,7 +510,7 @@ public class BoardDAO {
 		return arr;
 	}
 	
-	public boolean updateComment(String content, int commentID, String authorID)
+	public boolean updateComment(String content, int commentID, String authorID) throws SQLException
 	{
 		boolean isOK = false;
 		ResultSet rs = null;
@@ -520,15 +526,25 @@ public class BoardDAO {
 				isOK = true;
 			}
 			
-		} catch(SQLException e) {
-			e.printStackTrace(); 
 		} catch(Exception e) {
-			e.printStackTrace();
+			e.printStackTrace(); 
 		} finally {
 			pool.freeConnection(conn, pstmt, rs);
 		}
 		
 		return isOK;
+	}
+	
+	public static void main(String[] args) {
+		Path dir = Paths.get("WebContent");
+		
+		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, "*.*")) {
+			for( Path file: stream ) {
+				System.out.println(file.getFileName());
+			}
+		} catch(IOException | DirectoryIteratorException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
