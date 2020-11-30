@@ -223,18 +223,9 @@
             const self = this;
             this._elem = $("#editor");
 
-            $("#editor .table").fancyTable({
-                sortColumn: 0,
-                sortOrder:'descending',
-                searchable:false,   
-                sortable: true,     
-                pagination: true,     
-                perPage: 10,
-                paginationElement: ".board-footer-pages-buttons-wrapper"
-            });
+            const postData = [];
 
             data.forEach((i, idx) => {
-                console.log(i);
                 $("#editor .table tbody").append(`
                     <tr>
                         <td>${i.postNumber}</td>
@@ -247,15 +238,29 @@
                     </tr>
                 `);
 
-                this._elem.find("td > a").eq(idx).on("click", function(ev) {
+                postData.push(i);
+
+            });
+
+            const fancy = $("#editor .table").fancyTable({
+                sortColumn: 0,
+                sortOrder:'descending',
+                searchable:false,   
+                sortable: true,     
+                pagination: true,     
+                perPage: 10,
+                paginationElement: ".board-footer-pages-buttons-wrapper"
+            });
+
+            this._elem.find("td > a").each((index, item) => {
+                $(item).on("click", function(ev) {
                     // postNumber 전달
                     // pageNumber도 전달해야 할 듯 한데...
                     let url = new URLSearchParams(location.search);
-                    url.set("postNumber", i.postNumber);
-
+                    url.set("postNumber", postData[index].postNumber);
+    
                     location.href = "board-post.jsp?" + url.toString();  
-                })
-
+                });
             });
 
         },
