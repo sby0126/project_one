@@ -205,11 +205,26 @@ public class BoardDAO {
 					JSONObject obj = new JSONObject();
 					obj.put("postNumber", String.valueOf(vo.getArticleid()));
 					obj.put("postType", vo.getArticletype());
-					obj.put("postTitle", vo.getTitle());
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(vo.getTitle());
+					
+					// 코멘트를 읽습니다.
+					List<BoardCommentVO> comments = this.readAllComments(vo.getArticleid());
+					int commentsCount = comments.size();
+					
+					
+					sb.append("&nbsp<span class='comment'>[");
+					sb.append(commentsCount);
+					sb.append("]</span>");
+					
+					obj.put("postTitle", sb.toString());
 					obj.put("name", vo.getAuthorid());
 					obj.put("create_at", vo.getRegdate().toString());
 					obj.put("view", vo.getViewcount());
 					obj.put("recommandCount", vo.getRecommandcount());
+					
+
 					
 					arr.add(obj);
 				}
