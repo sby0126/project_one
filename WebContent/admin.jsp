@@ -38,9 +38,9 @@
                   </ul>
             </div>
             <div class="content-wrapper wall col-md-9">
-                <div id="main" class="content jumbotron">
+                <div id="main" class="content jumbotron media">
                     <p>관리자 페이지에 오신 것을 환영합니다.</p>
-                    <p><span><%=id %></span>님 환영합니다. </p>
+                    <p><span class="col-md-2"><%=id %></span>님 환영합니다. </p>
                 </div>
                 <div id="manage-whole-member" class="content jumbotron">
                     <p>전체 멤버 목록입니다.</p>
