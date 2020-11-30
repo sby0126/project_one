@@ -27,6 +27,8 @@ public class BoardService extends HttpServlet {
     private PostViewCommand postViewCommand;
     private ReplyCommand replyCommand;
     
+    private String saveFolderName;
+    
     public BoardService() {
         super();
         boardMgr = new BoardDAO();
@@ -44,6 +46,7 @@ public class BoardService extends HttpServlet {
     public void initWithDefaultUploadFolder(String uploadsFolderPath) {
     	try {
     		File uploadsFolder = new File(uploadsFolderPath);
+    		saveFolderName = uploadsFolderPath;
     		
     		if(!uploadsFolder.exists()) {
     			uploadsFolder.mkdir();
@@ -102,7 +105,8 @@ public class BoardService extends HttpServlet {
 		} else if(currentPage.equals("/deleteReply.do")) { // 댓글 삭제
 			// 댓글 삭제
 		} else if(currentPage.equals("/imageUpload.do")) { // 이미지 업로드
-			
+			ImageUploadCommand command = new ImageUploadCommand(boardMgr, saveFolderName);
+			command.execute(request, response);
 		}
 		
 	}
