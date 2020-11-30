@@ -14,7 +14,6 @@ error.jsp
 find_password.jsp
 header.jsp
 infopolicy.jsp
-join.html
 join.jsp
 login.jsp
 logout.jsp
