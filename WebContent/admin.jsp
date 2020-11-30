@@ -28,13 +28,14 @@
                       <a class="dropdown-toggle" data-toggle="dropdown" href="#">멤버 관리
                       <span class="caret"></span></a>
                       <ul class="dropdown-menu">
-                        <li><a href="#">전체 멤버 관리</a></li>
-                        <li><a href="#">강제 탈퇴 관리</a></li>
-                        <li><a href="#">IP 차단 설정</a></li>
+                        <li><a href="#manage-whole-member">전체 멤버 관리</a></li>
+                        <li><a href="#manage-forced-secession">강제 탈퇴 관리</a></li>
+                        <li><a href="#ip-ban-list">IP 차단 설정</a></li>
                       </ul>
                     </li>
-                    <li><a href="#">게시판 관리</a></li>
-                    <li><a href="#">접속 로그</a></li>
+                    <li><a href="#board-manage">게시판 관리</a></li>
+                    <li><a href="#all-post">전체 게시글 관리</a></li>
+                    <li><a href="#log">접속 로그</a></li>
                   </ul>
             </div>
             <div class="content-wrapper wall col-md-9">
@@ -43,6 +44,7 @@
                     <p><span class="col-md-2"><%=id %></span>님 환영합니다. </p>
                 </div>
                 <div id="manage-whole-member" class="content jumbotron">
+                	<a name="manage-whole-member"></a>
                     <p>전체 멤버 목록입니다.</p>
                     <table class="table">
                     	<thead>
@@ -84,6 +86,7 @@
                     </table>
                 </div>
                 <div id="manage-forced-secession" class="content jumbotron">
+             	   <a name="manage-forced-secession"></a>
                     <p>강제 탈퇴 관리</p>
                 	<input class="form-control col-md-3" type="text" maxlength="20">
                  	<button class="btn btn-default">차단 IP 설정</button>
@@ -120,10 +123,22 @@
                    	</table>         	
                 </div>
                 <div id="manage-forced-secession" class="content jumbotron">
+                	<a name="ip-ban-list"></a>
                     <p>IP 차단 설정</p>
                     <p>현재 관리자 IP : <%= request.getRemoteAddr() %> </p>
                 </div>
-
+                <div id="board-manage" class="content jumbotron">
+                	<a name="board-manage"></a>
+                    <p>게시판 관리</p>
+                </div>
+				<div id="all-post" class="content jumbotron">
+					<a name="all-post"></a>
+                    <p>전체 게시물 관리</p>
+                </div>   
+				<div id="log" class="content jumbotron">
+					<a name="log"></a>
+                    <p>접속 로그</p>
+                </div>                               
             </div>
         </section>
         
