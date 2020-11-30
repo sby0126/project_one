@@ -88,17 +88,20 @@ public class BoardService extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.println(json.toJSONString());
 			
-		} else if(currentPage.equals("/postView.do")) { 
+		} else if(currentPage.equals("/postView.do")) { // 게시물 보기 
 			postViewCommand.execute(request, response);
-		} else if(currentPage.equals("/writeForm.do")) {
+		} else if(currentPage.equals("/writeForm.do")) { // 게시물 작성
 			writeCommand.execute(request, response);
-		} else if(currentPage.equals("/writeReply.do")) {
+		} else if(currentPage.equals("/deletePost.do")) { // 게시물 삭제
+			DeleteCommand command = new DeleteCommand(boardMgr);
+			command.execute(request, response);
+		} else if(currentPage.equals("/writeReply.do")) { // 댓글 작성
 			replyCommand.write(request, response);
-		} else if(currentPage.equals("/updateReply.do")) { 
+		} else if(currentPage.equals("/updateReply.do")) { // 댓글 수정 
 			// 댓글 업데이트
-		} else if(currentPage.equals("/deleteReply.do")) {
+		} else if(currentPage.equals("/deleteReply.do")) { // 댓글 삭제
 			// 댓글 삭제
-		} else if(currentPage.equals("/imageUpload.do")) {
+		} else if(currentPage.equals("/imageUpload.do")) { // 이미지 업로드
 			
 		}
 		

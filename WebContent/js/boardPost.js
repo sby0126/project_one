@@ -59,10 +59,21 @@ const FUNC = {
             const params = new URLSearchParams(location.search);
             const postNumber = params.get("postNumber");
 
-            AJAX.doPost("delete.jsp", {"postNumber": postNumber}, (jqXHR) => {
-                history.back();
+            $.get({
+                url: `/board/qna/deletePost.do?postNumber=${postNumber}`,
+                method: "GET",
+                contentType: false,
+                processData: false,
+                success: function(data) {
+                    location.href = "/pages/board-default.jsp";
+                },
+                error: function(err) {
+                    console.warn(err);
+                    alert(err);
+                }                
             });
-        }   
+            
+        }           
     },
     POST_MORE_FUNCTION_BUTTON: function(ev) {
         alert("더보기 버튼을 눌렀습니다");
@@ -138,7 +149,6 @@ const FUNC = {
     MODIFY: function(ev) {
     },
     DELETE: function(ev) {
-        alert("삭제 버튼을 눌렀습니다.");   
 
         const yesNo = confirm("정말로 삭제하시겠습니까?");
         const YES = true;
@@ -147,11 +157,20 @@ const FUNC = {
             const params = new URLSearchParams(location.search);
             const postNumber = params.get("postNumber");
 
-            AJAX.doPost("delete.jsp", {
-                "postNumber": postNumber
-            }, jqXHR => {
-                history.back();
+            $.get({
+                url: `/board/qna/deletePost.do?postNumber=${postNumber}`,
+                method: "GET",
+                contentType: false,
+                processData: false,
+                success: function(data) {
+                    location.href = "/pages/board-default.jsp";
+                },
+                error: function(err) {
+                    console.warn(err);
+                    alert(err);
+                }                
             });
+            
         }   
 
     },
@@ -333,6 +352,9 @@ class Editor extends Component {
             $("#regdate").text(data.create_at);
             $("#viewcount").text(`조회수 ${data.view}`);
             $("#commentsCount").text(`댓글수 ${data.comments.length}개`);
+
+            // 댓글 뱃지 업데이트
+            $(".badge").text(data.comments.length);
 
             data.comments.forEach(comment => {
                 SDK.registerComment(comment.author, comment.contents, comment.create_at);
