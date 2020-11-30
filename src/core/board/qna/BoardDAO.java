@@ -5,6 +5,8 @@ import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 
@@ -67,6 +69,19 @@ public class BoardDAO {
 		}
 		
 		return ret;
+	}
+	
+	/**
+	 * MYSQL과 호환되는 시간 형식을 만듭니다.
+	 * @return
+	 */
+	public String getLocalTime() {
+		LocalDateTime dateTime = LocalDateTime.now();
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		String formatedDate = dateTime.format(formatter);
+		
+		return formatedDate;
 	}
 	
 	/***
