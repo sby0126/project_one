@@ -3,9 +3,15 @@
 	response.setHeader("Cache-Control","no-store"); 
 	response.setHeader("Pragma","no-cache"); 
 	response.setDateHeader("Expires",0); 
-	if (request.getProtocol().equals("HTTP/1.1"))
-	        response.setHeader("Cache-Control", "no-cache");
+	if (request.getProtocol().equals("HTTP/1.1")) {
+	    response.setHeader("Cache-Control", "no-cache");
+	}
 	
+	int postNumber = 1;
+	if(request.getParameter("postNumber") != null) {
+		postNumber = Integer.parseInt(request.getParameter("postNumber"));
+		out.println("<script> console.log(" + postNumber + ") </script>");
+	}
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -92,8 +98,8 @@
                             </div>
                             <div class="comment-area panel-body">
                                     <div class="add-comment-button-area">
-                                        <textarea name="" id="comment-textarea" name="text"></textarea>
-                                        <button href="#" type="submit" id="comment-ok-button" class="btn btn-default">등록</button>
+                                       	<textarea name="contents" id="comment-textarea" name="text"></textarea>
+                                       	<input href="#" type="submit" id="comment-ok-button" class="btn btn-default" value="등록">
                                     </div>                                                          
                             </div>
                         </div>

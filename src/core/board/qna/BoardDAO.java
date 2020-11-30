@@ -1,6 +1,7 @@
 package core.board.qna;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,6 +43,32 @@ public class BoardDAO {
 		}		
 	}
 	
+	public boolean isExistsTable() {
+		boolean ret = false;
+		try {
+			conn = pool.getConnection();
+			DatabaseMetaData dbm = conn.getMetaData();
+			
+			ResultSet tables = dbm.getTables(null, null, "tblQNABoard", null);
+			
+			if (tables.next()) {
+				// 테이블이 존재합니다.
+				ret = true;
+			}
+			else {
+				// 테이블이 존재하지 않습니다.
+				ret = false;
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ret;
+	}
+	
 	/***
 	 * 
 	 */
@@ -62,7 +89,8 @@ public class BoardDAO {
 		
 		// 글을 읽습니다.
 		qlList.put("readPost", "select articleID, articleType, title, authorID, content, regdate, viewCount, recommandCount from tblQNABoard where articleID = ?");
-		// 글 수정
+
+		// 글을 수정합니다.
 		qlList.put("updatePost", "UPDATE tblqnaboard SET title = ?, content=?, regdate = NOW() WHERE articleID = ?");
 		
 		// 글 삭제
@@ -80,8 +108,15 @@ public class BoardDAO {
 				"INSERT INTO tblQNABoardComments(parent_articleID, authorID, content, regdate)"
 				+ " VALUES(?, ?, ?, NOW())");
 		
+		// 댓글의 댓글을 작성합니다.
+		qlList.put("writeChildComment", "INSERT INTO tblqnaboardcomments(parent_articleID, authorID, content, regdate, pos, parentID, depth) "
+				+ "VALUES(?, ?, ?, NOW(), ?, ?, ?)");
+		
 		// 댓글을 수정합니다.
 		qlList.put("modifyComment", "UPDATE tblqnaboardcomments SET content = ? WHERE commentID = ? AND authorID = ?");
+		
+		// 댓글을 삭제합니다.
+		qlList.put("deleteComments", "delete from tblqnaboardcomments WHERE parent_articleID = ?");
 		
 		// 글을 작성합니다.
 		qlList.put("writePost", "insert into tblQNABoard(authorID, articleType, title, content, regdate, imageFileName) VALUES(?, ?, ?, ?, NOW(), ?)");
@@ -205,11 +240,26 @@ public class BoardDAO {
 					JSONObject obj = new JSONObject();
 					obj.put("postNumber", String.valueOf(vo.getArticleid()));
 					obj.put("postType", vo.getArticletype());
-					obj.put("postTitle", vo.getTitle());
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(vo.getTitle());
+					
+					// 코멘트를 읽습니다.
+					List<BoardCommentVO> comments = this.readAllComments(vo.getArticleid());
+					int commentsCount = comments.size();
+					
+					
+					sb.append("&nbsp<span class='comment'>[");
+					sb.append(commentsCount);
+					sb.append("]</span>");
+					
+					obj.put("postTitle", sb.toString());
 					obj.put("name", vo.getAuthorid());
 					obj.put("create_at", vo.getRegdate().toString());
 					obj.put("view", vo.getViewcount());
 					obj.put("recommandCount", vo.getRecommandcount());
+					
+
 					
 					arr.add(obj);
 				}
@@ -346,6 +396,35 @@ public class BoardDAO {
 			pstmt.setInt(1, articleID);
 			pstmt.setString(2, authorID);
 			pstmt.setString(3, contents);
+			
+			if(pstmt.executeUpdate() > 0) {
+				isOK = true;
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace(); 
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt, rs);
+		}
+		
+		return isOK;
+	}
+	
+	public boolean writeChildComment(int articleID, String authorID, String contents, int pos, int parentCommentID, int depth) {
+		boolean isOK = false;
+		ResultSet rs = null;
+				
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement(getQL("writeChildComment"));
+			pstmt.setInt(1, articleID);
+			pstmt.setString(2, authorID);
+			pstmt.setString(3, contents);
+			pstmt.setInt(4, pos);
+			pstmt.setInt(5, parentCommentID);
+			pstmt.setInt(6, depth);
 			
 			if(pstmt.executeUpdate() > 0) {
 				isOK = true;

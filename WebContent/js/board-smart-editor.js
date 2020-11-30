@@ -73,7 +73,7 @@
             $.ajax({
                 type: "post",
                 enctype: "multipart/form-data",
-                url: "board/qna/imageUploader.do",
+                url: "board/qna/imageUpload.do",
                 data: formData,
                 processData: false,
                 contentType: false,

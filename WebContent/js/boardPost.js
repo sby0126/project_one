@@ -59,16 +59,52 @@ const FUNC = {
             const params = new URLSearchParams(location.search);
             const postNumber = params.get("postNumber");
 
-            AJAX.doPost("delete.jsp", {"postNumber": postNumber}, (jqXHR) => {
-                history.back();
+            $.get({
+                url: `/board/qna/deletePost.do?postNumber=${postNumber}`,
+                method: "GET",
+                contentType: false,
+                processData: false,
+                success: function(data) {
+                    location.href = "/pages/board-default.jsp";
+                },
+                error: function(err) {
+                    console.warn(err);
+                    alert(err);
+                }                
             });
-        }   
+            
+        } else {
+            ev.preventDefault();
+        }     
     },
     POST_MORE_FUNCTION_BUTTON: function(ev) {
         alert("더보기 버튼을 눌렀습니다");
     },
     REPLAY_OK: function(ev) {
-        alert("대댓글 버튼을 눌렀습니다.");   
+
+        const self = $(this).parent().parent().parent().parent().after(`
+            <div class="detail-area">
+                <div class="add-comment-button-area">
+                    <textarea id="comment-textarea" name="text"></textarea>
+                    <input href="#" type="submit" id="comment-ok-button" class="btn btn-default" value="등록">
+                </div>
+            </div>
+        `);
+
+        // 대댓글 작성 버튼
+        let area = self.next();
+
+        area.find("#comment-ok-button").on("click", (ev) => {
+            const yesNo = confirm("대댓글을 작성하시겠습니까?");
+            const content = area.find("#comment-textarea").val();
+
+            // 대댓글 작성 버튼 삭제
+            if(yesNo) {
+                alert(content);
+                area.remove();
+            }
+        });
+
     },
     REPLAY_DELETE: function(ev) {
         const ret = window.confirm("댓글을 삭제하시겠습니까?");
@@ -89,8 +125,25 @@ const FUNC = {
             ev.preventDefault();
             return false;
         }
+
+        const params = new URLSearchParams(location.search);
+        const postNumber = params.get("postNumber");
+
         if(texts.length > 0) {
-            SDK.registerComment("테스터", texts);
+            $.get(
+                {
+                    url: `/board/qna/writeReply.do?postNumber=${postNumber}&contents=${texts}`,
+                    method: "GET",
+                    contentType: false,
+                    processData: false,
+                    success: function(data) {
+                        location.reload();
+                    },
+                    error: function(err) {
+                        console.warn(err);
+                    }
+                }
+            )
         }
     },
     BACK_TO_LIST: function(ev) {
@@ -98,7 +151,6 @@ const FUNC = {
     MODIFY: function(ev) {
     },
     DELETE: function(ev) {
-        alert("삭제 버튼을 눌렀습니다.");   
 
         const yesNo = confirm("정말로 삭제하시겠습니까?");
         const YES = true;
@@ -107,12 +159,23 @@ const FUNC = {
             const params = new URLSearchParams(location.search);
             const postNumber = params.get("postNumber");
 
-            AJAX.doPost("delete.jsp", {
-                "postNumber": postNumber
-            }, jqXHR => {
-                history.back();
+            $.get({
+                url: `/board/qna/deletePost.do?postNumber=${postNumber}`,
+                method: "GET",
+                contentType: false,
+                processData: false,
+                success: function(data) {
+                    location.href = "/pages/board-default.jsp";
+                },
+                error: function(err) {
+                    console.warn(err);
+                    alert(err);
+                }                
             });
-        }   
+            
+        } else {
+            ev.preventDefault();
+        }
 
     },
     POST_RECOMMAND_BUTTON: function(ev) {
@@ -201,24 +264,25 @@ const SDK = (() => {
             $(".add-comment-button-area").before(
                 $(`
                 <div class="comment-area">
-                <div class="comment-author well">
-                    <div class="profile-box">
-                        <span><i class="fas fa-user-circle fa-3x"></i></span>
-                    </div>
-                    <div class="detail-area">
-                        <div class="detail-area-author-id">
-                            <span>${authorId}</span>        
+                    <div class="comment-author well">
+                        <div class="profile-box">
+                            <span><i class="fas fa-user-circle fa-3x"></i></span>
                         </div>
-                        <div class="detail-area-date-panel">
-                            <span>${timeText}</span>
-                            <span style="cursor:pointer;"><a href="" class="replay-ok">답글</a></span>
-                            <span style="cursor:pointer;"><a href="" class="replay-delete">삭제</a></span>
-                        </div>
-                        <div class="detail-area-contentss">
-                            ${commentRaw}
-                        </div>
-                    </div>       
-                </div>      
+                        <div class="detail-area">
+                            <div class="detail-area-author-id">
+                                <span>${authorId}</span>        
+                            </div>
+                            <div class="detail-area-date-panel">
+                                <span>${timeText}</span>
+                                <span style="cursor:pointer;"><a href="" class="replay-ok">답글</a></span>
+                                <span style="cursor:pointer;"><a href="" class="replay-delete">삭제</a></span>
+                            </div>
+                            <div class="detail-area-contentss">
+                                ${commentRaw}
+                            </div>
+                        </div>       
+                    </div>      
+                </div>
                 <img src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7' onload='SDK.updateCommentsCount();this.parentNode.removeChild(this);'>       
                 `)
             );
@@ -293,6 +357,9 @@ class Editor extends Component {
             $("#viewcount").text(`조회수 ${data.view}`);
             $("#commentsCount").text(`댓글수 ${data.comments.length}개`);
 
+            // 댓글 뱃지 업데이트
+            $(".badge").text(data.comments.length);
+
             data.comments.forEach(comment => {
                 SDK.registerComment(comment.author, comment.contents, comment.create_at);
             })
@@ -301,7 +368,9 @@ class Editor extends Component {
                 if(i === "REPLAY_DELETE") {
                     continue;
                 }
-                document.querySelector(ID[i]).onclick = FUNC[i];
+                if(document.querySelector(ID[i])) {
+                    document.querySelector(ID[i]).onclick = FUNC[i];
+                }
             }
     
             $(".board-post-comment").on("click", (ev) => {

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,6 +25,9 @@ public class BoardService extends HttpServlet {
     
     private WriteFormCommand writeCommand;
     private PostViewCommand postViewCommand;
+    private ReplyCommand replyCommand;
+    
+    private String saveFolderName;
     
     public BoardService() {
         super();
@@ -34,6 +38,7 @@ public class BoardService extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
     	writeCommand = new WriteFormCommand(boardMgr);
     	postViewCommand = new PostViewCommand(boardMgr);
+    	replyCommand = new ReplyCommand(boardMgr);
     	
     	initWithDefaultUploadFolder(config.getServletContext().getRealPath("uploads"));
     }
@@ -41,6 +46,7 @@ public class BoardService extends HttpServlet {
     public void initWithDefaultUploadFolder(String uploadsFolderPath) {
     	try {
     		File uploadsFolder = new File(uploadsFolderPath);
+    		saveFolderName = uploadsFolderPath;
     		
     		if(!uploadsFolder.exists()) {
     			uploadsFolder.mkdir();
@@ -65,6 +71,16 @@ public class BoardService extends HttpServlet {
 		String currentPage = request.getPathInfo();
 		String nextPage = "pages/board-default.jsp";
 		
+		if(!boardMgr.isExistsTable()) {
+			request.setAttribute("errorMessage", "테이블이 존재하지 않습니다. 먼저 테이블을 생성해주세요.");
+			request.setAttribute("url", "/pages/board-default.jsp");
+			nextPage = "/pages/error.jsp";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
+			dispatcher.forward(request, response);
+			
+			return;
+		}
+		
 		// 모든 게시물을 읽어서 JSON으로 내보냅니다.
 		if(currentPage.equals("/listAll.do")) {
 			JSONArray json = boardMgr.getListAll();
@@ -75,18 +91,22 @@ public class BoardService extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.println(json.toJSONString());
 			
-		} else if(currentPage.equals("/postView.do")) { 
+		} else if(currentPage.equals("/postView.do")) { // 게시물 보기 
 			postViewCommand.execute(request, response);
-		} else if(currentPage.equals("/writeForm.do")) {
+		} else if(currentPage.equals("/writeForm.do")) { // 게시물 작성
 			writeCommand.execute(request, response);
-		} else if(currentPage.equals("/writeReply.do")) {
-			// 댓글 작성
-		} else if(currentPage.equals("/updateReply.do")) { 
+		} else if(currentPage.equals("/deletePost.do")) { // 게시물 삭제
+			DeleteCommand command = new DeleteCommand(boardMgr);
+			command.execute(request, response);
+		} else if(currentPage.equals("/writeReply.do")) { // 댓글 작성
+			replyCommand.write(request, response);
+		} else if(currentPage.equals("/updateReply.do")) { // 댓글 수정 
 			// 댓글 업데이트
-		} else if(currentPage.equals("/deleteReply.do")) {
+		} else if(currentPage.equals("/deleteReply.do")) { // 댓글 삭제
 			// 댓글 삭제
-		} else if(currentPage.equals("/imageUpload.do")) {
-			
+		} else if(currentPage.equals("/imageUpload.do")) { // 이미지 업로드
+			ImageUploadCommand command = new ImageUploadCommand(boardMgr, saveFolderName);
+			command.execute(request, response);
 		}
 		
 	}

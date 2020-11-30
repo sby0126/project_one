@@ -11,7 +11,7 @@ create table tblQNABoard(
     pos smallint(7) UNSIGNED DEFAULT 0,
     parentID smallint(7) DEFAULT 0,
     depth smallint(7) UNSIGNED DEFAULT 0,
-    regdate date,
+    regdate TIMESTAMP,
     recommandCount smallint(7) unsigned default 0,
     viewCount smallint(7) UNSIGNED DEFAULT 0,
     imageFileName varchar(255),
@@ -39,7 +39,7 @@ CREATE TABLE tblQNABoardComments (
 	parent_articleID INT(11) NOT NULL,
 	authorID varchar(15) NOT null,
 	content TEXT,
-	regdate DATE,
+	regdate TIMESTAMP,
    pos smallint(7) UNSIGNED DEFAULT 0,
    parentID smallint(7) DEFAULT 0,
    depth smallint(7) UNSIGNED DEFAULT 0,
@@ -60,3 +60,6 @@ update tblQNABoard set viewCount = viewCount + 1 where articleID = 1;
 select authorID, content, regdate, pos, parentID, depth 
 	from tblQNABoardComments 
 	where parent_articleID = 1 order by parentID desc, pos, commentID;
+
+
+
