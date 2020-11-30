@@ -6,6 +6,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.oreilly.servlet.multipart.FileRenamePolicy;
+
 public class FileDownloadCommand extends Command {
 	
 	private BoardDAO boardMgr;
@@ -18,6 +22,10 @@ public class FileDownloadCommand extends Command {
 	}
 	
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
+		int maxSize = 0;
+		FileRenamePolicy policy = new DefaultFileRenamePolicy(); 
+		
+		MultipartRequest multi = new MultipartRequest(request, filename, maxSize, policy);
 		
 	}
 	

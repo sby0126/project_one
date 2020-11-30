@@ -73,7 +73,9 @@ const FUNC = {
                 }                
             });
             
-        }           
+        } else {
+            ev.preventDefault();
+        }     
     },
     POST_MORE_FUNCTION_BUTTON: function(ev) {
         alert("더보기 버튼을 눌렀습니다");
@@ -171,7 +173,9 @@ const FUNC = {
                 }                
             });
             
-        }   
+        } else {
+            ev.preventDefault();
+        }
 
     },
     POST_RECOMMAND_BUTTON: function(ev) {
