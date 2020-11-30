@@ -53,6 +53,7 @@
                     		<th>이메일</th>
                     		<th>전화번호</th>
                     		<th>우편번호</th>
+                    		<th>탈퇴</th>
                     	</thead>
                    	<%
                    		CustomerDAO customerDAO = new CustomerDAO();
@@ -68,20 +69,24 @@
                    			<td><span><%=vo.getEmail()%></span></td>
                    			<td><span><%=vo.getTel()%></span></td>
                    			<td><span><%=vo.getZipCode()%></span></td>
+                   			<td><button class="ban btn btn-primary">강제 탈퇴</button></td>
                    		</tr>
                    	<%
                    		}
                    	%>
+                   	<tfoot>
+                   		<div class="form-group">
+                   			<label for="search">검색 하기</label>
+                   			<input type="search" name="search" class="form-control">
+                   			<input type="submit" value="검색하기" class="btn btn-default">
+                   		</div>
+                   	</tfoot>
                     </table>
                 </div>
                 <div id="manage-forced-secession" class="content jumbotron">
                     <p>강제 탈퇴 관리</p>
-                    <div class="col-md-6">
-                    	<div class="col-md-3 form-group" style="display:flex">
-                    		<input type="text" maxlength="20">
-                    		<button class="btn btn-default">차단 IP 설정</button>
-                    	</div>
-                    </div>
+                	<input class="form-control" type="text" maxlength="20">
+                 	<button class="btn btn-default">차단 IP 설정</button>
                 </div>
                 <div id="manage-forced-secession" class="content jumbotron">
                     <p>IP 차단 설정</p>
