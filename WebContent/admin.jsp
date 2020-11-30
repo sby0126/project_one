@@ -85,8 +85,39 @@
                 </div>
                 <div id="manage-forced-secession" class="content jumbotron">
                     <p>강제 탈퇴 관리</p>
-                	<input class="form-control" type="text" maxlength="20">
+                	<input class="form-control col-md-3" type="text" maxlength="20">
                  	<button class="btn btn-default">차단 IP 설정</button>
+                 	<p></p>
+                    <table class="table">
+                    	<thead>
+                    		<th>회원 번호</th>
+                    		<th>ID</th>
+                    		<th>이름</th>
+                    		<th>주소</th>
+                    		<th>이메일</th>
+                    		<th>전화번호</th>
+                    		<th>우편번호</th>
+                    		<th>차단 여부</th>
+                    	</thead>
+                   	<%
+                   		List<CustomerVO> customerList2 = customerDAO.listMembers();
+                   		for(CustomerVO vo : customerList2) {
+                   			String address = vo.getAddress();
+                   	%>
+                   		<tr>
+                   			<td><span><%=vo.getNo()%></span></td>
+                   			<td><span><%=vo.getId()%></span></td>
+                   			<td><span><%=vo.getName()%></span></td>
+                   			<td><span><%=address%></span></td>
+                   			<td><span><%=vo.getEmail()%></span></td>
+                   			<td><span><%=vo.getTel()%></span></td>
+                   			<td><span><%=vo.getZipCode()%></span></td>
+                   			<td><button class="ban btn btn-danger">차단됨</button></td>
+                   		</tr>
+                   	<%
+                   		}
+                   	%>        
+                   	</table>         	
                 </div>
                 <div id="manage-forced-secession" class="content jumbotron">
                     <p>IP 차단 설정</p>
