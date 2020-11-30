@@ -287,7 +287,7 @@ class Editor extends Component {
             $(".detail-area-author-id span").text(data.author);
 
             // 내용
-            $(".board-article-contents").text(data.contents);
+            $(".board-article-contents").html(data.contents);
 
             $("#regdate").text(data.create_at);
             $("#viewcount").text(`조회수 ${data.view}`);

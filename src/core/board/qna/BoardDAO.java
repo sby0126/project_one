@@ -115,8 +115,6 @@ public class BoardDAO {
 			
 			ret = pstmt.execute();
 			
-			conn.commit();
-			
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} catch(Exception e) {
@@ -338,8 +336,30 @@ public class BoardDAO {
 	 * @param authorID
 	 * @param contents
 	 */
-	public void writeComment(int articleID, String authorID, String contents) {
+	public boolean writeComment(int articleID, String authorID, String contents) {
+		boolean isOK = false;
+		ResultSet rs = null;
 		
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement(getQL("writeComment"));
+			pstmt.setInt(1, articleID);
+			pstmt.setString(2, authorID);
+			pstmt.setString(3, contents);
+			
+			if(pstmt.executeUpdate() > 0) {
+				isOK = true;
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace(); 
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt, rs);
+		}
+		
+		return isOK;
 	}
 	
 	public List<BoardCommentVO> readAllComments(int articleID) {
@@ -388,6 +408,33 @@ public class BoardDAO {
 		}
 		
 		return arr;
+	}
+	
+	public boolean updateComment(String content, int commentID, String authorID)
+	{
+		boolean isOK = false;
+		ResultSet rs = null;
+		
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement(getQL("modifyComment"));
+			pstmt.setString(1, content);
+			pstmt.setInt(2, commentID);
+			pstmt.setString(3, authorID);
+			
+			if(pstmt.executeUpdate() > 0) {
+				isOK = true;
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace(); 
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt, rs);
+		}
+		
+		return isOK;
 	}
 
 }

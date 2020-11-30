@@ -166,14 +166,14 @@
 
                 const result = {
                     title: $("#input-item-title").val(),
-                    src: localStorage.getItem("thum"),
+                    src: "",
                     contents: quill.root.innerHTML
                 };
                                 
                 let prevJson = JSON.stringify(result);
                 
-                prevJson = prevJson.replace(/\</g, "&lt;");
-                prevJson = prevJson.replace(/\>/g, "&gt;");
+                // prevJson = prevJson.replace(/\</g, "&lt;");
+                // prevJson = prevJson.replace(/\>/g, "&gt;");
 
                 navigator.clipboard.writeText(prevJson);
 
@@ -181,13 +181,26 @@
                 const postNumber = param.get("postNumber") || 0;
 
                 // 폼을 동적으로 생성합니다.
-                const form = document.createElement("form");
-                form.setAttribute("postNumber", postNumber);
-                form.setAttribute("data", JSON.stringify(prevJson));
-                form.setAttribute("action", "/board/qna/writeForm.do");
+                // const form = document.createElement("form");
+                // form.setAttribute("postNumber", postNumber);
+                // form.setAttribute("data", JSON.stringify(prevJson));
+                // form.setAttribute("action", "/board/qna/writeForm.do");
+                // document.body.appendChild(form);
+                // form.submit();
 
-                document.body.appendChild(form);
-                form.submit();
+                $.ajax({
+                    url: "/board/qna/writeForm.do",
+                    method: "POST",
+                    data: prevJson,
+                    contentType: "application/json; charset=utf-8" ,
+                    success: function(data) {
+                        location.href = "/pages/board-default.jsp";
+                    },
+                    error: function(err) {
+                        console.log(err);
+                    }
+                });
+
             }
 
             // placeholder 제어
