@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -65,6 +66,16 @@ public class BoardService extends HttpServlet {
 		String currentPage = request.getPathInfo();
 		String nextPage = "pages/board-default.jsp";
 		
+		if(!boardMgr.isExistsTable()) {
+			request.setAttribute("errorMessage", "테이블이 존재하지 않습니다. 먼저 테이블을 생성해주세요.");
+			request.setAttribute("url", "/pages/board-default.jsp");
+			nextPage = "/pages/error.jsp";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
+			dispatcher.forward(request, response);
+			
+			return;
+		}
+		
 		// 모든 게시물을 읽어서 JSON으로 내보냅니다.
 		if(currentPage.equals("/listAll.do")) {
 			JSONArray json = boardMgr.getListAll();
@@ -80,7 +91,8 @@ public class BoardService extends HttpServlet {
 		} else if(currentPage.equals("/writeForm.do")) {
 			writeCommand.execute(request, response);
 		} else if(currentPage.equals("/writeReply.do")) {
-			// 댓글 작성
+			ReplyCommand command = new ReplyCommand(boardMgr);
+			command.execute(request, response);
 		} else if(currentPage.equals("/updateReply.do")) { 
 			// 댓글 업데이트
 		} else if(currentPage.equals("/deleteReply.do")) {

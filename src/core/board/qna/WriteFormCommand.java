@@ -17,21 +17,13 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-public class WriteFormCommand {
-	
-	private BoardDAO boardMgr;
-	private boolean isReady = false;
-	
+public class WriteFormCommand extends Command {
+
 	public WriteFormCommand(BoardDAO boardDAO)  {
-		this.boardMgr = boardDAO;
-		isReady = true;
+		super(boardDAO);
 	}
 	
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		if(!isReady) {
-			return;
-		}
 		
 		String nextPage = "pages/board-default.jsp";
 		

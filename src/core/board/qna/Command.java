@@ -6,19 +6,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class FileDownloadCommand extends Command {
-	
-	private BoardDAO boardMgr;
-	private String filename;
+public class Command {
+	protected BoardDAO boardMgr;
 	private boolean isReady = false;
 	
-	public FileDownloadCommand(BoardDAO boardDAO, String filename)  {
-		super(boardDAO);
-		this.filename = filename;
+	public Command(BoardDAO boardDAO)  {
+		this.boardMgr = boardDAO;
+		this.isReady = true;
 	}
 	
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
 		
 	}
-	
 }

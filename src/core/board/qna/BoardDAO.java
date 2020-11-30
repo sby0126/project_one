@@ -1,6 +1,7 @@
 package core.board.qna;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,6 +41,32 @@ public class BoardDAO {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}		
+	}
+	
+	public boolean isExistsTable() {
+		boolean ret = false;
+		try {
+			conn = pool.getConnection();
+			DatabaseMetaData dbm = conn.getMetaData();
+			
+			ResultSet tables = dbm.getTables(null, null, "tblQNABoard", null);
+			
+			if (tables.next()) {
+				// 테이블이 존재합니다.
+				ret = true;
+			}
+			else {
+				// 테이블이 존재하지 않습니다.
+				ret = false;
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ret;
 	}
 	
 	/***

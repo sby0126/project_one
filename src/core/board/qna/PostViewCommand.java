@@ -10,14 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class PostViewCommand {
-	
-	private BoardDAO boardMgr;
-	private boolean isReady = false;
+public class PostViewCommand extends Command {
 	
 	public PostViewCommand(BoardDAO boardDAO)  {
-		this.boardMgr = boardDAO;
-		isReady = true;
+		super(boardDAO);
 	}
 	
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

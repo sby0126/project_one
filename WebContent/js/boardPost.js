@@ -89,8 +89,25 @@ const FUNC = {
             ev.preventDefault();
             return false;
         }
+
+        const params = new URLSearchParams(location.search);
+        const postNumber = params.get("postNumber");
+
         if(texts.length > 0) {
-            SDK.registerComment("테스터", texts);
+            $.get(
+                {
+                    url: `/board/qna/writeReply.do?postNumber=${postNumber}&contents=${texts}`,
+                    method: "GET",
+                    contentType: false,
+                    processData: false,
+                    success: function(data) {
+                        location.reload();
+                    },
+                    error: function(err) {
+                        console.warn(err);
+                    }
+                }
+            )
         }
     },
     BACK_TO_LIST: function(ev) {
