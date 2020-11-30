@@ -15,7 +15,7 @@ public class ReplyCommand extends Command {
 		super(boardDAO);
 	}
 	
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void write(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int parentArticleID = Integer.parseInt(request.getParameter("postNumber"));
 		
 		HttpSession session = request.getSession();

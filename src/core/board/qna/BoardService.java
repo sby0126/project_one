@@ -25,6 +25,7 @@ public class BoardService extends HttpServlet {
     
     private WriteFormCommand writeCommand;
     private PostViewCommand postViewCommand;
+    private ReplyCommand replyCommand;
     
     public BoardService() {
         super();
@@ -35,6 +36,7 @@ public class BoardService extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
     	writeCommand = new WriteFormCommand(boardMgr);
     	postViewCommand = new PostViewCommand(boardMgr);
+    	replyCommand = new ReplyCommand(boardMgr);
     	
     	initWithDefaultUploadFolder(config.getServletContext().getRealPath("uploads"));
     }
@@ -91,8 +93,7 @@ public class BoardService extends HttpServlet {
 		} else if(currentPage.equals("/writeForm.do")) {
 			writeCommand.execute(request, response);
 		} else if(currentPage.equals("/writeReply.do")) {
-			ReplyCommand command = new ReplyCommand(boardMgr);
-			command.execute(request, response);
+			replyCommand.write(request, response);
 		} else if(currentPage.equals("/updateReply.do")) { 
 			// 댓글 업데이트
 		} else if(currentPage.equals("/deleteReply.do")) {
