@@ -102,7 +102,7 @@ public class CustomerDAO {
 					.setEmail( 		rs.getString("EMAIL") )
 					.setZipCode(	rs.getString("ZIPCODE") )
 					.setIsAdmin( 	rs.getString("isAdmin") )
-					.setJoinDate(	rs.getDate("joinDate") )
+					.setJoinDate(	rs.getString("joinDate") )
 					.setSalt( 		rs.getString("salt") )
 					.setLastLogin( 	rs.getString("LAST_LOGIN") )
 					.setFailedLoginCount( rs.getString("FAILED_LOGIN_COUNT") )
@@ -147,7 +147,7 @@ public class CustomerDAO {
 				String email = rs.getString("EMAIL");
 				String zipCode = rs.getString("ZIPCODE");
 				String isAdmin = rs.getString("isAdmin");
-				Date joinDate = rs.getDate("joinDate");
+				String joinDate = rs.getString("joinDate");
 				String salt = rs.getString("salt");
 				String lastLogin = rs.getString("LAST_LOGIN");
 				String failedLoginCount = rs.getString("FAILED_LOGIN_COUNT");
@@ -272,8 +272,6 @@ public class CustomerDAO {
 		try {
 			
 			conn = pool.getConnection();
-			
-			Date joinDate = c.getJoinDate();
 			
 			String query = getQuery("insert");
 		

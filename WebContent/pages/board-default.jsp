@@ -23,8 +23,10 @@
     <script src="../libs/fancyTable.js"></script> 
     <!-- <link rel="stylesheet" href="../libs/table-sortable.css">
     <script src="../libs/table-sortable.js"></script> -->
+   
 </head>
-<body>
+<body> 
+	
     <style>
         /* 컨텐츠 상단 마진을 줄입니다 */
         .contents-wrapper {

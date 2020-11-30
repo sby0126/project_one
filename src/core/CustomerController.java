@@ -1,7 +1,7 @@
 package core;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -127,7 +127,9 @@ public class CustomerController extends HttpServlet {
 			String email = buff.toString();
 			
 			String isAdmin = "N";
-			Date joinDate = Date.valueOf( request.getParameter("joinDate") );
+			
+			// 오류로 인해 String 형식으로 변환하였음.
+			String joinDate = request.getParameter("joinDate");
 			
 			boolean isValid = true;
 			

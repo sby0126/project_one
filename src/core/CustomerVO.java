@@ -1,6 +1,6 @@
 package core;
 
-import java.sql.Date;
+import java.util.Date;
 
 import utils.SHA256Util;
 
@@ -21,7 +21,7 @@ public class CustomerVO {
 	private String email; // EMAIL
 	private String zipCode;
 	private String isAdmin; // IS_ADMIN
-	private Date joinDate; // JoinDate
+	private String joinDate; // JoinDate
 	private String salt; 
 
 	private String lastLogin;
@@ -131,11 +131,11 @@ public class CustomerVO {
 		return this;
 	}
 
-	public Date getJoinDate() {
+	public String getJoinDate() {
 		return joinDate;
 	}
 
-	public CustomerVO setJoinDate(Date joinDate2) {
+	public CustomerVO setJoinDate(String joinDate2) {
 		this.joinDate = joinDate2;
 		
 		return this;

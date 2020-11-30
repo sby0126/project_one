@@ -189,6 +189,13 @@
 
     const Editor = {
         init() {
+
+            $("#editor .table tbody").append(`
+            <tr>
+                <td>데이터가 없습니다</td>
+            </tr>
+        `);
+
             this.load(this.initWithEvent.bind(this));
             this.initWithPages();
         },
@@ -225,6 +232,10 @@
 
             const postData = [];
 
+            if(data && Array.isArray(data) && data.length > 0) {
+                $("#editor .table tbody tr").remove();
+            }
+
             data.forEach((i, idx) => {
                 $("#editor .table tbody").append(`
                     <tr>
@@ -249,18 +260,24 @@
                 sortable: true,     
                 pagination: true,     
                 perPage: 10,
-                paginationElement: ".board-footer-pages-buttons-wrapper"
-            });
+                paginationElement: ".board-footer-pages-buttons-wrapper",
+                onUpdate: () => {
+                    this._elem.find("td > a").each((index, item) => {
+                        $(item).on("click", function(ev) {
+                            let url = new URLSearchParams(location.search);
+                            const postNumber = $(this)
+                            .parent()
+                            .parent()
+                            .find("td").eq(0).text();
 
-            this._elem.find("td > a").each((index, item) => {
-                $(item).on("click", function(ev) {
-                    // postNumber 전달
-                    // pageNumber도 전달해야 할 듯 한데...
-                    let url = new URLSearchParams(location.search);
-                    url.set("postNumber", postData[index].postNumber);
-    
-                    location.href = "board-post.jsp?" + url.toString();  
-                });
+                            // url.set("postNumber", postData[index].postNumber);
+                            url.set("postNumber", postNumber);
+
+                            location.href = "board-post.jsp?" + url.toString();  
+                        });
+                    });
+        
+                }
             });
 
         },
