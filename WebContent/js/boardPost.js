@@ -68,7 +68,30 @@ const FUNC = {
         alert("더보기 버튼을 눌렀습니다");
     },
     REPLAY_OK: function(ev) {
-        alert("대댓글 버튼을 눌렀습니다.");   
+
+        const self = $(this).parent().parent().parent().parent().after(`
+            <div class="detail-area">
+                <div class="add-comment-button-area">
+                    <textarea id="comment-textarea" name="text"></textarea>
+                    <input href="#" type="submit" id="comment-ok-button" class="btn btn-default" value="등록">
+                </div>
+            </div>
+        `);
+
+        // 대댓글 작성 버튼
+        let area = self.next();
+
+        area.find("#comment-ok-button").on("click", (ev) => {
+            const yesNo = confirm("대댓글을 작성하시겠습니까?");
+            const content = area.find("#comment-textarea").val();
+
+            // 대댓글 작성 버튼 삭제
+            if(yesNo) {
+                alert(content);
+                area.remove();
+            }
+        });
+
     },
     REPLAY_DELETE: function(ev) {
         const ret = window.confirm("댓글을 삭제하시겠습니까?");
@@ -218,24 +241,25 @@ const SDK = (() => {
             $(".add-comment-button-area").before(
                 $(`
                 <div class="comment-area">
-                <div class="comment-author well">
-                    <div class="profile-box">
-                        <span><i class="fas fa-user-circle fa-3x"></i></span>
-                    </div>
-                    <div class="detail-area">
-                        <div class="detail-area-author-id">
-                            <span>${authorId}</span>        
+                    <div class="comment-author well">
+                        <div class="profile-box">
+                            <span><i class="fas fa-user-circle fa-3x"></i></span>
                         </div>
-                        <div class="detail-area-date-panel">
-                            <span>${timeText}</span>
-                            <span style="cursor:pointer;"><a href="" class="replay-ok">답글</a></span>
-                            <span style="cursor:pointer;"><a href="" class="replay-delete">삭제</a></span>
-                        </div>
-                        <div class="detail-area-contentss">
-                            ${commentRaw}
-                        </div>
-                    </div>       
-                </div>      
+                        <div class="detail-area">
+                            <div class="detail-area-author-id">
+                                <span>${authorId}</span>        
+                            </div>
+                            <div class="detail-area-date-panel">
+                                <span>${timeText}</span>
+                                <span style="cursor:pointer;"><a href="" class="replay-ok">답글</a></span>
+                                <span style="cursor:pointer;"><a href="" class="replay-delete">삭제</a></span>
+                            </div>
+                            <div class="detail-area-contentss">
+                                ${commentRaw}
+                            </div>
+                        </div>       
+                    </div>      
+                </div>
                 <img src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7' onload='SDK.updateCommentsCount();this.parentNode.removeChild(this);'>       
                 `)
             );
