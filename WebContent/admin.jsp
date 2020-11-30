@@ -63,7 +63,7 @@
                     		<th>이메일</th>
                     		<th>전화번호</th>
                     		<th>우편번호</th>
-                    		<th>탈퇴</th>
+                    		<th>회원 정보</th>
                     	</thead>
                    	<%
                    		CustomerDAO customerDAO = new CustomerDAO();
@@ -79,7 +79,7 @@
                    			<td><span><%=vo.getEmail()%></span></td>
                    			<td><span><%=vo.getTel()%></span></td>
                    			<td><span><%=vo.getZipCode()%></span></td>
-                   			<td><button class="ban btn btn-primary">강제 탈퇴</button></td>
+                   			<td><button class="ban btn btn-primary">정보 수정하기</button></td>
                    		</tr>
                    	<%
                    		}
@@ -123,7 +123,7 @@
                    			<td><span><%=vo.getEmail()%></span></td>
                    			<td><span><%=vo.getTel()%></span></td>
                    			<td><span><%=vo.getZipCode()%></span></td>
-                   			<td><button class="ban btn btn-danger">차단됨</button></td>
+                   			<td><button class="ban btn btn-danger">강제 탈퇴</button></td>
                    		</tr>
                    	<%
                    		}
