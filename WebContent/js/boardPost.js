@@ -281,7 +281,7 @@ class Editor extends Component {
             }
 
             // 제목
-            $("board-post-title span").text(data.title)
+            $("#title").text(data.title)
 
             // 작성자
             $(".detail-area-author-id span").text(data.author);

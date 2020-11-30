@@ -43,7 +43,7 @@
                         </div>
                         <!-- 게시물 제목 -->
                         <div class="board-post-title">
-                            <strong></strong>
+                            <strong id="title"></strong>
                         </div>
                         <!-- 작성자 프로필 / 작성 날짜 / 조회수 / 댓글수 -->
                         <div class="board-post-header-detail-info">
