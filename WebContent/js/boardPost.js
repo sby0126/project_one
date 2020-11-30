@@ -342,7 +342,9 @@ class Editor extends Component {
                 if(i === "REPLAY_DELETE") {
                     continue;
                 }
-                document.querySelector(ID[i]).onclick = FUNC[i];
+                if(document.querySelector(ID[i])) {
+                    document.querySelector(ID[i]).onclick = FUNC[i];
+                }
             }
     
             $(".board-post-comment").on("click", (ev) => {
