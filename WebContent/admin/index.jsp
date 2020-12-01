@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" session="true"  isELIgnored="false"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<%@ page import="java.util.List" %>
-<%@ page import="core.*" %>
-<%@ page import="core.board.qna.*" %>
-<%@ page import="org.json.simple.JSONArray, org.json.simple.JSONObject" %>
+	pageEncoding="UTF-8" session="true" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.List"%>
+<%@ page import="core.*"%>
+<%@ page import="core.board.qna.*"%>
+<%@ page import="org.json.simple.JSONArray, org.json.simple.JSONObject"%>
 <!DOCTYPE html>
 <%
 	String id = (String)session.getAttribute("id");
@@ -17,9 +17,12 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자 페이지</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <style>
   	.left {
   		position: fixed;
@@ -42,6 +45,18 @@
   	table a {
   		color: #000000;
 /*   		text-shadow: 1px 1px 1px var(--mycolor), -1px -1px 1px var(--mycolor), 1px 0px 1px var(--mycolor), 0px 1px 1px var(--mycolor), 0px -1px 1px var(--mycolor); */
+  	}
+  	
+  	.member-information-form {
+  		position: fixed;
+  		left: 50%;
+  		right: 0;
+  		top: 50%;
+  		bottom: 0;
+  		transform: translate(-50%, -50%);
+  		width: 80%;
+  		height: 80%;
+  		display: none;
   	}
   	
   </style>
@@ -210,7 +225,40 @@
             </div>
         </section>
     </div>
+    <div class="member-information-form col-md-12 panel panel-default">
+    	<div class="jumbotron"><h2>회원 정보 수정</h2></div>
+    	<div class="panel panel-body">
+    		<form class="form-group">
+    			<div class="form-group col-md-8">
+    				<label for="name">이름 : </label>
+    				<input type="text" class="form-control" placeholder="회원명을 입력해주세요">
+    			</div>
+    			<div class="form-group col-md-8">
+    				<label for="name">전화번호 : </label>
+    				<input type="text" class="form-control" placeholder="전화번호를 입력해주세요">
+    			</div>
+ 			    <div class="form-group col-md-8">
+    				<label for="name">주소 : </label>
+    				<input type="text" class="form-control" placeholder="주소를 입력해주세요">
+    			</div>    			
+    		</form>
+    		<div class="col-md-12">
+    			<center>
+    				<button class="btn btn-primary">수정 완료</button>
+    				<button class="btn btn-danger" onclick="closeMemberInformation()">취소</button>
+    			</center>
+    		</div>
+    	</div>
+    </div>
     <script>
+    
+    	function closeMemberInformation() {
+    		$(".member-information-form").hide();
+    	}
+    	
+    	function showMemberInformation(postNumber) {
+    		$(".member-information-form").show();
+    	}
     
     	function getPostNumber() {
     		return parseInt( $(this).data("number") ); 
@@ -225,7 +273,7 @@
     	});
     	
     	$(".whole-member").on("click", function() {
-    		alert("정보를 수정할 회원의 번호는 " + getPostNumber.call(this));
+    		showMemberInformation(getPostNumber.call(this));
     	});
     	
     	$( ".forced-secession" ).on("click", function() {
