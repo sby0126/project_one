@@ -103,41 +103,22 @@ public class BoardService extends HttpServlet {
 				postViewCommand.execute(request, response);
 			} else if(currentPage.equals("/writeForm.do")) { // 게시물 작성
 				writeCommand.execute(request, response);
-				
 			} else if(currentPage.equals("/deletePost.do")) { // 게시물 삭제
 				DeleteCommand command = new DeleteCommand(boardMgr);
 				command.execute(request, response);
-			} else if(currentPage.equals("/writeReply.do")) { // 댓글 작성
-				replyCommand.write(request, response);
-			} else if(currentPage.equals("/updateReply.do")) { // 댓글 수정 
-				// 댓글 업데이트
-			} else if(currentPage.equals("/deleteReply.do")) { // 댓글 삭제
-				// 댓글 삭제
+			} else if(currentPage.equals("/postReply.do")) { // 댓글 작성
+				replyCommand.execute(request, response);
 			} else if(currentPage.equals("/imageUpload.do")) { // 이미지 업로드
 				ImageUploadCommand command = new ImageUploadCommand(boardMgr, saveFolderName);
 				command.execute(request, response);
+			} else if(currentPage.equals("/recommandPost.do")) { // 추천
+				// 추천은 한 번만 가능해야 합니다. 즉, 추천인 목록이 필요합니다.
 			}
 			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		
-//		String status = (String)request.getAttribute("_status");
-//		if(status.equals("error")) {
-//			String errorMessage = (String)request.getAttribute("errorMessage");
-//			String url = (String)request.getAttribute("url");
-//			nextPage = (String)request.getAttribute("nextpage");
-//			
-//			System.out.println(errorMessage);
-//			
-//			request.removeAttribute("nextPage");
-//			request.removeAttribute("_status");
-//			request.removeAttribute("url");
-//			
-//			RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
-//			dispatcher.forward(request, response);
-//		}
-//		
 	}
 
 }

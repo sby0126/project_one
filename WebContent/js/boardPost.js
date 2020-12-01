@@ -132,7 +132,7 @@ const FUNC = {
         if(texts.length > 0) {
             $.get(
                 {
-                    url: `/board/qna/writeReply.do?postNumber=${postNumber}&contents=${texts}`,
+                    url: `/board/qna/postReply.do?postNumber=${postNumber}&contents=${texts}&method=write&depth=0&parentID=0&pos=0`,
                     method: "GET",
                     contentType: false,
                     processData: false,
