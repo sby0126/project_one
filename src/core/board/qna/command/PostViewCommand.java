@@ -1,4 +1,4 @@
-package core.board.qna;
+package core.board.qna.command;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import core.board.qna.BoardDAO;
 
 public class PostViewCommand extends Command {
 	

@@ -1,5 +1,6 @@
 package core.board.qna;
 
+import core.*;
 import java.io.IOException;
 import java.nio.file.DirectoryIteratorException;
 import java.nio.file.DirectoryStream;
@@ -25,7 +26,7 @@ import core.SQLHelper;
 /***
  * 테이블을 생성합니다.
  */
-public class BoardDAO {
+public class BoardDAO implements IDAO {
 	private DBConnectionMgr pool; 
 	private Connection conn;
 	private PreparedStatement pstmt;
@@ -137,7 +138,7 @@ public class BoardDAO {
 		qlList.put("modifyComment", "UPDATE tblqnaboardcomments SET content = ? WHERE commentID = ? AND authorID = ?");
 		
 		// 댓글을 삭제합니다.
-		qlList.put("deleteComments", "delete from tblqnaboardcomments WHERE parent_articleID = ?");
+		qlList.put("deleteComments", "delete from tblqnaboardcomments WHERE commentID = ?");
 		
 		// 글을 작성합니다.
 		qlList.put("writePost", "insert into tblQNABoard(authorID, articleType, title, content, regdate, imageFileName) VALUES(?, ?, ?, ?, NOW(), ?)");

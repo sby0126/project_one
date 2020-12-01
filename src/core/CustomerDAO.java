@@ -10,7 +10,7 @@ import java.util.List;
 
 import utils.SHA256Util;
 
-public class CustomerDAO {
+public class CustomerDAO implements IDAO {
 	
 	public static final String TABLE_NAME = "tblCustomer";
 	public static final String QL_VERSION = "mysql1";

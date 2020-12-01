@@ -99,7 +99,7 @@
                    			<td><span>${vo.getEmail()}</span></td>
                    			<td><span>${vo.getTel()}</span></td>
                    			<td><span>${vo.getZipCode()}</span></td>
-                   			<td><button class="ban btn btn-primary">정보 수정하기</button></td>
+                   			<td><button data-number="${vo.getNo()}" class="ban btn btn-primary whole-member">정보 수정하기</button></td>
                    		</tr>
                    	</c:forEach>
 
@@ -138,7 +138,7 @@
                    			<td><span>${m.getEmail()}</span></td>
                    			<td><span>${m.getTel()}</span></td>
                    			<td><span>${m.getZipCode()}</span></td>
-                   			<td><button class="ban btn btn-danger">강제 탈퇴</button></td>
+                   			<td><button data-number="${m.getNo()}" class="ban btn btn-danger forced-secession">강제 탈퇴</button></td>
                    		</tr>
                    	  </c:forEach>
                    	</table>         	
@@ -180,12 +180,23 @@
                     			<td><%= myBoard.get("create_at") %></td>
                     			<td><%= myBoard.get("view") %></td>
                     			<td><%= myBoard.get("recommandCount") %></td>
-                    			<td><button class="btn btn-primary">글 수정</button></td>
-                    			<td><button class="btn btn-danger">글 삭제</button></td>
+                    			<td><button data-number="<%= myBoard.get("postNumber") %>" class="btn btn-primary post-modify">글 수정</button></td>
+                    			<td><button data-number="<%= myBoard.get("postNumber") %>" class="btn btn-danger post-delete">글 삭제</button></td>
                     		</tr>
                     	<%
                     		}
                     	%>
+                    	<tfoot>
+                    		<div class="panel panel-default">
+                    			<form class="form-inline">                    		
+	                    			<div class=" form-group">
+	                    				<label for="tablename">테이블 명 :</label>
+	                    			 	<input type="text" class="form-control" name="tablename">                    			
+	                    			</div>
+                    			</form>                    			
+                    		<button class="btn btn-primary">새로운 테이블 만들기</button>
+                    		</div>
+                    	</tfoot>
                     </table>
                 </div>
 				<div id="all-post" class="content jumbotron">
@@ -198,7 +209,29 @@
                 </div>                               
             </div>
         </section>
-        
     </div>
+    <script>
+    
+    	function getPostNumber() {
+    		return parseInt( $(this).data("number") ); 
+    	}
+    
+    	$( ".post-modify" ).on("click", function() {		
+    		alert("글 수정 번호는 " + getPostNumber.call(this));
+    	});
+    	
+    	$( ".post-delete" ).on("click", function() {
+    		alert("글 삭제 번호는 " + getPostNumber.call(this));
+    	});
+    	
+    	$(".whole-member").on("click", function() {
+    		alert("정보를 수정할 회원의 번호는 " + getPostNumber.call(this));
+    	});
+    	
+    	$( ".forced-secession" ).on("click", function() {
+    		alert("강제로 탈퇴시킬 회원 번호는 " + getPostNumber.call(this));
+    	});
+    	
+    </script>
 </body>
 </html>

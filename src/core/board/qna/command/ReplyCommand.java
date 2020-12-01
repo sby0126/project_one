@@ -1,4 +1,4 @@
-package core.board.qna;
+package core.board.qna.command;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -8,6 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import core.board.qna.BoardDAO;
 
 public class ReplyCommand extends Command {
 	
@@ -41,5 +43,9 @@ public class ReplyCommand extends Command {
 		String redirect = response.encodeRedirectURL(request.getContextPath() + "/pages/board-post.jsp?postNumber=" + parentArticleID);
 		response.sendRedirect(redirect);
 		return;
+	}
+	
+	public void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 	}
 }

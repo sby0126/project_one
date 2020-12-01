@@ -38,22 +38,6 @@ public class CustomerController extends HttpServlet {
 		response.setContentType("text/html; utf-8");
 		
 		String act = request.getPathInfo();
-//		
-//		// 주소 값에서 매개변수를 파싱합니다.
-//		URL url = new URL(request.);
-//		String query = url.getQuery();
-//		String[] param = query.split("&");
-//		HashMap<String, String> paramMap = new HashMap<String, String>();
-//		
-//		for(String pair : param) {
-//			int idx = pair.indexOf("=");
-//			paramMap.put(
-//						URLDecoder.decode(pair.substring(0, idx), "UTF-8"), 
-//						URLDecoder.decode(pair.substring(idx + 1), "UTF-8")
-//					);
-//		}
-//				
-//		String root = url.getPath();
 		String nextPage = null;
 		
 		if(act == null || act.equals("/members.do")) {
