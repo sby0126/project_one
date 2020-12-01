@@ -87,34 +87,60 @@ public class BoardService extends HttpServlet {
 			return;
 		}
 		
-		// 모든 게시물을 읽어서 JSON으로 내보냅니다.
-		if(currentPage.equals("/listAll.do")) {
-			JSONArray json = boardMgr.getListAll();
+		try {
 			
-			response.setContentType("application/json");
-			response.setCharacterEncoding("EUC-KR");
+			// 모든 게시물을 읽어서 JSON으로 내보냅니다.
+			if(currentPage.equals("/listAll.do")) {
+				JSONArray json = boardMgr.getListAll();
+				
+				response.setContentType("application/json");
+				response.setCharacterEncoding("EUC-KR");
+				
+				PrintWriter out = response.getWriter();
+				out.println(json.toJSONString());
+
+			} else if(currentPage.equals("/postView.do")) { // 게시물 보기 
+				postViewCommand.execute(request, response);
+			} else if(currentPage.equals("/writeForm.do")) { // 게시물 작성
+				writeCommand.execute(request, response);
+				
+			} else if(currentPage.equals("/deletePost.do")) { // 게시물 삭제
+				DeleteCommand command = new DeleteCommand(boardMgr);
+				command.execute(request, response);
+			} else if(currentPage.equals("/writeReply.do")) { // 댓글 작성
+				replyCommand.write(request, response);
+				
+			} else if(currentPage.equals("/updateReply.do")) { // 댓글 수정 
+				// 댓글 업데이트
+			} else if(currentPage.equals("/deleteReply.do")) { // 댓글 삭제
+				// 댓글 삭제
+			} else if(currentPage.equals("/imageUpload.do")) { // 이미지 업로드
+				ImageUploadCommand command = new ImageUploadCommand(boardMgr, saveFolderName);
+				command.execute(request, response);
+			}
 			
-			PrintWriter out = response.getWriter();
-			out.println(json.toJSONString());
-			
-		} else if(currentPage.equals("/postView.do")) { // 게시물 보기 
-			postViewCommand.execute(request, response);
-		} else if(currentPage.equals("/writeForm.do")) { // 게시물 작성
-			writeCommand.execute(request, response);
-		} else if(currentPage.equals("/deletePost.do")) { // 게시물 삭제
-			DeleteCommand command = new DeleteCommand(boardMgr);
-			command.execute(request, response);
-		} else if(currentPage.equals("/writeReply.do")) { // 댓글 작성
-			replyCommand.write(request, response);
-		} else if(currentPage.equals("/updateReply.do")) { // 댓글 수정 
-			// 댓글 업데이트
-		} else if(currentPage.equals("/deleteReply.do")) { // 댓글 삭제
-			// 댓글 삭제
-		} else if(currentPage.equals("/imageUpload.do")) { // 이미지 업로드
-			ImageUploadCommand command = new ImageUploadCommand(boardMgr, saveFolderName);
-			command.execute(request, response);
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 		
+
+		
+//		String status = (String)request.getAttribute("_status");
+//		if(status.equals("error")) {
+//			String errorMessage = (String)request.getAttribute("errorMessage");
+//			String url = (String)request.getAttribute("url");
+//			nextPage = (String)request.getAttribute("nextpage");
+//			
+//			System.out.println(errorMessage);
+//			
+//			request.removeAttribute("nextPage");
+//			request.removeAttribute("_status");
+//			request.removeAttribute("url");
+//			
+//			RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
+//			dispatcher.forward(request, response);
+//		}
+//		
 	}
 
 }

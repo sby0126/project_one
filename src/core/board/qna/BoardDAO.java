@@ -138,7 +138,8 @@ public class BoardDAO implements IDAO {
 		qlList.put("modifyComment", "UPDATE tblqnaboardcomments SET content = ? WHERE commentID = ? AND authorID = ?");
 		
 		// 댓글을 삭제합니다.
-		qlList.put("deleteComments", "delete from tblqnaboardcomments WHERE commentID = ?");
+		qlList.put("deleteComments", "delete from tblqnaboardcomments WHERE parent_articleID = ?");
+		qlList.put("deleteComment", "delete from tblqnaboardcomments WHERE commentID = ?");
 		
 		// 글을 작성합니다.
 		qlList.put("writePost", "insert into tblQNABoard(authorID, articleType, title, content, regdate, imageFileName) VALUES(?, ?, ?, ?, NOW(), ?)");

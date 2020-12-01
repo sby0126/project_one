@@ -21,20 +21,16 @@ public class ReplyCommand extends Command {
 		int parentArticleID = Integer.parseInt(request.getParameter("postNumber"));
 		
 		HttpSession session = request.getSession();
-		String authorID = String.valueOf(session.getAttribute("id"));
+		String authorID = (String)session.getAttribute("id");
 		
 		String content = request.getParameter("contents");
 		
-		System.out.println(authorID);
-		System.out.println(content);
 		
 		if(authorID == null) {
+			request.setAttribute("_status", "error");
 			request.setAttribute("errorMessage", "댓글을 작성하려면 우선 로그인을 하셔야 합니다.");
 			request.setAttribute("url", "/pages/board-default.jsp");
-			String nextPage = "/pages/error.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
-			dispatcher.forward(request, response);
-			System.out.println("아이디가 없습니다.");
+			request.setAttribute("nextpage", "/pages/error.jsp");
 			return;
 		}
 		

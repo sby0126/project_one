@@ -166,7 +166,7 @@
                 <div id="board-manage" class="content jumbotron">
                 	<a name="board-manage"></a>
                     <p>게시판 관리</p>
-                    <table class="table">
+                    <table class="table" style="height: 200px; overflow:scroll;">
                     <%
 	            		BoardDAO boardMgr = new BoardDAO();
 	            		JSONArray json = boardMgr.getListAll();                    
@@ -226,7 +226,10 @@
         </section>
     </div>
     <div class="member-information-form col-md-12 panel panel-default">
-    	<div class="jumbotron"><h2>회원 정보 수정</h2></div>
+    	<%
+    		String name = "";
+    	%>
+    	<div class="jumbotron"><h2><em>회원 정보 수정</h2></div>
     	<div class="panel panel-body">
     		<form class="form-group">
     			<div class="form-group col-md-8">

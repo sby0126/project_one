@@ -25,7 +25,7 @@ public class DeleteCommand extends Command {
 		
 		// 세션의 존재 확인
 		HttpSession session = request.getSession();
-		String id = String.valueOf(session.getAttribute("id"));
+		String id = (String)session.getAttribute("id");
 		
 		// 세션이 존재하지 않으면 오류
 		if(id == null) {
