@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" session="true"%>
+    pageEncoding="UTF-8" session="true"  isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ page import="java.util.List" %>
 <%@ page import="core.*" %>
 <%@ page import="core.board.qna.*" %>
@@ -87,22 +88,21 @@
                    	<%
                    		CustomerDAO customerDAO = new CustomerDAO();
                    		List<CustomerVO> customerList = customerDAO.listMembers();
-                   		for(CustomerVO vo : customerList) {
-                   			String address = vo.getAddress();
                    	%>
+                   	<c:set var="customerList" value="<%= customerList %>" />
+                   	<c:forEach var="vo" items="${customerList}">
                    		<tr>
-                   			<td><span><%=vo.getNo()%></span></td>
-                   			<td><span><%=vo.getId()%></span></td>
-                   			<td><span><%=vo.getName()%></span></td>
-                   			<td><span><%=address%></span></td>
-                   			<td><span><%=vo.getEmail()%></span></td>
-                   			<td><span><%=vo.getTel()%></span></td>
-                   			<td><span><%=vo.getZipCode()%></span></td>
+                   			<td><span>${vo.getNo()}</span></td>
+                   			<td><span>${vo.getId()}</span></td>
+                   			<td><span>${vo.getName()}</span></td>
+                   			<td><span>${vo.getAddress()}</span></td>
+                   			<td><span>${vo.getEmail()}</span></td>
+                   			<td><span>${vo.getTel()}</span></td>
+                   			<td><span>${vo.getZipCode()}</span></td>
                    			<td><button class="ban btn btn-primary">정보 수정하기</button></td>
                    		</tr>
-                   	<%
-                   		}
-                   	%>
+                   	</c:forEach>
+
                    	<tfoot>
                    		<div class="form-group">
                    			<label for="search">검색 하기</label>
@@ -128,25 +128,19 @@
                     		<th>전화번호</th>
                     		<th>우편번호</th>
                     		<th>차단 여부</th>
-                    	</thead>
-                   	<%
-                   		List<CustomerVO> customerList2 = customerDAO.listMembers();
-                   		for(CustomerVO vo : customerList2) {
-                   			String address = vo.getAddress();
-                   	%>
+                    	</thead>     	
+                   	<c:forEach var="m" items="${customerList}">
                    		<tr>
-                   			<td><span><%=vo.getNo()%></span></td>
-                   			<td><span><%=vo.getId()%></span></td>
-                   			<td><span><%=vo.getName()%></span></td>
-                   			<td><span><%=address%></span></td>
-                   			<td><span><%=vo.getEmail()%></span></td>
-                   			<td><span><%=vo.getTel()%></span></td>
-                   			<td><span><%=vo.getZipCode()%></span></td>
+                   			<td><span>${m.getNo()}</span></td>
+                   			<td><span>${m.getId()}</span></td>
+                   			<td><span>${m.getName()}</span></td>
+                   			<td><span>${m.getAddress()}</span></td>
+                   			<td><span>${m.getEmail()}</span></td>
+                   			<td><span>${m.getTel()}</span></td>
+                   			<td><span>${m.getZipCode()}</span></td>
                    			<td><button class="ban btn btn-danger">강제 탈퇴</button></td>
                    		</tr>
-                   	<%
-                   		}
-                   	%>        
+                   	  </c:forEach>
                    	</table>         	
                 </div>
                 <div id="manage-forced-secession" class="content jumbotron">
