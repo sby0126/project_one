@@ -1,4 +1,4 @@
-package ch15;
+package core.board.notice;
 
 /**
  * Copyright(c) 2001 iSavvix Corporation (http://www.isavvix.com/)

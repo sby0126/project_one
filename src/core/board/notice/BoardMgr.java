@@ -57,12 +57,13 @@ public class BoardMgr {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				BoardBean bean = new BoardBean();
-				bean.setCtxtno(rs.getInt("num"));
-				bean.setWrtnm(rs.getString("name"));
-				bean.setCtitle(rs.getString("title"));
+				bean.setCtxtno(rs.getInt("ctxtno"));
+				bean.setWrtnm(rs.getString("wrtnm"));
+				bean.setCtitle(rs.getString("ctitle"));
 				bean.setPos(rs.getInt("pos"));
-				bean.setWrtdate(rs.getString("date"));
-				bean.setViewcnt(rs.getInt("cnt"));
+				bean.setReply(rs.getInt("reply"));				
+				bean.setViewcnt(rs.getInt("viewcnt"));
+				bean.setWrtdate(rs.getString("wrtdate"));
 				vlist.add(bean);
 			}
 			
@@ -145,17 +146,14 @@ public class BoardMgr {
 				if(multi.getParameter("contentType").equalsIgnoreCase("TEXT")) {
 					content = UtilMgr.replace(content, "<", "&lt;");
 				}
-				sql = "insert bbsnotice(wrtnm,ctxt,ctitle,pos,depth,regdate,pass,count,ip,filename,filesize) ";
-				sql += "values(?, ?, ?, ?, 0, 0, now(), ?, 0, ?, ?, ?)";
+				sql = "insert bbsnotice(wrtnm,ctitle,ctxt,pos,cpwd,reply,viewcnt,wrtdate,filename) ";
+				sql += "values(?,?,?,0,?,0,0,now(),?)";
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, multi.getParameter("name"));
-				pstmt.setString(2, content);
-				pstmt.setString(3, multi.getParameter("subject"));
-				pstmt.setInt(4, ref);
-				pstmt.setString(5, multi.getParameter("pass"));
-				pstmt.setString(6, multi.getParameter("ip"));
-				pstmt.setString(7, filename);
-				pstmt.setInt(8, filesize);
+				pstmt.setString(1, multi.getParameter("wrtnm"));
+				pstmt.setString(2, multi.getParameter("ctitle"));
+				pstmt.setString(3, content);				
+				pstmt.setString(4, multi.getParameter("cpwd"));
+				pstmt.setString(5, filename);				
 				pstmt.executeUpdate();
 				
 		} catch(Exception e) {
@@ -177,25 +175,22 @@ public class BoardMgr {
 		
 		try {
 			conn = pool.getConnection();
-			sql = "select * from tblBoard where num = ?";
+			sql = "select * from bbsnotice where ctxtno = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				bean.setNum(rs.getInt("num"));
-				bean.setName(rs.getString("name"));
-				bean.setSubject(rs.getString("subject"));
-				bean.setContent(rs.getString("content"));
+				bean.setCtxtno(rs.getInt("ctxtno"));
+				bean.setWrtnm(rs.getString("wrtnm"));
+				bean.setCtitle(rs.getString("ctitle"));
+				bean.setCtxt(rs.getString("Ctxt"));
 				bean.setPos(rs.getInt("pos"));
-				bean.setRef(rs.getInt("ref"));
-				bean.setDepth(rs.getInt("depth"));
-				bean.setRegdate(rs.getString("regdate"));
-				bean.setPass(rs.getString("pass"));
-				bean.setCount(rs.getInt("count"));
+				bean.setCpwd(rs.getString("cpwd"));
+				bean.setReply(rs.getInt("reply"));
+				bean.setViewcnt(rs.getInt("viewcnt"));
+				bean.setWrtdate(rs.getString("wrtdate"));
 				bean.setFilename(rs.getString("filename"));
-				bean.setFilesize(rs.getInt("filesize"));
-				bean.setIp(rs.getString("ip"));
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -213,7 +208,7 @@ public class BoardMgr {
 		
 		try {
 			conn = pool.getConnection();
-			sql = "update tblBoard set count = count+1 where num = ?";
+			sql = "update bbsnotice set viewcnt = viewcnt+1 where ctxtno = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.executeUpdate();
@@ -234,7 +229,7 @@ public class BoardMgr {
 		
 		try {
 			conn = pool.getConnection();
-			sql = "select filename from tblBoard where num = ?";
+			sql = "select filename from bbsnotice where ctxtno = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
@@ -248,7 +243,7 @@ public class BoardMgr {
 				}				
 			} 
 			
-			sql = "delete from tblBoard where num = ?";
+			sql = "delete from bbsnotice where ctxctno = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.executeUpdate();			

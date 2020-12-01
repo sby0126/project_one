@@ -12,10 +12,10 @@
 	String nowPage = request.getParameter("nowPage");
 	int num = Integer.parseInt(request.getParameter("num"));
 	
-	if (request.getParameter("pass") != null) {
-		String inPass = request.getParameter("pass");
+	if (request.getParameter("cpwd") != null) {
+		String inPass = request.getParameter("cpwd");
 		BoardBean bean = (BoardBean) session.getAttribute("bean");
-		String dbPass = bean.getPass();
+		String dbPass = bean.getCpwd();
 		
 		if(inPass.equals(dbPass)) {
 			bMgr.deleteBoard(num);
@@ -57,7 +57,7 @@
 						<table>
 							<tr>
 								<td align="center">
-									<input type="password" name="pass" size="17" maxlength="15">
+									<input type="password" name="cpwd" size="17" maxlength="15">
 								</td>
 							</tr>
 							<tr>
