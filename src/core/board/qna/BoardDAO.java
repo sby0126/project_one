@@ -1,10 +1,19 @@
 package core.board.qna;
 
+import core.*;
+import java.io.IOException;
+import java.nio.file.DirectoryIteratorException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,7 +26,7 @@ import core.SQLHelper;
 /***
  * 테이블을 생성합니다.
  */
-public class BoardDAO {
+public class BoardDAO implements IDAO {
 	private DBConnectionMgr pool; 
 	private Connection conn;
 	private PreparedStatement pstmt;
@@ -69,6 +78,19 @@ public class BoardDAO {
 		return ret;
 	}
 	
+	/**
+	 * MYSQL과 호환되는 시간 형식을 만듭니다.
+	 * @return
+	 */
+	public String getLocalTime() {
+		LocalDateTime dateTime = LocalDateTime.now();
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		String formatedDate = dateTime.format(formatter);
+		
+		return formatedDate;
+	}
+	
 	/***
 	 * 
 	 */
@@ -116,7 +138,7 @@ public class BoardDAO {
 		qlList.put("modifyComment", "UPDATE tblqnaboardcomments SET content = ? WHERE commentID = ? AND authorID = ?");
 		
 		// 댓글을 삭제합니다.
-		qlList.put("deleteComments", "delete from tblqnaboardcomments WHERE parent_articleID = ?");
+		qlList.put("deleteComments", "delete from tblqnaboardcomments WHERE commentID = ?");
 		
 		// 글을 작성합니다.
 		qlList.put("writePost", "insert into tblQNABoard(authorID, articleType, title, content, regdate, imageFileName) VALUES(?, ?, ?, ?, NOW(), ?)");
@@ -489,7 +511,7 @@ public class BoardDAO {
 		return arr;
 	}
 	
-	public boolean updateComment(String content, int commentID, String authorID)
+	public boolean updateComment(String content, int commentID, String authorID) throws SQLException
 	{
 		boolean isOK = false;
 		ResultSet rs = null;
@@ -505,15 +527,25 @@ public class BoardDAO {
 				isOK = true;
 			}
 			
-		} catch(SQLException e) {
-			e.printStackTrace(); 
 		} catch(Exception e) {
-			e.printStackTrace();
+			e.printStackTrace(); 
 		} finally {
 			pool.freeConnection(conn, pstmt, rs);
 		}
 		
 		return isOK;
+	}
+	
+	public static void main(String[] args) {
+		Path dir = Paths.get("WebContent");
+		
+		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, "*.*")) {
+			for( Path file: stream ) {
+				System.out.println(file.getFileName());
+			}
+		} catch(IOException | DirectoryIteratorException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
