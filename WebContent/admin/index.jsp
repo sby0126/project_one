@@ -2,6 +2,8 @@
     pageEncoding="UTF-8" session="true"%>
 <%@ page import="java.util.List" %>
 <%@ page import="core.*" %>
+<%@ page import="core.board.qna.*" %>
+<%@ page import="org.json.simple.JSONArray, org.json.simple.JSONObject" %>
 <!DOCTYPE html>
 <%
 	String id = (String)session.getAttribute("id");
@@ -24,6 +26,23 @@
   	.right {
   		float: right;
   	}
+  	.comment {
+  		color: orange;
+  	}
+  	
+  	tr:hover {
+  		background-color: #F4F4F6;
+  	}
+  	
+  	:root {
+  		--mycolor: rgba(0, 0, 0, 0.6);
+  	}
+  	
+  	table a {
+  		color: #000000;
+/*   		text-shadow: 1px 1px 1px var(--mycolor), -1px -1px 1px var(--mycolor), 1px 0px 1px var(--mycolor), 0px 1px 1px var(--mycolor), 0px -1px 1px var(--mycolor); */
+  	}
+  	
   </style>
 </head>
 <body>
@@ -138,6 +157,42 @@
                 <div id="board-manage" class="content jumbotron">
                 	<a name="board-manage"></a>
                     <p>게시판 관리</p>
+                    <table class="table">
+                    <%
+	            		BoardDAO boardMgr = new BoardDAO();
+	            		JSONArray json = boardMgr.getListAll();                    
+                    %>
+                    	<caption class="well">총 글 갯수 : <%= json.size() %></caption>
+                    	<thead>
+                    		<th>글 번호</th>
+                    		<th>분류</th>
+                    		<th>글 제목</th>
+                    		<th>작성자</th>
+                    		<th>작성일</th>
+                    		<th>조회수</th>
+                    		<th>추천수</th>
+                    		<th>수정</th>
+                    		<th>삭제</th>
+                    	</thead>
+                    	<%                    		
+                    		for(int i = 0 ; i < json.size(); i++) {
+                    			JSONObject myBoard = (JSONObject)json.get(i);
+                    	%>
+                    		<tr>
+                    			<td><%= myBoard.get("postNumber") %></td>
+                    			<td><%= myBoard.get("postType") %></td>
+                    			<td><a href="/pages/board-post.jsp?postNumber=<%=myBoard.get("postNumber")%>" target="_blank"><%= myBoard.get("postTitle") %></a></td>
+                    			<td><%= myBoard.get("name") %></td>
+                    			<td><%= myBoard.get("create_at") %></td>
+                    			<td><%= myBoard.get("view") %></td>
+                    			<td><%= myBoard.get("recommandCount") %></td>
+                    			<td><button class="btn btn-primary">글 수정</button></td>
+                    			<td><button class="btn btn-danger">글 삭제</button></td>
+                    		</tr>
+                    	<%
+                    		}
+                    	%>
+                    </table>
                 </div>
 				<div id="all-post" class="content jumbotron">
 					<a name="all-post"></a>

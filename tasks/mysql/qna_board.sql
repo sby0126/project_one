@@ -54,6 +54,11 @@ INSERT INTO tblQNABoardComments(parent_articleID, authorID, content, regdate) VA
 INSERT INTO tblQNABoardComments(parent_articleID, authorID, content, regdate) VALUES(1, 'admin', '테스트 댓글', NOW());
 INSERT INTO tblQNABoardComments(parent_articleID, authorID, content, regdate) VALUES(2, 'admin', '테스트 댓글', NOW());
 
+	
+INSERT INTO tblqnaboardcomments(parent_articleID, authorID, content, regdate, pos, parentID, depth) 
+	VALUES(1, 'admin', 'test.....', NOW(), 1, 1, 1);
+
+
 UPDATE tblqnaboardcomments SET content = '테스트2' WHERE commentID = 1 AND authorID = 'admin';
 update tblQNABoard set viewCount = viewCount + 1 where articleID = 1;
 
