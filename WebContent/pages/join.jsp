@@ -58,7 +58,7 @@
                             <li>
                                 <!-- 비밀번호 확인 --> <label for="pw" class="label1"> <span>비밀번호를 다시 입력해주세요
                                 </span> <span>띄어쓰기없이 영/숫자 6~14자</span>
-                                </label> <input type="password" id="password-check"
+                                </label> <input type="password" autocomplete="new-password" id="password-check"
                                     maxlength="15">
                                 <div id="pwd1Msg2" class="ability_chk"></div>
                             </li>

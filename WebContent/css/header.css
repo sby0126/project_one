@@ -127,10 +127,17 @@ header {
     
     font-size: 0.6875em;
     margin-left: 0.625em;
+    
+    line-height: 64px;
 
     background: #fff;
     border: none;
     outline: none;
+}
+
+.header-right-login-button:hover {
+	background-color: #F2F2F2;
+	border-radius: 0.2em;
 }
 
 .input-non-border-box {
