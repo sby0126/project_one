@@ -109,7 +109,6 @@ public class BoardService extends HttpServlet {
 				command.execute(request, response);
 			} else if(currentPage.equals("/writeReply.do")) { // 댓글 작성
 				replyCommand.write(request, response);
-				
 			} else if(currentPage.equals("/updateReply.do")) { // 댓글 수정 
 				// 댓글 업데이트
 			} else if(currentPage.equals("/deleteReply.do")) { // 댓글 삭제
@@ -122,8 +121,6 @@ public class BoardService extends HttpServlet {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-
 		
 //		String status = (String)request.getAttribute("_status");
 //		if(status.equals("error")) {

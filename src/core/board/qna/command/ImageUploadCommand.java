@@ -1,10 +1,14 @@
 package core.board.qna.command;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONObject;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -28,23 +32,34 @@ public class ImageUploadCommand extends Command {
 		int filesize = 0;
 		String encType = "EUC-KR";
 		String filename = null;
+        String saveFolder = "/uploads";
+        int fileSize = 5 * 1024 * 1024;
+        ServletContext context = request.getServletContext();
+        String realFolder = context.getRealPath(saveFolder);		
 		
 		int contentLength = Integer.parseInt(request.getHeader("Content-Length"));
 		System.out.println(contentLength);
 		
 		FileRenamePolicy policy = new DefaultFileRenamePolicy(); 
 		
-		MultipartRequest multi = new MultipartRequest(request, filename, maxSize, policy);
+		// request 객체를 전송하여 파일을 서버로 업로드 한다.
+		MultipartRequest multi = new MultipartRequest(
+				request, 
+				realFolder, 
+				fileSize,
+				"UTF-8",
+				policy);
+				
+		response.setContentType("application/json");
+		response.setCharacterEncoding("EUC-KR");
 		
-		if(multi.getFilesystemName("filename") != null) {
-			filename = multi.getFilesystemName("filename");
-			filesize = (int)multi.getFile("filename").length();
-		}
+		PrintWriter out = response.getWriter();
 		
-		// 파일 내용
-		String content = multi.getParameter("content");
+		JSONObject json = new JSONObject();
+		json.put("url", multi.getOriginalFileName("image")
+				);
 		
-		
+		out.println(json.toJSONString());
 		
 	}
 	

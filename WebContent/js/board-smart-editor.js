@@ -63,29 +63,32 @@
     function selectImage() {
         const input = document.createElement("input");
         input.type = "file";
-        input.click();
-
         input.onchange = function () {
             const formData = new FormData();
             const file = $(this)[0].files[0];
             formData.append('image', file);
 
+            alert("이벤트 발동");
+
             $.ajax({
-                type: "post",
+                type: "POST",
                 enctype: "multipart/form-data",
-                url: "board/qna/imageUpload.do",
+                url: "/board/qna/imageUpload.do",
                 data: formData,
                 processData: false,
                 contentType: false,
                 success: function (data) {
+                    console.log(data);
                     const range = quill.getSelection();
-                    quill.insertEmbed(range.index, 'image', '/upload/' + data);
+                    quill.insertEmbed(range.index, 'image', "/uploads/" + data.url);
                 },
                 error: function (err) {
                     console.warn(err);
                 }
             })
         }
+
+        input.click();
     }
 
     quill.getModule("toolbar").addHandler('image', () => {
