@@ -274,14 +274,14 @@
 						</c:choose>
 						<td>
 							<p>${ isValid }</p>
-<!-- 							<form action="/myAdmin/openFileBrowser.do"> -->
+<!-- 							<form action="/myadmin/openFileBrowser.do"> -->
 <%-- 								<input type="hidden" name="filename" value="<%= request.getRealPath("uploads/" + path.getFileName()) %>"> --%>
 <%-- 								<input type="submit" class="btn ${btnName}" onclick="openImageView('/uploads/${filename}')" value="파일 보기"> --%>
 <!-- 							</form> -->
 							<button class="btn ${btnName}" onclick="openImageView('/uploads/${filename}')">파일 보기</button>
 						</td>
 						<td>
-							<form action="/myAdmin/fileDelete.do">
+							<form action="/myadmin/fileDelete.do">
 								<input type="hidden" name="filename" value="<%= request.getRealPath("uploads/" + path.getFileName()) %>">
 								<input type="submit" class="btn ${btnName}" data-filename="${filename}" value="파일 삭제">
 							</form>

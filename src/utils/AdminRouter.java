@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/admin")
+@WebServlet("/myadmin/*")
 public class AdminRouter extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,13 +31,11 @@ public class AdminRouter extends HttpServlet {
 		String reqeustURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String command = reqeustURI.substring(contextPath.length());
+		String path = request.getPathInfo();
 		
-		if (command.equals("/admin")) {
-			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/index.jsp");
-			dispatcher.forward(request, response);
-			
-		} else if (command.equals("/openFileBrowser.do")) {
+		System.out.println(command);
+		
+		if (path.equals("/openFileBrowser.do")) {
 			String filename = request.getParameter("filename");
 	    	try {
 				Runtime.getRuntime().exec("explorer.exe /select," + filename);
@@ -48,7 +46,7 @@ public class AdminRouter extends HttpServlet {
 	    	
 	    	response.sendRedirect("/admin");
 	    	
-		} else if(command.equals("/fileDelete.do")) {
+		} else if(path.equals("/fileDelete.do")) {
 			String filename = request.getParameter("filename");
 			
 			try {
