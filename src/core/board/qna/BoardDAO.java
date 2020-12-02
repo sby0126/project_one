@@ -150,6 +150,9 @@ public class BoardDAO implements IDAO {
 		// 파일을 업로드 합니다.
 		qlList.put("uploadFile", "UPDATE tblqnaboard SET imageFileName = concat(ifnull(imageFileName, ''), ',', ?) WHERE articleID = ?");
 		
+		// 이미지를 검색하여 글 번호를 획득합니다.
+		qlList.put("searchPostNumber", "SELECT * FROM tblqnaboard WHERE content LIKE ?");
+		
 	}
 	
 	/***
@@ -583,6 +586,38 @@ public class BoardDAO implements IDAO {
 		return isOK;
 	}
 	
+	/**
+	 * 해당 파일을 가지고 있는 글을 검색하여 글 번호를 반환합니다.
+	 * 
+	 * @param filename
+	 * @return
+	 */
+	public int getFileNameToPostNumber(String filename) {
+		int postNumber = 0;
+		ResultSet rs = null;
+		try {
+			
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement(getQL("searchPostNumber"));
+			pstmt.setString(1, "%" + filename + "%");
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				postNumber = rs.getInt("articleID");
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt, rs);
+		}
+		
+		return postNumber;
+	}
+	
 	public static void main(String[] args) {
 		Path dir = Paths.get("WebContent");
 		
@@ -594,5 +629,4 @@ public class BoardDAO implements IDAO {
 			e.printStackTrace();
 		}
 	}
-
 }

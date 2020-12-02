@@ -113,6 +113,30 @@ public class BoardService extends HttpServlet {
 				command.execute(request, response);
 			} else if(currentPage.equals("/recommandPost.do")) { // 추천
 				// 추천은 한 번만 가능해야 합니다. 즉, 추천인 목록이 필요합니다.
+			} else  if(currentPage.equals("/openFileBrowser.do")) {
+				String filename = request.getParameter("filename");
+		    	try {
+					Runtime.getRuntime().exec("explorer.exe /select," + filename);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    	
+		    	response.sendRedirect("/admin");
+		    	
+			} else if(currentPage.equals("/fileDelete.do")) {
+				String filename = request.getParameter("filename");
+				
+				try {
+					File file = new File(filename);
+					if(file.exists()) {
+						file.delete();
+					}					
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+				
+				response.sendRedirect("/admin");
 			}
 			
 		} catch(Exception e) {

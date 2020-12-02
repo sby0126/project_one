@@ -255,9 +255,37 @@
 						<c:set var="filename" value="<%=path.getFileName() %>" />
 						<td><%=path.getFileName()%></td>
 						<td><%= path.toFile().length() / 1024 %> KB</td>
-						<td>게시물 번호</td>
-						<td><button class="btn btn-default" onclick="openImageView('/uploads/${filename}')">파일 보기</button></td>
-						<td><button class="btn btn-default" data-filename="${filename}">파일 삭제</button></td> 
+						
+						<%
+							int postNumber = boardMgr.getFileNameToPostNumber(path.getFileName().toString());
+						%>
+						<c:set var="postNumber" value="<%=postNumber%>" />
+						<c:choose>
+							<c:when test="${postNumber > 0}">
+								<c:set var="isValid" value="가능" />
+								<c:set var="btnName" value="btn-default" />
+								<td><%= postNumber %></td>
+							</c:when>
+							<c:otherwise>
+								<c:set var="isValid" value="불가능" />
+								<c:set var="btnName" value="btn-danger" />
+								<td>글이 존재하지 않습니다</td>
+							</c:otherwise>
+						</c:choose>
+						<td>
+							<p>${ isValid }</p>
+<!-- 							<form action="/board/qna/openFileBrowser.do"> -->
+<%-- 								<input type="hidden" name="filename" value="<%= request.getRealPath("uploads/" + path.getFileName()) %>"> --%>
+<%-- 								<input type="submit" class="btn ${btnName}" onclick="openImageView('/uploads/${filename}')" value="파일 보기"> --%>
+<!-- 							</form> -->
+							<button class="btn ${btnName}" onclick="openImageView('/uploads/${filename}')">파일 보기</button>
+						</td>
+						<td>
+							<form action="/board/qna/fileDelete.do">
+								<input type="hidden" name="filename" value="<%= request.getRealPath("uploads/" + path.getFileName()) %>">
+								<input type="submit" class="btn ${btnName}" data-filename="${filename}" value="파일 삭제">
+							</form>
+						</td> 
 						</tr>
 					<%
                 		}
@@ -265,7 +293,6 @@
                 		e.printStackTrace();
                 	}
 					%>
-						
 					</tbody>
 					</table>
                 </div>                               
@@ -320,7 +347,7 @@
     		$(".member-information-form").show();
     	}
     	
-    	function openImageView(src) {
+    	function openImageView(src) {    		
     		$("#image-view").show();
     		$("#image-view img").attr("src", src);
     	}
@@ -347,10 +374,6 @@
     	
     	$( ".forced-secession" ).on("click", function() {
     		alert("강제로 탈퇴시킬 회원 번호는 " + getPostNumber.call(this));
-    	});
-    	
-    	$( " button[data-filename]" ).on("click", function() {
-    		alert( $(this).data("filename") + "의 삭제는 아직 지원하지 않습니다.");
     	});
     	
     	$(window).on("click", function(ev) {
