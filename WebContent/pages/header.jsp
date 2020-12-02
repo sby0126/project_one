@@ -33,8 +33,8 @@
                 	<c:set var="id" value="<%=id %>" />
                 	<c:choose>
                 		<c:when test="${id != null}">
+                			<a class="header-right-login-button" href="/members/modifyMemberForm.do?id=${id}">회원 정보 수정</a>
                 			<c:if test="${id=='admin'}">
-                				<a class="header-right-login-button" href="/members/modifyMemberForm.do">회원 정보 수정</a>
                 				<a class="header-right-login-button" href="/admin">관리자 페이지</a>
                 			</c:if>
                 			<button class="header-right-login-button" id="logout-button" onclick="javascript:location.href='/members/logout.do'">로그아웃</button>

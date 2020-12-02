@@ -128,7 +128,7 @@
                    			<td><span>${vo.getEmail()}</span></td>
                    			<td><span>${vo.getTel()}</span></td>
                    			<td><span>${vo.getZipCode()}</span></td>
-                   			<td><button data-number="${vo.getNo()}" class="ban btn btn-primary whole-member">정보 수정하기</button></td>
+                   			<td><button data-number="${vo.getId()}" class="ban btn btn-primary whole-member">정보 수정하기</button></td>
                    		</tr>
                    	</c:forEach>
 
@@ -167,7 +167,7 @@
                    			<td><span>${m.getEmail()}</span></td>
                    			<td><span>${m.getTel()}</span></td>
                    			<td><span>${m.getZipCode()}</span></td>
-                   			<td><button data-number="${m.getNo()}" class="ban btn btn-danger forced-secession">강제 탈퇴</button></td>
+                   			<td><button data-number="${m.getId()}" class="ban btn btn-danger forced-secession">강제 탈퇴</button></td>
                    		</tr>
                    	  </c:forEach>
                    	</table>         	
@@ -379,7 +379,8 @@
     	});
     	
     	$(".whole-member").on("click", function() {
-    		showMemberInformation(getPostNumber.call(this));
+    		const memberId = $(this).data("number");
+    		location.href = `/members/modifyMemberForm.do?id=` + memberId;
     	});
     	
     	$( ".forced-secession" ).on("click", function() {

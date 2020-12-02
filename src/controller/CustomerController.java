@@ -60,17 +60,22 @@ public class CustomerController extends HttpServlet {
 				nextPage = request.getParameter("nextPage");
 			}
 		} else if(act.equals("/modifyMemberForm.do")) {
-			String id = (String)request.getSession().getAttribute("id");
 			
-			if(id != null) {
+			HttpSession session = request.getSession();
+			String id = request.getParameter("id");
+			String sid = (String)session.getAttribute("id");
+			
+			if(id == null) {
+				response.sendRedirect("/");
+				return;			
+			}
+			
+			if(sid.equals(id) || sid.equals("admin")) {
 				CustomerVO member = customerDAO.getMember(id);
 				System.out.println(member.getId());
 				request.setAttribute("member", member);
 				
 				nextPage = "/pages/modifyMemberForm.jsp";				
-			} else {
-				response.sendRedirect("/");
-				return;
 			}
 			
 		} else if(act.equals("/modifyMember.do")) {
