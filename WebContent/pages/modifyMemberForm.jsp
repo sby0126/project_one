@@ -93,6 +93,9 @@ img, a {
 								<input type="email" class="form-control" id="email"
 									placeholder="Enter email" value="${ member.getEmail() }">
 							</div>
+							<div class="col-sm-2">
+								<button class="btn btn-default">이메일 중복 확인</button>
+							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="pwd">비밀번호:</label>
@@ -128,18 +131,21 @@ img, a {
 							<div class="col-sm-6">
 								<input type="text" class="form-control col-sm-2" id="zipcode"
 									value="${ member.getZipCode() }">
-								<button class="btn btn-default">주소 검색 하기</button>
-								<input type="text" class="form-control col-sm-6" id="address1"
+								<input type="text" class="form-control" id="address1"
 									value="${ member.getAddress() }"> <input type="text"
-									class="form-control col-sm-6" id="address2">
+									class="form-control" id="address2">									
 							</div>
-
+							<div class="col-sm-2">
+								<button class="btn btn-default">주소 검색 하기</button>
+							</div>
 						</div>
 
 						<div class="form-group">
-							<label class="control-label col-sm-2" for="tel">가입일</label>
-							<div class="col-sm-6">
-								<p>${ member.getJoinDate() }</p>
+							<div class="panel">
+								<label class="control-label col-sm-2" for="tel">가입일</label>
+								<div class="col-sm-6">
+									<p>${ member.getJoinDate() }</p>
+								</div>								
 							</div>
 						</div>
 
