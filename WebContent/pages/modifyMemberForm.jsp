@@ -87,6 +87,7 @@ img, a {
 
 					<form class="form-horizontal col-sm-8"
 						action="/members/modifyMember.do">
+						<input type="hidden" name="id" value="${member.getId()}">
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="email">이메일:</label>
 							<div class="col-sm-6">
