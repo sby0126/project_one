@@ -9,7 +9,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.List"%>
 <%@ page import="core.*"%>
-<%@ page import="core.board.qna.*"%>
+<%@ page import="controller.*"%>
+<%@ page import="dao.*"%>
+<%@ page import="service.*"%>
+<%@ page import="vo.*"%>
 <%@ page import="org.json.simple.JSONArray, org.json.simple.JSONObject"%>
 <!DOCTYPE html>
 <%

@@ -1,6 +1,10 @@
-package core.board.qna;
+package dao;
 
 import core.*;
+import utils.DBConnectionMgr;
+import vo.BoardCommentVO;
+import vo.BoardVO;
+
 import java.io.IOException;
 import java.nio.file.DirectoryIteratorException;
 import java.nio.file.DirectoryStream;
@@ -19,9 +23,6 @@ import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
-import core.DBConnectionMgr;
-import core.SQLHelper;
 
 /***
  * 테이블을 생성합니다.

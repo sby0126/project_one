@@ -1,4 +1,4 @@
-package manager;
+package router;
 
 
 import java.io.IOException;
@@ -16,6 +16,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import manager.DataManager;
 
 @WebServlet(name = "loadConfig", urlPatterns = { "/loadConfig" }, loadOnStartup = 1)
 public class AppConfigServlet extends HttpServlet {

@@ -1,4 +1,4 @@
-package core;
+package dao;
 
 public interface IDAO {
 

@@ -1,4 +1,4 @@
-package core.board.qna.command;
+package command;
 
 import java.io.IOException;
 
@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import core.board.qna.BoardDAO;
+import dao.BoardDAO;
 
 public class ReplyCommand extends Command {
 		

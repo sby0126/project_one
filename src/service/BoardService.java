@@ -1,4 +1,4 @@
-package core.board.qna;
+package service;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,11 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
 
-import core.board.qna.command.DeleteCommand;
-import core.board.qna.command.ImageUploadCommand;
-import core.board.qna.command.PostViewCommand;
-import core.board.qna.command.ReplyCommand;
-import core.board.qna.command.WriteFormCommand;
+import command.DeleteCommand;
+import command.ImageUploadCommand;
+import command.PostViewCommand;
+import command.ReplyCommand;
+import command.WriteFormCommand;
+import dao.BoardDAO;
 
 /**
  * Servlet implementation class BoardService

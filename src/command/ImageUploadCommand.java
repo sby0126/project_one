@@ -1,4 +1,4 @@
-package core.board.qna.command;
+package command;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,7 +14,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.oreilly.servlet.multipart.FileRenamePolicy;
 
-import core.board.qna.BoardDAO;
+import dao.BoardDAO;
 
 public class ImageUploadCommand extends Command {
 	

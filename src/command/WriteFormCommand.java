@@ -1,4 +1,4 @@
-package core.board.qna.command;
+package command;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,7 +17,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import core.board.qna.BoardDAO;
+import dao.BoardDAO;
 
 public class WriteFormCommand extends Command {
 

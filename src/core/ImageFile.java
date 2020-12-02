@@ -1,8 +1,8 @@
-package core.board.qna;
+package core;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.*;
+import java.util.function.Consumer;
 
 /***
  * 데이터베이스의 로우 이미지 문자열을 파싱하여 이미지 이름 배열로 만듭니다.
@@ -33,5 +33,4 @@ public class ImageFile {
 		images.forEach(action);
 	}
 	
-
 }

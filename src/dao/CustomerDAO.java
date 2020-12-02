@@ -1,4 +1,4 @@
-package core;
+package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import utils.DBConnectionMgr;
 import utils.SHA256Util;
+import vo.CustomerVO;
 
 public class CustomerDAO implements IDAO {
 	
