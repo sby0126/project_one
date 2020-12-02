@@ -62,7 +62,21 @@
   		transform: translate(-50%, -50%);
   		width: 80%;
   		height: 80%;
-  		display: none;  	
+  		display: none;  
+  		z-index: 1;	
+  	}
+  	
+  	#light-box {
+  		width: 100vw;
+  		height: 100vh;
+  		background-color: black;
+  		z-index: 1;
+  		display: none;
+  	}
+  	
+  	#light-box .active {
+  		display: fixed;
+
   	}
   	
   	.member-information-form {
@@ -299,6 +313,7 @@
             </div>
         </section>
     </div>
+    
     <!-- 회원 정보 수정 창  -->
     <div class="modal window member-information-form col-md-12 panel panel-default">
     	<%
@@ -337,22 +352,31 @@
     		<img src="">
     	</div>
     </div>
+    
+    <div id="light-box">
+    </div>
+        
+    
     <script>
     
     	function closeMemberInformation() {
+    		$("#light-box").removeClass("active");
     		$(".member-information-form").hide();
     	}
     	
     	function showMemberInformation(postNumber) {
+    		$("#light-box").addClass("active");
     		$(".member-information-form").show();
     	}
     	
-    	function openImageView(src) {    		
+    	function openImageView(src) {   
+    		$("#light-box").addClass("active");
     		$("#image-view").show();
     		$("#image-view img").attr("src", src);
     	}
     	
     	function hideImageView() {
+    		$("#light-box").removeClass("active");
     		$("#image-view").fadeOut();
     	}
     
