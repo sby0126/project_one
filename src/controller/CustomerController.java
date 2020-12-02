@@ -73,6 +73,10 @@ public class CustomerController extends HttpServlet {
 				return;
 			}
 			
+		} else if(act.equals("/modifyMember.do")) {
+			
+			// SQL로 회원 정보 수정 처리
+			
 		}  else if(act.equals("/login.do")) { 
 			
 			// 로그인 처리
