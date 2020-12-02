@@ -143,6 +143,13 @@ public class BoardDAO implements IDAO {
 		
 		// 글을 작성합니다.
 		qlList.put("writePost", "insert into tblQNABoard(authorID, articleType, title, content, regdate, imageFileName) VALUES(?, ?, ?, ?, NOW(), ?)");
+		
+		// 특정 글에 업로드된 파일을 가져옵니다.
+		qlList.put("readFile", "SELECT imageFileName FROM tblqnaboard WHERE articleID = ?");
+		
+		// 파일을 업로드 합니다.
+		qlList.put("uploadFile", "UPDATE tblqnaboard SET imageFileName = concat(ifnull(imageFileName, ''), ',', ?) WHERE articleID = ?");
+		
 	}
 	
 	/***
@@ -384,6 +391,45 @@ public class BoardDAO implements IDAO {
 		}
 		
 		return ret;
+	}
+	
+	public ImageFile uploadFile(int articleID, String newFileName) {
+		boolean ret = false;
+		ResultSet rs = null;
+		ImageFile imageFile = null;
+		
+		try {
+			conn = pool.getConnection();
+						
+			// 새로운 이미지 파일을 업로드 합니다.
+			pstmt = conn.prepareStatement(getQL("uploadFile"));
+			pstmt.setString(1, newFileName);
+			pstmt.setInt(2, articleID);
+			
+			if(pstmt.executeUpdate() > 0) {
+				ret = true;
+			}
+			
+			pstmt.close();
+			pstmt = conn.prepareStatement(getQL("readFile"));
+			pstmt.setInt(1, articleID);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				imageFile = new ImageFile( rs.getString("imageFileName") );
+				imageFile.start();
+			}
+			
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt, rs);
+		}
+		
+		return imageFile;
 	}
 	
 	public void deletePost(int articleID) {

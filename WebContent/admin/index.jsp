@@ -1,3 +1,9 @@
+<%@page import="java.io.File"%>
+<%@page import="java.nio.file.*"%>
+<%@page import="java.nio.file.Paths"%>
+<%@page import="java.nio.file.Files"%>
+<%@page import="javax.sound.midi.Patch"%>
+<%@page import="java.io.IOException" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" session="true" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -47,7 +53,7 @@
 /*   		text-shadow: 1px 1px 1px var(--mycolor), -1px -1px 1px var(--mycolor), 1px 0px 1px var(--mycolor), 0px 1px 1px var(--mycolor), 0px -1px 1px var(--mycolor); */
   	}
   	
-  	.member-information-form {
+  	.window {
   		position: fixed;
   		left: 50%;
   		right: 0;
@@ -56,7 +62,10 @@
   		transform: translate(-50%, -50%);
   		width: 80%;
   		height: 80%;
-  		display: none;
+  		display: none;  	
+  	}
+  	
+  	.member-information-form {
   	}
   	
   </style>
@@ -79,6 +88,7 @@
                     <li><a href="#board-manage">게시판 관리</a></li>
                     <li><a href="#all-post">전체 게시글 관리</a></li>
                     <li><a href="#log">접속 로그</a></li>
+                    <li><a href="#uploads">파일 관리</a></li>
                   </ul>
             </div>
             <div class="right content-wrapper wall col-md-9">
@@ -222,10 +232,48 @@
 					<a name="log"></a>
                     <p>접속 로그</p>
                 </div>                               
+				<div id="uploads" class="content jumbotron">
+					<a name="uploads"></a>
+                    <p>업로드된 파일 관리</p>
+                    <table class="table">
+                    <thead>
+                    	<th>파일명</th>
+                    	<th>파일 크기</th>
+                    	<th>게시물 번호</th>
+                    	<th>다운로드</th>
+                    	<th>파일 삭제</th>
+                    </thead>
+                    <tbody>
+    
+					<%
+						Path uploadFolder = Path.of(request.getRealPath("uploads"));
+					
+                	try (DirectoryStream<Path> dirs = Files.newDirectoryStream(uploadFolder)) {
+                		for(Path path : dirs) {
+					%>
+						<tr>
+						<c:set var="filename" value="<%=path.getFileName() %>" />
+						<td><%=path.getFileName()%></td>
+						<td><%= path.toFile().length() / 1024 %> KB</td>
+						<td>게시물 번호</td>
+						<td><button class="btn btn-default" onclick="openImageView('/uploads/${filename}')">파일 보기</button></td>
+						<td><button class="btn btn-default" data-filename="${filename}">파일 삭제</button></td> 
+						</tr>
+					<%
+                		}
+                	} catch(IOException e) {
+                		e.printStackTrace();
+                	}
+					%>
+						
+					</tbody>
+					</table>
+                </div>                               
             </div>
         </section>
     </div>
-    <div class="member-information-form col-md-12 panel panel-default">
+    <!-- 회원 정보 수정 창  -->
+    <div class="modal window member-information-form col-md-12 panel panel-default">
     	<%
     		String name = "";
     	%>
@@ -253,6 +301,15 @@
     		</div>
     	</div>
     </div>
+ 
+    <div id="image-view" class="modal window col-md-12 panel panel-default">
+    	<div class="jumbotron"><h2><em>파일 미리 보기</h2>
+    		<button class="btn btn-primary" onclick="hideImageView()">닫기</button>
+    	</div>
+    	<div class="panel panel-body" style="overflow:scroll">
+    		<img src="">
+    	</div>
+    </div>
     <script>
     
     	function closeMemberInformation() {
@@ -261,6 +318,15 @@
     	
     	function showMemberInformation(postNumber) {
     		$(".member-information-form").show();
+    	}
+    	
+    	function openImageView(src) {
+    		$("#image-view").show();
+    		$("#image-view img").attr("src", src);
+    	}
+    	
+    	function hideImageView() {
+    		$("#image-view").fadeOut();
     	}
     
     	function getPostNumber() {
@@ -281,6 +347,16 @@
     	
     	$( ".forced-secession" ).on("click", function() {
     		alert("강제로 탈퇴시킬 회원 번호는 " + getPostNumber.call(this));
+    	});
+    	
+    	$( " button[data-filename]" ).on("click", function() {
+    		alert( $(this).data("filename") + "의 삭제는 아직 지원하지 않습니다.");
+    	});
+    	
+    	$(window).on("click", function(ev) {
+    		if(ev.target.classList.contains("modal")) {
+    			$(".modal").hide();
+    		}
     	});
     	
     </script>
