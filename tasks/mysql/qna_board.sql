@@ -66,5 +66,13 @@ select authorID, content, regdate, pos, parentID, depth
 	from tblQNABoardComments 
 	where parent_articleID = 1 order by parentID desc, pos, commentID;
 
+SELECT INSERT(content, LENGTH(content), 1, ',') FROM tblqnaboardcomments;
+SELECT FROM_BASE64(TO_BASE64("WOWzzzzzzzzzzzzzzzzz"));
+
+-- UPDATE tblqnaboard SET content = (SELECT concat(content, ',', '새로룬내용') FROM tblqnaboard WHERE articleID = 33) WHERE articleID = 33;
+UPDATE tblqnaboard SET imageFileName = concat(ifnull(imageFileName, ''), ',', '새로운내용') WHERE articleID = 33;
+SELECT imageFileName FROM tblqnaboard WHERE articleID = 33;
+SELECT REGEXP_SUBSTR(content, '<img src=(.*)>', 1, 1, 'mi') FROM tblqnaboard WHERE articleID = 33;
+
 
 
