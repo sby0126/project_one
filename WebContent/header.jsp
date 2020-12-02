@@ -19,7 +19,7 @@
                 <!-- 헤더 왼쪽 : 로고 -->
                 <div class="header-left">
                     <div class="" id="logo">
-                        <a href="./"><img src="https://dummyimage.com/64x64/000/fff" alt=""></a>
+                        <a href="/"><img src="https://dummyimage.com/64x64/000/fff" alt=""></a>
                     </div>
                     <a href="#">WOMEN</a>
                     <a href="#">MEN</a>
@@ -40,6 +40,7 @@
                 	<c:choose>
                 		<c:when test="${id != null}">
                 			<c:if test="${id=='admin'}">
+                				<a class="header-right-login-button" href="/members/modifyMemberForm.do">회원 정보 수정</a>
                 				<a class="header-right-login-button" href="/admin">관리자 페이지</a>
                 			</c:if>
                 			<button class="header-right-login-button" id="logout-button" onclick="javascript:location.href='/members/logout.do'">로그아웃</button>

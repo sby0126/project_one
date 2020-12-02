@@ -59,6 +59,16 @@ public class CustomerController extends HttpServlet {
 			if(request.getParameter("nextPage") != null) {
 				nextPage = request.getParameter("nextPage");
 			}
+		} else if(act.equals("/modifyMemberForm.do")) {
+			String id = (String)request.getSession().getAttribute("id");
+			
+			if(id != null) {
+				CustomerVO member = customerDAO.getMember(id);
+				System.out.println(member.getId());
+				request.setAttribute("member", member);
+				
+				nextPage = "/pages/modifyMemberForm.jsp";				
+			}
 			
 		}  else if(act.equals("/login.do")) { 
 			

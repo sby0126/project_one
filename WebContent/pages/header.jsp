@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,20 +25,24 @@
                    <a href="../sale.jsp">SALE</a>
                    <a href="#">MORE</a>
                </div>
-               <!-- 헤더 오른쪽 : 로그인 / 검색 -->
+                <!-- 헤더 오른쪽 : 로그인 / 검색 -->
                 <div class="header-right">
                 	<%
                 		String id = (String)session.getAttribute("id");
-                		if(id != null) {
                 	%>
-                    <button class="header-right-login-button" id="logout-button" onclick="javascript:location.href='/members/logout.do'">로그아웃</button>
-                    <%
-                		} else {
-                    %>
-                    <button class="header-right-login-button">로그인</button>	
-                    <%
-                		}
-                    %>
+                	<c:set var="id" value="<%=id %>" />
+                	<c:choose>
+                		<c:when test="${id != null}">
+                			<c:if test="${id=='admin'}">
+                				<a class="header-right-login-button" href="/members/modifyMemberForm.do">회원 정보 수정</a>
+                				<a class="header-right-login-button" href="/admin">관리자 페이지</a>
+                			</c:if>
+                			<button class="header-right-login-button" id="logout-button" onclick="javascript:location.href='/members/logout.do'">로그아웃</button>
+                		</c:when>
+                		<c:otherwise>
+                			<button class="header-right-login-button">로그인</button>		
+                		</c:otherwise>
+                	</c:choose>
                     <input type="text" class="input-non-border-box" name="" id="" placeholder="검색어를 입력하세요">
                 </div>
            </div>

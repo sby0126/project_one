@@ -46,27 +46,6 @@ public class CustomerDAO implements IDAO {
 		qlNotes.put("mysql1.delete", "delete from tblCustomer where ctmid = ?");
 	}
 	
-//	public ArrayList<CustomerVO> test(String id) {
-//		ResultSet rs = null;
-//		ArrayList<CustomerVO> list = null;
-//		
-//		try {
-//			String query = getQuery("getMember");
-//			conn = pool.getConnection();
-//			pstmt = conn.prepareStatement(query);
-//			rs = pstmt.executeQuery();
-//			
-//			list = SQLHelper.putResult(rs, CustomerVO.class);
-//			
-//		} catch(Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//			pool.freeConnection(conn, pstmt, rs);
-//		}
-//		
-//		return list;
-//	}
-	
 	/**
 	 * 쿼리문을 가져옵니다.
 	 * @param command
@@ -102,9 +81,9 @@ public class CustomerDAO implements IDAO {
 					.setTel( 		rs.getString("TEL") )
 					.setEmail( 		rs.getString("EMAIL") )
 					.setZipCode(	rs.getString("ZIPCODE") )
-					.setIsAdmin( 	rs.getString("isAdmin") )
 					.setJoinDate(	rs.getString("joinDate") )
 					.setSalt( 		rs.getString("salt") )
+					.setIsAdmin(    rs.getString("IS_ADMIN"))
 					.setLastLogin( 	rs.getString("LAST_LOGIN") )
 					.setFailedLoginCount( rs.getString("FAILED_LOGIN_COUNT") )
 					.setIsLock( 	rs.getString("IS_LOCK") );
