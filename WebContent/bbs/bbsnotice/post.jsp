@@ -22,19 +22,19 @@
 						<table align="center">
 							<tr>
 								<td width="12%">이 름</td>
-								<td width="90%"><input name="name" size="10" maxlength="8"></td>
+								<td width="90%"><input name="wrtnm" size="10" maxlength="8"></td>
 							</tr>
 							<tr>
 								<td>제 목</td>
-								<td><input name="subject" size="50" maxlength="30"></td>
+								<td><input name="ctitle" size="50" maxlength="30"></td>
 							</tr>
 							<tr>
 								<td>내 용</td>
-								<td><textarea name="content" rows="25" cols="55"></textarea></td>								
+								<td><textarea name="ctxt" rows="25" cols="55"></textarea></td>								
 							</tr>
 							<tr>
 								<td>비밀번호</td>
-								<td><input type="password" name="pass" size="15" maxlength="15"></td>								
+								<td><input type="password" name="cpwd" size="15" maxlength="15"></td>								
 							</tr>
 							<tr>
 								<td>파일찾기</td>
@@ -59,7 +59,6 @@
 					</td>
 				</tr>
 			</table>
-			<input type="hidden" name="ip" value="<%=request.getRemoteAddr()%>"> 		
 		</form>
 	</div>
 </body>

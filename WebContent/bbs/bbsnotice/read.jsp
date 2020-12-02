@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%@ page import="ch15.BoardBean"%>
-<jsp:useBean id="bMgr" class="ch15.BoardMgr" />
+<%@ page import="core.board.notice.BoardBean"%>
+<jsp:useBean id="bMgr" class="core.board.notice.BoardMgr" />
 <%
 	request.setCharacterEncoding("EUC-KR");
 	int num = Integer.parseInt(request.getParameter("num"));
@@ -10,14 +10,13 @@
 	String keyWord = request.getParameter("keyWord");
 	bMgr.upCount(num);
 	BoardBean bean = bMgr.getBoard(num);
-	String name = bean.getName();
-	String subject = bean.getSubject();
-	String regdate = bean.getRegdate();
-	String content = bean.getContent();
+	String name = bean.getWrtnm();
+	String subject = bean.getCtitle();
+	String content = bean.getCtxt();
+	String regdate = bean.getWrtdate();
+	int reply = bean.getReply();
+	int count = bean.getViewcnt();
 	String filename = bean.getFilename();
-	int filesize = bean.getFilesize();
-	String ip = bean.getIp();
-	int count = bean.getCount();
 	session.setAttribute("bean", bean);
 %>
 <!DOCTYPE html>
@@ -61,7 +60,6 @@
 						<td bgcolor="#FFFFE8" colspan="3">
 						<% if(filename != null && !filename.equals("")) { %>
 							<a href="javascript:down('<%=filename%>')"></a>&nbsp;&nbsp;
-							<font color="blue">(<%=filesize%>KBytes)</font>
 							<% } else { %> 등록된 파일이 없습니다. <% } %>
 						</td>
 					</tr>
@@ -70,7 +68,7 @@
 					</tr>
 					<tr>
 						<td colspan="4" align="right">
-							<%=ip%>로부터 글을 남기셨습니다. / 조회수 : <%=count%>
+							 / 조회수 : <%=count%>
 						</td>
 					</tr>
 				</table>

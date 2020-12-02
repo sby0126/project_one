@@ -109,6 +109,7 @@
 							<td width="80">번 호</td>
 							<td width="330">제 목</td>
 							<td width="70">이 름</td>
+							<td width="50">댓글수</td>
 							<td width="150">날 짜</td>
 							<td width="70">조회수</td>
 						</tr>
@@ -118,18 +119,19 @@
 								BoardBean bean = vlist.get(i);
 								int num = bean.getCtxtno();
 								String name = bean.getWrtnm();
-								String subject = bean.getCtitle();
-								String regdate = bean.getWrtdate();
+								String title = bean.getCtitle();
+								int reply = bean.getReply();
+								String date = bean.getWrtdate();
 								int count = bean.getViewcnt();
 								
 						%>
 								<tr>
 									<td align="center"><%=totalRecord - ((nowPage - 1) * numPerPage) - i%></td>
 									<td>
-										<a href="javascript:read('<%=num%>')"><%=subject%></a>
+										<a href="javascript:read('<%=num%>')"><%=title%></a>
 									</td>
 									<td align="center"><%=name%></td>
-									<td align="center"><%=regdate%></td>
+									<td align="center"><%=date%></td>
 									<td align="center"><%=count%></td>
 								</tr>
 						<% } %>			<!-- 115 line for 종료 -->
