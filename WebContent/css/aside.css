@@ -36,7 +36,7 @@
 
 /* 우측 로그인 바를 감싸고 있는 래퍼입니다 */
 .floating-login-view-wrapper {
-    display: flex;
+    display: none;
     position: fixed;
 
     left: 9999px;
@@ -55,6 +55,7 @@
 }
 
 .floating-login-view-wrapper.active {
+	display: flex;
     left: 0;
 }
 
