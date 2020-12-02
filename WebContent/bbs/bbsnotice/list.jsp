@@ -125,15 +125,16 @@
 								int count = bean.getViewcnt();
 								
 						%>
-								<tr>
-									<td align="center"><%=totalRecord - ((nowPage - 1) * numPerPage) - i%></td>
-									<td>
-										<a href="javascript:read('<%=num%>')"><%=title%></a>
-									</td>
-									<td align="center"><%=name%></td>
-									<td align="center"><%=date%></td>
-									<td align="center"><%=count%></td>
-								</tr>
+						<tr>
+							<td align="center"><%=totalRecord - ((nowPage - 1) * numPerPage) - i%></td>
+							<td>
+								<a href="javascript:read('<%=num%>')"><%=title%></a>
+							</td>
+							<td align="center"><%=name%></td>
+							<td align="center"><%=reply%></td>
+							<td align="center"><%=date%></td>
+							<td align="center"><%=count%></td>
+						</tr>
 						<% } %>			<!-- 115 line for 종료 -->
 					</table>
 					<%	} %>		<!-- 104 line else 종료 -->

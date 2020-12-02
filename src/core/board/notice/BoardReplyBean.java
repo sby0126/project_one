@@ -8,7 +8,6 @@ public class BoardReplyBean {
 	private int rpos;
 	private int ref;
 	private int depth;
-	private String cpwd;
 	private String rpydate;
 	private String rpwd;
 	
@@ -48,12 +47,6 @@ public class BoardReplyBean {
 	}
 	public void setDepth(int depth) {
 		this.depth = depth;
-	}
-	public String getCpwd() {
-		return cpwd;
-	}
-	public void setCpwd(String cpwd) {
-		this.cpwd = cpwd;
 	}
 	public String getRpydate() {
 		return rpydate;

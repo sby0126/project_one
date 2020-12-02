@@ -1,4 +1,4 @@
-package ch15;
+package core.board.notice;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -12,11 +12,12 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/boardPost")
 public class BoardPostServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+	
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * 
 	 */
+	private static final long serialVersionUID = 1L;
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("EUC-KR");

@@ -41,11 +41,14 @@ public class BoardMgr {
 		try {
 			conn = pool.getConnection();
 			if(keyWord.equals("null") || keyWord.equals("")) {
+				
 				sql = "select * from bbsNotice order by wrtdate, pos limit ?, ?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, start);
 				pstmt.setInt(2, end);
+				
 			} else {
+				
 				sql = "select * from bbsNotice where " + keyField + " like ?";
 				sql += "order by wrtdate, pos limit ?, ?";
 				pstmt = conn.prepareStatement(sql);
@@ -55,7 +58,9 @@ public class BoardMgr {
 			}
 			
 			rs = pstmt.executeQuery();
+			
 			while(rs.next()) {
+				
 				BoardBean bean = new BoardBean();
 				bean.setCtxtno(rs.getInt("ctxtno"));
 				bean.setWrtnm(rs.getString("wrtnm"));
@@ -77,6 +82,7 @@ public class BoardMgr {
 	
 	// 총 게시물 수
 	public int getTotalCount(String keyField, String keyWord) {
+		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -85,6 +91,7 @@ public class BoardMgr {
 		
 		try {
 			conn = pool.getConnection();
+			
 			if(keyWord.equals("null") || keyWord.equals("")) {
 				sql = "select count(ctxtno) from bbsnotice";
 				pstmt = conn.prepareStatement(sql);
@@ -112,54 +119,46 @@ public class BoardMgr {
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		String sql = null;
 		MultipartRequest multi = null;
-		int filesize = 0;
 		String filename = null;
 		
 		try {
 			conn = pool.getConnection();
 			sql = "select max(ctxtno) from bbsnotice";
 			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
 			
-			int ref = 1;
+			File file = new File(SAVEFOLDER);
+				
+			if(!file.exists())
+				file.mkdirs();
+				
+			multi = new MultipartRequest(req, SAVEFOLDER, MAXSIZE, ENCTYPE, new DefaultFileRenamePolicy());
+				
+			if(multi.getFilesystemName("filename") != null) {
+				filename = multi.getFilesystemName("filename");
+			}
+				
+			String content = multi.getParameter("ctxt");
+				
+			if(multi.getParameter("contentType").equalsIgnoreCase("TEXT")) {
+				content = UtilMgr.replace(content, "<", "&lt;");
+			}
 			
-				if(rs.next()) 
-					ref = rs.getInt(1) + 1;
-				
-				File file = new File(SAVEFOLDER);
-				
-				if(!file.exists())
-					file.mkdirs();
-				
-				multi = new MultipartRequest(req, SAVEFOLDER, MAXSIZE, ENCTYPE, new DefaultFileRenamePolicy());
-				
-				if(multi.getFilesystemName("filename") != null) {
-					filename = multi.getFilesystemName("filename");
-					filesize = (int)multi.getFile("filename").length();
-				}
-				
-				String content = multi.getParameter("ctxt");
-				
-				if(multi.getParameter("contentType").equalsIgnoreCase("TEXT")) {
-					content = UtilMgr.replace(content, "<", "&lt;");
-				}
-				sql = "insert bbsnotice(wrtnm,ctitle,ctxt,pos,cpwd,reply,viewcnt,wrtdate,filename) ";
-				sql += "values(?,?,?,0,?,0,0,now(),?)";
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, multi.getParameter("wrtnm"));
-				pstmt.setString(2, multi.getParameter("ctitle"));
-				pstmt.setString(3, content);				
-				pstmt.setString(4, multi.getParameter("cpwd"));
-				pstmt.setString(5, filename);				
-				pstmt.executeUpdate();
+			sql = "insert bbsnotice(wrtnm,ctitle,ctxt,pos,cpwd,reply,viewcnt,wrtdate,filename) ";
+			sql += "values(?,?,?,0,?,0,0,now(),?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, multi.getParameter("wrtnm"));
+			pstmt.setString(2, multi.getParameter("ctitle"));
+			pstmt.setString(3, content);				
+			pstmt.setString(4, multi.getParameter("cpwd"));
+			pstmt.setString(5, filename);				
+			pstmt.executeUpdate();
 				
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			pool.freeConnection(conn, pstmt, rs);
+			pool.freeConnection(conn, pstmt);
 		}
 	}
 	
@@ -293,6 +292,147 @@ public class BoardMgr {
 			e.printStackTrace();
 		} 		
 	}
+	
+	// 댓글리스트 출력
+	public Vector<BoardReplyBean> getReplyList(int ctxtno) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		Vector<BoardReplyBean> vlist = new Vector<BoardReplyBean>();
+		
+		try {
+			conn = pool.getConnection();
+			
+				
+			sql = "select * from bbsNoticeRpy where ref = ? order by wrtdate";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, ctxtno);
+			rs = pstmt.executeQuery();
+
+					
+			while(rs.next()) {
+				
+				BoardReplyBean bean = new BoardReplyBean();
+				bean.setRpyno(rs.getInt("Rpyno"));
+				bean.setRprnm(rs.getString("rprnm"));
+				bean.setRpyctxt(rs.getString("rpyctxt"));
+				bean.setRpos(rs.getInt("rpos"));
+				bean.setRef(rs.getInt("ref"));
+				bean.setDepth(rs.getInt("depth"));
+				bean.setRpydate(rs.getString("rpydate"));
+				bean.setRpwd(rs.getString("rpwd"));
+				vlist.add(bean);
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt, rs);
+		}
+		return vlist;
+	}
+	
+	
+	// 댓글 리스트 리프레시
+	public BoardReplyBean getReply(int num) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		BoardReplyBean rbean = new BoardReplyBean();
+		
+		try {
+			conn = pool.getConnection();
+			sql = "select * from bbsnoticerpy where ref = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				rbean.setRpyno(rs.getInt("rpyno"));
+				rbean.setRprnm(rs.getString("rprnm"));
+				rbean.setRpyctxt(rs.getString("pryctxt"));
+				rbean.setRpos(rs.getInt("rpos"));
+				rbean.setRef(rs.getInt("ref"));
+				rbean.setDepth(rs.getInt("depth"));
+				rbean.setRpydate(rs.getString("prydate"));
+				rbean.setRpwd(rs.getString("rpwd"));
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt, rs);
+		}
+		return rbean;
+	}
+	
+	// 댓글 입력
+		public void insertReply(HttpServletRequest req) {
+			
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			String sql = null;
+			ResultSet rs = null;
+			MultipartRequest multi = null;
+						
+			try {
+				conn = pool.getConnection();
+				sql = "select max(rpyno) from bbsnoticerpy";
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				multi = new MultipartRequest(req, SAVEFOLDER, MAXSIZE, ENCTYPE, new DefaultFileRenamePolicy());
+						
+				String ReplyContent = multi.getParameter("rpyctxt");
+				
+				int ref = 1;
+				
+				if(rs.next()) 
+					ref = rs.getInt(1) + 1;
+				
+				
+				sql = "insert bbsnoticerpy(rprnm,rpyctxt,rpos,ref,depth,rpydate,rpwd) ";
+				sql += "values(?,?,?,?,?,now(),?)";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, multi.getParameter("rprnm"));
+				pstmt.setString(2, ReplyContent);				
+				pstmt.setInt(3, Integer.parseInt(multi.getParameter("rpos")));
+				pstmt.setInt(4, ref);
+				pstmt.setInt(5, Integer.parseInt(multi.getParameter("depth")));
+				pstmt.setString(6, multi.getParameter("rpwd"));
+				pstmt.executeUpdate();
+					
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				pool.freeConnection(conn, pstmt);
+			}
+		}
+		
+		// 댓글 삭제 
+		public void deleteReply(int num) {
+			
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = null;
+			
+			try {
+				
+				conn = pool.getConnection();				
+				sql = "delete from bbsnoticerpy where rpyno = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, num);
+				pstmt.executeUpdate();			
+				
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				pool.freeConnection(conn, pstmt, rs);
+			}		
+		}
 	
 	
 	
