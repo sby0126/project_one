@@ -66,19 +66,6 @@
   		z-index: 1;	
   	}
   	
-  	#light-box {
-  		width: 100vw;
-  		height: 100vh;
-  		background-color: black;
-  		z-index: 1;
-  		display: none;
-  	}
-  	
-  	#light-box .active {
-  		display: fixed;
-
-  	}
-  	
   	.member-information-form {
   	}
   	
@@ -351,12 +338,8 @@
     	<div class="panel panel-body" style="overflow:scroll">
     		<img src="">
     	</div>
-    </div>
-    
-    <div id="light-box">
-    </div>
+    </div>        
         
-    
     <script>
     
     	function closeMemberInformation() {
