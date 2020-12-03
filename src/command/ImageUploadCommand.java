@@ -14,20 +14,22 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.oreilly.servlet.multipart.FileRenamePolicy;
 
-import dao.BoardDAO;
+import action.ActionResult;
 
 public class ImageUploadCommand extends Command {
 	
-	private BoardDAO boardMgr;
 	private String filename;
 	private boolean isReady = false;
 	
-	public ImageUploadCommand(BoardDAO boardDAO, String filename)  {
-		super(boardDAO);
+	public ImageUploadCommand(String filename)  {
+		super();
 		this.filename = filename;
 	}
 	
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
+	public ActionResult execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
+		
+		result.start(request, response);
+		
 		int maxSize = 1024 * 1024 * 5;
 		int filesize = 0;
 		String encType = "EUC-KR";
@@ -56,10 +58,11 @@ public class ImageUploadCommand extends Command {
 		PrintWriter out = response.getWriter();
 		
 		JSONObject json = new JSONObject();
-		json.put("url", multi.getOriginalFileName("image")
-				);
+		json.put("url", multi.getOriginalFileName("image"));
 		
 		out.println(json.toJSONString());
+		
+		return null;
 		
 	}
 	

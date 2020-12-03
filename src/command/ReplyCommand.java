@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.BoardDAO;
+import action.ActionResult;
 
 public class ReplyCommand extends Command {
 		
@@ -23,11 +23,13 @@ public class ReplyCommand extends Command {
 	
 	private Parameters param = new Parameters();
 	
-	public ReplyCommand(BoardDAO boardDAO)  {
-		super(boardDAO);
+	public ReplyCommand()  {
+		super();
 	}
 	
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+	public ActionResult execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+		result.start(request, response);
+		
 		HttpSession session = request.getSession();
 		
 		param.authorID = (String)session.getAttribute("id");
@@ -56,20 +58,22 @@ public class ReplyCommand extends Command {
 			request.setAttribute("_status", "error");
 			request.setAttribute("errorMessage", "댓글을 작성하려면 우선 로그인을 하셔야 합니다.");
 			request.setAttribute("url", "/pages/board-default.jsp");
-			request.setAttribute("nextpage", "/pages/error.jsp");
-			return;
+			
+			result.forward("/pages/error.jsp");
+			return result;
 		}
 		
 		String redirect = response.encodeRedirectURL(request.getContextPath() 
 				+ "/pages/board-post.jsp?postNumber=" 
 				+ param.parentArticleID);
 		
-		response.sendRedirect(redirect);
-		return;
+		result.sendRedirect(redirect);
+		
+		return result;
 	}
 	
 	public void write(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		boardMgr.writeComment(
+		getDAO().writeComment(
 					param.parentArticleID, 
 					param.authorID, 
 					param.contents

@@ -6,18 +6,22 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import action.ActionResult;
 import dao.BoardDAO;
 
 public class Command {
-	protected BoardDAO boardMgr;
-	private boolean isReady = false;
 	
-	public Command(BoardDAO boardDAO)  {
-		this.boardMgr = boardDAO;
-		this.isReady = true;
+	ActionResult result;
+	
+	public Command()  {
+		result = new ActionResult();
+	}
+		
+	public BoardDAO getDAO() {
+		return BoardDAO.getInstance();
 	}
 	
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
-		
+	public ActionResult execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
+		return null;
 	}
 }

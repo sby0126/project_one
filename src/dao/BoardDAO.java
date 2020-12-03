@@ -1,10 +1,5 @@
 package dao;
 
-import core.*;
-import utils.DBConnectionMgr;
-import vo.BoardCommentVO;
-import vo.BoardVO;
-
 import java.io.IOException;
 import java.nio.file.DirectoryIteratorException;
 import java.nio.file.DirectoryStream;
@@ -24,6 +19,12 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import core.ImageFile;
+import core.SQLHelper;
+import utils.DBConnectionMgr;
+import vo.BoardCommentVO;
+import vo.BoardVO;
+
 /***
  * 테이블을 생성합니다.
  */
@@ -32,7 +33,18 @@ public class BoardDAO implements IDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
 	
+	public static BoardDAO instance = null;
+	
 	protected HashMap<String, String> qlList;
+	
+	
+	public static synchronized BoardDAO getInstance() {
+		if(instance == null) {
+			instance = new BoardDAO();
+		}
+		
+		return instance;
+	}
 	
 	/***
 	 * 
@@ -384,6 +396,34 @@ public class BoardDAO implements IDAO {
 			
 			if(pstmt.executeUpdate() > 0) {
 				ret = true;
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+		return ret;
+	}
+	
+	public boolean updatePost(String title, String content, int postNumber) {
+//		qlList.put("updatePost", "UPDATE tblqnaboard SET title = ?, content=?, regdate = NOW() WHERE articleID = ?");
+		
+		boolean ret = false;
+		
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement(getQL("updatePost"));
+			pstmt.setString(1, title);
+			pstmt.setString(2, content);
+			pstmt.setInt(3, postNumber);
+			
+			if(pstmt.executeUpdate() > 0) {
+				ret = true;
+				conn.commit();
 			}
 			
 		} catch(SQLException e) {

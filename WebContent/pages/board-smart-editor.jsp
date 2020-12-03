@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <%
@@ -78,6 +79,12 @@
                 </div>
                 <div class="editor"></div>
                 <div class="contents-tail">
+                	
+                	<input type="hidden" id="type" value="${type}">
+                	<input type="hidden" id="postNumber" value="${postNumber}">
+                	<input type="hidden" id="title" value="${title}">
+                	<input type="hidden" id="content" value="${content}">
+                	
                     <button class="button" id="upload-ok">작성</button>
                     <button class="button" id="upload-cancel">취소</button>
 

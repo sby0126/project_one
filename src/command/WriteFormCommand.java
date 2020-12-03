@@ -6,9 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URLDecoder;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,15 +15,16 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import dao.BoardDAO;
+import action.ActionResult;
 
 public class WriteFormCommand extends Command {
 
-	public WriteFormCommand(BoardDAO boardDAO)  {
-		super(boardDAO);
+	public WriteFormCommand()  {
+		super();
 	}
 	
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ActionResult execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		result.start(request, response);
 		
 		String nextPage = "pages/board-default.jsp";
 		
@@ -52,9 +51,8 @@ public class WriteFormCommand extends Command {
 				request.setAttribute("errorMessage", "데이터가 잘못되었습니다.");
 				request.setAttribute("url", "/pages/board-default.jsp");
 				nextPage = "/pages/error.jsp";
-				RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
-				dispatcher.forward(request, response);
-				return;		
+				result.forward(nextPage);
+				return result;
 			}
 			
 			// 버퍼로 문자열을 입력 받습니다.
@@ -73,8 +71,8 @@ public class WriteFormCommand extends Command {
 				request.setAttribute("errorMessage", "문자열 데이터가 없습니다.");
 				request.setAttribute("url", "/pages/board-default.jsp");
 				nextPage = "/pages/error.jsp";
-				RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
-				dispatcher.forward(request, response);
+				result.forward(nextPage);
+				return result;
 			}			
 							
 			JSONObject data = (JSONObject) parser.parse ( URLDecoder.decode(raw, "UTF-8") );
@@ -85,26 +83,27 @@ public class WriteFormCommand extends Command {
 			System.out.println("현재 ID : " + authorID);
 			
 			if(authorID == null || authorID.equals("")) {
-				request.setAttribute("errorMessage", "로그 인되어있지 않습니다.");
+				request.setAttribute("errorMessage", "로그인되어있지 않습니다.");
 				request.setAttribute("url", "/pages/board-default.jsp");
 				nextPage = "/pages/error.jsp";
-				RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
-				dispatcher.forward(request, response);
-				return;
+				result.forward(nextPage);
+				return result;
 			}
 			
 			String title = String.valueOf( data.get("title") );
 			String contents = String.valueOf( data.get("contents") );
 			
-			boolean ret = boardMgr.writePost(authorID, "Normal", title, contents, null);
+			boolean ret = getDAO().writePost(authorID, "Normal", title, contents, null);
 			
-			response.sendRedirect("/pages/board-default.jsp");
-			return;
+			result.sendRedirect("/pages/board-default.jsp");
+			return result;
 			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
+		
+		return result;
 		
 	}
 }

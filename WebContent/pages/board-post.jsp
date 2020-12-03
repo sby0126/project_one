@@ -12,6 +12,7 @@
 		postNumber = Integer.parseInt(request.getParameter("postNumber"));
 		out.println("<script> console.log(" + postNumber + ") </script>");
 	}
+	
 %>
 <!DOCTYPE html>
 <html lang="ko">

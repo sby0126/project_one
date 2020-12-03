@@ -57,6 +57,15 @@
         theme: 'snow',
     });
 
+	const type = $("input#title").val()
+	const title = $("input#title").val();
+	const content = $("input#content").val();
+	
+	if(type && type != "" && type == "modify") {
+		$("#input-item-title").val("title");
+		quill.root.innerHTML = content;	
+	}
+	
     /**
      * 이미지를 업로드 합니다.
      */
@@ -67,8 +76,6 @@
             const formData = new FormData();
             const file = $(this)[0].files[0];
             formData.append('image', file);
-
-            alert("이벤트 발동");
 
             $.ajax({
                 type: "POST",
@@ -94,6 +101,7 @@
     quill.getModule("toolbar").addHandler('image', () => {
         selectImage();
     });
+
 
     // 업로드 버튼 클릭 시 
     document.querySelector("#upload-ok").onclick = function () {

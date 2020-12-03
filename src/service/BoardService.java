@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,10 +14,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
 
+import action.ActionResult;
 import command.DeleteCommand;
 import command.ImageUploadCommand;
+import command.ModifyPostFormCommand;
 import command.PostViewCommand;
 import command.ReplyCommand;
+import command.ViewCommand;
 import command.WriteFormCommand;
 import dao.BoardDAO;
 
@@ -38,18 +41,20 @@ public class BoardService extends HttpServlet {
     
     public BoardService() {
         super();
-        boardMgr = new BoardDAO();
+        boardMgr = BoardDAO.getInstance();
     }
     
     @Override
     public void init(ServletConfig config) throws ServletException {
-    	writeCommand = new WriteFormCommand(boardMgr);
-    	postViewCommand = new PostViewCommand(boardMgr);
-    	replyCommand = new ReplyCommand(boardMgr);
+    	writeCommand = new WriteFormCommand();
+    	postViewCommand = new PostViewCommand();
+    	replyCommand = new ReplyCommand();
     	
-    	initWithDefaultUploadFolder(config.getServletContext().getRealPath("uploads"));
+    	ServletContext context = config.getServletContext();
+    	
+    	initWithDefaultUploadFolder( context.getRealPath("uploads") );
     }
-    
+            
     public void initWithDefaultUploadFolder(String uploadsFolderPath) {
     	try {
     		File uploadsFolder = new File(uploadsFolderPath);
@@ -77,14 +82,18 @@ public class BoardService extends HttpServlet {
 		
 		String currentPage = request.getPathInfo();
 		String nextPage = "pages/board-default.jsp";
+		String defaultPage = "pages/board-default.jsp";
+		
+		ActionResult result = new ActionResult();
+		result.setPath(nextPage);
+		result.start(request, response);
 		
 		if(!boardMgr.isExistsTable()) {
 			request.setAttribute("errorMessage", "테이블이 존재하지 않습니다. 먼저 테이블을 생성해주세요.");
 			request.setAttribute("url", "/pages/board-default.jsp");
 			nextPage = "/pages/error.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
-			dispatcher.forward(request, response);
-			
+			result.setPath(nextPage);			
+			result.render(defaultPage);
 			return;
 		}
 		
@@ -99,27 +108,36 @@ public class BoardService extends HttpServlet {
 				
 				PrintWriter out = response.getWriter();
 				out.println(json.toJSONString());
+				
+				return;
 
-			} else if(currentPage.equals("/postView.do")) { // 게시물 보기 
-				postViewCommand.execute(request, response);
+			} else if(currentPage.equals("/postView.do")) { // 특정 게시물 JSON 요청
+				result = postViewCommand.execute(request, response);
+			} else if(currentPage.equals("/view.do")) {
+				ViewCommand command = new ViewCommand();
+				command.execute(request, response);
 			} else if(currentPage.equals("/writeForm.do")) { // 게시물 작성
-				writeCommand.execute(request, response);
+				result = writeCommand.execute(request, response);
 			} else if(currentPage.equals("/deletePost.do")) { // 게시물 삭제
-				DeleteCommand command = new DeleteCommand(boardMgr);
-				command.execute(request, response);
+				DeleteCommand command = new DeleteCommand();
+				result = command.execute(request, response);
 			} else if(currentPage.equals("/postReply.do")) { // 댓글 작성
-				replyCommand.execute(request, response);
+				result = replyCommand.execute(request, response);
 			} else if(currentPage.equals("/imageUpload.do")) { // 이미지 업로드
-				ImageUploadCommand command = new ImageUploadCommand(boardMgr, saveFolderName);
-				command.execute(request, response);
-			} else if(currentPage.equals("/recommandPost.do")) { // 추천
-				// 추천은 한 번만 가능해야 합니다. 즉, 추천인 목록이 필요합니다.
+				ImageUploadCommand command = new ImageUploadCommand(saveFolderName);
+				result = command.execute(request, response);
+			} else if(currentPage.equals("/modifyPost.do")) { // 글 수정 폼 채우기
+				ModifyPostFormCommand command = new ModifyPostFormCommand(); 
+				result = command.execute(request, response);
 			}
 			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		
+		if(result != null) {
+			result.render(defaultPage);
+		}
 	}
 
 }
