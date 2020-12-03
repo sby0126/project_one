@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class BoardPostServlet
  */
-@WebServlet("/boardPost")
+@WebServlet("/boardPost/*")
 public class BoardPostServlet extends HttpServlet {
 	
 	/**
