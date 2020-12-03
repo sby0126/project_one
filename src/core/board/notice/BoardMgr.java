@@ -122,11 +122,13 @@ public class BoardMgr {
 		String sql = null;
 		MultipartRequest multi = null;
 		String filename = null;
+		ResultSet rs = null;
 		
 		try {
 			conn = pool.getConnection();
-			sql = "select max(ctxtno) from bbsnotice";
+			sql = "select max(ctxtno) from bbsNotice";
 			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
 			
 			File file = new File(SAVEFOLDER);
 				
@@ -134,7 +136,7 @@ public class BoardMgr {
 				file.mkdirs();
 				
 			multi = new MultipartRequest(req, SAVEFOLDER, MAXSIZE, ENCTYPE, new DefaultFileRenamePolicy());
-				
+
 			if(multi.getFilesystemName("filename") != null) {
 				filename = multi.getFilesystemName("filename");
 			}
@@ -150,15 +152,15 @@ public class BoardMgr {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, multi.getParameter("wrtnm"));
 			pstmt.setString(2, multi.getParameter("ctitle"));
-			pstmt.setString(3, content);				
+			pstmt.setString(3, content);
 			pstmt.setString(4, multi.getParameter("cpwd"));
-			pstmt.setString(5, filename);				
+			pstmt.setString(5, filename);
 			pstmt.executeUpdate();
-				
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			pool.freeConnection(conn, pstmt);
+			pool.freeConnection(conn, pstmt, rs);
 		}
 	}
 	
@@ -294,7 +296,7 @@ public class BoardMgr {
 	}
 	
 	// 댓글리스트 출력
-	public Vector<BoardReplyBean> getReplyList(int ctxtno) {
+	public Vector<BoardReplyBean> getReplyList(int num) {
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -308,22 +310,22 @@ public class BoardMgr {
 				
 			sql = "select * from bbsNoticeRpy where ref = ? order by wrtdate";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, ctxtno);
+			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
 
 					
 			while(rs.next()) {
 				
-				BoardReplyBean bean = new BoardReplyBean();
-				bean.setRpyno(rs.getInt("Rpyno"));
-				bean.setRprnm(rs.getString("rprnm"));
-				bean.setRpyctxt(rs.getString("rpyctxt"));
-				bean.setRpos(rs.getInt("rpos"));
-				bean.setRef(rs.getInt("ref"));
-				bean.setDepth(rs.getInt("depth"));
-				bean.setRpydate(rs.getString("rpydate"));
-				bean.setRpwd(rs.getString("rpwd"));
-				vlist.add(bean);
+				BoardReplyBean rbean = new BoardReplyBean();
+				rbean.setRpyno(rs.getInt("Rpyno"));
+				rbean.setRprnm(rs.getString("rprnm"));
+				rbean.setRpyctxt(rs.getString("rpyctxt"));
+				rbean.setRpos(rs.getInt("rpos"));
+				rbean.setRef(rs.getInt("ref"));
+				rbean.setDepth(rs.getInt("depth"));
+				rbean.setRpydate(rs.getString("rpydate"));
+				rbean.setRpwd(rs.getString("rpwd"));
+				vlist.add(rbean);
 			}
 			
 		} catch(Exception e) {
@@ -343,6 +345,7 @@ public class BoardMgr {
 		ResultSet rs = null;
 		String sql = null;
 		BoardReplyBean rbean = new BoardReplyBean();
+		
 		
 		try {
 			conn = pool.getConnection();
@@ -370,38 +373,33 @@ public class BoardMgr {
 	}
 	
 	// 댓글 입력
-		public void insertReply(HttpServletRequest req) {
+		public void writeReply(int num, HttpServletRequest request) {
 			
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			String sql = null;
 			ResultSet rs = null;
-			MultipartRequest multi = null;
+			
 						
 			try {
 				conn = pool.getConnection();
 				sql = "select max(rpyno) from bbsnoticerpy";
 				pstmt = conn.prepareStatement(sql);
 				rs = pstmt.executeQuery();
-				multi = new MultipartRequest(req, SAVEFOLDER, MAXSIZE, ENCTYPE, new DefaultFileRenamePolicy());
+				
 						
-				String ReplyContent = multi.getParameter("rpyctxt");
-				
-				int ref = 1;
-				
-				if(rs.next()) 
-					ref = rs.getInt(1) + 1;
-				
+				String ReplyContent = request.getParameter("rpyctxt");
+								
 				
 				sql = "insert bbsnoticerpy(rprnm,rpyctxt,rpos,ref,depth,rpydate,rpwd) ";
 				sql += "values(?,?,?,?,?,now(),?)";
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, multi.getParameter("rprnm"));
+				pstmt.setString(1, request.getParameter("rprnm"));
 				pstmt.setString(2, ReplyContent);				
-				pstmt.setInt(3, Integer.parseInt(multi.getParameter("rpos")));
-				pstmt.setInt(4, ref);
-				pstmt.setInt(5, Integer.parseInt(multi.getParameter("depth")));
-				pstmt.setString(6, multi.getParameter("rpwd"));
+				pstmt.setInt(3, Integer.parseInt(request.getParameter("rpos")));
+				pstmt.setInt(4, Integer.parseInt(request.getParameter("num")));
+				pstmt.setInt(5, Integer.parseInt(request.getParameter("depth")));
+				pstmt.setString(6, request.getParameter("rpwd"));
 				pstmt.executeUpdate();
 					
 			} catch(Exception e) {

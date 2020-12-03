@@ -22,7 +22,8 @@
 	session.setAttribute("bean", bean);
 	
 	Vector<BoardReplyBean> vlist = null;
-	BoardReplyBean rbean = bMgr.getReply(num); 
+	vlist = bMgr.getReplyList(num);
+	BoardReplyBean rbean = bMgr.getReply(num);
 %>
 <!DOCTYPE html>
 <html>
@@ -40,6 +41,24 @@
 		document.downFrm.submit();
 	}
 </script>
+<style>
+	#btnZone button {
+		width : 5%;
+	}
+	
+	#rpy{
+		box-sizing : border-box;
+		width : 500px;
+		height : 60px;
+	}
+	
+	#rpyBtn{
+		margin-left : 15px;
+		width : 60px;
+		height : 60px;
+	}
+	
+</style>
 </head>
 <body bgcolor="#FFFFCC">
 	<br/><br/>
@@ -55,14 +74,16 @@
 						<td bgcolor="#FFFFE8"><%=name%></td>
 						<td align="center" bgcolor="#DDDDDD" width="10%">등록날짜</td>
 						<td bgcolor="#FFFFE8"><%=date%></td>
+						<td align="center" bgcolor="#DDDDDD" width="10%">조회수</td>
+						<td bgcolor="#FFFFE8"><%=count%></td>
 					</tr>
 					<tr>
 						<td align="center" bgcolor="#DDDDDD">제 목</td>
-						<td bgcolor="#FFFFE8" colspan="3"><%=title%></td>
+						<td bgcolor="#FFFFE8" colspan="5"><%=title%></td>
 					</tr>
 					<tr>
 						<td align="center" bgcolor="#DDDDDD">첨부파일</td>
-						<td bgcolor="#FFFFE8" colspan="3">
+						<td bgcolor="#FFFFE8" colspan="5">
 						<% if(filename != null && !filename.equals("")) { %>
 							<a href="javascript:down('<%=filename%>')"></a>&nbsp;&nbsp;
 							<% } else { %> 등록된 파일이 없습니다. <% } %>
@@ -72,50 +93,43 @@
 						<td colspan="4"><br/><pre><%=ctxt%></pre><br/></td>
 					</tr>
 					<tr>
-						<td colspan="4" align="right">
-							 / 조회수 : <%=count%>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="4">
+						<td colspan="8">
 							<table align="center" border="0" cellspacing="0" cellpadding="3">
 								<tr>
-									<td align="center" colspan="5" rowspan="5">
+									<td>
+										<input type="text" name="rpyctxt" id="rpy"></td>
+									<td><button type="submit" value="작성" id="rpyBtn" onclick="writeRpy()">작성</button></td>
+								</tr>	
 									<%
 										vlist = bMgr.getReplyList(num);
 										int listSize = vlist.size();			// 화면에 출력될 게시물 수
 										
 										
 										if(!vlist.isEmpty()) {
-											
-										} else {
+											for (int i = 0 ; i != listSize; i++) {
+												if(i == listSize) break;	
+												rbean = vlist.get(i);
+												int rnum = rbean.getRpyno();
+												String rnm = rbean.getRprnm();
+												String rtxt = rbean.getRpyctxt();
+												int ref = rbean.getRef();
+												int depth = rbean.getDepth();
+												String rdate = rbean.getRpydate();
+																					  
 									%>
-						
-								<%
-									for (int i = 0 ; i != listSize; i++) {
-										if(i == listSize) break;	
-										BoardReplyBean rbean = vlist.get(i);
-										int num = bean.getCtxtno();
-										String name = bean.getWrtnm();
-										String title = bean.getCtitle();
-										int reply = bean.getReply();
-										String date = bean.getWrtdate();
-										int count = bean.getViewcnt();
-										
-								%>
-								<tr>
-									<td align="center"><%=totalRecord - ((nowPage - 1) * numPerPage) - i%></td>
-									<td>
-										<a href="javascript:read('<%=num%>')"><%=title%></a>
+								<tr>									
+									<td align="center"><%=rnm%></td>
+									<td align="center"><%=rtxt%></td>
+									<td align="center"><%=rdate%></td>
+									<td id="btnZone">
+										<button type="button" OnClick="WriteRpy()">댓글</button>
+										<button type="button">수정</button>
+										<button type="button" OnClick="DeleteRpy()">삭제</button>
 									</td>
-									<td align="center"><%=name%></td>
-									<td align="center"><%=reply%></td>
-									<td align="center"><%=date%></td>
-									<td align="center"><%=count%></td>
 								</tr>
-							<% } %>			<!-- 115 line for 종료 -->
+							<% 			}
+								} %>
 						</table>
-						<%	} %>
 					</tr> 
 				</table>
 			</td>
@@ -125,7 +139,7 @@
 				<hr/>
 				 [ <a href="javascript:list()">리스트</a> |
 				  <a href="update.jsp?nowPage=<%=nowPage%>&num=<%=num%>">수 정</a> |
-				  <a href="delete.jsp?nowPage=<%=nowPage%>&num=<%=num%>">삭 제</a>]<br/>
+				  <a href="delete.jsp?nowPage=<%=nowPage%>&num=<%=num%>">삭 제</a> ]<br/>
 			</td>
 		</tr>
 	</table>
