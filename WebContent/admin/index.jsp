@@ -7,6 +7,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" session="true" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <%@ page import="java.util.List"%>
 <%@ page import="core.*"%>
 <%@ page import="controller.*"%>
@@ -99,10 +100,16 @@
                 <div id="main" class="content jumbotron media">
                     <p>관리자 페이지에 오신 것을 환영합니다.</p>
                     <p><span class="col-md-2"><%=id %></span>님 환영합니다. </p>
+                    <p>서버 플랫폼 : <%=System.getProperty("os.name") %></p>
                 </div>
                 <div id="manage-whole-member" class="content jumbotron">
+                   	<%
+                   		CustomerDAO customerDAO = new CustomerDAO();
+                   		List<CustomerVO> customerList = customerDAO.listMembers();
+                   	%>                
+                   	<c:set var="customerList" value="<%= customerList %>" />                   	
                 	<a name="manage-whole-member"></a>
-                    <p>전체 멤버 목록입니다.</p>
+                    <p>전체 멤버 목록입니다 (총 멤버수 : ${ customerList.size() }명)</p>
                     <table class="table">
                     	<thead>
                     		<th>회원 번호</th>
@@ -114,11 +121,7 @@
                     		<th>우편번호</th>
                     		<th>회원 정보</th>
                     	</thead>
-                   	<%
-                   		CustomerDAO customerDAO = new CustomerDAO();
-                   		List<CustomerVO> customerList = customerDAO.listMembers();
-                   	%>
-                   	<c:set var="customerList" value="<%= customerList %>" />
+
                    	<c:forEach var="vo" items="${customerList}">
                    		<tr>
                    			<td><span>${vo.getNo()}</span></td>
@@ -185,7 +188,7 @@
 	            		BoardDAO boardMgr = new BoardDAO();
 	            		JSONArray json = boardMgr.getListAll();                    
                     %>
-                    	<caption class="well">총 글 갯수 : <%= json.size() %></caption>
+                    	<caption class="well">총 글 갯수 : <%= json.size() %> / 페이지 수 : <%= (int)(Math.ceil(json.size() / 10)) %></caption>
                     	<thead>
                     		<th>글 번호</th>
                     		<th>분류</th>
@@ -216,6 +219,19 @@
                     		}
                     	%>
                     	<tfoot>
+                    	<%
+                    		int rowSize = json.size();
+                    		int pageCounts = (int)(Math.ceil(rowSize / 10)); 
+                    	%>
+<!-- 							<nav aria-label="Page navigation example"> -->
+<!-- 							  <ul class="pagination"> -->
+<!-- 							    <li class="page-item"><a class="page-link" href="#">Previous</a></li> -->
+<!-- 							    <li class="page-item"><a class="page-link" href="#">1</a></li> -->
+<!-- 							    <li class="page-item"><a class="page-link" href="#">2</a></li> -->
+<!-- 							    <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+<!-- 							    <li class="page-item"><a class="page-link" href="#">Next</a></li> -->
+<!-- 							  </ul> -->
+<!-- 							</nav>                    	 -->
                     		<div class="panel panel-default">
                     			<form class="form-inline">                    		
 	                    			<div class=" form-group">
@@ -384,7 +400,7 @@
     	});
     	
     	$( ".forced-secession" ).on("click", function() {
-    		alert("강제로 탈퇴시킬 회원 번호는 " + getPostNumber.call(this));
+    		alert("강제로 탈퇴시킬 회원 번호는 " + $(this).data("number"));
     	});
     	
     	$(window).on("click", function(ev) {

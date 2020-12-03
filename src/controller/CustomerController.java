@@ -76,6 +76,8 @@ public class CustomerController extends HttpServlet {
 				request.setAttribute("member", member);
 				
 				nextPage = "/pages/modifyMemberForm.jsp";				
+			} else {
+				nextPage = "/pages/join.jsp";
 			}
 			
 		} else if(act.equals("/modifyMember.do")) {

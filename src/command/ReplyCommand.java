@@ -81,7 +81,18 @@ public class ReplyCommand extends Command {
 	}	
 	
 	public void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+//		HttpSession session = request.getSession();
+//		String id = (String)session.getAttribute("id");
+//		
+//		if(id == null) return;
+//		if(!id.equals(param.authorID)) {
+//			
+//		}
+//
+//		boardMgr.deleteComment(
+//				param.parentArticleID,
+//				param.commentID);
+//		
 	}
 	
 	public void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

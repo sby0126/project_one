@@ -34,6 +34,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	crossorigin="anonymous"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>	
 <link rel="stylesheet" href="../css/style.css">
 <style>
 
@@ -86,7 +87,7 @@ img, a {
 					</div>
 
 					<form class="form-horizontal col-sm-8"
-						action="/members/modifyMember.do">
+						action="/members/modifyMember.do" onclick="return false;">
 						<input type="hidden" name="id" value="${member.getId()}">
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="email">이메일:</label>
@@ -95,7 +96,7 @@ img, a {
 									placeholder="Enter email" value="${ member.getEmail() }">
 							</div>
 							<div class="col-sm-2">
-								<button class="btn btn-default">이메일 중복 확인</button>
+								<button id="email-check-btn" class="btn btn-default" data-usable="usable" onclick="emailCheck()">이메일 중복 확인</button>
 							</div>
 						</div>
 						<div class="form-group">
@@ -136,7 +137,7 @@ img, a {
 									value="${member.getAddress() }">									
 							</div>
 							<div class="col-sm-2">
-								<button class="btn btn-default">주소 검색 하기</button>
+								<button class="btn btn-default" onclick="searchAddress(this)">주소 검색 하기</button>
 							</div>
 						</div>
 
@@ -150,9 +151,13 @@ img, a {
 						</div>
 
 						<div class="form-group">
-							<div class="col-sm-offset-2 col-sm-10">
-								<input type="submit" class="btn btn-default" value="수정 완료">
+							<div class="col-sm-offset-2 col-sm-2">
+								<button class="btn btn-danger">회원 탈퇴</button>
 							</div>
+							<div class="col-sm-offset-1 col-sm-2">
+								<input type="submit" class="btn btn-default" value="수정 완료" onsubmit="submit()">
+							</div>
+						
 						</div>
 
 					</form>
@@ -164,5 +169,6 @@ img, a {
 	<div id="light-box-container"></div>
 	<!-- index.js는 메인 용이므로 알맞은 스크립트를 사용해야 합니다-->
 	<script type="module" src="../js/MorePage.js"></script>
+	<script src="../js/modifyMemberForm.js"></script>
 </body>
 </html>

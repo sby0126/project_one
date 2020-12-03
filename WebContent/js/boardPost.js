@@ -250,7 +250,7 @@ const SDK = (() => {
             return publishedTimeText;
         }
 
-        registerComment(authorId, texts, timer) {
+        registerComment(authorId, texts, timer, depth = 0) {
             const timeText = this.getTimeText(new Date(timer));
             let commentRaw = "";
             /**
@@ -284,7 +284,7 @@ const SDK = (() => {
                     </div>      
                 </div>
                 <img src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7' onload='SDK.updateCommentsCount();this.parentNode.removeChild(this);'>       
-                `)
+                `).css("marginLeft", `${2 * depth}em`)
             );
         }
 
@@ -361,7 +361,7 @@ class Editor extends Component {
             $(".badge").text(data.comments.length);
 
             data.comments.forEach(comment => {
-                SDK.registerComment(comment.author, comment.contents, comment.create_at);
+                SDK.registerComment(comment.author, comment.contents, comment.create_at, comment.depth);
             })
 
             for(let  i in FUNC) {

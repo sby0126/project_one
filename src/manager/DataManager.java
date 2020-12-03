@@ -41,7 +41,7 @@ public class DataManager {
 	
 	public void makeConfigFile() {
 		String root = getApplicationPath();
-		Path outputPath = Paths.get(root, "output.json");
+		Path outputPath = Paths.get(root, "settings.json");
 		
 		System.out.println(outputPath);
 		

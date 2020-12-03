@@ -32,18 +32,21 @@ public class AdminRouter extends HttpServlet {
 		String contextPath = request.getContextPath();
 		String command = reqeustURI.substring(contextPath.length());
 		String path = request.getPathInfo();
-		
-		System.out.println(command);
-		
+
 		if (path.equals("/openFileBrowser.do")) {
+			String platform = System.getProperty("os.name");		
 			String filename = request.getParameter("filename");
-	    	try {
-				Runtime.getRuntime().exec("explorer.exe /select," + filename);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			
+			// 실행 환경이 윈도우즈 인가?
+			if(platform.indexOf("Windows") >= 0) {
+		    	try {
+					Runtime.getRuntime().exec("explorer.exe /select," + filename);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}				
 			}
-	    	
+			
 	    	response.sendRedirect("/admin");
 	    	
 		} else if(path.equals("/fileDelete.do")) {
