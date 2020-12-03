@@ -91,7 +91,7 @@ img, a {
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="email">이메일:</label>
 							<div class="col-sm-6">
-								<input type="email" class="form-control" id="email"
+								<input type="email" class="form-control" id="email" autocomplete="email"
 									placeholder="Enter email" value="${ member.getEmail() }">
 							</div>
 							<div class="col-sm-2">
@@ -102,14 +102,14 @@ img, a {
 							<label class="control-label col-sm-2" for="pwd">비밀번호:</label>
 							<div class="col-sm-6">
 								<input type="password" name="pw" class="form-control" id="pw"
-									placeholder="비밀 번호 입력">
+									placeholder="비밀 번호 입력" autocomplete="current-password">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="pwd">비밀번호 확인:</label>
 							<div class="col-sm-6">
 								<input type="password" name="pw" class="form-control" id="pw"
-									placeholder="비밀 번호 다시 입력">
+									placeholder="비밀 번호 다시 입력" autocomplete="new-password">
 							</div>
 						</div>
 						<div class="form-group">
@@ -122,7 +122,7 @@ img, a {
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="tel">휴대폰 번호</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" id="tel" name="tel"
+								<input type="text" class="form-control" id="tel" name="tel" autocomplete="tel"
 									placeholder="휴대폰 번호 입력" value="${ member.getTel() }">
 							</div>
 						</div>
@@ -130,11 +130,10 @@ img, a {
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="email">우편 번호:</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control col-sm-2" id="zipcode"
+								<input type="text" class="form-control col-sm-2" id="zipcode" autocomplete="postal-code"
 									value="${ member.getZipCode() }">
-								<input type="text" class="form-control" id="address1"
-									value="${ member.getAddress() }"> <input type="text"
-									class="form-control" id="address2">									
+								<input type="text" class="form-control" id="address2" name="address" autocomplete="street-address"
+									value="${member.getAddress() }">									
 							</div>
 							<div class="col-sm-2">
 								<button class="btn btn-default">주소 검색 하기</button>
