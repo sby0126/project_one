@@ -351,7 +351,16 @@ class Editor extends Component {
             $(".detail-area-author-id span").text(data.author);
 
             // 내용
-            $(".board-article-contents").html(data.contents);
+            $(".board-article-contents").html(
+                
+                    (function() {
+                        data.contents = data.contents.replace(/&lt;/ig, "<");
+                        data.contents = data.contents.replace(/&gt;/ig, ">");
+                        data.contents = data.contents.replace(/&amp;/ig, ";");
+                        return data.contents;
+                    })()
+
+                );
 
             $("#regdate").text(data.create_at);
             $("#viewcount").text(`조회수 ${data.view}`);

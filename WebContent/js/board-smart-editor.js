@@ -121,7 +121,7 @@
         const result = {
             title: $("#input-item-title").val(),
             src: "",
-            contents: quill.root.innerHTML
+            contents: $("<div>").text(quill.root.innerHTML).html()
         };
 
         let prevJson = JSON.stringify(result);
