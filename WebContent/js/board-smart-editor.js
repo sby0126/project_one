@@ -70,7 +70,17 @@
 	       	
 	if(type && type != "" && type == "modify") {
         setTitle($("#title").val());
-        setContent($("#contents").val());    
+
+        let contents = $("#contents").val();
+
+        (function() {
+            contents = contents.replace(/&lt;/ig, "<");
+            contents = contents.replace(/&gt;/ig, ">");
+            contents = contents.replace(/&amp;/ig, ";");
+            return contents;
+        })()
+
+        setContent(contents);    
 	}
 	
     /**
