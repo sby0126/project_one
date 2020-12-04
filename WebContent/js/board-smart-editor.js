@@ -56,14 +56,21 @@
         placeholder: '내용을 작성하세요.',
         theme: 'snow',
     });
-
-	const type = $("input#title").val()
-	const title = $("input#title").val();
-	const content = $("input#content").val();
+    
+	function setTitle(text) {
+		$("#input-item-title").val(text);	
+		$(".contents-item-title span").css("visibility", "hidden");
+	}
 	
+	function setContent(text) {
+		quill.root.innerHTML = text;
+    }
+    
+    const type = $("#type").val();
+	       	
 	if(type && type != "" && type == "modify") {
-		$("#input-item-title").val("title");
-		quill.root.innerHTML = content;	
+        setTitle($("#title").val());
+        setContent($("#contents").val());    
 	}
 	
     /**

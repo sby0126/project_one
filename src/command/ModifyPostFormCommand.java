@@ -34,7 +34,7 @@ public class ModifyPostFormCommand extends Command {
 		request.setAttribute("title", title);
 		request.setAttribute("contents", content);
 		
-		result.forward("/pages/board-native-editor.jsp");
+		result.forward("/pages/board-smart-editor.jsp");
 	
 		return result;
 	}
