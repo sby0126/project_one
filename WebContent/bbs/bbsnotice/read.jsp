@@ -122,9 +122,9 @@
 									<td align="center"><%=rtxt%></td>
 									<td align="center"><%=rdate%></td>
 									<td id="btnZone">
-										<button type="button" OnClick="WriteRpy()">댓글</button>
+										<button type="button" OnClick="writeReply(num, request)">댓글</button>
 										<button type="button">수정</button>
-										<button type="button" OnClick="DeleteRpy()">삭제</button>
+										<button type="button" OnClick="deleteReply(ref, rnum)">삭제</button>
 									</td>
 								</tr>
 							<% 			}

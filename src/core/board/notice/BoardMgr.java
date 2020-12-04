@@ -386,10 +386,8 @@ public class BoardMgr {
 				sql = "select max(rpyno) from bbsnoticerpy";
 				pstmt = conn.prepareStatement(sql);
 				rs = pstmt.executeQuery();
-				
-						
+										
 				String ReplyContent = request.getParameter("rpyctxt");
-								
 				
 				sql = "insert bbsnoticerpy(rprnm,rpyctxt,rpos,ref,depth,rpydate,rpwd) ";
 				sql += "values(?,?,?,?,?,now(),?)";
@@ -410,7 +408,7 @@ public class BoardMgr {
 		}
 		
 		// 댓글 삭제 
-		public void deleteReply(int num) {
+		public void deleteReply(int ref,int num) {
 			
 			Connection conn = null;
 			PreparedStatement pstmt = null;
@@ -420,9 +418,10 @@ public class BoardMgr {
 			try {
 				
 				conn = pool.getConnection();				
-				sql = "delete from bbsnoticerpy where rpyno = ?";
+				sql = "delete from bbsnoticerpy where ref = ? and rpyno = ?";
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, num);
+				pstmt.setInt(1, ref);
+				pstmt.setInt(2, num);
 				pstmt.executeUpdate();			
 				
 			} catch(Exception e) {
