@@ -19,16 +19,16 @@
                 <!-- 헤더 왼쪽 : 로고 -->
                 <div class="header-left">
                     <div class="" id="logo">
-                        <a href="/"><img src="https://dummyimage.com/64x64/000/fff" alt=""></a>
+                        <a href="${pageContext.request.contextPath}"><img src="https://dummyimage.com/64x64/000/fff" alt=""></a>
                     </div>
-                    <a href="#">WOMEN</a>
-                    <a href="#">MEN</a>
+                    <a href="${pageContext.request.contextPath}">WOMEN</a>
+                    <a href="${pageContext.request.contextPath}">MEN</a>
                 </div>
                 <!-- 헤더 중앙 : 메뉴 -->
                 <div class="header-center">
                     <a href="/">SHOP</a>
-                    <a href="item.jsp" target="_self">ITEM</a>
-                    <a href="sale.jsp">SALE</a>
+                    <a href="${pageContext.request.contextPath}/item.jsp" target="_self">ITEM</a>
+                    <a href="${pageContext.request.contextPath}/sale.jsp">SALE</a>
                     <a href="#">MORE</a>
                 </div>
                 <!-- 헤더 오른쪽 : 로그인 / 검색 -->
@@ -56,37 +56,37 @@
                 <div class="header-popup-container">
                     <ul class="header-menu-list">
                         <li class="menu">
-                            <a href="#" class="menu-link">
+                            <a href="${pageContext.request.contextPath}" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">최근 본 샵 <em>0</em></p>
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="#" class="menu-link">
+                            <a href="${pageContext.request.contextPath}" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">최근 본 상품 <em>0</em></p>
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="#" class="menu-link">
+                            <a href="${pageContext.request.contextPath}" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">MY SHOP</p>
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="#" class="menu-link">
+                            <a href="${pageContext.request.contextPath}" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">관심 상품</p>
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="pages/board-default.jsp" class="menu-link">
+                            <a href="${pageContext.request.contextPath}/pages/board-default.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">1:1 문의</p>
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="pages/map.jsp" class="menu-link">
+                            <a href="${pageContext.request.contextPath}/pages/map.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">소개 및 약관</p>
                             </a>

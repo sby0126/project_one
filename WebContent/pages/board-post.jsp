@@ -107,7 +107,7 @@
                     </div>
                     <div class="prev-list-panel btn-group">
                         <a href="./board-default.jsp" id="list-button" class="btn btn-default">목록</a>
-                        <a href="./board-smart-editor.jsp" id="modify-button" class="btn btn-default">수정</a>
+                        <a href="/board/qna/modifyPost.do?postNumber=<%=postNumber%>" id="modify-button" class="btn btn-default">수정</a>
                         <a href="#" id="delete-button" class="btn btn-default">삭제</a>
                     </div>
                 </div>  

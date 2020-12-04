@@ -16,23 +16,25 @@ public class ModifyPostFormCommand extends Command {
 		super();
 	}
 	
-	@Override
-	public ActionResult execute(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public ActionResult execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		result.start(request, response);
 		
 		int postNumber = Integer.parseInt(request.getParameter("postNumber"));
 		JSONArray raw = getDAO().readPost(postNumber);
 		JSONObject myJson = (JSONObject)raw.get(0);
 		
 		String title = (String)myJson.get("title");
-		String content = (String)myJson.get("content");
+		String content = (String)myJson.get("contents");
+		
+		System.out.println("제목은?         : " + title);
 		
 		request.setAttribute("type", "modify");
 		request.setAttribute("postNumber", postNumber);
 		request.setAttribute("title", title);
-		request.setAttribute("content", content);
+		request.setAttribute("contents", content);
 		
-		result.forward(request.getContextPath() + "/pages/board-smart-editor.jsp");
+		result.forward("/pages/board-native-editor.jsp");
 	
 		return result;
 	}

@@ -4,6 +4,10 @@
 <html lang="ko">
 <%
 	String id = (String)session.getAttribute("id");
+	String type = (String)request.getAttribute("type");
+	String title = (String)request.getAttribute("title");
+	String content = (String)request.getAttribute("content");
+
 %>
 <head>
     <meta charset="UTF-8">
@@ -80,10 +84,10 @@
                 <div class="editor"></div>
                 <div class="contents-tail">
                 	
-                	<input type="hidden" id="type" value="${type}">
-                	<input type="hidden" id="postNumber" value="${postNumber}">
-                	<input type="hidden" id="title" value="${title}">
-                	<input type="hidden" id="content" value="${content}">
+                	<input type="hidden" id="type" value="<%=type%>">
+                	<input type="hidden" id="postNumber" value="<%= request.getParameter("postNumber") %>">
+                	<input type="hidden" id="title" value="<%=title %>">
+                	<input type="hidden" id="content" value="<%=content%>">
                 	
                     <button class="button" id="upload-ok">작성</button>
                     <button class="button" id="upload-cancel">취소</button>

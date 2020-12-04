@@ -340,8 +340,8 @@ public class BoardDAO implements IDAO {
 			rs = pstmt.executeQuery();
 			list = SQLHelper.putResult(rs, BoardVO.class);
 			
-			
 			if(list != null) {
+				
 				
 				for(BoardVO vo : list) {
 					JSONObject obj = new JSONObject();

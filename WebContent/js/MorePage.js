@@ -1,5 +1,4 @@
 import {App} from "./app.js";
-import { JoinButton } from "./components/JoinButton.js";
 import {LoginButton} from "./components/LoginButton.js";
 
 /**
@@ -34,7 +33,6 @@ class MorePage extends App {
     }
 
     onLoad() {
-        JoinButton.builder(this).run();
         this.emit("loginView:ready");
     }
 

@@ -22,6 +22,6 @@ public class Command {
 	}
 	
 	public ActionResult execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
-		return null;
+		return result;
 	}
 }

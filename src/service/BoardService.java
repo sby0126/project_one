@@ -84,14 +84,16 @@ public class BoardService extends HttpServlet {
 		String nextPage = "pages/board-default.jsp";
 		String defaultPage = "pages/board-default.jsp";
 		
-		ActionResult result = new ActionResult();
-		result.setPath(nextPage);
-		result.start(request, response);
+		ActionResult result = null;
+
 		
 		if(!boardMgr.isExistsTable()) {
 			request.setAttribute("errorMessage", "테이블이 존재하지 않습니다. 먼저 테이블을 생성해주세요.");
 			request.setAttribute("url", "/pages/board-default.jsp");
 			nextPage = "/pages/error.jsp";
+			result = new ActionResult();
+			result.setPath(nextPage);
+			result.start(request, response);			
 			result.setPath(nextPage);			
 			result.render(defaultPage);
 			return;
@@ -136,7 +138,12 @@ public class BoardService extends HttpServlet {
 		}
 		
 		if(result != null) {
-			result.render(defaultPage);
+			try {
+				result.render(defaultPage);	
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+			
 		}
 	}
 

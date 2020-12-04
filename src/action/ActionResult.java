@@ -82,12 +82,16 @@ public class ActionResult {
 		this.path = path;
 	}
 	
-	public void start(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	public void start(HttpServletRequest req, HttpServletResponse res)  throws ServletException, IOException {
 		this.request = req;
 		this.response = res;
 	}
 		
+	@SuppressWarnings("unchecked")
 	public void render(String defaultPath) throws ServletException, IOException {
+		
+		if(request == null) return;
+		if(response == null) return;
 		
 		// 오류 처리
 		if(isError) {
@@ -104,8 +108,10 @@ public class ActionResult {
 			if(path == null) {
 				path = defaultPath;
 			}
-			RequestDispatcher dispatcher = request.getRequestDispatcher(path);
-			dispatcher.forward(request, response);					
+			if(request.getPathInfo().indexOf(path) < 0) {
+				RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+				dispatcher.forward(request, response);						
+			}
 		}
 	}
 	

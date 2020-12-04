@@ -10,6 +10,14 @@ export class LoginButton extends Component {
         const loginView = document.querySelector(".floating-login-view-wrapper");
         const lightBox = document.querySelector("#light-box-container");
 
+        if(!loginView) {
+            return;
+        }
+
+        if(!lightBox) {
+            return;
+        }
+
         // 로그인 바가 열렸을 때 우측을 누르면 닫기
         window.addEventListener("click", (ev) => {
             if(ev.target == loginView && !$(".main .content_login").is(":visible")) {
@@ -38,6 +46,9 @@ export class LoginButton extends Component {
         });
 
         const btn = document.querySelector("#close-login-view");
+        if(!btn) {
+            return;
+        }
         btn.addEventListener("click", () => {
             lightBox.classList.remove("active");
             loginView.style.transition = "all .8s ease-in-out";
