@@ -173,7 +173,7 @@ public class CustomerDAO implements IDAO {
 			conn = pool.getConnection();
 			pstmt = conn.prepareStatement("select CTMID" + 
 					" from tblCustomer" +
-					" where IS_ADMIN");
+					" where IS_ADMIN = 'Y'");
 			
 			rs = pstmt.executeQuery();
 			
