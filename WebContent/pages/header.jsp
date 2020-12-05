@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html>
@@ -31,6 +31,7 @@
                 		String id = (String)session.getAttribute("id");
                 	%>
                 	<c:set var="id" value="<%=id %>" />
+                	<h2><c:out value='${pageContext.request.contextPath}'></c:out></h2>
                 	<c:choose>
                 		<c:when test="${id != null}">
                 			<a class="header-right-login-button" href="/members/modifyMemberForm.do?id=${id}">회원 정보 수정</a>

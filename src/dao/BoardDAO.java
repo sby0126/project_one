@@ -410,8 +410,7 @@ public class BoardDAO implements IDAO {
 	}
 	
 	public boolean updatePost(String title, String content, int postNumber) {
-//		qlList.put("updatePost", "UPDATE tblqnaboard SET title = ?, content=?, regdate = NOW() WHERE articleID = ?");
-		
+
 		boolean ret = false;
 		
 		try {

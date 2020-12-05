@@ -26,7 +26,7 @@
                 </div>
                 <!-- 헤더 중앙 : 메뉴 -->
                 <div class="header-center">
-                    <a href="/">SHOP</a>
+                    <a href="${pageContext.request.contextPath}">SHOP</a>
                     <a href="${pageContext.request.contextPath}/item.jsp" target="_self">ITEM</a>
                     <a href="${pageContext.request.contextPath}/sale.jsp">SALE</a>
                     <a href="#">MORE</a>
@@ -39,11 +39,11 @@
                 	<c:set var="id" value="<%=id %>" />
                 	<c:choose>
                 		<c:when test="${id != null}">
-                			<a class="header-right-login-button" href="/members/modifyMemberForm.do?id=${id}">회원 정보 수정</a>
+                			<a class="header-right-login-button" href="${pageContext.request.contextPath}/members/modifyMemberForm.do?id=${id}">회원 정보 수정</a>
                 			<c:if test="${id=='admin'}">
-                				<a class="header-right-login-button" href="/admin">관리자 페이지</a>
+                				<a class="header-right-login-button" href="${pageContext.request.contextPath}/admin">관리자 페이지</a>
                 			</c:if>
-                			<button class="header-right-login-button" id="logout-button" onclick="javascript:location.href='/members/logout.do'">로그아웃</button>
+                			<button class="header-right-login-button" id="logout-button" onclick="javascript:location.href='${pageContext.request.contextPath}/members/logout.do'">로그아웃</button>
                 		</c:when>
                 		<c:otherwise>
                 			<button class="header-right-login-button">로그인</button>		
@@ -146,7 +146,10 @@
                             <span>30대</span>                            
                         </div>
                     </div>
-                    <div style="margin-top: 4px; text-align: center; font-size: 0.8em;">이 사이트는 포트폴리오 용으로 개발된 사이트로 실제 사이트가 아닙니다.</div>
+                    <div style="margin-top: 4px; text-align: center; font-size: 0.8em;">
+                    <input type="hidden" id="contextPath" value="${pageContext.request.contextPath}">
+                    이 사이트는 포트폴리오 용으로 개발된 사이트로 실제 사이트가 아닙니다.
+                    </div>
                 </div>
             </div>
         </header>        
