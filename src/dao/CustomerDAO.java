@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -164,6 +167,10 @@ public class CustomerDAO implements IDAO {
 		return customerList;
 	}
 	
+	/**
+	 * 관리자 목록을 추출합니다.
+	 * @return
+	 */
 	public List<String> getAdminators() {
 		List<String> adminators = new ArrayList<String>();
 		ResultSet rs = null;
@@ -189,6 +196,46 @@ public class CustomerDAO implements IDAO {
 			
 		}
 		return adminators;
+	}
+	
+	/**
+	 * 로그인 시간을 업데이트 합니다.
+	 * @param memberID
+	 * @return
+	 */
+	public boolean updateLastLogin(String memberID) {
+		
+		String formatedDate = "";
+		boolean ret = false;
+		
+		try {
+			// 현재 시각을 구합니다.
+			LocalDateTime dateTime = LocalDateTime.now();
+			
+			// LocalDateTime toString과 동일
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			formatedDate = dateTime.format(formatter);
+			
+			System.out.println(formatedDate);
+			
+			conn = pool.getConnection();
+			
+			pstmt = conn.prepareStatement("update tblCustomer set LAST_LOGIN = ? where CTMID = ?");
+			pstmt.setString(1, formatedDate);
+			pstmt.setString(2, memberID);
+			
+			if(pstmt.executeUpdate() > 0) {
+				ret = true;
+			}
+			
+			
+		} catch(SQLException | DateTimeParseException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return ret;
 	}
 	
 	public boolean processLogin(String id, String pw) {
