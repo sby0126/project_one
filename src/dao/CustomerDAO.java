@@ -164,6 +164,33 @@ public class CustomerDAO implements IDAO {
 		return customerList;
 	}
 	
+	public List<String> getAdminators() {
+		List<String> adminators = new ArrayList<String>();
+		ResultSet rs = null;
+		
+		try {
+			
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement("select CTMID" + 
+					" from tblCustomer" +
+					" where IS_ADMIN");
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				adminators.add(rs.getString("CTMID"));
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			
+		}
+		return adminators;
+	}
+	
 	public boolean processLogin(String id, String pw) {
 		boolean ret = false;
 		ResultSet rs = null;
