@@ -80,13 +80,51 @@ const FUNC = {
     POST_MORE_FUNCTION_BUTTON: function(ev) {
         alert("더보기 버튼을 눌렀습니다");
     },
+	/**
+	 * @link https://explainextended.com/2009/03/17/hierarchical-queries-in-mysql/
+	 */
     REPLAY_OK: function(ev) {
+	
+		// 댓글 창이 이미 존재하는 경우, 
+		if($("#child-comment-textarea").length) {
+			ev.preventDefault();
+			$("#child-comment-textarea").remove();
+			return;
+		}
+	
+		const parentComment = $(this).parent().parent().parent().parent();
+		const parentCommentOrder = $(".comment-author").index(comment) + 1;
+        const params = new URLSearchParams(location.search);	
 
-        const self = $(this).parent().parent().parent().parent().after(`
-            <div class="detail-area">
+		// 부모 코멘트에서 pos 값을 찾습니다.
+		if(!parentComment.data("pos")) {
+			parentComment.data("pos", 0);
+		} 
+		
+		let parentPos = parseInt(parentComment.data("pos"));
+		if(parentPos) {
+			parentPos += 1;
+			parentComment.data("pos", parentPos);
+		}
+		
+		if(!parentComment.data("depth")) {
+			parentComment.data("depth", 0);
+		} 		
+		
+		// 부모 코멘트에서 깊이 값을 찾습니다.
+		let depth = parseInt(parentComment.data("depth"));
+		if(depth) {
+			depth++;
+		}
+		
+		// 부모 코멘트에서 닉네임을 찾습니다.
+		const nickname = paremtComment.find("span").text();
+		
+        const self = parentComment.after(`
+            <div class="detail-area" data-depth=${depth}>
                 <div class="add-comment-button-area">
-                    <textarea id="comment-textarea" name="text"></textarea>
-                    <input href="#" type="submit" id="comment-ok-button" class="btn btn-default" value="등록">
+                    <textarea id="child-comment-textarea" name="text"></textarea>
+                    <input href="#" type="submit" id="child-comment-ok-button" class="btn btn-default" value="등록">
                 </div>
             </div>
         `);
@@ -94,13 +132,42 @@ const FUNC = {
         // 대댓글 작성 버튼
         let area = self.next();
 
-        area.find("#comment-ok-button").on("click", (ev) => {
+        area.find("#child-comment-ok-button").on("click", (ev) => {
             const yesNo = confirm("대댓글을 작성하시겠습니까?");
-            const content = area.find("#comment-textarea").val();
 
             // 대댓글 작성 버튼 삭제
             if(yesNo) {
-                alert(content);
+	
+		        const texts = `[${nickname}] ` + self.find("#child-comment-textarea").val();
+		        if(texts.length == 0) {
+		            alert("댓글란이 비어있습니다.");
+		            ev.preventDefault();
+		            return false;
+		        }
+		
+		        const params = new URLSearchParams(location.search);
+		        const postNumber = params.get("postNumber");
+		
+		        if(texts.length > 0) {
+					
+					const parentID = parentCommentOrder;
+			
+		            $.get(
+		                {
+		                    url: `/board/qna/postReply.do?postNumber=${postNumber}&contents=${texts}&method=writeChild&depth=0&parentID=${parentID}&pos=0`,
+		                    method: "GET",
+		                    contentType: false,
+		                    processData: false,
+		                    success: function(data) {
+		                        location.reload();
+		                    },
+		                    error: function(err) {
+		                        console.warn(err);
+		                    }
+		                }
+		            )
+		        }
+
                 area.remove();
             }
         });
@@ -268,7 +335,15 @@ const SDK = (() => {
             return publishedTimeText;
         }
 
-        registerComment(authorId, texts, timer, depth = 0) {
+        registerComment(comment) {
+			const commentID = comment.commentID;
+			const authorId = comment.author;
+			const timer = comment.create_at;
+			const texts = comment.contents;
+			const depth = comment.depth;
+			const pos = comment.pos;
+			const parentID = comment.parentID;
+			
             const timeText = this.getTimeText(new Date(timer));
             let commentRaw = "";
             /**
@@ -282,7 +357,7 @@ const SDK = (() => {
             $(".add-comment-button-area").before(
                 $(`
                 <div class="comment-area">
-                    <div class="comment-author well">
+                    <div class="comment-author well" data-depth=${depth} data-pos=${pos} data-parentID=${parentID}>
                         <div class="profile-box">
                             <span><i class="fas fa-user-circle fa-3x"></i></span>
                         </div>
@@ -388,8 +463,8 @@ class Editor extends Component {
             $(".badge").text(data.comments.length);
 
             data.comments.forEach(comment => {
-                SDK.registerComment(comment.author, comment.contents, comment.create_at, comment.depth);
-            })
+                SDK.registerComment(comment);
+            });
 
             for(let  i in FUNC) {
                 if(i === "REPLAY_DELETE") {

@@ -593,6 +593,10 @@ public class BoardDAO implements IDAO {
 		if(list != null) {
 			for(BoardCommentVO vo : list) {
 				JSONObject data = new JSONObject();
+				data.put("commentID", vo.getCommentid());
+				data.put("pos", vo.getPos());
+				data.put("parentID", vo.getParentID());
+				data.put("depth", vo.getDepth());
 				data.put("author", vo.getAuthorid());
 				data.put("create_at", vo.getRegdate().toString());
 				data.put("contents", vo.getContent());
