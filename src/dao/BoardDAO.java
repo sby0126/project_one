@@ -1,16 +1,11 @@
 package dao;
 
-import java.io.IOException;
-import java.nio.file.DirectoryIteratorException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -658,15 +653,34 @@ public class BoardDAO implements IDAO {
 		return postNumber;
 	}
 	
-	public static void main(String[] args) {
-		Path dir = Paths.get("WebContent");
-		
-		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, "*.*")) {
-			for( Path file: stream ) {
-				System.out.println(file.getFileName());
+	/**
+	 * 전체 코멘트 갯수를 획득합니다.
+	 * 
+	 * @return
+	 */
+	public int getCommentCount() {
+		int count = 0;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			conn = pool.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("select count(*) from tblQNABoardComments");
+			
+			boolean ret = rs.next();
+			
+			if(ret) {
+				count = rs.getInt(1);
 			}
-		} catch(IOException | DirectoryIteratorException e) {
+
+		} catch(SQLException e) {
 			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, stmt, rs);
 		}
+		
+		return count;
 	}
 }
