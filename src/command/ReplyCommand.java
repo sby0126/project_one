@@ -120,15 +120,21 @@ public class ReplyCommand extends Command {
 	public void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int parentArticleID = param.parentArticleID;
 		
+		// 특정 게시물의 댓글 번호를 가져옵니다 (1부터 시작합니다)
 		String commentOrderRAW = request.getParameter("commentOrder");
 		
+		// 댓글 번호가 없을 경우, NullException이 일어나므로 기본값인 0으로 설정해둡니다.
 		if(commentOrderRAW == null) {
 			commentOrderRAW = "0";
 		}
 		
+		// 댓글 번호를 파싱합니다.
 		int commentOrder = Integer.parseInt(commentOrderRAW);
+		
+		// 댓글 삭제가 가능한지 확인합니다.
 		boolean isValid = getDAO().checkValidByAuthorIDForComment(parentArticleID, commentOrder, param.authorID);
 		
+		// 삭제 가능하다면 삭제합니다.
 		if(isValid) {
 			getDAO().deleteCertainComment(parentArticleID, commentOrder);			
 		}
