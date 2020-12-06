@@ -25,7 +25,7 @@ public class CustomerController extends HttpServlet {
        
 	@Override
 	public void init() throws ServletException {
-		customerDAO = new CustomerDAO();
+		customerDAO = CustomerDAO.getInstance();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

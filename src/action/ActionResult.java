@@ -82,9 +82,11 @@ public class ActionResult {
 		this.path = path;
 	}
 	
-	public void start(HttpServletRequest req, HttpServletResponse res)  throws ServletException, IOException {
+	public ActionResult start(HttpServletRequest req, HttpServletResponse res)  throws ServletException, IOException {
 		this.request = req;
 		this.response = res;
+		
+		return this;
 	}
 		
 	@SuppressWarnings("unchecked")

@@ -26,7 +26,9 @@ public class CustomerDAO implements IDAO {
 
 	private HashMap<String, String> qlNotes = new HashMap<String, String>();
 	
-	public CustomerDAO() {
+	private static CustomerDAO instance = null;
+	
+	private CustomerDAO() {
 		try {
 			pool = DBConnectionMgr.getInstance();
 		} catch(Exception e) {
@@ -34,6 +36,18 @@ public class CustomerDAO implements IDAO {
 		}
 		
 		initSQLNotes();
+	}
+	
+	/**
+	 * 싱글턴 패턴으로 인스턴스를 하나만 생성합니다.
+	 * @return
+	 */
+	public static synchronized CustomerDAO getInstance() {
+		if(instance == null) {
+			instance = new CustomerDAO();
+		}
+		
+		return instance;
 	}
 	
 	public void initSQLNotes() {

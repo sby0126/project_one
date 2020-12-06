@@ -90,10 +90,17 @@ public class WriteFormCommand extends Command {
 				return result;
 			}
 			
+			String type = (String)data.get("type");
 			String title = String.valueOf( data.get("title") );
 			String contents = String.valueOf( data.get("contents") );
 			
-			boolean ret = getDAO().writePost(authorID, "Normal", title, contents, null);
+			boolean ret = false;
+			
+			if(type.equals("modify")) {
+				ret = getDAO().updatePost(title, contents, postNumber);	
+			} else {
+				ret = getDAO().writePost(authorID, "Normal", title, contents, null);
+			}
 			
 			result.sendRedirect("/pages/board-default.jsp");
 			return result;

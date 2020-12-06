@@ -27,8 +27,6 @@ public class ModifyPostFormCommand extends Command {
 		String title = (String)myJson.get("title");
 		String content = (String)myJson.get("contents");
 		
-		System.out.println("제목은?         : " + title);
-		
 		request.setAttribute("type", "modify");
 		request.setAttribute("postNumber", postNumber);
 		request.setAttribute("title", title);

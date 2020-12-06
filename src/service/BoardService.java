@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 
 import action.ActionResult;
+import action.ErrorResult;
 import command.DeleteCommand;
 import command.ImageUploadCommand;
 import command.ModifyPostFormCommand;
@@ -78,6 +79,16 @@ public class BoardService extends HttpServlet {
 		doHandle(request, response);
 	}
 	
+	/**
+	 * 테이블이 존재하지 않을 경우
+	 * 
+	 * @return
+	 */
+	private boolean isNotFoundTable() {
+		if(boardMgr == null) return true;
+		return !boardMgr.isExistsTable();
+	}
+	
 	public void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String currentPage = request.getPathInfo();
@@ -87,15 +98,13 @@ public class BoardService extends HttpServlet {
 		ActionResult result = null;
 
 		
-		if(!boardMgr.isExistsTable()) {
-			request.setAttribute("errorMessage", "테이블이 존재하지 않습니다. 먼저 테이블을 생성해주세요.");
-			request.setAttribute("url", "/pages/board-default.jsp");
-			nextPage = "/pages/error.jsp";
-			result = new ActionResult();
-			result.setPath(nextPage);
-			result.start(request, response);			
-			result.setPath(nextPage);			
-			result.render(defaultPage);
+		if(isNotFoundTable()) {
+			result = new ErrorResult(
+						"테이블이 존재하지 않거나 오류로 데이터베이스가 중단된 상태입니다. 서버를 재시작해주십시오.",
+						"/pages/board-default.jsp"
+					);
+			result.start(request, response)			
+				  .render(defaultPage);
 			return;
 		}
 		

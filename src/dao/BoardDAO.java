@@ -33,7 +33,7 @@ public class BoardDAO implements IDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
 	
-	public static BoardDAO instance = null;
+	private static BoardDAO instance = null;
 	
 	protected HashMap<String, String> qlList;
 	
@@ -49,7 +49,7 @@ public class BoardDAO implements IDAO {
 	/***
 	 * 
 	 */
-	public BoardDAO() {
+	private BoardDAO() {
 		connect();
 		initWithSQL();
 	}

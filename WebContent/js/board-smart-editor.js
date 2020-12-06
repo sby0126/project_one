@@ -66,7 +66,7 @@
 		quill.root.innerHTML = text;
     }
     
-    const type = $("#type").val();
+    const type = $("#type").val() || "none";
 	       	
 	if(type && type != "" && type == "modify") {
         setTitle($("#title").val());
@@ -129,6 +129,7 @@
         }
 
         const result = {
+			type,
             title: $("#input-item-title").val(),
             src: "",
             contents: $("<div>").text(quill.root.innerHTML).html()
@@ -143,7 +144,7 @@
 
         // 게시물 데이터를 보냅니다.
         $.ajax({
-            url: "/board/qna/writeForm.do",
+            url: "/board/qna/writeForm.do?postNumber=" + postNumber,
             method: "POST",
             data: prevJson,
             contentType: "application/json; charset=utf-8",
