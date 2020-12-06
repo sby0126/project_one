@@ -101,10 +101,17 @@ const FUNC = {
 			parentComment.data("pos", 0);
 		} 
 		
+		// TODO: 부모 코멘트에 댓글이 하나 이상 있을 때, 
+		// 부모 코멘트의 깊이보다 1 정도 큰,  
+		// 마지막 자식 코멘트의 pos 값을 가져옵니다.
+		
+		
+		// 부모 댓글의 순번
+		// 같은 깊이의 댓글이 달리면 pos가 1, 2, 3으로 이어진다.
+		// 작성일순으로 정렬하면 pos도 필요 없지만 현재로썬 댓글 정렬을 위해 필요하다. 
 		let parentPos = parseInt(parentComment.data("pos"));
 		if(parentPos) {
 			parentPos += 1;
-			parentComment.data("pos", parentPos);
 		}
 		
 		if(!parentComment.data("depth")) {
@@ -121,7 +128,7 @@ const FUNC = {
 		const nickname = paremtComment.find("span").text();
 		
         const self = parentComment.after(`
-            <div class="detail-area" data-depth=${depth}>
+            <div class="detail-area" data-depth=${depth} data-pos=${parentPos + 1}>
                 <div class="add-comment-button-area">
                     <textarea id="child-comment-textarea" name="text"></textarea>
                     <input href="#" type="submit" id="child-comment-ok-button" class="btn btn-default" value="등록">
