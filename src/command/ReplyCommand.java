@@ -1,6 +1,7 @@
 package command;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,16 +23,22 @@ public class ReplyCommand extends Command {
 	}
 	
 	private Parameters param = new Parameters();
+	private HashMap<String, String> lang = new HashMap<String, String>();
 	
 	public ReplyCommand()  {
 		super();
+		initWithErrorMessages();
 	}
 	
-	public ActionResult execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		result.start(request, response);
-		
+	public void initWithErrorMessages() {
+		lang.put("write", "댓글을 작성하려면 우선 로그인을 하셔야 합니다.");
+		lang.put("delete", "댓글을 삭제하시려면 우선 로그인을 하셔야 합니다.");
+		lang.put("update", "댓글을 수정하시려면 우선 로그인을 하셔야 합니다.");
+		lang.put("writeChild", "댓글의 댓글을 작성하시려면 우선 로그인을 하셔야 합니다.");	
+	}
+	
+	public void initWithParameters(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		
 		param.authorID = (String)session.getAttribute("id");
 		param.parentArticleID = Integer.parseInt(request.getParameter("postNumber"));;
 		param.contents = request.getParameter("contents");
@@ -39,7 +46,9 @@ public class ReplyCommand extends Command {
 		param.depth = Integer.parseInt(request.getParameter("depth"));
 		param.parentID = Integer.parseInt(request.getParameter("parentID"));
 		param.pos = Integer.parseInt(request.getParameter("pos"));
-				
+	}
+	
+	public void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		switch( param.methods ) {
 		case "write":
 			write(request, response);
@@ -53,13 +62,37 @@ public class ReplyCommand extends Command {
 		case "writeChild":
 			writeChild(request, response);
 		}
-		
+	}
+	
+	/**
+	 * 오류가 있는지 확인합니다.
+	 * 
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public boolean checkErrors(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(param.authorID == null) {
 			request.setAttribute("_status", "error");
-			request.setAttribute("errorMessage", "댓글을 작성하려면 우선 로그인을 하셔야 합니다.");
+			request.setAttribute("errorMessage", lang.get(param.methods));
 			request.setAttribute("url", "/pages/board-default.jsp");
 			
 			result.forward("/pages/error.jsp");
+		}		
+		
+		return param.authorID == null;
+	}
+	
+	public ActionResult execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+		result.start(request, response);
+		
+		initWithParameters(request, response);
+		
+		doAction(request, response);
+
+		if(checkErrors(request, response)) {
 			return result;
 		}
 		
