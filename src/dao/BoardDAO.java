@@ -161,6 +161,13 @@ public class BoardDAO implements IDAO {
 		// 이미지를 검색하여 글 번호를 획득합니다.
 		qlList.put("searchPostNumber", "SELECT * FROM tblqnaboard WHERE content LIKE ?");
 		
+		qlList.put("deleteCertainComment",
+		  "DELETE FROM tblqnaboardcomments" 
+		+ " WHERE commentID = (SELECT commentID from (SELECT @rownum := @rownum + 1 AS rownum, COMMENT.* FROM tblqnaboardcomments COMMENT" 
+	    + " WHERE COMMENT.parent_articleID = ?"
+		+ " order by parentID desc, pos, commentID) AS mytbl"
+	    + " WHERE mytbl.rownum = ?)");
+		
 	}
 	
 	/***
@@ -682,5 +689,35 @@ public class BoardDAO implements IDAO {
 		}
 		
 		return count;
+	}
+	
+	public boolean deleteCertainComment(int paretArticleID, int commentOrder) {
+		boolean ret = false;
+		
+		try {
+			
+			execute("SET @rownum := 0");
+			
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement(getQL("deleteCertainComment"));
+			pstmt.setInt(1, paretArticleID);
+			pstmt.setInt(2, commentOrder);
+			
+			if( pstmt.executeUpdate() > 0) {
+				ret = true;
+				conn.commit();
+			} else {
+				conn.rollback();
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			
+		}
+		
+		return ret;
 	}
 }
