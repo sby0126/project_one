@@ -110,8 +110,26 @@ const FUNC = {
         const ret = window.confirm("댓글을 삭제하시겠습니까?");
 
         if(ret) {
-            $(ev.target).parent().parent().parent().parent().remove();
-            SDK.updateCommentsCount();
+			const comment = $(ev.target).parent().parent().parent().parent();
+			const commentOrder = $(".comment-author").index(comment) + 1;
+	        const params = new URLSearchParams(location.search);
+	        const postNumber = params.get("postNumber");
+			const texts = "empty";
+
+            $.get(
+                {
+                    url: `/board/qna/postReply.do?postNumber=${postNumber}&contents=${texts}&method=delete&depth=0&parentID=0&pos=0&commentOrder=${commentOrder}`,
+                    method: "GET",
+                    contentType: false,
+                    processData: false,
+                    success: function(data) {
+                        location.reload();
+                    },
+                    error: function(err) {
+                        console.warn(err);
+                    }
+                }
+            )
         }
         
         ev.preventDefault();

@@ -40,12 +40,14 @@ public class ReplyCommand extends Command {
 	public void initWithParameters(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		param.authorID = (String)session.getAttribute("id");
-		param.parentArticleID = Integer.parseInt(request.getParameter("postNumber"));;
+		param.parentArticleID = Integer.parseInt(request.getParameter("postNumber"));
 		param.contents = request.getParameter("contents");
 		param.methods = request.getParameter("method");
 		param.depth = Integer.parseInt(request.getParameter("depth"));
 		param.parentID = Integer.parseInt(request.getParameter("parentID"));
 		param.pos = Integer.parseInt(request.getParameter("pos"));
+		
+		System.out.println("방법: " + param.methods);
 	}
 	
 	public void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

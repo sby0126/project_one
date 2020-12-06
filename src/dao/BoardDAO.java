@@ -747,9 +747,6 @@ public class BoardDAO implements IDAO {
 			
 			if( pstmt.executeUpdate() > 0) {
 				ret = true;
-				conn.commit();
-			} else {
-				conn.rollback();
 			}
 			
 		} catch(SQLException e) {
