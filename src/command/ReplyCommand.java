@@ -39,7 +39,7 @@ public class ReplyCommand extends Command {
 		param.depth = Integer.parseInt(request.getParameter("depth"));
 		param.parentID = Integer.parseInt(request.getParameter("parentID"));
 		param.pos = Integer.parseInt(request.getParameter("pos"));
-		
+				
 		switch( param.methods ) {
 		case "write":
 			write(request, response);
@@ -85,18 +85,20 @@ public class ReplyCommand extends Command {
 	}	
 	
 	public void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		HttpSession session = request.getSession();
-//		String id = (String)session.getAttribute("id");
-//		
-//		if(id == null) return;
-//		if(!id.equals(param.authorID)) {
-//			
-//		}
-//
-//		boardMgr.deleteComment(
-//				param.parentArticleID,
-//				param.commentID);
-//		
+		int parentArticleID = param.parentArticleID;
+		
+		String commentOrderRAW = request.getParameter("commentOrder");
+		
+		if(commentOrderRAW == null) {
+			commentOrderRAW = "0";
+		}
+		
+		int commentOrder = Integer.parseInt(commentOrderRAW);
+		boolean isValid = getDAO().checkValidByAuthorIDForComment(parentArticleID, commentOrder, param.authorID);
+		
+		if(isValid) {
+			getDAO().deleteCertainComment(parentArticleID, commentOrder);			
+		}
 	}
 	
 	public void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

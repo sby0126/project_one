@@ -161,6 +161,7 @@ public class BoardDAO implements IDAO {
 		// 이미지를 검색하여 글 번호를 획득합니다.
 		qlList.put("searchPostNumber", "SELECT * FROM tblqnaboard WHERE content LIKE ?");
 		
+		// 특정 댓글을 삭제합니다.
 		qlList.put("deleteCertainComment",
 		  "DELETE FROM tblqnaboardcomments" 
 		+ " WHERE commentID = (SELECT commentID from (SELECT @rownum := @rownum + 1 AS rownum, COMMENT.* FROM tblqnaboardcomments COMMENT" 
@@ -691,7 +692,48 @@ public class BoardDAO implements IDAO {
 		return count;
 	}
 	
-	public boolean deleteCertainComment(int paretArticleID, int commentOrder) {
+	public boolean checkValidByAuthorIDForComment(int parentArticleID, int commentOrder, String authorID) {
+		boolean ret = false;
+		ResultSet rs = null;
+		
+		try {
+			execute("SET @rownum := 0");
+			StringBuilder sb = new StringBuilder();
+			sb
+				.append("SELECT * from (SELECT @rownum := @rownum + 1 AS rownum, COMMENT.* FROM tblqnaboardcomments COMMENT")
+				.append(" WHERE COMMENT.parent_articleID = ?")
+				.append(" order by parentID desc, pos, commentID) AS mytbl")
+				.append(" WHERE mytbl.rownum = ?");
+			
+			String query = sb.toString();
+			
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, parentArticleID);
+			pstmt.setInt(2, commentOrder);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				String targetAuthorID = rs.getString("authorID");
+				
+				if(targetAuthorID.equals(authorID)) {
+					ret = true;
+				}
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt, rs);
+		}
+		
+		return ret;
+	}
+	
+	public boolean deleteCertainComment(int parentArticleID, int commentOrder) {
 		boolean ret = false;
 		
 		try {
@@ -700,7 +742,7 @@ public class BoardDAO implements IDAO {
 			
 			conn = pool.getConnection();
 			pstmt = conn.prepareStatement(getQL("deleteCertainComment"));
-			pstmt.setInt(1, paretArticleID);
+			pstmt.setInt(1, parentArticleID);
 			pstmt.setInt(2, commentOrder);
 			
 			if( pstmt.executeUpdate() > 0) {
