@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import sql.CustomerSQL;
 import utils.DBConnectionMgr;
 import utils.SHA256Util;
 import vo.CustomerVO;
@@ -24,7 +25,7 @@ public class CustomerDAO implements IDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
 
-	private HashMap<String, String> qlNotes = new HashMap<String, String>();
+	private CustomerSQL qlNotes;
 	
 	private static CustomerDAO instance = null;
 	
@@ -51,16 +52,7 @@ public class CustomerDAO implements IDAO {
 	}
 	
 	public void initSQLNotes() {
-		
-		qlNotes.put("mysql1.selectOnce", "select * from tblCustomer where ctmid = ?");
-		qlNotes.put("mysql1.selectAll", "select * from tblCustomer");
-		
-		qlNotes.put("mysql1.insert", "insert into tblCustomer "
-				+ "(CTMID, CTMPW, CTMNM, ADDR, TEL, EMAIL, ZIPCODE, IS_ADMIN, JOINDATE, SALT)"
-				+ " values(?, ?, ?, ?, ?, ?, ?, ?, CURDATE(), ?)");
-		
-		qlNotes.put("mysql1.updateName", "update * from tblCustomer set ctmnm = ? where ctmid = ?");
-		qlNotes.put("mysql1.delete", "delete from tblCustomer where ctmid = ?");
+		qlNotes = new CustomerSQL();
 	}
 	
 	/**

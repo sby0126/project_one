@@ -104,7 +104,7 @@
                 </div>
                 <div id="manage-whole-member" class="content jumbotron">
                    	<%
-                   		CustomerDAO customerDAO = new CustomerDAO();
+                   		CustomerDAO customerDAO = CustomerDAO.getInstance();
                    		List<CustomerVO> customerList = customerDAO.listMembers();
                    	%>                
                    	<c:set var="customerList" value="<%= customerList %>" />                   	
@@ -185,7 +185,7 @@
                     <p>게시판 관리</p>
                     <table class="table" style="height: 200px; overflow:scroll;">
                     <%
-	            		BoardDAO boardMgr = new BoardDAO();
+	            		BoardDAO boardMgr = BoardDAO.getInstance();
 	            		JSONArray json = boardMgr.getListAll();                    
                     %>
                     	<caption class="well">총 글 갯수 : <%= json.size() %> / 페이지 수 : <%= (int)(Math.ceil(json.size() / 10)) %></caption>
