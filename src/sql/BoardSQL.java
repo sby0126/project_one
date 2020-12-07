@@ -74,16 +74,17 @@ public class BoardSQL {
 		// 특정 댓글을 삭제합니다.
 		qlList.put("deleteCertainComment",
 		  "DELETE FROM tblqnaboardcomments" 
-		+ " WHERE commentID = (SELECT commentID from (SELECT @rownum := @rownum + 1 AS rownum, COMMENT.* FROM tblqnaboardcomments COMMENT" 
-	    + " WHERE COMMENT.parent_articleID = ?"
-		+ " order by parentID desc, pos, commentID) AS mytbl"
-	    + " WHERE mytbl.rownum = ?)");		
+		+ " where commentID = (SELECT commentID FROM (SELECT ROW_NUMBER() OVER w AS 'row_number', t.* "
+		+ " FROM tblqnaboardcomments t"
+		+ " WHERE parent_articleID = ?"
+		+ " WINDOW w AS (order by parentID desc, pos, commentID)) AS mytbl"
+		+ " WHERE mytbl.row_number = ?)");
 		
 		// 특정 순번의 댓글이 있는지 검색합니다.
-		qlList.put("searchCertainComment", "SELECT * from (SELECT @rownum := @rownum + 1 AS rownum, COMMENT.* FROM tblqnaboardcomments COMMENT"
-				+ " WHERE COMMENT.parent_articleID = ?"
-				+ " order by parentID desc, pos, commentID) AS mytbl"
-				+ " WHERE mytbl.rownum = ?");
+		qlList.put("searchCertainComment", "SELECT * FROM (SELECT ROW_NUMBER() OVER w AS 'row_number', t.* FROM tblqnaboardcomments t"
+				+ " WHERE parent_articleID = ?"
+				+ " WINDOW w AS (order by parentID desc, pos, commentID)) AS mytbl"
+				+ " WHERE mytbl.row_number = ?");
 		
 	}
 	
