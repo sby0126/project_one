@@ -638,14 +638,8 @@ public class BoardDAO implements IDAO {
 		
 		try {
 			execute("SET @rownum := 0");
-			StringBuilder sb = new StringBuilder();
-			sb
-				.append("SELECT * from (SELECT @rownum := @rownum + 1 AS rownum, COMMENT.* FROM tblqnaboardcomments COMMENT")
-				.append(" WHERE COMMENT.parent_articleID = ?")
-				.append(" order by parentID desc, pos, commentID) AS mytbl")
-				.append(" WHERE mytbl.rownum = ?");
 			
-			String query = sb.toString();
+			String query = getQL("searchCertainComment");
 			
 			conn = pool.getConnection();
 			pstmt = conn.prepareStatement(query);
