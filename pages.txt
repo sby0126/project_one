@@ -18,7 +18,6 @@ join.jsp
 login.jsp
 logout.jsp
 map.jsp
-members.jsp
 modifyMemberForm.jsp
 outer-link-page.jsp
 payments.jsp
