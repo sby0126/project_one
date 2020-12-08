@@ -7,6 +7,8 @@ public class ContentSQLLoader {
 	
 	public ContentSQLLoader() {
 		qlList = new HashMap<String, String>(); 
+		
+		initWithSQL();
 	}
 	
 	public void initWithSQL() {

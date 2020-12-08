@@ -103,8 +103,8 @@ const FUNC = {
 		
 		// TODO: 부모 코멘트에 댓글이 하나 이상 있을 때, 
 		// 부모 코멘트의 깊이보다 1 정도 큰,  
-		// 마지막 자식 코멘트의 pos 값을 가져옵니다.
-		
+        // 마지막 자식 코멘트의 pos 값을 가져옵니다.
+        
 		
 		// 부모 댓글의 순번
 		// 같은 깊이의 댓글이 달리면 pos가 1, 2, 3으로 이어진다.
@@ -330,7 +330,7 @@ const SDK = (() => {
                 publishedTimeText = days + mark;
             } else {
                 mark = "시간 전";
-                // publishedTimeText = (Math.abs(23 - publishedTime.getHours()) + (currentTime.getHours())) % 24 + mark;
+                publishedTimeText = (Math.abs(23 - publishedTime.getHours()) + (currentTime.getHours())) % 24 + mark;
                 let m = Math.abs(currentTime.getHours() - publishedTime.getHours());
                 if(m === 0) {
                     m = "";
@@ -342,7 +342,7 @@ const SDK = (() => {
             return publishedTimeText;
         }
 
-        registerComment(comment) {
+        registerComment(comment, index) {
 			const commentID = comment.commentID;
 			const authorId = comment.author;
 			const timer = comment.create_at;
@@ -361,9 +361,13 @@ const SDK = (() => {
                 commentRaw += `<span>${line}</span>`
             });
 
+            if(!index) {
+                index = 0;
+            }
+
             $(".add-comment-button-area").before(
                 $(`
-                <div class="comment-area">
+                <div class="comment-area" data-index=${index}>
                     <div class="comment-author well" data-depth=${depth} data-pos=${pos} data-parentID=${parentID}>
                         <div class="profile-box">
                             <span><i class="fas fa-user-circle fa-3x"></i></span>
@@ -469,8 +473,8 @@ class Editor extends Component {
             // 댓글 뱃지 업데이트
             $(".badge").text(data.comments.length);
 
-            data.comments.forEach(comment => {
-                SDK.registerComment(comment);
+            data.comments.forEach((comment, index) => {
+                SDK.registerComment(comment, index);
             });
 
             for(let  i in FUNC) {
