@@ -355,6 +355,12 @@ const SDK = (() => {
             return publishedTimeText;
         }
 
+        /**
+         * 댓글을 작성합니다.
+         * 
+         * @param {*} comment 
+         * @param {*} index 
+         */
         registerComment(comment, index) {
 			const commentID = comment.commentID;
 			const authorId = comment.author;
@@ -364,7 +370,8 @@ const SDK = (() => {
 			const pos = comment.pos;
 			const parentID = comment.parentID;
 			
-            const timeText = this.getTimeText(new Date(timer));
+            // const timeText = this.getTimeText(new Date(timer));
+            const timeText = timer; 
             let commentRaw = "";
             /**
              * @type {String[]}
@@ -493,6 +500,7 @@ class Editor extends Component {
                 SDK.registerComment(comment, index);
             });
 
+            // 이벤트 리스너 연결
             for(let  i in FUNC) {
                 if(i === "REPLAY_DELETE") {
                     continue;
