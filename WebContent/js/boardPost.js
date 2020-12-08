@@ -45,6 +45,10 @@ const AJAX = {
     }
 }
 
+//=============================================================================
+// ! 게시판 글에 대한 모든 이벤트 리스너
+//=============================================================================
+
 // 실행하기 위한 이벤트를 여기에 추가하세요.
 const FUNC = {
     POST_SHARE_BUTTON: function(ev) {
@@ -280,6 +284,10 @@ const FUNC = {
 
 window.BoardEvent = FUNC;
 
+//=============================================================================
+// ! 댓글 관련 기능
+//=============================================================================
+
 const SDK = (() => {
     class SDKImpl {
 
@@ -380,7 +388,7 @@ const SDK = (() => {
                         <div class="detail-area">
                             <div class="detail-area-author-id">
                                 <span>${authorId}</span>       
-                                <span>(댓글 번호 : <strong>${commentID}<strong>)</span>
+                                <span>(댓글 번호 : <strong>${commentID}</strong>)</span>
                             </div>
                             <div class="detail-area-date-panel">
                                 <span>${timeText}</span>
