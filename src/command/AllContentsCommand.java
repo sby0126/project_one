@@ -31,6 +31,7 @@ public class AllContentsCommand extends Command {
 		
 		JSONArray array = new JSONArray();
 		
+		// 최악의 성능 N*N*N..... 
 		for(int i = 0; i < TYPE_GNDR.length; i++) {
 			for(int j = 0; j < TYPE_PAGE.length; j++) {
 				for(int k = 0; k < TYPE_SHOP.length; k++) {
