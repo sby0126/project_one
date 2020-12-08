@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.ActionResult;
 import command.Command;
+import command.ItemCommand;
 import command.ShopCommand;
 
 /**
@@ -46,10 +47,10 @@ public class ContentController extends HttpServlet {
 				command = new ShopCommand();
 				result = command.execute(request, response);
 				break;
-//			case "/item.do":
-//				command = new ItemCommand();
-//				result = command.execute(request, response);				
-//				break;
+			case "/item.do":
+				command = new ItemCommand();
+				result = command.execute(request, response);				
+				break;
 //			case "sale.do":
 //				command = new SaleCommand();
 //				result = command.execute(request, response);

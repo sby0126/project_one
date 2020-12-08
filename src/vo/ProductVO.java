@@ -12,6 +12,7 @@ public class ProductVO {
 	private String ages;
 	private String type;
 	private String imgid;
+	private String title;
 	
 	public String getPagetype() {
 		return pagetype;
@@ -98,6 +99,14 @@ public class ProductVO {
 
 	public void setImgid(String imgid) {
 		this.imgid = imgid;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 }

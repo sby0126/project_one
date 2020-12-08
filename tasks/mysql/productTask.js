@@ -64,7 +64,7 @@ class SQLManagerImpl {
                         pageType,
                         genderType,
                         shopType,
-                        i.shopName,
+                        i.shopName || i.shop,
                         i.texts,
                         i.url || "",
                         i.title,
