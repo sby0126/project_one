@@ -380,7 +380,7 @@ const SDK = (() => {
                         <div class="detail-area">
                             <div class="detail-area-author-id">
                                 <span>${authorId}</span>       
-                                <span>(댓글 번호 : ${commentID})</span>
+                                <span>(댓글 번호 : <strong>${commentID}<strong>)</span>
                             </div>
                             <div class="detail-area-date-panel">
                                 <span>${timeText}</span>
