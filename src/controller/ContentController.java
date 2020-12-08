@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.ActionResult;
+import command.AllContentsCommand;
 import command.Command;
 import command.ItemCommand;
 import command.SaleCommand;
@@ -46,17 +47,20 @@ public class ContentController extends HttpServlet {
 			switch(pathInfo) {
 			case "/shop.do":
 				command = new ShopCommand();
-				result = command.execute(request, response);
 				break;
 			case "/item.do":
-				command = new ItemCommand();
-				result = command.execute(request, response);				
+				command = new ItemCommand();			
 				break;
 			case "/sale.do":
 				command = new SaleCommand();
-				result = command.execute(request, response);
 				break;
+			default:
+			case "/all.do":
+				command = new AllContentsCommand();
 			}
+			
+			result = command.execute(request, response);
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
