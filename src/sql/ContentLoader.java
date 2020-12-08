@@ -13,7 +13,7 @@ public class ContentLoader {
 	
 	public void initWithSQL() {
 		qlList.put("search", 
-				"SELECT DISTINCT b.pageType, b.genderType, b.shopType, b.shopName, a.imgId"
+				"SELECT DISTINCT b.pageType, b.genderType, b.shopType, b.shopName, b.contentUrl, a.imgId, b.*"
 						+ " FROM tblimagehash a, tblproduct b"
 						+ " WHERE a.pageType = ? AND"
 						+ " a.genderType = ? AND"
