@@ -282,6 +282,11 @@ window.BoardEvent = FUNC;
 
 const SDK = (() => {
     class SDKImpl {
+
+        constructor() {
+            this._lastIndex = 0;
+        }
+
         updateCommentsCount() {
             let val = parseInt($(".comment-header span em").text().trim());
             if(val) {
@@ -367,14 +372,15 @@ const SDK = (() => {
 
             $(".add-comment-button-area").before(
                 $(`
-                <div class="comment-area" data-index=${index}>
+                <div class="comment-area" data-commentID=${commentID} data-index=${index} data-depth=${depth} data-pos=${pos} data-parentID=${parentID}>
                     <div class="comment-author well" data-depth=${depth} data-pos=${pos} data-parentID=${parentID}>
                         <div class="profile-box">
                             <span><i class="fas fa-user-circle fa-3x"></i></span>
                         </div>
                         <div class="detail-area">
                             <div class="detail-area-author-id">
-                                <span>${authorId}</span>        
+                                <span>${authorId}</span>       
+                                <span>(댓글 번호 : ${commentID})</span>
                             </div>
                             <div class="detail-area-date-panel">
                                 <span>${timeText}</span>
@@ -390,6 +396,8 @@ const SDK = (() => {
                 <img src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7' onload='SDK.updateCommentsCount();this.parentNode.removeChild(this);'>       
                 `).css("marginLeft", `${2 * depth}em`)
             );
+
+            this._lastIndex++;
         }
 
     }

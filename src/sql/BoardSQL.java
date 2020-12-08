@@ -39,7 +39,7 @@ public class BoardSQL {
 		
 		// 특정 게시물에 있는 코멘트를 읽습니다.
 		qlList.put("readComments", 
-					"select authorID, content, regdate, pos, parentID, depth " 
+					"select * " 
 				+ "from tblQNABoardComments "
 				+ "where parent_articleID = ? order by parentID desc, pos, commentID");
 		

@@ -44,5 +44,4 @@ public class ContentDAO implements IDAO {
 		return instance;
 	}
 	
-	public JSONArray getShopData()
 }
