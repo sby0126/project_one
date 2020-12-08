@@ -16,9 +16,6 @@ import command.ItemCommand;
 import command.SaleCommand;
 import command.ShopCommand;
 
-/**
- * Servlet implementation class ContentController
- */
 @WebServlet("/contents/*")
 public class ContentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
