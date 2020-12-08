@@ -2,10 +2,10 @@ package sql;
 
 import java.util.HashMap;
 
-public class ContentSQLLoader {
+public class ContentLoader {
 	private HashMap<String, String> qlList;
 	
-	public ContentSQLLoader() {
+	public ContentLoader() {
 		qlList = new HashMap<String, String>(); 
 		
 		initWithSQL();

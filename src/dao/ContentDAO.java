@@ -1,11 +1,11 @@
 package dao;
 
-import sql.ContentSQLLoader;
+import sql.ContentLoader;
 
 public class ContentDAO implements IDAO {
 	
 	private static ContentDAO instance = null;
-	private ContentSQLLoader qlList = null;
+	private ContentLoader qlList = null;
 	
 //	class ContentParams {
 //		public int startNumber;
@@ -33,7 +33,7 @@ public class ContentDAO implements IDAO {
 	}
 	
 	public void initWithSQL() {
-		qlList = new ContentSQLLoader();
+		qlList = new ContentLoader();
 	}
 	
 	public synchronized ContentDAO getInstance() {
