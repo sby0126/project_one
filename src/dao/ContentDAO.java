@@ -67,7 +67,7 @@ public class ContentDAO implements IDAO {
 		
 		try {
 			conn = pool.getConnection();
-			pstmt = conn.prepareStatement(getQL("search"));
+			pstmt = conn.prepareStatement(getQL("전체 데이터 검색"));
 			pstmt.setString(1, pageType);
 			pstmt.setString(2, genderType);
 			pstmt.setString(3, shopType);
