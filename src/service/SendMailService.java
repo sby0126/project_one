@@ -24,7 +24,7 @@ public class SendMailService {
 		
 	public SendMailService() {
 		// db.properties 파일은 보안 우려로 추후에 깃허브에서 제거됩니다.  
-		configFilePath = Paths.get( System.getProperty("user.dir"), "src", "db.properties" ).toString();
+		configFilePath = Paths.get( System.getProperty("user.dir"), "db.properties" ).toString();
 	}
 	
 	public void loadConfig() {
