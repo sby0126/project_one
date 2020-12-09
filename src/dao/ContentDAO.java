@@ -86,4 +86,30 @@ public class ContentDAO implements IDAO {
 		return list;
 	}
 	
+	public List<ProductVO> searchAsAge(String pageType, String genderType, String shopType, String ages) {
+		ResultSet rs = null;
+		List<ProductVO> list = null;
+		
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement(getQL("번호 붙여 검색"));
+			pstmt.setString(1, pageType);
+			pstmt.setString(2, genderType);
+			pstmt.setString(3, shopType);
+			pstmt.setString(4, "%" + ages + "%");
+			
+			rs = pstmt.executeQuery();
+			list = SQLHelper.putResult(rs, ProductVO.class);
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt, rs);
+		}
+		
+		return list;
+	}
+	
 }
