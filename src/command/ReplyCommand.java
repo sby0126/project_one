@@ -142,16 +142,6 @@ public class ReplyCommand extends Command {
 		}
 	}
 	
-	public void delete2(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String raw = request.getParameter("commentID");
-		
-		if(raw != null) {
-			int commentID = Integer.parseInt(request.getParameter("commentID"));
-			getDAO().deleteCertainComment2(commentID);			
-		}
-	}
-	
 	public void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	}
