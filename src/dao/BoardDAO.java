@@ -688,7 +688,32 @@ public class BoardDAO implements IDAO {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+		return ret;
+	}
+	
+	public boolean deleteCertainComment2(int commentID) {
+		boolean ret = false;
+		String query = getQL("deleteComment");
+		
+		try {
 			
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, commentID);
+			
+			if(pstmt.executeUpdate() > 0) {
+				ret = true;
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
 		}
 		
 		return ret;

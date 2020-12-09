@@ -21,8 +21,8 @@
                     <div class="" id="logo">
                         <a href="${pageContext.request.contextPath}"><img src="https://dummyimage.com/64x64/000/fff" alt=""></a>
                     </div>
-                    <a href="${pageContext.request.contextPath}">WOMEN</a>
-                    <a href="${pageContext.request.contextPath}">MEN</a>
+                    <a href="#">WOMEN</a>
+                    <a href="#">MEN</a>
                 </div>
                 <!-- 헤더 중앙 : 메뉴 -->
                 <div class="header-center">

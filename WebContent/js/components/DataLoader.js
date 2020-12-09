@@ -48,7 +48,10 @@ export class DataLoader extends Component {
     load(pageType, success) {
         const prom = new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest();
-            xhr.open("GET", `json/prebuilt.json`);
+            // 
+            // ${pageType}.do?pageType=${pageType}&shopType=S&gndr=F
+            // xhr.open("GET", `json/prebuilt.json`); 
+            xhr.open("GET", `/contents/all.do`);
             xhr.onload = () => {
                 resolve(JSON.parse(xhr.responseText));
             }
@@ -61,7 +64,9 @@ export class DataLoader extends Component {
         prom.then(ret => {
             
             const matched = ret.filter(e => {
-                return e.shopType === this.shopType && e.pageType === pageType && e.genderType === this.gndr;
+                return e.shopType === this.shopType && 
+                       e.pageType === pageType && 
+                       e.genderType === this.gndr;
             });
 
             const retData = matched[0];

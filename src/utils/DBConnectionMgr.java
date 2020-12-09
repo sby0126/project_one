@@ -46,7 +46,7 @@ public class DBConnectionMgr {
 //    _user = "admin",
 //    _password = "admin";
     private String _driver = "org.gjt.mm.mysql.Driver",
-    _url = "jdbc:mysql://127.0.0.1:3306/mydb?useUnicode=true&characterEncoding=EUC_KR&serverTimezone=UTC",
+    _url = "jdbc:mysql://127.0.0.1:3306/mydb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC",
     _user = "root",
     _password = "1234";
     private boolean _traceOn = false;

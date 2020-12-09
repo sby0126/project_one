@@ -51,7 +51,7 @@ public class AllContentsCommand extends Command {
 		}
 
 	
-		response.setCharacterEncoding("EUC-KR");
+		response.setCharacterEncoding("UTF-8");
 		
 		PrintWriter out = response.getWriter();
 		out.println(array.toJSONString());
