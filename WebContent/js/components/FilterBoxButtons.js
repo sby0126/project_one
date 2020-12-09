@@ -49,15 +49,15 @@ export class FilterBoxButtons extends Component {
             });
 
         const params = new URLSearchParams(location.search);
-
+        const container = $(".header-filter-box-footer-right span");
         if(params.get("ages")) {
             self._ageTabIndex = AGES.indexOf(params.get("ages"));
         } else {
             // 선택 버튼에 메뉴 인덱스 설정
-            self._ageTabIndex = container.index($(this));
+            self._ageTabIndex = 0;
         }            
 
-        const container = $(".header-filter-box-footer-right span")
+        container
             .removeClass("active")
             .eq(self._ageTabIndex)
             .addClass("active");
