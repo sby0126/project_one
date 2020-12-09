@@ -1,6 +1,5 @@
 const path = require("path");
 const fs = require("fs");
-const file = require("../../WebContent/json/prebuilt.json");
 const mysql = require("mysql");
 
 class SQLManagerImpl {
@@ -32,7 +31,7 @@ class SQLManagerImpl {
 
     async dropTable() {
         this._conn = await this.createConnection();
-        this._conn.query(`DROP TABLE if exists tblimagehash`, (err, result) => {
+        this._conn.query(`DROP TABLE if EXISTS tblqnaboardrec`, (err, result) => {
             if(err) {
                 console.warn(err);
                 return;
@@ -44,41 +43,27 @@ class SQLManagerImpl {
     }
 
     async createTable(conn) {
-        conn.query(`create table tblImageHash ( pageType varchar(4) not null, genderType varchar(1) not null, shopType varchar(1) not null, imgUrl varchar(256) not null, imgId varchar(256) not null )`, (err, result) => {
+        conn.query(`CREATE TABLE tblQnaBoardRec ( board_id int(11) NOT NULL, receiver_id VARCHAR(15) NOT NULL )`, (err, result) => {
             if(err) {
                 console.warn(err);
                 return;
             }
             console.log("테이블 생성 완료");
-        });
+        })
 
         return conn;
     }
 
-    async insertAllData(conn) {
-        try {
-            const query = `insert into tblImageHash(pageType, genderType, shopType, imgUrl, imgId) values(?, ?, ?, ?, ?)`;
-            file.forEach(data => {
-                const {pageType, genderType, shopType, imageData} = data;
-
-                Object.keys(imageData).forEach(key => {
-                    const exec = conn.query(query, [
-                        pageType,
-                        genderType,
-                        shopType,
-                        key,
-                        imageData[key]
-                    ]);                    
-                });
-
-            });
-
-        } catch(e) {
-            console.warn(e);
-        }
+    async alterTable(conn) {
+        conn.query(`ALTER TABLE tblQnaBoardRec ADD CONSTRAINT tblQnaBoardRec_PK PRIMARY KEY(board_id, receiver_id)`, (err, result) => {
+            if(err) {
+                console.warn(err);
+                return;
+            }
+            console.log("테이블 권한 변경 완료");
+        })  
 
         return conn;
-
     }
 }
 
@@ -86,11 +71,10 @@ async function start() {
     try {
         const man = new SQLManagerImpl();
 
-        await man.dropTable().then(async (conn) => {
+        man.dropTable().then(async (conn) => {
             await man.createTable(conn);
-            await man.insertAllData(conn);
-        })
-
+            await man.alterTable(conn);
+        }).then(i => {});
     } catch(e) {
         console.warn(e);
     }

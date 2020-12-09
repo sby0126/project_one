@@ -39,28 +39,31 @@ class SQLManagerImpl {
             }
             console.log("drop table 성공");
         })    
+
+        return this._conn;
     }
 
-    async createTable() {
-        this._conn = await this.createConnection();
-        this._conn.query(`create table tblProduct ( pageType varchar(4) not null, genderType varchar(1) not NULL, shopType varchar(1) not null, shopName varchar(20), texts varchar(80), contentUrl varchar(100) not null, title varchar(50), price varchar(10), term varchar(15) )`, (err, result) => {
+    async createTable(conn) {
+        
+        conn.query(`create table tblProduct ( id int(11) not null auto_increment, pageType varchar(4) not null, genderType varchar(1) not NULL, shopType varchar(1) not null, shopName varchar(20), texts varchar(80), contentUrl varchar(100) not null, title varchar(50), price varchar(10), term varchar(15), CONSTRAINT PRIMARY KEY tblProduct_pk (id) )`, (err, result) => {
             if(err) {
                 console.warn(err);
                 return;
             }
             console.log("테이블 생성 완료");
-        })
+        });
+
+        return conn;
     }
 
-    async getConnection() {
+    async insertAllData(conn) {
         try {
-            this._conn = await this.createConnection();
             const query = `insert into tblProduct(pageType, genderType, shopType, shopName, texts, contentUrl, title, price, term) values(?, ?, ?, ?, ?, ?, ?, ?, ?)`;
             file.forEach(data => {
                 const {pageType, genderType, shopType, contentData} = data;
 
                 contentData.forEach(i => {
-                    const exec = this._conn.query(query, [
+                    const exec = conn.query(query, [
                         pageType,
                         genderType,
                         shopType,
@@ -79,7 +82,7 @@ class SQLManagerImpl {
             console.warn(e);
         }
 
-
+        return conn;
     }
 }
 
@@ -87,9 +90,11 @@ async function start() {
     try {
         const man = new SQLManagerImpl();
 
-        await man.dropTable();
-        await man.createTable();
-        await man.getConnection();
+        await man.dropTable().then(async (conn) => {
+            await man.createTable(conn);
+            await man.insertAllData(conn);
+        })
+        
     } catch(e) {
         console.warn(e);
     }
