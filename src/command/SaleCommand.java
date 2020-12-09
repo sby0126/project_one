@@ -30,7 +30,7 @@ public class SaleCommand extends Command {
 		SaleService saleService = new SaleService();
 		JSONObject data = saleService.getSale(pageType, genderType, shopType);
 		
-		response.setCharacterEncoding("EUC-KR");
+		response.setCharacterEncoding("UTF-8");
 		
 		PrintWriter out = response.getWriter();
 		out.println(data.toJSONString());

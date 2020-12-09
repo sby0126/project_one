@@ -13,7 +13,7 @@ export class DataLoader extends Component {
         const shopType = urlParams.get("shopType") || "S";
         const category = parseInt(urlParams.get("category")) || 100;
         const pg = parseInt(urlParams.get("pg")) || 1;
-        const ages = parseInt(urlParams.get("ages")) || 100;      
+        const ages = parseInt(urlParams.get("ages")) || "all";      
 
         const ret = {
             gndr, shopType, category, pg, ages
@@ -51,9 +51,9 @@ export class DataLoader extends Component {
             // 
             // ${pageType}.do?pageType=${pageType}&shopType=S&gndr=F
             // xhr.open("GET", `json/prebuilt.json`); 
-            xhr.open("GET", `/contents/all.do`);
+            xhr.open("GET", `/contents/${pageType}.do?pageType=${pageType}&shopType=${this.shopType}&gndr=${this.gndr}&category=${this.category}&ages=${this.ages}`);
             xhr.onload = () => {
-                resolve(JSON.parse(xhr.responseText));
+                resolve([].concat(JSON.parse(xhr.responseText)));
             }
             xhr.onerror = (err) => {
                 reject(err);

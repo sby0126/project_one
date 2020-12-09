@@ -22,15 +22,17 @@ public class ItemCommand extends Command {
 		String pageType = request.getParameter("pageType");
 		String genderType = request.getParameter("gndr");
 		String shopType = request.getParameter("shopType");
+		String category = request.getParameter("category");
+		String ages = request.getParameter("ages");		
 		
 		if(!pageType.equals("item")) {
 			return null;
 		}
 		
 		ItemService itemService = new ItemService();
-		JSONObject data = itemService.getItem(pageType, genderType, shopType);
+		JSONObject data = itemService.getItem(pageType, genderType, shopType, category, ages);
 		
-		response.setCharacterEncoding("EUC-KR");
+		response.setCharacterEncoding("UTF-8");
 		
 		PrintWriter out = response.getWriter();
 		out.println(data.toJSONString());

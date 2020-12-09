@@ -19,14 +19,14 @@
                 <!-- 헤더 왼쪽 : 로고 -->
                 <div class="header-left">
                     <div class="" id="logo">
-                        <a href="${pageContext.request.contextPath}"><img src="https://dummyimage.com/64x64/000/fff" alt=""></a>
+                        <a href="${pageContext.request.contextPath}/index.jsp"><img src="https://dummyimage.com/64x64/000/fff" alt=""></a>
                     </div>
                     <a href="#">WOMEN</a>
                     <a href="#">MEN</a>
                 </div>
                 <!-- 헤더 중앙 : 메뉴 -->
                 <div class="header-center">
-                    <a href="${pageContext.request.contextPath}">SHOP</a>
+                    <a href="${pageContext.request.contextPath}/index.jsp">SHOP</a>
                     <a href="${pageContext.request.contextPath}/item.jsp" target="_self">ITEM</a>
                     <a href="${pageContext.request.contextPath}/sale.jsp">SALE</a>
                     <a href="#">MORE</a>

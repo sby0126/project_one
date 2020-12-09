@@ -20,6 +20,26 @@ public class ContentDAO implements IDAO {
 	private static ContentDAO instance = null;
 	private ContentLoader qlList = null;
 	
+	public final String[] CATEGORY = {
+        "", 
+        "트렌드", 
+        "댄디", 
+        "유니크", 
+        "레플리카·제작", 
+        "스트릿", 
+        "클래식수트", 
+        "빅사이즈", 
+        "슈즈", 
+        "액세서리"				
+	};
+	
+	public final String[] AGES = {
+			"",
+			"10대",
+			"20대",
+			"30대"
+	};
+	
 	private ContentDAO() {
 		create();
 	}
@@ -53,6 +73,24 @@ public class ContentDAO implements IDAO {
 		return qlList.get(command);
 	}
 	
+	public String getCategory(String typeValue) {
+		try {
+			int type = Integer.parseInt(typeValue);
+			
+			return CATEGORY[type - 100];
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "";
+		
+	}
+	
+	public String getAge(String typeValue) {
+		return typeValue + "대";
+	}
+	
 	/**
 	 * 
 	 * @param pageType
@@ -60,17 +98,53 @@ public class ContentDAO implements IDAO {
 	 * @param shopType
 	 * @return
 	 */
-	public List<ProductVO> getData(String pageType, String genderType, String shopType) {
+	public List<ProductVO> getData(String pageType, String genderType, String shopType, String category, String ages) {
 		
 		ResultSet rs = null;
 		List<ProductVO> list = null;
 		
+		if(category != null) {
+			if(!category.equals("100")) {
+				category = getCategory(category);
+			} else {
+				category = null;
+			}
+		}
+		
+		if(ages != null) {
+			if(!ages.equals("all")) {
+				ages = getAge(ages);
+			} else {
+				ages = null;
+			}
+		}
+		
+		
+		System.out.println("카테고리 : " + category);
+		System.out.println("연령대 : " + ages);
+		
 		try {
 			conn = pool.getConnection();
-			pstmt = conn.prepareStatement(getQL("전체 데이터 추출"));
+			pstmt = conn.prepareStatement(
+					getQL("전체 데이터 추출")
+					+ (category != null ? " AND texts LIKE ?" : "")
+					+ (ages != null ? " AND texts LIKE ?" : "")
+					);
 			pstmt.setString(1, pageType);
 			pstmt.setString(2, genderType);
 			pstmt.setString(3, shopType);
+			
+			int i = 3;
+			
+			if(category != null) {
+				i += 1;
+				pstmt.setString(i, "%" + category + "%");
+			}
+			
+			if(ages != null) {
+				i += 1;
+				pstmt.setString(i, "%" + ages + "%");
+			}			
 			
 			rs = pstmt.executeQuery();
 			list = SQLHelper.putResult(rs, ProductVO.class);
@@ -96,6 +170,7 @@ public class ContentDAO implements IDAO {
 	 * @return
 	 */
 	public List<ProductVO> searchAsAge(String pageType, String genderType, String shopType, String ages) {
+		
 		ResultSet rs = null;
 		List<ProductVO> list = null;
 		
