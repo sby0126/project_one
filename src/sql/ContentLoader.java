@@ -41,6 +41,10 @@ public class ContentLoader {
 		qlList.put("특정 범위의 데이터만 추출", qlList.get("전체 데이터 번호 붙여 추출") 
 					+ " WHERE mytbl.row_number BETWEEN ? AND ?"
 				);
+		
+		qlList.put("번호 붙여 검색", qlList.get("전체 데이터 번호 붙여 추출")
+				+ " AND mytbl.texts LIKE ?");
+		
 	}
 	
 	public String get(String command) {
