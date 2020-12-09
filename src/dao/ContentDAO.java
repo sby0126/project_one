@@ -86,6 +86,15 @@ public class ContentDAO implements IDAO {
 		return list;
 	}
 	
+	/**
+	 * 연령대로 JSON 데이터를 필터링합니다. category
+	 * 
+	 * @param pageType
+	 * @param genderType
+	 * @param shopType
+	 * @param ages
+	 * @return
+	 */
 	public List<ProductVO> searchAsAge(String pageType, String genderType, String shopType, String ages) {
 		ResultSet rs = null;
 		List<ProductVO> list = null;
@@ -111,5 +120,54 @@ public class ContentDAO implements IDAO {
 		
 		return list;
 	}
+	
+	/**
+	 * 카테고리로 검색
+	 * @param pageType
+	 * @param genderType
+	 * @param shopType
+	 * @param category
+	 * @return
+	 */
+	public List<ProductVO> searchAsCategory(String pageType, String genderType, String shopType, String category) {
+		return searchAsAge(pageType, genderType, shopType, category);
+	}	
+	
+	/**
+	 * 연령대로 JSON 데이터를 필터링합니다. category
+	 * 
+	 * @param pageType
+	 * @param genderType
+	 * @param shopType
+	 * @param ages
+	 * @return
+	 */
+	public List<ProductVO> searchAsAny(String pageType, String genderType, String shopType, String category, String ages) {
+		ResultSet rs = null;
+		List<ProductVO> list = null;
+		
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement(getQL("나이 또는 카테고리로 필터링"));
+			pstmt.setString(1, pageType);
+			pstmt.setString(2, genderType);
+			pstmt.setString(3, shopType);
+			pstmt.setString(4, "%" + category + "%");
+			pstmt.setString(5, "%" + ages + "%");
+			
+			rs = pstmt.executeQuery();
+			list = SQLHelper.putResult(rs, ProductVO.class);
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt, rs);
+		}
+		
+		return list;
+	}
+		
 	
 }

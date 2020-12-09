@@ -2,6 +2,12 @@ import {Component} from "./Component.js";
 import {App} from "../app.js";
 import { parseBodyFromString, parseScriptFromString } from "../utils/bodyParser.js";
 
+const AGES = [
+    "all",
+    "10",
+    "20",
+    "30"
+];
 
 export class FilterBoxButtons extends Component {
 
@@ -34,9 +40,27 @@ export class FilterBoxButtons extends Component {
                 container.removeClass("active");
                 $(this).addClass("active");
 
-                // 선택 버튼에 메뉴 인덱스 설정
-                self._ageTabIndex = container.index($(this));
+                const idx = container.index($(this));
+
+                const params = new URLSearchParams(location.search);
+                params.set("ages", AGES[idx]);
+
+                location.search = params.toString();
             });
+
+        const params = new URLSearchParams(location.search);
+
+        if(params.get("ages")) {
+            self._ageTabIndex = AGES.indexOf(params.get("ages"));
+        } else {
+            // 선택 버튼에 메뉴 인덱스 설정
+            self._ageTabIndex = container.index($(this));
+        }            
+
+        const container = $(".header-filter-box-footer-right span")
+            .removeClass("active")
+            .eq(self._ageTabIndex)
+            .addClass("active");
 
         /**
          * @type {HTMLDivElement[]}

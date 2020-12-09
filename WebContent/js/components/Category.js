@@ -89,6 +89,10 @@ export class Category extends Component {
             $(BOX.CATEGORIES).not(this).prop('checked', false);  
             const idx = $(BOX.CATEGORIES).index($(this));
             self.changeIndex(idx);
+
+            const params = new URLSearchParams(location.search);
+            params.set("category", _CATEGORY.Type[Object.keys(_CATEGORY.Type)[idx]]);
+            location.search = params.toString();
         });
 
         // 드랍 박스 화살표 방향을 바꿉니다.
@@ -103,7 +107,7 @@ export class Category extends Component {
         $(BOX.FOOTER_LEFT).on("mouseout", (ev) => {
             $(ev.currentTarget).find("i").removeClass("fa-caret-up");
             $(ev.currentTarget).find("i").addClass("fa-caret-down");
-        })                        
+        })                  
     }
 
     static id() {
