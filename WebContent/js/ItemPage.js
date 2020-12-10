@@ -85,6 +85,8 @@ class ItemPage extends App {
     onLoad() {
         super.onLoad();
 
+        ItemCategory.builder.run(this);
+
         this.emit("loginView:ready");
         this.emit("contents:ready"); 
     }

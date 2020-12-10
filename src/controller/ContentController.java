@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import action.ActionResult;
 import command.AllContentsCommand;
 import command.Command;
+import command.ItemCategoryCommand;
 import command.ItemCommand;
 import command.SaleCommand;
 import command.ShopCommand;
@@ -54,6 +55,10 @@ public class ContentController extends HttpServlet {
 			default:
 			case "/all.do":
 				command = new AllContentsCommand();
+				break;
+			case "/item_category.do":
+				command = new ItemCategoryCommand();
+				break;
 			}
 			
 			result = command.execute(request, response);

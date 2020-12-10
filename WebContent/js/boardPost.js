@@ -481,10 +481,13 @@ class Editor extends Component {
             $(".board-article-contents").html(
                 
                     (function() {
-                        data.contents = data.contents.replace(/&lt;/ig, "<");
-                        data.contents = data.contents.replace(/&gt;/ig, ">");
-                        data.contents = data.contents.replace(/&amp;/ig, ";");
-                        return data.contents;
+                        console.log(data.contents);
+                        let {html} = JSON.parse(data.contents);
+
+                        html = html.replace(/&lt;/ig, "<");
+                        html = html.replace(/&gt;/ig, ">");
+                        html = html.replace(/&amp;/ig, ";");
+                        return html;
                     })()
 
                 );

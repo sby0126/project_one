@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.json.simple.JSONArray;
+
 import core.SQLHelper;
 import sql.ContentLoader;
 import utils.DBConnectionMgr;
@@ -242,6 +244,31 @@ public class ContentDAO implements IDAO {
 		}
 		
 		return list;
+	}
+	
+	public JSONArray getItemCategories() {
+		ResultSet rs = null;
+		JSONArray categories = new JSONArray();
+		
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement(getQL("아이템 카테고리 생성"));
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				categories.add( rs.getString("category") );
+			}
+			
+		}  catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt, rs);
+		}
+		
+		return categories;
 	}
 		
 	

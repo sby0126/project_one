@@ -1,3 +1,5 @@
+<%@page import="java.net.URLEncoder"%>
+<%@page import="java.net.URLDecoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -88,7 +90,7 @@
                 	<input type="hidden" id="type" value="<%=type%>">
                 	<input type="hidden" id="postNumber" value="<%= request.getParameter("postNumber") %>">
                 	<input type="hidden" id="title" value="<%=title %>">
-                	<input type="hidden" id="contents" value="<%=contents%>">
+                	<input type="hidden" id="contents" value="<%=URLEncoder.encode( contents )%>">
                 	
                     <button class="button" id="upload-ok">작성</button>
                     <button class="button" id="upload-cancel">취소</button>

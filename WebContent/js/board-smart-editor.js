@@ -61,10 +61,16 @@
 		$("#input-item-title").val(text);	
 		$(".contents-item-title span").css("visibility", "hidden");
 	}
-	
+    
+    /**
+     * 게시물을 Quill 라이브러리의 델타 오브젝트로 채우는 기능입니다.
+     * 
+     * @param {Object} text 
+     */
 	function setContent(text) {
-		// quill.setContents(text);
-		quill.root.innerHTML = text;
+        text = JSON.parse(decodeURIComponent(text.replace(/\+/g, ' ')));
+        const contents = text.contents;
+        quill.setContents(contents);
     }
     
     const type = $("#type").val() || "none";
@@ -74,14 +80,6 @@
 
         let contents = $("#contents").val();
 
-        (function() {
-            contents = contents.replace(/&lt;/ig, "<");
-            contents = contents.replace(/&gt;/ig, ">");
-            contents = contents.replace(/&amp;/ig, ";");
-            return contents;
-        })()
-
-        // setContent(JSON.parse(contents));
 		setContent(contents);    
 	}
 	
@@ -104,7 +102,6 @@
                 processData: false,
                 contentType: false,
                 success: function (data) {
-                    console.log(data);
                     const range = quill.getSelection();
                     quill.insertEmbed(range.index, 'image', "/uploads/" + data.url);
                 },
@@ -135,8 +132,10 @@
 			type,
             title: $("#input-item-title").val(),
             src: "",
-			contents: $("<div>").text(quill.root.innerHTML).html(),
-			// contents: JSON.stringify(quill.getContents())
+			contents: JSON.stringify({
+                html: quill.root.innerHTML,
+                contents: quill.getContents(),
+            })
         };
 
         let prevJson = JSON.stringify(result);
@@ -196,5 +195,7 @@
             });
         }
     }
+
+    window.quill = quill;
 
 })();

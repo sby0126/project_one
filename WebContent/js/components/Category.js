@@ -67,6 +67,33 @@ export class Category extends Component {
         this.changeIndex( parseInt(category) - _CATEGORY.Type.ALL );
     }
 
+    /**
+     * 카테고리를 데이터로부터 생성합니다.
+     * 
+     * @param {String[]} data
+     */
+    createManually(data) {
+        if(!data) {
+            return;
+        }
+        
+        const container = $(".header-filter-box-left-dropdown-menu-content dl");
+
+        // 카테고리 초기화
+        container.empty();
+
+        if(!Array.isArray(data)) {
+
+            data.forEach(k => {
+                // 카테고리 생성
+                container.append(`
+                    <dd><label><input class="header-filter-box-left-shop-categories" type="checkbox" name="categories"><span>${k}</span></label></dd>
+                `);
+            })
+        }
+
+    }
+
     changeIndex(idx) {            
         // 카테고리 명을 변경합니다.
         $(`${BOX.BUTTON} em`).text( _CATEGORY.KEYS[idx] );   
