@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ page import="java.net.URLDecoder" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <!DOCTYPE html>
 <%
 	String key = (String)session.getAttribute("key");
@@ -47,10 +48,14 @@
                            		if(sessionKey.equals(passedKey)) {
                            			session.setAttribute("id", session.getAttribute("tempId"));
                            			session.removeAttribute("tempId");
+                           			
+                           			String fakePassword = "0";
+                           			
                            	%>
+                           		<c:set var="password" value="<%= fakePassword %>" />
                            		<div>
                            			<p> 인증되었습니다 </p><br>
-                           			<p> 변경된 비밀번호는 <strong></strong>입니다</p>
+                           			<p> 변경된 비밀번호는 <strong>${ fakePassword }</strong>입니다</p>
                            		</div>
                            	<%
 

@@ -4,11 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import sql.CustomerSQL;
@@ -203,47 +199,7 @@ public class CustomerDAO implements IDAO {
 		}
 		return adminators;
 	}
-	
-	/**
-	 * 로그인 시간을 업데이트 합니다.
-	 * @param memberID
-	 * @return
-	 */
-	public boolean updateLastLogin(String memberID) {
 		
-		String formatedDate = "";
-		boolean ret = false;
-		
-		try {
-			// 현재 시각을 구합니다.
-			LocalDateTime dateTime = LocalDateTime.now();
-			
-			// LocalDateTime toString과 동일
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-			formatedDate = dateTime.format(formatter);
-			
-			System.out.println(formatedDate);
-			
-			conn = pool.getConnection();
-			
-			pstmt = conn.prepareStatement("update tblCustomer set LAST_LOGIN = ? where CTMID = ?");
-			pstmt.setString(1, formatedDate);
-			pstmt.setString(2, memberID);
-			
-			if(pstmt.executeUpdate() > 0) {
-				ret = true;
-			}
-			
-			
-		} catch(SQLException | DateTimeParseException e) {
-			e.printStackTrace();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		return ret;
-	}
-	
 	public boolean processLogin(String id, String pw) {
 		boolean ret = false;
 		ResultSet rs = null;
@@ -357,21 +313,113 @@ public class CustomerDAO implements IDAO {
 		}
 	}
 	
-	public void changePassword(String id, String password) {
+	/**
+	 * 마지막 시간을 업데이트 합니다.
+	 * @param id
+	 */
+	public boolean updateLastLogin(String id) {
+		boolean ret = false;
+		
 		try {
 			conn = pool.getConnection();
+			String query = "UPDATE tblCustomer SET last_login = NOW() WHERE ctmid = ?";
 			
-			String salt = SHA256Util.generateSalt();
+			pstmt = conn.prepareStatement(query);	
+			pstmt.setString(1, id);
 			
-			// Salt 값과 비밀번호를 통해 단방향 암호화를 한 후, 이 값을 DB에 저장합니다.
-			String hashedPassword = SHA256Util.getEncrypt(password, salt);
+			if(pstmt.executeUpdate() > 0) {
+				ret = true;
+				conn.commit();
+			} else {
+				conn.rollback();
+			}			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+		return ret;
+	}
+	
+	/**
+	 * ID와 이메일이 DB에 있는지 확인합니다. 
+	 *  
+	 * @param id
+	 * @param email
+	 * @return
+	 */
+	public boolean checkWithIdAndEmail(String id, String email) {
+		boolean isValidID = !this.isInvalidID(id);
+		boolean isValidEmail = false;
+		
+		ResultSet rs = null;
+		
+		try {
 			
+			conn = pool.getConnection();
+			String query = "select CTMID, EMAIL from tblCustomer where ctmid = ? and email = ?";
 			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "id");
+			pstmt.setString(2, email);
+			
+			rs = pstmt.executeQuery();
+			
+			isValidEmail = rs.next();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
 		}
+		
+		return isValidID && isValidEmail;
+	}
+	
+	/**
+	 * 비밀번호를 변경합니다.
+	 * 
+	 * @param id
+	 * @param password
+	 */
+	public boolean changePassword(String id, String password) {
+		
+		boolean ret = false;
+		
+		try {
+			conn = pool.getConnection();
+			
+			String query = "update set ctmid = ?, ctmpw = ?, salt = ? from tblcustomer";
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			
+			String salt = SHA256Util.generateSalt();			
+			String hashedPassword = SHA256Util.getEncrypt(password, salt);
+			
+			pstmt.setString(2, hashedPassword);
+			pstmt.setString(3, salt);
+			
+			if(pstmt.executeUpdate() > 0) {
+				ret = true;
+				conn.commit();
+			} else {
+				conn.rollback();
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+		return ret;
 	}
 }
