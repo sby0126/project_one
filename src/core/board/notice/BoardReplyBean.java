@@ -2,39 +2,39 @@ package core.board.notice;
 
 public class BoardReplyBean {
 	
-	private	int rpyno;
-	private String rprnm;
-	private String rpyctxt;
-	private int rpos;
+	private	int replyno;
+	private String replynm;
+	private String replyctxt;
+	private int replypos;
 	private int ref;
 	private int depth;
-	private String rpydate;
-	private String rpwd;
+	private String replydate;
+	private String replypwd;
 	
 	
-	public int getRpyno() {
-		return rpyno;
+	public int getReplyno() {
+		return replyno;
 	}
-	public void setRpyno(int rpyno) {
-		this.rpyno = rpyno;
+	public void setReplyno(int replyno) {
+		this.replyno = replyno;
 	}
-	public String getRprnm() {
-		return rprnm;
+	public String getReplynm() {
+		return replynm;
 	}
-	public void setRprnm(String rprnm) {
-		this.rprnm = rprnm;
+	public void setReplynm(String replynm) {
+		this.replynm = replynm;
 	}
-	public String getRpyctxt() {
-		return rpyctxt;
+	public String getReplyctxt() {
+		return replyctxt;
 	}
-	public void setRpyctxt(String rpyctxt) {
-		this.rpyctxt = rpyctxt;
+	public void setReplyctxt(String replyctxt) {
+		this.replyctxt = replyctxt;
 	}
-	public int getRpos() {
-		return rpos;
+	public int getReplypos() {
+		return replypos;
 	}
-	public void setRpos(int rpos) {
-		this.rpos = rpos;
+	public void setReplypos(int replypos) {
+		this.replypos = replypos;
 	}
 	public int getRef() {
 		return ref;
@@ -48,17 +48,17 @@ public class BoardReplyBean {
 	public void setDepth(int depth) {
 		this.depth = depth;
 	}
-	public String getRpydate() {
-		return rpydate;
+	public String getReplydate() {
+		return replydate;
 	}
-	public void setRpydate(String rpydate) {
-		this.rpydate = rpydate;
+	public void setReplydate(String replydate) {
+		this.replydate = replydate;
 	}
-	public String getRpwd() {
-		return rpwd;
+	public String getReplypwd() {
+		return replypwd;
 	}
-	public void setRpwd(String rpwd) {
-		this.rpwd = rpwd;
-	}	
-	
+	public void setReplypwd(String replypwd) {
+		this.replypwd = replypwd;
+	}
+		
 }
