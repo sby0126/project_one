@@ -62,6 +62,7 @@ public class SendMailService {
 		
 		// 주의: 이메일 비밀번호가 여과 없이 깃허브에 노출될 수 있습니다.
 		// (테스트용 지메일이 실제로 필요합니다)
+		// 계정에서 보안 관련 설정을 추가로 해야 합니다.
 		String SMTP_PASSWORD = configFile.getProperty("mail.password");
 		
 		int PORT = Integer.parseInt(configFile.getProperty("mail.port"));

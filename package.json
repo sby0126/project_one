@@ -33,6 +33,7 @@
     "minimist": "^1.2.5",
     "mocha": "^8.2.1",
     "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
     "oracledb": "^5.0.0",
     "request": "^2.88.2",
     "selenium-webdriver": "^4.0.0-alpha.7",

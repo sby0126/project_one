@@ -23,28 +23,36 @@
             <div class="contents-wrapper">
                 <div class="find-password-wrapper">
                     <h3>비밀번호 찾기</h3>
-                    <form action="findPassword.jsp">
+                    <form action="/findPassword.do">
                         <ul>
                             <li>
-                                <strong>회원 유형</strong>
-                                <span>
-                                    <select name="searchType" id="searchType">
-                                        <option value="public" selected="selected">개인 회원</option>
-                                        <option value="corp" selected="selected">법인 사원자 회원</option>
-                                    </select>
-                                </span>
+                            	<div>
+                                	<div id="id-message">
+                                		비밀번호를 찾고자 하는 아이디를 입력해 주세요.
+                                	</div>                            	                             	
+                            	</div>
+                            	<div>
+                                	<strong>아이디</strong>
+                     				<span>
+                            			<input type="text" id="id" autocomplete="id">
+                            		</span>          
+                            	</div>
                             </li>
                             <li>
-                                <strong>아이디</strong>
-                                <span><input type="text" id="id"></span>
+                           	<div>
+                               	<div id="pw-message">
+                               		본인을 인증할 이메일 주소를 적어주세요.
+                               	</div>                            	                             	                     
+                            	<div>
+                            		<strong>이메일 : </strong>
+                            		<span><input type="text" id="email" autocomplete="email"></span>
+                            	</div>
                             </li>
-                            <li><strong>이름</strong><span><input type="text" id="name"></span></li>
-                            <li><strong>이메일로 찾기</strong><span><input type="text" id="email"></span></li>
                         </ul>
                         <div class="find-password-button-container">
-                            <input type="submit" value="확인" id='ok'>
+                            <input type="submit" value="다음" id='ok'>
                         </div>
-                    </form>
+                    </form>              
                 </div>
             </div>
         </section>
