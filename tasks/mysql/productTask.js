@@ -1,7 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 const file = require("../../WebContent/json/prebuilt.json");
-const mysql = require("mysql");
+const mysql = require("mysql2");
 
 class SQLManagerImpl {
 
