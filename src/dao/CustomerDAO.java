@@ -352,7 +352,7 @@ public class CustomerDAO implements IDAO {
 	 * @return
 	 */
 	public boolean checkWithIdAndEmail(String id, String email) {
-		boolean isValidID = !this.isInvalidID(id);
+		boolean isValidID = this.isInvalidID(id);
 		boolean isValidEmail = false;
 		
 		ResultSet rs = null;
@@ -363,7 +363,7 @@ public class CustomerDAO implements IDAO {
 			String query = "select CTMID, EMAIL from tblCustomer where ctmid = ? and email = ?";
 			
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "id");
+			pstmt.setString(1, id);
 			pstmt.setString(2, email);
 			
 			rs = pstmt.executeQuery();
@@ -394,16 +394,16 @@ public class CustomerDAO implements IDAO {
 		try {
 			conn = pool.getConnection();
 			
-			String query = "update set ctmid = ?, ctmpw = ?, salt = ? from tblcustomer";
+			String query = "update tblcustomer set ctmpw = ?, salt = ? where ctmid = ?";
 			
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, id);
 			
 			String salt = SHA256Util.generateSalt();			
 			String hashedPassword = SHA256Util.getEncrypt(password, salt);
 			
-			pstmt.setString(2, hashedPassword);
-			pstmt.setString(3, salt);
+			pstmt.setString(1, hashedPassword);
+			pstmt.setString(2, salt);
+			pstmt.setString(3, id);
 			
 			if(pstmt.executeUpdate() > 0) {
 				ret = true;

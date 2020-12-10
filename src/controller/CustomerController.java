@@ -97,6 +97,10 @@ public class CustomerController extends HttpServlet {
 			
 			// 로그인 성공 처리
 			if(isValidLogin) {
+				
+				// 최근 로그인 시간 업데이트
+				customerDAO.updateLastLogin(id);
+				
 				HttpSession session  = request.getSession();
 				session.setAttribute("id", id);
 				response.sendRedirect("/");

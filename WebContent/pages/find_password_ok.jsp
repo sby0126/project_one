@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
-<%@ page import="java.net.URLDecoder" %>
+<%@ page import="java.net.URLDecoder, service.SendMailService, dao.CustomerDAO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <!DOCTYPE html>
 <%
@@ -46,19 +46,21 @@
                            	<div>
                            	<%
                            		if(sessionKey.equals(passedKey)) {
-                           			session.setAttribute("id", session.getAttribute("tempId"));
-                           			session.removeAttribute("tempId");
-                           			
-                           			String fakePassword = "0";
-                           			
+                           			String fakePassword = SendMailService.getRandomPassword(session.getId());
+                           			String id = (String)session.getAttribute("tempId");
+                           			// 비밀 번호 변경 처리
+                           			CustomerDAO cust = CustomerDAO.getInstance();
+                           			boolean isChangedOK = cust.changePassword(id, fakePassword);
                            	%>
+                           		<c:set var="id" value="<%= id %>" />
                            		<c:set var="password" value="<%= fakePassword %>" />
                            		<div>
                            			<p> 인증되었습니다 </p><br>
-                           			<p> 변경된 비밀번호는 <strong>${ fakePassword }</strong>입니다</p>
+                           			<p> ${id}님의 변경된 비밀번호는 <strong>${ password }</strong>입니다</p>
                            		</div>
                            	<%
 
+                           		// Remove a key from the session.
                            		session.removeAttribute("key");
                            		} else {
                            	%>

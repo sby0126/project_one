@@ -2,7 +2,6 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.security.MessageDigest;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
+import dao.CustomerDAO;
 
 @WebServlet("/password/findPassword.do")
 public class FindPasswordController extends HttpServlet {
@@ -31,26 +30,39 @@ public class FindPasswordController extends HttpServlet {
 			// MessageDigest md5Chipper = MessageDigest.getInstance("md5");
 			
 			String id = request.getParameter("id");
+			String email = request.getParameter("email");
+			String nextPage = null;
 			
+			// 임시 번호를 MD5로 발급합니다 (주석 처리)
 			// byte[] bytesOfMessage = id.getBytes("UTF-8");
 			// byte[] thedigest = md5Chipper.digest(bytesOfMessage);
 			
+			// 임시 번호를 발급합니다.
 			String thedigest = String.valueOf( (int)(Math.floor(10000 + Math.random() * 30000)) ); 
 			
-			System.out.println("아이디는 " + id);
-			System.out.println("이메일은 " + request.getParameter("email"));
-			
 			// DB 상의 ID와 이메일이 일치하는 지 확인
+			boolean isValid = CustomerDAO.getInstance().checkWithIdAndEmail(id, email);
 			
+			if(isValid) {
+				// 키를 보냅니다.
+				request.setAttribute("key", thedigest.toString());
+				nextPage = "/password/sendMail.do";
+			} else {
+				// 수동으로 오류 처리
+				PrintWriter out = response.getWriter();
+				request.setCharacterEncoding("EUC-KR");
+				out.println("<script charset='utf-8'>alert('존재하지 않는 아이디 또는 이메일입니다');");
+				out.println("location.href='" + request.getContextPath() + "/pages/find_password.jsp" +"'");
+				out.println("</script>");
+				return;
+			}
 			
-			// 키를 보냅니다.
-			request.setAttribute("key", thedigest.toString());
-			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/password/sendMail.do");
-			dispatcher.forward(request, response);
-			
+			// 포워드 처리
+			RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
+			dispatcher.forward(request, response);			
+						
 		} catch(Exception e) {
-			
+			e.printStackTrace();
 		}
 		
 	}

@@ -6,7 +6,13 @@ public class MailHandler {
 
 	private String subject;
 	private String body;
-	
+
+	/**
+	 * 
+	 * @param to 받는 사람
+	 * @param subject 제목
+	 * @param body 본문
+	 */
 	public MailHandler(String to, String subject, String body) {
 		this.to = to;
 		this.subject = subject;

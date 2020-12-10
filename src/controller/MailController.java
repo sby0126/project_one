@@ -2,7 +2,6 @@ package controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -46,8 +45,11 @@ public class MailController extends HttpServlet {
 			
 			HttpSession session = request.getSession();
 			
+			// 메일 발송에 성공하였으므로 인증 키를 세션에 저장합니다.
 			session.setAttribute("key", key);
-			request.setAttribute("tempId", id);
+			
+			// 아이디를 세션에 저장합니다.
+			session.setAttribute("tempId", id);
 			
 			response.sendRedirect("/pages/find_password_ok.jsp");
 			

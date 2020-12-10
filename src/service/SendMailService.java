@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.security.MessageDigest;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -103,6 +104,22 @@ public class SendMailService {
             transport.close();
         }	
         
+	}
+	
+	public static String getRandomPassword(String key) {
+		String password = ""; 
+		try {
+			 MessageDigest md5Chipper = MessageDigest.getInstance("md5");
+			 byte[] bytesOfMessage = key.getBytes("UTF-8");
+			 byte[] digest = md5Chipper.digest(bytesOfMessage);	
+			 
+			 password = digest.toString();
+			 
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return password;
 	}
 		
 }
