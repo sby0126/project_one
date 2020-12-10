@@ -1,6 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="java.net.URLDecoder" %>
 <!DOCTYPE html>
 <%
+	String key = (String)session.getAttribute("key");
+
+	String sessionKey = (String)session.getAttribute("key");
+	String passedKey = request.getParameter("auth");
+	
+	if(sessionKey == null) {
+		sessionKey = "";
+	}
+	
+	if(passedKey == null) {
+		passedKey = "";
+	}
+
 %>
 <html lang="ko">
 <head>
@@ -25,34 +39,38 @@
             <div class="contents-wrapper">
                 <div class="find-password-wrapper">
                     <h3>비밀번호 찾기</h3>
-                    <form action="/password/findPassword.do">
+                    <form>
                         <ul>
                             <li>
-                            	<div>
-                                	<div id="id-message">
-                                		비밀번호를 찾고자 하는 아이디를 입력해 주세요.
-                                	</div>                            	                             	
-                            	</div>
-                            	<div>
-                                	<strong>아이디</strong>
-                     				<span>
-                            			<input type="text" id="id" name="id" autocomplete="id">
-                            		</span>          
-                            	</div>
-                            </li>
-                            <li>
                            	<div>
+                           	<%
+                           		if(sessionKey.equals(passedKey)) {
+                           			session.setAttribute("id", session.getAttribute("tempId"));
+                           			session.removeAttribute("tempId");
+                           	%>
+                           		<div>
+                           			<p> 인증되었습니다 </p><br>
+                           			<p> 변경된 비밀번호는 <strong></strong>입니다</p>
+                           		</div>
+                           	<%
+
+                           		session.removeAttribute("key");
+                           		} else {
+                           	%>
                                	<div id="pw-message">
-                               		본인을 인증할 이메일 주소를 적어주세요.
+                               		메일로 전송 받은 인증 번호를 입력해주세요.
                                	</div>                            	                             	                     
                             	<div>
                             		<strong>이메일 : </strong>
-                            		<span><input type="text" id="email" name="email" autocomplete="email"></span>
+                            		<span><input type="text" id="auth" name="auth" autocomplete="auth"></span>
                             	</div>
+                            <%
+                           		}                            	
+                            %>
                             </li>
                         </ul>
                         <div class="find-password-button-container">
-                            <input type="submit" value="다음" id='ok'>
+                            <input type="submit" value="확인" id='ok'>
                         </div>
                     </form>              
                 </div>
@@ -69,9 +87,7 @@
         // 작성되지 않은 항목 체크
         $("#ok").on("click", (ev) => {
             let list = [
-                document.querySelector("#id").value.length > 0,
-                document.querySelector("#name").value.length > 0,
-                document.querySelector("#email").value.length > 0,
+                document.querySelector("#auth").value.length > 0,
             ];
 
             const isValid = list.every(e => !!e == true);

@@ -357,4 +357,21 @@ public class CustomerDAO implements IDAO {
 		}
 	}
 	
+	public void changePassword(String id, String password) {
+		try {
+			conn = pool.getConnection();
+			
+			String salt = SHA256Util.generateSalt();
+			
+			// Salt 값과 비밀번호를 통해 단방향 암호화를 한 후, 이 값을 DB에 저장합니다.
+			String hashedPassword = SHA256Util.getEncrypt(password, salt);
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

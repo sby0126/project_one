@@ -3,14 +3,12 @@ package vo;
 public class MailHandler {
 	
 	private String to;
-	private String username;
 
 	private String subject;
 	private String body;
 	
-	public MailHandler(String to, String username, String subject, String body) {
+	public MailHandler(String to, String subject, String body) {
 		this.to = to;
-		this.username = username;
 		this.subject = subject;
 		this.body = body;
 	}
@@ -38,13 +36,5 @@ public class MailHandler {
 	public void setBody(String body) {
 		this.body = body;
 	}
-	
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}	
 
 }

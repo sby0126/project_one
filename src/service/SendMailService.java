@@ -22,15 +22,15 @@ public class SendMailService {
 	static final String CONFIGSET = "ConfigSet";
 	static final int PORT = 587;
 		
-	public SendMailService() {
+	public SendMailService(String realPath) {
 		// db.properties 파일은 보안 우려로 추후에 깃허브에서 제거됩니다.  
-		configFilePath = Paths.get( System.getProperty("user.dir"), "db.properties" ).toString();
+		configFilePath = Paths.get( realPath ).toString();
+		
+		System.out.println(configFilePath);
 	}
 	
 	public void loadConfig() {
 		try {
-			
-			System.out.println( System.getProperty("user.dir") );
 			
 			FileInputStream fis = new FileInputStream(configFilePath);
 			configFile = new Properties();
@@ -79,7 +79,7 @@ public class SendMailService {
         msg.setFrom(new InternetAddress(FROM,FROMNAME));
         msg.setRecipient(Message.RecipientType.TO, new InternetAddress(handler.getTo()));
         msg.setSubject(handler.getSubject());
-        msg.setContent(handler.getBody(),"text/html");
+        msg.setContent(handler.getBody(),"text/html; charset=UTF-8");
         
         msg.setHeader("X-SES-CONFIGURATION-SET", CONFIGSET);
             
@@ -89,7 +89,7 @@ public class SendMailService {
         {
             System.out.println("이메일 전송에 실패하였습니다.");
             
-            transport.connect(HOST, handler.getUsername(), SMTP_PASSWORD);
+            transport.connect(HOST, FROMNAME, SMTP_PASSWORD);
         	
             transport.sendMessage(msg, msg.getAllRecipients());
             System.out.println("이메일 전송에 성공하였습니다.");
