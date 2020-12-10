@@ -12,6 +12,7 @@ detail-item-uploader.jsp
 detail.jsp
 error.jsp
 find_password.jsp
+find_password_ok.jsp
 header.jsp
 infopolicy.jsp
 join.jsp
