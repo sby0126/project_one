@@ -63,6 +63,7 @@
 	}
 	
 	function setContent(text) {
+		// quill.setContents(text);
 		quill.root.innerHTML = text;
     }
     
@@ -80,7 +81,8 @@
             return contents;
         })()
 
-        setContent(contents);    
+        // setContent(JSON.parse(contents));
+		setContent(contents);    
 	}
 	
     /**
@@ -128,11 +130,13 @@
             return false;
         }
 
+        // https://stackoverflow.com/questions/54835375/how-to-edit-and-save-my-html-file-using-quill
         const result = {
 			type,
             title: $("#input-item-title").val(),
             src: "",
-            contents: $("<div>").text(quill.root.innerHTML).html()
+			contents: $("<div>").text(quill.root.innerHTML).html(),
+			// contents: JSON.stringify(quill.getContents())
         };
 
         let prevJson = JSON.stringify(result);
