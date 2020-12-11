@@ -36,9 +36,9 @@
                                 <td><img src="#" class="product-img"></td> <!-- 구매할 상품 이미지 -->
                                 <td><a href="#"><p class="product-name">상품명 1234</p></a> </td> <!-- 구매할 상품 이름 -->
                                 <td><input type="number" class="product-num" placeholder="1"></td> <!-- 구매 갯수 -->
-                                <td><P name="product-price"> 가격 </P></td> <!-- 상품 가격-->
-                                <td><P name="product-price"> 할인 </P></td> <!-- 할인 -->
-                                <td><P class="product-price">price 원</P> </td> <!-- 상품 금액 -->
+                                <td><P class="product-price"> 가격 </P></td> <!-- 상품 가격-->
+                                <td><P class="product-discnt"> 할인 </P></td> <!-- 할인 -->
+                                <td><P class="product-rltprice">price 원</P> </td> <!-- 상품 금액 -->
                             </tr>
                         </table>
                     </form>
@@ -52,8 +52,8 @@
                     </div>
                 </div>
                 <div class="button-zone"> <!-- 장바구니 내 추가 액션에 대한 버튼 -->
-                    <button class="buy-product">구매</button>
-                    <button class="del-product">삭제</button>
+                    <button class="buy-product" onclick="">구매</button>
+                    <button class="del-product" onclick="del()">삭제</button>
                 </div>
             </div>
         </section>
@@ -63,5 +63,15 @@
     </div>
     <!-- 스크립트 --> 
     <script type="module" src="../js/MorePage.js"></script>
+    <script type="module" src="../js/components/ItemdDetailLoaderCart.js"></script>
+    <script>
+
+        function del(){
+            if ($('.chkbox').prop()) {
+                $('chkbox').parent().parent().remove();
+            }
+        }
+        
+    </script>
 </body>
 </html>

@@ -120,7 +120,7 @@
                             <!-- 6. 총상품금액 -->
                             <li><span>총상품금액</span><span class="allPrice">종합가격(데이터)</span></li>
                             <!-- 7. 구매하기.장바구니 버튼 -->
-                            <li><div><button class="detail_button" type="button" onclick="location.href='payments.jsp'">구매하기</button><button class="detail_button" type="button" onclick="location.href='cart.jsp'">장바구니</button></div></li>
+                            <li><div><button class="detail_button" type="button" onclick="location.href='pages/payment.jsp?date=${Date.now()}&title=${title}&price=${price}&shop=${shop}&dataId=${dataId}'">구매하기</button><button class="detail_button" type="button" onclick="location.href='pages/cart.jsp?date=${Date.now()}&title=${title}&price=${price}&shop=${shop}&dataId=${dataId}'">장바구니</button></div></li>
                         </ul>
                     </div>
                     
