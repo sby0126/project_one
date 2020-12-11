@@ -192,7 +192,7 @@ img, a {
 					</div>
 
 					<form class="form-horizontal col-sm-8"
-						action="/members/modifyMember.do" onclick="return false;">
+						action="/members/modifyMember.do">
 						<input type="hidden" name="id" value="${member.getId()}">
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="email">이메일:</label>
@@ -246,7 +246,7 @@ img, a {
 									autocomplete="street-address" value="${member.getAddress() }">
 							</div>
 							<div class="col-sm-2">
-								<button class="btn btn-default" onclick="searchAddress(this)">주소
+								<button class="btn btn-default" onclick="searchAddress(this); return false;">주소
 									검색 하기</button>
 							</div>
 						</div>

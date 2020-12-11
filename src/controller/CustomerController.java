@@ -85,12 +85,42 @@ public class CustomerController extends HttpServlet {
 		} else if(act.equals("/modifyMember.do")) { 
 			// 회원 정보 수정
 			
+			HttpSession session = request.getSession();
+			
+			String id = (String)session.getAttribute("id");
 			String email = request.getParameter("email");
 			String pw = request.getParameter("pw");
 			String name = request.getParameter("name");
 			String tel = request.getParameter("tel");
 			String zipcode = request.getParameter("zipcode");
 			String address = request.getParameter("address");
+			
+			CustomerVO vo = customerDAO.getMember(id);
+			
+			if(customerDAO.checkWithIdAndEmail(id,  email)) {
+				request.setAttribute("errorMessage", "아이디와 이메일이 이미 존재합니다.");
+				request.setAttribute("url", "/");
+				nextPage = "/pages/error.jsp";
+				
+				RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
+				dispatcher.forward(request, response);
+				
+				return;
+			}
+			
+			vo.setEmail(email);
+			vo.setPassword(pw);
+			vo.setName(name);
+			vo.setTel(tel);
+			vo.setZipCode(zipcode);
+			vo.setAddress(address);
+			
+			if(customerDAO.updateCustomer(vo)) {
+				response.sendRedirect("/");
+				return;
+			} 
+			
+			nextPage = "/";
 			
 			
 		}  else if(act.equals("/login.do")) { 
@@ -112,11 +142,11 @@ public class CustomerController extends HttpServlet {
 				
 				HttpSession session  = request.getSession();
 				session.setAttribute("id", id);
-				response.sendRedirect("/");
+				response.sendRedirect("/index.jsp");
 				return;				
 			} else {
 				request.setAttribute("errorMessage", "[Error 4] 아이디 또는 비밀번호가 틀렸습니다.");
-				request.setAttribute("url", "/");
+				request.setAttribute("url", "/index.jsp");
 				nextPage = "/pages/error.jsp";
 			}
 			

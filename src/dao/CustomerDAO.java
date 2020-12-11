@@ -310,7 +310,43 @@ public class CustomerDAO implements IDAO {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
 		}
+	}
+	
+	public boolean updateCustomer(CustomerVO c) {
+		
+		boolean ret = false;
+		
+		try {
+			conn = pool.getConnection();
+			
+			String query = "update tblCustomer set CTMPW = ?, CTMNM = ?, ADDR = ?, TEL = ?, ZIPCODE = ?, SALT = ? where CTMID = ?";
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, c.getPassword());
+			pstmt.setString(2, c.getName());
+			pstmt.setString(3, c.getAddress());
+			pstmt.setString(4, c.getTel());
+			pstmt.setString(5, c.getZipCode());
+			pstmt.setString(6, c.getSalt());
+			pstmt.setString(7, c.getId());
+			
+			if(pstmt.executeUpdate() > 0) {
+				ret = true;
+				conn.commit();
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+		return ret;
 	}
 	
 	/**
