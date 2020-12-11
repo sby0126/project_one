@@ -35,6 +35,10 @@ public class ContentDAO implements IDAO {
         "액세서리"				
 	};
 	
+	public final String[] ITEM_CATEGORY = {
+			"", "상의", "아우터", "하의", "트레이닝", "수트", "신발", "아우터 수트", "가방", "액세서리"			
+	};
+	
 	public final String[] AGES = {
 			"",
 			"10대",
@@ -75,18 +79,20 @@ public class ContentDAO implements IDAO {
 		return qlList.get(command);
 	}
 	
-	public String getCategory(String typeValue) {
-		try {
-			int type = Integer.parseInt(typeValue);
+	public String getCategory(String pageType, String typeValue) {
+		int type = 100;
+		
+		switch(pageType) {
+		default:
+		case "shop":
+			type = Integer.parseInt(typeValue);
 			
-			return CATEGORY[type - 100];
+			return CATEGORY[type - 100];			
+		case "item":
+			type = Integer.parseInt(typeValue);
 			
-		} catch(Exception e) {
-			e.printStackTrace();
+			return ITEM_CATEGORY[type - 100];
 		}
-		
-		return "";
-		
 	}
 	
 	public String getAge(String typeValue) {
@@ -107,7 +113,7 @@ public class ContentDAO implements IDAO {
 		
 		if(category != null) {
 			if(!category.equals("100")) {
-				category = getCategory(category);
+				category = getCategory(pageType, category);
 			} else {
 				category = null;
 			}

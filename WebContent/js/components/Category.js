@@ -14,18 +14,7 @@ const _CATEGORY = {
         SHOES: 108,
         ACCESSORY: 109,
     },
-    KEYS: [
-        "",  // 100
-        "트렌드", 
-        "댄디·심플", 
-        "유니크·빈티지", 
-        "레플리카·제작", 
-        "스트릿·도매스틱", 
-        "클래식수트", 
-        "빅사이즈", 
-        "슈즈", 
-        "액세서리·잡화" // 109
-    ]
+    KEYS: Array.from(document.querySelectorAll("dd span")).map(i => i.innerHTML == "ALL" ? "" : i.innerHTML.trim())
 };
 
 const BOX = {
@@ -60,38 +49,11 @@ export class Category extends Component {
 
         // 주소에 카테고리 매개변수가 있으면 파싱하여 이에 맞는 카테고리로 변경합니다.
         const category = this._urlParam.category;
-        const key = getKeyByValue( _CATEGORY.Type, category );
-        this._type = _CATEGORY.Type[ key ];
+        // const key = getKeyByValue( _CATEGORY.Type, category );
+        // this._type = _CATEGORY.Type[ key ];
 
         // 카테고리 인덱스를 0 ~ 9 사이로 변경합니다.
-        this.changeIndex( parseInt(category) - _CATEGORY.Type.ALL );
-    }
-
-    /**
-     * 카테고리를 데이터로부터 생성합니다.
-     * 
-     * @param {String[]} data
-     */
-    createManually(data) {
-        if(!data) {
-            return;
-        }
-        
-        const container = $(".header-filter-box-left-dropdown-menu-content dl");
-
-        // 카테고리 초기화
-        container.empty();
-
-        if(!Array.isArray(data)) {
-
-            data.forEach(k => {
-                // 카테고리 생성
-                container.append(`
-                    <dd><label><input class="header-filter-box-left-shop-categories" type="checkbox" name="categories"><span>${k}</span></label></dd>
-                `);
-            })
-        }
-
+        this.changeIndex( parseInt(category) - 100 );
     }
 
     changeIndex(idx) {            
@@ -118,7 +80,7 @@ export class Category extends Component {
             self.changeIndex(idx);
 
             const params = new URLSearchParams(location.search);
-            params.set("category", _CATEGORY.Type[Object.keys(_CATEGORY.Type)[idx]]);
+            params.set("category", 100 + idx);
             location.search = params.toString();
         });
 

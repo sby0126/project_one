@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import action.ActionResult;
 import dao.CustomerDAO;
 import vo.CustomerVO;
 
@@ -37,6 +38,7 @@ public class CustomerController extends HttpServlet {
 	}
 	
 	private void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; utf-8");
 		
@@ -80,9 +82,16 @@ public class CustomerController extends HttpServlet {
 				nextPage = "/pages/join.jsp";
 			}
 			
-		} else if(act.equals("/modifyMember.do")) {
+		} else if(act.equals("/modifyMember.do")) { 
+			// 회원 정보 수정
 			
-			// SQL로 회원 정보 수정 처리
+			String email = request.getParameter("email");
+			String pw = request.getParameter("pw");
+			String name = request.getParameter("name");
+			String tel = request.getParameter("tel");
+			String zipcode = request.getParameter("zipcode");
+			String address = request.getParameter("address");
+			
 			
 		}  else if(act.equals("/login.do")) { 
 			

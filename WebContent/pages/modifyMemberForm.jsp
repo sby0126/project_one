@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="vo.*"%>
+<jsp:useBean id="memberInfo" class="vo.MemberInfoBean" />
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
@@ -34,7 +35,8 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	crossorigin="anonymous"></script>
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>	
+<script
+	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link rel="stylesheet" href="../css/style.css">
 <style>
 
@@ -69,12 +71,115 @@ img, a {
 .header-filter-box {
 	display: none;
 }
+
+.header-menu-list p {
+	font-size: 11px;
+}
+
+.header-popup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-menu-list > .menu {
+	margin-right: 0.5em;
+}
+
 </style>
 </head>
 <body>
 	<!-- 컨테이너의 시작 -->
 	<div class="container">
-		<jsp:include page="header.jsp"></jsp:include>
+		<!-- 헤더의 시작 -->
+		<header>
+			<div class="header-wrapper">
+				<!-- 헤더 왼쪽 : 로고 -->
+				<div class="header-left">
+					<div class="" id="logo">
+						<a href="${contextPath}/index.jsp">
+							<img src="https://dummyimage.com/64x64/000/fff" alt="">
+						</a>
+					</div>
+					<a href="#">WOMEN</a> <a href="#">MEN</a>
+				</div>
+				<!-- 헤더 중앙 : 메뉴 -->
+				<div class="header-center">
+					<a href="${contextPath}/index.jsp">SHOP</a>
+					<a href="${contextPath}/item.jsp" target="_self">ITEM</a>
+					<a href="${contextPath}/sale.jsp">SALE</a>
+					<a href="#">MORE</a>
+				</div>
+				<!-- 헤더 오른쪽 : 로그인 / 검색 -->
+				<div class="header-right">
+					<%
+                		String id = (String)session.getAttribute("id");
+                	%>
+					<c:set var="id" value="<%=id %>" />
+					<h2>
+						<c:out value='${pageContext.request.contextPath}'></c:out>
+					</h2>
+					<c:choose>
+						<c:when test="${id != null}">
+							<a class="header-right-login-button"
+								href="/members/modifyMemberForm.do?id=${id}">회원 정보 수정</a>
+							<c:if test="${id=='admin'}">
+								<a class="header-right-login-button" href="/admin">관리자 페이지</a>
+							</c:if>
+							<button class="header-right-login-button" id="logout-button"
+								onclick="javascript:location.href='/members/logout.do'">로그아웃</button>
+						</c:when>
+						<c:otherwise>
+							<button class="header-right-login-button">로그인</button>
+						</c:otherwise>
+					</c:choose>
+					<input type="text" class="input-non-border-box" name="" id=""
+						placeholder="검색어를 입력하세요">
+				</div>
+			</div>
+			<!-- 숨겨진 메뉴 -->
+			<div class="header-popup-container">
+				<ul class="header-menu-list">
+					<li class="menu"><a href="${contextPath}/pages/Recently_viewed_shop.jsp"
+						class="menu-link">
+							<div class="menu-icon"></div>
+							<p class="menu-title">
+								최근 본 샵 <em>0</em>
+							</p>
+					</a></li>
+					<li class="menu"><a href="${contextPath}/pages/Recently_viewde_item.jsp"
+						class="menu-link">
+							<div class="menu-icon"></div>
+							<p class="menu-title">
+								최근 본 상품 <em>0</em>
+							</p>
+					</a></li>
+					<li class="menu"><a href="#" class="menu-link">
+							<div class="menu-icon"></div>
+							<p class="menu-title">MY SHOP</p>
+					</a></li>
+					<li class="menu"><a href="${contextPath}/pages/Interested_item.jsp"
+						class="menu-link">
+							<div class="menu-icon"></div>
+							<p class="menu-title">관심 상품</p>
+					</a></li>
+					<li class="menu"><a href="${contextPath}/pages/board-default.jsp"
+						class="menu-link">
+							<div class="menu-icon"></div>
+							<p class="menu-title">1:1 문의</p>
+					</a></li>
+					<li class="menu"><a href="${contextPath}/pages/map.jsp" class="menu-link">
+							<div class="menu-icon"></div>
+							<p class="menu-title">소개 및 약관</p>
+					</a></li>
+					<li class="menu"><a href="${contextPath}/pages/outer-link-page.jsp"
+						class="menu-link">
+							<div class="menu-icon"></div>
+							<p class="menu-title">마케팅 센터</p>
+					</a></li>
+				</ul>
+			</div>
+		</header>
 
 		<!-- 본문의 시작 -->
 		<section>
@@ -92,11 +197,13 @@ img, a {
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="email">이메일:</label>
 							<div class="col-sm-6">
-								<input type="email" class="form-control" id="email" autocomplete="email"
-									placeholder="Enter email" value="${ member.getEmail() }">
+								<input type="email" class="form-control" name="email" id="email"
+									autocomplete="email" placeholder="Enter email"
+									value="${ member.getEmail() }">
 							</div>
 							<div class="col-sm-2">
-								<button id="email-check-btn" class="btn btn-default" data-usable="usable" onclick="emailCheck()">이메일 중복 확인</button>
+								<button id="email-check-btn" class="btn btn-default"
+									data-usable="usable" onclick="emailCheck()">이메일 중복 확인</button>
 							</div>
 						</div>
 						<div class="form-group">
@@ -123,41 +230,44 @@ img, a {
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="tel">휴대폰 번호</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" id="tel" name="tel" autocomplete="tel"
-									placeholder="휴대폰 번호 입력" value="${ member.getTel() }">
+								<input type="text" class="form-control" id="tel" name="tel"
+									autocomplete="tel" placeholder="휴대폰 번호 입력"
+									value="${ member.getTel() }">
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label class="control-label col-sm-2" for="email">우편 번호:</label>
+							<label class="control-label col-sm-2" for="zipcode">우편 번호:</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control col-sm-2" id="zipcode" autocomplete="postal-code"
-									value="${ member.getZipCode() }">
-								<input type="text" class="form-control" id="address2" name="address" autocomplete="street-address"
-									value="${member.getAddress() }">									
+								<input type="text" class="form-control col-sm-2" id="zipcode"
+									autocomplete="postal-code" name="zipcode"
+									value="${ member.getZipCode() }"> <input type="text"
+									class="form-control" id="address2" name="address"
+									autocomplete="street-address" value="${member.getAddress() }">
 							</div>
 							<div class="col-sm-2">
-								<button class="btn btn-default" onclick="searchAddress(this)">주소 검색 하기</button>
+								<button class="btn btn-default" onclick="searchAddress(this)">주소
+									검색 하기</button>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="panel">
-								<label class="control-label col-sm-2" for="tel">가입일</label>
+								<label class="control-label col-sm-2" for="joindate">가입일</label>
 								<div class="col-sm-6">
 									<p>${ member.getJoinDate() }</p>
-								</div>								
+								</div>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-2">
-								<button class="btn btn-danger">회원 탈퇴</button>
+								<button id="leave-member" class="btn btn-danger">회원 탈퇴</button>
 							</div>
 							<div class="col-sm-offset-1 col-sm-2">
-								<input type="submit" class="btn btn-default" value="수정 완료" onsubmit="submit()">
+								<input type="submit" class="btn btn-default" value="수정 완료">
 							</div>
-						
+
 						</div>
 
 					</form>

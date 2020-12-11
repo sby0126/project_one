@@ -50,10 +50,13 @@ public class FindPasswordController extends HttpServlet {
 			} else {
 				// 수동으로 오류 처리
 				PrintWriter out = response.getWriter();
-				request.setCharacterEncoding("EUC-KR");
+				request.setCharacterEncoding("UTF-8");
+				response.setContentType("text/html; charset='utf-8'");
+				out.println("<html><head>");
+				out.println("<meta charset=\"UTF-8\">");
 				out.println("<script charset='utf-8'>alert('존재하지 않는 아이디 또는 이메일입니다');");
 				out.println("location.href='" + request.getContextPath() + "/pages/find_password.jsp" +"'");
-				out.println("</script>");
+				out.println("</script></head></html>");
 				return;
 			}
 			
