@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
+<%@ page import="java.net.URLEncoder"%>
+<%@ page import="java.net.URLDecoder"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.net.URLEncoder" %>
-<%@ page import="java.net.URLDecoder" %>
 <!DOCTYPE html>
 <html lang="ko">
 <%
@@ -10,10 +10,6 @@
 	String title = (String)request.getAttribute("title");
 	String contents = (String)request.getAttribute("contents");
 	String contextPath = request.getContextPath();
-	
-	if(contents == null) {
-		contents = "";
-	}
 %>
 <c:set var="contextPath" value="<%=contextPath %>" />
 <head>
@@ -71,7 +67,7 @@
     <!-- 컨테이너의 시작 -->
     <div class="container">
         <!-- 헤더의 시작 -->
-        <jsp:include page="./header.jsp"></jsp:include>
+        <jsp:include page="${pageContext.request.contextPath}/header.jsp"></jsp:include>
 
         <!-- 본문의 시작 -->
         <section>
@@ -94,7 +90,7 @@
                 	<input type="hidden" id="type" value="<%=type%>">
                 	<input type="hidden" id="postNumber" value="<%= request.getParameter("postNumber") %>">
                 	<input type="hidden" id="title" value="<%=title %>">
-                	<input type="hidden" id="contents" value="<%= URLEncoder.encode( contents ) %>">
+                	<input type="hidden" id="contents" value="<%=URLEncoder.encode( contents )%>">
                 	
                     <button class="button" id="upload-ok">작성</button>
                     <button class="button" id="upload-cancel">취소</button>
