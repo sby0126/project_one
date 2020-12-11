@@ -41,7 +41,7 @@
                 			<button class="header-right-login-button" id="logout-button" onclick="javascript:location.href='/members/logout.do'">로그아웃</button>
                 		</c:when>
                 		<c:otherwise>
-                			<button class="header-right-login-button">로그인</button>		
+                			<button class="header-right-login-button">로그인</button>
                 		</c:otherwise>
                 	</c:choose>
                     <input type="text" class="input-non-border-box" name="" id="" placeholder="검색어를 입력하세요">

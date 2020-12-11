@@ -120,7 +120,7 @@ export class ShopContentLoader extends Component {
                     <i class="shop-hot-icon" data-title="HOT"></i>
                     <h2 class="contents-shop-name">${filename.shopName}</h2>
                     <p class="shop-contents">${ lines }</p>
-                    <div class="shop-button-container">
+                    <div class="shop-button-container" data-id="${filename.id}">
                         <button class="shop-button">전체 상품</button>
                         <button class="shop-button">
                             <p class="shop-button-text">마이샵</p>

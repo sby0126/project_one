@@ -13,7 +13,16 @@ public class ProductVO {
 	private String type;
 	private String imgid;
 	private String title;
+	private int id;
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getPagetype() {
 		return pagetype;
 	}

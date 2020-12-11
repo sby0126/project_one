@@ -1,12 +1,13 @@
 import { Component } from "./Component.js";
 import { itemData, imgSrc, itemImg } from "../services/itemData.js";
+import {parseBodyFromString} from "./utils/bodyParser.js";
 
 /**
  * 주소에 있는 dataId 값을 인자를 파싱하여 id 값에 맞는 데이터를 동적으로 가져옵니다.
  * 
  * @author 어진석
  */
-export class ItemDetailLoader extends Component {
+export class ItemDetailLoaderCart extends Component {
 
     rltprice = 0;
     
