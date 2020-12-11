@@ -6,6 +6,7 @@ board-default.jsp
 board-native-editor.jsp
 board-post.jsp
 board-smart-editor.jsp
+board-smart-editor3.jsp
 board.jsp
 cart.jsp
 detail-item-uploader.jsp
