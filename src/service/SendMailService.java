@@ -73,6 +73,7 @@ public class SendMailService {
     	props.put("mail.smtp.port", PORT); 
     	props.put("mail.smtp.starttls.enable", "true");
     	props.put("mail.smtp.auth", "true");
+    	props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
  
     	Session session = Session.getDefaultInstance(props);
 
