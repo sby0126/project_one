@@ -1,11 +1,14 @@
 package router;
 
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Properties;
 import java.util.stream.Stream;
 
 import javax.servlet.Servlet;
@@ -18,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import manager.DataManager;
+import utils.DBConnectionMgr;
 
 @WebServlet(name = "loadConfig", urlPatterns = { "/loadConfig" }, loadOnStartup = 1)
 public class AppConfigServlet extends HttpServlet {
@@ -34,6 +38,33 @@ public class AppConfigServlet extends HttpServlet {
 		manager.DataManager.getInstance().setMainApplication(context);
 		System.out.println(manager.DataManager.getInstance().getApplicationPath());
 		DataManager.getInstance().loadAllGlobalData();
+		
+		HashMap<String, String> configFile = new HashMap<String, String>();
+		
+		try {
+			FileReader reader = new FileReader(context.getRealPath("settings.properties"));
+			
+			Properties prop = new Properties();
+			prop.load(reader);
+			
+			if(!prop.isEmpty()) {
+				configFile.put("host", prop.getProperty("host"));
+				configFile.put("port", prop.getProperty("port"));
+				configFile.put("username", prop.getProperty("username"));
+				configFile.put("password", prop.getProperty("password"));
+				configFile.put("database", prop.getProperty("database"));
+				
+				System.out.println(configFile.toString());
+			}
+			
+			DBConnectionMgr
+				.getInstance()
+				.setConfig(configFile);
+			
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+
 		
 	}
 

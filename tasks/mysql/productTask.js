@@ -2,6 +2,7 @@ const path = require("path");
 const fs = require("fs");
 const file = require("../../WebContent/json/prebuilt.json");
 const mysql = require("mysql2");
+const settings = require("./settings.json");
 
 class SQLManagerImpl {
 
@@ -12,11 +13,11 @@ class SQLManagerImpl {
         return new Promise((resolve, reject) => {
             const pool = mysql.createPool({
                 connectionLimit: 10,
-                host: "localhost",
-                port: 3306,
-                user: "root",
-                password: "1234",
-                database: "mydb",
+                host: settings.host,
+                port: settings.port,
+                user: settings.user,
+                password: settings.password,
+                database: settings.database,
                 debug: true
             });
 

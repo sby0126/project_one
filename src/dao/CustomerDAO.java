@@ -430,7 +430,7 @@ public class CustomerDAO implements IDAO {
 		try {
 			conn = pool.getConnection();
 			
-			String query = "update tblcustomer set ctmpw = ?, salt = ? where ctmid = ?";
+			String query = "update tblCustomer set ctmpw = ?, salt = ? where ctmid = ?";
 			
 			pstmt = conn.prepareStatement(query);
 			

@@ -14,7 +14,7 @@ public class ContentLoader {
 	public void initWithSQL() {
 		
 		qlList.put("전체 데이터 추출", "SELECT DISTINCT b.pageType, b.genderType, b.shopType, b.shopName, b.contentUrl, a.imgId, b.*"
-						+ " FROM tblimagehash a, tblproduct b"
+						+ " FROM tblImageHash a, tblproduct b"
 						+ " WHERE a.pageType = ? AND"
 						+ " a.genderType = ? AND"
 						+ " a.shopType = ? AND"
@@ -30,7 +30,7 @@ public class ContentLoader {
 			);	
 		
 		qlList.put("전체 데이터 번호 붙여 추출", "SELECT * FROM (SELECT DISTINCT ROW_NUMBER() OVER w AS 'row_number', b.pageType, b.genderType, b.shopType, b.shopName, b.contentUrl, a.imgId, b.texts, b.title, b.price, b.term"
-					+ " FROM tblimagehash a, tblproduct b"
+					+ " FROM tblImageHash a, tblproduct b"
 					+ " WHERE a.pageType = ? AND"
 					+ " a.genderType = ? AND"
 					+ " a.shopType = ? AND"

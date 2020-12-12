@@ -2,6 +2,7 @@ const path = require("path");
 const fs = require("fs");
 const file = require("../../WebContent/json/prebuilt.json");
 const mysql = require("mysql2");
+const settings = require("./settings.json");
 
 class SQLManagerImpl {
 
@@ -12,11 +13,11 @@ class SQLManagerImpl {
         return new Promise((resolve, reject) => {
             const pool = mysql.createPool({
                 connectionLimit: 10,
-                host: "localhost",
-                port: 3306,
-                user: "root",
-                password: "1234",
-                database: "mydb",
+                host: settings.host,
+                port: settings.port,
+                user: settings.user,
+                password: settings.password,
+                database: settings.database,
                 debug: true
             });
 
@@ -44,7 +45,7 @@ class SQLManagerImpl {
     }
 
     async createTable(conn) {
-        conn.query(`create table tblImageHash ( pageType varchar(4) not null, genderType varchar(1) not null, shopType varchar(1) not null, imgUrl varchar(256) not null, imgId varchar(256) not null )`, (err, result) => {
+        conn.query(`create table tblimagehash ( pageType varchar(4) not null, genderType varchar(1) not null, shopType varchar(1) not null, imgUrl varchar(256) not null, imgId varchar(256) not null )`, (err, result) => {
             if(err) {
                 console.warn(err);
                 return;
@@ -57,7 +58,7 @@ class SQLManagerImpl {
 
     async insertAllData(conn) {
         try {
-            const query = `insert into tblImageHash(pageType, genderType, shopType, imgUrl, imgId) values(?, ?, ?, ?, ?)`;
+            const query = `insert into tblimagehash(pageType, genderType, shopType, imgUrl, imgId) values(?, ?, ?, ?, ?)`;
             file.forEach(data => {
                 const {pageType, genderType, shopType, imageData} = data;
 

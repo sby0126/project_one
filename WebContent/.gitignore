@@ -204,3 +204,4 @@ local.properties
 /.classpath
 
 mail.properties
+settings.properties
