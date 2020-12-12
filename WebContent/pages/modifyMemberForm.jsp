@@ -202,7 +202,7 @@ img, a {
 									value="${ member.getEmail() }">
 							</div>
 							<div class="col-sm-2">
-								<button id="email-check-btn" class="btn btn-default"
+								<button id="email-check-btn" type="button" class="btn btn-default"
 									data-usable="usable" onclick="emailCheck()">이메일 중복 확인</button>
 							</div>
 						</div>
@@ -246,7 +246,7 @@ img, a {
 									autocomplete="street-address" value="${member.getAddress() }">
 							</div>
 							<div class="col-sm-2">
-								<button class="btn btn-default" onclick="searchAddress(this); return false;">주소
+								<button type="button" class="btn btn-default" onclick="searchAddress(this); return false;">주소
 									검색 하기</button>
 							</div>
 						</div>
@@ -262,7 +262,7 @@ img, a {
 
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-2">
-								<button id="leave-member" class="btn btn-danger">회원 탈퇴</button>
+								<button type="button" id="leave-member" class="btn btn-danger">회원 탈퇴</button>
 							</div>
 							<div class="col-sm-offset-1 col-sm-2">
 								<input type="submit" class="btn btn-default" value="수정 완료">
