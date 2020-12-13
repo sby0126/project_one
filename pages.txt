@@ -30,3 +30,4 @@ shop-detail.html
 shop-detail.jsp
 shop.jsp
 terms.jsp
+vertifyEmailSuccess.jsp
