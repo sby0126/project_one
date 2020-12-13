@@ -12,6 +12,7 @@ cart.jsp
 detail-item-uploader.jsp
 detail.jsp
 error.jsp
+error2.jsp
 find_password.jsp
 find_password_ok.jsp
 header.jsp
