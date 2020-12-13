@@ -12,6 +12,17 @@ import javax.servlet.http.HttpSession;
 import service.SendMailService;
 import vo.MailHandler;
 
+/**
+ * 메일을 전송하는 기능을 수행합니다.
+ * 
+ * 키를 발급하고 세션을 생성하여 세션에 값이 있으면 인증된 것을 보고 있습니다. 
+ *
+ * 하지만 실제 이메일 인증은 세션 없이 액세스 토큰을 발급하는 OAuth를 사용합니다.
+ * OAuth는 메일로 인증 정보가 담긴 Access Token(JSON WEB TOKEN)을 이를 클릭하면 인증된 것으로 보는 기술입니다.
+ * 
+ * Access Token은 JSON으로 되어있으며 BASE64와 SHA-256으로 인코딩하여 주소에 JSON을 자체를 보냅니다. 
+ * 
+ */
 @WebServlet("/password/sendMail.do")
 public class MailController extends HttpServlet {
 
