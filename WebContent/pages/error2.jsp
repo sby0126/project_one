@@ -3,7 +3,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 	String errorMessage = (String)request.getAttribute("errorMessage");
-	String url = (String)request.getAttribute("url");
 %>
 <!DOCTYPE html>
 <html>
@@ -12,9 +11,12 @@
 <title>Insert title here</title>
 </head>
 <body>
+<c:forEach var="trace" items="${pageContext.errorData.throwable.stackTrace}">
+    <p>${trace}</p>
+</c:forEach>
 <script>
 	alert("<%= errorMessage %>");
-	location.href = "<%= url %>";
+	history.go(-1);
 </script>
 </body>
 </html>

@@ -96,7 +96,6 @@ public class BoardService extends HttpServlet {
 		String defaultPage = "pages/board-default.jsp";
 		
 		ActionResult result = null;
-
 		
 		if(isNotFoundTable()) {
 			result = new ErrorResult(

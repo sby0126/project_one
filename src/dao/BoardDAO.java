@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -707,6 +706,31 @@ public class BoardDAO implements IDAO {
 			if(pstmt.executeUpdate() > 0) {
 				ret = true;
 			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+		return ret;
+	}
+	
+	public boolean checkWithAuthority(int postNumber, String id) {
+		ResultSet rs = null;
+		boolean ret = false;
+		try {
+			conn = pool.getConnection();
+			
+			pstmt = conn.prepareStatement("select authorID from tblQNABoard where articleID = ? and authorID = ? ");
+			pstmt.setInt(1, postNumber);
+			pstmt.setString(2, id);
+			
+			rs = pstmt.executeQuery();
+			
+			ret = rs.next();
 			
 		} catch(SQLException e) {
 			e.printStackTrace();

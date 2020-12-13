@@ -439,12 +439,14 @@ class Editor extends Component {
             url: "/board/qna/postView.do",
             method: "GET",
             data: {postNumber: postNumber},
-            contentType: "application/json",
+            contentType: "application/json; charset=UTF-8",
             success: function(data) {
                 cb(data);
             },
             error: function(err) {
-                console.log(err);
+                alert("데이터를 볼 수 있는 권한이 없습니다");					
+
+				history.go(-1);
             }
         });
     }
