@@ -25,7 +25,8 @@
             <div class="contents-wrapper">
                 <div class="find-password-wrapper">
                     <h3>비밀번호 찾기</h3>
-                    <form action="/password/findPassword.do">
+<!--                     <form action="/password/findPassword.do"> -->
+                    <form action="/vertify/email.do">
                         <ul>
                             <li>
                             	<div>

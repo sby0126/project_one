@@ -20,7 +20,7 @@
             <!-- 로그인 폼 -->
             <form method="POST" action="/members/login.do">
                 <p class="floating-login-view-input-group">
-                    <label for="id"><i class="fas fa-user-alt"></i></label><input type="text" name="id" class="input-non-border-box" id="floating-login-view-login-id">
+                    <label for="id"><i class="fas fa-user-alt"></i></label><input type="text" name="id" autocomplete="id" class="input-non-border-box" id="floating-login-view-login-id">
                 </p>
                 <p class="floating-login-view-input-group"><label for="pw"><i class="fas fa-lock"></i></label><input type="password" name="pw" class="input-non-border-box" id="floating-login-view-login-pw"></p>
                 <input class="input-button" type="submit" value="Login">
