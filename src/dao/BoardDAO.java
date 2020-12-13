@@ -238,7 +238,7 @@ public class BoardDAO implements IDAO {
 					sb.append("]</span>");
 					
 					obj.put("postTitle", sb.toString());
-					obj.put("name", vo.getAuthorid());
+					obj.put("name", vo.getCtmnm());
 					obj.put("create_at", vo.getRegdate().toString());
 					obj.put("view", vo.getViewcount());
 					obj.put("recommandCount", vo.getRecommandcount());
@@ -289,7 +289,7 @@ public class BoardDAO implements IDAO {
 				    obj.put("contents", vo.getContent());
 				    obj.put("view", vo.getViewcount());
 				    obj.put("create_at", vo.getRegdate().toString());
-				    obj.put("author", vo.getAuthorid());
+				    obj.put("author", vo.getCtmnm());
 				    
 				    // 코멘트를 생성합니다.
 				    JSONArray comments = readAllCommentsToJson(vo.getArticleid());
@@ -532,7 +532,7 @@ public class BoardDAO implements IDAO {
 				data.put("pos", vo.getPos());
 				data.put("parentID", vo.getParentID());
 				data.put("depth", vo.getDepth());
-				data.put("author", vo.getAuthorid());
+				data.put("author", vo.getCtmnm());
 				data.put("create_at", vo.getRegdate().toString());
 				data.put("contents", vo.getContent());
 				

@@ -17,6 +17,14 @@ public class BoardVO {
     private String imagefilename;
     private long filesize;
     
+    private String ctmnm;
+    
+	public String getCtmnm() {
+		return ctmnm;
+	}
+	public void setCtmnm(String ctmnm) {
+		this.ctmnm = ctmnm;
+	}
 	public int getArticleid() {
 		return articleid;
 	}

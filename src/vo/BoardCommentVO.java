@@ -11,7 +11,14 @@ public class BoardCommentVO {
 	private int pos;
 	private int parentID;
 	private int depth;
-	
+    private String ctmnm;
+    
+	public String getCtmnm() {
+		return ctmnm;
+	}
+	public void setCtmnm(String ctmnm) {
+		this.ctmnm = ctmnm;
+	}
 	public int getCommentid() {
 		return commentid;
 	}
