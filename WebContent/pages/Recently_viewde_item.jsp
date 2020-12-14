@@ -1,10 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>최근 본 상품</title>
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a99df0f94f.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -35,15 +36,6 @@
                             <button></button>
                         </div>
                     </div>
-                   <!-- <div class="item_selected">
-                        <img src="../images/img1.jpg">
-                    </div>
-                    <div class="item_selected">
-                        <img src="../images/img1.jpg">
-                    </div>
-                    <div class="item_selected">
-                        <img src="../images/img1.jpg">
-                    </div>-->
                 </div>
                 <!-- 비어있을때-->
                 <div class="item_selected_none">
