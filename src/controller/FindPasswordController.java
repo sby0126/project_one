@@ -48,10 +48,11 @@ public class FindPasswordController extends HttpServlet {
 				request.setAttribute("key", thedigest.toString());
 				nextPage = "/password/sendMail.do";
 			} else {
-				// 수동으로 오류 처리
+				// 수동으로 오류 처리 (순서 중요 응답이 먼저, 그 다음 프린트라이터)
+				response.setContentType("text/html; charset=UTF-8");
+				response.setCharacterEncoding("UTF-8");
+				
 				PrintWriter out = response.getWriter();
-				request.setCharacterEncoding("UTF-8");
-				response.setContentType("text/html; charset='utf-8'");
 				out.println("<html><head>");
 				out.println("<meta charset=\"UTF-8\">");
 				out.println("<script charset='utf-8'>alert('존재하지 않는 아이디 또는 이메일입니다');");

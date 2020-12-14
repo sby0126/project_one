@@ -32,6 +32,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.Properties;
 import java.util.Vector;
 /**
@@ -51,32 +52,25 @@ public class DBConnectionMgr {
     private boolean initialized = false;
     private int _openConnections = 10;
     private static DBConnectionMgr instance = null;
+    private HashMap<String, String> config = null;
 
     public DBConnectionMgr() {
-//    	JSONParser parser = new JSONParser();
-//    	
-//    	try {
-//    		// 루트 폴더에서 admin.json 파일을 획득합니다.
-//    		String root = DataManager.getInstance().getApplicationPath();
-//    		String myConfigPath = Paths.get(Paths.get(root).getParent().toAbsolutePath().toString(), "admin.json").toString();
-//    		JSONObject config = (JSONObject)parser.parse(new FileReader(myConfigPath));
-//    		
-//    		String userTemp = String.valueOf(config.get("user"));
-//    		String passwordTemp = String.valueOf(config.get("password"));
-//    		
-//    		System.out.println(passwordTemp);
-//    		
-//    		if(userTemp != null && !userTemp.isEmpty())
-//    			_user = userTemp;
-//    		
-//    		if(passwordTemp != null && !passwordTemp.isEmpty())
-//    			_password = passwordTemp;
-//    		
-//    	} catch(IOException ex) {
-//    		ex.printStackTrace();
-//    	} catch(ParseException ex) {
-//    		ex.printStackTrace();
-//    	}
+    }
+    
+    public void setConfig(HashMap<String, String> config) {
+    	this.config = config;
+    	
+    	_user = config.get("username");
+    	_password = config.get("password");
+    	_url = "jdbc:mysql://"
+    			+ config.get("host")
+    			+ ":"
+    			+ config.get("port")
+    			+ "/" + config.get("database")
+    			+ "?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC";
+    	
+    	System.out.println(_url);
+    	
     }
 
     /** Use this method to set the maximum number of open connections before

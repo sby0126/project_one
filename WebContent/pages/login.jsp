@@ -20,7 +20,7 @@
             <!-- 로그인 폼 -->
             <form method="POST" action="/members/login.do">
                 <p class="floating-login-view-input-group">
-                    <label for="id"><i class="fas fa-user-alt"></i></label><input type="text" name="id" class="input-non-border-box" id="floating-login-view-login-id">
+                    <label for="id"><i class="fas fa-user-alt"></i></label><input type="text" name="id" autocomplete="id" class="input-non-border-box" id="floating-login-view-login-id">
                 </p>
                 <p class="floating-login-view-input-group"><label for="pw"><i class="fas fa-lock"></i></label><input type="password" name="pw" class="input-non-border-box" id="floating-login-view-login-pw"></p>
                 <input class="input-button" type="submit" value="Login">
@@ -28,6 +28,8 @@
                     <input class="input-button" id="join-button" type="button" value="회원가입">
                     <input class="input-button" id="find-password-button" type="button" value="비밀번호 찾기" onclick="location.href='${contextPath}/pages/find_password.jsp'">
                 </div>
+                <div id="naver_id_login"></div>
+<%--                 <a href="/members/naverLoginPro.do"><img src="${contextPath}/images/naver_login.PNG" style="width:80%"></a> --%>
             </form>
         </div>
     </div>

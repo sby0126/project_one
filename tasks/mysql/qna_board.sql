@@ -1,5 +1,5 @@
 SET FOREIGN_KEY_CHECKS = 0;
-drop TABLE if exists tblqnaboard;
+drop TABLE if exists tblQNABoard;
 SET FOREIGN_KEY_CHECKS = 1;
 
 create table tblQNABoard(
@@ -48,18 +48,18 @@ CREATE TABLE tblQNABoardComments (
 );
 
 alter table tblQNABoardComments ADD constraint tblQNABoardComments_fk FOREIGN key(parent_articleID) REFERENCES tblQNABoard(articleID);
-ALTER TABLE tblQNABoardComments ADD constraint tblQNABoardComments_authorID_fk FOREIGN KEY(authorID) REFERENCES tblcustomer(ctmid);
+ALTER TABLE tblQNABoardComments ADD constraint tblQNABoardComments_authorID_fk FOREIGN KEY(authorID) REFERENCES tblCustomer(ctmid);
 
 INSERT INTO tblQNABoardComments(parent_articleID, authorID, content, regdate) VALUES(1, 'admin', 'wow....', NOW());
 INSERT INTO tblQNABoardComments(parent_articleID, authorID, content, regdate) VALUES(1, 'admin', '테스트 댓글', NOW());
 INSERT INTO tblQNABoardComments(parent_articleID, authorID, content, regdate) VALUES(2, 'admin', '테스트 댓글', NOW());
 
 	
-INSERT INTO tblqnaboardcomments(parent_articleID, authorID, content, regdate, pos, parentID, depth) 
+INSERT INTO tblQNABoardComments(parent_articleID, authorID, content, regdate, pos, parentID, depth) 
 	VALUES(1, 'admin', 'test.....', NOW(), 1, 1, 1);
 
 
-UPDATE tblqnaboardcomments SET content = '테스트2' WHERE commentID = 1 AND authorID = 'admin';
+UPDATE tblQNABoardComments SET content = '테스트2' WHERE commentID = 1 AND authorID = 'admin';
 update tblQNABoard set viewCount = viewCount + 1 where articleID = 1;
 
 select authorID, content, regdate, pos, parentID, depth 
@@ -74,5 +74,5 @@ UPDATE tblqnaboard SET imageFileName = concat(ifnull(imageFileName, ''), ',', '�
 SELECT imageFileName FROM tblqnaboard WHERE articleID = 33;
 SELECT REGEXP_SUBSTR(content, '<img src=(.*)>', 1, 1, 'mi') FROM tblqnaboard WHERE articleID = 33;
 
-
+tblproduct
 

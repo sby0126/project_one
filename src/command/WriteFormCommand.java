@@ -91,8 +91,8 @@ public class WriteFormCommand extends Command {
 			}
 			
 			String type = (String)data.get("type");
-			String title = String.valueOf( data.get("title") );
-			String contents = String.valueOf( data.get("contents") );
+			String title =(String)data.get("title");
+			String contents = (String)data.get("contents");
 			
 			boolean ret = false;
 			

@@ -192,19 +192,19 @@ img, a {
 					</div>
 
 					<form class="form-horizontal col-sm-8"
-						action="/members/modifyMember.do" onclick="return false;">
+						action="/members/modifyMember.do">
 						<input type="hidden" name="id" value="${member.getId()}">
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="email">이메일:</label>
 							<div class="col-sm-6">
-								<input type="email" class="form-control" name="email" id="email"
+								<input type="email" class="form-control" name="email" id="email" readonly
 									autocomplete="email" placeholder="Enter email"
 									value="${ member.getEmail() }">
 							</div>
-							<div class="col-sm-2">
-								<button id="email-check-btn" class="btn btn-default"
-									data-usable="usable" onclick="emailCheck()">이메일 중복 확인</button>
-							</div>
+<!-- 							<div class="col-sm-2"> -->
+<!-- 								<button id="email-check-btn" type="button" class="btn btn-default" -->
+<!-- 									data-usable="usable" onclick="emailCheck()">이메일 중복 확인</button> -->
+<!-- 							</div> -->
 						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="pwd">비밀번호:</label>
@@ -246,7 +246,7 @@ img, a {
 									autocomplete="street-address" value="${member.getAddress() }">
 							</div>
 							<div class="col-sm-2">
-								<button class="btn btn-default" onclick="searchAddress(this)">주소
+								<button type="button" class="btn btn-default" onclick="searchAddress(this); return false;">주소
 									검색 하기</button>
 							</div>
 						</div>
@@ -262,7 +262,7 @@ img, a {
 
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-2">
-								<button id="leave-member" class="btn btn-danger">회원 탈퇴</button>
+								<button type="button" id="leave-member" class="btn btn-danger">회원 탈퇴</button>
 							</div>
 							<div class="col-sm-offset-1 col-sm-2">
 								<input type="submit" class="btn btn-default" value="수정 완료">
@@ -278,7 +278,7 @@ img, a {
 	<!-- 라이트 박스-->
 	<div id="light-box-container"></div>
 	<!-- index.js는 메인 용이므로 알맞은 스크립트를 사용해야 합니다-->
-	<script type="module" src="../js/MorePage.js"></script>
-	<script src="../js/modifyMemberForm.js"></script>
+	<script type="module" src="${contextPath}/js/MorePage.js"></script>
+	<script src="${contextPath}/js/modifyMemberForm.js"></script>
 </body>
 </html>

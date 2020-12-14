@@ -8,10 +8,12 @@ board-post.jsp
 board-smart-editor.jsp
 board-smart-editor3.jsp
 board.jsp
+callback.jsp
 cart.jsp
 detail-item-uploader.jsp
 detail.jsp
 error.jsp
+error2.jsp
 find_password.jsp
 find_password_ok.jsp
 header.jsp
@@ -29,3 +31,4 @@ shop-detail.html
 shop-detail.jsp
 shop.jsp
 terms.jsp
+vertifyEmailSuccess.jsp

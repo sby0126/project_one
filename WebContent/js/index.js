@@ -77,6 +77,8 @@ class MainPage extends App {
         this.emit("login:ready");
         this.emit("contents:ready");
 
+		
+
     }
 
     fetchNewData() {

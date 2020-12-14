@@ -1,6 +1,4 @@
-CREATE DATABASE if NOT EXISTS MYDB;
-USE MYDB;
-
+USE mydb;
 DROP TABLE if EXISTS tblCustomer;
 
 CREATE TABLE tblCustomer (

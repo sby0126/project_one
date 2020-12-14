@@ -2,6 +2,8 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import action.ActionResult;
 import dao.CustomerDAO;
 import vo.CustomerVO;
 
@@ -36,6 +37,12 @@ public class CustomerController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doHandle(request, response);
 	}
+	
+	public String generateState()
+	{
+	    SecureRandom random = new SecureRandom();
+	    return new BigInteger(130, random).toString(32);
+	}	
 	
 	private void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -85,12 +92,42 @@ public class CustomerController extends HttpServlet {
 		} else if(act.equals("/modifyMember.do")) { 
 			// 회원 정보 수정
 			
+			HttpSession session = request.getSession();
+			
+			String id = (String)session.getAttribute("id");
 			String email = request.getParameter("email");
 			String pw = request.getParameter("pw");
 			String name = request.getParameter("name");
 			String tel = request.getParameter("tel");
 			String zipcode = request.getParameter("zipcode");
 			String address = request.getParameter("address");
+			
+			CustomerVO vo = customerDAO.getMember(id);
+			
+			if(!customerDAO.isInvalidID(id)) {
+				request.setAttribute("errorMessage", "아이디가 존재하지 않습니다.");
+				request.setAttribute("url", "/");
+				nextPage = "/pages/error.jsp";
+				
+				RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
+				dispatcher.forward(request, response);
+				
+				return;
+			}
+			
+			// vo.setEmail(email); (이메일 변경 불가능)
+			vo.setPassword(pw);
+			vo.setName(name);
+			vo.setTel(tel);
+			vo.setZipCode(zipcode);
+			vo.setAddress(address);
+			
+			if(customerDAO.updateCustomer(vo)) {
+				response.sendRedirect(request.getContextPath() + "/index.jsp");
+				return;
+			} 
+			
+			nextPage = "/";
 			
 			
 		}  else if(act.equals("/login.do")) { 
@@ -112,11 +149,11 @@ public class CustomerController extends HttpServlet {
 				
 				HttpSession session  = request.getSession();
 				session.setAttribute("id", id);
-				response.sendRedirect("/");
+				response.sendRedirect("/index.jsp");
 				return;				
 			} else {
 				request.setAttribute("errorMessage", "[Error 4] 아이디 또는 비밀번호가 틀렸습니다.");
-				request.setAttribute("url", "/");
+				request.setAttribute("url", "/index.jsp");
 				nextPage = "/pages/error.jsp";
 			}
 			
@@ -171,14 +208,68 @@ public class CustomerController extends HttpServlet {
 				isValid = false;
 			}
 			
-//			// 비밀번호 유효성 검사
-//			if(!isValidPassword(password)) {
-//				// 회원 가입 실패 처리
-//				request.setAttribute("errorMessage", "[Error 2] 특수 문자나 영어 및 대 소문자 섞어야 합니다");
-//				request.setAttribute("url", "/pages/join.jsp");
-//				nextPage = "/pages/error.jsp";
-//				isValid = false;
-//			}
+			if(isValid) {
+				CustomerVO c = new CustomerVO();
+				
+				c.setId(id)
+				 .setPassword(password)
+				 .setName(name)
+				 .setAddress(address)
+				 .setTel(tel)
+				 .setEmail(email)
+				 .setIsAdmin(isAdmin)
+				 .setJoinDate(joinDate);
+				
+				c.setZipCode(zipcode);
+
+				customerDAO.addCustomer(c);
+				response.sendRedirect("/");
+				return;				
+			} else {
+				request.setAttribute("errorMessage", "[Error 3] 이미 존재하는 아이디입니다. 다른 아이디로 사용해주세요.");
+				request.setAttribute("url", "/pages/join.jsp");
+				nextPage = "/pages/error.jsp";
+			}
+		} else if(act.equals("/naverLogin.do")) { 
+			
+			// 회원 가입 폼에서 전달 받은 매개변수를 가져옵니다.
+			String id = request.getParameter("id");
+			String password = request.getParameter("pw");
+			String name = request.getParameter("name");
+			
+			// 주소 
+			StringBuffer buff = new StringBuffer();
+			buff.append(request.getParameter("address1"));
+			buff.append(' ');
+			buff.append(request.getParameter("address2"));
+			
+			String address = buff.toString();
+			
+			String tel = request.getParameter("tel");
+			String zipcode = request.getParameter("zipcode");
+			
+			// 이메일
+			buff = new StringBuffer();
+			buff.append(request.getParameter("email1"));
+			buff.append("@");
+			buff.append(request.getParameter("email2"));
+			
+			String email = buff.toString();
+			
+			String isAdmin = "N";
+			
+			// 오류로 인해 String 형식으로 변환하였음.
+			String joinDate = request.getParameter("joinDate");
+			
+			boolean isValid = true;
+			
+			// ID 중복 여부 체크 후 로그인 처리
+			if(customerDAO.isInvalidID(id)) {
+				request.getSession().setAttribute("id", id);
+				
+				response.sendRedirect(request.getContextPath() + "/index.jsp");
+				return;
+			}
 			
 			if(isValid) {
 				CustomerVO c = new CustomerVO();
@@ -196,22 +287,26 @@ public class CustomerController extends HttpServlet {
 
 				customerDAO.addCustomer(c);
 				response.sendRedirect("/");
-				return;
+				return;				
 			} else {
 				request.setAttribute("errorMessage", "[Error 3] 이미 존재하는 아이디입니다. 다른 아이디로 사용해주세요.");
 				request.setAttribute("url", "/pages/join.jsp");
 				nextPage = "/pages/error.jsp";
 			}
-			
+		
 		} else {
 			response.sendRedirect("/");
 		}
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
-		dispatcher.forward(request, response);
+		if(nextPage != null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
+			if(dispatcher != null) {
+				dispatcher.forward(request, response);
+			}			
+		}
+		
 	}
-	
-	
+
 	/**
 	 * 하나 이상의 알파벳을 포함해야 함
 	 * 하나 이상의 숫자를 포함해야 함

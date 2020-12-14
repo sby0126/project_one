@@ -54,8 +54,28 @@ export class LoginButton extends Component {
             loginView.style.transition = "all .8s ease-in-out";
             loginView.style.left = "9999px";
             $(loginView).removeClass("active");
-        })      
+        })    
+
+		 this.loadNaverLogin();  
     }
+
+	loadNaverLogin() {
+		const script = document.createElement('script');
+		script.src = "https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js";
+		script.onload = function() {
+			
+		  	var naver_id_login = new window.naver_id_login("7ImHSjL7FtzCQoKe84Jc", "http://localhost:9988/pages/callback.jsp");
+		  	var state = naver_id_login.getUniqState();
+		  	naver_id_login.setButton("green", 3,40);
+		  	naver_id_login.setDomain("http://localhost:9988");
+		  	naver_id_login.setState(state);
+		  	naver_id_login.init_naver_id_login();
+	
+		};
+		
+		document.head.appendChild(script); //or something of the likes
+		
+	}
 
     static id() {
         return LoginButton;
