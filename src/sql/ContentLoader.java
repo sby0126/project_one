@@ -18,7 +18,7 @@ public class ContentLoader {
 						+ " WHERE a.pageType = ? AND"
 						+ " a.genderType = ? AND"
 						+ " a.shopType = ? AND"
-						+ " a.imgUrl = b.contentUrl GROUP BY b.contentUrl");
+						+ " a.imgUrl = b.contentUrl");
 		
 		qlList.put("나이 및 카테고리로 필터링", qlList.get("전체 데이터 추출")
 					+ " AND texts LIKE ? AND"
