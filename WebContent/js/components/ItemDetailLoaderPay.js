@@ -1,15 +1,11 @@
 import { Component } from "./Component.js";
 import { itemData, imgSrc, itemImg } from "../services/itemData.js";
-import {parseBodyFromString} from "./utils/bodyParser.js";
-
 /**
  * 주소에 있는 dataId 값을 인자를 파싱하여 id 값에 맞는 데이터를 동적으로 가져옵니다.
  * 
  * @author 어진석
  */
 export class ItemDetailLoaderPay extends Component {
-
-    rltprice = 0;
 
     run() {
 
@@ -23,11 +19,9 @@ export class ItemDetailLoaderPay extends Component {
         $(".item-price, .produce-rltprice").text(item.price);
         $(".item-img").attr("src", imgSrc + itemImg[item.url]);
 
-        rltprice += Integer.parseInt(item.price);
-
     }
 
     static id() {
-        return ItemDetailLoader;
+        return ItemDetailLoaderPay;
     }
 }

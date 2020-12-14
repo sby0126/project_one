@@ -5,9 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/outer-link-page.css">
-    <title>Document</title>
+    <title>프로젝트용 더미 페이지</title>
+    <style>
+    	h1 {
+    		margin : 0 auto;
+    	}
+    </style>
 </head>
 <body>
+<h1> 해당 페이지는 임시 페이지입니다.</h1>
     <section>
         <div class="contents-main">
             <img src="../images/stadc_logo.jpg">
