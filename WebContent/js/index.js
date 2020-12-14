@@ -18,11 +18,11 @@ class MainPage extends App {
          * 동적으로 삽입할 페이지의 경로를 기입해주세요.
          */
         this._pendingList = [
-            {
-                src: `pages/login.jsp`,
-                parent: ID.CONTAINER,
-                isCreateNewDiv: true,
-            },
+//            {
+//                src: `pages/login.jsp`,
+//                parent: ID.CONTAINER,
+//                isCreateNewDiv: true,
+//            },
             {
                 src: `pages/shop.jsp`,
                 parent: ID.CONTENTS_WRAPPER,

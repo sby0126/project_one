@@ -13,7 +13,9 @@
 </head>
 <body>
     <div class="container">
-        <jsp:include page="header.jsp"></jsp:include>
+        <jsp:include page="/header.jsp">
+        	<jsp:param value="true" name="isHide"/>
+        </jsp:include>
         
         <section>
             <div class="contents-wrapper"> <!-- 장바구니 정보 영역 -->
@@ -61,6 +63,7 @@
     <!-- 라이트 박스-->
     <div id="light-box-container">
     </div>
+    <jsp:include page="/pages/login.jsp"></jsp:include> 
     <!-- 스크립트 --> 
     <script type="module" src="../js/MorePage.js"></script>
     <script type="module" src="../js/components/ItemdDetailLoaderCart.js"></script>

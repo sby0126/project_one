@@ -29,7 +29,6 @@
                     <input class="input-button" id="find-password-button" type="button" value="비밀번호 찾기" onclick="location.href='${contextPath}/pages/find_password.jsp'">
                 </div>
                 <div id="naver_id_login"></div>
-<%--                 <a href="/members/naverLoginPro.do"><img src="${contextPath}/images/naver_login.PNG" style="width:80%"></a> --%>
             </form>
         </div>
     </div>

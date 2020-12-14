@@ -17,7 +17,9 @@
 <body>
     <div class="container">
         <!-- 헤더의 시작 -->
-        <jsp:include page="header.jsp"></jsp:include>
+        <jsp:include page="/header.jsp">
+        	<jsp:param value="true" name="isHide"/>
+        </jsp:include>
 
         <!-- 본문의 시작 -->
         <section>
@@ -37,6 +39,7 @@
     <!-- 라이트 박스-->
     <div id="light-box-container">
     </div>
+    <jsp:include page="/pages/login.jsp"></jsp:include> 
     <!-- index.js는 메인 용이므로 알맞은 스크립트를 사용해야 합니다-->
     <script type="module" src="../js/MorePage.js"></script>
     

@@ -15,14 +15,12 @@
     <title>Document</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a99df0f94f.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>   
-    <script src="../libs/filter-table.min.js"></script> 
-    <script src="../libs/fancyTable.js"></script> 
-    <!-- <link rel="stylesheet" href="../libs/table-sortable.css">
-    <script src="../libs/table-sortable.js"></script> -->
+    <script src="/libs/filter-table.min.js"></script> 
+    <script src="/libs/fancyTable.js"></script> 
    
 </head>
 <body> 
@@ -197,7 +195,9 @@
     <!-- 컨테이너의 시작 -->
     <div class="container">
         <!-- 헤더의 시작 -->
-        <jsp:include page="header.jsp"></jsp:include>
+        <jsp:include page="/header.jsp">
+        	<jsp:param value="true" name="isHide"/>
+        </jsp:include>
 
         <!-- 본문의 시작 -->
         <section>
@@ -263,9 +263,10 @@
     <!-- 라이트 박스-->
     <div id="light-box-container">
     </div>
+    <jsp:include page="/pages/login.jsp"></jsp:include> 
     <!-- 스크립트 -->
     <!-- <script src="../js/boardMain.js"></script>     -->
-    <script type="module" src="../js/MorePage.js"></script>    
-    <script src="../js/boardDefault.js"></script>
+    <script type="module" src="/js/MorePage.js"></script>    
+    <script src="/js/boardDefault.js"></script>
 </body>
 </html>

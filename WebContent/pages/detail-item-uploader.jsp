@@ -25,7 +25,9 @@
     <!-- 컨테이너의 시작 -->
     <div class="container">
         <!-- 헤더의 시작 -->
-        <jsp:include page="header.jsp"></jsp:include>
+        <jsp:include page="/header.jsp">
+        	<jsp:param value="true" name="isHide"/>
+        </jsp:include>
 
         <!-- 본문의 시작 -->
         <section>
@@ -70,6 +72,7 @@
     <!-- 라이트 박스-->
     <div id="light-box-container">
     </div>
+    <jsp:include page="/pages/login.jsp"></jsp:include> 
     <!-- 스크립트 -->
     <script type="module" src="../js/MorePage.js"></script>
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>

@@ -9,12 +9,17 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a99df0f94f.js" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/underscore@1.11.0/underscore-min.js"></script>
 </head>
 <body>
         <!-- 헤더의 시작 -->
         <header>
+        	<%
+        		String hide = (String)request.getParameter("isHide");
+        		if(hide == null) hide = "";
+        		boolean isHide = hide.equals("true");
+        	%>
+        	<c:set var="isHide" value="<%= isHide %>" />        	
             <div class="header-wrapper">
                 <!-- 헤더 왼쪽 : 로고 -->
                 <div class="header-left">
@@ -56,13 +61,13 @@
                 <div class="header-popup-container">
                     <ul class="header-menu-list">
                         <li class="menu">
-                            <a href="${pageContext.request.contextPath}/pages/Recently_viewed_shop.jsp" class="menu-link">
+                            <a href="${pageContext.request.contextPath}/pages/recently_viewed_shop.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">최근 본 샵 <em>0</em></p>
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="${pageContext.request.contextPath}/pages/Recently_viewed_item.jsp" class="menu-link">
+                            <a href="${pageContext.request.contextPath}/pages/recently_viewed_item.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">최근 본 상품 <em>0</em></p>
                             </a>
@@ -98,60 +103,62 @@
                             </a>
                         </li>
                     </ul>
-                </div>            
-            <!-- 검색 필터 -->
-            <div class="header-filter-box">
-                <!-- 검색 필터 래퍼 -->
-                <div class="header-filter-box-wrapper">
-                    <!-- 검색 필터 : 소호/브랜드 탭 -->
-                    <div class="header-filter-box-header">
-                        <button class="active">소호</button>
-                        <button>브랜드</button>
-                    </div>
-                    <!-- 검색 필터 하단 : 대/중/소 분류 -->
-                    <div class="header-filter-box-footer">
-                        <!-- 검색 필터 왼쪽 : 카테고리 선택 -->
-                        <div class="header-filter-box-footer-left">
-                            <div class="header-filter-box-footer-left-button">
-                                <span>상품 카테고리<em>베스트(X)</em></span>
-                                <i class="fa fa-caret-down"></i>
-                            </div>
-                            <div class="header-filter-box-left-dropdown-menu" data-attr="상품 카테고리">
-                                <div class="header-filter-box-left-dropdown-menu-content">
-                                    <dl>
-                                        <dt>샵 카테고리</dt>
-                                        <dd><label><input class="header-filter-box-left-shop-categories" type="checkbox" name="categories"><span>ALL</span></label></dd>
-                                        <dd><label><input class="header-filter-box-left-shop-categories" type="checkbox" name="categories"><span>트랜드·캐쥬얼</span></label></dd>
-                                        <dd><label><input class="header-filter-box-left-shop-categories" type="checkbox" name="categories"><span>댄디·심플</span></label></dd>
-                                        <dd><label><input class="header-filter-box-left-shop-categories" type="checkbox" name="categories"><span>유니크·빈티지</span></label></dd>
-                                        <dd><label><input class="header-filter-box-left-shop-categories" type="checkbox" name="categories"><span>레플리카·제작</span></label></dd>
-                                        <dd><label><input class="header-filter-box-left-shop-categories" type="checkbox" name="categories"><span>스트릿·도매스틱</span></label></dd>
-                                        <dd><label><input class="header-filter-box-left-shop-categories" type="checkbox" name="categories"><span>클래식·수트</span></label></dd>
-                                        <dd><label><input class="header-filter-box-left-shop-categories" type="checkbox" name="categories"><span>빅사이즈</span></label></dd>
-                                        <dd><label><input class="header-filter-box-left-shop-categories" type="checkbox" name="categories"><span>슈즈</span></label></dd>
-                                        <dd><label><input class="header-filter-box-left-shop-categories" type="checkbox" name="categories"><span>액세서리·잡화</span></label></dd>
-                                    </dl>
-                                </div>                                
-                            </div>
-                        </div>
-                        <!-- 검색 필터 중앙 : 검색 -->
-                        <div class="header-filter-box-footer-center">
-                            <label for="name-search"></label><input class="input-non-border-box" type="text" placeholder="이름으로 검색">
-                        </div>
-                        <!-- 검색 필터 오른쪽 : 분류 -->
-                        <div class="header-filter-box-footer-right">
-                            <span class="active">전체</span>
-                            <span>10대</span>
-                            <span>20대</span>
-                            <span>30대</span>                            
-                        </div>
-                    </div>
-                    <div style="margin-top: 4px; text-align: center; font-size: 0.8em;">
-                    <input type="hidden" id="contextPath" value="${pageContext.request.contextPath}">
-                    이 사이트는 포트폴리오 용으로 개발된 사이트로 실제 사이트가 아닙니다.
-                    </div>
-                </div>
-            </div>
+                </div>      
+            <c:if test="${isHide != true}">
+	            <!-- 검색 필터 -->
+	            <div class="header-filter-box">
+	                <!-- 검색 필터 래퍼 -->
+	                <div class="header-filter-box-wrapper">
+	                    <!-- 검색 필터 : 소호/브랜드 탭 -->
+	                    <div class="header-filter-box-header">
+	                        <button class="active">소호</button>
+	                        <button>브랜드</button>
+	                    </div>
+	                    <!-- 검색 필터 하단 : 대/중/소 분류 -->
+	                    <div class="header-filter-box-footer">
+	                        <!-- 검색 필터 왼쪽 : 카테고리 선택 -->
+	                        <div class="header-filter-box-footer-left">
+	                            <div class="header-filter-box-footer-left-button">
+	                                <span>상품 카테고리<em>베스트(X)</em></span>
+	                                <i class="fa fa-caret-down"></i>
+	                            </div>
+	                            <div class="header-filter-box-left-dropdown-menu" data-attr="상품 카테고리">
+	                                <div class="header-filter-box-left-dropdown-menu-content">
+	                                    <dl>
+	                                        <dt>샵 카테고리</dt>
+	                                        <dd><label><input class="header-filter-box-left-shop-categories" type="checkbox" name="categories"><span>ALL</span></label></dd>
+	                                        <dd><label><input class="header-filter-box-left-shop-categories" type="checkbox" name="categories"><span>트랜드·캐쥬얼</span></label></dd>
+	                                        <dd><label><input class="header-filter-box-left-shop-categories" type="checkbox" name="categories"><span>댄디·심플</span></label></dd>
+	                                        <dd><label><input class="header-filter-box-left-shop-categories" type="checkbox" name="categories"><span>유니크·빈티지</span></label></dd>
+	                                        <dd><label><input class="header-filter-box-left-shop-categories" type="checkbox" name="categories"><span>레플리카·제작</span></label></dd>
+	                                        <dd><label><input class="header-filter-box-left-shop-categories" type="checkbox" name="categories"><span>스트릿·도매스틱</span></label></dd>
+	                                        <dd><label><input class="header-filter-box-left-shop-categories" type="checkbox" name="categories"><span>클래식·수트</span></label></dd>
+	                                        <dd><label><input class="header-filter-box-left-shop-categories" type="checkbox" name="categories"><span>빅사이즈</span></label></dd>
+	                                        <dd><label><input class="header-filter-box-left-shop-categories" type="checkbox" name="categories"><span>슈즈</span></label></dd>
+	                                        <dd><label><input class="header-filter-box-left-shop-categories" type="checkbox" name="categories"><span>액세서리·잡화</span></label></dd>
+	                                    </dl>
+	                                </div>                                
+	                            </div>
+	                        </div>
+	                        <!-- 검색 필터 중앙 : 검색 -->
+	                        <div class="header-filter-box-footer-center">
+	                            <label for="name-search"></label><input class="input-non-border-box" type="text" placeholder="이름으로 검색">
+	                        </div>
+	                        <!-- 검색 필터 오른쪽 : 분류 -->
+	                        <div class="header-filter-box-footer-right">
+	                            <span class="active">전체</span>
+	                            <span>10대</span>
+	                            <span>20대</span>
+	                            <span>30대</span>                            
+	                        </div>
+	                    </div>
+	                    <div style="margin-top: 4px; text-align: center; font-size: 0.8em;">
+	                    <input type="hidden" id="contextPath" value="${pageContext.request.contextPath}">
+	                    이 사이트는 포트폴리오 용으로 개발된 사이트로 실제 사이트가 아닙니다.
+	                    </div>
+	                </div>
+	            </div>
+            </c:if>
         </header>        
 </body>
 </html>
