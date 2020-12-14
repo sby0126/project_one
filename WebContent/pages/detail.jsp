@@ -53,7 +53,7 @@
                                 </a>
                             </li>
                             <li class="menu">
-                                <a href="#" class="menu-link">
+                                <a href="#" classs="menu-link">
                                     <div class="menu-icon"></div>
                                     <p class="menu-title">MY SHOP</p>
                                 </a>
@@ -175,10 +175,10 @@
                     <a href="#item_content" id="item_top"><span class="item_top_button">top</span></a>
                     <a href="#productPayInfo" id="item_bottom"><span class="item_bottom_button">bottom</span></a>
                 </div>
-                
-    
-                
-            </div>
+                <form method="post" action="goCart()">
+                	<input type="hidden" name="title" value="">
+                	<input type="hidden" name="price" value="">
+                </form>                
             </div>
 
         <script>
@@ -313,6 +313,16 @@
             // 상품명 옆에 x버튼 클릭시 목록제거
             function del(obj){
                 obj.parent("li").remove();
+            }
+            
+            function goCart(obj){
+            	var title = $("#detail-item-title").text();
+            	var price = $("#detail-item-price").text();
+            	
+            	
+            	
+            	
+            	
             }
            
         </script>
