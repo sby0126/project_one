@@ -1,17 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>쇼핑몰 클론 프로젝트</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a99df0f94f.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/underscore@1.11.0/underscore-min.js"></script>
-</head>
-<body>
         <!-- 헤더의 시작 -->
         <header>
         	<%
@@ -19,7 +7,7 @@
         		if(hide == null) hide = "";
         		boolean isHide = hide.equals("true");
         	%>
-        	<c:set var="isHide" value="<%= isHide %>" />        	
+        	<c:set var="isHide" value="<%= isHide %>" />
             <div class="header-wrapper">
                 <!-- 헤더 왼쪽 : 로고 -->
                 <div class="header-left">
@@ -159,6 +147,8 @@
 	                </div>
 	            </div>
             </c:if>
-        </header>        
-</body>
-</html>
+        </header>   
+   	    <c:if test="${isHide != true}">
+   	    	<div style="display:block; height: 4em; width:100%;">
+   	    	</div>
+        </c:if>             

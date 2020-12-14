@@ -1,16 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${ pageContext.request.contextPath }" />  
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <script src="https://kit.fontawesome.com/a99df0f94f.js" crossorigin="anonymous"></script>
-</head>
-<body>
     <div class="floating-login-view-wrapper">
         <div class="floating-login-view">
             <!-- 닫기 버튼 -->
@@ -33,5 +23,3 @@
         </div>
     </div>
     <img src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7' onload='console.log("로그인 창이 바인드 되었어요.");this.parentNode.removeChild(this);'>
-</body>
-</html>
