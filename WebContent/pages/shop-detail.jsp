@@ -226,7 +226,7 @@
     <div id="light-box-container">
     </div>
     <!-- index.js는 메인 용이므로 알맞은 스크립트를 사용해야 합니다-->
-    <script type="module" src="js/index.js"></script>
+    <script type="module" src="../js/index.js"></script>
     <script>
         (function() {
 

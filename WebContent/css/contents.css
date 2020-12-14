@@ -384,4 +384,8 @@ section {
     cursor: pointer;
 }
 
+.shop-button:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
 @import url("./recent-product-container.css")

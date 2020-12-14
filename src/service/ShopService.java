@@ -78,7 +78,9 @@ public class ShopService extends ContentService {
 		
 		List<ProductVO> list = getDAO().searchAsShopName(pageType, shopName);
 		
-		System.out.println(list.toString());
+		if(list == null) {
+			return null;
+		}
 		
 		JSONObject root = new JSONObject();
 		
