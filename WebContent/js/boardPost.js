@@ -45,6 +45,17 @@ const AJAX = {
     }
 }
 
+class UUID {
+    /**
+     * @link https://stackoverflow.com/a/2117523
+     */
+    static builder() {
+        return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+            (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+          );
+    }
+}
+
 //=============================================================================
 // ! 게시판 글에 대한 모든 이벤트 리스너
 //=============================================================================
@@ -95,9 +106,17 @@ const FUNC = {
 			$("#child-comment-textarea").remove();
 			return;
 		}
-	
-		const parentComment = $(this).parent().parent().parent().parent();
-		const parentCommentOrder = $(".comment-author").index(comment) + 1;
+    
+        // 부모 코멘트
+        const parentComment = $(ev.target).parent().parent().parent().parent();
+        console.dir(parentComment);
+
+        // 부모 코멘트의 번호
+        const parentCommentOrder = $(".comment-author").index(parentComment) + 1;
+
+        const parentCommentID = parentComment.parent().data("commentid");
+
+        // 현재 쿼리값 파싱
         const params = new URLSearchParams(location.search);	
 
 		// 부모 코멘트에서 pos 값을 찾습니다.
@@ -111,8 +130,8 @@ const FUNC = {
         
 		
 		// 부모 댓글의 순번
-		// 같은 깊이의 댓글이 달리면 pos가 1, 2, 3으로 이어진다.
-		// 작성일순으로 정렬하면 pos도 필요 없지만 현재로썬 댓글 정렬을 위해 필요하다. 
+		// 같은 깊이의 댓글이 달리면 pos가 1, 2, 3으로 이어집니다.
+		// 작성일순으로 정렬하면 pos도 필요 없지만 현재로썬 댓글 정렬을 위해 필요합니다.
 		let parentPos = parseInt(parentComment.data("pos"));
 		if(parentPos) {
 			parentPos += 1;
@@ -126,14 +145,22 @@ const FUNC = {
 		let depth = parseInt(parentComment.data("depth"));
 		if(depth) {
 			depth++;
-		}
+        }
 		
 		// 부모 코멘트에서 닉네임을 찾습니다.
-		const nickname = paremtComment.find("span").text();
-		
+		const nickname = parentComment.find("span").text();
+        
+        // 부모 코멘트 뒤에 댓글 작성란을 추가합니다.
+        const uuid = UUID.builder();
+        
+        window["func_" + uuid] = function() {
+            $(`div[data-uuid='${uuid}']`).remove();
+        };
+
         const self = parentComment.after(`
-            <div class="detail-area" data-depth=${depth} data-pos=${parentPos + 1}>
+            <div class="detail-area" data-depth=${depth} data-pos=${parentPos + 1} data-uuid=${uuid}>
                 <div class="add-comment-button-area">
+                    <button class="btn btn-default" id="close-sub-button" onclick="window['${'func_' + uuid}']()">닫기</button>
                     <textarea id="child-comment-textarea" name="text"></textarea>
                     <input href="#" type="submit" id="child-comment-ok-button" class="btn btn-default" value="등록">
                 </div>
@@ -148,14 +175,16 @@ const FUNC = {
 
             // 대댓글 작성 버튼 삭제
             if(yesNo) {
-	
-		        const texts = `[${nickname}] ` + self.find("#child-comment-textarea").val();
-		        if(texts.length == 0) {
+    
+                // 닉네임을 포함하여 댓글을 작성합니다.
+		        const texts = $("#child-comment-textarea").val();
+		        if(!texts.length) {
 		            alert("댓글란이 비어있습니다.");
 		            ev.preventDefault();
 		            return false;
 		        }
-		
+        
+                // 주소에 글 번호 쿼리를 추가합니다.
 		        const params = new URLSearchParams(location.search);
 		        const postNumber = params.get("postNumber");
 		
@@ -165,10 +194,17 @@ const FUNC = {
 			
 		            $.get(
 		                {
-		                    url: `/board/qna/postReply.do?postNumber=${postNumber}&contents=${texts}&method=writeChild&depth=0&parentID=${parentID}&pos=0`,
-		                    method: "GET",
-		                    contentType: false,
-		                    processData: false,
+		                    url: `/board/qna/postReply.do`,
+                            method: "POST",                      
+                            data: {
+                                postNumber: postNumber,
+                                contents: texts,
+                                method: "writeChild",
+                                depth: depth + 1,
+                                parentID: parentID,
+                                parentCommentID: parentCommentID,
+                                pos: parentPos + 1
+                            },
 		                    success: function(data) {
 		                        location.reload();
 		                    },
@@ -501,22 +537,23 @@ class Editor extends Component {
             // 댓글 뱃지 업데이트
             $(".badge").text(data.comments.length);
 
+            // 이미 작성된 댓글을 생성합니다.
             data.comments.forEach((comment, index) => {
                 SDK.registerComment(comment, index);
             });
 
-            // 이벤트 리스너 연결
+            // 이벤트 리스너를 연결합니다.
             for(let  i in FUNC) {
                 if(i === "REPLAY_DELETE") {
                     continue;
                 }
-                if(document.querySelector(ID[i])) {
-                    document.querySelector(ID[i]).onclick = FUNC[i];
+                if( $(ID[i]).length ) {
+                    $(ID[i]).on("click", FUNC[i].bind(this));
                 }
             }
     
             $(".board-post-comment").on("click", (ev) => {
-                if(ev.target.tagName === "A") {
+                if(ev.target.tagName === "A") {      
                     if(ev.target.classList.contains("replay-delete")) {
                         FUNC.REPLAY_DELETE(ev);
                     }

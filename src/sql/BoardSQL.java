@@ -39,14 +39,16 @@ public class BoardSQL {
 		
 		// 특정 게시물에 있는 코멘트를 읽습니다.
 		qlList.put("readComments", 
-					"select q.*, ctmnm " 
+					"select q.*, ctmnm, ( (parentID * 5) + depth * 0.015) AS level " 
 				+ "from tblQNABoardComments q, tblCustomer c "
-				+ "where parent_articleID = ? and ctmid = authorID order by parentID desc, pos, commentID");
+				+ "where parent_articleID = ? and ctmid = authorID ORDER BY level");
+		
+		qlList.put("maxCommentID", "SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'mydb' AND TABLE_NAME = 'tblQNABoardComments'");
 		
 		// 댓글을 작성합니다.
 		qlList.put("writeComment", 
-				"INSERT INTO tblQNABoardComments(parent_articleID, authorID, content, regdate)"
-				+ " VALUES(?, ?, ?, NOW())");
+				"INSERT INTO tblQNABoardComments(parent_articleID, authorID, content, regdate, parentID)"
+				+ " VALUES(?, ?, ?, NOW(), ?)");
 		
 		// 댓글의 댓글을 작성합니다.
 		qlList.put("writeChildComment", "INSERT INTO tblQNABoardComments(parent_articleID, authorID, content, regdate, pos, parentID, depth) "

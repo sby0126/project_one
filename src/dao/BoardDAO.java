@@ -441,11 +441,17 @@ public class BoardDAO implements IDAO {
 		ResultSet rs = null;
 		
 		try {
+			
+			int nextCommentID = nextCommentID();
+			
+			System.out.println("다음 코멘트 번호 : " + nextCommentID);
+			
 			conn = pool.getConnection();
 			pstmt = conn.prepareStatement(getQL("writeComment"));
 			pstmt.setInt(1, articleID);
 			pstmt.setString(2, authorID);
 			pstmt.setString(3, contents);
+			pstmt.setInt(4, nextCommentID);
 			
 			if(pstmt.executeUpdate() > 0) {
 				isOK = true;
@@ -460,6 +466,30 @@ public class BoardDAO implements IDAO {
 		}
 		
 		return isOK;
+	}
+	
+	public int nextCommentID() {
+		ResultSet rs = null;
+		int count = 0;
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement(getQL("maxCommentID"));
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt(1);	
+			}
+					
+		} catch(SQLException e) {
+			e.printStackTrace(); 
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt, rs);
+		}
+		
+		return count;
+		
 	}
 	
 	public boolean writeChildComment(int articleID, String authorID, String contents, int pos, int parentCommentID, int depth) {

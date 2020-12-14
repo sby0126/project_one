@@ -109,14 +109,23 @@ public class ReplyCommand extends Command {
 	
 	public void write(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		getDAO().writeComment(
-					param.parentArticleID, 
-					param.authorID, 
-					param.contents
-				);
+				param.parentArticleID, 
+				param.authorID, 
+				param.contents
+			);
 	}	
 	
 	public void writeChild(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int parentCommentID = Integer.parseInt(request.getParameter("parentCommentID"));
 		
+		getDAO().writeChildComment(
+					param.parentArticleID, 
+					param.authorID, 
+					param.contents,
+					param.pos,
+					parentCommentID,
+					param.depth
+				);
 	}	
 	
 	public void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
