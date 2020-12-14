@@ -104,8 +104,8 @@ public class CustomerController extends HttpServlet {
 			
 			CustomerVO vo = customerDAO.getMember(id);
 			
-			if(customerDAO.checkWithIdAndEmail(id,  email)) {
-				request.setAttribute("errorMessage", "아이디와 이메일이 이미 존재합니다.");
+			if(!customerDAO.isInvalidID(id)) {
+				request.setAttribute("errorMessage", "아이디가 존재하지 않습니다.");
 				request.setAttribute("url", "/");
 				nextPage = "/pages/error.jsp";
 				
@@ -115,7 +115,7 @@ public class CustomerController extends HttpServlet {
 				return;
 			}
 			
-			vo.setEmail(email);
+			// vo.setEmail(email); (이메일 변경 불가능)
 			vo.setPassword(pw);
 			vo.setName(name);
 			vo.setTel(tel);
@@ -123,7 +123,7 @@ public class CustomerController extends HttpServlet {
 			vo.setAddress(address);
 			
 			if(customerDAO.updateCustomer(vo)) {
-				response.sendRedirect("/");
+				response.sendRedirect(request.getContextPath() + "/index.jsp");
 				return;
 			} 
 			
