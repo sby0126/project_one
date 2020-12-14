@@ -138,7 +138,7 @@ export class ShopContentLoader extends Component {
                 `);
 
                 // 전체 상품 버튼이 클릭되었을 때 실행되어야 하는 내용을 정의하세요.
-                $(`div[data-id='${filename.id}']`).on("click", (ev) => {
+                $(`div[data-id='${filename.id}'] > button.all-item-button`).on("click", (ev) => {
                     alert("클릭되었습니다! : " + filename.id);
 
                     const parent = $(ev.currentTarget).parent();
