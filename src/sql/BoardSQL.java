@@ -41,7 +41,7 @@ public class BoardSQL {
 		qlList.put("readComments", 
 					"select q.*, ctmnm, ( (parentID * 5) + depth * 0.015) AS level " 
 				+ "from tblQNABoardComments q, tblCustomer c "
-				+ "where parent_articleID = ? and ctmid = authorID ORDER BY level");
+				+ "where parent_articleID = ? and ctmid = authorID ORDER BY level, pos");
 		
 		qlList.put("maxCommentID", "SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'mydb' AND TABLE_NAME = 'tblQNABoardComments'");
 		
