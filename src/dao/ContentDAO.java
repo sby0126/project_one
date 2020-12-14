@@ -137,6 +137,7 @@ public class ContentDAO implements IDAO {
 					getQL("전체 데이터 추출")
 					+ (category != null ? " AND texts LIKE ?" : "")
 					+ (ages != null ? " AND texts LIKE ?" : "")
+					+ " group by contentUrl"
 					);
 			pstmt.setString(1, pageType);
 			pstmt.setString(2, genderType);
@@ -275,6 +276,32 @@ public class ContentDAO implements IDAO {
 		}
 		
 		return categories;
+	}
+	
+	public List<ProductVO> searchAsShopName(String pageType, String shopName) {
+		ResultSet rs = null;
+		List<ProductVO> retList = null;
+		
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement(getQL("브랜드 별 검색"));
+			
+			rs = pstmt.executeQuery();
+			
+			List<ProductVO> list = SQLHelper.putResult(rs, ProductVO.class);
+			
+			retList = list;
+			
+		}  catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt, rs);
+		}
+		
+		return retList;
+		
 	}
 		
 	

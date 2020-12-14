@@ -53,6 +53,8 @@ public class ContentLoader {
 					+ " ORDER BY COUNT(t.category) DESC"
 				);
 		
+		qlList.put("브랜드 별 검색", "SELECT distinct * FROM tblproduct WHERE pageType=? AND shopName=? GROUP BY contentUrl");
+		
 	}
 	
 	public String get(String command) {
