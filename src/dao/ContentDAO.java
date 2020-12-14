@@ -278,6 +278,46 @@ public class ContentDAO implements IDAO {
 		return categories;
 	}
 	
+	/** 
+	 * 브랜드 명을 유일 키인 ID로 찾습니다.
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public String findShopName(int id) {
+		ResultSet rs = null;
+		String shopName = null;
+		
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement(getQL("브랜드 명 찾기"));
+			pstmt.setInt(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				shopName = rs.getString(1);
+			}
+			
+		}  catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt, rs);
+		}
+		
+		return shopName;
+		
+	}
+	
+	/**
+	 * 특정 쇼핑몰의 전체 상품을 검색합니다 (DB에 있는 것만 찾습니다)
+	 * 
+	 * @param pageType
+	 * @param shopName
+	 * @return
+	 */
 	public List<ProductVO> searchAsShopName(String pageType, String shopName) {
 		ResultSet rs = null;
 		List<ProductVO> retList = null;
@@ -286,11 +326,15 @@ public class ContentDAO implements IDAO {
 			conn = pool.getConnection();
 			pstmt = conn.prepareStatement(getQL("브랜드 별 검색"));
 			
+			pstmt.setString(1, pageType);
+			pstmt.setString(2, shopName);
+			
 			rs = pstmt.executeQuery();
 			
-			List<ProductVO> list = SQLHelper.putResult(rs, ProductVO.class);
-			
-			retList = list;
+			if(rs.next()) {
+				List<ProductVO> list = SQLHelper.putResult(rs, ProductVO.class);
+				retList = list;
+			}
 			
 		}  catch(SQLException e) {
 			e.printStackTrace();

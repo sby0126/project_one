@@ -15,6 +15,7 @@ import command.Command;
 import command.ItemCategoryCommand;
 import command.ItemCommand;
 import command.SaleCommand;
+import command.SearchShopItemCommand;
 import command.ShopCommand;
 
 @WebServlet("/contents/*")
@@ -58,6 +59,9 @@ public class ContentController extends HttpServlet {
 				break;
 			case "/item_category.do":
 				command = new ItemCategoryCommand();
+				break;
+			case "/searchShopItem.do":
+				command = new SearchShopItemCommand();
 				break;
 			}
 			

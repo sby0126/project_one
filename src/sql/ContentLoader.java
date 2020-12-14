@@ -53,7 +53,9 @@ public class ContentLoader {
 					+ " ORDER BY COUNT(t.category) DESC"
 				);
 		
-		qlList.put("브랜드 별 검색", "SELECT distinct * FROM tblproduct WHERE pageType=? AND shopName=? GROUP BY contentUrl");
+		qlList.put("브랜드 별 검색", "SELECT DISTINCT a.*, b.* FROM tblImageHash a, tblproduct b WHERE b.pageType = ? AND shopName = ? AND imgUrl = contentUrl GROUP BY contentUrl");
+		
+		qlList.put("브랜드 명 찾기", "select shopName from tblproduct where id = ?");
 		
 	}
 	

@@ -61,4 +61,53 @@ public class ShopService extends ContentService {
 		
 		return root;
 	}
+	
+	/**
+	 * 특정 쇼핑몰의 전체 상품을 검색하여 JSON으로 반환합니다.
+	 * 
+	 * @param pageType 페이지 타입을 기입하십시오.
+	 * @param id 유일키를 입력해주십시오.
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public JSONObject getItemForCertainShop(String pageType, int id) {
+
+		String shopName = getDAO().findShopName(id);
+		
+		System.out.println("shopName : " + shopName);
+		
+		List<ProductVO> list = getDAO().searchAsShopName(pageType, shopName);
+		
+		System.out.println(list.toString());
+		
+		JSONObject root = new JSONObject();
+		
+		root.put("pageType", pageType );
+		root.put("genderType", "M" );
+		root.put("shopType", "S" );
+		root.put("offset", getOffset());		
+		root.put("imageUrl", "https://drive.google.com/uc?export=view&id=");
+		
+		JSONArray contentData = new JSONArray();
+		JSONObject imageData = new JSONObject();
+		
+		root.put("contentData", contentData);
+		root.put("imageData", imageData);
+		
+		for(ProductVO vo : list) {
+			JSONObject newContentData = new JSONObject();
+			
+			newContentData.put("category", vo.getShoptype());
+			newContentData.put("shopName", vo.getShopname());
+			newContentData.put("texts", vo.getTexts());
+			newContentData.put("url", vo.getContenturl());
+			newContentData.put("id", vo.getId());
+			
+			contentData.add(newContentData);
+			imageData.put(vo.getContenturl(), vo.getImgid());
+		}
+		
+		return root;
+		
+	}
 }
