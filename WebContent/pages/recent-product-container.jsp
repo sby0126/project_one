@@ -53,6 +53,9 @@
 		refresh(list);
 	} 
 	
+	window.next = next;
+	window.prev = prev;
+	
 	function refresh(json) {
 		if(!json) {
 			return;
@@ -81,6 +84,9 @@
 		method: "GET",
 		success: function(data) {
 			list = data;
+			if(data.contentData) {
+				maxCount = data.contentData.length;	
+			}
 			refresh(list);
 		}, 
 		error: function(err) {
