@@ -19,6 +19,7 @@
 <div class="recent-product-container">
     <strong>최근 본 상품</strong>
     <span><em>0</em> / 50</span>
+    <img src="https://dummyimage.com/64x64/000/fff">
     <div>
         <button id="btn-prev"></button>
         <button id="btn-next"></button>
