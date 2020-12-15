@@ -207,3 +207,4 @@ local.properties
 .classpath
 *.project
 *.classpath
+WebContent/settings.json

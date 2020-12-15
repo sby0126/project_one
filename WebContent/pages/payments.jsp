@@ -291,6 +291,5 @@
     </div>
     <!-- 스크립트 --> 
     <script type="module" src="../js/MorePage.js"></script>
-    <script type="module" src="../js/ItemDetailPage.js"></script>
 </body>
 </html>

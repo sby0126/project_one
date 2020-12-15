@@ -1,5 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
+<% 
+    String title = request.getParameter("title");
+	System.out.println("title = " + title);
+    
+	String price = request.getParameter("price");    
+    System.out.println("price = " + price);
+    
+    String imguri = request.getParameter("imguris");
+    System.out.println("uri = " + imguri);
+    
+    int totalPrice = 0;
+    
+    
+%>
+
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -33,12 +48,12 @@
                             </tr>
                             <tr>
                                 <td><input type="checkbox" class="chkbox"></td>
-                                <td><img src="#" class="product-img"></td> <!-- 구매할 상품 이미지 -->
-                                <td><a href="#"><p class="product-name">상품명 1234</p></a> </td> <!-- 구매할 상품 이름 -->
+                                <td><img src='<%=imguri%>' class="product-img"></td> <!-- 구매할 상품 이미지 -->
+                                <td><a href="#"><p class="product-name"><%=title%></p></a> </td> <!-- 구매할 상품 이름 -->
                                 <td><input type="number" class="product-num" placeholder="1" min="1"></td> <!-- 구매 갯수 -->
-                                <td><P class="product-price"> 가격 </P></td> <!-- 상품 가격-->
+                                <td><P class="product-price"> <%=price%> </P></td> <!-- 상품 가격-->
                                 <td><P class="product-discnt"> 할인 </P></td> <!-- 할인 -->
-                                <td><P class="product-rltprice">price 원</P> </td> <!-- 상품 금액 -->
+                                <td><P class="product-rltprice"> <%=totalPrice%> </P> </td> <!-- 상품 금액 -->
                             </tr>
                         </table>
                     </form>
@@ -63,8 +78,6 @@
     </div>
     <!-- 스크립트 --> 
     <script type="module" src="../js/MorePage.js"></script>
-    <script type="module" src="../js/components/ItemdDetailLoaderCart.js"></script>
-    <script type="module" src="../js/ItemDetailPage.js"></script>
     <script>
 
         function del(){

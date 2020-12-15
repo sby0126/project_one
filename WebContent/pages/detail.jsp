@@ -120,7 +120,7 @@
                             <!-- 6. 총상품금액 -->
                             <li><span>총상품금액</span><span class="allPrice">종합가격(데이터)</span></li>
                             <!-- 7. 구매하기.장바구니 버튼 -->
-                            <li><div><button class="detail_button" type="button" onclick="location.href='payments.jsp'">구매하기</button><button class="detail_button" type="button" onclick="location.href='cart.jsp'">장바구니</button></div></li>
+                            <li><div><button class="detail_button" type="button" onClick="goPay(); return false;">구매하기</button><button class="detail_button" type="button" onClick="goCart(); return false;">장바구니</button></div></li>
                         </ul>
                     </div>
                     
@@ -175,9 +175,10 @@
                     <a href="#item_content" id="item_top"><span class="item_top_button">top</span></a>
                     <a href="#productPayInfo" id="item_bottom"><span class="item_bottom_button">bottom</span></a>
                 </div>
-                <form method="post" action="goCart()">
-                	<input type="hidden" name="title" value="">
-                	<input type="hidden" name="price" value="">
+                <form id="needVal" method="post" action="">
+                	<input type="hidden" name="title" id="title" value="">
+                	<input type="hidden" name="price" id="price" value="">
+                	<input type="hidden" name="imguri" id="imguri" value="">
                 </form>                
             </div>
 
@@ -315,18 +316,38 @@
                 obj.parent("li").remove();
             }
             
-            function goCart(obj){
+            function goCart(){
+            	
             	var title = $("#detail-item-title").text();
             	var price = $("#detail-item-price").text();
+            	var img = $(".imgArea > img").attr("src");
+            	
+            	$("input#detail-item-title").val("", title);
+            	$("input#detail-item-price").val("", price);
+            	$("input#imguri").val("", img);
             	
             	
+            	$("#needVal").attr("action", "cart.jsp");
             	
+            	$("#needVal").submit();
+            }
+            
+            function goPay(){
             	
+            	var title = $("#detail-item-title").text();
+            	var price = $("#detail-item-price").text();
+            	var img = $(".imgArea > img").attr("src");
             	
+            	$("input#detail-item-title").val("", title);
+            	$("input#detail-item-price").val("", price);
+            	$("input#imguri").val("", img);
+            		
+            	$("#needVal").attr("action", "payments.jsp");
+            	
+            	$("#needVal").submit();
             }
            
         </script>
         <script type="module" src="../js/ItemDetailPage.js"></script>
     </body>
-  
 </html>
