@@ -141,6 +141,8 @@ public class CustomerController extends HttpServlet {
 			
 			boolean isValidLogin = customerDAO.processLogin(id, pw);
 			
+			String referer = request.getHeader("referer");
+			
 			// 로그인 성공 처리
 			if(isValidLogin) {
 				
@@ -149,11 +151,13 @@ public class CustomerController extends HttpServlet {
 				
 				HttpSession session  = request.getSession();
 				session.setAttribute("id", id);
-				response.sendRedirect("/index.jsp");
+
+				response.sendRedirect(referer);					
+				
 				return;				
 			} else {
 				request.setAttribute("errorMessage", "[Error 4] 아이디 또는 비밀번호가 틀렸습니다.");
-				request.setAttribute("url", "/index.jsp");
+				request.setAttribute("url", referer);
 				nextPage = "/pages/error.jsp";
 			}
 			
@@ -163,7 +167,9 @@ public class CustomerController extends HttpServlet {
 			HttpSession session  = request.getSession();
 			session.invalidate();
 			
-			response.sendRedirect("/");	
+			String referer = request.getHeader("referer");
+			
+			response.sendRedirect(referer);	
 			return;
 			
 		} else if(act.equals("/signUp.do")) { 
@@ -223,6 +229,7 @@ public class CustomerController extends HttpServlet {
 				c.setZipCode(zipcode);
 
 				customerDAO.addCustomer(c);
+								
 				response.sendRedirect("/");
 				return;				
 			} else {
