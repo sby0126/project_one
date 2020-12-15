@@ -61,7 +61,7 @@
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="${pageContext.request.contextPath}" class="menu-link">
+                            <a href="${pageContext.request.contextPath}/pages/myshop.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">MY SHOP</p>
                             </a>

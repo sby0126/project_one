@@ -139,8 +139,6 @@ export class ShopContentLoader extends Component {
 
                 // 전체 상품 버튼이 클릭되었을 때 실행되어야 하는 내용을 정의하세요.
                 $(`div[data-id='${filename.id}'] > button.all-item-button`).on("click", (ev) => {
-                    alert("클릭되었습니다! : " + filename.id);
-
                     const parent = $(ev.currentTarget).parent();
                     const id = filename.id;
 
@@ -149,7 +147,7 @@ export class ShopContentLoader extends Component {
                         url: `/contents/searchShopItem.do?pageType=item&id=${id}`,
                         method: "GET",
                         success: function(data) {
-                            alert("상품 데이터가 있습니다 : " + JSON.stringify(data));
+                            location.href = "/pages/shop-detail.jsp?id=" + id;
                         },
                         error: function(err) {
                             alert(`${id}에 대한 상품 데이터가 없습니다.`);

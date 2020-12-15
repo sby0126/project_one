@@ -1,4 +1,37 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib  prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page import="java.util.List, vo.ProductVO, dao.ContentDAO" %>
+<%@ page import="java.net.URLDecoder" %>
+<%
+	
+	int id = Integer.parseInt(request.getParameter("id"));
+
+	String pageType = "item";
+
+	ContentDAO contentDAO = ContentDAO.getInstance();
+	
+	String shopName = contentDAO.findShopName(id);
+	List<ProductVO> list = contentDAO.searchAsShopName(pageType, shopName);
+	List<ProductVO> thumb = contentDAO.findThumbnail(shopName);
+
+	String thumbNailImage = null;
+	if(!thumb.isEmpty()) {
+		ProductVO thumbNailVO = thumb.get(0);
+		thumbNailImage = "/images/shop/" + thumbNailVO.getGendertype() + "/" +  thumbNailVO.getShoptype() + "/" + thumbNailVO.getContenturl();
+	}
+	
+	String mainUrl = "https://drive.google.com/uc?export=view&id=";
+%>
+<c:set var="list" value="<%= list %>" />
+<c:set var="thumbNailImage" value="<%=thumbNailImage %>" />
+<c:set var="shopName" value="<%=shopName %>" />
+<c:if test="${ list.size() == 0 or shopName == null }">
+	<script>
+		alert("DB에서 상품을 찾지 못했습니다.");
+		history.go(-1);
+	</script>
+</c:if>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -13,6 +46,51 @@
     <link rel="stylesheet" href="../css/shop-detail.css">
     <link rel="stylesheet" href="../libs/themes/wrunner-default-theme.css">
     <script src="../libs/wrunner-jquery.js"></script>
+    <style>
+		.card-container {
+		    display: flex;
+		    flex-direction: row;
+		    justify-content: left;
+		    align-items: center;
+		    background-color: #fff;
+		}    
+    </style>
+	 <%
+	 	for(int i = 0; i < list.size(); i++) {
+	 		ProductVO vo = list.get(i);
+	 %>
+	    <style>
+            .card {
+                display: flex;
+                flex-wrap: wrap;
+                flex: auto auto auto;
+                flex-direction: column;
+                border: 1px solid #F2F5F9;
+            }
+            
+            .card p[d-<%=vo.getId()%>]::before {
+                content: "";
+                width: 100%;
+                height: 78%;
+                background: url(<%=mainUrl+vo.getImgid()%>) left top;
+                background-size: cover;
+                background-repeat: no-repeat;
+                position: absolute;
+                border-radius: 0;
+                left: 0;
+                top: 0;
+                z-index: 0;
+            }
+
+            .card p[d-<%=vo.getId()%>]:hover::before {
+                filter: brightness(1.1);
+                border-radius: 0;
+                transition: all .2s linear;
+            }
+	    </style>
+	 <%
+	 	}
+	 %>
 </head>
 <body>
     <!-- 컨테이너의 시작 -->
@@ -48,10 +126,10 @@
                             </ul>
                         </div>
                         <div class="centered">
-                            <a href="#"><img src="https://dummyimage.com/128x128/000/fff"></a>
+                            <a href="#"><img src="${thumbNailImage }"></a>
                         </div>
                         <div>
-                            asd
+                            <h2><%= shopName %></h2>
                         </div>
                     </div>
                     <div class="header-filter-box">
@@ -100,126 +178,23 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <p>
-                        </p>
-                    </div>
-                    <div class="card">
-                        <p>
-                        </p>
-                    </div>
-                    <div class="card">
-                        <p>
-                        </p>
-                    </div>
-                    <div class="card">
-                        <p>
-                        </p>
-                    </div>
-                    <div class="card">
-                        <p>
-                        </p>
-                    </div>
-                    <div class="card">
-                        <p>
-                        </p>
-                    </div>
-                    <div class="card">
-                        <p>
-                        </p>
-                    </div>
-                    <div class="card">
-                        <p>
-                        </p>
-                    </div>
-                    <div class="card">
-                        <p>
-                        </p>
-                    </div>
-                    <div class="card">
-                        <p>
-                        </p>
-                    </div>
-                    <div class="card">
-                        <p>
-                        </p>
-                    </div>
-                    <div class="card">
-                        <p>
-                        </p>
-                    </div>
-                    <div class="card">
-                        <p>
-                        </p>
-                    </div>
-                    <div class="card">
-                        <p>
-                        </p>
-                    </div>
-                    <div class="card">
-                        <p>
-                        </p>
-                    </div>
-                    <div class="card">
-                        <p>
-                        </p>
-                    </div>
-                    <div class="card">
-                        <p>
-                        </p>
-                    </div>
-                    <div class="card">
-                        <p>
-                        </p>
-                    </div>
-                    <div class="card">
-                        <p>
-                        </p>
-                    </div>
-                    <div class="card">
-                        <p>
-                        </p>
-                    </div>
-                    <div class="card">
-                        <p>
-                        </p>
-                    </div>
-                    <div class="card">
-                        <p>
-                        </p>
-                    </div>
-                    <div class="card">
-                        <p>
-                        </p>
-                    </div>
-                    <div class="card">
-                        <p>
-                        </p>
-                    </div>
-                    <div class="card">
-                        <p>
-                        </p>
-                    </div>
-                    <div class="card">
-                        <p>
-                        </p>
-                    </div>
-                    <div class="card">
-                        <p>
-                        </p>
-                    </div>
-                    <div class="card">
-                        <p>
-                        </p>
-                    </div>
-                    <div class="card">
-                        <p>
-                        </p>
-                    </div>
-                    <div class="card">
-                        <p>
-                        </p>
-                    </div>                    
+                    <%
+                    	for(ProductVO card : list) {
+                    %>
+                    	<c:set var="card" value="<%= card %>" />
+	                    <div class="card">
+	                        <p d-<%= card.getId() %>></p>
+		                    <i class="shop-hot-icon"></i>
+		                    <div class="item-button-container"> 
+		                        <h2>${card.getTitle()}</h2>
+		                        <p>${card.getPrice()}</p>
+		                        <p>${card.getShopname()}</p>
+		                        <button class="like-button"></button>
+		                    </div> 	                        
+	                    </div>                     
+                    <%
+                    	}
+                    %>
                 </div> 
             </div>
         </section>
