@@ -8,6 +8,7 @@ import java.util.function.BiConsumer;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 쿠키 클래스
@@ -24,12 +25,31 @@ public class CookieService {
 	 * @param path
 	 * @return
 	 */
-	public Cookie create(String name, String value, String path) {
+	public Cookie create(HttpServletResponse response, String name, String value, String path) {
 		Cookie cookie = new Cookie(name, value);
 		cookie.setMaxAge(DAY);
 		cookie.setPath(path);
 		
+		response.addCookie(cookie);
+		
 		return cookie;
+	}
+	
+	/**
+	 * 쿠키를 삭제합니다.
+	 * 
+	 * @param request
+	 * @param response
+	 */
+	public void remove(HttpServletRequest request, HttpServletResponse response, String cookieName) {
+		List<Cookie> list = Arrays.asList(request.getCookies());
+		
+		list.forEach(c -> {
+			if(c.getName().equals(cookieName)) {
+				c.setMaxAge(0);
+				response.addCookie(c);				
+			}
+		});
 	}
 	
 	/**
