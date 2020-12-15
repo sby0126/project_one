@@ -1,7 +1,4 @@
 ./WebContent/pages/:
-Interested_item.jsp
-Recently_viewde_item.jsp
-Recently_viewed_shop.jsp
 board-default.jsp
 board-native-editor.jsp
 board-post.jsp
@@ -16,8 +13,8 @@ error.jsp
 error2.jsp
 find_password.jsp
 find_password_ok.jsp
-header.jsp
 infopolicy.jsp
+interested_item.jsp
 join.jsp
 login.jsp
 logout.jsp
@@ -27,6 +24,8 @@ outer-link-page.jsp
 payments.jsp
 post.html
 recent-product-container.jsp
+recently_viewed_item.jsp
+recently_viewed_shop.jsp
 shop-detail.html
 shop-detail.jsp
 shop.jsp

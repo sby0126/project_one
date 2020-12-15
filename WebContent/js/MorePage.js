@@ -14,11 +14,11 @@ class MorePage extends App {
          * 동적으로 삽입할 페이지의 경로를 기입해주세요.
          */
         this._pendingList = [
-            {
-                src: `login.jsp`,
-                parent: ".container",
-                isCreateNewDiv: true,
-            }
+//            {
+//                src: `login.jsp`,
+//                parent: ".container",
+//                isCreateNewDiv: true,
+//            }
         ];
 
         this._menuIndex = 0;

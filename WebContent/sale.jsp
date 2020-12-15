@@ -160,6 +160,7 @@
     <!-- 라이트 박스-->
     <div id="light-box-container">
     </div>
+    <jsp:include page="/pages/login.jsp"></jsp:include>
     <!-- 스크립트 --> 
     <script type="module" src="js/SalePage.js"></script>
 </body>

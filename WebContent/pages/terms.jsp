@@ -13,7 +13,9 @@
 </head>
 <body>  
     <div class="container">  <!-- 약관 페이지 -->
-        <jsp:include page="header.jsp"></jsp:include>
+        <jsp:include page="/header.jsp">
+        	<jsp:param value="true" name="isHide"/>
+        </jsp:include>
         
         <section>
             <div class="contents-wrapper">
@@ -138,6 +140,7 @@
     </div>
     <div id="light-box-container">
     </div> 
+    <jsp:include page="/pages/login.jsp"></jsp:include> 
     <script type="module" src="../js/MorePage.js"></script>
 </body>
 </html>

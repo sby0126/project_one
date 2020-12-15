@@ -24,7 +24,8 @@ export class ShopContentLoader extends Component {
     }
 
     /**
-     * 무한 증식.....
+     * 새로운 데이터를 가져옵니다.
+     * 
      * @param {Number} count 
      */
     addFetchData(count) {
@@ -38,8 +39,14 @@ export class ShopContentLoader extends Component {
         for(let i = 0; i < count; i++) {
             setTimeout(() => {
                 const lastChildCount = document.querySelector(".card-container").children.length;
+
+                // 기존 카드 데이터를 복제합니다 (자식 노드까지 복제 합니다)
                 const cloneNode = document.querySelector(".card").cloneNode(true);
+
+                // 복제된 노드의 p 태그 데이터 속성을 변경합니다.
                 cloneNode.querySelector("p").setAttribute("d-"+(lastChildCount+i), "");
+
+                // 현재 카드 값을 1 늘립니다.
                 this._currentCards++;
                 parent.append(cloneNode);
             }, 0);
@@ -76,6 +83,7 @@ export class ShopContentLoader extends Component {
             return;
         }
 
+        // 새로운 데이터를 가져옵니다.
         for(let idx = currentCards; idx < (currentCards + fetchCards); idx++) {
             const card = this._items[idx];
 
@@ -116,23 +124,40 @@ export class ShopContentLoader extends Component {
                     return args[0] + "<br>";
                 });
 
-                function allItems(ev) {
-                    const parent = $(ev.target).parent();
-                    parent.data("id");
-                }
-
-                myCard.innerHTML = `
+                $(myCard).html(`
                     <i class="shop-hot-icon" data-title="HOT"></i>
                     <h2 class="contents-shop-name">${filename.shopName}</h2>
                     <p class="shop-contents">${ lines }</p>
                     <div class="shop-button-container" data-id="${filename.id}">
-                        <button class="shop-button" onclick="">전체 상품</button>
+                        <button class="shop-button all-item-button">전체 상품</button>
                         <button class="shop-button">
                             <p class="shop-button-text">마이샵</p>
                             <i class="shop-button-icon"></i>
                         </button>
                     </div>
-                `;
+                `);
+
+                // 전체 상품 버튼이 클릭되었을 때 실행되어야 하는 내용을 정의하세요.
+                $(`div[data-id='${filename.id}'] > button.all-item-button`).on("click", (ev) => {
+                    alert("클릭되었습니다! : " + filename.id);
+
+                    const parent = $(ev.currentTarget).parent();
+                    const id = filename.id;
+
+                    // AJAX 호출
+                    $.ajax({
+                        url: `/contents/searchShopItem.do?pageType=item&id=${id}`,
+                        method: "GET",
+                        success: function(data) {
+                            alert("상품 데이터가 있습니다 : " + JSON.stringify(data));
+                        },
+                        error: function(err) {
+                            alert(`${id}에 대한 상품 데이터가 없습니다.`);
+                        }
+                    })
+
+                });
+
             }
 
             // 카드의 갯수를 1 증감시킵니다.
