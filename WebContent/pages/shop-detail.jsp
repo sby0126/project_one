@@ -248,5 +248,6 @@
         })();
 
     </script>
+    <script src="/js/itemPage.js"></script>
 </body>
 </html>    
