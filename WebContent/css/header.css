@@ -165,6 +165,11 @@ header {
 
 .input-non-border-box:focus {
     background: #FF6B00;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAtCAYAAAA6GuKaAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAnFJREFUeNrUmEFLAkEUx9019rCBUFAe8ix9AcGbdvFSt4IO4alP0M1bX6JjHgULvNVFojoKfoHwahcNvGkR2fYfeELIzs7OzNNdH/xxdXbf/hxm/vNmnCAIMjHDhapQDSpDRWgfykJzaAwNoB7UhV6h38wqQkArlIMa0HugF+/0XC7GO7SkuqEOjQK7GFGelUNvQ+2AN9qU1xraCRnTe9AjVFrBaOxDx9CHTZJl6G3oZUXA/8GPoKlpAnfpezMGsHCIa6gC5aEd+qzQ7wPF8yV6D4t71BVjcgidQY5izDl031CRr247EYUtjSNe8ATtaibfpedkMTa1w8VFQwHsGfaKpwBvmEK7EQvH0KCHw3p8GLEAubo5F0vzgWTIX0ETS7eYUJ6wOKD3a7tHLcIlOkw214lwlZoJdFnS1hLmwlXiUL6wKJtAFyVtr8yLiixf0WRF/KHycjnyVG5yhShjRyG/i7J2S7ens5K2b+aeluXLmgyPuaTNY4aW5ZubQMuGwCEztCzf2ARaZkVVZuhqhLVqQ/ckbRdiojIBO5QvLHom0N0IKzplgj6NsLauSWm6kbWH2ObfSP5TAbq3cBKPni9I2m+Mjhk2uZ5OYudyybUbb0PnMfaILaol3mil88iHq+QSceoJsYE+gWabsBu3Bl/ejU/pXKK/JmhxlPAA+TbQGTpIEcnuUgu+prM8MemeFfeJdp/jAJLz1NTnAnfWfD7t01A4spqc3GfHMWTd40lAW4MnBW0FniS0MXjS0EbgaYDWBk8LtBa4jk+vI+L4eDNt0HHAv9xM+mJGK+KLTpWXdvBWmiaibHLeQp8kce3/CTAAE0wCmoyDK48AAAAASUVORK5CYII=);
+    background-size: 0.9375em;
+    background-repeat: no-repeat;
+    background-position-x: 1.25em;
+    background-position-y: calc(50%);    
 }
 
 .input-non-border-box:not(:focus)::placeholder {

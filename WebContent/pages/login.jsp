@@ -23,3 +23,6 @@
         </div>
     </div>
     <img src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7' onload='console.log("로그인 창이 바인드 되었어요.");this.parentNode.removeChild(this);'>
+    <jsp:include page="/pages/recent-product-container.jsp">
+    	<jsp:param value="${ pageContext.request.contextPath }" name="contextPath"/>
+    </jsp:include>
