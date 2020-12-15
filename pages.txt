@@ -23,6 +23,7 @@ modifyMemberForm.jsp
 outer-link-page.jsp
 payments.jsp
 post.html
+recent-product-container.html
 recent-product-container.jsp
 recently_viewed_item.jsp
 recently_viewed_shop.jsp
