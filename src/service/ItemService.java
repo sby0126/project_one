@@ -50,6 +50,7 @@ public class ItemService extends ContentService {
 			newContentData.put("price", vo.getPrice());
 			newContentData.put("shop", vo.getShopname());
 			newContentData.put("url", vo.getContenturl());
+			newContentData.put("link", vo.getLink());
 			
 			contentData.add(newContentData);
 			imageData.put(vo.getContenturl(), vo.getImgid());

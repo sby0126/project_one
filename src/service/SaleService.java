@@ -50,6 +50,7 @@ public class SaleService extends ContentService {
 			newContentData.put("shop", vo.getShopname());
 			newContentData.put("term", vo.getTerm());
 			newContentData.put("url", vo.getContenturl());
+			newContentData.put("link", vo.getLink());
 			
 			contentData.add(newContentData);
 			imageData.put(vo.getContenturl(), vo.getImgid());

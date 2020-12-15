@@ -14,6 +14,7 @@ public class ProductVO {
 	private String imgid;
 	private String title;
 	private int id;
+	private String link;
 	
 	public int getId() {
 		return id;
@@ -116,6 +117,14 @@ public class ProductVO {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
 	}
 
 }
