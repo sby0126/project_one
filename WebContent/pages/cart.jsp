@@ -84,8 +84,8 @@
     <script>
 
         function del(){
-            if ($('.chkbox').prop()) {
-                $('chkbox').parent().parent().remove();
+            if ($('.chkbox').prop("selected")) {
+                $(this).parent().parent().remove();
             }
         }
         
