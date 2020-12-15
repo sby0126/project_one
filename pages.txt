@@ -20,6 +20,7 @@ login.jsp
 logout.jsp
 map.jsp
 modifyMemberForm.jsp
+myshop.jsp
 outer-link-page.jsp
 payments.jsp
 post.html
