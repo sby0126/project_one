@@ -165,7 +165,7 @@
                 $(".infoArea > ul > li:nth-child(4) button").removeClass("click_button");
                 $(".infoArea > ul > li:nth-child(4) button").prop("disabled", true);
             }
-        })
+        });
 
         //사이즈버튼(4) 클릭시 발생하는 이벤트
         $(".infoArea > ul > li:nth-child(4) button").on("click", function () {
@@ -234,37 +234,6 @@
             // 상품명 옆에 x버튼 클릭시 목록제거
             function del(obj){
                 obj.parent("li").remove();
-            }
-            
-            function goCart(){
-            	
-            	var title = $("#detail-item-title").text();
-            	var price = $("#detail-item-price").text();
-            	var img = $(".imgArea > img").attr("src");
-            	
-            	$("input#detail-item-title").val("", title);
-            	$("input#detail-item-price").val("", price);
-            	$("input#imguri").val("", img);
-            	
-            	
-            	$("#needVal").attr("action", "cart.jsp");
-            	
-            	$("#needVal").submit();
-            }
-            
-            function goPay(){
-            	
-            	var title = $("#detail-item-title").text();
-            	var price = $("#detail-item-price").text();
-            	var img = $(".imgArea > img").attr("src");
-            	
-            	$("input#detail-item-title").val("", title);
-            	$("input#detail-item-price").val("", price);
-            	$("input#imguri").val("", img);
-            		
-            	$("#needVal").attr("action", "payments.jsp");
-            	
-            	$("#needVal").submit();
             }
            
         </script>
