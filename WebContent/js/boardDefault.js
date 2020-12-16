@@ -50,6 +50,22 @@
             </tr>
         `);
 
+            $("#search-button").on("click", () => {
+
+                const params = new URLSearchParams(location.search);
+                
+                if(!params.get("type")) {
+                    params.set("type", "search");
+                    const searchQuery = $(".search-box").val();
+                    if(!searchQuery) {
+                        searchQuery = "";
+                    }
+                    params.set("searchQuery", searchQuery);
+                }
+
+                location.search = params.toString();
+            });
+
             this.load(this.initWithEvent.bind(this));
             this.initWithPages();
         },
@@ -67,8 +83,13 @@
         },
 
         load(cb) {
+
+            const params = new URLSearchParams(location.search);
+            const type = params.get("type");
+            const searchQuery = params.get("searchQuery");
+
             $.ajax({
-                url: "/board/qna/listAll.do",
+                url: (type && type.indexOf("search") >= 0) ? `/board/qna/search.do?searchQuery=${encodeURIComponent(searchQuery)}` : "/board/qna/listAll.do",
                 method: "GET",
                 contentType: "application/json",
                 success: function(data) {
@@ -77,7 +98,8 @@
                 error: function(err) {
                     console.log(err);
                 }
-            });
+            });             
+
         },
 
         initWithEvent(data) {

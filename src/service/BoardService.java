@@ -3,6 +3,7 @@ package service;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -18,6 +19,7 @@ import action.ActionResult;
 import action.ErrorResult;
 import command.DeleteCommand;
 import command.ImageUploadCommand;
+import command.IncreaseRecommandCountCommand;
 import command.ModifyPostFormCommand;
 import command.PostViewCommand;
 import command.ReplyCommand;
@@ -121,6 +123,22 @@ public class BoardService extends HttpServlet {
 				
 				return;
 
+			} else if(currentPage.equals("/search.do")) {
+				
+				String searchQuery = request.getParameter("searchQuery");
+				if(searchQuery != null) {
+					searchQuery = URLDecoder.decode(searchQuery);
+				}
+				JSONArray json = boardMgr.getListAllForFilter(searchQuery);
+				
+				response.setContentType("application/json");
+				response.setCharacterEncoding("EUC-KR");
+				
+				PrintWriter out = response.getWriter();
+				out.println(json.toJSONString());
+				
+				return;				
+				
 			} else if(currentPage.equals("/postView.do")) { // 특정 게시물 JSON 요청
 				result = postViewCommand.execute(request, response);
 			} else if(currentPage.equals("/view.do")) {
@@ -138,6 +156,9 @@ public class BoardService extends HttpServlet {
 				result = command.execute(request, response);
 			} else if(currentPage.equals("/modifyPost.do")) { // 글 수정 폼 채우기
 				ModifyPostFormCommand command = new ModifyPostFormCommand(); 
+				result = command.execute(request, response);
+			} else if(currentPage.equals("/increaseRecommandCount.do")) { // 게시물 추천하기
+				IncreaseRecommandCountCommand command = new IncreaseRecommandCountCommand();
 				result = command.execute(request, response);
 			}
 			

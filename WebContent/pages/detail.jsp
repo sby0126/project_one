@@ -28,7 +28,7 @@
                 </div>
                 <!-- 상품구매정보 -->
                 <div class="infoArea">
-                    <ul class>
+                    <ul>
                         <!-- 1. 상품명 -->
                         <li>
                             <h2 id="detail-item-title">후드후드후드(데이터)</h2>
@@ -60,13 +60,14 @@
                             <!-- 6. 총상품금액 -->
                             <li><span>총상품금액</span><span class="allPrice">종합가격(데이터)</span></li>
                             <!-- 7. 구매하기.장바구니 버튼 -->
-                            <li><div><button class="detail_button" type="button" onClick="goPay(); return false;">구매하기</button><button class="detail_button" type="button" onClick="goCart(); return false;">장바구니</button></div></li>
+                            <li><div><button class="detail_button" type="button" onClick="">구매하기</button><button class="detail_button" type="button" onClick="">장바구니</button></div></li>
                         </ul>
                     </div>
                     
                 </div>
 
             </div>
+       
 
 
             <div class="productArea2">
@@ -128,7 +129,6 @@
                 <a href="#productPayInfo" id="item_bottom"><span class="item_bottom_button">bottom</span></a>
             </div>
         </div>
-    </div>
 
     <script>
         // 색상버튼은(ul태그안에 li목록중 3번째줄), 사이즈버튼은(ul태그안에 li목록중 4번째줄)
@@ -235,7 +235,7 @@
             function del(obj){
                 obj.parent("li").remove();
             }
-        }
+        });
         </script>
         <script type="module" src="../js/ItemDetailPage.js"></script>
     </body>

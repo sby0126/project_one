@@ -29,7 +29,7 @@ const ID = {
     MODIFY: "#modify-button",
     DELETE: "#delete-button",
     POST_RECOMMAND_BUTTON: "#post-recommand-button",
-    POST_SHARE_BUTTON2: "#post-share-button2"
+    POST_SHARE_BUTTON2: "#post-share-button2",
 };
 
 const AJAX = {
@@ -311,7 +311,43 @@ const FUNC = {
 
     },
     POST_RECOMMAND_BUTTON: function(ev) {
-        alert("글 추천 버튼을 눌렀습니다.");   
+
+        const params = new URLSearchParams(location.search);
+        const postNumber = params.get("postNumber");
+
+        if(!postNumber) {
+            alert("잘못된 접근입니다.");
+            return;
+        }
+
+        if(postNumber < 0) {
+            alert("잘못된 게시물 번호입니다.");
+            return;
+        }
+
+        if(!postNumber.match(/[\d]+/ig)) {
+            alert("글 번호에 한글, 영문, 특수기호가 올 수 없습니다.");
+            return;
+        }
+
+        $.ajax({
+            url: `/board/qna/increaseRecommandCount.do?postNumber=${postNumber}`,
+            method: "GET",
+            success: function(data) {
+                if(!data) data = "";
+                if(data.indexOf("success") >= 0) {
+                    location.reload();
+                } else if(data.indexOf("duplicate") >= 0) {
+                    alert("이미 추천하신 게시물입니다.");
+                }
+
+                console.log(data);
+            },
+            error: function(err) {
+                console.warn(err);
+            }
+        });
+
     },
     POST_SHARE_BUTTON2: function(ev) {
         alert("글 공유하기 버튼을 눌렀습니다.");   

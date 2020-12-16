@@ -25,10 +25,10 @@ public class CookieService {
 	 * @param path
 	 * @return
 	 */
-	public Cookie create(HttpServletResponse response, String name, String value, String path) {
+	public Cookie create(HttpServletResponse response, String name, String value) {
 		Cookie cookie = new Cookie(name, value);
 		cookie.setMaxAge(DAY);
-		cookie.setPath(path);
+		cookie.setPath("/");
 		
 		response.addCookie(cookie);
 		

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -312,6 +313,38 @@ public class ContentDAO implements IDAO {
 		
 	}
 	
+	public List<ProductVO> findThumbnail(String shopName) {
+		ResultSet rs = null;
+		List<ProductVO> list = null;
+		
+		try {
+			conn = pool.getConnection();
+			
+			pstmt = conn.prepareStatement(getQL("브랜드 썸네일 찾기"));
+			pstmt.setString(1, shopName);
+			
+			rs = pstmt.executeQuery();
+			
+			List<ProductVO> myList = SQLHelper.putResult(rs, ProductVO.class);
+			
+			if(myList != null) {
+				list = myList;
+				
+				System.out.println(Arrays.toString(list.toArray()));
+			}
+			
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt, rs);
+		}
+		
+		return list;
+	}	
+	
 	/**
 	 * 특정 쇼핑몰의 전체 상품을 검색합니다 (DB에 있는 것만 찾습니다)
 	 * 
@@ -389,7 +422,7 @@ public class ContentDAO implements IDAO {
 			
 			for(ProductVO list : p) {
 			String query = "insert into CartNPay(id, title, price, qty) "
-					+ "values(?,?,?,?,?)";
+					+ "values(?,?,?,?)";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, list.getId());
 			pstmt.setString(2, list.getTitle());
@@ -413,5 +446,41 @@ public class ContentDAO implements IDAO {
 		}
 		
 		return success;
+	}
+	
+	public List<ProductVO> findThumbnail(String shopName) {
+		
+		ResultSet rs = null;
+		List<ProductVO> list = null;
+		String sql = null;
+		
+		try {
+			conn = pool.getConnection();
+			sql = "SELECT COUNT(DISTINCT b.title) AS cnt, b.title, "
+				+ "b.price, b.genderType, b.shopType, b.shopName, "
+				+ "b.pageType, c.Contenturl, a.imgId "					
+				+ "FROM tblImageHash a, tblproduct b, tblproduct c "
+				+ "WHERE b.title IS NOT NULL "
+				+ "and b.pageType = 'item' "
+				+ "AND c.pageType = 'shop' "
+				+ "AND a.imgUrl = b.contentUrl"
+				+ "AND b.shopName = c.shopName"
+				+ "GROUP BY b.shopname "
+				+ "order by cnt DESC";
+			
+			pstmt = conn.prepareStatement(sql);			
+			rs = pstmt.executeQuery();
+			
+			list = SQLHelper.putResult(rs, ProductVO.class);
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt, rs);
+		}
+		
+		return list;
 	}
 }

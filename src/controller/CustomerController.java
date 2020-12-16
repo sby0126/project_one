@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import command.Command;
 import dao.CustomerDAO;
 import vo.CustomerVO;
 
@@ -52,6 +53,8 @@ public class CustomerController extends HttpServlet {
 		String act = request.getPathInfo();
 		String nextPage = null;
 		
+		Command command = null;
+		
 		if(act == null || act.equals("/members.do")) {
 			
 			List<CustomerVO> customerList = customerDAO.listMembers();  
@@ -68,6 +71,7 @@ public class CustomerController extends HttpServlet {
 			if(request.getParameter("nextPage") != null) {
 				nextPage = request.getParameter("nextPage");
 			}
+			
 		} else if(act.equals("/modifyMemberForm.do")) {
 			
 			HttpSession session = request.getSession();

@@ -141,13 +141,15 @@ export class ItemContentLoader extends Component {
                 }
 
                 card.insertAdjacentHTML( 'afterbegin', `
-                    <i class="shop-hot-icon"></i>
-                    <div class="item-button-container"> 
-                        <h2>${title}</h2>
-                        <p>${price}</p>
-                        <p>${shop}</p>
-                        <button class="like-button"></button>
-                    </div>
+                    <a href="${filename.link} target='_blank'>
+                        <i class="shop-hot-icon"></i>
+                        <div class="item-button-container"> 
+                            <h2>${title}</h2>
+                            <p>${price}</p>
+                            <p>${shop}</p>
+                            <button class="like-button"></button>
+                        </div>
+                    </a>
                 `);
 
                 // 카드의 갯수를 1 증감시킵니다.

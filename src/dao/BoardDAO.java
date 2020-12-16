@@ -259,6 +259,65 @@ public class BoardDAO implements IDAO {
 		
 		return arr;		
 	}	
+	/***
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public JSONArray getListAllForFilter(String searchQuery) {
+		ResultSet rs = null;
+		List<BoardVO> list = null;
+		JSONArray arr = new JSONArray();
+		
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement(getQL("toJSONFilter"));
+			pstmt.setString(1, "%" + searchQuery + "%");
+			
+			rs = pstmt.executeQuery();
+			list = SQLHelper.putResult(rs, BoardVO.class);
+			
+			if(list != null) {
+				
+				for(BoardVO vo : list) {
+					JSONObject obj = new JSONObject();
+					obj.put("postNumber", String.valueOf(vo.getArticleid()));
+					obj.put("postType", vo.getArticletype());
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(vo.getTitle());
+					
+					// 코멘트를 읽습니다.
+					List<BoardCommentVO> comments = this.readAllComments(vo.getArticleid());
+					int commentsCount = comments.size();
+					
+					
+					sb.append("&nbsp<span class='comment'>[");
+					sb.append(commentsCount);
+					sb.append("]</span>");
+					
+					obj.put("postTitle", sb.toString());
+					obj.put("name", vo.getCtmnm());
+					obj.put("create_at", vo.getRegdate().toString());
+					obj.put("view", vo.getViewcount());
+					obj.put("recommandCount", vo.getRecommandcount());
+					
+					
+					
+					arr.add(obj);
+				}
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt, rs);
+		}
+		
+		return arr;		
+	}	
 	
 	/***
 	 * 
@@ -771,5 +830,58 @@ public class BoardDAO implements IDAO {
 		}
 		
 		return ret;
+	}
+	
+	public boolean increaseRecommendCount(int postNumber, String receiverId) {
+		
+		boolean ret = false;
+		
+		try {
+			conn = pool.getConnection();
+			
+			pstmt = conn.prepareStatement(getQL("추천"));
+			pstmt.setInt(1, postNumber);
+			pstmt.setString(2, receiverId);
+			
+			if(pstmt.executeUpdate() > 0) {
+				ret = true;
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+		return ret;
+		
+	}
+	
+	public int getRecommandCount(int postNumber) {
+		
+		ResultSet rs = null;
+		int count = 0;
+		
+		try {
+			conn = pool.getConnection();
+			
+			pstmt = conn.prepareStatement(getQL("추천수 집계"));
+			pstmt.setInt(1, postNumber);
+			
+			while(rs.next()) {
+				count = rs.getInt(1);
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+		return count;
+		
 	}
 }
