@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -12,6 +11,7 @@ import org.json.simple.JSONArray;
 import core.SQLHelper;
 import sql.ContentLoader;
 import utils.DBConnectionMgr;
+import vo.CustomerVO;
 import vo.ProductVO;
 
 public class ContentDAO implements IDAO {
@@ -312,38 +312,6 @@ public class ContentDAO implements IDAO {
 		
 	}
 	
-	public List<ProductVO> findThumbnail(String shopName) {
-		ResultSet rs = null;
-		List<ProductVO> list = null;
-		
-		try {
-			conn = pool.getConnection();
-			
-			pstmt = conn.prepareStatement(getQL("브랜드 썸네일 찾기"));
-			pstmt.setString(1, shopName);
-			
-			rs = pstmt.executeQuery();
-			
-			List<ProductVO> myList = SQLHelper.putResult(rs, ProductVO.class);
-			
-			if(myList != null) {
-				list = myList;
-				
-				System.out.println(Arrays.toString(list.toArray()));
-			}
-			
-			
-		} catch(SQLException e) {
-			e.printStackTrace();
-		} catch(Exception e) {
-			e.printStackTrace();
-		} finally {
-			pool.freeConnection(conn, pstmt, rs);
-		}
-		
-		return list;
-	}
-	
 	/**
 	 * 특정 쇼핑몰의 전체 상품을 검색합니다 (DB에 있는 것만 찾습니다)
 	 * 
@@ -380,6 +348,70 @@ public class ContentDAO implements IDAO {
 		return retList;
 		
 	}
-		
 	
+	public List<ProductVO> getDetail(String title, String price) {
+		
+		ResultSet rs = null;
+		List<ProductVO> list = null;
+		String sql = null;
+		
+		try {
+			conn = pool.getConnection();
+			sql = "select b.title, b.price, a.imgUrl FROM tblImageHash a, tblproduct b"
+				  + " where title = ? and price = ?"
+				  + " and a.imgUrl = b.contentUrl"
+				  + " group by contentUrl";
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, title);
+			pstmt.setString(2, price);
+			
+			rs = pstmt.executeQuery();
+			list = SQLHelper.putResult(rs, ProductVO.class);
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt, rs);
+		}
+		
+		return list;
+	}
+	
+	public boolean insertDetail(List<ProductVO> p, int qty) {
+		
+		boolean success = false;
+		
+		try {
+			conn = pool.getConnection();
+			
+			for(ProductVO list : p) {
+			String query = "insert into CartNPay(id, title, price, qty) "
+					+ "values(?,?,?,?,?)";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, list.getId());
+			pstmt.setString(2, list.getTitle());
+			pstmt.setString(3, list.getPrice());
+			pstmt.setInt(4, qty);			
+			}
+			
+			
+			if(pstmt.executeUpdate() > 0) {
+				conn.commit();
+				System.out.println("데이터 입력 완료.");
+				success = true;
+			};
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+		return success;
+	}
 }
