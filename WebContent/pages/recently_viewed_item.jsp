@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+	int maxItems = 12;
+%>
+<c:set var="maxItems" value="<%= maxItems %>" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -26,19 +30,23 @@
 
             <!-- 본문이 들어가는 래퍼 -->
             <div class="contents-wrapper">
-                <!-- 아이템 총-->
-                <div class="item_selected">
-                    <!-- 아이템-->
-                    <div class="item_selected_list">
-                        <img src="../images/img1.jpg">
-                        <div class="item_selected_list_info">
-                            <h3>하찌 트임 루즈 니트(데이터)</h3>
-                            <p>15000원</p>
-                            <p>제이브로스</p>
-                            <button></button>
-                        </div>
-                    </div>
-                </div>
+            	
+            	<c:forEach begin="1" end="${ maxItems }" step="1">
+	                <!-- 아이템 총-->
+	                <div class="item_selected">
+	                    <!-- 아이템-->
+	                    <div class="item_selected_list">
+	                        <img src="../images/img1.jpg">
+	                        <div class="item_selected_list_info">
+	                            <h3>하찌 트임 루즈 니트(데이터)</h3>
+	                            <p>15000원</p>
+	                            <p>제이브로스</p>
+	                            <button></button>
+	                        </div>
+	                    </div>
+	                </div>            	
+            	</c:forEach>
+            	
                 <!-- 비어있을때-->
                 <div class="item_selected_none">
                     <button class="item_selected_none_all_del">전체삭제</button>
