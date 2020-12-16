@@ -124,18 +124,20 @@ export class ShopContentLoader extends Component {
                 const lines = filename.texts.replace(/([\d]+대\,[\d]+대\,[\d]+대)|([\d]+대[ ]*\,[ ]*[\d]+대)/, function(...args) {
                     return args[0] + "<br>";
                 });
-                
+
                 $(myCard).html(`
-                    <i class="shop-hot-icon" data-title="HOT"></i>
-                    <h2 class="contents-shop-name">${filename.shopName}</h2>
-                    <p class="shop-contents">${ lines }</p>
-                    <div class="shop-button-container" data-id="${filename.id}">
-                        <button class="shop-button all-item-button">전체 상품</button>
-                        <button class="shop-button">
-                            <p class="shop-button-text">마이샵</p>
-                            <i class="shop-button-icon"></i>
-                        </button>
-                    </div>                    
+                    <a href="${filename.link} target='_blank'>
+                        <i class="shop-hot-icon" data-title="HOT"></i>
+                        <h2 class="contents-shop-name">${filename.shopName}</h2>
+                        <p class="shop-contents">${ lines }</p>
+                        <div class="shop-button-container" data-id="${filename.id}">
+                            <button class="shop-button all-item-button">전체 상품</button>
+                            <button class="shop-button">
+                                <p class="shop-button-text">마이샵</p>
+                                <i class="shop-button-icon"></i>
+                            </button>
+                        </div>                    
+                    </a>
                 `);
 
                 // 전체 상품 버튼이 클릭되었을 때 실행되어야 하는 내용을 정의하세요.

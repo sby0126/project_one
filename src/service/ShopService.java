@@ -54,6 +54,7 @@ public class ShopService extends ContentService {
 			newContentData.put("texts", vo.getTexts());
 			newContentData.put("url", vo.getContenturl());
 			newContentData.put("id", vo.getId());
+			newContentData.put("link", vo.getLink());
 			
 			contentData.add(newContentData);
 			imageData.put(vo.getContenturl(), vo.getImgid());
