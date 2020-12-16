@@ -235,7 +235,7 @@
             function del(obj){
                 obj.parent("li").remove();
             }
-           
+        }
         </script>
         <script type="module" src="../js/ItemDetailPage.js"></script>
     </body>
