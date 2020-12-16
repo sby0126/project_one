@@ -94,6 +94,7 @@
             const file = $(this)[0].files[0];
             formData.append('image', file);
 
+            // AJAX를 통해 이미지를 서버에 업로드합니다.
             $.ajax({
                 type: "POST",
                 enctype: "multipart/form-data",

@@ -109,6 +109,8 @@ export class ShopContentLoader extends Component {
                 card.querySelector("p").setAttribute("d-"+idx, "");
 
                 const filename = myImgData;
+
+                // 로컬 모드일 경우, 로컬에 있는 이미지 데이터를 사용합니다.
                 if(this._isLocalMode) {
                     const {gndr, shopType} = this._dataLoader;
                     parent.createNewStyleSheet("d-"+idx, `/images/shop/${gndr}/${shopType}/${filename.url}`);     
@@ -116,7 +118,6 @@ export class ShopContentLoader extends Component {
                     parent.createNewStyleSheet("d-"+idx, imgSrc + mainImg[filename.url]);     
                 }
                 
-
                 // 정규 표현식을 이용하여 한 줄로 되어있는 텍스트를 여러 줄로 잘라냅니다.
                 // 정규 표현식 문법 \d는 숫자를 나타냅니다.
                 const myCard = card.querySelector("p");
@@ -125,16 +126,18 @@ export class ShopContentLoader extends Component {
                 });
 
                 $(myCard).html(`
-                    <i class="shop-hot-icon" data-title="HOT"></i>
-                    <h2 class="contents-shop-name">${filename.shopName}</h2>
-                    <p class="shop-contents">${ lines }</p>
-                    <div class="shop-button-container" data-id="${filename.id}">
-                        <button class="shop-button all-item-button">전체 상품</button>
-                        <button class="shop-button">
-                            <p class="shop-button-text">마이샵</p>
-                            <i class="shop-button-icon"></i>
-                        </button>
-                    </div>
+                    <a href="#">
+                        <i class="shop-hot-icon" data-title="HOT"></i>
+                        <h2 class="contents-shop-name">${filename.shopName}</h2>
+                        <p class="shop-contents">${ lines }</p>
+                        <div class="shop-button-container" data-id="${filename.id}">
+                            <button class="shop-button all-item-button">전체 상품</button>
+                            <button class="shop-button">
+                                <p class="shop-button-text">마이샵</p>
+                                <i class="shop-button-icon"></i>
+                            </button>
+                        </div>                    
+                    </a>
                 `);
 
                 // 전체 상품 버튼이 클릭되었을 때 실행되어야 하는 내용을 정의하세요.
