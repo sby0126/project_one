@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+ * {
+	margin: 0;
+	padding: 0;
+}
+
+.readBox {
+	width: 50%;
+	margin: 0 auto;
+}
+
+.readBox > .readBox2 {
+	list-style-type: none;
+}
+
+.readBox > .readBox2 > li {
+	margin: 2% 0 2% 0;
+}
+
+.readBox > .readBox2 > li > span:nth-child(1) {
+	font-weight: bold;
+	margin-right: 10%;
+}
+
+.readBox > .readBox2 > li:nth-child(5) {
+	border-radius: 5px;
+	background-color: #B2EBF4;
+	width: 50%;
+	padding: 5px;
+	
+}
+
+.readBox > .readBox3 {
+	
+	display: inline-block;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	
+}
+
+.readBox > .replyBox > div   {
+	padding: 10px;	
+	border: 1px solid black;
+	margin-bottom: 15px;
+	display:inline-block;
+}
+
+.readBox > .replyBox > div > span {
+	margin-right: 25px;
+}
+

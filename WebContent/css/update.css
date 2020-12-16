@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.updateBox {
+	width: 50%;
+	margin: 0 auto;
+}
+
+.updateBox > form > ul {
+	list-style-type: none;
+}
+
+.updateBox > form > ul > li > span:nth-child(1) {
+	margin-right: 10px;
+}
+
+.updateBox > form > ul > li {
+	margin: 2% 0 2% 0;
+}
+

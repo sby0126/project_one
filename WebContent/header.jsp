@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
         <!-- 헤더의 시작 -->
         <header>
+       	
         	<%
         		String hide = (String)request.getParameter("isHide");
         		if(hide == null) hide = "";
@@ -72,11 +73,20 @@
                                 <p class="menu-title">관심 상품</p>
                             </a>
                         </li>
-                        <li class="menu">
-                            <a href="${pageContext.request.contextPath}/pages/board-default.jsp" class="menu-link">
-                                <div class="menu-icon"></div>
-                                <p class="menu-title">1:1 문의</p>
-                            </a>
+                        <li class="menu" id="nav_board_li">
+                            <a href="#" class="menu-link" id="asdasd2">
+                                <div class="menu-icon" id="nav_board_li_icon"></div>
+                                <p class="menu-title" id="nav_board_li_title">1:1 문의</p>
+                            	<div class="side_box" >
+                             		<ul class="side_menu">
+		                            	<a href="boardList.abc"><li>자유게시판</li></a>
+		                            	<a href="#"><li>OO게시판</li></a>
+		                            	<a href="#"><li>OO게시판</li></a>
+                           			 </ul>
+                            	</div>
+                            </a> 
+                       
+                           <%--  ${pageContext.request.contextPath}/pages/board-default.jsp --%>
                         </li>
                         <li class="menu">
                             <a href="${pageContext.request.contextPath}/pages/map.jsp" class="menu-link">
@@ -147,7 +157,31 @@
 	                </div>
 	            </div>
             </c:if>
-        </header>   
+           
+        </header>
+        <script>
+        	 (function() { 
+        		 //여기에 스크립트 추가
+        			//헤더네비게이션(게시판) 마우스 온 아웃했을때
+                	$("#nav_board_li").mouseover(function(){
+                		
+               			$("#nav_board_li_icon , #nav_board_li_title").css("display","none");
+               			$(".side_box").css("position","absolute");
+               			$(".side_box").css("display","block");
+               			
+               		}) 
+               		
+               		$("#nav_board_li").mouseout(function(){
+               			$("#nav_board_li_icon , #nav_board_li_title").css("display","block");
+               			$(".side_box").css("display","none");
+               		})
+               				
+               		
+               		
+               	
+         	})(); 
+
+        </script>   
    	    <c:if test="${isHide != true}">
    	    	<div style="display:block; height: 4em; width:100%;">
    	    	</div>

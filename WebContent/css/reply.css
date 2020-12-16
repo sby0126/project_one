@@ -1,0 +1,20 @@
+
+@charset "UTF-8";
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.reply {
+	width: 50%;
+	
+	margin: 0 auto;
+}
+
+.reply > form > ul {
+	list-style-type: none;
+}
+
+.reply > form > ul > li {
+	margin: 1% 0 1% 0;
+}

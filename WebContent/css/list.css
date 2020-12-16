@@ -1,0 +1,72 @@
+@charset "UTF-8";
+
+ *{
+	margin: 0;
+	padding: 0;
+}
+
+.listBox {
+	width: 50%;
+	margin: 0 auto;
+	position: relative;
+	
+}
+
+.listTitle {
+	font-weight: bold;
+	font-size: 25px;
+	text-align: center;
+	display: block;
+}
+
+.listTitle2 {
+	list-style-type: none;
+	overflow: hidden;
+	margin: 10px 0 10px 0;
+	border-radius: 5px;
+	background-color: #B2EBF4;
+	
+}
+
+.listTitle2 > li {
+	float:left;
+	width: 20%;	
+	overflow:hidden;
+}
+
+.listPM {
+	position: relative;
+	
+}
+
+.listPM > .listPMPage {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.listPM > .listPMMove {
+	position: absolute;
+	right: 0;	
+}
+
+.listPM > .listPMMove > a {
+	text-decoration:none;
+}
+
+.listSearch {
+	position: relative;
+}
+
+.listSearch > .listSearchFrm {
+	
+	display:inline-block;
+	position: relative;
+	left:50%;
+	transform: translateX(-50%);
+}
+
+
+
+
+

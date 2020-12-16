@@ -15,14 +15,12 @@
     <!-- 컨테이너의 시작 -->
     <div class="container">
         <jsp:include page="header.jsp"></jsp:include>
-	 		
+
         <!-- 본문의 시작 -->
         <section>
             <!-- 본문이 들어가는 래퍼 -->
             <div class="contents-wrapper">
-            
-          
-           
+<!--             	여기에 -->
             </div>
         </section>
     </div>
@@ -31,6 +29,6 @@
     </div>
     <jsp:include page="/pages/login.jsp"></jsp:include>
     <!-- index.js는 메인 용이므로 알맞은 스크립트를 사용해야 합니다-->
-    <script type="module" src="<%=application.getContextPath()%>/js/index.js"></script>
+    <script type="module" src="<%=application.getContextPath()%>/js/MorePage.js"></script>
 </body>
 </html>

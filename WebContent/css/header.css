@@ -331,6 +331,20 @@ header {
     background: #F3F7FA;
 }
 
+#nav_board_li{
+	position: relative;	
+}
+
+
+
+.side_box {
+	display:none;
+	top:50%;
+	left: 50%;
+	transform : translate(-50%, -50%);
+	font-size: 7px;
+}
+
 /* 검색 필터링 박스를 감싼 래퍼의 크기와 위치를 지정합니다. */
 .header-filter-box-wrapper {
     display: flex;
