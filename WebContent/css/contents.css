@@ -322,10 +322,8 @@ section {
     text-align: center;
 }
 
-.shop-button-icon.active {
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAVCAYAAADID4fUAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAANFJREFUeNrE0l0KwjAMB/CuE8/hOXaUPYjgwxCPozAEH4YPHmmnccwEEihi16/QBP6M0JT+aNesV6NRLeQBOUHGRgGBgBekp36xygCsySoD3pDBKgOO5r5WeQ4/AP4HbBBxg3wgT9pQFcCICw2faUNbE8CIyel7IUg0gBEDDUhBkgCMWGhAApIMYIQRgmQBXEQpJBvwi8iFFAH+IVIhxQAfIhYiAthChCB7KQDWLrDOEOMciN8OcpAAhG5i60bEALEIH0QEkIJwITP1swQA6yvAAP0aYAk1AT5qAAAAAElFTkSuQmCC);
-    background-size: cover;
-    background-origin: padding-box;    
+.shop-button.active {
+    color: #FF994F;
 }
 
 .item-button-container .like-button {

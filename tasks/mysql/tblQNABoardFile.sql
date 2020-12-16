@@ -9,3 +9,7 @@ CREATE TABLE tblQNABoardFile (
 
 INSERT INTO tblQNABoardFile VALUES(4, 'myfile.png', 'image/png');
 TRUNCATE tblQNABoardFile;
+
+-- text/html
+-- image/png
+-- text/css

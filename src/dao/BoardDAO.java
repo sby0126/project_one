@@ -772,4 +772,57 @@ public class BoardDAO implements IDAO {
 		
 		return ret;
 	}
+	
+	public boolean increaseRecommendCount(int postNumber, String receiverId) {
+		
+		boolean ret = false;
+		
+		try {
+			conn = pool.getConnection();
+			
+			pstmt = conn.prepareStatement(getQL("추천"));
+			pstmt.setInt(1, postNumber);
+			pstmt.setString(2, receiverId);
+			
+			if(pstmt.executeUpdate() > 0) {
+				ret = true;
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+		return ret;
+		
+	}
+	
+	public int getRecommandCount(int postNumber) {
+		
+		ResultSet rs = null;
+		int count = 0;
+		
+		try {
+			conn = pool.getConnection();
+			
+			pstmt = conn.prepareStatement(getQL("추천수 집계"));
+			pstmt.setInt(1, postNumber);
+			
+			while(rs.next()) {
+				count = rs.getInt(1);
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+		return count;
+		
+	}
 }

@@ -18,6 +18,7 @@ import action.ActionResult;
 import action.ErrorResult;
 import command.DeleteCommand;
 import command.ImageUploadCommand;
+import command.IncreaseRecommandCountCommand;
 import command.ModifyPostFormCommand;
 import command.PostViewCommand;
 import command.ReplyCommand;
@@ -138,6 +139,9 @@ public class BoardService extends HttpServlet {
 				result = command.execute(request, response);
 			} else if(currentPage.equals("/modifyPost.do")) { // 글 수정 폼 채우기
 				ModifyPostFormCommand command = new ModifyPostFormCommand(); 
+				result = command.execute(request, response);
+			} else if(currentPage.equals("/increaseRecommandCount.do")) { // 게시물 추천하기
+				IncreaseRecommandCountCommand command = new IncreaseRecommandCountCommand();
 				result = command.execute(request, response);
 			}
 			

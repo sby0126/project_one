@@ -21,8 +21,11 @@ public class BoardSQL {
 					+ " where c.ctmid == q.authorID"
 					+ " order by parentID desc, pos limit ?, ?");
 		
-		// 게시물 목록을 JSON으로 출력합니다.
-		qlList.put("toJSON", "select articleID, articleType, title, authorID, regdate, viewCount, recommandCount, ctmnm from tblQNABoard q, tblCustomer c where ctmid = authorID");
+		// 게시물 목록을 JSON으로 출력합니다 (추천수 집계)
+		qlList.put("toJSON", "select articleID, articleType, title, authorID, regdate, viewCount, (select COUNT(*) from tblQnaBoardRec where board_id = q.articleID) as recommandCount, ctmnm"
+				+ " from tblQNABoard q, tblCustomer c, tblQnaBoardRec r"
+				+ " where ctmid = authorID"
+				+ " GROUP BY articleID");
 		
 		// 조회수 증가
 		qlList.put("updatePostViewCount", "update tblQNABoard set viewCount = viewCount + 1 where articleID = ?");
@@ -87,6 +90,12 @@ public class BoardSQL {
 				+ " WHERE parent_articleID = ?"
 				+ " WINDOW w AS (order by parentID desc, pos, commentID)) AS mytbl"
 				+ " WHERE mytbl.row_number = ?");
+		
+		// 추천수를 올립니다.
+		qlList.put("추천", "INSERT INTO tblQnaBoardRec(board_id, receiver_id) VALUES(?, ?)");
+		
+		// 추천수 집계
+		qlList.put("추천수 집계", "SELECT COUNT(*) FROM tblQnaBoardRec WHERE board_id = ?");
 		
 	}
 	
