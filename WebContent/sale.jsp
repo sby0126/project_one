@@ -53,13 +53,13 @@
                 <div class="header-popup-container">
                     <ul class="header-menu-list">
                         <li class="menu">
-                            <a href="pages/Recently_viewed_shop.jsp" class="menu-link">
+                            <a href="pages/recently_viewed_shop.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">최근 본 샵 <em>0</em></p>
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="pages/Recently_viewde_item.jsp" class="menu-link">
+                            <a href="pages/recently_viewed_item.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">최근 본 상품 <em>0</em></p>
                             </a>
@@ -71,7 +71,7 @@
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="pages/Interested_item.jsp" class="menu-link">
+                            <a href="pages/interested_item.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">관심 상품</p>
                             </a>
