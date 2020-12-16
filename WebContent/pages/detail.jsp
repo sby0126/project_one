@@ -127,10 +127,6 @@
                 <a href="#item_content" id="item_top"><span class="item_top_button">top</span></a>
                 <a href="#productPayInfo" id="item_bottom"><span class="item_bottom_button">bottom</span></a>
             </div>
-            <form method="post" action="goCart()">
-                <input type="hidden" name="title" value="">
-                <input type="hidden" name="price" value="">
-            </form>
         </div>
     </div>
 

@@ -56,7 +56,6 @@
                                 <img src="https://dummyimage.com/196x196/000/fff" alt="">
                             </div>          
                         </div>
-                                   
                     </div>
                 </div>
                 <div class="editor"></div>

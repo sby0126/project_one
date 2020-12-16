@@ -9,11 +9,12 @@
     <style>
     	h1 {
     		margin : 0 auto;
+            text-align: center;
     	}
     </style>
 </head>
 <body>
-<h1> 해당 페이지는 임시 페이지입니다.</h1>
+<h1>해당 페이지는 임시 페이지입니다.</h1>
     <section>
         <div class="contents-main">
             <img src="../images/stadc_logo.jpg">

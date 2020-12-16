@@ -16,8 +16,8 @@ export class ItemDetailLoader extends Component {
 
         const item = itemData[dataId]; // 여기엔 large image, content 정보가 없음.
         
-        $("#detail-item-title").text(item.title);
-        $("#detail-item-price, .allPrice").text(item.price);
+        $("#detail-item-title, #title").text(item.title);
+        $("#detail-item-price, .allPrice, #price").text(item.price);
         $(".imgArea > img").attr("src", imgSrc + itemImg[item.url]);
 
     }
