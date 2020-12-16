@@ -46,9 +46,35 @@
                                 <span>상품 가격</span>                            
                             </div>        
                             <div class="contents-item-title">
+                                <span>성별 : </span>                            
+                                <select style="margin-right: 1em;">
+                                	<option value="M" selected>남자</option>
+                                	<option value="F">여자</option>
+                                </select>
+                            </div>        
+                            <div class="contents-item-title">
+                            	<input type="text" value="">
+                                <span>상점 이름</span>  
+                            </div>                                 
+                            <div class="contents-item-title">
+                                <span>상점 타입</span>                            
+                                <select style="margin-right: 1em;">
+                                	<option value="S" selected>소호</option>
+                                	<option value="B">브랜드</option>
+                                </select>
+                            </div>        
+                            <div class="contents-item-title">
+                            	<input type="text" value="">
+                                <span>링크</span>  
+                            </div>        
+                            <div class="contents-item-title">
+                            	<input type="text" value="">
+                                <span>유형(예: 20대,30대트랜드·캐쥬얼)</span>  
+                            </div>                                  
+                            <div class="contents-item-title">
                                 <span style="margin-right: 1em;">상품 썸네일</span>                            
                                 <input type="file" id="input-item-image" onchange="updateImage(this)">
-                            </div>                               
+                            </div>      
                         </div>
                         <div class="item">
                             <div class="contents-item-title content-item-thum">
