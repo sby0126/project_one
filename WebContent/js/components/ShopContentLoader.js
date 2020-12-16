@@ -124,12 +124,8 @@ export class ShopContentLoader extends Component {
                 const lines = filename.texts.replace(/([\d]+대\,[\d]+대\,[\d]+대)|([\d]+대[ ]*\,[ ]*[\d]+대)/, function(...args) {
                     return args[0] + "<br>";
                 });
-
-                console.log(filename.link);
-
+                
                 $(myCard).html(`
-                    <a href="${filename.link}" target="_blank">
-                    </a>
                     <i class="shop-hot-icon" data-title="HOT"></i>
                     <h2 class="contents-shop-name">${filename.shopName}</h2>
                     <p class="shop-contents">${ lines }</p>

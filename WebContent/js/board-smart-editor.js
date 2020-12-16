@@ -1,5 +1,9 @@
 (function () {
 
+    // 아이콘을 변경합니다.
+    let icons = Quill.import("ui/icons");
+    icons["image"] = `<i class="fas fa-arrow-circle-up"></i>`;
+
     // 게시물 에디터의 인스턴스를 만듭니다.
     var quill = new Quill('.editor', {
         modules: {
@@ -94,6 +98,17 @@
             const file = $(this)[0].files[0];
             formData.append('image', file);
 
+            const filename = file.name || "";
+            let mimeType = '';
+
+            if(filename.indexOf(".png") >= 0) {
+                console.log("이미지입니다.")
+                mimeType = "image";
+            } else if(filename.indexOf(".zip") >= 0) {
+                console.log("압축 파일입니다...");
+                mimeType = "zip";
+            }
+
             // AJAX를 통해 이미지를 서버에 업로드합니다.
             $.ajax({
                 type: "POST",
@@ -104,7 +119,11 @@
                 contentType: false,
                 success: function (data) {
                     const range = quill.getSelection();
-                    quill.insertEmbed(range.index, 'image', "/uploads/" + data.url);
+                    if(mimeType == "image") {
+                        quill.insertEmbed(range.index, 'image', "/uploads/" + data.url);
+                    } else {
+                        quill.insertEmbed(range.index + 1, "link", data.files[0].name);
+                    }
                 },
                 error: function (err) {
                     console.warn(err);

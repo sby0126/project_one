@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -311,6 +312,38 @@ public class ContentDAO implements IDAO {
 		return shopName;
 		
 	}
+	
+	public List<ProductVO> findThumbnail(String shopName) {
+		ResultSet rs = null;
+		List<ProductVO> list = null;
+		
+		try {
+			conn = pool.getConnection();
+			
+			pstmt = conn.prepareStatement(getQL("브랜드 썸네일 찾기"));
+			pstmt.setString(1, shopName);
+			
+			rs = pstmt.executeQuery();
+			
+			List<ProductVO> myList = SQLHelper.putResult(rs, ProductVO.class);
+			
+			if(myList != null) {
+				list = myList;
+				
+				System.out.println(Arrays.toString(list.toArray()));
+			}
+			
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt, rs);
+		}
+		
+		return list;
+	}	
 	
 	/**
 	 * 특정 쇼핑몰의 전체 상품을 검색합니다 (DB에 있는 것만 찾습니다)

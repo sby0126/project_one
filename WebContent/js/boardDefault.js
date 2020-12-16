@@ -57,6 +57,9 @@
                 if(!params.get("type")) {
                     params.set("type", "search");
                     const searchQuery = $(".search-box").val();
+                    if(!searchQuery) {
+                        searchQuery = "";
+                    }
                     params.set("searchQuery", searchQuery);
                 }
 
@@ -84,6 +87,7 @@
             const params = new URLSearchParams(location.search);
             const type = params.get("type");
             const searchQuery = params.get("searchQuery");
+
             $.ajax({
                 url: (type && type.indexOf("search") >= 0) ? `/board/qna/search.do?searchQuery=${encodeURIComponent(searchQuery)}` : "/board/qna/listAll.do",
                 method: "GET",

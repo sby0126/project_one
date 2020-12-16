@@ -87,6 +87,7 @@
                         </div>
                     </div>
                 </div>
+                <input type="hidden" style="display: none;" accept="" id="file" accept="*.*">
                 <div class="editor"></div>
                 <div class="contents-tail">
                 	
