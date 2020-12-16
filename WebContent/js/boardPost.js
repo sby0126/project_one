@@ -29,7 +29,7 @@ const ID = {
     MODIFY: "#modify-button",
     DELETE: "#delete-button",
     POST_RECOMMAND_BUTTON: "#post-recommand-button",
-    POST_SHARE_BUTTON2: "#post-share-button2"
+    POST_SHARE_BUTTON2: "#post-share-button2",
 };
 
 const AJAX = {

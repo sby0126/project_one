@@ -27,6 +27,12 @@ public class BoardSQL {
 				+ " where ctmid = authorID"
 				+ " GROUP BY articleID");
 		
+		// 게시물 목록을 JSON으로 출력합니다 (추천수 집계)
+		qlList.put("toJSONFilter", "select articleID, articleType, title, authorID, regdate, viewCount, (select COUNT(*) from tblQnaBoardRec where board_id = q.articleID) as recommandCount, ctmnm"
+				+ " from tblQNABoard q, tblCustomer c, tblQnaBoardRec r"
+				+ " where ctmid = authorID AND title LIKE ?"
+				+ " GROUP BY articleID");
+		
 		// 조회수 증가
 		qlList.put("updatePostViewCount", "update tblQNABoard set viewCount = viewCount + 1 where articleID = ?");
 		

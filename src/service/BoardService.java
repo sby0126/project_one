@@ -3,6 +3,7 @@ package service;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -122,6 +123,22 @@ public class BoardService extends HttpServlet {
 				
 				return;
 
+			} else if(currentPage.equals("/search.do")) {
+				
+				String searchQuery = request.getParameter("searchQuery");
+				if(searchQuery != null) {
+					searchQuery = URLDecoder.decode(searchQuery);
+				}
+				JSONArray json = boardMgr.getListAllForFilter(searchQuery);
+				
+				response.setContentType("application/json");
+				response.setCharacterEncoding("EUC-KR");
+				
+				PrintWriter out = response.getWriter();
+				out.println(json.toJSONString());
+				
+				return;				
+				
 			} else if(currentPage.equals("/postView.do")) { // 특정 게시물 JSON 요청
 				result = postViewCommand.execute(request, response);
 			} else if(currentPage.equals("/view.do")) {
