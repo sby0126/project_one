@@ -59,7 +59,7 @@
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="pages/recently_viewde_item.jsp" class="menu-link">
+                            <a href="pages/recently_viewed_item.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">최근 본 상품 <em>0</em></p>
                             </a>
