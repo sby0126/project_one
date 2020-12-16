@@ -76,9 +76,13 @@
 
     .product tr td:nth-of-type(3) { width: 35%;}
 
-    .product tr td:nth-of-type(4) { width: 8%;}
+    .product tr td:nth-of-type(4) { width: 10%;}
 
-    .product tr td:nth-of-type(4) > input { width: 50px;}
+    .product tr td:nth-of-type(4) > input { 
+
+    	width: 50px;
+    	text-align:right;    	
+    	}
 
     .product tr td:nth-of-type(5) { width: 10%;}
 
@@ -124,6 +128,12 @@
     .product-img {
         width: 125px;
         height: 125px;
+    }
+    
+    .page-pooter {
+    	position:absolute;
+    	bottom: -5%;
+    	right: 15%;
     }
 
     /* product-info 이후 결제에 필요한 최종 금액을 도출하는 영역 */
