@@ -11,8 +11,6 @@
     System.out.println("uri = " + imguri);
     
     int totalPrice = 0;
-    
-    
 %>
 
 <html lang="ko">
@@ -40,7 +38,7 @@
                     <form class="product-info">
                         <table class="product">
                             <tr class="label">
-                                <td><input type="checkbox" name="chk" id="chk"></td>
+                                <td><input type="checkbox" name="chk" id="chk" onClick="allChk()"></td>
                                 <td><p name="product-img"> 상품 이미지 </td> <!-- 구매할 상품 이미지 -->
                                 <td><a href="#"><p name="product-name"> 상품명</p></a></td> <!-- 구매할 상품 이름 -->
                                 <td><p name="product-num"> 구매 갯수 </p></td> <!-- 구매 갯수 -->
@@ -57,22 +55,35 @@
                                 <td><P class="product-discnt"> 할인 </P></td> <!-- 할인 -->
                                 <td><P class="product-rltprice"> <%=totalPrice%> </P> </td> <!-- 상품 금액 -->
                             </tr>
+                            <tr>
+                                <td><input type="checkbox" name="chk" class="chkbox"></td>
+                                <td><img src='<%=imguri%>' class="product-img"></td> <!-- 구매할 상품 이미지 -->
+                                <td><a href="#"><p class="product-name"><%=title%></p></a> </td> <!-- 구매할 상품 이름 -->
+                                <td><input type="number" class="product-num" placeholder="1" min="1"></td> <!-- 구매 갯수 -->
+                                <td><P class="product-price"> <%=price%> </P></td> <!-- 상품 가격-->
+                                <td><P class="product-discnt"> 할인1 </P></td> <!-- 할인 -->
+                                <td><P class="product-rltprice"> <%=totalPrice%> </P> </td> <!-- 상품 금액 -->
+                            </tr>
                         </table>
                     </form>
                 </div>
-                <div class="down-line-bd"></div>
-                <div class="cart-result"> <!-- 장바구니 내 구매할 상품에 대한 총 정보 -->
-                    <div class="result-buy-cost">
-                        <p>총 </p>
-                        <p class="total-num">n개 상품</p>
-                        <p class="total-price">XXX원</p>
-                    </div>
-                </div>
-                <div class="button-zone"> <!-- 장바구니 내 추가 액션에 대한 버튼 -->
-                    <button class="buy-product" onclick="">구매</button>
-                    <button class="del-product" onclick="del()">삭제</button>
-                </div>
-            </div>
+                <div class="page-pooter">
+                	<table class="page-pooterbox">
+                		<tr>
+                			<td width="80"></td>
+                			<td width="80"></td>
+                			<td class='total-num'><p>총</p> <span>X 개</span></td>
+                			<td class="total-price">XXX원</td>
+                		</tr>
+                		<tr>
+                			<td></td>
+                			<td></td>
+                			<td><button class="buy-product" onclick="">구매</button></td>
+                			<td><button class="del-product" onclick="del()">삭제</button></td>
+                		</tr>
+	                </table>
+	            </div>
+	         </div>
         </section>
     </div>
     <!-- 라이트 박스-->
@@ -82,21 +93,16 @@
     <!-- 스크립트 --> 
     <script type="module" src="../js/MorePage.js"></script>
     <script>
-		
-    	function allChk() {
-    		$('#chk').on("click", function(){
-    			if ($('.chkbox').prop() == null) {
-    				$('.chkbox').prop('selected')
-    			} else {
-    				$('.chkbox').prop('')
-    			}
-    		})
-    	}
-    	
-        function del(obj){
-            if ($('.chkbox').prop() == "selected") {
-                $('.chkbox').prop('selected').parent().parent().remove();
-            }            
+	    $(document).ready(function() {
+	    		$('#chk').on("click", function(){
+	    			$('.chkbox').prop('checked', this.checked);
+	    		});
+	    	});
+	    
+        function del(){
+           $(this).on('click', function() {
+        	   $('.chkbox:checked').parent().parent().remove();
+           });      
         }        
     </script>
 </body>
