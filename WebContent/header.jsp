@@ -79,8 +79,8 @@
                                 <p class="menu-title" id="nav_board_li_title">1:1 문의</p>
                             	<div class="side_box" >
                              		<ul class="side_menu">
-		                            	<a href="boardList.abc"><li>자유게시판</li></a>
-		                            	<a href="#"><li>OO게시판</li></a>
+		                            	<a href="/boardList.abc"><li>자유게시판</li></a>
+		                            	<a href="/pages/board-default.jsp"><li>1:1 문의</li></a>
 		                            	<a href="#"><li>OO게시판</li></a>
                            			 </ul>
                             	</div>
