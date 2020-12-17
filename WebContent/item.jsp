@@ -89,11 +89,19 @@
                                 <p class="menu-title">관심 상품</p>
                             </a>
                         </li>
-                        <li class="menu">
-                            <a href="${pageContext.request.contextPath}/pages/board-default.jsp" class="menu-link">
-                                <div class="menu-icon"></div>
-                                <p class="menu-title">1:1 문의</p>
-                            </a>
+                        <li class="menu" id="nav_board_li">
+                            <a href="#" class="menu-link" id="asdasd2">
+                                <div class="menu-icon" id="nav_board_li_icon"></div>
+                                <p class="menu-title" id="nav_board_li_title">1:1 문의</p>
+                            	<div class="side_box" >
+                             		<ul class="side_menu">
+		                            	<a href="/boardList.abc"><li>자유게시판</li></a>
+		                            	<a href="/pages/board-default.jsp"><li>1:1 문의</li></a>
+		                            	<a href="#"><li>OO게시판</li></a>
+                           			 </ul>
+                            	</div>
+                            </a> 
+                           <%--  ${pageContext.request.contextPath}/pages/board-default.jsp --%>
                         </li>
                         <li class="menu">
                             <a href="${pageContext.request.contextPath}/pages/map.jsp" class="menu-link">
@@ -160,6 +168,30 @@
                 </div>
             </div>
         </header>        
+        <script>
+        
+	        (function () {
+	            //여기에 스크립트 추가
+	            
+	            const navContainer = $("#nav_board_li");
+	            const insideMenu = $(".side_box");
+
+	            //헤더네비게이션(게시판) 마우스 온 아웃했을때
+	            navContainer.mouseover(function () {
+	
+	                $("#nav_board_li_icon , #nav_board_li_title").css("display", "none");
+	                insideMenu.css("position", "absolute");
+	                insideMenu.css("display", "block");
+	
+	            });
+	
+	            navContainer.mouseout(function () {
+	                $("#nav_board_li_icon , #nav_board_li_title").css("display", "block");
+	                insideMenu.css("display", "none");
+	            });
+	            
+	        })();
+        </script>          
         <!-- 본문의 시작 -->
         <section>
             <!-- 본문이 들어가는 래퍼 -->

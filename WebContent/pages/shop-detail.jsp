@@ -87,10 +87,50 @@
                 border-radius: 0;
                 transition: all .2s linear;
             }
+            
 	    </style>
 	 <%
 	 	}
 	 %>
+	 <style>
+		.list-container {
+			display: flex;
+			flex-direction: row;
+		}
+		
+		.btn {
+		    display: inline-block;
+		    border: 1px solid #e6e9eb;
+		    line-height: 28px;
+		    color: #ff6b00;
+		    margin: 0 3px;
+		    padding: 0 10px;
+		    font-size: 11px;
+		    vertical-align: middle;
+		    cursor: pointer;
+			border: 1px solid #E6E9EB;
+			position: relative;
+		}
+		
+		.plus::after {
+			content: "";
+		    display: block;
+		    position: absolute;
+		    left: 50%;
+		    top: 50%;
+		    transform: translate(-50%,-50%);
+		    width: 14px;
+		    height: 14px;
+		    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAYAAABy6+R8AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACxJREFUeNpiXLBgAQMO8B+IGbFJMDGQAYajJhZoKOELQayaGEeDnExNAAEGAKtFBf2k2wluAAAAAElFTkSuQmCC);
+		    background-repeat: no-repeat;
+		    background-size: cover;			
+		} 
+		
+		.similar-shop {
+			display: flex;
+			justify-content: center;
+		}
+	 </style>
 </head>
 <body>
     <!-- 컨테이너의 시작 -->
@@ -107,7 +147,7 @@
                 <div class="card-container">
                     <div class="shop-detail">
                         <div class="detail-trailer-list">
-                            <div>
+                            <div class="similar-shop">
                                 <p>비슷한 샵</p>
                             </div>
                             <ul>
@@ -129,7 +169,18 @@
                             <a href="#"><img src="${thumbNailImage }"></a>
                         </div>
                         <div>
-                            <h2><%= shopName %></h2>
+                        	<div class="list-container">
+                        		<div>
+                        			<h2><%= shopName %></h2>
+                        		</div>
+                        		<div>
+                        			<p>스트릿·도매스틱</p>
+                        		</div>
+                        		<div>
+                        			<a class="btn" href="#">바로가기</a>
+                        			<a class="btn plus" href="#">&nbsp;</a>
+                        		</div>                        		
+                        	</div>
                         </div>
                     </div>
                     <div class="header-filter-box">
