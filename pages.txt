@@ -7,6 +7,7 @@ board-smart-editor3.jsp
 board.jsp
 callback.jsp
 cart.jsp
+components/
 detail-item-uploader.jsp
 detail.jsp
 error.jsp
@@ -33,3 +34,6 @@ shop-detail.jsp
 shop.jsp
 terms.jsp
 vertifyEmailSuccess.jsp
+
+./WebContent/pages/components:
+filterbox.jsp
