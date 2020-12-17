@@ -1,180 +1,200 @@
 @charset "UTF-8";
-    /* 페이지 내의 상단 구분선 속성*/
-    .up-line-bd {
-        width: 75%;
-        height: 3px;
-        border: 1px solid rgb(rgb(128, 127, 128));
-        background-color: gray;
-        position: absolute;
-        top: 28%;
-        left: 15%;
-    }
-        
-    .down-line-bd {
-        clear: both;
-        width: 75%;
-        height: 3px;
-        border: 1px solid rgb(rgb(128, 127, 128));
-        background-color: gray;
-        position: absolute;
-        bottom: 22%;
-        left: 15%;
-    }
+/* 페이지 내의 상단 구분선 속성*/
 
-    .contents-wrapper {
-        margin: 0;
-        padding: 0;
-        width: 85%;
-        height: auto;
-        min-height: 600px;
-        overflow: display;
-    }
+.up-line-bd {
+  width: 75%;
+  height: 3px;
+  border: 1px solid rgb(rgb(128, 127, 128));
+  background-color: gray;
+  position: absolute;
+  top: 28%;
+  left: 15%;
+}
 
-    .contents-wrapper h2 {
-        position: absolute;
-        left: 20%;
-        top: 17%;
-    }
+.down-line-bd {
+  clear: both;
+  width: 75%;
+  height: 3px;
+  border: 1px solid rgb(rgb(128, 127, 128));
+  background-color: gray;
+  position: absolute;
+  bottom: 22%;
+  left: 15%;
+}
 
-    /* 아이템 정보를 받아 출력하는 기능 필요 */
-    /* 구매할 상품의 정보를 출력하는 영역의 wrapper  */
-    .product-info-zone {
-       position: relative;
-        margin: 0 auto;
-        width: 90%;
-        top: 9.3em;
-        left: 1.7em;
-        height: auto;
-        min-height: 300px;
-    }
+.contents-wrapper {
+  margin: 0;
+  padding: 0;
+  width: 85%;
+  height: auto;
+  min-height: 640px;
+  overflow: visible;
+}
 
-    /* 추후 출력 기능 구현*/
-    /* 구매 상품 정보를 출력하는 실제 영역  */
-    .product-info{
-        width: 100%;
-        height: 300px;
-        margin: 0;
-        padding-top: 5.5em;
-        padding-left: 6%;
-        box-sizing: border-box;
-        top: 1em;
-        display: flex;
-    }
+.contents-wrapper h2 {
+  position: absolute;
+  left: 20%;
+  top: 17%;
+}
 
-    .product {
-        margin: 0 auto;
-        margin-right: 7%;
-        width: 100%;
-        text-align: center;
-    }
+/* 아이템 정보를 받아 출력하는 기능 필요 */
+/* 구매할 상품의 정보를 출력하는 영역의 wrapper  */
+.product-info-zone {
+  position: relative;
+  margin: 0 auto;
+  margin-bottom: 25%;
+  width: 90%;
+  top: 9.3em;
+  left: 1.7em;
+  height: auto;
+  min-height: 300px;
+}
 
-    .product tr td { padding: 0.3em; }
+/* 추후 출력 기능 구현*/
+/* 구매 상품 정보를 출력하는 실제 영역  */
+.product-info {
+  width: 100%;
+  height: 300px;
+  margin: 0;
+  padding-top: 5.5em;
+  padding-left: 6%;
+  box-sizing: border-box;
+  top: 1em;
+  display: flex;
+}
 
-    .product tr td:nth-of-type(1) {width: 4%;}
+.product {
+  margin: 0 auto;
+  margin-right: 7%;
+  width: 100%;
+  text-align: center;
+}
 
-    .product tr td:nth-of-type(2) { width: 15%;}
+.product tr td {
+  padding: 0.3em;
+}
 
-    .product tr td:nth-of-type(3) { width: 35%;}
+.product tr td:nth-of-type(1) {
+  width: 4%;
+}
 
-    .product tr td:nth-of-type(4) { width: 10%;}
+.product tr td:nth-of-type(2) {
+  width: 15%;
+}
 
-    .product tr td:nth-of-type(4) > input { 
+.product tr td:nth-of-type(3) {
+  width: 35%;
+}
 
-    	width: 50px;
-    	text-align:right;    	
-    	}
+.product tr td:nth-of-type(4) {
+  width: 10%;
+}
 
-    .product tr td:nth-of-type(5) { width: 10%;}
+.product tr td:nth-of-type(4) > input {
+  width: 50px;
+  text-align: right;
+}
 
-    .product tr td:nth-of-type(6) { width: 10%;}
+.product tr td:nth-of-type(5) {
+  width: 10%;
+}
 
-    .product tr td:nth-of-type(7) { width: 12%;}
+.product tr td:nth-of-type(6) {
+  width: 10%;
+}
 
+.product tr td:nth-of-type(7) {
+  width: 12%;
+}
 
-    .product tr:first-of-type td {
-        border: 1px solid grey;
-        border-left: none;
-    }
+.product tr:first-of-type td {
+  border: 1px solid grey;
+  border-left: none;
+}
 
-    .product tr:first-of-type td:last-of-type {
-        border-right: none;
-    }
-    
-    .product tr:not(.label) td {
-        border: 1px solid grey;
-        border-left: none;
-        border-top: none;
-    }
+.product tr:first-of-type td:last-of-type {
+  border-right: none;
+}
 
-    .product tr:not(.label) td:last-of-type {
-        border-right: none;
-    }
+.product tr:not(.label) td {
+  border: 1px solid grey;
+  border-left: none;
+  border-top: none;
+}
 
-    .product tr:not(.label) td:nth-of-type(2) {
-        padding: 0.3em;
-    }
+.product tr:not(.label) td:last-of-type {
+  border-right: none;
+}
 
-    .product tr:not(.label) td:nth-of-type(3) {
-        text-align: left;
-        padding-left: 1em;
-    }
+.product tr:not(.label) td:nth-of-type(2) {
+  padding: 0.3em;
+}
 
-    .chkbox {
-        position: relative;
-        top: 2%;
-        margin-right: 10%;
-    }
-        
-    .product-img {
-        width: 125px;
-        height: 125px;
-    }
-    
-    .page-pooter {
-    	position:absolute;
-    	bottom: -5%;
-    	right: 15%;
-    }
+.product tr:not(.label) td:nth-of-type(3) {
+  text-align: left;
+  padding-left: 1em;
+}
 
-    /* product-info 이후 결제에 필요한 최종 금액을 도출하는 영역 */
-    .result-buy-cost {
-        position: relative;
-        margin: 0 auto;
-        width: 90%;
-        height: 150px;
-        clear: both;
-        bottom: -11.9em;
-    }
+.chkbox {
+  position: relative;
+  top: 2%;
+  margin-right: 10%;
+}
 
-    .result-buy-cost p{
-        float: left;
-        right: -73%;
-        position: relative;
-        margin-right: 67px;
-    }
+.product-img {
+  width: 125px;
+  height: 125px;
+}
 
-    /* 구매 및 삭제 버튼을 감싸는 wrapper 영역 */
-    .button-zone {      
-        width: 150px;
-        height: 50px;
-        right: -79%;
-        bottom: -13.4%;
-        position: relative;
-        display: flex;
-    }
+/* product-info 이후 결제에 필요한 최종 금액을 도출하는 영역 */
+.page-pooter {
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  box-sizing: border-box;
+}
 
-    /* 구매 버튼 속성 */
-    .buy-product {      
-        width: 55px;
-        height: 30px;
-        margin-right: 2em;
-        font-size: 0.8em;
-    }
+.page-pooterbox {
+  float: right;
+}
 
-    /* 판매 버튼 속성 */
-    .del-product {      
-        width: 55px;
-        height: 30px;
-       font-size: 0.8em;
-    }
-    
+.total-num {
+  padding-right: 15%;
+}
+
+.total-num p {
+  float: left;
+  display: inline;
+  margin-right: 20%;
+}
+
+.total-num span {
+  margin: 0;
+}
+
+.total-price {
+  overflow: visible;
+}
+
+.total-price span {
+  margin-right: 100px;
+}
+
+.btn-zone button {
+  margin: 5px;
+}
+
+/* 구매 버튼 속성 */
+.buy-product {
+  width: 55px;
+  height: 30px;
+  margin-right: 2em;
+  font-size: 0.8em;
+}
+
+/* 판매 버튼 속성 */
+.del-product {
+  width: 55px;
+  height: 30px;
+  font-size: 0.8em;
+}
