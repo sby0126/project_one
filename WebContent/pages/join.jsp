@@ -208,7 +208,7 @@
                                     return false;
                                 }
                                 if ($("#user_email1, user_email2").val() == "") {
-                                    alert("이메일를 입력하세요");
+                                    alert("이메일을 입력하세요");
                                     return false;
                                 }
 
