@@ -1,15 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<% 
-    String title = request.getParameter("title");
-	System.out.println("title = " + title);
-    
-	String price = request.getParameter("price");    
-    System.out.println("price = " + price);
-    
-    String imguri = request.getParameter("imguris");
-    System.out.println("uri = " + imguri);
-    
+<%  
     int totalPrice = 0;
 %>
 
@@ -48,19 +39,19 @@
                             </tr>
                             <tr>
                                 <td><input type="checkbox" name="chk" class="chkbox"></td>
-                                <td><img src='<%=imguri%>' class="product-img"></td> <!-- 구매할 상품 이미지 -->
-                                <td><a href="#"><p class="product-name"><%=title%></p></a> </td> <!-- 구매할 상품 이름 -->
+                                <td><img src='' class="product-img"></td> <!-- 구매할 상품 이미지 -->
+                                <td><a href="#"><p class="product-name">title</p></a> </td> <!-- 구매할 상품 이름 -->
                                 <td><input type="number" class="product-num" placeholder="1" min="1"></td> <!-- 구매 갯수 -->
-                                <td><P class="product-price"> <%=price%> </P></td> <!-- 상품 가격-->
+                                <td><P class="product-price"> price </P></td> <!-- 상품 가격-->
                                 <td><P class="product-discnt"> 할인 </P></td> <!-- 할인 -->
                                 <td><P class="product-rltprice"> <%=totalPrice%> </P> </td> <!-- 상품 금액 -->
                             </tr>
                             <tr>
                                 <td><input type="checkbox" name="chk" class="chkbox"></td>
-                                <td><img src='<%=imguri%>' class="product-img"></td> <!-- 구매할 상품 이미지 -->
-                                <td><a href="#"><p class="product-name"><%=title%></p></a> </td> <!-- 구매할 상품 이름 -->
+                                <td><img src='' class="product-img"></td> <!-- 구매할 상품 이미지 -->
+                                <td><a href="#"><p class="product-name">title</p></a> </td> <!-- 구매할 상품 이름 -->
                                 <td><input type="number" class="product-num" placeholder="1" min="1"></td> <!-- 구매 갯수 -->
-                                <td><P class="product-price"> <%=price%> </P></td> <!-- 상품 가격-->
+                                <td><P class="product-price"> price </P></td> <!-- 상품 가격-->
                                 <td><P class="product-discnt"> 할인1 </P></td> <!-- 할인 -->
                                 <td><P class="product-rltprice"> <%=totalPrice%> </P> </td> <!-- 상품 금액 -->
                             </tr>
@@ -72,10 +63,10 @@
                 		<tr>
                 			<td width="80"></td>
                 			<td width="80"></td>
-                			<td class='total-num'><p>총</p> <span>X 개</span></td>
-                			<td class="total-price">XXX원</td>
+                			<td class='total-num'><p>총</p><span>X 개</span></td>
+                			<td class='total-price'><span>XXX원</span></td>
                 		</tr>
-                		<tr>
+                		<tr class="btn-zone">
                 			<td></td>
                 			<td></td>
                 			<td><button class="buy-product" onclick="">구매</button></td>

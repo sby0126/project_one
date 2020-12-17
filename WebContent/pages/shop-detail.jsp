@@ -87,10 +87,50 @@
                 border-radius: 0;
                 transition: all .2s linear;
             }
+            
 	    </style>
 	 <%
 	 	}
 	 %>
+	 <style>
+		.list-container {
+			display: flex;
+			flex-direction: row;
+		}
+		
+		.btn {
+		    display: inline-block;
+		    border: 1px solid #e6e9eb;
+		    line-height: 28px;
+		    color: #ff6b00;
+		    margin: 0 3px;
+		    padding: 0 10px;
+		    font-size: 11px;
+		    vertical-align: middle;
+		    cursor: pointer;
+			border: 1px solid #E6E9EB;
+			position: relative;
+		}
+		
+		.plus::after {
+			content: "";
+		    display: block;
+		    position: absolute;
+		    left: 50%;
+		    top: 50%;
+		    transform: translate(-50%,-50%);
+		    width: 14px;
+		    height: 14px;
+		    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAYAAABy6+R8AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACxJREFUeNpiXLBgAQMO8B+IGbFJMDGQAYajJhZoKOELQayaGEeDnExNAAEGAKtFBf2k2wluAAAAAElFTkSuQmCC);
+		    background-repeat: no-repeat;
+		    background-size: cover;			
+		} 
+		
+		.similar-shop {
+			display: flex;
+			justify-content: center;
+		}
+	 </style>
 </head>
 <body>
     <!-- 컨테이너의 시작 -->
@@ -107,7 +147,7 @@
                 <div class="card-container">
                     <div class="shop-detail">
                         <div class="detail-trailer-list">
-                            <div>
+                            <div class="similar-shop">
                                 <p>비슷한 샵</p>
                             </div>
                             <ul>
@@ -129,55 +169,21 @@
                             <a href="#"><img src="${thumbNailImage }"></a>
                         </div>
                         <div>
-                            <h2><%= shopName %></h2>
+                        	<div class="list-container">
+                        		<div>
+                        			<h2><%= shopName %></h2>
+                        		</div>
+                        		<div>
+                        			<p>스트릿·도매스틱</p>
+                        		</div>
+                        		<div>
+                        			<a class="btn" href="#">바로가기</a>
+                        			<a class="btn plus" href="#">&nbsp;</a>
+                        		</div>                        		
+                        	</div>
                         </div>
                     </div>
-                    <div class="header-filter-box">
-                        <!-- 검색 필터 래퍼 -->
-                        <div class="header-filter-box-wrapper">
-                            <!-- 검색 필터 하단 : 대/중/소 분류 -->
-                            <div class="header-filter-box-footer">
-                                <!-- 검색 필터 왼쪽 : 카테고리 선택 -->
-                                <div class="header-filter-box-footer-left">
-                                    <div class="header-filter-box-footer-left-button">
-                                        <span>상품 카테고리<em>전체(0)</em></span>
-                                        <i class="fa fa-caret-down"></i>
-                                    </div>
-                                    <div class="header-filter-box-left-dropdown-menu" data-attr="상품 카테고리">
-                                        <div class="header-filter-box-left-dropdown-menu-content">
-                                            <dl>
-                                                <dt>샵 카테고리</dt>
-                                                <dd><label><input class="header-filter-box-left-shop-categories" type="checkbox" name="categories"><span>ALL</span></label></dd>
-                                                <dd><label><input class="header-filter-box-left-shop-categories" type="checkbox" name="categories"><span>OUTER</span></label></dd>
-                                                <dd><label><input class="header-filter-box-left-shop-categories" type="checkbox" name="categories"><span>TOP</span></label></dd>
-                                                <dd><label><input class="header-filter-box-left-shop-categories" type="checkbox" name="categories"><span>BOTTOM</span></label></dd>
-                                                <dd><label><input class="header-filter-box-left-shop-categories" type="checkbox" name="categories"><span>BAG</span></label></dd>
-                                                <dd><label><input class="header-filter-box-left-shop-categories" type="checkbox" name="categories"><span>SHOES</span></label></dd>
-                                                <dd><label><input class="header-filter-box-left-shop-categories" type="checkbox" name="categories"><span>ACC·ETC</span></label></dd>
-                                            </dl>
-                                        </div>                                
-                                    </div>
-                                </div>
-                                <!-- 검색 필터 중앙 : 검색 -->
-                                <div class="header-filter-box-footer-center">
-                                    <label for="name-search"></label><input class="input-non-border-box" type="text" placeholder="이름으로 검색">
-                                </div>
-                                <!-- 검색 필터 오른쪽 : 분류 -->
-                                <div class="header-filter-box-footer-right">
-                                    <ul>
-                                        <li></li>
-                                        <li>
-                                            <div id="slide-bar">
-
-                                            </div>
-                                        </li>
-                                        <li></li>
-                                        <li></li>
-                                    </ul>                         
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <jsp:include page="/pages/components/filterbox.jsp"></jsp:include>
                     <%
                     	for(ProductVO card : list) {
                     %>
@@ -196,6 +202,7 @@
                     	}
                     %>
                 </div> 
+               
             </div>
         </section>
     </div>

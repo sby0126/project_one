@@ -79,13 +79,12 @@
                                 <p class="menu-title" id="nav_board_li_title">1:1 문의</p>
                             	<div class="side_box" >
                              		<ul class="side_menu">
-		                            	<a href="boardList.abc"><li>자유게시판</li></a>
-		                            	<a href="#"><li>OO게시판</li></a>
+		                            	<a href="/boardList.abc"><li>자유게시판</li></a>
+		                            	<a href="/pages/board-default.jsp"><li>1:1 문의</li></a>
 		                            	<a href="#"><li>OO게시판</li></a>
                            			 </ul>
                             	</div>
                             </a> 
-                       
                            <%--  ${pageContext.request.contextPath}/pages/board-default.jsp --%>
                         </li>
                         <li class="menu">
@@ -160,28 +159,30 @@
            
         </header>
         <script>
-        	 (function() { 
-        		 //여기에 스크립트 추가
-        			//헤더네비게이션(게시판) 마우스 온 아웃했을때
-                	$("#nav_board_li").mouseover(function(){
-                		
-               			$("#nav_board_li_icon , #nav_board_li_title").css("display","none");
-               			$(".side_box").css("position","absolute");
-               			$(".side_box").css("display","block");
-               			
-               		}) 
-               		
-               		$("#nav_board_li").mouseout(function(){
-               			$("#nav_board_li_icon , #nav_board_li_title").css("display","block");
-               			$(".side_box").css("display","none");
-               		})
-               				
-               		
-               		
-               	
-         	})(); 
+        
+	        (function () {
+	            //여기에 스크립트 추가
+	            
+	            const navContainer = $("#nav_board_li");
+	            const insideMenu = $(".side_box");
 
+	            //헤더네비게이션(게시판) 마우스 온 아웃했을때
+	            navContainer.mouseover(function () {
+	
+	                $("#nav_board_li_icon , #nav_board_li_title").css("display", "none");
+	                insideMenu.css("position", "absolute");
+	                insideMenu.css("display", "block");
+	
+	            });
+	
+	            navContainer.mouseout(function () {
+	                $("#nav_board_li_icon , #nav_board_li_title").css("display", "block");
+	                insideMenu.css("display", "none");
+	            });
+	            
+	        })();
         </script>   
+        
    	    <c:if test="${isHide != true}">
    	    	<div style="display:block; height: 4em; width:100%;">
    	    	</div>
