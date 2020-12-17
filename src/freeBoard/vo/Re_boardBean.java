@@ -11,6 +11,14 @@ public class Re_boardBean {
 	private int re_re_ref;
 	private int re_re_lev;
 	private int re_re_seq;
+	private String del_yn;
+	
+	public String getDel_yn() {
+		return del_yn;
+	}
+	public void setDel_yn(String del_yn) {
+		this.del_yn = del_yn;
+	}
 	
 	public int getRe_num() {
 		return re_num;

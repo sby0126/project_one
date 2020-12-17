@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import freeBoard.action.Action;
 import freeBoard.action.BoardDeleteProAction;
@@ -20,6 +21,7 @@ import freeBoard.action.BoardUpdateProAction;
 import freeBoard.action.BoardWriteProAction;
 import freeBoard.action.ReplePlayProAction;
 import freeBoard.action.RepleformProAction;
+import freeBoard.action.boardReDeleteProAction;
 //import action.MemberJoinAction;
 import freeBoard.vo.ActionForward;
 
@@ -28,14 +30,16 @@ import freeBoard.vo.ActionForward;
 public class BoardFrontController extends HttpServlet {
    
    
-   protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+   protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws Exception {
       request.setCharacterEncoding("UTF-8");
       String RequestURI=request.getRequestURI();
       String contextPath=request.getContextPath();
       String command=RequestURI.substring(contextPath.length());
       ActionForward forward=null;
       Action action=null;
-      
+      HttpSession session = request.getSession();
+	  String id = (String)session.getAttribute("id");
+		
       if(command.equals("/boardList.abc")){
             action = new BoardListAction();
             try{
@@ -127,6 +131,18 @@ public class BoardFrontController extends HttpServlet {
                     e.printStackTrace();
                  }
               }
+      		else if(command.equals("/boardReDeletePro.abc")){
+
+      		
+      			
+                action =new boardReDeleteProAction();
+                try {
+                   forward=action.execute(request, response );
+                } catch (Exception e) {
+                   e.printStackTrace();
+                }
+               
+      		}
       
       if(forward != null){
          
@@ -144,12 +160,22 @@ public class BoardFrontController extends HttpServlet {
    }
    
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      doProcess(request,response);
+      try {
+		doProcess(request,response);
+      } catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+      }
    }
 
    
    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      doProcess(request,response);
+      try {
+		doProcess(request,response);
+      } catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+      }
    }
 
 }

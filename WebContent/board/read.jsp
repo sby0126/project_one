@@ -58,19 +58,52 @@
 				for(int i=0; i<re_articleList.size();i++) { %>
 					
 					<%if(re_articleList.get(i).getRe_re_lev()!=0){ 
+						
 						for(int a=0; a<=re_articleList.get(i).getRe_re_lev()*2; a++){ %>
 							&nbsp; 
 						<%} %> 
-								⇒⇒ <div><span><%=re_articleList.get(i).getRe_name() %></span><span><%=re_articleList.get(i).getRe_content() %></span><button onclick="reply('<%=re_articleList.get(i).getRe_name() %>','<%=re_articleList.get(i).getRe_num() %>','<%=re_articleList.get(i).getRe_num2() %>','<%=re_articleList.get(i).getRe_re_ref() %>','<%=re_articleList.get(i).getRe_re_lev() %>','<%=re_articleList.get(i).getRe_re_seq() %>','<%=re_articleList.get(i).getRe_date() %>','<%=userId %>','<%=i %>','<%=nowPage %>','<%=article.getNum()%>')" class="rerere<%=i %>">댓글달기</button><button>수정</button><button>삭제</button> </div><br>
-						<%}else{ %> 	
-								<div><span><%=re_articleList.get(i).getRe_name() %></span><span><%=re_articleList.get(i).getRe_content() %></span><button onclick="reply('<%=re_articleList.get(i).getRe_name() %>','<%=re_articleList.get(i).getRe_num() %>','<%=re_articleList.get(i).getRe_num2() %>','<%=re_articleList.get(i).getRe_re_ref() %>','<%=re_articleList.get(i).getRe_re_lev() %>','<%=re_articleList.get(i).getRe_re_seq() %>','<%=re_articleList.get(i).getRe_date() %>','<%=userId %>','<%=i %>','<%=nowPage %>','<%=article.getNum()%>')" class="rerere<%=i %>">댓글달기</button><button>수정</button><button>삭제</button> </div><br>	
-						<%} %> 
+							
+							<% if("Y".equals(re_articleList.get(i).getDel_yn())){%>
+							⇒⇒ <div>삭제된 게시물입니다.</div><br>
+							<%}else{ %>
+								⇒⇒ <div><span><%=re_articleList.get(i).getRe_name() %></span><span><%=re_articleList.get(i).getRe_content() %></span><button onclick="reply('<%=re_articleList.get(i).getRe_name() %>','<%=re_articleList.get(i).getRe_num() %>','<%=re_articleList.get(i).getRe_num2() %>','<%=re_articleList.get(i).getRe_re_ref() %>','<%=re_articleList.get(i).getRe_re_lev() %>','<%=re_articleList.get(i).getRe_re_seq() %>','<%=re_articleList.get(i).getRe_date() %>','<%=userId %>','<%=i %>','<%=nowPage %>','<%=article.getNum()%>')" class="rerere<%=i %>">댓글달기</button><button>수정</button>
+								
+								<%if(userId !=null){ %>
+									
+									  <%if(userId.equals(re_articleList.get(i).getRe_name())){ %>
+										<button onclick="location.href='boardReDeletePro.abc?re_num=<%=re_articleList.get(i).getRe_num() %>&num=<%=article.getNum() %>&nowPage=<%=nowPage %>'">삭제</button>
+									  <%}else{ %>
+									   	<button onclick='alert("권한이 없습니다.")'>삭제</button>
+									  <%}%>
+									 
+								<%}else{ %>
+									<button onclick='alert("로그인이 필요합니다.")'>삭제</button> 
+								<%} %>
+								</div><br>
+							<%} %>
+					<%}else{%> 
+							<% if("Y".equals(re_articleList.get(i).getDel_yn())){%>
+								<div>삭제된 게시물입니다.</div><br>
+							<%} else { %>
+								<div><span><%=re_articleList.get(i).getRe_name() %></span><span><%=re_articleList.get(i).getRe_content() %></span><button onclick="reply('<%=re_articleList.get(i).getRe_name() %>','<%=re_articleList.get(i).getRe_num() %>','<%=re_articleList.get(i).getRe_num2() %>','<%=re_articleList.get(i).getRe_re_ref() %>','<%=re_articleList.get(i).getRe_re_lev() %>','<%=re_articleList.get(i).getRe_re_seq() %>','<%=re_articleList.get(i).getRe_date() %>','<%=userId %>','<%=i %>','<%=nowPage %>','<%=article.getNum()%>')" class="rerere<%=i %>">댓글달기</button><button>수정</button>
+								<% if(userId !=null){%>
+									<%if(userId.equals(re_articleList.get(i).getRe_name())){ %>
+										<button onclick="location.href='boardReDeletePro.abc?re_num=<%=re_articleList.get(i).getRe_num() %>&num=<%=article.getNum() %>&nowPage=<%=nowPage %>'">삭제</button>
+									  <%}else{ %>
+									   	<button onclick='alert("권한이 없습니다.")'>삭제</button>
+									  <%}%> 
+								<%} else{%>
+									<button onclick='alert("로그인이 필요합니다.")'>삭제</button> 
+								<%} %>
+								</div><br>	
+							<%} %>
+					<%} %> 
 						
-			
-										
-					<% }
+					<%}
 				}%>
 		</div>
+		
+		
 		
 	
 		<form action="repleform.abc" method="post" >
@@ -112,6 +145,17 @@
 					+"<input type='submit' value='등록'></form></div>");
 			
 		};
+		
+		function deleteReple(re_num,num,nowPage){
+			
+			"<form action='replePlay.abc' method='post'>"
+			+"<input type='hidden' name='re_num' value=" + re_num + ">"		
+			+"<input type='hidden' name='num' value= " + num + ">"
+			+"<input type='hidden' name='nowPage' value=" + nowPage +">"
+			+"</form>"
+		}
+		
+		
 		
 			
 			

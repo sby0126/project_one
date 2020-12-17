@@ -41,4 +41,25 @@ public class BoardDeleteProService {
 	      return isRemoveSuccess;
 	   }
 	   
+	   public boolean removeReArticle(String re_num) throws Exception{
+		      // TODO Auto-generated method stub
+		      
+		      boolean isRemoveSuccess = false;
+		      Connection con = getConnection();
+		      BoardDAODeok boardDAO = BoardDAODeok.getInstance();
+		      boardDAO.setConnection(con);
+		      int deleteCount = boardDAO.deleteReArticle(re_num);
+		      
+		      if(deleteCount > 0){
+		         commit(con);
+		         isRemoveSuccess=true;
+		      }
+		      else{
+		         rollback(con);
+		      }
+		      
+		      close(con);
+		      return isRemoveSuccess;
+		   }
+	   
 }

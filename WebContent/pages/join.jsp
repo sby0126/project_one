@@ -21,6 +21,12 @@
     <script src="https://cdn.jsdelivr.net/npm/underscore@1.11.0/underscore-min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+	<script type="text/javascript">
+		(function() {
+			emailjs.init("user_X7j6z2JYAPbyb2W32qUSv");
+		})();
+	</script>
 </head>
 <body>
 <!-- 컨테이너의 시작 -->
@@ -94,7 +100,7 @@
                                 </label> <label for="email2" class="label1"></label> <input type="text" name="email1"
                                     id="user_email1" maxlength="30"> <span id="sp"></span> <input type="text"
                                     name="email2" id="user_email2" maxlength="30">
-                                <button type="button" id="bt_email">이메일인증</button>
+                                <button type="button" id="bt_email" onclick="sendEmail()">이메일인증</button>
 
                                 <div id="userEmailMsg" class="ability_chk"></div>
                             </li>
@@ -103,6 +109,69 @@
                         <input id="join_button" type="submit" value="회원가입">
 
                         <script>
+                        	var random; //이메일 인증을 위한 랜덤값 4자리 전송
+                        	var checkYnyn = "N"; // 회원가입을 위한 변수
+                        	var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/; //올바른 이메일형식 체크를 위한 변수
+                            var clickCount = 0; 
+                        	var sendmeil = false; // 이메일인증이 확인되면 더이상 sendEmail 함수를 실행시키지않는다.
+                        	
+                        	
+                        	// 이메일 인증 api 
+                        	
+                        	
+                        	function sendEmail(){
+                        		if(sendmeil) {
+                        			alert('인증이 완료되었습니다.');
+                        			return false;
+                        		}
+                        		var str = $("#user_email1").val() + "@" + $("#user_email2").val();
+                        		if (!reg_email.test(str)) {	
+                                    alert("이메일형식이 잘못됬습니다.");
+                                    return false;
+                                }else{
+                        		random = Math.floor(Math.random()*9000) + 1000;
+                        		var user = $("#user_email1").val()+"@"+$("#user_email2").val();
+                        		clickCount++;
+                        		 
+                        		var templateParams = {
+                        				random : random,
+                        	            user: user                        				 
+                        		 };                        		                        		                       		          
+                        		 emailjs.send('service_wc9sij4', 'template_e47qy7i', templateParams)
+                            
+                                 	    .then(function(response) {
+                                 	    	alert("인증번호가 발송되었습니다.");
+                                 	    	if(clickCount == 1){
+                                  	    	$("#bt_email").after("<br><input id='checkNum' name='check' style='width:100px; display:inline' placeholder='인증번호입력'><button type='button' id='checkButton' style='position:relative' onclick='checkYn()'>확인</button>")
+                                 	    	}
+                                 	      
+                                 	    }, function(error) {
+                                 	       console.log('FAILED...', error);
+                                 	    });
+                                }
+                        	}
+                        	
+                        	// 인증번호가 맞는지 확인 
+                        	function checkYn(){
+                        		
+                        		if($("#checkNum").val() == random){
+                        			sendmeil = true;
+                        			$("#checkNum, #checkButton").css("display","none");
+                        			alert('인증되었습니다.')
+                        			checkYnyn = "Y";    //   checkYnyn = Y면 회원가입 가능 
+                        			clickCount = 0;      
+                        			
+                        		}else {
+                        			alert('인증번호가 틀렸습니다.');
+                        			checkYnyn = "N";              //    checkYnyn = N면 회원가입 불가능
+                        		}
+                        	
+                        	}
+                        	
+                        	
+                        	
+                        	
+                        	
                         
                         	function processMouseDown(e) {
                                 $(this).find("label").hide();
@@ -127,13 +196,13 @@
                             });
 
                             // 올바른 이메일형식 체크
-                            $("#bt_email").click(function () {
+                           /*  $("#bt_email").click(function () {
                                 var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
                                 var str = $("#user_email1").val() + "@" + $("#user_email2").val();
                                 if (!reg_email.test(str)) {
                                     alert("이메일형식이 잘못됬습니다.");
                                 }
-                            });
+                            }); */
 
                             $(".main .content_login input").focus(function () {
                                 var read = $(this).prop("readonly");
@@ -210,6 +279,11 @@
                                 if ($("#user_email1, user_email2").val() == "") {
                                     alert("이메일를 입력하세요");
                                     return false;
+                                }
+                                
+                                if (checkYnyn == "N"){
+                                	alert("이메일을 인증해주세요")
+                                	return false;
                                 }
 
                                 $(".main .content_login input").trigger("blur");

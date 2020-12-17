@@ -337,10 +337,14 @@ public class BoardDAODeok {
 
 	      PreparedStatement pstmt = null;
 	      String board_delete_sql="delete from board where num=?";
+	      String re_board_delete_sql="delete from board_re where re_num2=?";
 	      int deleteCount=0;
 
 	      try{
 	    	  con = pool.getConnection();
+	    	 pstmt=con.prepareStatement(re_board_delete_sql); 
+	    	 pstmt.setInt(1, board_num);
+	    	 pstmt.executeUpdate();
 	         pstmt=con.prepareStatement(board_delete_sql);
 	         pstmt.setInt(1, board_num);
 	         deleteCount=pstmt.executeUpdate();
@@ -400,6 +404,7 @@ public class BoardDAODeok {
 	    	  		board.setRe_re_lev(rs.getInt("re_re_lev"));
 	    	  		board.setRe_re_seq(rs.getInt("re_re_seq"));
 	    	  		board.setRe_date(rs.getDate("re_date"));
+	    	  		board.setDel_yn(rs.getString("del_yn"));
 	    	  		re_articleList.add(board);
 	         }
 
@@ -512,6 +517,28 @@ public class BoardDAODeok {
 	      }
 
 	      return insertCount;
+
+	   }
+   
+   public int deleteReArticle(String re_num){
+
+	      PreparedStatement pstmt = null;
+	      String re_board_delete_sql="update board_re set del_yn='Y' where re_num=?";
+	      int deleteCount=0;
+
+	      try{
+	    	  con = pool.getConnection();
+	    	 pstmt=con.prepareStatement(re_board_delete_sql); 
+	    	 pstmt.setString(1, re_num);    
+	         deleteCount=pstmt.executeUpdate();
+	      }catch(Exception ex){
+	         System.out.println("boardDelete 에러 : "+ex);
+	      }   finally{
+	    	  pool.freeConnection(con,pstmt);
+	        // close(pstmt);
+	      }
+
+	      return deleteCount;
 
 	   }
 
