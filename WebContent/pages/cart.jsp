@@ -1,10 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="org.json.simple.JSONObject" %>
+<%@ page import="org.json.simple.*"%>
+<%@ page import="org.json.*" %>
+<%@ page import="java.util.*" %>
+<%@ page import="vo.ProductVO" %>
+<%@ page import="com.google.gson.*" %>
+
 <!DOCTYPE html>
 <%  
+	Gson gson = new GsonBuilder().create();
 	JSONObject root = (JSONObject)request.getAttribute("root");
-	ArrayList<ProductVO> list = ;
+	Map<String, Object> list = gson.fromJson(root.get("ContentData").toString(), new TypeToken<Map<String, Object>>(){}.getType());
+
 	int totalPrice = 0;
+	for(int i = 0; i < root.size(); i++) {
+		JSONValue contentData = JSONObject.
+		
+		
+		list.add((List<ProductVO>)root.get(i));
+	}
+	String[] list = (String[]) list.toArray(new String[list.size()]);
 %>
 
 <html lang="ko">

@@ -31,7 +31,7 @@ public class DetailInputCommand extends Command {
 		boolean isSuccess = detailInputService.inputDetail(title, price, qty);
 		boolean inputSuccess = false;
 		
-		uri = request.getServletPath();
+		uri = request.getPathInfo();
 		
 		int choice;
 		
@@ -49,7 +49,7 @@ public class DetailInputCommand extends Command {
 		response.setCharacterEncoding("UTF-8");
 		
 		if(inputSuccess) {
-			if(uri == "/cart.do") {
+			if(uri.equals("/cart.do")) {
 				
 				choice = JOptionPane.showConfirmDialog(null, 
 						"상품이 장바구니에 담겼습니다 \n" 
@@ -67,7 +67,7 @@ public class DetailInputCommand extends Command {
 				
 			}
 			
-			if(uri == "/pay.do") {
+			if(uri.equals("/pay.do")) {
 				result.forward(request.getContextPath() + "/pages/payments.jsp");
 				
 			}
