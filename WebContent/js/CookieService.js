@@ -1,18 +1,6 @@
 import {Cookie, ConstantCookie} from "./components/Cookie.js";
 import {EventEmitter} from "./EventEmitter.js";
-
-/**
- * @class Request
- */
-class Request {
-    constructor() {
-        this._o = new URLSearchParams(location.search);
-    }
-
-    getParameter(name) {
-        return this._o.get(name);
-    }
-}
+import {Request} from "./Request.js";
 
 /**
  * @class Impl
