@@ -17,6 +17,7 @@ import command.ItemCommand;
 import command.SaleCommand;
 import command.SearchShopItemCommand;
 import command.ShopCommand;
+import command.DetailInputCommand;
 
 @WebServlet("/contents/*")
 public class ContentController extends HttpServlet {
@@ -63,7 +64,11 @@ public class ContentController extends HttpServlet {
 			case "/searchShopItem.do":
 				command = new SearchShopItemCommand();
 				break;
+			case "/cart.do, /buy.do":
+				command = new DetailInputCommand();
+				break;
 			}
+			
 			
 			result = command.execute(request, response);
 			

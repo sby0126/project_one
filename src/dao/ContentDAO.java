@@ -428,8 +428,7 @@ public class ContentDAO implements IDAO {
 			pstmt.setString(2, list.getTitle());
 			pstmt.setString(3, list.getPrice());
 			pstmt.setInt(4, qty);			
-			}
-			
+			}			
 			
 			if(pstmt.executeUpdate() > 0) {
 				conn.commit();

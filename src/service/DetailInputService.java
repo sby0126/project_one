@@ -2,6 +2,7 @@ package service;
 
 import java.sql.ResultSet;
 import java.util.List;
+import javax.servlet.http.*;
 
 import vo.ProductVO;
 import dao.ContentDAO;
@@ -13,15 +14,18 @@ public class DetailInputService {
 		ResultSet rs = null;
 		List<ProductVO> list = null;
 		boolean success = false;
-		ProductVO p = null;
 		ItemService itemService = new ItemService();
-		
+
+		HttpServletRequest request = null;
 		
 		list = itemService.getDAO().getDetail(title, price);
 		
+		request.setAttribute("list", list);
+		
+		System.out.println(list);
+		
 		success = itemService.getDAO().insertDetail(list, qty);
 		
-
 		return success;
 	}
 	

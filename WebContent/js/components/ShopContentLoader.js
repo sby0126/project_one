@@ -9,7 +9,7 @@ export class ShopContentLoader extends Component {
 
         this._currentCards = 0; // 현재 카드 갯수
         this._fetchCards = 10; // 새로 가져올 카드 갯수
-        this._maxCards = 50; // 최대 카드 갯수
+        this._maxCards = 150; // 최대 카드 갯수
         this._interval = 400; // 이벤트 과대 실행 방지 용 실행 간격 800ms
         this._data = {};
 
@@ -197,6 +197,21 @@ export class ShopContentLoader extends Component {
             
             // 스크롤 시 새로운 카드 이미지를 일정 간격마다 추가합니다.
             const throttled  = _.throttle(() => {
+                if(this._currentCards < this._maxCards) {
+                    
+                    // 새로운 카드를 생성합니다 (빈껍데기)
+                    for(let i = 0; i < this._fetchCards; i++) {
+                        const card = $(`
+                        <div class="card">
+                            <p>
+                            </p>
+                        </div>                    
+                        `)
+                        $(".card-container").append(card);
+                        this._items.push(card.get(0));
+                    }
+
+                }
                 this.appendCards();
             }, this._interval);
 

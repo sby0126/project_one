@@ -1,5 +1,7 @@
-<%@page import="core.board.notice.BoardBean"%>
-<%@page import="core.board.notice.BoardReplyBean"%>
+<%@page import="bbsnotice.BoardBean"%>
+<%@page import="bbsnotice.BoardReplyBean"%>
+<%@page import="bbsnotice.PageInfo" %>
+<%@page import="java.util.*" %>
 <%@page language="java" contentType="text/html; charset=UTF-8"%>
 
 <%
@@ -9,7 +11,7 @@
     ArrayList<BoardReplyBean> replyList = (ArrayList<BoardReplyBean>)request.getAttribute("replyList");
     PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	int listCount = pageInfo.getListCount();
-	int nowPage = pageInfo.getPage();
+	int now_Page = pageInfo.getPage();
 	int maxPage = pageInfo.getMaxPage();
 	int startPage = pageInfo.getStartPage();
 	int endPage = pageInfo.getEndPage();
@@ -54,7 +56,7 @@ h2 {
 </head>
 
 <body>
-	<!-- 게시판 수정 -->
+ <jsp:include page="header.jsp"></jsp:include>
 	<section id="articleForm">
 		<h2>글 내용 상세보기</h2>
 		<section id="basicInfoArea">
@@ -97,8 +99,8 @@ h2 {
 	</section>
 	<section id="commandList">
 		<a href="boardModifyForm.bo?board_num=<%=article.getCtxtno() %>"> [수정] </a> 
-		<a href="boardDeleteForm.bo?board_num=<%=article.getCtxtno() %>&page=<%=nowPage%>"> [삭제] </a> 
-		<a href="boardList.bo?page=<%=nowPage%>">[목록]</a>&nbsp;&nbsp;
+		<a href="boardDeleteForm.bo?board_num=<%=article.getCtxtno() %>&page=<%=now_Page%>"> [삭제] </a> 
+		<a href="boardList.bo?page=<%=now_Page%>">[목록]</a>&nbsp;&nbsp;
 	</section>
 </body>
 </html>

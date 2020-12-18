@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="org.json.simple.JSONObject" %>
 <!DOCTYPE html>
 <%  
-    int totalPrice = 0;
+	JSONObject root = (JSONObject)request.getAttribute("root");
+	ArrayList<ProductVO> list = ;
+	int totalPrice = 0;
 %>
 
 <html lang="ko">
@@ -30,7 +33,7 @@
                         <table class="product">
                             <tr class="label">
                                 <td><input type="checkbox" name="chk" id="chk" onClick="allChk()"></td>
-                                <td><p name="product-img"> 상품 이미지 </td> <!-- 구매할 상품 이미지 -->
+                                <td><p name="product-img"> 상품 이미지</p></td> <!-- 구매할 상품 이미지 -->
                                 <td><p name="product-name"> 상품명</p></td> <!-- 구매할 상품 이름 -->
                                 <td><p name="product-num"> 구매 갯수 </p></td> <!-- 구매 갯수 -->
                                 <td><P name="product-price"> 가격 </P></td> <!-- 상품 가격-->
@@ -64,8 +67,8 @@
 		                			<td class='total-price'><span>XXX원</span></td>
 		                		</tr>
 		                		<tr class="btn-zone">
-		                			<td><button class="buy-product" onclick="">구매</button></td>
-		                			<td><button class="del-product" onclick="del()">삭제</button></td>
+                                    <td><button type="button" class="buy-product" onclick="">구매</button></td>
+		                			<td><button type="button" class="del-product" onclick="del()">삭제</button></td>
 		                		</tr>
 			                </table>
 			            </div>
@@ -93,5 +96,6 @@
            });      
         }        
     </script>
+    <script type="module" src="../js/MorePage.js"></script>
 </body>
 </html>

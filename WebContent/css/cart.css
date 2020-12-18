@@ -1,6 +1,10 @@
 @charset "UTF-8";
 /* 페이지 내의 상단 구분선 속성*/
 
+html {
+  height: 680px !important;
+}
+
 .up-line-bd {
   width: 75%;
   height: 3px;
