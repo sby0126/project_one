@@ -11,7 +11,9 @@
     }
 
     .contents-main img{
+        position: relative;
         width: 235px;
+        left: 9%;        
 
     }
 

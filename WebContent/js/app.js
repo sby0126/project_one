@@ -6,7 +6,6 @@ import { EventEmitter } from "./EventEmitter.js";
 import { cssRuleSet } from "./utils/styleRules.js";
 import { ScrollEventBuilder } from "./components/ScrollEventBuilder.js";
 
-
 // ID 상수 배열
 const ID = {
     CONTAINER: ".container",
@@ -409,6 +408,7 @@ class App extends EventEmitter {
         Category.builder().run();
         JoinButton.builder(this).run();
         FilterBoxButtons.builder(this).run();
+    
     }
  
     /**

@@ -448,39 +448,70 @@ public class ContentDAO implements IDAO {
 		return success;
 	}
 	
-	public List<ProductVO> findThumbnail(String shopName) {
-		
-		ResultSet rs = null;
+	/**
+	 * ID로 상품 데이터 획득
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public List<ProductVO> findShopDataAsID(int id) {
 		List<ProductVO> list = null;
-		String sql = null;
+		ResultSet rs = null;
 		
 		try {
 			conn = pool.getConnection();
-			sql = "SELECT COUNT(DISTINCT b.title) AS cnt, b.title, "
-				+ "b.price, b.genderType, b.shopType, b.shopName, "
-				+ "b.pageType, c.Contenturl, a.imgId "					
-				+ "FROM tblImageHash a, tblproduct b, tblproduct c "
-				+ "WHERE b.title IS NOT NULL "
-				+ "and b.pageType = 'item' "
-				+ "AND c.pageType = 'shop' "
-				+ "AND a.imgUrl = b.contentUrl"
-				+ "AND b.shopName = c.shopName"
-				+ "GROUP BY b.shopname "
-				+ "order by cnt DESC";
 			
-			pstmt = conn.prepareStatement(sql);			
+			pstmt = conn.prepareCall(getQL("ID로 상품 찾기"));
+			pstmt.setInt(1, id);
+			
 			rs = pstmt.executeQuery();
 			
 			list = SQLHelper.putResult(rs, ProductVO.class);
 			
-		} catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			pool.freeConnection(conn, pstmt, rs);
+			pool.freeConnection(conn, pstmt);
 		}
 		
 		return list;
 	}
+	
+//	public List<ProductVO> findThumbnail(String shopName) {
+//		
+//		ResultSet rs = null;
+//		List<ProductVO> list = null;
+//		String sql = null;
+//		
+//		try {
+//			conn = pool.getConnection();
+//			sql = "SELECT COUNT(DISTINCT b.title) AS cnt, b.title, "
+//				+ "b.price, b.genderType, b.shopType, b.shopName, "
+//				+ "b.pageType, c.Contenturl, a.imgId "					
+//				+ "FROM tblImageHash a, tblproduct b, tblproduct c "
+//				+ "WHERE b.title IS NOT NULL "
+//				+ "and b.pageType = 'item' "
+//				+ "AND c.pageType = 'shop' "
+//				+ "AND a.imgUrl = b.contentUrl"
+//				+ "AND b.shopName = c.shopName"
+//				+ "GROUP BY b.shopname "
+//				+ "order by cnt DESC";
+//			
+//			pstmt = conn.prepareStatement(sql);			
+//			rs = pstmt.executeQuery();
+//			
+//			list = SQLHelper.putResult(rs, ProductVO.class);
+//			
+//		} catch(SQLException e) {
+//			e.printStackTrace();
+//		} catch(Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			pool.freeConnection(conn, pstmt, rs);
+//		}
+//		
+//		return list;
+//	}
 }

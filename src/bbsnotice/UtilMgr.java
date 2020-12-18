@@ -1,4 +1,4 @@
-package core.board.notice;
+package bbsnotice;
 
 import java.io.*;
 import java.util.*;

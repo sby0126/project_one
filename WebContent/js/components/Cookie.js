@@ -1,16 +1,22 @@
 import { Component } from "./Component.js";
 
 class Cookie extends Component {
-    constructor(name, value) {
+
+    /**
+     * 
+     * @param {String} name 쿠키의 이름을 기입하십시오
+     * @param {String} value 쿠키의 값을 기입하십시오
+     */
+    constructor(args) {
 
         super();
         this.initMembers(null);
         
         // 쿠키명 설정
-        this._name = name;
+        this._name = args[0];
 
         // 쿠키값 설정
-        this._value = value;
+        this._value = args[1];
 
         // 쿠키 만료 기간 설정 (현재 시간부터 내일까지만)
         let currentDate = new Date();
@@ -35,16 +41,66 @@ class Cookie extends Component {
      * 쿠키를 생성합니다.
      */
     create() {
-        let cookie = this._name 
+        let cookie = encodeURIComponent(this._name)
                     + "=" 
-                    + escape(this._value)
-                    + ";path=" 
+                    + encodeURIComponent(this._value)
+                    + "; path=" 
                     + this._path
-                    + ";expires="
+                    + "; expires="
                     + this._expire.toUTCString();
 
         document.cookie = cookie;
     }
+
+    /**
+     * 중복 데이터를 제거합니다.
+     * 
+     * @param {String}} values 
+     */
+    unique(values) {
+        let q = values.split(",");
+        let uniqueValue = q.filter((e,i,a) => {
+            return a.indexOf(e.trim()) == i;
+        });
+
+        return uniqueValue.join(",");
+    }
+
+    /**
+     * 
+     * @param {String} myKey 
+     */
+    get(myKey) {
+        let raw = document.cookie;
+        
+        /**
+         * @type {Array}
+         */
+        let arr = raw.split(';');    
+
+        let cookies = {};
+
+        arr.forEach(kv => {
+            const v = kv.split("=");
+            const key = v[0];
+            if(!v[1]) {
+                return;
+            }
+            const value = decodeURIComponent( v[1] );
+
+            // 중복된 값을 제거합니다.
+            cookies[key] = this.unique(value);
+        })
+
+        return cookies[myKey];
+        
+    }
 }
 
-export {Cookie};
+class ConstantCookie extends Cookie {
+    constructor() {
+        super("", "");
+    }
+}
+
+export {Cookie, ConstantCookie};
