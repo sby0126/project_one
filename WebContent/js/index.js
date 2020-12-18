@@ -3,6 +3,7 @@ import {LoginButton} from "./components/LoginButton.js";
 import { ShopContentLoader } from "./components/ShopContentLoader.js";
 import { CardStyleSheetBuilder } from "./components/CardStyleSheetBuilder.js";
 import { Cookie } from "./components/Cookie.js";
+import { RecentlyItems } from "./components/RecentlyItems.js";
 
 /**
  * jshint esversion: 6
@@ -78,7 +79,7 @@ class MainPage extends App {
         this.emit("login:ready");
         this.emit("contents:ready");
 
-		
+        RecentlyItems.builder().run();    
 
     }
 
