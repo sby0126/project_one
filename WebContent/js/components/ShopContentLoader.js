@@ -91,8 +91,6 @@ export class ShopContentLoader extends Component {
                 continue;
             }
 
-            // let myImgData = await this.loadJsonAsync(`json/shop/shop_data${idx}.json`);
-            // let myImgData = blobData[idx];
             let myImgData = this._data.contentData[idx];
             const imgSrc = this._data.imageUrl;
             const mainImg = this._data.imageData;

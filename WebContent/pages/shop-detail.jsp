@@ -5,14 +5,19 @@
 <%@ page import="java.net.URLDecoder" %>
 <%
 	
+	// 상품 아이디
 	int id = Integer.parseInt(request.getParameter("id"));
 
+	// 페이지 타입
 	String pageType = "item";
 
 	ContentDAO contentDAO = ContentDAO.getInstance();
 	
+	// ID 값으로 상점을 찾습니다.
 	String shopName = contentDAO.findShopName(id);
 	List<ProductVO> list = contentDAO.searchAsShopName(pageType, shopName);
+	
+	// 모델 얼굴 썸네일 이미지
 	List<ProductVO> thumb = contentDAO.findThumbnail(shopName);
 
 	String thumbNailImage = null;
@@ -21,6 +26,9 @@
 		thumbNailImage = "/images/shop/" + thumbNailVO.getGendertype() + "/" +  thumbNailVO.getShoptype() + "/" + thumbNailVO.getContenturl();
 	}
 	
+	// 상품을 찾지 못했을 때
+	boolean isNotFound = Boolean.valueOf(request.getParameter("not_found"));
+
 	String mainUrl = "https://drive.google.com/uc?export=view&id=";
 %>
 <c:set var="list" value="<%= list %>" />
