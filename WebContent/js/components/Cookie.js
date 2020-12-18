@@ -71,6 +71,7 @@ class Cookie extends Component {
      * @param {String} myKey 
      */
     get(myKey) {
+
         let raw = document.cookie;
         
         /**

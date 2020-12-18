@@ -408,7 +408,6 @@ class App extends EventEmitter {
         Category.builder().run();
         JoinButton.builder(this).run();
         FilterBoxButtons.builder(this).run();
-    
     }
  
     /**

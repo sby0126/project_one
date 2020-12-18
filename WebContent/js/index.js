@@ -79,7 +79,7 @@ class MainPage extends App {
         this.emit("login:ready");
         this.emit("contents:ready");
 
-        RecentlyItems.builder().run();    
+        // RecentlyItems.builder().run();    
 
     }
 
