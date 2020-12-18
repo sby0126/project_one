@@ -31,7 +31,7 @@
                             <tr class="label">
                                 <td><input type="checkbox" name="chk" id="chk" onClick="allChk()"></td>
                                 <td><p name="product-img"> 상품 이미지 </td> <!-- 구매할 상품 이미지 -->
-                                <td><a href="#"><p name="product-name"> 상품명</p></a></td> <!-- 구매할 상품 이름 -->
+                                <td><p name="product-name"> 상품명</p></td> <!-- 구매할 상품 이름 -->
                                 <td><p name="product-num"> 구매 갯수 </p></td> <!-- 구매 갯수 -->
                                 <td><P name="product-price"> 가격 </P></td> <!-- 상품 가격-->
                                 <td><P name="product-price"> 할인 </P></td> <!-- 할인 -->
@@ -40,7 +40,7 @@
                             <tr>
                                 <td><input type="checkbox" name="chk" class="chkbox"></td>
                                 <td><img src='' class="product-img"></td> <!-- 구매할 상품 이미지 -->
-                                <td><a href="#"><p class="product-name">title</p></a> </td> <!-- 구매할 상품 이름 -->
+                                <td><p class="product-name"><a href="#">title</a></p> </td> <!-- 구매할 상품 이름 -->
                                 <td><input type="number" class="product-num" placeholder="1" min="1"></td> <!-- 구매 갯수 -->
                                 <td><P class="product-price"> price </P></td> <!-- 상품 가격-->
                                 <td><P class="product-discnt"> 할인 </P></td> <!-- 할인 -->
@@ -49,7 +49,7 @@
                             <tr>
                                 <td><input type="checkbox" name="chk" class="chkbox"></td>
                                 <td><img src='' class="product-img"></td> <!-- 구매할 상품 이미지 -->
-                                <td><a href="#"><p class="product-name">title</p></a> </td> <!-- 구매할 상품 이름 -->
+                                <td><p class="product-name"><a href="#">title</a></p> </td> <!-- 구매할 상품 이름 -->
                                 <td><input type="number" class="product-num" placeholder="1" min="1"></td> <!-- 구매 갯수 -->
                                 <td><P class="product-price"> price </P></td> <!-- 상품 가격-->
                                 <td><P class="product-discnt"> 할인1 </P></td> <!-- 할인 -->
@@ -61,14 +61,10 @@
                 <div class="page-pooter">
                 	<table class="page-pooterbox">
                 		<tr>
-                			<td width="80"></td>
-                			<td width="80"></td>
                 			<td class='total-num'><p>총</p><span>X 개</span></td>
                 			<td class='total-price'><span>XXX원</span></td>
                 		</tr>
                 		<tr class="btn-zone">
-                			<td></td>
-                			<td></td>
                 			<td><button class="buy-product" onclick="">구매</button></td>
                 			<td><button class="del-product" onclick="del()">삭제</button></td>
                 		</tr>
