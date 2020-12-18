@@ -1,5 +1,5 @@
-<%@page import="core.board.notice.PageInfo"%>
-<%@page import="core.board.notice.BoardBean"%>
+<%@page import="bbsnotice.PageInfo"%>
+<%@page import="bbsnotice.BoardBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.text.SimpleDateFormat"%>
@@ -56,6 +56,7 @@ table {
 </head>
 
 <body>
+ <jsp:include page="header.jsp"></jsp:include>
 	<!-- 게시판 리스트 -->
 
 	<section id="listForm">
@@ -83,12 +84,13 @@ if(articleList != null && listCount > 0){
 				<td><%=articleList.get(i).getCtxtno()%></td>
 
 				<td>
-					<ahref="boardDetail.bo?board_num=<%=articleList.get(i).getCtxtno()%>&page=<%=nowPage%>">
+					<a href="boardDetail.bo?board_num=<%=articleList.get(i).getCtxtno()%>&page=<%=nowPage%>">
 						<%=articleList.get(i).getCtitle()%>
 				</a>
 				</td>
 
 				<td><%=articleList.get(i).getWrtnm() %></td>
+				<td><%=articleList.get(i).getReply() %></td>
 				<td><%=articleList.get(i).getWrtdate() %></td>
 				<td><%=articleList.get(i).getViewcnt() %></td>
 			</tr>

@@ -56,20 +56,21 @@
                                 <td><P class="product-rltprice"> <%=totalPrice%> </P> </td> <!-- 상품 금액 -->
                             </tr>
                         </table>
+                        <br>
+                        <div class="page-pooter">
+		                	<table class="page-pooterbox">
+		                		<tr>
+		                			<td class='total-num'><p>총</p><span>X 개</span></td>
+		                			<td class='total-price'><span>XXX원</span></td>
+		                		</tr>
+		                		<tr class="btn-zone">
+		                			<td><button class="buy-product" onclick="">구매</button></td>
+		                			<td><button class="del-product" onclick="del()">삭제</button></td>
+		                		</tr>
+			                </table>
+			            </div>
                     </form>
                 </div>
-                <div class="page-pooter">
-                	<table class="page-pooterbox">
-                		<tr>
-                			<td class='total-num'><p>총</p><span>X 개</span></td>
-                			<td class='total-price'><span>XXX원</span></td>
-                		</tr>
-                		<tr class="btn-zone">
-                			<td><button class="buy-product" onclick="">구매</button></td>
-                			<td><button class="del-product" onclick="del()">삭제</button></td>
-                		</tr>
-	                </table>
-	            </div>
 	         </div>
         </section>
     </div>
