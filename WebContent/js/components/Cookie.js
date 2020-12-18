@@ -53,6 +53,20 @@ class Cookie extends Component {
     }
 
     /**
+     * 중복 데이터를 제거합니다.
+     * 
+     * @param {String}} values 
+     */
+    unique(values) {
+        let q = values.split(",");
+        let uniqueValue = q.filter((e,i,a) => {
+            return a.indexOf(e.trim()) == i;
+        });
+
+        return uniqueValue.join(",");
+    }
+
+    /**
      * 
      * @param {String} myKey 
      */
@@ -69,14 +83,15 @@ class Cookie extends Component {
         arr.forEach(kv => {
             const v = kv.split("=");
             const key = v[0];
-            const value = v[1];
+            if(!v[1]) {
+                return;
+            }
+            const value = decodeURIComponent( v[1] );
 
-            cookies[key] = value;
+            // 중복된 값을 제거합니다.
+            cookies[key] = this.unique(value);
         })
 
-        console.log(arr);
-
-        
         return cookies[myKey];
         
     }
