@@ -16,6 +16,7 @@
 
 .readBox > .readBox2 > li {
 	margin: 2% 0 2% 0;
+	position: relative;
 }
 
 .readBox > .readBox2 > li > span:nth-child(1) {
@@ -23,9 +24,15 @@
 	margin-right: 10%;
 }
 
+.readBox > .readBox2 > li > span:nth-child(2) {
+	position: absolute;
+	left: 13%;
+}
+
+
 .readBox > .readBox2 > li:nth-child(5) {
 	border-radius: 5px;
-	background-color: #B2EBF4;
+	background-color: #EAEAEA;
 	width: 50%;
 	padding: 5px;
 	
@@ -41,12 +48,56 @@
 
 .readBox > .replyBox > div   {
 	padding: 10px;	
-	border: 1px solid black;
 	margin-bottom: 15px;
-	display:inline-block;
+	display:inline-block; 
 }
 
 .readBox > .replyBox > div > span {
 	margin-right: 25px;
 }
 
+.readBox3 button {
+	border: none;
+    font-weight: bold;
+    font-size: 12px;  
+    border-radius: 5px 5px 5px 5px;
+    line-height: 12px;
+    background-color: #D5D5D5;
+    height: 22px;
+}
+
+.replyBox button {
+	border: none;
+    font-weight: bold;
+    font-size: 12px;  
+    border-radius: 5px 5px 5px 5px;
+    line-height: 12px;
+    background-color: #D5D5D5;
+    height: 22px;
+}
+
+.read-btn {
+	border: none;
+    font-weight: bold;
+    font-size: 12px;  
+    border-radius: 5px 5px 5px 5px;
+    line-height: 12px;
+    background-color: #D5D5D5;
+    height: 22px;
+}
+
+.read-deleted-div {
+	background-color: #EAEAEA;
+	border: none;
+	border-radius: 5px;
+}
+
+.read-exit-div {
+	background-color: #EAEAEA;
+	border: none;
+	border-radius: 5px;
+}
+
+.read-exit-div span:nth-child(1) {
+	font-weight: bold;
+}

@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+/** 
+ * @author: Handeokho
+ * @type freeboard
+ * @description This is a freeboard.  
+ */
  *{
 	margin: 0;
 	padding: 0;
@@ -14,17 +19,22 @@
 
 .listTitle {
 	font-weight: bold;
-	font-size: 25px;
+	font-size: 20px;
 	text-align: center;
 	display: block;
 }
+
+/* #listTitle1 {
+	background-color: gray;
+} */
 
 .listTitle2 {
 	list-style-type: none;
 	overflow: hidden;
 	margin: 10px 0 10px 0;
 	border-radius: 5px;
-	background-color: #B2EBF4;
+	font-size: 13px;
+	/* background-color: #B2EBF4; */
 	
 }
 
@@ -32,6 +42,7 @@
 	float:left;
 	width: 20%;	
 	overflow:hidden;
+	border-bottom: 2px solid #EAEAEA;
 }
 
 .listPM {
@@ -52,6 +63,8 @@
 
 .listPM > .listPMMove > a {
 	text-decoration:none;
+	font-weight: bold;
+	font-size: 13px;
 }
 
 .listSearch {
@@ -66,7 +79,13 @@
 	transform: translateX(-50%);
 }
 
-
-
-
-
+.list-btn {
+	border: none;
+    font-weight: bold;
+    font-size: 12px;
+   
+    border-radius: 5px 5px 5px 5px;
+    line-height: 12px;
+    background-color: #D5D5D5;
+    height: 22px;
+}
