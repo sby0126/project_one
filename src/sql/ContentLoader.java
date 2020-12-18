@@ -59,6 +59,11 @@ public class ContentLoader {
 		
 		qlList.put("브랜드 썸네일 찾기", "SELECT * FROM tblproduct WHERE pageType='shop' AND shopName = ? GROUP BY contentUrl");
 		
+		qlList.put("ID로 상품 찾기", "SELECT DISTINCT b.pageType, b.genderType, b.shopType, b.shopName, b.contentUrl, a.imgId, b.*"
+				+ " FROM tblImageHash a, tblproduct b"
+				+ " where a.imgUrl = b.contentUrl"
+				+ " AND b.id = ?");
+		
 	}
 	
 	public String get(String command) {

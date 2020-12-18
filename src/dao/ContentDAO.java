@@ -448,6 +448,37 @@ public class ContentDAO implements IDAO {
 		return success;
 	}
 	
+	/**
+	 * ID로 상품 데이터 획득
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public List<ProductVO> findShopDataAsID(int id) {
+		List<ProductVO> list = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = pool.getConnection();
+			
+			pstmt = conn.prepareCall(getQL("ID로 상품 찾기"));
+			pstmt.setInt(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			list = SQLHelper.putResult(rs, ProductVO.class);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+		return list;
+	}
+	
 //	public List<ProductVO> findThumbnail(String shopName) {
 //		
 //		ResultSet rs = null;
