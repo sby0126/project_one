@@ -5,7 +5,6 @@ import { FilterBoxButtons } from "./components/FilterBoxButtons.js";
 import { EventEmitter } from "./EventEmitter.js";
 import { cssRuleSet } from "./utils/styleRules.js";
 import { ScrollEventBuilder } from "./components/ScrollEventBuilder.js";
-import { RecentlyItems } from "./components/RecentlyItems.js";
 
 // ID 상수 배열
 const ID = {
@@ -409,7 +408,7 @@ class App extends EventEmitter {
         Category.builder().run();
         JoinButton.builder(this).run();
         FilterBoxButtons.builder(this).run();
-        RecentlyItems.builder().run();        
+    
     }
  
     /**
@@ -445,7 +444,7 @@ class App extends EventEmitter {
             })
             .catch(err => {
                 console.warn(err);
-                // this.onLoad();
+                this.onLoad();
             });
 
     }
