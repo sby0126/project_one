@@ -78,9 +78,6 @@ class MainPage extends App {
         // 미리 정의해놓은 이벤트 함수를 호출합니다. (제이쿼리의 trigger와 유사합니다);
         this.emit("login:ready");
         this.emit("contents:ready");
-
-        // RecentlyItems.builder().run();    
-
     }
 
     fetchNewData() {
