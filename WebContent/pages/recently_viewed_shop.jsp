@@ -23,8 +23,6 @@
 
         <!-- 본문의 시작 -->
         <section>
-
-
             <!-- 본문이 들어가는 래퍼 -->
             <div class="contents-wrapper">
                 <div class="item_selected_none">
@@ -42,6 +40,6 @@
     <jsp:include page="/pages/login.jsp"></jsp:include> 
     <!-- index.js는 메인 용이므로 알맞은 스크립트를 사용해야 합니다-->
     <script type="module" src="../js/MorePage.js"></script>
-    
+    <script type="module" src="../js/recentlyViewedShop.js"></script>
 </body>
 </html>

@@ -454,9 +454,11 @@ public class ContentDAO implements IDAO {
 	 * @param id
 	 * @return
 	 */
-	public List<ProductVO> findShopDataAsID(int id) {
+	public ProductVO findShopDataAsID(int id) {
 		List<ProductVO> list = null;
 		ResultSet rs = null;
+		
+		ProductVO vo = null;
 		
 		try {
 			conn = pool.getConnection();
@@ -468,6 +470,10 @@ public class ContentDAO implements IDAO {
 			
 			list = SQLHelper.putResult(rs, ProductVO.class);
 			
+			if(list != null) {
+				vo = list.get(0);	
+			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -476,7 +482,7 @@ public class ContentDAO implements IDAO {
 			pool.freeConnection(conn, pstmt);
 		}
 		
-		return list;
+		return vo;
 	}
 	
 //	public List<ProductVO> findThumbnail(String shopName) {
