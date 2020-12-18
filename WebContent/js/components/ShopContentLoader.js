@@ -179,9 +179,11 @@ export class ShopContentLoader extends Component {
 
         this._items = Array.from(document.querySelectorAll(".card-container .card"));
 
+        // 클릭 시 정렬 기준을 여성으로 변경
         $(".header-left a").eq(1).on("click", (ev) => {
             this._dataLoader.setParameter("gndr", "F");
         })
+        // 클릭 시 정렬 기준을 남성으로 변경
         $(".header-left a").eq(2).on("click", (ev) => {
             this._dataLoader.setParameter("gndr", "M");
         })

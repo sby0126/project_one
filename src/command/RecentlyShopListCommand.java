@@ -26,15 +26,15 @@ import dao.ContentDAO;
 import vo.ProductVO;
 
 public class RecentlyShopListCommand extends Command {
+	@SuppressWarnings("unchecked")
 	@Override
 	public ActionResult execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		result.start(request, response);
 		
 		// 원시 JSON 데이터를 받아옵니다.
-		
-		
 		InputStream inputStream = request.getInputStream();
+		
 		// 데이터가 들어오지 않았을 때 오류 처리
 		if(inputStream == null) {
 			request.setAttribute("errorMessage", "데이터가 잘못되었습니다.");
@@ -55,10 +55,7 @@ public class RecentlyShopListCommand extends Command {
 		
 		// 문자열 조합 결과, 아무 데이터도 없을 때 오류 처리
 		String raw = sb.toString();
-		
-		
-		System.out.println(raw);
-		
+			
 		if(raw == null) {
 			request.setAttribute("errorMessage", "문자열 데이터가 없습니다.");
 			request.setAttribute("url", "/pages/board-default.jsp");
@@ -67,7 +64,6 @@ public class RecentlyShopListCommand extends Command {
 			return result;
 		}				
 		
-
 		// JSON 파싱
 		JSONParser parser = new JSONParser();
 		Object objRaw = null;
@@ -100,12 +96,30 @@ public class RecentlyShopListCommand extends Command {
 			productList.add( contentDAO.findShopDataAsID(id) );	
 		});
 		
+		// 오프셋 생성
+		JSONObject offset = new JSONObject();
+		
+		offset.put("start", 0);
+		offset.put("count", 68);
+				
+		
 		// JSON으로 변환 시작합니다.
+		JSONObject root = new JSONObject();
+		root.put("pageType", "shop" );
+		root.put("genderType", 'M' );
+		root.put("shopType", 'S' );
+		root.put("offset", offset);		
+		root.put("imageUrl", "https://drive.google.com/uc?export=view&id=");	
+		
+		JSONArray contentData = new JSONArray();
+		JSONObject imageData = new JSONObject();
+		
+		root.put("contentData", contentData);
+		root.put("imageData", imageData);
+		
 		JSONArray jsonArray = new JSONArray();
 		
-		for(ProductVO vo : productList) {	
-			JSONObject root = new JSONObject();
-			
+		for(ProductVO vo : productList) {				
 			JSONObject newContentData = new JSONObject();
 			
 			newContentData.put("category", vo.getShoptype());
@@ -115,9 +129,9 @@ public class RecentlyShopListCommand extends Command {
 			newContentData.put("id", vo.getId());
 			newContentData.put("link", vo.getLink());
 			
-			jsonArray.add(newContentData);
+			contentData.add(newContentData);
 		}
-		
+				
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json; charset=utf-8");
 		

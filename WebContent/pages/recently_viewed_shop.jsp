@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +11,6 @@
     <script src="https://cdn.jsdelivr.net/npm/underscore@1.11.0/underscore-min.js"></script>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/Recently_viewed_shop.css">
-  
   
 </head>
 <body>
@@ -30,6 +29,8 @@
                     <img class="item_selected_none_img" src="../images/b527471.png">
                     <div class="item_selected_none_sp">최근 본 샾이 없습니다.</div>
                     <a href="../index.jsp"><button class="item_selected_none_button">샾 메인으로 이동</button></a>
+                </div>
+                <div class=".card-container">
                 </div>
             </div>
         </section>
