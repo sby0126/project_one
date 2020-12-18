@@ -26,18 +26,20 @@
 		thumbNailImage = "/images/shop/" + thumbNailVO.getGendertype() + "/" +  thumbNailVO.getShoptype() + "/" + thumbNailVO.getContenturl();
 	}
 	
-	// 상품을 찾지 못했을 때
-	boolean isNotFound = Boolean.valueOf(request.getParameter("not_found"));
-
 	String mainUrl = "https://drive.google.com/uc?export=view&id=";
+	String link = "#";
+	if(list != null) {
+		link = list.get(0).getLink();
+	}
+	
 %>
 <c:set var="list" value="<%= list %>" />
 <c:set var="thumbNailImage" value="<%=thumbNailImage %>" />
 <c:set var="shopName" value="<%=shopName %>" />
-<c:if test="${ list.size() == 0 or shopName == null }">
+<c:if test="${ list == null or shopName == null }">
 	<script>
-		alert("DB에서 상품을 찾지 못했습니다.");
-		history.go(-1);
+// 		alert("DB에서 상품을 찾지 못했습니다.");
+// 		history.go(-1);
 	</script>
 </c:if>
 <!DOCTYPE html>
@@ -52,6 +54,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/underscore@1.11.0/underscore-min.js"></script>
     <link rel="stylesheet" href="../css/shop-detail.css">
+    <link rel="stylesheet" href="../css/Recently_viewed_shop.css">
     <link rel="stylesheet" href="../libs/themes/wrunner-default-theme.css">
     <script src="../libs/wrunner-jquery.js"></script>
     <style>
@@ -62,44 +65,54 @@
 		    align-items: center;
 		    background-color: #fff;
 		}    
+		.item_selected_none {
+			width: 100%;
+/* 			display: flex; */
+/* 			flex-direction: row; */
+/* 			justify-content: center; */
+/* 			align-items: center; */
+		}
     </style>
-	 <%
-	 	for(int i = 0; i < list.size(); i++) {
-	 		ProductVO vo = list.get(i);
-	 %>
-	    <style>
-            .card {
-                display: flex;
-                flex-wrap: wrap;
-                flex: auto auto auto;
-                flex-direction: column;
-                border: 1px solid #F2F5F9;
-            }
-            
-            .card p[d-<%=vo.getId()%>]::before {
-                content: "";
-                width: 100%;
-                height: 78%;
-                background: url(<%=mainUrl+vo.getImgid()%>) left top;
-                background-size: cover;
-                background-repeat: no-repeat;
-                position: absolute;
-                border-radius: 0;
-                left: 0;
-                top: 0;
-                z-index: 0;
-            }
-
-            .card p[d-<%=vo.getId()%>]:hover::before {
-                filter: brightness(1.1);
-                border-radius: 0;
-                transition: all .2s linear;
-            }
-            
-	    </style>
-	 <%
-	 	}
-	 %>
+    <!-- 카드 목록이 있다면 스타일을 지정합니다.  -->
+    <c:if test="${ list != null}" >
+		 <%
+		 	for(int i = 0; i < list.size(); i++) {
+		 		ProductVO vo = list.get(i);
+		 %>
+		    <style>
+	            .card {
+	                display: flex;
+	                flex-wrap: wrap;
+	                flex: auto auto auto;
+	                flex-direction: column;
+	                border: 1px solid #F2F5F9;
+	            }
+	            
+	            .card p[d-<%=vo.getId()%>]::before {
+	                content: "";
+	                width: 100%;
+	                height: 78%;
+	                background: url(<%=mainUrl+vo.getImgid()%>) left top;
+	                background-size: cover;
+	                background-repeat: no-repeat;
+	                position: absolute;
+	                border-radius: 0;
+	                left: 0;
+	                top: 0;
+	                z-index: 0;
+	            }
+	
+	            .card p[d-<%=vo.getId()%>]:hover::before {
+	                filter: brightness(1.1);
+	                border-radius: 0;
+	                transition: all .2s linear;
+	            }
+	            
+		    </style>
+		 <%
+		 	}
+		 %>
+	 </c:if>
 	 <style>
 		.list-container {
 			display: flex;
@@ -174,7 +187,7 @@
                             </ul>
                         </div>
                         <div class="centered">
-                            <a href="#"><img src="${thumbNailImage }"></a>
+                            <a href="#"><img src="${ thumbNailImage }"></a>
                         </div>
                         <div>
                         	<div class="list-container">
@@ -185,13 +198,15 @@
                         			<p>스트릿·도매스틱</p>
                         		</div>
                         		<div>
-                        			<a class="btn" href="#">바로가기</a>
-                        			<a class="btn plus" href="#">&nbsp;</a>
+                        			<a class="btn" href="<%= link %>">바로가기</a>
+                        			<a class="btn plus" href="<%= link %>">&nbsp;</a>
                         		</div>                        		
                         	</div>
                         </div>
                     </div>
                     <jsp:include page="/pages/components/filterbox.jsp"></jsp:include>
+                    <c:choose>
+                    <c:when test="${list != null}">
                     <%
                     	for(ProductVO card : list) {
                     %>
@@ -209,6 +224,18 @@
                     <%
                     	}
                     %>
+                    </c:when>
+                    <c:otherwise>
+		                <div class="item_selected_none">
+<!-- 		                    <button class="item_selected_none_all_del">전체삭제</button> -->
+		                    <img class="item_selected_none_img" src="../images/b527471.png">
+		                    <div class="item_selected_none_sp">상품이 없습니다.</div>
+		                    <a href="#" onclick="history.go(-1);">
+		                    	<button class="item_selected_none_button">이전으로</button>
+		                    </a>
+		                </div>                    
+                    </c:otherwise>
+                    </c:choose>
                 </div> 
                
             </div>

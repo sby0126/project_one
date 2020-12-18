@@ -151,7 +151,8 @@ export class ShopContentLoader extends Component {
                             location.href = "/pages/shop-detail.jsp?id=" + id;
                         },
                         error: function(err) {
-                            alert(`${id}에 대한 상품 데이터가 없습니다.`);
+                            console.log(`${id}에 대한 상품 데이터가 없습니다.`);
+                            location.href = "/pages/shop-detail.jsp?id=" + id;
                         }
                     })
 

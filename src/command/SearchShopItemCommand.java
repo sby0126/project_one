@@ -31,11 +31,11 @@ public class SearchShopItemCommand extends Command {
 		// JSON으로 변환합니다.
 		JSONObject data = service.getItemForCertainShop(pageType, id);
 		
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json; charset=utf-8");		
+		
 		if( data != null ) {
 			// 한글이 나올 수 있게 처리합니다 (순서 문자열 인코딩 변환 -> 프린트라이터)
-			response.setCharacterEncoding("UTF-8");
-			response.setContentType("application/json; charset=utf-8");
-			
 			PrintWriter out = response.getWriter();
 			out.println(data.toJSONString());
 						

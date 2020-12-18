@@ -52,7 +52,9 @@
                     <button class="item_selected_none_all_del">전체삭제</button>
                     <img class="item_selected_none_img" src="../images/fbb847b.png">
                     <div class="item_selected_none_sp">최근 본 상품이 없습니다.</div>
-                    <a href="../item.jsp"><button class="item_selected_none_button">아이템 메인으로 이동</button></a>
+                    <a href="#" onclick="history.go(-1)">
+                    	<button class="item_selected_none_button">뒤로 가기</button>
+                    </a>
                 </div>
             </div>
         </section>
