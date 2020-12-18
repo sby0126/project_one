@@ -1,5 +1,6 @@
 import {App} from "./app.js";
 import {LoginButton} from "./components/LoginButton.js";
+import { RecentlyItems } from "./components/RecentlyItems.js";
 
 /**
  * ==============================================
@@ -34,6 +35,7 @@ class MorePage extends App {
 
     onLoad() {
         this.emit("loginView:ready");
+        RecentlyItems.builder().run();
     }
 
 }

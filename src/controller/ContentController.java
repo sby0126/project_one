@@ -14,6 +14,7 @@ import command.AllContentsCommand;
 import command.Command;
 import command.ItemCategoryCommand;
 import command.ItemCommand;
+import command.RecentlyShopListCommand;
 import command.SaleCommand;
 import command.SearchShopItemCommand;
 import command.ShopCommand;
@@ -64,11 +65,14 @@ public class ContentController extends HttpServlet {
 			case "/searchShopItem.do":
 				command = new SearchShopItemCommand();
 				break;
-			case "/cart.do, /buy.do":
+			case "/buy.do":
+			case "/cart.do":
 				command = new DetailInputCommand();
 				break;
+			case "/recentlyShopList.do":
+				command = new RecentlyShopListCommand();
+				break;
 			}
-			
 			
 			result = command.execute(request, response);
 			

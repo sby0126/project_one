@@ -22,3 +22,15 @@
 	margin: 2% 0 2% 0;
 }
 
+.update-btn {
+	border: none;
+    font-weight: bold;
+    font-size: 12px;
+   
+    border-radius: 5px 5px 5px 5px;
+    line-height: 12px;
+    background-color: #D5D5D5;
+    height: 22px;
+}
+
+

@@ -1,4 +1,14 @@
 import { Component } from "./Component.js";
+import { getDataManager, DataManager } from "../DataManager.js";
+
+const config = {
+    isSlow: false
+};
+
+/**
+ * @type {DataManager}
+ */
+const DataMan = getDataManager();
 
 class Cookie extends Component {
 
@@ -49,7 +59,25 @@ class Cookie extends Component {
                     + "; expires="
                     + this._expire.toUTCString();
 
-        document.cookie = cookie;
+        if(config.isSlow) {
+            DataMan.set(this._name, this._value);
+        } else {
+            document.cookie = cookie;
+        }
+    }
+
+    /**
+     * 중복 데이터를 제거합니다.
+     * 
+     * @param {String}} values 
+     */
+    unique(values) {
+        let q = values.split(",");
+        let uniqueValue = q.filter((e,i,a) => {
+            return a.indexOf(e.trim()) == i;
+        });
+
+        return uniqueValue.join(",");
     }
 
     /**
@@ -57,7 +85,13 @@ class Cookie extends Component {
      * @param {String} myKey 
      */
     get(myKey) {
-        let raw = document.cookie;
+        let raw = "";
+
+        if(config.isSlow) {
+            raw = DataMan.get(myyKey);
+        } else {
+            raw = document.cookie;
+        }
         
         /**
          * @type {Array}
@@ -69,14 +103,15 @@ class Cookie extends Component {
         arr.forEach(kv => {
             const v = kv.split("=");
             const key = v[0];
-            const value = v[1];
+            if(!v[1]) {
+                return;
+            }
+            const value = decodeURIComponent( v[1] );
 
-            cookies[key] = value;
+            // 중복된 값을 제거합니다.
+            cookies[key] = this.unique(value);
         })
 
-        console.log(arr);
-
-        
         return cookies[myKey];
         
     }

@@ -3,6 +3,7 @@ import {LoginButton} from "./components/LoginButton.js";
 import { ShopContentLoader } from "./components/ShopContentLoader.js";
 import { CardStyleSheetBuilder } from "./components/CardStyleSheetBuilder.js";
 import { Cookie } from "./components/Cookie.js";
+import { RecentlyItems } from "./components/RecentlyItems.js";
 
 /**
  * jshint esversion: 6
@@ -78,8 +79,8 @@ class MainPage extends App {
         this.emit("login:ready");
         this.emit("contents:ready");
 
-		
-
+        // 최근 샵 아이템의 갯수를 가져올 수 있게 합니다.
+        RecentlyItems.builder(this).run();
     }
 
     fetchNewData() {

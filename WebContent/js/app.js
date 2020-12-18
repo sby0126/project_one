@@ -6,7 +6,6 @@ import { EventEmitter } from "./EventEmitter.js";
 import { cssRuleSet } from "./utils/styleRules.js";
 import { ScrollEventBuilder } from "./components/ScrollEventBuilder.js";
 
-
 // ID 상수 배열
 const ID = {
     CONTAINER: ".container",

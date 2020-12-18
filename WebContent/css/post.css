@@ -17,3 +17,14 @@
 .post > form > ul > li {
 	margin: 1% 0 1% 0;
 }
+
+.post-btn {
+	border: none;
+    font-weight: bold;
+    font-size: 12px;
+   
+    border-radius: 5px 5px 5px 5px;
+    line-height: 12px;
+    background-color: #D5D5D5;
+    height: 22px;
+}

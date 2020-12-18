@@ -241,4 +241,4 @@ function getDataManager() {
     return DataManager.getInstance();
 }
 
-export {getDataManager};
+export {getDataManager, DataManager};
