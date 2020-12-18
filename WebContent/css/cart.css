@@ -28,8 +28,7 @@
   width: 85%;
   height: auto;
   min-height: 640px;
-  overflow: visible;
-}
+ }
 
 .contents-wrapper h2 {
   position: absolute;
@@ -42,12 +41,13 @@
 .product-info-zone {
   position: relative;
   margin: 0 auto;
-  margin-bottom: 25%;
+  margin-bottom: 30%;
   width: 90%;
   top: 9.3em;
   left: 1.7em;
   height: auto;
   min-height: 300px;
+  box-sizing: content-box;
 }
 
 /* 추후 출력 기능 구현*/
@@ -148,9 +148,10 @@
 
 /* product-info 이후 결제에 필요한 최종 금액을 도출하는 영역 */
 .page-pooter {
-  overflow: hidden;
   position: absolute;
-  right: 0;
+  right: 5%;
+  bottom: -68%;
+  padding-right:5%;
   box-sizing: border-box;
 }
 
@@ -158,30 +159,22 @@
   float: right;
 }
 
-.total-num {
-  padding-right: 15%;
-}
-
 .total-num p {
-  float: left;
-  display: inline;
+  float:left;
   margin-right: 20%;
 }
 
 .total-num span {
-  margin: 0;
+  	margin: 0;
 }
 
 .total-price {
-  overflow: visible;
-}
-
-.total-price span {
-  margin-right: 100px;
+  padding-left : 5%;
 }
 
 .btn-zone button {
-  margin: 5px;
+  margin: 8px;
+  margin-top : 10px;
 }
 
 /* 구매 버튼 속성 */

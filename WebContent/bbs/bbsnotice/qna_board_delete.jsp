@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%
    int board_num = (Integer)request.getAttribute("board_num");
-    String nowPage = (String)request.getAttribute("page");
+   String nowPage = (String)request.getAttribute("page");
 %>
 <!DOCTYPE html>
 <html>
@@ -19,6 +19,7 @@
 </style>
 </head>
 <body>
+ <jsp:include page="header.jsp"></jsp:include>
 <section id = "passForm">
 <form name="deleteForm" action="boardDeletePro.bo?board_num=<%=board_num %>" 
    method="post">
