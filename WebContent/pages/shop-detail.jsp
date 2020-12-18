@@ -291,5 +291,6 @@
 
     </script>
     <script src="/js/itemPage.js"></script>
+    <script type="module" src="/js/CookieService.js"></script>
 </body>
 </html>    
