@@ -1,4 +1,14 @@
 import { Component } from "./Component.js";
+import { getDataManager, DataManager } from "../DataManager.js";
+
+const config = {
+    isSlow: false
+};
+
+/**
+ * @type {DataManager}
+ */
+const DataMan = getDataManager();
 
 class Cookie extends Component {
 
@@ -49,7 +59,11 @@ class Cookie extends Component {
                     + "; expires="
                     + this._expire.toUTCString();
 
-        document.cookie = cookie;
+        if(config.isSlow) {
+            DataMan.set(this._name, this._value);
+        } else {
+            document.cookie = cookie;
+        }
     }
 
     /**
@@ -71,8 +85,13 @@ class Cookie extends Component {
      * @param {String} myKey 
      */
     get(myKey) {
+        let raw = "";
 
-        let raw = document.cookie;
+        if(config.isSlow) {
+            raw = DataMan.get(myyKey);
+        } else {
+            raw = document.cookie;
+        }
         
         /**
          * @type {Array}
