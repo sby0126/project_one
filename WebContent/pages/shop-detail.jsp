@@ -38,259 +38,268 @@
 <c:set var="shopName" value="<%=shopName %>" />
 <c:if test="${ list == null or shopName == null }">
 	<script>
-// 		alert("DB에서 상품을 찾지 못했습니다.");
-// 		history.go(-1);
+		// 		alert("DB에서 상품을 찾지 못했습니다.");
+		// 		history.go(-1);
 	</script>
 </c:if>
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>쇼핑몰 클론 프로젝트</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a99df0f94f.js" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/underscore@1.11.0/underscore-min.js"></script>
-    <link rel="stylesheet" href="../css/shop-detail.css">
-    <link rel="stylesheet" href="../css/Recently_viewed_shop.css">
-    <link rel="stylesheet" href="../libs/themes/wrunner-default-theme.css">
-    <script src="../libs/wrunner-jquery.js"></script>
-    <style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>쇼핑몰 클론 프로젝트</title>
+	<link rel="stylesheet" href="../css/style.css">
+	<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/a99df0f94f.js" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/underscore@1.11.0/underscore-min.js"></script>
+	<link rel="stylesheet" href="../css/shop-detail.css">
+	<link rel="stylesheet" href="../css/Recently_viewed_shop.css">
+	<link rel="stylesheet" href="../libs/themes/wrunner-default-theme.css">
+	<script src="../libs/wrunner-jquery.js"></script>
+	<style>
 		.card-container {
-		    display: flex;
-		    flex-direction: row;
-		    justify-content: left;
-		    align-items: center;
-		    background-color: #fff;
-		}    
+			display: flex;
+			flex-direction: row;
+			justify-content: left;
+			align-items: center;
+			background-color: #fff;
+		}
+
 		.item_selected_none {
 			width: 100%;
-/* 			display: flex; */
-/* 			flex-direction: row; */
-/* 			justify-content: center; */
-/* 			align-items: center; */
+			/* 			display: flex; */
+			/* 			flex-direction: row; */
+			/* 			justify-content: center; */
+			/* 			align-items: center; */
 		}
-    </style>
-    <!-- 카드 목록이 있다면 스타일을 지정합니다.  -->
-    <c:if test="${ list != null}" >
-		 <%
+	</style>
+	<!-- 카드 목록이 있다면 스타일을 지정합니다.  -->
+	<c:if test="${ list != null}">
+		<%
 		 	for(int i = 0; i < list.size(); i++) {
 		 		ProductVO vo = list.get(i);
 		 %>
-		    <style>
-	            .card {
-	                display: flex;
-	                flex-wrap: wrap;
-	                flex: auto auto auto;
-	                flex-direction: column;
-	                border: 1px solid #F2F5F9;
-	            }
-	            
-	            .card p[d-<%=vo.getId()%>]::before {
-	                content: "";
-	                width: 100%;
-	                height: 78%;
-	                background: url(<%=mainUrl+vo.getImgid()%>) left top;
-	                background-size: cover;
-	                background-repeat: no-repeat;
-	                position: absolute;
-	                border-radius: 0;
-	                left: 0;
-	                top: 0;
-	                z-index: 0;
-	            }
-	
-	            .card p[d-<%=vo.getId()%>]:hover::before {
-	                filter: brightness(1.1);
-	                border-radius: 0;
-	                transition: all .2s linear;
-	            }
-	            
-		    </style>
-		 <%
+		<style>
+			.card {
+				display: flex;
+				flex-wrap: wrap;
+				flex: auto auto auto;
+				flex-direction: column;
+				border: 1px solid #F2F5F9;
+			}
+
+			.card p[d-<%=vo.getId()%>]::before {
+				content: "";
+				width: 100%;
+				height: 78%;
+				background: url(<%=mainUrl+vo.getImgid()%>) left top;
+				background-size: cover;
+				background-repeat: no-repeat;
+				position: absolute;
+				border-radius: 0;
+				left: 0;
+				top: 0;
+				z-index: 0;
+			}
+
+			.card p[d-<%=vo.getId()%>]:hover::before {
+				filter: brightness(1.1);
+				border-radius: 0;
+				transition: all .2s linear;
+			}
+		</style>
+		<%
 		 	}
 		 %>
-	 </c:if>
-	 <style>
-		.list-container {
+	</c:if>
+	<style>
+		/* 가로로 배치, 한 줄로 표시, 왼쪽 */
+		.card-container {
 			display: flex;
 			flex-direction: row;
+			flex-wrap: no-wrap;
+			justify-content: left;
 		}
 		
+		/* 가로로 배치, 한 줄로 표시, 중앙 */
+		.card-container > section {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: no-wrap;
+			justify-content: center;
+		}
+
+		.face-area {
+			column-gap: 0.5em;
+		}
+
+		/* 세로로 배치, 여러줄로 표시 */
+		.detail-trailer-list {
+			display: flex;
+			flex-direction: column;
+			flex-wrap: wrap;
+		}
+
+		/* 가로로 배치, 한 줄로 표시 */
+		.shop-detail {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: no-wrap;
+			justify-content: space-around;
+		}
+
+		/* 세로로 배치, 여러줄로 표시, 간격 0.5em */
+		.list-container {
+			display: flex;
+			flex-direction: column;
+			flex-wrap: wrap;
+			row-gap: 0.5em
+		}
+
 		.btn {
-		    display: inline-block;
-		    border: 1px solid #e6e9eb;
-		    line-height: 28px;
-		    color: #ff6b00;
-		    margin: 0 3px;
-		    padding: 0 10px;
-		    font-size: 11px;
-		    vertical-align: middle;
-		    cursor: pointer;
+			display: inline-block;
+			border: 1px solid #e6e9eb;
+			line-height: 28px;
+			color: #ff6b00;
+			margin: 0 3px;
+			padding: 0 10px;
+			font-size: 11px;
+			vertical-align: middle;
+			cursor: pointer;
 			border: 1px solid #E6E9EB;
 			position: relative;
 		}
-		
+
 		.plus::after {
 			content: "";
-		    display: block;
-		    position: absolute;
-		    left: 50%;
-		    top: 50%;
-		    transform: translate(-50%,-50%);
-		    width: 14px;
-		    height: 14px;
-		    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAYAAABy6+R8AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACxJREFUeNpiXLBgAQMO8B+IGbFJMDGQAYajJhZoKOELQayaGEeDnExNAAEGAKtFBf2k2wluAAAAAElFTkSuQmCC);
-		    background-repeat: no-repeat;
-		    background-size: cover;			
-		} 
-		
-		.similar-shop {
-			display: flex;
-			justify-content: center;
+			display: block;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			width: 14px;
+			height: 14px;
+			background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAYAAABy6+R8AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACxJREFUeNpiXLBgAQMO8B+IGbFJMDGQAYajJhZoKOELQayaGEeDnExNAAEGAKtFBf2k2wluAAAAAElFTkSuQmCC);
+			background-repeat: no-repeat;
+			background-size: cover;
 		}
-	 </style>
-</head>
-<body>
-    <!-- 컨테이너의 시작 -->
-    <div class="container">
-        <!-- 헤더의 시작 -->
-        <jsp:include page="/header.jsp">
-        	<jsp:param value="true" name="isHide"/>
-        </jsp:include>
 
-        <!-- 본문의 시작 -->
-        <section>
-            <!-- 본문이 들어가는 래퍼 -->
-            <div class="contents-wrapper">
-                <div class="card-container">
-                    <div class="shop-detail">
-                        <div class="detail-trailer-list">
-                            <div class="similar-shop">
-                                <p>비슷한 샵</p>
-                            </div>
-                            <ul>
-                                <li>
-                                    <a href="#"><img src="https://dummyimage.com/64x64/000/fff"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="https://dummyimage.com/64x64/000/fff"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="https://dummyimage.com/64x64/000/fff"></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="https://dummyimage.com/64x64/000/fff"></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="centered">
-                            <a href="#"><img src="${ thumbNailImage }"></a>
-                        </div>
-                        <div>
-                        	<div class="list-container">
-                        		<div>
-                        			<h2><%= shopName %></h2>
-                        		</div>
-                        		<div>
-                        			<p>스트릿·도매스틱</p>
-                        		</div>
-                        		<div>
-                        			<a class="btn" href="<%= link %>">바로가기</a>
-                        			<a class="btn plus" href="<%= link %>">&nbsp;</a>
-                        		</div>                        		
-                        	</div>
-                        </div>
-                    </div>
-                    <jsp:include page="/pages/components/filterbox.jsp"></jsp:include>
-                    <c:choose>
-                    <c:when test="${list != null}">
-                    <%
+		.similar-shop {
+			width: 100%;
+			text-align: center;
+		}
+
+		.similar-shop>p {
+			font-family: 'Nanum Gothic', sans-serif;
+			font-size: 12px;
+			margin-bottom: 4px;
+			display: block;
+		}
+	</style>
+</head>
+
+<body>
+	<!-- 컨테이너의 시작 -->
+	<div class="container">
+		<!-- 헤더의 시작 -->
+		<jsp:include page="/header.jsp">
+			<jsp:param value="true" name="isHide" />
+		</jsp:include>
+
+		<!-- 본문의 시작 -->
+		<section>
+			<!-- 본문이 들어가는 래퍼 -->
+			<div class="contents-wrapper">
+				<div class="card-container">
+					<section>
+						<div class="shop-detail">
+							<div class="detail-trailer-list">
+								<div class="similar-shop">
+									<p>비슷한 샵</p>
+								</div>
+								<ul class="face-area">
+									<li>
+										<a href="#"><img src="https://dummyimage.com/64x64/000/fff"></a>
+									</li>
+									<li>
+										<a href="#"><img src="https://dummyimage.com/64x64/000/fff"></a>
+									</li>
+									<li>
+										<a href="#"><img src="https://dummyimage.com/64x64/000/fff"></a>
+									</li>
+									<li>
+										<a href="#"><img src="https://dummyimage.com/64x64/000/fff"></a>
+									</li>
+								</ul>
+							</div>
+							<div class="centered">
+								<a href="#"><img src="${ thumbNailImage }"></a>
+							</div>
+							<div>
+								<div class="list-container">
+									<div>
+										<h2><%= shopName %></h2>
+									</div>
+									<div>
+										<p>스트릿·도매스틱</p>
+									</div>
+									<div>
+										<a class="btn" href="<%= link %>">바로가기</a>
+										<a class="btn plus" href="<%= link %>">&nbsp;</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<jsp:include page="/pages/components/filterbox.jsp"></jsp:include>
+					<c:choose>
+						<c:when test="${list != null}">
+							<%
                     	for(ProductVO card : list) {
                     %>
-                    	<c:set var="card" value="<%= card %>" />
-	                    <div class="card">
-	                        <p d-<%= card.getId() %>></p>
-		                    <i class="shop-hot-icon"></i>
-		                    <div class="item-button-container"> 
-		                        <h2>${card.getTitle()}</h2>
-		                        <p>${card.getPrice()}</p>
-		                        <p>${card.getShopname()}</p>
-		                        <button class="like-button"></button>
-		                    </div> 	                        
-	                    </div>                     
-                    <%
+							<c:set var="card" value="<%= card %>" />
+							<div class="card">
+								<p d-<%= card.getId() %>></p>
+								<i class="shop-hot-icon"></i>
+								<div class="item-button-container">
+									<h2>${card.getTitle()}</h2>
+									<p>${card.getPrice()}</p>
+									<p>${card.getShopname()}</p>
+									<button class="like-button"></button>
+								</div>
+							</div>
+							<%
                     	}
                     %>
-                    </c:when>
-                    <c:otherwise>
-		                <div class="item_selected_none">
-<!-- 		                    <button class="item_selected_none_all_del">전체삭제</button> -->
-		                    <img class="item_selected_none_img" src="../images/b527471.png">
-		                    <div class="item_selected_none_sp">상품이 없습니다.</div>
-		                    <a href="#" onclick="history.go(-1);">
-		                    	<button class="item_selected_none_button">이전으로</button>
-		                    </a>
-		                </div>                    
-                    </c:otherwise>
-                    </c:choose>
-                </div> 
-               
-            </div>
-        </section>
-    </div>
-    <!-- 라이트 박스-->
-    <div id="light-box-container">
-    </div>
-    <jsp:include page="/pages/login.jsp"></jsp:include> 
-    <!-- index.js는 메인 용이므로 알맞은 스크립트를 사용해야 합니다-->
-    <script type="module" src="../js/index.js"></script>
-    <script>
-        (function() {
+						</c:when>
+						<c:otherwise>
+							<div class="item_selected_none">
+								<!-- 		                    <button class="item_selected_none_all_del">전체삭제</button> -->
+								<img class="item_selected_none_img" src="../images/b527471.png">
+								<div class="item_selected_none_sp">상품이 없습니다.</div>
+								<a href="#" onclick="history.go(-1);">
+									<button class="item_selected_none_button">이전으로</button>
+								</a>
+							</div>
+						</c:otherwise>
+					</c:choose>
+				</div>
 
-            const mySlider = $("#slide-bar").wRunner({
-                // step size
-                step: 100,
-
-                // or 'range'
-                type: "range",
-
-                // min/max values
-                limits: {
-                    minLimit: 0, 
-                    maxLimit: 128000
-                },
-
-                // default value
-                singleValue: 1000,
-                rangeValue: { 
-                    minValue: 20, 
-                    maxValue: 126000
-                },
-
-                // root element
-                sliderRoots: document.querySelector(".header-filter-box-footer-right"),
-
-                // the number of divisions
-                divisionsCount: 10,
-
-                // shows labels
-                valueNoteDisplay: true,
-
-                // theme name
-                theme: "default",
-
-                // or 'vertical'
-                direction: 'horizontal'
-
-            });        
-
-        })();
-
-    </script>
-    <script src="/js/itemPage.js"></script>
-    <script type="module" src="/js/CookieService.js"></script>
+			</div>
+		</section>
+	</div>
+	<!-- 라이트 박스-->
+	<div id="light-box-container">
+	</div>
+	<jsp:include page="/pages/login.jsp"></jsp:include>
+	<!-- index.js는 메인 용이므로 알맞은 스크립트를 사용해야 합니다-->
+	<script type="module" src="../js/index.js"></script>
+	<script src="/js/itemPage.js"></script>
+	<script src="/js/shopDetailPage.js"></script>
+	<script type="module" src="/js/CookieService.js"></script>
 </body>
-</html>    
+
+</html>
