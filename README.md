@@ -7,6 +7,7 @@ and the project called 'Project One' consists with below specs :
 |JDK|java 15 2020-09-15, Java(TM) SE Runtime Environment (build 15+36-1562)|
 |Maria DB|10.3.25-MariaDB-0ubuntu0.20.04.1|
 |Tomcat|9|
+|port|9988|
 
 # License
 
