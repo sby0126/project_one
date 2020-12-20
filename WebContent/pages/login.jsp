@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="contextPath" value="${ pageContext.request.contextPath }" />  
+<c:set var="contextPath" value="${ pageContext.request.contextPath }" />
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script>
+	    Kakao.init('57f13bd28ed3ed731017136a2a67ec40');
+	    Kakao.isInitialized();
+    </script>
     <div class="floating-login-view-wrapper">
         <div class="floating-login-view">
             <!-- 닫기 버튼 -->
@@ -19,6 +24,25 @@
                     <input class="input-button" id="find-password-button" type="button" value="비밀번호 찾기" onclick="location.href='${contextPath}/pages/find_password.jsp'">
                 </div>
                 <div id="naver_id_login"></div>
+				<a id="custom-login-btn" href="javascript:loginWithKakao()">
+				  <img
+				    src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
+				    width="185"
+				  />
+				</a>        
+				<script type="text/javascript">
+				  function loginWithKakao() {
+				    Kakao.Auth.login({
+				      success: function(authObj) {
+				        alert(JSON.stringify(authObj))
+				      },
+				      fail: function(err) {
+				        alert(JSON.stringify(err))
+				      },
+				    })
+				  }
+				</script>
+				        
             </form>
         </div>
     </div>
