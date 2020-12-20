@@ -9,6 +9,7 @@ We have implemented a template site through JSP(Java Server Page)
 | QuillJS | BSD 3, Clause  | https://github.com/quilljs/quill/blob/develop/LICENSE |
 | SCSS | MIT | https://github.com/duojs/sass/blob/master/license |
 | undercore.js | MIT | https://github.com/jashkenas/underscore/blob/master/LICENSE |
+| 네이버 로그인 API | https://developers.naver.com/products/terms/ | https://developers.naver.com/docs/login/overview/
 | 다음 우편 번호 서비스 | Free | http://postcode.map.daum.net/ |
 | EmailJS | Free Version | https://www.emailjs.com/ |
 | JSON.simple | Apache 2.0 | https://mvnrepository.com/artifact/com.googlecode.json|simple/json|simple/1.1.1 |
