@@ -125,21 +125,21 @@ img, a {
 							<label class="control-label col-sm-2" for="pwd">비밀번호:</label>
 							<div class="col-sm-6">
 								<input type="password" name="pw" class="form-control" id="pw"
-									placeholder="비밀 번호 입력" autocomplete="current-password">
+									placeholder="비밀 번호 입력" autocomplete="current-password" required autofocus>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="pwd">비밀번호 확인:</label>
 							<div class="col-sm-6">
 								<input type="password" name="pw" class="form-control" id="pw"
-									placeholder="비밀 번호 다시 입력" autocomplete="new-password">
+									placeholder="비밀 번호 다시 입력" autocomplete="new-password" required>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="name">이름:</label>
 							<div class="col-sm-6">
 								<input type="text" class="form-control" id="name" name="name"
-									placeholder="이름 입력" value="${ member.getName() }">
+									placeholder="이름 입력" value="${ member.getName() }" required>
 							</div>
 						</div>
 						<div class="form-group">
