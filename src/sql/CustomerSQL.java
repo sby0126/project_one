@@ -15,8 +15,8 @@ public class CustomerSQL {
 		qlNotes.put("mysql1.selectAll", "select * from tblCustomer");
 		
 		qlNotes.put("mysql1.insert", "insert into tblCustomer "
-				+ "(CTMID, CTMPW, CTMNM, ADDR, TEL, EMAIL, ZIPCODE, IS_ADMIN, JOINDATE, SALT)"
-				+ " values(?, ?, ?, ?, ?, ?, ?, ?, CURDATE(), ?)");
+				+ "(CTMID, CTMPW, CTMNM, ADDR, TEL, EMAIL, ZIPCODE, IS_ADMIN, JOINDATE, SALT, CTMTYPE)"
+				+ " values(?, ?, ?, ?, ?, ?, ?, ?, CURDATE(), ?, ?)");
 		
 		qlNotes.put("mysql1.updateName", "update * from tblCustomer set ctmnm = ? where ctmid = ?");
 		qlNotes.put("mysql1.delete", "delete from tblCustomer where ctmid = ?");

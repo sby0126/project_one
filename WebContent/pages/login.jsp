@@ -24,25 +24,13 @@
                     <input class="input-button" id="find-password-button" type="button" value="비밀번호 찾기" onclick="location.href='${contextPath}/pages/find_password.jsp'">
                 </div>
                 <div id="naver_id_login"></div>
-				<a id="custom-login-btn" href="javascript:loginWithKakao()">
+				<a id="custom-login-btn" href="javascript:kakaoLogin()">
 				  <img
 				    src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
 				    width="185"
 				  />
 				</a>        
-				<script type="text/javascript">
-				  function loginWithKakao() {
-				    Kakao.Auth.login({
-				      success: function(authObj) {
-				        alert(JSON.stringify(authObj))
-				      },
-				      fail: function(err) {
-				        alert(JSON.stringify(err))
-				      },
-				    })
-				  }
-				</script>
-				        
+				<script src="/js/components/kakaoLogin.js"></script>
             </form>
         </div>
     </div>

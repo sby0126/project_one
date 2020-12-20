@@ -169,6 +169,36 @@ public class CustomerDAO implements IDAO {
 		return customerList;
 	}
 	
+	public boolean isSNSMember(String id) {
+		boolean isOK;
+		
+		ResultSet rs = null;
+		
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement("select * from tblCustomer where id = ?");
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			while( rs.next() ) {
+				String ctmType = rs.getString("CTMTYPE");
+				if(ctmType.equals("SNS")) {
+					return true;
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt, rs);
+		}
+		
+		return false;
+	}
+	
 	/**
 	 * 관리자 목록을 추출합니다.
 	 * @return
@@ -299,6 +329,7 @@ public class CustomerDAO implements IDAO {
 			pstmt.setString(7, c.getZipCode());
 			pstmt.setString(8, c.getIsAdmin());
 			pstmt.setString(9, c.getSalt());
+			pstmt.setString(10, c.getCtmtype());
 			
 			if(pstmt.executeUpdate() > 0) {
 				conn.commit();
@@ -415,6 +446,40 @@ public class CustomerDAO implements IDAO {
 		}
 		
 		return isValidID && isValidEmail;
+	}
+	/**
+	 * 이메일이 DB에 있는지 확인합니다. 
+	 *  
+	 * @param id
+	 * @param email
+	 * @return
+	 */
+	public boolean checkEmail(String email) {
+		boolean isValidEmail = false;
+		
+		ResultSet rs = null;
+		
+		try {
+			
+			conn = pool.getConnection();
+			String query = "select CTMID, EMAIL from tblCustomer where email = ?";
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, email);
+			
+			rs = pstmt.executeQuery();
+			
+			isValidEmail = rs.next();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+		return isValidEmail;
 	}
 	
 	/**

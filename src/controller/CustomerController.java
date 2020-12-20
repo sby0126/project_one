@@ -147,6 +147,14 @@ public class CustomerController extends HttpServlet {
 			
 			String referer = request.getHeader("referer");
 			
+			if(customerDAO.isSNSMember(id)) {
+				request.setAttribute("errorMessage", "소셜 네트워크(네이버/카카오) 멤버 전용 로그인을 이용하세요.");
+				request.setAttribute("url", referer);
+				nextPage = "/pages/error.jsp";
+				
+				isValidLogin = false;
+			}
+			
 			// 로그인 성공 처리
 			if(isValidLogin) {
 				
@@ -160,7 +168,7 @@ public class CustomerController extends HttpServlet {
 				
 				return;				
 			} else {
-				request.setAttribute("errorMessage", "[Error 4] 아이디 또는 비밀번호가 틀렸습니다.");
+				request.setAttribute("errorMessage", "아이디 또는 비밀번호가 틀렸습니다.");
 				request.setAttribute("url", referer);
 				nextPage = "/pages/error.jsp";
 			}
@@ -228,7 +236,8 @@ public class CustomerController extends HttpServlet {
 				 .setTel(tel)
 				 .setEmail(email)
 				 .setIsAdmin(isAdmin)
-				 .setJoinDate(joinDate);
+				 .setJoinDate(joinDate)
+				 .setCtmtype("NORMAL");
 				
 				c.setZipCode(zipcode);
 
@@ -237,11 +246,11 @@ public class CustomerController extends HttpServlet {
 				response.sendRedirect("/");
 				return;				
 			} else {
-				request.setAttribute("errorMessage", "[Error 3] 이미 존재하는 아이디입니다. 다른 아이디로 사용해주세요.");
+				request.setAttribute("errorMessage", "이미 존재하는 아이디입니다. 다른 아이디로 사용해주세요.");
 				request.setAttribute("url", "/pages/join.jsp");
 				nextPage = "/pages/error.jsp";
 			}
-		} else if(act.equals("/naverLogin.do")) { 
+		} else if(act.equals("/naverLogin.do") || act.equals("/kakaoLogin.do")) { 
 			
 			// 회원 가입 폼에서 전달 받은 매개변수를 가져옵니다.
 			String id = request.getParameter("id");
@@ -275,10 +284,25 @@ public class CustomerController extends HttpServlet {
 			boolean isValid = true;
 			
 			// ID 중복 여부 체크 후 로그인 처리
-			if(customerDAO.isInvalidID(id)) {
+			if(isValid && customerDAO.isInvalidID(id)) {
 				request.getSession().setAttribute("id", id);
 				
 				response.sendRedirect(request.getContextPath() + "/index.jsp");
+				return;
+			}			
+			
+			if(customerDAO.checkEmail(email)) {
+				request.setAttribute("errorMessage", "이미 등록된 이메일입니다. 다른 이메일로 가입해주시기 바랍니다.");
+				request.setAttribute("url", "/pages/join.jsp");
+				nextPage = "/pages/error.jsp";
+				
+				if(nextPage != null) {
+					RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
+					if(dispatcher != null) {
+						dispatcher.forward(request, response);
+					}			
+				}
+				
 				return;
 			}
 			
@@ -292,15 +316,18 @@ public class CustomerController extends HttpServlet {
 				 .setTel(tel)
 				 .setEmail(email)
 				 .setIsAdmin(isAdmin)
-				 .setJoinDate(joinDate);
+				 .setJoinDate(joinDate)
+				 .setCtmtype("SNS");
 				
 				c.setZipCode(zipcode);
-
+				
 				customerDAO.addCustomer(c);
+				
+				request.getSession().setAttribute("id", id);
 				response.sendRedirect("/");
-				return;				
+				return;	
 			} else {
-				request.setAttribute("errorMessage", "[Error 3] 이미 존재하는 아이디입니다. 다른 아이디로 사용해주세요.");
+				request.setAttribute("errorMessage", "이미 존재하는 아이디입니다. 다른 아이디로 사용해주세요.");
 				request.setAttribute("url", "/pages/join.jsp");
 				nextPage = "/pages/error.jsp";
 			}
