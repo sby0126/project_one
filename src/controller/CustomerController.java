@@ -3,8 +3,6 @@ package controller;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.SecureRandom;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -97,25 +95,5 @@ public class CustomerController extends HttpServlet {
 			}
 		}	
 	}
-	
-	/**
-	 * 하나 이상의 알파벳을 포함해야 함
-	 * 하나 이상의 숫자를 포함해야 함
-	 * 하나 이상의 특수문자를 포함해야 함
-	 * 최소 8글자 이상 입력해야 함
-	 * 
-	 * @link https://minwoohi.tistory.com/98
-	 * @param password
-	 * @return
-	 */
-	public boolean isValidPassword(String password) {
-		
-		String passwordPolicy = "((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9가-힣]).{8,})";
-		
-		Pattern pattern = Pattern.compile(passwordPolicy);
-		Matcher matcher = pattern.matcher(password);
-		return matcher.matches();
-	}	
-		
 
 }
