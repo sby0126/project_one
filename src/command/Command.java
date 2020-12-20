@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.ActionResult;
-import dao.BoardDAO;
+import dao.board.qna.BoardDAO;
 
 public class Command {
 	

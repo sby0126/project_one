@@ -1,4 +1,4 @@
-package service;
+package service.board.qna;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,7 +25,7 @@ import command.board.qna.PostViewCommand;
 import command.board.qna.ReplyCommand;
 import command.board.qna.ViewCommand;
 import command.board.qna.WriteFormCommand;
-import dao.BoardDAO;
+import dao.board.qna.BoardDAO;
 
 /**
  * Servlet implementation class BoardService

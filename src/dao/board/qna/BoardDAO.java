@@ -1,4 +1,4 @@
-package dao;
+package dao.board.qna;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -15,10 +15,11 @@ import org.json.simple.JSONObject;
 
 import core.ImageFile;
 import core.SQLHelper;
+import dao.IDAO;
 import sql.BoardSQL;
 import utils.DBConnectionMgr;
-import vo.BoardCommentVO;
-import vo.BoardVO;
+import vo.board.qna.BoardCommentVO;
+import vo.board.qna.BoardVO;
 
 /***
  * 테이블을 생성합니다.

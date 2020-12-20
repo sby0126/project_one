@@ -1,4 +1,4 @@
-package vo;
+package vo.board.qna;
 
 import java.util.Date;
 
