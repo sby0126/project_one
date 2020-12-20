@@ -1,4 +1,4 @@
-package command;
+package command.customer;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.ActionResult;
+import command.Command;
 import dao.CustomerDAO;
 import vo.CustomerVO;
 

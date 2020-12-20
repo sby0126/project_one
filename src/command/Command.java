@@ -11,7 +11,7 @@ import dao.BoardDAO;
 
 public class Command {
 	
-	ActionResult result;
+	public ActionResult result;
 	
 	public Command()  {
 		result = new ActionResult();
@@ -22,6 +22,8 @@ public class Command {
 	}
 	
 	public ActionResult execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
+		result.start(request, response);
+		
 		return result;
 	}
 }
