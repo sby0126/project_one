@@ -2,40 +2,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib  prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page import="java.util.List, vo.ProductVO, dao.ContentDAO" %>
-<%@ page import="java.net.URLDecoder" %>
+<%@ page import="java.net.URLDecoder, service.ShopDetailService" %>
 <%
-	
-	// 상품 아이디
+
 	int id = Integer.parseInt(request.getParameter("id"));
-
-	// 페이지 타입
 	String pageType = "item";
-
-	ContentDAO contentDAO = ContentDAO.getInstance();
 	
-	// ID 값으로 상점을 찾습니다.
-	String shopName = contentDAO.findShopName(id);
-	List<ProductVO> list = contentDAO.searchAsShopName(pageType, shopName);
+	ShopDetailService service = new ShopDetailService(id, pageType);
 	
-	// 모델 얼굴 썸네일 이미지
-	List<ProductVO> thumb = contentDAO.findThumbnail(shopName);
-
-	String thumbNailImage = null;
-	if(!thumb.isEmpty()) {
-		ProductVO thumbNailVO = thumb.get(0);
-		thumbNailImage = "/images/shop/" + thumbNailVO.getGendertype() + "/" +  thumbNailVO.getShoptype() + "/" + thumbNailVO.getContenturl();
-	}
-	
-	String mainUrl = "https://drive.google.com/uc?export=view&id=";
-	String link = "#";
-	if(list != null) {
-		link = list.get(0).getLink();
-	}
+	List<ProductVO> list = service.getList();
 	
 %>
-<c:set var="list" value="<%= list %>" />
-<c:set var="thumbNailImage" value="<%=thumbNailImage %>" />
-<c:set var="shopName" value="<%=shopName %>" />
+<c:set var="list" value="<%= service.getList() %>" />
+<c:set var="thumbNailImage" value="<%= service.getThumbNailImage() %>" />
+<c:set var="shopName" value="<%= service.getShopName() %>" />
 <c:if test="${ list == null or shopName == null }">
 	<script>
 		// 		alert("DB에서 상품을 찾지 못했습니다.");
@@ -94,7 +74,7 @@
 				content: "";
 				width: 100%;
 				height: 78%;
-				background: url(<%=mainUrl+vo.getImgid()%>) left top;
+				background: url(<%=service.getMainUrl()+vo.getImgid()%>) left top;
 				background-size: cover;
 				background-repeat: no-repeat;
 				position: absolute;
@@ -240,14 +220,14 @@
 							<div>
 								<div class="list-container">
 									<div>
-										<h2><%= shopName %></h2>
+										<h2><%= service.getShopName() %></h2>
 									</div>
 									<div>
 										<p>스트릿·도매스틱</p>
 									</div>
 									<div>
-										<a class="btn" href="<%= link %>">바로가기</a>
-										<a class="btn plus" href="<%= link %>">&nbsp;</a>
+										<a class="btn" href="<%= service.getLink() %>">바로가기</a>
+										<a class="btn plus" href="<%= service.getLink() %>">&nbsp;</a>
 									</div>
 								</div>
 							</div>
