@@ -1,4 +1,4 @@
-package command;
+package command.board.qna;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import action.ActionResult;
+import command.Command;
 
 public class IncreaseRecommandCountCommand extends Command {
 	@Override

@@ -1,4 +1,4 @@
-package command;
+package command.board.qna;
 
 import java.io.IOException;
 
@@ -10,6 +10,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import action.ActionResult;
+import command.Command;
 
 public class ModifyPostFormCommand extends Command {
 	public ModifyPostFormCommand() {

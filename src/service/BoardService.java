@@ -17,14 +17,14 @@ import org.json.simple.JSONArray;
 
 import action.ActionResult;
 import action.ErrorResult;
-import command.DeleteCommand;
-import command.ImageUploadCommand;
-import command.IncreaseRecommandCountCommand;
-import command.ModifyPostFormCommand;
-import command.PostViewCommand;
-import command.ReplyCommand;
-import command.ViewCommand;
-import command.WriteFormCommand;
+import command.board.qna.DeleteCommand;
+import command.board.qna.ImageUploadCommand;
+import command.board.qna.IncreaseRecommandCountCommand;
+import command.board.qna.ModifyPostFormCommand;
+import command.board.qna.PostViewCommand;
+import command.board.qna.ReplyCommand;
+import command.board.qna.ViewCommand;
+import command.board.qna.WriteFormCommand;
 import dao.BoardDAO;
 
 /**

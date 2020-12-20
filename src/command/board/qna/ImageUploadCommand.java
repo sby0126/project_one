@@ -1,4 +1,4 @@
-package command;
+package command.board.qna;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,6 +15,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.oreilly.servlet.multipart.FileRenamePolicy;
 
 import action.ActionResult;
+import command.Command;
 
 public class ImageUploadCommand extends Command {
 	

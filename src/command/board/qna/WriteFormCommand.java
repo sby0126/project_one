@@ -1,4 +1,4 @@
-package command;
+package command.board.qna;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,6 +16,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import action.ActionResult;
+import command.Command;
 
 public class WriteFormCommand extends Command {
 

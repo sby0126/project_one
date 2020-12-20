@@ -1,4 +1,4 @@
-package command;
+package command.board.qna;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,6 +12,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import action.ActionResult;
+import command.Command;
 import manager.DataManager;
 
 public class PostViewCommand extends Command {

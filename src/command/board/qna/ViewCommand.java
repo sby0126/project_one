@@ -1,4 +1,4 @@
-package command;
+package command.board.qna;
 
 import java.io.IOException;
 
@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.ActionResult;
+import command.Command;
 
 public class ViewCommand extends Command {
 	public ViewCommand() {
