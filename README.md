@@ -5,6 +5,8 @@ We have implemented a template site through JSP(Java Server Page)
 
 |Name|License|URL|
 |--|--|--|
+| Tomcat | Apache License 2.0 | http://tomcat.apache.org/ |
+| MariaDB | LGPL | https://mariadb.com |
 | jQuery | MIT | https://jquery.org/license/ |
 | QuillJS | BSD 3, Clause  | https://github.com/quilljs/quill/blob/develop/LICENSE |
 | SCSS | MIT | https://github.com/duojs/sass/blob/master/license |
