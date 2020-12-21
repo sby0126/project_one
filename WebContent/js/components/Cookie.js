@@ -59,6 +59,8 @@ class Cookie extends Component {
                     + "; expires="
                     + this._expire.toUTCString();
 
+        DataMan.set(this._name, this._value);
+        
         if(config.isSlow) {
             DataMan.set(this._name, this._value);
         } else {

@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*" %>
-<%@ page import="service.RecentlyShopService, service.*" %>
+<%@ page import="service.RecentlyItemService, service.*" %>
 <%@ page import="java.net.*" %>
 <%@ page import="vo.*" %>
 <%
 	// Create a cookie service.
-	CookieService cookieService = new CookieService();
-	HashMap<String, String> cookie = cookieService.getKeyValue(request);
-	String value = cookie.get("recentlyItems");
+	
+// 	CookieService cookieService = new CookieService();
+// 	HashMap<String, String> cookie = cookieService.getKeyValue(request);
+// 	String value = cookie.get("recentlyItems");
+	String value = "235,236";
 	
 	String num = "";
 	
@@ -17,7 +19,7 @@
 		// num = request.getParameter("recentlyShopItem");
 	}
 	
-	RecentlyShopService service = new RecentlyShopService(num);
+	RecentlyItemService service = new RecentlyItemService(num);
 	
 	Vector<ProductVO> list = service.getCards();
 
@@ -53,50 +55,44 @@
 		 							+ contentUrl;
 		 %>
 		<style>
-			.card {
-			    position: relative;
-			    flex-basis: 13.8em;
-			    height: 18.3em;
-			    margin-bottom: 0.5em;
-			    background: #fff;
-			    border-bottom: 1px solid #E0E4E6;
-			    cursor: pointer;
-			}
-						
-			.card-container {
-			    display: flex;
-			    width: 100%;
-			    row-gap: 0.25em;
-			    column-gap: 0.25em;
-			    flex: 0 1 0;
-			    flex-basis: 0;
-			    justify-content: left;
-			    flex-direction: column;
-			    flex-flow: wrap;
-			}			
+		
+            .card {
+                display: flex;
+                flex-wrap: wrap;
+                flex: auto auto auto;
+                flex-direction: column;
+                border: 1px solid #F2F5F9;
+            }
+            
+            .card p[<%=vo.getId()%>]::before {
+                content: "";
+                width: 100%;
+                height: 78%;
+                background: url("<%=imgUrl %>") left top;
+                background-size: cover;
+                background-repeat: no-repeat;
+                position: absolute;
+                border-radius: 0;
+                left: 0;
+                top: 0;
+                z-index: 0;
+            }
 
-			.card div[d-<%=vo.getId()%>]::before {
-			    content: "";
-			    width: 5.5em;
-			    height: 5.5em;
-				background: url(<%= imgUrl %>) left top;
-				background-size: cover;
-			    position: absolute;
-			    border-radius: 50%;
-			    left: calc(50% - 5.5em / 2);
-			    top: 10%;
-			    z-index: 0;
-			}
-
-			.card div[d-<%=vo.getId()%>]:hover::before {
-				filter: brightness(1.1);
-				border-radius: 0;
-				transition: all .2s linear;
-			}
+            .card p[<%=vo.getId()%>]:hover::before {
+                filter: brightness(1.1);
+                border-radius: 0;
+                transition: all .2s linear;
+            }		
+		
 		</style>
 		<%
 		 	}
 		 %>
+		 <style>
+		 	.card-container {
+		 	    justify-content: left;
+		 	}
+		 </style>
 	</c:if>
 </head>
 <body>
@@ -119,22 +115,16 @@
 		                	%>
 		                		<c:set var="card" value="<%= vo %>" />
 								<div class="card">
-				                    <a href="${card.getLink() }" target='_blank'>
-										<div>
-											<div d-<%=vo.getId()%>>
-					                        	<i class="shop-hot-icon" data-title="HOT"></i>
-					                        	<h2 class="contents-shop-name"><%= vo.getShopname()%></h2>
-					                        </div>
-					                        <p class="shop-contents"><%= vo.getTexts() %></p>
-					                        <div class="shop-button-container" data-id="${card.getId()}">
-					                            <button class="shop-button all-item-button">전체 상품</button>
-					                            <button class="shop-button">
-					                                <p class="shop-button-text">마이샵</p>
-					                                <i class="shop-button-icon"></i>
-					                            </button>
-					                        </div>                    
-										</div>
-				                    </a>									
+				                    <a href="${card.getLink()}" target='_blank'>
+				                        <i class="shop-hot-icon"></i>
+				                        <div class="item-button-container"> 
+				                            <h2>${card.getTitle()}</h2>
+				                            <p>${card.getPrice()}</p>
+				                            <p>${card.getShopname()}</p>
+				                            <button class="like-button"></button>
+				                        </div>
+				                    <p d-<%= vo.getId()%>></p>	                    
+				                    </a>	
 								</div>		                		
 		                	<%
 		                		}

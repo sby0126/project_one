@@ -97,6 +97,11 @@
 		<%
 		 	}
 		 %>
+		 <style>
+		 	.card-container {
+		 	    justify-content: left;
+		 	}
+		 </style>		 
 	</c:if>
 </head>
 <body>

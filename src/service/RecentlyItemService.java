@@ -14,11 +14,13 @@ import vo.ProductVO;
  * @author User
  *
  */
-public class RecentlyitemService {
+public class RecentlyItemService {
 	
 	private Vector<ProductVO> cards;
 	
-	public RecentlyitemService(String num) {
+	public RecentlyItemService(String num) {
+		
+		System.out.println(num);
 		
 		String str[] = num.split(",");
 		List<String> list = Arrays.asList(str);

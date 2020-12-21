@@ -66,13 +66,13 @@
                 <div class="header-popup-container">
                     <ul class="header-menu-list">
                         <li class="menu">
-                            <a href="${pageContext.request.contextPath}/pages/recently-viewd-shop.jsp" class="menu-link">
+                            <a href="${pageContext.request.contextPath}/pages/recently-viewed-shop.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">최근 본 샵 <em id="recently-shop-count">0</em></p>
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="${pageContext.request.contextPath}/pages/recently-viewd-item.jsp" class="menu-link">
+                            <a href="${pageContext.request.contextPath}/pages/recently-viewed-item.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">최근 본 상품 <em id="recently-item-count">0</em></p>
                             </a>
