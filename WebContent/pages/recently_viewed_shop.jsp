@@ -46,12 +46,16 @@
 		<%
 		 	for(int i = 0; i < list.size(); i++) {
 		 		ProductVO vo = list.get(i);
-		 		String mainUrl = "https://drive.google.com/uc?export=view&id=";
+		 		String mainUrl = "https://raw.githubusercontent.com/biud436/project_one/main/WebContent";
 		 		
 		 		String gndr = vo.getGendertype();
 		 		String shopType = vo.getShoptype();
 		 		String contentUrl = vo.getContenturl();
 		 		
+// 		 		String imgUrl = mainUrl + "/images/shop/" 
+// 		 							+ gndr + "/"
+// 		 							+ shopType + "/"
+// 		 							+ contentUrl;
 		 		String imgUrl = "/images/shop/" 
 		 							+ gndr + "/"
 		 							+ shopType + "/"
