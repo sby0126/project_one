@@ -178,14 +178,19 @@ export class ItemContentLoader extends Component {
                 card.insertAdjacentHTML( 'afterbegin', `
                     <a href="${filename.link} target='_blank'>
                         <i class="shop-hot-icon"></i>
+                        </a>
                         <div class="item-button-container"> 
                             <h2>${title}</h2>
                             <p>${price}</p>
                             <p>${shop}</p>
                             <button class="like-button"></button>
                         </div>
-                    </a>
                 `);
+
+                $(card).find(".like-button").on("click", (ev) => {
+                    $(card).find(".like-button").toggleClass("active");
+                    return false;
+                })
 
                 // 카드의 갯수를 1 증감시킵니다.
                 if(this._currentCards < this._maxCards)
