@@ -11,7 +11,7 @@
 <%@ page import="java.util.List"%>
 <%@ page import="core.*"%>
 <%@ page import="controller.*"%>
-<%@ page import="dao.*"%>
+<%@ page import="dao.board.qna.*, dao.*"%>
 <%@ page import="service.*"%>
 <%@ page import="vo.*"%>
 <%@ page import="org.json.simple.JSONArray, org.json.simple.JSONObject"%>

@@ -5,9 +5,9 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import svc.BoardReplyProService;
-import vo.ActionForward;
-import vo.BoardBean;
+import core.board.notice.svc.BoardReplyProService;
+import vo.board.notice.ActionForward;
+import vo.board.notice.BoardBean;
 
 public class BoardReplyProAction implements Action {
 

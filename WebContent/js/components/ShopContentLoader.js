@@ -9,8 +9,8 @@ export class ShopContentLoader extends Component {
 
         this._currentCards = 0; // 현재 카드 갯수
         this._fetchCards = 10; // 새로 가져올 카드 갯수
-        this._maxCards = 150; // 최대 카드 갯수
-        this._interval = 400; // 이벤트 과대 실행 방지 용 실행 간격 800ms
+        this._maxCards = 20; // 최대 카드 갯수
+        this._interval = 100; // 이벤트 과대 실행 방지 용 실행 간격 100ms
         this._data = {};
 
         this._loaders = {};
@@ -124,7 +124,7 @@ export class ShopContentLoader extends Component {
                 });
 
                 $(myCard).html(`
-                    <a href="${filename.link} target='_blank'>
+                    <a href="${filename.link}" target='_blank'>
                         <i class="shop-hot-icon" data-title="HOT"></i>
                         <h2 class="contents-shop-name">${filename.shopName}</h2>
                         <p class="shop-contents">${ lines }</p>

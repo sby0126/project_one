@@ -1,7 +1,11 @@
-import {App, ID} from "./app.js";
 import {EventEmitter} from "./EventEmitter.js";
 import { getDataManager, DataManager } from "./DataManager.js";
 import { ShopContentLoader } from "./components/ShopContentLoader.js";
+import { JoinButton } from "./components/JoinButton.js";
+import { RecentlyItems } from "./components/RecentlyItems.js";
+import { CardStyleSheetBuilder } from "./components/CardStyleSheetBuilder.js";
+import {App, ID} from "./app.js";
+import {LoginButton} from "./components/LoginButton.js";
 
 /**
  * @type {DataManager}
@@ -9,10 +13,16 @@ import { ShopContentLoader } from "./components/ShopContentLoader.js";
 const DataMan = getDataManager();
 const cookieName = `recentShopItems`;
 
-class EntryPoint extends App {
+class EntryPoint extends EventEmitter {
 
     initMembers() {
         super.initMembers();
+        
+        this.adapter = new App();
+
+        this.adapter.initMembers();
+        this.addEventListeners();
+        this.adapter.initWithNav();
 
         this._pendingList = [
             {
@@ -21,6 +31,8 @@ class EntryPoint extends App {
                 isCreateNewDiv: false,
             }    
         ];
+
+        // 어댑터 선언
     }
 
     createNewStyleSheet(dataID, imagePath) {
@@ -62,9 +74,11 @@ class EntryPoint extends App {
     }
 
     onLoad() {
-        super.onLoad();
+        JoinButton.builder(this).run();
 
         this.run();
+
+        RecentlyItems.builder(this).run();
 
         this.emit("login:ready");
         this.emit("contents:ready");
@@ -96,13 +110,13 @@ class EntryPoint extends App {
                 const {contentData} = data;
 
                 if(contentData.length > 0)
-                    $(".contents-wrapper").empty();
+                    $(".contents-wrapper .card-container").empty();
                 
                 const pre = $("<pre></pre>");
                 $(".card-container").append(pre);
             },
             error: function(err) {
-                alert(err);
+                // alert(err);
             }
         });
 
@@ -113,7 +127,7 @@ class EntryPoint extends App {
 const entryPoint = new EntryPoint();
 entryPoint.run();
 
-entryPoint.on("ready", async () => app.createLazyLoader());
+entryPoint.on("ready", async () => app.adapter.createLazyLoader());
 window.addEventListener("load", () => entryPoint.emit("ready"));
 
 export {EntryPoint}

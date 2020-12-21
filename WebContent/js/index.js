@@ -26,7 +26,7 @@ class MainPage extends App {
 //                isCreateNewDiv: true,
 //            },
             {
-                src: `pages/shop.jsp`,
+                src: `/pages/shop.jsp`,
                 parent: ID.CONTENTS_WRAPPER,
                 isCreateNewDiv: false,
             }    

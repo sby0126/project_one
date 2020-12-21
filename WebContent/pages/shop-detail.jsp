@@ -276,7 +276,6 @@
 	</div>
 	<jsp:include page="/pages/login.jsp"></jsp:include>
 	<!-- index.js는 메인 용이므로 알맞은 스크립트를 사용해야 합니다-->
-	<script type="module" src="../js/index.js"></script>
 	<script src="/js/itemPage.js"></script>
 	<script src="/js/shopDetailPage.js"></script>
 	<script type="module" src="/js/CookieService.js"></script>

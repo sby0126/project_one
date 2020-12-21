@@ -1,6 +1,4 @@
-<%@page import="bbsnotice.BoardBean"%>
-<%@page import="bbsnotice.BoardReplyBean"%>
-<%@page import="bbsnotice.PageInfo" %>
+<%@page import="core.board.notice.*"%>
 <%@page import="java.util.*" %>
 <%@page language="java" contentType="text/html; charset=UTF-8"%>
 
