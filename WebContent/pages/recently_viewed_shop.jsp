@@ -2,9 +2,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*" %>
 <%@ page import="service.RecentlyShopService, service.*" %>
+<%@ page import="java.net.*" %>
 <%@ page import="vo.*" %>
 <%
-	String num = request.getParameter("recentlyShopItem");
+	// Create a cookie service.
+	CookieService cookieService = new CookieService();
+	HashMap<String, String> cookie = cookieService.getKeyValue(request);
+	String value = cookie.get("recentShopItems");
+	
+	String num = "";
+	
+	if(value != null) {
+		num = URLDecoder.decode(value);
+		// num = request.getParameter("recentlyShopItem");
+	}
 	
 	RecentlyShopService service = new RecentlyShopService(num);
 	
