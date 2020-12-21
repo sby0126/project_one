@@ -1,6 +1,7 @@
 import { Component } from "./Component.js";
 import { itemData, imgSrc, itemImg } from "../services/itemData.js";
 import { Request } from "../Request.js";
+import { ImagePath } from "./ImagePath.js";
 
 /**
  * 주소에 있는 dataId 값을 인자를 파싱하여 id 값에 맞는 데이터를 동적으로 가져옵니다.
@@ -43,16 +44,7 @@ export class ItemDetailLoader extends Component {
         const myItem = contentData[0];
         
         // 구글 드라이브 메인 링크
-        const imgSrc = data.imageUrl;
-
-        // 이미지 해쉬 주소
-        let imgHash = imgSrc + data.thumbnail;
-        let isOtherCDN = false;
-
-        if(data.thumbnail.indexOf("http") >= 0) {
-            isOtherCDN = true;
-            imgHash = data.thumbnail;
-        }
+        let imgSrc = data.thumbnail;
 
         // 상품명
         $("#detail-item-title, #title").text(myItem.title);
@@ -61,7 +53,7 @@ export class ItemDetailLoader extends Component {
         $("#detail-item-price, .allPrice, #price").text(myItem.price);
 
         // 이미지 주소
-        $(".imgArea > img").attr("src", imgHash);
+        $(".imgArea > img").attr("src", imgSrc);
 
     }
 

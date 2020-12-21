@@ -3,6 +3,7 @@ import { getDataManager } from "../DataManager.js";
 import { itemData, imgSrc, itemImg } from "../services/itemData.js";
 import { DataLoader } from "./DataLoader.js";
 import { Request } from "../Request.js";
+import { ImagePath } from "./ImagePath.js";
 
 /**
  * @author 어진석
@@ -89,9 +90,6 @@ export class ItemContentLoader extends Component {
             return;
         }
 
-        // const blobData = await this.loadJsonAsync(`json/item/item_data${this._index++}.json`);
-        // const first = currentCards;
-
         // 카드를 새로 가져옵니다.
         for(let idx = currentCards; idx < (currentCards + fetchCards); idx++) {
             const card = this._items[idx];
@@ -129,13 +127,14 @@ export class ItemContentLoader extends Component {
                     isOtherCDN = true;
                 }
 
-                let resultUrl = imgSrc + itemImg[filename.url];
+                const {gndr, shopType} = this._dataLoader;
+                let imgUrl = ImagePath.getItemPath(gndr, shopType, filename.url);
 
                 if(isOtherCDN) {
-                    resultUrl = itemImg[filename.url];
+                    imgUrl = filename.url;
                 }
-
-                parent.createNewStyleSheet("d-"+idx, resultUrl);     
+            
+                parent.createNewStyleSheet("d-"+idx, imgUrl);     
 
                 const myCard = card.querySelector("p");
                 const {title, price, shop} = myImgData;
@@ -169,7 +168,7 @@ export class ItemContentLoader extends Component {
                         contentData: [
                             myImgData
                         ],
-                        thumbnail: itemImg[filename.url],
+                        thumbnail: imgUrl,
                     };
                     // 주소에 데이터 ID를 포함시킵니다.
                     // 이렇게 GET과 비슷한 식으로 URL을 만들면 로컬 스토리지 등을 이용하지 않아도 데이터를 간단히 전송할 수 있습니다.

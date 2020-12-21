@@ -1,6 +1,7 @@
 import { Component } from "./Component.js";
 import {blobData, imgSrc, mainImg} from "../services/data.js";
 import { DataLoader } from "./DataLoader.js";
+import { ImagePath } from "./ImagePath.js";
 
 export class ShopContentLoader extends Component {
     
@@ -111,7 +112,7 @@ export class ShopContentLoader extends Component {
                 // 로컬 모드일 경우, 로컬에 있는 이미지 데이터를 사용합니다.
                 if(this._isLocalMode) {
                     const {gndr, shopType} = this._dataLoader;
-                    parent.createNewStyleSheet("d-"+idx, `/images/shop/${gndr}/${shopType}/${filename.url}`);     
+                    parent.createNewStyleSheet("d-"+idx, ImagePath.getShopPath(gndr, shopType, filename.url));     
                 } else {
                     parent.createNewStyleSheet("d-"+idx, imgSrc + mainImg[filename.url]);     
                 }
@@ -130,13 +131,18 @@ export class ShopContentLoader extends Component {
                         <p class="shop-contents">${ lines }</p>
                         <div class="shop-button-container" data-id="${filename.id}">
                             <button class="shop-button all-item-button">전체 상품</button>
-                            <button class="shop-button">
-                                <p class="shop-button-text">마이샵</p>
+                            <button class="shop-button" onclick="return false">
+                                <p class="shop-button-text" onclick="return false">마이샵</p>
                                 <i class="shop-button-icon"></i>
                             </button>
                         </div>                    
                     </a>
                 `);
+
+                // 상위 노드에 걸린 클릭 이벤트의 실행을 방지합니다.
+                $(myCard).find(".shop-button-container button").on("click", (ev) => {
+                    return false;
+                })
 
                 // 전체 상품 버튼이 클릭되었을 때 실행되어야 하는 내용을 정의하세요.
                 $(`div[data-id='${filename.id}'] > button.all-item-button`).on("click", (ev) => {
