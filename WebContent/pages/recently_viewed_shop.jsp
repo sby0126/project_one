@@ -10,17 +10,19 @@
 	HashMap<String, String> cookie = cookieService.getKeyValue(request);
 	String value = cookie.get("recentShopItems");
 	
-	String num = "";
+	String num = "0";
 	
 	if(value != null) {
 		num = URLDecoder.decode(value);
 		// num = request.getParameter("recentlyShopItem");
 	}
+	Vector<ProductVO> list = null;
 	
-	RecentlyShopService service = new RecentlyShopService(num);
+	if(!value.equals("0")) {
+		RecentlyShopService service = new RecentlyShopService(num);
+		list = service.getCards();
+	}
 	
-	Vector<ProductVO> list = service.getCards();
-
 %>
 <!DOCTYPE html>
 <c:set var="list" value="<%= list %>" />

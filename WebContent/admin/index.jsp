@@ -33,6 +33,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
   <style>
   	.left {
   		position: fixed;
@@ -90,8 +91,8 @@
                         <li><a href="#ip-ban-list">IP 차단 설정</a></li>
                       </ul>
                     </li>
-                    <li><a href="#board-manage">게시판 관리</a></li>
-                    <li><a href="#all-post">전체 게시글 관리</a></li>
+                    <li><a href="#board-manage">게시물 관리</a></li>
+                    <li><a href="#all-post">상품</a></li>
                     <li><a href="#log">접속 로그</a></li>
                     <li><a href="#uploads">파일 관리</a></li>
                   </ul>
@@ -246,7 +247,56 @@
                 </div>
 				<div id="all-post" class="content jumbotron">
 					<a name="all-post"></a>
-                    <p>전체 게시물 관리</p>
+                    <p>상품</p>
+                    <canvas id="myChart" width="400" height="200"></canvas>
+                    <script>
+                    
+                    $.ajax({
+                    	url: "/contents/all.do",
+                    	success: function(data) {
+                    		
+                    		data = JSON.parse(data);
+
+                    		var labels = data
+                        			.filter(i => i.pageType === 'item')
+                        			.map(i => i.contentData.shop);
+                    		
+                    		var datas = data.filter(i => i.pageType === 'item')
+                        		.map(i => {
+	                        		return parseInt( (i.contentData.price || "0").replace(/\,/g,"") );
+                        		});
+                    		
+                            var ctx = document.getElementById('myChart').getContext('2d');
+                            var myChart = new Chart(ctx, {
+                                type: 'bar',
+                                data: {
+                                    labels: labels,
+                                    datasets: [{
+                                        label: '# of Votes',
+                                        data: datas,
+                                        backgroundColor: data.map(i => 'rgba(255, 99, 132, 0.2)'),
+                                        borderColor: data.map(i => 'rgba(255, 99, 132, 0.2)'),
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                beginAtZero: true
+                                            }
+                                        }]
+                                    }
+                                }
+                            });  
+                            
+                    	},
+                    	error: function(err) {
+                    		console.warn(err);
+                    	}
+                    });
+
+					</script>
                 </div>   
 				<div id="log" class="content jumbotron">
 					<a name="log"></a>

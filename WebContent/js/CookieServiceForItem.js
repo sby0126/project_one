@@ -27,10 +27,9 @@ caller.on("getCookie", (name) => {
     const cookie = new ConstantCookie();
     const value = cookie.get(name);
 
-    const paramData = request.getParameter("data");
-    const raw = decodeURIComponent(escape(atob(paramData)));
-    const data = JSON.parse(raw);    
-    const id = data.contentData[0].id;
+    console.log(value);
+
+    const id = request.getParameter("id");
 
     if( value ) {
         caller.emit("createCookie", [cookieName, `${value},` + id]);
