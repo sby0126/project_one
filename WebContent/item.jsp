@@ -96,20 +96,24 @@
                                 <p class="menu-title">관심 상품</p>
                             </a>
                         </li>
-                        <li class="menu" id="nav_board_li">
-                            <a href="#" class="menu-link" id="asdasd2">
-                                <div class="menu-icon" id="nav_board_li_icon"></div>
-                                <p class="menu-title" id="nav_board_li_title">1:1 문의</p>
-                            	<div class="side_box" >
-                             		<ul class="side_menu">
-		                            	<a href="/boardList.abc"><li>자유게시판</li></a>
-		                            	<a href="/pages/board-default.jsp"><li>1:1 문의</li></a>
-		                            	<a href="#"><li>OO게시판</li></a>
-                           			 </ul>
-                            	</div>
-                            </a> 
-                           <%--  ${pageContext.request.contextPath}/pages/board-default.jsp --%>
-                        </li>
+                        <li class="menu">
+                            <a href="#" class="menu-link">
+                                <div class="menu-icon"></div>
+                                <p class="menu-title">공지 사항</p>
+                            </a>
+                        </li>                         
+                        <li class="menu">
+                            <a href="/pages/board-default.jsp" class="menu-link">
+                                <div class="menu-icon"></div>
+                                <p class="menu-title">1:1 문의</p>
+                            </a>
+                        </li>                          
+                        <li class="menu">
+                            <a href="/boardList.abc" class="menu-link">
+                                <div class="menu-icon"></div>
+                                <p class="menu-title">자유 게시판</p>
+                            </a>
+                        </li>     
                         <li class="menu">
                             <a href="${pageContext.request.contextPath}/pages/map.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
