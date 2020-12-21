@@ -85,34 +85,34 @@ public class BoardDAODeok {
       ResultSet rs = null;
       int num =0;
       String sql="";
-      int insertCount=0;
+       int insertCount=0;
 
       try{
     	  con = pool.getConnection();
-         pstmt=con.prepareStatement("select max(num) from board");
-         rs = pstmt.executeQuery();
+          pstmt=con.prepareStatement("select max(num) from board");
+          rs = pstmt.executeQuery();
 
-         if(rs.next())
-            num =rs.getInt(1)+1;
-         else
-            num=1;
+          if(rs.next())
+             num =rs.getInt(1)+1;
+          else
+             num=1;
 
-         sql="insert into board (num,name,pass,subject,";
-         sql+="content,re_ref,"+
-               "re_lev,re_seq,readCount,"+
-               "date) values(?,?,?,?,?,?,?,?,?,now())";
-         pstmt = con.prepareStatement(sql);
-         pstmt.setInt(1, num);
-         pstmt.setString(2, article.getName());
-         pstmt.setString(3, article.getPass());
-         pstmt.setString(4, article.getSubject());
-         pstmt.setString(5, article.getContent());
-         pstmt.setInt(6, num);
-         pstmt.setInt(7, 0);
-         pstmt.setInt(8, 0);
-         pstmt.setInt(9, 0);
+          sql="insert into board (num,name,pass,subject,";
+          sql+="content,re_ref,"+
+                "re_lev,re_seq,readCount,"+
+                "date) values(?,?,?,?,?,?,?,?,?,now())";
+          pstmt = con.prepareStatement(sql);
+          pstmt.setInt(1, num);
+          pstmt.setString(2, article.getName());
+          pstmt.setString(3, article.getPass());
+          pstmt.setString(4, article.getSubject());
+          pstmt.setString(5, article.getContent());
+          pstmt.setInt(6, num);
+          pstmt.setInt(7, 0);
+          pstmt.setInt(8, 0);
+          pstmt.setInt(9, 0);
 
-         insertCount=pstmt.executeUpdate();
+          insertCount=pstmt.executeUpdate();
 
       }catch(Exception ex){
          System.out.println("boardInsert 에러 : "+ex);
@@ -542,10 +542,29 @@ public class BoardDAODeok {
 
 	   }
 
+   public int updateReArticle(Re_boardBean re_article) {
+	   
+		PreparedStatement pstmt = null;
+		String sql = null;
+		int updateCount = 0;
+		try {
+			  con = pool.getConnection();
+			sql = "update board_re set re_content=?,re_date=now() where re_num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, re_article.getRe_content());
+			pstmt.setInt(2, re_article.getRe_num());	
+			updateCount = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// close(pstmt);
+			  pool.freeConnection(con,pstmt);
+			 
+		}
+		return updateCount;
    
    
    
-   
-   
+   }
 
 }

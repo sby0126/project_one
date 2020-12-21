@@ -69,49 +69,64 @@
 		<div class="replyBox">
 			<% if(re_articleList.size() > 0 ){
 				for(int i=0; i<re_articleList.size();i++) { %>
-					
+					<!-- 댓글의 댓글들경우 -->
 					<%if(re_articleList.get(i).getRe_re_lev()!=0){ 
 						
 						for(int a=0; a<=re_articleList.get(i).getRe_re_lev()*2; a++){ %>
 							&nbsp; 
 						<%} %> 
-							
+							<!-- 삭제된 댓글일 경우 -->
 							<% if("Y".equals(re_articleList.get(i).getDel_yn())){%>
 							⇒ <div class="read-deleted-div">삭제된 게시물입니다.</div><br>
+							<!-- 삭제되지 않은 경우-->
 							<%}else{ %>
-								⇒ <div class="read-exit-div"><span><%=re_articleList.get(i).getRe_name() %></span><span><%=re_articleList.get(i).getRe_content() %></span> <button>수정</button>
-								
+								⇒ <div class="read-exit-div"><span><%=re_articleList.get(i).getRe_name() %></span><span>(<%=re_articleList.get(i).getRe_date() %>)</span><span><%=re_articleList.get(i).getRe_content() %></span> 
+								<!-- 세션에 아이디값이 있을 경우 -->
 								<%if(userId !=null){ %>
-									  
+									  <!-- 세션에 아이디값이 본인 댓글일 경우 -->
 									  <%if(userId.equals(re_articleList.get(i).getRe_name())){ %>
 									    <button onclick="reply('<%=re_articleList.get(i).getRe_name() %>','<%=re_articleList.get(i).getRe_num() %>','<%=re_articleList.get(i).getRe_num2() %>','<%=re_articleList.get(i).getRe_re_ref() %>','<%=re_articleList.get(i).getRe_re_lev() %>','<%=re_articleList.get(i).getRe_re_seq() %>','<%=re_articleList.get(i).getRe_date() %>','<%=userId %>','<%=i %>','<%=nowPage %>','<%=article.getNum()%>')" class="rerere<%=i %>">댓글달기</button>
+										<button onclick="updateReple('<%=re_articleList.get(i).getRe_name() %>','<%=re_articleList.get(i).getRe_num() %>','<%=re_articleList.get(i).getRe_content() %>','<%=re_articleList.get(i).getRe_date() %>','<%=i %>','<%=nowPage %>','<%=article.getNum()%>')" class="upupup<%=i %>")">수정</button>
 										<button onclick="location.href='boardReDeletePro.abc?re_num=<%=re_articleList.get(i).getRe_num() %>&num=<%=article.getNum() %>&nowPage=<%=nowPage %>'">삭제</button>
+									  <!-- 세션에 아이디값이 본인 댓글이 아닐 경우 -->
 									  <%}else{ %>
 									  	<button onclick="reply('<%=re_articleList.get(i).getRe_name() %>','<%=re_articleList.get(i).getRe_num() %>','<%=re_articleList.get(i).getRe_num2() %>','<%=re_articleList.get(i).getRe_re_ref() %>','<%=re_articleList.get(i).getRe_re_lev() %>','<%=re_articleList.get(i).getRe_re_seq() %>','<%=re_articleList.get(i).getRe_date() %>','<%=userId %>','<%=i %>','<%=nowPage %>','<%=article.getNum()%>')" class="rerere<%=i %>">댓글달기</button>
+									    <button onclick='alert("권한이 없습니다.")'>수정</button>
 									   	<button onclick='alert("권한이 없습니다.")'>삭제</button>
 									  <%}%>
-									 
+								<!-- 세션에 아이디값이 없을 경우 -->	 
 								<%}else{ %>
 									<button onclick='alert("로그인이 필요합니다.")'>댓글달기</button>
+									<button onclick='alert("로그인이 필요합니다.")'>수정</button>
 									<button onclick='alert("로그인이 필요합니다.")'>삭제</button> 
 								<%} %>
 								</div><br>
 							<%} %>
+					<!-- 댓글일경우 -->
 					<%}else{%> 
+							<!-- 삭제된 댓글일 경우 -->
 							<% if("Y".equals(re_articleList.get(i).getDel_yn())){%>
 								<div class="read-deleted-div">삭제된 게시물입니다.</div><br>
+							<!-- 삭제되지 않은 경우 -->
 							<%} else { %>
-								<div class="read-exit-div"><span><%=re_articleList.get(i).getRe_name() %></span><span><%=re_articleList.get(i).getRe_content() %></span> <button>수정</button>
+								<div class="read-exit-div"><span><%=re_articleList.get(i).getRe_name() %></span><span>(<%=re_articleList.get(i).getRe_date() %>)</span><span><%=re_articleList.get(i).getRe_content() %></span> 
+								<!-- 세션에 아이디값이 있을 경우 -->
 								<% if(userId !=null){%>
-									<%if(userId.equals(re_articleList.get(i).getRe_name())){ %>
+									  <!-- 세션에 아이디값이 본인 댓글일 경우 -->
+									  <%if(userId.equals(re_articleList.get(i).getRe_name())){ %>
 										<button onclick="reply('<%=re_articleList.get(i).getRe_name() %>','<%=re_articleList.get(i).getRe_num() %>','<%=re_articleList.get(i).getRe_num2() %>','<%=re_articleList.get(i).getRe_re_ref() %>','<%=re_articleList.get(i).getRe_re_lev() %>','<%=re_articleList.get(i).getRe_re_seq() %>','<%=re_articleList.get(i).getRe_date() %>','<%=userId %>','<%=i %>','<%=nowPage %>','<%=article.getNum()%>')" class="rerere<%=i %>">댓글달기</button>
+										<button onclick="updateReple('<%=re_articleList.get(i).getRe_name() %>','<%=re_articleList.get(i).getRe_num() %>','<%=re_articleList.get(i).getRe_content() %>','<%=re_articleList.get(i).getRe_date() %>','<%=i %>','<%=nowPage %>','<%=article.getNum()%>')" class="upupup<%=i %>")">수정</button>
 										<button onclick="location.href='boardReDeletePro.abc?re_num=<%=re_articleList.get(i).getRe_num() %>&num=<%=article.getNum() %>&nowPage=<%=nowPage %>'">삭제</button>
+									  <!-- 세션에 아이디값이 본인 댓글이 아닐 경우 -->
 									  <%}else{ %>
 									  	<button onclick="reply('<%=re_articleList.get(i).getRe_name() %>','<%=re_articleList.get(i).getRe_num() %>','<%=re_articleList.get(i).getRe_num2() %>','<%=re_articleList.get(i).getRe_re_ref() %>','<%=re_articleList.get(i).getRe_re_lev() %>','<%=re_articleList.get(i).getRe_re_seq() %>','<%=re_articleList.get(i).getRe_date() %>','<%=userId %>','<%=i %>','<%=nowPage %>','<%=article.getNum()%>')" class="rerere<%=i %>">댓글달기</button>
+									   	<button onclick='alert("권한이 없습니다.")'>수정</button>
 									   	<button onclick='alert("권한이 없습니다.")'>삭제</button>
 									  <%}%> 
+								<!-- 세션에 아이디값이 없을 경우 -->
 								<%} else{%>
 									<button onclick='alert("로그인이 필요합니다")'>댓글달기</button>
+									<button onclick='alert("로그인이 필요합니다.")'>수정</button>
 									<button onclick='alert("로그인이 필요합니다.")'>삭제</button> 
 								<%} %>
 								</div><br>	
@@ -148,10 +163,10 @@
 			
 	
 	<script>
-	
+		/* 댓글달기 함수 */
 		function reply(name,num,num2,ref,lev,seq,date,userId,i,page,articleNum){
 			
-			$(".rerere" + i).parent().after("<br><div class='read-reple-box'><form action='replePlay.abc' method='post'><textarea rows='5' cols='50' name='content'></textarea>"
+			$(".rerere" + i).parent().after("<br><div><form action='replePlay.abc' method='post'><textarea rows='5' cols='50' name='content'></textarea>"
 					+"<input type='hidden' name='name' value=" + userId + ">"		
 					+"<input type='hidden' name='num' value= " + num + ">"
 					+"<input type='hidden' name='num2' value=" + num2 +">"
@@ -164,6 +179,28 @@
 					+"<input type='submit' value='등록'></form></div>");
 			
 		};
+		/* 댓글수정 함수 */
+		function updateReple(name,num,content,date,i,page,articleNum){
+			$(".upupup" + i).parent().after("<br><div><form action='replePlayUpdate.abc' method='post'><textarea rows='5' cols='50' name='content'>"+content+"</textarea>"
+					+"<input type='hidden' name='name' value=" + name + ">"		
+					+"<input type='hidden' name='num' value= " + num + ">"
+					+"<input type='hidden' name='content' value=" + content +">"
+					+"<input type='hidden' name='date' value=" + date + ">"
+					+"<input type='hidden' name='page' value=" + page + ">"
+					+"<input type='hidden' name='articleNum' value=" + articleNum + ">"
+					+"<input type='submit' value='수정'></form></div>");
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/* 댓글삭제 함수 */
 		
 		function deleteReple(re_num,num,nowPage){
 			

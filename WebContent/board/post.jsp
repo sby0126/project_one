@@ -11,6 +11,7 @@
     <script src="https://kit.fontawesome.com/a99df0f94f.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/underscore@1.11.0/underscore-min.js"></script>
+    <script src="../js/smarteditor2/js/HuskyEZCreator.js"></script>
     <link rel="stylesheet" href="css/post.css">
 </head>
 <body>
@@ -27,22 +28,21 @@
             <div class="contents-wrapper">
             		<div class="post">
     	<h2>쓰기</h2>
-		<form name="postFrm" method="post" action="boardWritePro.abc">
+		<form name="postFrm" id = "postFrm" method="post" action="boardWritePro.abc" >
 			<ul>
 				<li><input readonly placeholder="<%=userId%>"></li>
-				<input type="hidden" name="name" value="<%=userId%>">
+				<li><input type="hidden" name="name" value="<%=userId%>"></li>
 				<li><input name ="subject" placeholder="제목"></li>
-				<li><textarea name="content" rows="10" cols="50" placeholder="내용"></textarea></li>
-				<li><input type="password" name ="pass" placeholder="비밀번호"></li>
-				<li>
-					<input type="submit" value="등록" class="post-btn">
-					<input type="reset" value="다시쓰기" class="post-btn">	
-					<a href="boardList.abc"><input type="button" value="리스트" class="post-btn"></a>	<!-- 경로수정하기 -->
-				</li>
-		
-		
+				<li><textarea style="display:none" name="content" id ="popContent" rows="10" cols="50" style="width: 500px; height: 412px;" placeholder="내용"></textarea></li>
+				<li><input type="password" name="pass" placeholder="비밀번호"></li>
+				<li><button type="button" class="post-btn" onclick="addFile()">파일+1</button> <button type="button" class="post-btn" onclick="minusFile()">파일-1</button></li>
+				<li><input type="file" name="file1" onchange ="chchch(this)" id="fileArrays1"></li>	
+			
+				
 			</ul>
-	
+			<a href="boardList.abc"><input type="button" value="리스트" class="post-btn">	</a>	<!-- 경로수정하기 -->
+				<input type="submit" id="registBtn" value="등록" class="post-btn">
+				<input type="reset" value="다시쓰기" class="post-btn">	
 		</form>
 	</div>
           
@@ -53,6 +53,69 @@
     <!-- 라이트 박스-->
     <div id="light-box-container">
     </div>
+    <script>
+    
+    	var clickCount=1;
+    	
+    	function addFile(){
+    		clickCount++;
+    		$("#postFrm > ul").append("<li><input type='file' onchange='chchch(this)' name='file"+clickCount+"' id='fileArrays"+clickCount+"' >");
+    			
+    	}
+    	
+    	
+   		function minusFile(){
+    		if(clickCount > 1){
+    			clickCount--;
+        		$("#postFrm > ul >li:last").remove();
+    		}
+    	} 
+    	
+    	var oEditors = [];
+    	nhn.husky.EZCreator.createInIFrame({
+    	    oAppRef: oEditors,
+    	    elPlaceHolder: "popContent",  //textarea ID
+    	    sSkinURI: "../js/smarteditor2/SmartEditor2Skin.html",  //skin경로
+    	    fCreator: "createSEditor2",
+    	    htParams : {
+    	    	bUseToolbar : true,
+    	    	bUseVerticalResizer : true,
+    	    	bUseModeChanger : true
+    	    }
+    	});
+
+
+ 		$("#registBtn").click(function(){
+ 			oEditors.getById["popContent"].exec("UPDATE_CONTENTS_FIELD",[]);
+ 		});
+ 		
+ 		//이미지 올리기 버튼 생성
+ 		function chchch(obj){	
+			 if((obj.value.split(".")[1]) == 'jpg' || (obj.value.split(".")[1]) == 'png'){
+				 $('#' + obj.id).parent().append("<button type='button' >이미지올리기</button>");
+             } 
+ 		}
+ 		
+ 		//이미지 업로드
+ 		function abcdef(objId){
+ 		   var formData = new FormData();
+		   var a ;    
+  		   formData.append('uploadFile', $('#' + objId.id)[0].files[0]);
+  		 
+  		   $.ajax({
+  		        url: '/ImgUpload.z',
+  		        data: formData,
+  		        contentType: false,
+  		    	processData: false,
+  		        type: 'POST',
+  		        success: function (data) {
+  		        	
+  		  
+  		        }
+  		    });
+
+ 		}
+    </script>
     <jsp:include page="/pages/login.jsp"></jsp:include>
     <!-- index.js는 메인 용이므로 알맞은 스크립트를 사용해야 합니다-->
     <script type="module" src="<%=application.getContextPath()%>/js/MorePage.js"></script>
