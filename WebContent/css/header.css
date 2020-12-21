@@ -648,3 +648,19 @@ header {
         display: flex;
     }
 }
+
+.popular-search {
+		list-style-type: none;
+		border: 1px solid black;
+		min-width: 200px;
+		padding: 10px;
+		position: absolute;
+		top: 64px;
+		right: 0;		
+		display: none; 
+	
+		
+	}
+.popular-search > li {
+		margin: 10px 0 10px 0;
+	}
