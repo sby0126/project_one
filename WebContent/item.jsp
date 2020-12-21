@@ -66,25 +66,25 @@
                 <div class="header-popup-container">
                     <ul class="header-menu-list">
                         <li class="menu">
-                            <a href="${pageContext.request.contextPath}" class="menu-link">
+                            <a href="${pageContext.request.contextPath}/pages/recently-viewd-shop.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
-                                <p class="menu-title">최근 본 샵 <em>0</em></p>
+                                <p class="menu-title">최근 본 샵 <em id="recently-shop-count">0</em></p>
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="${pageContext.request.contextPath}" class="menu-link">
+                            <a href="${pageContext.request.contextPath}/pages/recently-viewd-item.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
-                                <p class="menu-title">최근 본 상품 <em>0</em></p>
+                                <p class="menu-title">최근 본 상품 <em id="recently-item-count">0</em></p>
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="${pageContext.request.contextPath}" class="menu-link">
+                            <a href="${pageContext.request.contextPath}/pages/myshop.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">MY SHOP</p>
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="${pageContext.request.contextPath}" class="menu-link">
+                            <a href="${pageContext.request.contextPath}/pages/interested_item.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">관심 상품</p>
                             </a>

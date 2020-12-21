@@ -2,6 +2,7 @@ import { Component } from "./Component.js";
 import { getDataManager } from "../DataManager.js";
 import { itemData, imgSrc, itemImg } from "../services/itemData.js";
 import { DataLoader } from "./DataLoader.js";
+import { Request } from "../Request.js";
 
 /**
  * @author 어진석
@@ -100,6 +101,7 @@ export class ItemContentLoader extends Component {
             }            
             
             // let myImgData = itemData[idx];
+
             let myImgData = this._data.contentData[idx];
             const imgSrc = this._data.imageUrl;
             const itemImg = this._data.imageData;            
@@ -135,9 +137,25 @@ export class ItemContentLoader extends Component {
 
                     const dataId = idx; // 기본키
 
+                    const request = new Request();
+
+                    const myData = {
+                        pageType: request.getParameter("pageType") || "shop",
+                        genderType: request.getParameter("gndr") || "M",
+                        shopType: request.getParameter("shopType") || "S",
+                        offset: {
+                            start: 0,
+                            count: 68,
+                        },
+                        imageUrl: "https://drive.google.com/uc?export=view&id=",
+                        contentData: [
+                            myImgData
+                        ],
+                        thumbnail: itemImg[filename.url],
+                    };
                     // 주소에 데이터 ID를 포함시킵니다.
                     // 이렇게 GET과 비슷한 식으로 URL을 만들면 로컬 스토리지 등을 이용하지 않아도 데이터를 간단히 전송할 수 있습니다.
-                    location.href = `pages/detail.jsp?date=${Date.now()}&title=${title}&price=${price}&shop=${shop}&dataId=${dataId}`;
+                    location.href = `pages/detail.jsp?data=${btoa(unescape(encodeURIComponent(JSON.stringify(myData))))}`;
                 }
 
                 card.insertAdjacentHTML( 'afterbegin', `

@@ -1,5 +1,6 @@
 import { Component } from "./Component.js";
 import { itemData, imgSrc, itemImg } from "../services/itemData.js";
+import { Request } from "../Request.js";
 
 /**
  * 주소에 있는 dataId 값을 인자를 파싱하여 id 값에 맞는 데이터를 동적으로 가져옵니다.
@@ -10,15 +11,51 @@ export class ItemDetailLoader extends Component {
 
     run() {
 
-        const urlParams = new URLSearchParams(decodeURI(location.search));
+        // F 또는 M 값을 매개변수로부터 파싱합니다.
+        $(".header-left a").eq(1).on("click", (ev) => {
+            this._dataLoader.setParameter("gndr", "F");
+        })
+        $(".header-left a").eq(2).on("click", (ev) => {
+            this._dataLoader.setParameter("gndr", "M");
+        });
 
-        const dataId = parseInt(urlParams.get("dataId"));
+        const request = new Request();
 
-        const item = itemData[dataId]; // 여기엔 large image, content 정보가 없음.
+        // 매개변수에서 데이터 ID 값을 파싱합니다.
+        // 이 값은 없을 수도 있습니다.
+        // 없을 경우에는 뒤로 가게 됩니다.
+        const paramData = request.getParameter("data");
+        const raw = decodeURIComponent(escape(atob(paramData)));
+        const data = JSON.parse(raw);
+
+        if(!data) {
+            console.warn("데이터가 undefined이거나 null입니다.");
+            return;
+        }
+
+        if(!data) {
+            alert("정상적인 접근이 아닙니다.");
+            history.go(-1);
+            return;
+        }
+
+        const {contentData} = data;
+        const myItem = contentData[0];
         
-        $("#detail-item-title, #title").text(item.title);
-        $("#detail-item-price, .allPrice, #price").text(item.price);
-        $(".imgArea > img").attr("src", imgSrc + itemImg[item.url]);
+        // 구글 드라이브 메인 링크
+        const imgSrc = data.imageUrl;
+
+        // 이미지 해쉬 주소
+        const imgHash = imgSrc + data.thumbnail;
+
+        // 상품명
+        $("#detail-item-title, #title").text(myItem.title);
+
+        // 상품 가격
+        $("#detail-item-price, .allPrice, #price").text(myItem.price);
+
+        // 이미지 주소
+        $(".imgArea > img").attr("src", imgHash);
 
     }
 

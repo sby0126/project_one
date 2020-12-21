@@ -1,21 +1,103 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*" %>
+<%@ page import="service.RecentlyShopService, service.*" %>
+<%@ page import="java.net.*" %>
+<%@ page import="vo.*" %>
 <%
-	int maxItems = 12;
+	// Create a cookie service.
+	CookieService cookieService = new CookieService();
+	HashMap<String, String> cookie = cookieService.getKeyValue(request);
+	String value = cookie.get("recentlyItems");
+	
+	String num = "";
+	
+	if(value != null) {
+		num = URLDecoder.decode(value);
+		// num = request.getParameter("recentlyShopItem");
+	}
+	
+	RecentlyShopService service = new RecentlyShopService(num);
+	
+	Vector<ProductVO> list = service.getCards();
+
 %>
-<c:set var="maxItems" value="<%= maxItems %>" />
 <!DOCTYPE html>
+<c:set var="list" value="<%= list %>" />
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>최근 본 상품</title>
+    <title>쇼핑몰 클론 프로젝트</title>
+    <link rel="stylesheet" href="<%=application.getContextPath()%>/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a99df0f94f.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/underscore@1.11.0/underscore-min.js"></script>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/Recently_viewed_item.css">
+    <c:if test="${ list == null}">
+	    <link rel="stylesheet" href="../css/Recently_viewed_shop.css">
+    </c:if>
+	<c:if test="${ list != null}">
+		<%
+		 	for(int i = 0; i < list.size(); i++) {
+		 		ProductVO vo = list.get(i);
+		 		String mainUrl = "https://drive.google.com/uc?export=view&id=";
+		 		
+		 		String gndr = vo.getGendertype();
+		 		String shopType = vo.getShoptype();
+		 		String contentUrl = vo.getContenturl();
+		 		
+		 		String imgUrl = "/images/shop/" 
+		 							+ gndr + "/"
+		 							+ shopType + "/"
+		 							+ contentUrl;
+		 %>
+		<style>
+			.card {
+			    position: relative;
+			    flex-basis: 13.8em;
+			    height: 18.3em;
+			    margin-bottom: 0.5em;
+			    background: #fff;
+			    border-bottom: 1px solid #E0E4E6;
+			    cursor: pointer;
+			}
+						
+			.card-container {
+			    display: flex;
+			    width: 100%;
+			    row-gap: 0.25em;
+			    column-gap: 0.25em;
+			    flex: 0 1 0;
+			    flex-basis: 0;
+			    justify-content: left;
+			    flex-direction: column;
+			    flex-flow: wrap;
+			}			
+
+			.card div[d-<%=vo.getId()%>]::before {
+			    content: "";
+			    width: 5.5em;
+			    height: 5.5em;
+				background: url(<%= imgUrl %>) left top;
+				background-size: cover;
+			    position: absolute;
+			    border-radius: 50%;
+			    left: calc(50% - 5.5em / 2);
+			    top: 10%;
+			    z-index: 0;
+			}
+
+			.card div[d-<%=vo.getId()%>]:hover::before {
+				filter: brightness(1.1);
+				border-radius: 0;
+				transition: all .2s linear;
+			}
+		</style>
+		<%
+		 	}
+		 %>
+	</c:if>
 </head>
 <body>
     <div class="container">
@@ -26,36 +108,49 @@
 
         <!-- 본문의 시작 -->
         <section>
-
-
             <!-- 본문이 들어가는 래퍼 -->
             <div class="contents-wrapper">
-            	
-            	<c:forEach begin="1" end="${ maxItems }" step="1">
-	                <!-- 아이템 총-->
-	                <div class="item_selected">
-	                    <!-- 아이템-->
-	                    <div class="item_selected_list">
-	                        <img src="../images/img1.jpg">
-	                        <div class="item_selected_list_info">
-	                            <h3>하찌 트임 루즈 니트(데이터)</h3>
-	                            <p>15000원</p>
-	                            <p>제이브로스</p>
-	                            <button></button>
-	                        </div>
-	                    </div>
-	                </div>            	
-            	</c:forEach>
-            	
-                <!-- 비어있을때-->
-                <div class="item_selected_none">
-                    <button class="item_selected_none_all_del">전체삭제</button>
-                    <img class="item_selected_none_img" src="../images/fbb847b.png">
-                    <div class="item_selected_none_sp">최근 본 상품이 없습니다.</div>
-                    <a href="#" onclick="history.go(-1)">
-                    	<button class="item_selected_none_button">뒤로 가기</button>
-                    </a>
-                </div>
+            	<c:choose>
+            		<c:when test="${list != null}">
+		                <div class="card-container">
+		                	<%
+		                		for(ProductVO vo : list) {
+		                			
+		                	%>
+		                		<c:set var="card" value="<%= vo %>" />
+								<div class="card">
+				                    <a href="${card.getLink() }" target='_blank'>
+										<div>
+											<div d-<%=vo.getId()%>>
+					                        	<i class="shop-hot-icon" data-title="HOT"></i>
+					                        	<h2 class="contents-shop-name"><%= vo.getShopname()%></h2>
+					                        </div>
+					                        <p class="shop-contents"><%= vo.getTexts() %></p>
+					                        <div class="shop-button-container" data-id="${card.getId()}">
+					                            <button class="shop-button all-item-button">전체 상품</button>
+					                            <button class="shop-button">
+					                                <p class="shop-button-text">마이샵</p>
+					                                <i class="shop-button-icon"></i>
+					                            </button>
+					                        </div>                    
+										</div>
+				                    </a>									
+								</div>		                		
+		                	<%
+		                		}
+		                	%>
+		                </div>		
+            		</c:when>
+            		<c:otherwise>
+		                <div class="item_selected_none">
+		                    <button class="item_selected_none_all_del">전체삭제</button>
+		                    <img class="item_selected_none_img" src="../images/b527471.png">
+		                    <div class="item_selected_none_sp">최근 본 샾이 없습니다.</div>
+		                    <a href="/index.jsp"><button class="item_selected_none_button">샾 메인으로 이동</button></a>
+		                </div>            		
+            		</c:otherwise>
+            	</c:choose>
+
             </div>
         </section>
     </div>
@@ -65,6 +160,5 @@
     <jsp:include page="/pages/login.jsp"></jsp:include> 
     <!-- index.js는 메인 용이므로 알맞은 스크립트를 사용해야 합니다-->
     <script type="module" src="../js/MorePage.js"></script>
-    
 </body>
 </html>
