@@ -16,6 +16,8 @@
 	if(value != null) {
 		num = URLDecoder.decode(value);
 		// num = request.getParameter("recentlyShopItem");
+	} else {
+		value = "0";
 	}
 	
 	Vector<ProductVO> list = null;
@@ -46,13 +48,17 @@
 		<%
 		 	for(int i = 0; i < list.size(); i++) {
 		 		ProductVO vo = list.get(i);
-		 		String mainUrl = "https://drive.google.com/uc?export=view&id=";
+		 		String mainUrl = "https://raw.githubusercontent.com/biud436/project_one/main/WebContent";
 		 		
 		 		String gndr = vo.getGendertype();
 		 		String shopType = vo.getShoptype();
 		 		String contentUrl = vo.getContenturl();
 		 		
-		 		String imgUrl = "/images/shop/" 
+// 		 		String imgUrl = mainUrl + "/images/item/" 
+// 		 							+ gndr + "/"
+// 		 							+ shopType + "/"
+// 		 							+ contentUrl;
+		 		String imgUrl = "/images/item/" 
 		 							+ gndr + "/"
 		 							+ shopType + "/"
 		 							+ contentUrl;
@@ -67,7 +73,7 @@
                 border: 1px solid #F2F5F9;
             }
             
-            .card p[<%=vo.getId()%>]::before {
+            p[d-<%=vo.getId()%>]::before {
                 content: "";
                 width: 100%;
                 height: 78%;
@@ -80,12 +86,6 @@
                 top: 0;
                 z-index: 0;
             }
-
-            .card p[<%=vo.getId()%>]:hover::before {
-                filter: brightness(1.1);
-                border-radius: 0;
-                transition: all .2s linear;
-            }		
 		
 		</style>
 		<%
@@ -118,6 +118,7 @@
 		                	%>
 		                		<c:set var="card" value="<%= vo %>" />
 								<div class="card">
+				                    <p d-<%= vo.getId()%> onclick="javascript:window.open('${card.getLink()}', '_blank')"></p>	                    
 				                    <a href="${card.getLink()}" target='_blank'>
 				                        <i class="shop-hot-icon"></i>
 				                        <div class="item-button-container"> 
@@ -126,7 +127,6 @@
 				                            <p>${card.getShopname()}</p>
 				                            <button class="like-button"></button>
 				                        </div>
-				                    <p d-<%= vo.getId()%>></p>	                    
 				                    </a>	
 								</div>		                		
 		                	<%
