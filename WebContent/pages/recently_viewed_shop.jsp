@@ -14,7 +14,6 @@
 	
 	if(value != null) {
 		num = URLDecoder.decode(value);
-		value = "0";
 		// num = request.getParameter("recentlyShopItem");
 	} else {
 		value = "0";
