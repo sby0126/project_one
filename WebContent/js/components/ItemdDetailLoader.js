@@ -46,7 +46,13 @@ export class ItemDetailLoader extends Component {
         const imgSrc = data.imageUrl;
 
         // 이미지 해쉬 주소
-        const imgHash = imgSrc + data.thumbnail;
+        let imgHash = imgSrc + data.thumbnail;
+        let isOtherCDN = false;
+
+        if(data.thumbnail.indexOf("http") >= 0) {
+            isOtherCDN = true;
+            imgHash = data.thumbnail;
+        }
 
         // 상품명
         $("#detail-item-title, #title").text(myItem.title);

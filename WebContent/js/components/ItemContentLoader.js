@@ -117,7 +117,25 @@ export class ItemContentLoader extends Component {
                 card.querySelector("p").setAttribute("d-"+idx, "");
         
                 const filename = myImgData;
-                parent.createNewStyleSheet("d-"+idx, imgSrc + itemImg[filename.url]);     
+                
+                let isOtherCDN = false;
+                
+                /**
+                 * 파일명이 http로 시작하면
+                 * @type {String}
+                 */
+                const startUrl = itemImg[filename.url];
+                if(startUrl.startsWith("http")) {
+                    isOtherCDN = true;
+                }
+
+                let resultUrl = imgSrc + itemImg[filename.url];
+
+                if(isOtherCDN) {
+                    resultUrl = itemImg[filename.url];
+                }
+
+                parent.createNewStyleSheet("d-"+idx, resultUrl);     
 
                 const myCard = card.querySelector("p");
                 const {title, price, shop} = myImgData;
