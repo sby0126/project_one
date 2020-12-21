@@ -17,6 +17,7 @@ import command.customer.LoginCommand;
 import command.customer.LogoutCommand;
 import command.customer.ModifyMemberCommand;
 import command.customer.ModifyMemberFormCommand;
+import command.customer.SecessionMemberCommand;
 import command.customer.SignUpCommand;
 import command.customer.SocialLoginCommand;
 import dao.CustomerDAO;
@@ -65,6 +66,9 @@ public class CustomerController extends HttpServlet {
 			case "/modifyMember.do":
 				command = new ModifyMemberCommand();
 				break;
+			case "/secessionMember.do":
+				command = new SecessionMemberCommand();
+				break;
 			case "/login.do":
 				command = new LoginCommand();
 				break;
@@ -75,8 +79,10 @@ public class CustomerController extends HttpServlet {
 				command = new SignUpCommand();
 				break;
 			case "/naverLogin.do":
+				command = new SocialLoginCommand("네이버");
+				break;
 			case "/kakaoLogin.do":
-				command = new SocialLoginCommand();
+				command = new SocialLoginCommand("카카오");
 				break;
 			}
 			

@@ -69,3 +69,20 @@ function searchAddress(ev) {
 function submit() {
 
 }
+
+$("#leave-member").on("click", (ev) => {
+	/**
+	 * @type {HTMLFormElement}
+	 */
+	const form = document.querySelector("#member-info-form");
+
+	form.action = "/members/secessionMember.do";
+	
+	const yes = confirm("정말 탈퇴하시겠습니까?");
+
+	if(yes) {
+		form.submit();
+	}
+
+	return false;
+})

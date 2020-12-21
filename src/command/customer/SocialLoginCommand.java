@@ -12,6 +12,13 @@ import dao.CustomerDAO;
 import vo.CustomerVO;
 
 public class SocialLoginCommand extends Command {
+	
+	private String socialType;
+	
+	public SocialLoginCommand(String socialType) {
+		this.socialType = socialType;
+	}
+	
 	@Override
 	public ActionResult execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -77,7 +84,7 @@ public class SocialLoginCommand extends Command {
 			 .setEmail(email)
 			 .setIsAdmin(isAdmin)
 			 .setJoinDate(joinDate)
-			 .setCtmtype("SNS");
+			 .setCtmtype(socialType);
 			
 			c.setZipCode(zipcode);
 			

@@ -9,12 +9,11 @@
 <body>
 	<div class="member-form-container col-md-10 col-md-offset-2">
 	
-		<div class="jumbotron col-md-8">
-			<p class="lead">상품 업로드</p>
+		<div class="panel panel-default">
+			<div class="panel-body">상품 업로드</div>
 		</div>
 	
-		<form class="form-horizontal col-sm-8"
-			action="/members/modifyMember.do">
+		<form class="form-horizontal col-sm-8">
 			<input type="hidden" name="id" value="${member.getId()}">
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="email">이메일:</label>
