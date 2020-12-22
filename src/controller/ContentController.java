@@ -65,12 +65,13 @@ public class ContentController extends HttpServlet {
 			case "/searchShopItem.do":
 				command = new SearchShopItemCommand();
 				break;
-			case "/buy.do":
-			case "/cart.do":
-				command = new DetailInputCommand();
-				break;
 			case "/recentlyShopList.do":
 				command = new RecentlyShopListCommand();
+				break;
+			case "/pay.do":
+			case "/cart.do":
+				System.out.println("실행됨");
+				command = new DetailInputCommand();
 				break;
 			}
 			

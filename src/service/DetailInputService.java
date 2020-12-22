@@ -1,6 +1,5 @@
 package service;
 
-import java.sql.ResultSet;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,22 +8,23 @@ import vo.ProductVO;
 
 public class DetailInputService {
 
-	public boolean inputDetail(String title, String price, int qty) {
-		
-		ResultSet rs = null;
+	public boolean inputDetail(HttpServletRequest req, String title, String price, int qty) {
+
 		List<ProductVO> list = null;
 		boolean success = false;
 		ItemService itemService = new ItemService();
-
-		HttpServletRequest request = null;
+		
+		String id = req.getParameter("id");
 		
 		list = itemService.getDAO().getDetail(title, price);
 		
-		request.setAttribute("list", list);
+		req.setAttribute("list", list);
+		req.setAttribute("id", id);
+		
 		
 		System.out.println(list);
 		
-		success = itemService.getDAO().insertDetail(list, qty);
+		success = itemService.getDAO().insertDetail(id, list, qty);
 		
 		return success;
 	}

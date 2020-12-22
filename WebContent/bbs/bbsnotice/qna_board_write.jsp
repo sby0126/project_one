@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>MVC 게시판</title>
+<title>공지사항 게시판</title>
 <style type="text/css">
 #registForm {
 	width: 500px;
@@ -68,7 +68,7 @@ table {
 				<tr>
 					<td class="td_left"><label for="filename"> 파일 첨부 </label></td>
 					<td class="td_right"><input name="filename" type="file"
-						id="filename" required="required" /></td>
+						id="filename" /></td>
 				</tr>
 			</table>
 			<section id="commandCell">

@@ -1,4 +1,4 @@
-<%@page import="core.board.notice.*"%>
+<%@page import="bbsnotice.*"%>
 <%@page import="java.util.*" %>
 <%@page language="java" contentType="text/html; charset=UTF-8"%>
 
@@ -19,7 +19,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>MVC 게시판</title>
+<title>공지사항 게시판</title>
 <style type="text/css">
 #articleForm {
 	width: 500px;

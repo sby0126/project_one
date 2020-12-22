@@ -1,4 +1,4 @@
-<%@page import="core.board.notice.*"%>
+<%@page import="bbsnotice.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.text.SimpleDateFormat"%>
@@ -17,7 +17,7 @@
 <html>
 <head>
 <meta charset="UTF-8" />
-<title>MVC 게시판</title>
+<title>공지사항 게시판</title>
 <style type="text/css">
 #registForm {
 	width: 500px;
@@ -64,8 +64,8 @@ table {
 		</h2>
 		<table>
 			<%
-if(articleList != null && listCount > 0){
-%>
+			if(articleList != null && listCount > 0){
+			%>
 
 			<tr id="tr_top">
 				<td>번호</td>
@@ -78,7 +78,7 @@ if(articleList != null && listCount > 0){
 			<%
 		for(int i=0;i<articleList.size();i++){
 			
-	%>
+		%>
 			<tr>
 				<td><%=articleList.get(i).getCtxtno()%></td>
 

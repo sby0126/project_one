@@ -484,18 +484,28 @@ public class ContentDAO implements IDAO {
 		return list;
 	}
 	
-	public boolean insertDetail(List<ProductVO> p, int qty) {
+	public boolean insertDetail(String id, List<ProductVO> p, int qty) {
 		
 		boolean success = false;
+		ResultSet rs = null;
 		
 		try {
 			conn = pool.getConnection();
 			
-			for(ProductVO list : p) {
-			String query = "insert into CartNPay(id, title, price, qty) "
-					+ "values(?,?,?,?)";
+			String query = "select ctmid from tblCustomer where ctmid = ?";
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, list.getId());
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {id = rs.getString("ctmid");}
+			
+			
+			for(ProductVO list : p) {
+			query = "insert into CartNPay(id, title, price, qty) "
+				  + "values(?,?,?,?)";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
 			pstmt.setString(2, list.getTitle());
 			pstmt.setString(3, list.getPrice());
 			pstmt.setInt(4, qty);			

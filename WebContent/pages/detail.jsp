@@ -60,7 +60,12 @@
                             <!-- 6. 총상품금액 -->
                             <li><span>총상품금액</span><span class="allPrice">종합가격(데이터)</span></li>
                             <!-- 7. 구매하기.장바구니 버튼 -->
-                            <li><div><button class="detail_button" type="button" onClick="">구매하기</button><button class="detail_button" type="button" onClick="">장바구니</button></div></li>
+                            <li>
+                            	<div>
+                            		<button class="detail_button" type="button" onClick="javascript:pay();">구매하기</button>
+                            		<button class="detail_button" type="button" onClick="javascript:cart();">장바구니</button>
+                            	</div>
+                            </li>
                         </ul>
                     </div>
                     
@@ -68,8 +73,6 @@
 
             </div>
        
-
-
             <div class="productArea2">
                 <!-- 중간 상품상세설명, 상품결제정보 버튼 -->
                 <div class="productArea2_button">
@@ -120,8 +123,9 @@
                 <form id="needVal" method="post" action="">
                 	<input type="hidden" name="title" id="title" value="">
                 	<input type="hidden" name="price" id="price" value="">
-                	<input type="hidden" name="imguri" id="imguri" value="">
-                </form>                
+                	<input type="hidden" name="img" id="img" value="">
+                	<input type="submit"/>
+                </form>
             </div>
             <!-- 오른쪽하단 top.bottom 버튼 -->
             <div class="item_top_bottom">
@@ -129,7 +133,6 @@
                 <a href="#productPayInfo" id="item_bottom"><span class="item_bottom_button">bottom</span></a>
             </div>
         </div>
-
     <script>
         // 색상버튼은(ul태그안에 li목록중 3번째줄), 사이즈버튼은(ul태그안에 li목록중 4번째줄)
 
@@ -235,7 +238,19 @@
             function del(obj){
                 obj.parent("li").remove();
             }
+            
         });
+        
+        function pay() {
+        	$("#needVal").attr("action", "/pay.do");
+        	$("#needVal").submit();
+        }
+        
+        function cart() {
+        	$("#needVal").attr("action", "/cart.do");
+        	$("#needVal").submit();
+        }
+        
         </script>
         <jsp:include page="/pages/login.jsp"></jsp:include>
         <script type="module" src="../js/ItemDetailPage.js"></script>

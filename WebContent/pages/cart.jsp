@@ -2,23 +2,22 @@
 <%@ page import="org.json.simple.*"%>
 <%@ page import="org.json.*" %>
 <%@ page import="java.util.*" %>
+<%@ page import="javax.servlet.*" %>
 <%@ page import="vo.ProductVO" %>
 <%@ page import="com.google.gson.*" %>
 
+
 <!DOCTYPE html>
 <%  
+
+	String id = (String)session.getAttribute("id");
 	Gson gson = new GsonBuilder().create();
 	JSONObject root = (JSONObject)request.getAttribute("root");
-	Map<String, Object> list = gson.fromJson(root.get("ContentData").toString(), new TypeToken<Map<String, Object>>(){}.getType());
-
+	List<ProductVO> list = gson.fromJson(root.toString(), List.class);
+	
 	int totalPrice = 0;
-	for(int i = 0; i < root.size(); i++) {
-		JSONValue contentData = JSONObject.
-		
-		
-		list.add((List<ProductVO>)root.get(i));
-	}
-	String[] list = (String[]) list.toArray(new String[list.size()]);
+
+	
 %>
 
 <html lang="ko">
@@ -54,31 +53,49 @@
                                 <td><P name="product-price"> 할인 </P></td> <!-- 할인 -->
                                 <td><P name="product-price"> 총 금액 </P></td> <!-- 상품 금액 -->
                             </tr>
+                            
+                            <% 
+                            	if(list != null) {
+                            		for(int i = 0; i < list.size(); i++) {
+                            			
+                            			String title = list.get(i).getTitle();
+                            			String img = list.get(i).getContenturl();
+                            			String uri = list.get(i).getLink();
+                            			int price = Integer.parseInt(list.get(i).getPrice());
+                            			int discnt = 0;
+                            			int rltprice = price - discnt;
+                            			totalPrice += rltprice;
+                            %>
                             <tr>
                                 <td><input type="checkbox" name="chk" class="chkbox"></td>
                                 <td><img src='' class="product-img"></td> <!-- 구매할 상품 이미지 -->
-                                <td><p class="product-name"><a href="#">title</a></p> </td> <!-- 구매할 상품 이름 -->
+                                <td><p class="product-name"><a href="#"><%=title%></a></p> </td> <!-- 구매할 상품 이름 -->
                                 <td><input type="number" class="product-num" placeholder="1" min="1"></td> <!-- 구매 갯수 -->
-                                <td><P class="product-price"> price </P></td> <!-- 상품 가격-->
-                                <td><P class="product-discnt"> 할인 </P></td> <!-- 할인 -->
-                                <td><P class="product-rltprice"> <%=totalPrice%> </P> </td> <!-- 상품 금액 -->
+                                <td><P class="product-price"> <%=price%> </P></td> <!-- 상품 가격-->
+                                <td><P class="product-discnt"> <%=discnt%> </P></td> <!-- 할인 -->
+                                <td><P class="product-rltprice"> <%=rltprice%> </P> </td> <!-- 상품 금액 -->
                             </tr>
-                            <tr>
-                                <td><input type="checkbox" name="chk" class="chkbox"></td>
-                                <td><img src='' class="product-img"></td> <!-- 구매할 상품 이미지 -->
-                                <td><p class="product-name"><a href="#">title</a></p> </td> <!-- 구매할 상품 이름 -->
-                                <td><input type="number" class="product-num" placeholder="1" min="1"></td> <!-- 구매 갯수 -->
-                                <td><P class="product-price"> price </P></td> <!-- 상품 가격-->
-                                <td><P class="product-discnt"> 할인1 </P></td> <!-- 할인 -->
-                                <td><P class="product-rltprice"> <%=totalPrice%> </P> </td> <!-- 상품 금액 -->
-                            </tr>
+                            <%
+                            		}
+                            	}
+                            
+                            	if(list == null) {
+                            	
+                            %>
+                            	  <h2> 장바구니에 상품이 없습니다 </h2>
+                            	  <button type="button" value="메인화면으로 가기" action="index.jsp"> 메인화면으로 가기</button>
+                            <%
+                            	}
+                            %>
+                            
+                            
                         </table>
                         <br>
                         <div class="page-pooter">
 		                	<table class="page-pooterbox">
 		                		<tr>
-		                			<td class='total-num'><p>총</p><span>X 개</span></td>
-		                			<td class='total-price'><span>XXX원</span></td>
+		                			<td class='total-num'><p>총</p><span><%=list.size()%> 개</span></td>
+		                			<td class='total-price'><span><%=totalPrice%>원</span></td>
 		                		</tr>
 		                		<tr class="btn-zone">
                                     <td><button type="button" class="buy-product" onclick="">구매</button></td>
