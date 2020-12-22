@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -37,8 +38,8 @@ public class ContentDAO implements IDAO {
         "액세서리"				
 	};
 	
-	public final String[] ITEM_CATEGORY = {
-			"", "상의", "아우터", "하의", "트레이닝", "수트", "신발", "아우터 수트", "가방", "액세서리"			
+	public String[] ITEM_CATEGORY = {
+			"", "상의", "아우터", "하의", "트레이닝", "수트", "신발", "가방", "액세서리"			
 	};
 	
 	public final String[] AGES = {
@@ -259,6 +260,7 @@ public class ContentDAO implements IDAO {
 	public JSONArray getItemCategories() {
 		ResultSet rs = null;
 		JSONArray categories = new JSONArray();
+		List<String> rawCategories = new ArrayList<>();
 		
 		try {
 			conn = pool.getConnection();
@@ -268,6 +270,7 @@ public class ContentDAO implements IDAO {
 			
 			while(rs.next()) {
 				categories.add( rs.getString("category") );
+				rawCategories.add( rs.getString("category") );
 			}
 			
 		}  catch(SQLException e) {
@@ -277,6 +280,8 @@ public class ContentDAO implements IDAO {
 		} finally {
 			pool.freeConnection(conn, pstmt, rs);
 		}
+		
+		ITEM_CATEGORY = rawCategories.toArray(new String[9]);
 		
 		return categories;
 	}

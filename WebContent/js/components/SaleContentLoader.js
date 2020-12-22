@@ -100,15 +100,19 @@ export class SaleContentLoader extends Component {
 
                 // 카드의 내용을 훼손시키지 않고 요소의 뒤에 새로운 내용을 추가합니다.
                 card.insertAdjacentHTML( 'afterbegin', `
-                    <a href="${filename.link} target='_blank'>
-                        <i class="shop-hot-icon" data-title="HOT"></i>
-                        <div class="item-button-container"> 
-                            <h2>${title}</h2>
-                            <p>${shop}</p>
-                            <button class="like-button"></button>
-                        </div>
-                    </a>
+                    <i class="shop-hot-icon" data-title="HOT"></i>
+                    <div class="item-button-container"> 
+                        <h2>${title}</h2>
+                        <p>${shop}</p>
+                        <button class="like-button"></button>
+                    </div>
                 `);
+
+                // 톰캣 문제로 인해 링크 안에 요소가 있으면 링크가 동작하지 않습니다.
+                $(card).on("click", (ev) => {
+                    window.open(filename.link, "_blank");
+                    return false;
+                });
             }            
 
             // 현재 카드의 갯수를 1 증가시킵니다.
