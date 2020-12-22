@@ -1,4 +1,4 @@
-package core.board.notice;
+package bbsnotice;
 
 public class PageInfo {
 	
@@ -33,7 +33,7 @@ public class PageInfo {
 	public void setEndPage(int endPage) {
 		this.endPage = endPage;
 	}
-	public int getListCount() {
+	public int getListCount	() {
 		return listCount;
 	}
 	public void setListCount(int listCount) {

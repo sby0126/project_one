@@ -1,10 +1,11 @@
-package core.board.notice.svc;
+package bbsnotice.svc;
+
+import static bbsnotice.JdbcUtil.*;
 
 import java.sql.Connection;
 
-import core.board.notice.BoardDAO;
-import core.board.notice.BoardReplyBean;
-import static core.board.notice.JdbcUtil.*;
+import bbsnotice.BoardDAO;
+import bbsnotice.BoardReplyBean;
 
 public class BoardReplyProService {
 

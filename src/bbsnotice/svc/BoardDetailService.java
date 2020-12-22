@@ -1,10 +1,11 @@
-package core.board.notice.svc;
+package bbsnotice.svc;
+
+import static bbsnotice.JdbcUtil.*;
 
 import java.sql.Connection;
 
-import core.board.notice.BoardDAO;
-import core.board.notice.BoardBean;
-import static core.board.notice.JdbcUtil.*;
+import bbsnotice.BoardBean;
+import bbsnotice.BoardDAO;
 
 public class BoardDetailService {
 
@@ -25,7 +26,7 @@ public class BoardDetailService {
 	      
 	      article = boardDAO.selectArticle(board_num);
 	      close(con);
-	      return article;
 	      
+	      return article;	      
 	   }
 }

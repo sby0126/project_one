@@ -1,0 +1,7 @@
+{ 
+	"host": "193.122.102.5",
+	"port": 3306,
+    "user": "hope",
+    "password": "yh15028a!!",
+	"database": "mydb"
+}

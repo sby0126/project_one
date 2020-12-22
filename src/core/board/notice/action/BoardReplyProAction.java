@@ -1,13 +1,18 @@
-package core.board.notice.action;
+package bbsnotice.action;
 
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+<<<<<<< Updated upstream:src/core/board/notice/action/BoardReplyProAction.java
 import svc.BoardReplyProService;
 import vo.ActionForward;
 import vo.BoardBean;
+=======
+import bbsnotice.BoardReplyBean;
+import bbsnotice.ActionForward;
+>>>>>>> Stashed changes:src/bbsnotice/action/BoardReplyProAction.java
 
 public class BoardReplyProAction implements Action {
 
@@ -16,17 +21,17 @@ public class BoardReplyProAction implements Action {
 
 		ActionForward forward = null;
         String nowPage = request.getParameter("page");
-        BoardBean article = new BoardBean();        
-        article.setBOARD_NUM(Integer.parseInt(request.getParameter("BOARD_NUM")));
-        article.setBOARD_NAME(request.getParameter("BOARD_NAME"));
-        article.setBOARD_PASS(request.getParameter("BOARD_PASS"));
-        article.setBOARD_SUBJECT(request.getParameter("BOARD_SUBJECT"));
-        article.setBOARD_CONTENT(request.getParameter("BOARD_CONTENT"));
-        article.setBOARD_RE_REF(Integer.parseInt(request.getParameter("BOARD_RE_REF")));
-        article.setBOARD_RE_LEV(Integer.parseInt(request.getParameter("BOARD_RE_LEV")));
-        article.setBOARD_RE_SEQ(Integer.parseInt(request.getParameter("BOARD_RE_SEQ")));            
-        BoardReplyProService boardReplyProService = new BoardReplyProService();
-        boolean isReplySuccess = boardReplyProService.replyArticle(article);
+        String ctxtno = request.getParameter("ctxtno");
+        BoardReplyBean article = new BoardReplyBean();        
+        
+        article.setReplynm(request.getParameter("replynm"));
+        article.setReplypwd(request.getParameter("replypwd"));
+        article.setReplyctxt(request.getParameter("replyctxt"));
+        article.setRef(Integer.parseInt(request.getParameter("ctxtno")));
+        article.setDepth(Integer.parseInt(request.getParameter("depth")));
+        article.setReplypos(Integer.parseInt(request.getParameter("replypos")));            
+        
+        boolean isReplySuccess = false;
         
           if(isReplySuccess){
              forward = new ActionForward();
