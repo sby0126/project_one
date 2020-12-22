@@ -48,7 +48,6 @@ public class PaymentService {
 		connection.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
 		connection.setDoOutput(true);
 		connection.getOutputStream().write(postDataBytes); // POST 호출
-		// connection.setRequestProperty("Authorization", access_token);
 		
 		connection.setRequestProperty("accept", "application/json");
 			
@@ -77,7 +76,6 @@ public class PaymentService {
 	 * @throws Exception
 	 */
 	public boolean orderKakaoPay(String imp_uid, String customerId, String productId, int paid_amount, String access_token) throws Exception {
-		
 		
 		// GET 방식의 호출입니다.
 		// 주소로 전달합니다.

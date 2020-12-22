@@ -29,6 +29,7 @@ public class PaymentCheckCommand extends Command {
 			PaymentService service = new PaymentService();
 			
 			String access_token = service.getAccessToken();
+			System.out.println(access_token + "(액세스 토큰)을 획득하였습니다.");
 			
 			boolean isSuccess = service.orderKakaoPay(imp_uid, id, productId, paid_amount, access_token);
 			
