@@ -171,7 +171,7 @@ public class PaymentService {
 		int cancelAmount = response.get("cancel_amount").asInt(); 
 		
 		// 구매 시 DB에 값을 전달, 
-		// 아임포트로부터 받은 실제 결제 금액과 일치하면 검증 완료
+		// 아임포트로부터 받은 결제 금액과 실제 DB에 저장된 결제 금액과 일치하면 정상적으로 결제된 것임 (검증 완료)
 		boolean isValid = false;
 		
 		// isValid가 true면 구매 처리
