@@ -19,10 +19,7 @@
         <!-- 본문의 시작 -->
         <section>
             <!-- 본문이 들어가는 래퍼 -->
-            <div class="contents-wrapper">
-            
-          
-           
+            <div class="contents-wrapper">      
             </div>
         </section>
     </div>

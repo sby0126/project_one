@@ -35,8 +35,8 @@ class RecentlyItems extends Component {
 
         // 최근 아이템 갯수
         raw = decodeURIComponent( cookie.get("recentlyItems") ) || "";
-        items = raw.split(",").map(i => i.trim());
-        count2 = items.length || 0;
+        let items2 = raw.split(",").map(i => i.trim());
+        count2 = items2.length || 0;
 
         $(IDS.ITEMS).text(count2);
     }

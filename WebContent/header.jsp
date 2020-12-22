@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<%@ page import="dao.*, vo.*" %>
+<%@ page import="dao.*, vo.*, service.*, java.util.*" %>
+<%
+	BestItemListService service = new BestItemListService();
+	List<SearchVO> searchList = service.getList();
+%>
+		<c:set var="searchList" value="<%= searchList %>" />
         <!-- 헤더의 시작 -->
         <header>
        	
@@ -169,15 +174,16 @@
             </c:if>
            <ul class="popular-search">
 				<h4>인기검색어</h4>
-				<li> 1 <span>...</span> <span><img src="#" width="32px"></span> </li>
-				<li> 2 <span>...</span> <span><img src="#" width="32px"></span> </li>
-				<li> 3 <span>...</span> <span><img src="#" width="32px"></span> </li>
-				<li> 4 <span>...</span> <span><img src="#" width="32px"></span> </li>
-				<li> 5 <span>...</span> <span><img src="#" width="32px"></span> </li>
-				<li> 6 <span>...</span> <span><img src="#" width="32px"></span> </li>
-				<li> 7 <span>...</span> <span><img src="#" width="32px"></span> </li>
+				<c:forEach var="m" items="${searchList}" varStatus="stat">
+					<li> ${stat.count} <span>${ m.getKeyword() }</span>&nbsp;<span>${ m.getCount() }</span> </li>
+				</c:forEach>
+<!-- 				<li> 2 <span>...</span> <span><img src="#" width="32px"></span> </li> -->
+<!-- 				<li> 3 <span>...</span> <span><img src="#" width="32px"></span> </li> -->
+<!-- 				<li> 4 <span>...</span> <span><img src="#" width="32px"></span> </li> -->
+<!-- 				<li> 5 <span>...</span> <span><img src="#" width="32px"></span> </li> -->
+<!-- 				<li> 6 <span>...</span> <span><img src="#" width="32px"></span> </li> -->
+<!-- 				<li> 7 <span>...</span> <span><img src="#" width="32px"></span> </li> -->
 			</ul>
-           
         </header>
         <script>
         	

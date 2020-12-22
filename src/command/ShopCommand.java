@@ -25,6 +25,8 @@ public class ShopCommand extends Command {
 		String category = request.getParameter("category");
 		String ages = request.getParameter("ages");
 		
+		String keyword = request.getParameter("keyword");
+		
 		if(!pageType.equals("shop")) {
 			return null;
 		}

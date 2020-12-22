@@ -13,8 +13,8 @@ import org.json.simple.JSONArray;
 import core.SQLHelper;
 import sql.ContentLoader;
 import utils.DBConnectionMgr;
-import vo.CustomerVO;
 import vo.ProductVO;
+import vo.SearchVO;
 
 public class ContentDAO implements IDAO {
 	
@@ -140,6 +140,71 @@ public class ContentDAO implements IDAO {
 					getQL("전체 데이터 추출")
 					+ (category != null ? " AND texts LIKE ?" : "")
 					+ (ages != null ? " AND texts LIKE ?" : "")
+					+ " group by contentUrl"
+					+ " limit 40"
+					);
+			pstmt.setString(1, pageType);
+			pstmt.setString(2, genderType);
+			pstmt.setString(3, shopType);
+			
+			int i = 3;
+			
+			if(category != null) {
+				i += 1;
+				pstmt.setString(i, "%" + category + "%");
+			}
+			
+			if(ages != null) {
+				i += 1;
+				pstmt.setString(i, "%" + ages + "%");
+			}			
+			
+			rs = pstmt.executeQuery();
+			list = SQLHelper.putResult(rs, ProductVO.class);
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt, rs);
+		}
+		
+		return list;
+	}
+	
+	public List<ProductVO> searchData(String pageType, String genderType, String shopType, String category, String ages, String searchKeyword) {
+		
+		ResultSet rs = null;
+		List<ProductVO> list = null;
+		
+		if(category != null) {
+			if(!category.equals("100")) {
+				category = getCategory(pageType, category);
+			} else {
+				category = null;
+			}
+		}
+		
+		if(ages != null) {
+			if(!ages.equals("all")) {
+				ages = getAge(ages);
+			} else {
+				ages = null;
+			}
+		}
+		
+		
+		System.out.println("카테고리 : " + category);
+		System.out.println("연령대 : " + ages);
+		
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement(
+					getQL("전체 데이터 추출")
+					+ (category != null ? " AND texts LIKE ?" : "")
+					+ (ages != null ? " AND texts LIKE ?" : "")
+					+ (searchKeyword != null ? " AND title like ?" : "")
 					+ " group by contentUrl"
 					+ " limit 40"
 					);
@@ -488,6 +553,72 @@ public class ContentDAO implements IDAO {
 		}
 		
 		return vo;
+	}
+	
+	public List<SearchVO> getBestKeyword() {
+		boolean isOK = false;
+		ResultSet rs = null;
+		
+		List<SearchVO> list = new ArrayList<>();
+		
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement("SELECT *, COUNT(keyword) FROM tblSearch GROUP BY keyword ORDER BY COUNT(keyword) DESC");
+
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+
+				SearchVO vo = new SearchVO();
+				
+				vo.setKeyword( rs.getString(1) );
+				vo.setRegdate( rs.getString(2) );
+				vo.setCount( rs.getInt(3) );
+				
+				list.add(vo);
+			}
+			
+
+			if(pstmt.executeUpdate() > 0) {
+				isOK = true;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+		return list;	
+	}
+	
+	public boolean insertKeywordToBestList(String keyword, String regdate) {
+		boolean isOK = false;
+		
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement("insert into tblSearch values(?, ?)");
+			pstmt.setString(1, keyword);
+			
+			// 문자열에서 시간으로 변환 설정
+			java.sql.Timestamp t = java.sql.Timestamp.valueOf(regdate);
+			pstmt.setTimestamp(2, t);
+			
+			if(pstmt.executeUpdate() > 0) {
+				isOK = true;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+		return true;
 	}
 	
 //	public List<ProductVO> findThumbnail(String shopName) {

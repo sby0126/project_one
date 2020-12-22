@@ -13,10 +13,11 @@ export class DataLoader extends Component {
         const shopType = urlParams.get("shopType") || "S";
         const category = parseInt(urlParams.get("category")) || 100;
         const pg = parseInt(urlParams.get("pg")) || 1;
-        const ages = parseInt(urlParams.get("ages")) || "all";      
+        const ages = parseInt(urlParams.get("ages")) || "all";  
+        const keyword = urlParams.get("keyword");
 
         const ret = {
-            gndr, shopType, category, pg, ages
+            gndr, shopType, category, pg, ages, keyword
         };
 
         Object.assign(this, ret);

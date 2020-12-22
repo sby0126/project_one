@@ -106,7 +106,7 @@ class Cookie extends Component {
             const v = kv.split("=");
             const key = v[0];
             if(!v[1]) {
-                return;
+                v[1] = "0";
             }
             const value = decodeURIComponent( v[1] );
 

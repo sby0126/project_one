@@ -23,6 +23,8 @@ public class SaleCommand extends Command {
 		String genderType = request.getParameter("gndr");
 		String shopType = request.getParameter("shopType");
 		
+		String keyword = request.getParameter("keyword");
+		
 		if(!pageType.equals("sale")) {
 			return null;
 		}
