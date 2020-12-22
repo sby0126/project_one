@@ -28,7 +28,7 @@ public class DetailInputCommand extends Command {
 		
 		DetailInputService detailInputService = new DetailInputService();
 		
-		boolean isSuccess = detailInputService.inputDetail(title, price, qty);
+		boolean isSuccess = detailInputService.inputDetail(request, title, price, qty);
 		boolean inputSuccess = false;
 		
 		uri = request.getPathInfo();
@@ -59,10 +59,13 @@ public class DetailInputCommand extends Command {
 				
 				switch(choice) {
 					case 0 : result.forward(request.getContextPath() + "/pages/cart.jsp");
+							 request.setAttribute("title", title);
+							 request.setAttribute("price", price);
+							 request.setAttribute("qty", qty);
 							 break;
 							 
 					case 1 : result = null;
-							 break;					 
+							 break;	
 				}
 				
 			}
