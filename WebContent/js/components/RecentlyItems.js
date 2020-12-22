@@ -19,6 +19,7 @@ class RecentlyItems extends Component {
         // 최근 본 아이템 또는 상품의 갯수를 정수로 가져옵니다.
         const cookie = new ConstantCookie();
         let raw = getCookie(`recentShopItems`) || "";
+
         let count1 = 0;
         let count2 = 0;
         /**
@@ -34,7 +35,7 @@ class RecentlyItems extends Component {
         $(IDS.SHOP).text(count1);
 
         // 최근 아이템 갯수
-        let raw2 = getCookie("recentlyItems");
+        let raw2 = getCookie("recentlyItems") || "";
 
         console.log("최근 아이템 갯수 : " + raw2, cookie.get("recentlyItems"));
 
