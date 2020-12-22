@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ page import="dao.*, vo.*" %>
         <!-- 헤더의 시작 -->
         <header>
        	
@@ -29,10 +30,16 @@
                 <div class="header-right">
                 	<%
                 		String id = (String)session.getAttribute("id");
+                		CustomerDAO dao = CustomerDAO.getInstance();
                 	%>
                 	<c:set var="id" value="<%=id %>" />
                 	<c:choose>
                 		<c:when test="${id != null}">
+							<%
+								CustomerVO vo = dao.getMember(id);
+							%>             
+							<c:set var="isSNS" value="<%= dao.isSNSMember(id) %>" />
+							<div class="header-right-login-button">(<%= vo.getCtmtype() %>)</div>
                 			<a class="header-right-login-button" href="${pageContext.request.contextPath}/members/modifyMemberForm.do?id=${id}">회원 정보 수정</a>
                 			<c:if test="${id=='admin'}">
                 				<a class="header-right-login-button" href="${pageContext.request.contextPath}/admin">관리자 페이지</a>
@@ -43,7 +50,7 @@
                 			<button class="header-right-login-button">로그인</button>		
                 		</c:otherwise>
                 	</c:choose>
-                    <input type="text" class="input-non-border-box" name="" id="" placeholder="검색어를 입력하세요">
+                    <input type="text"  class="input-non-border-box" name="" id="zzzz" placeholder="검색어를 입력하세요">
                 </div>
             </div>
                 <!-- 숨겨진 메뉴 -->
@@ -160,10 +167,38 @@
 	                </div>
 	            </div>
             </c:if>
+           <ul class="popular-search">
+				<h4>인기검색어</h4>
+				<li> 1 <span>...</span> <span><img src="#" width="32px"></span> </li>
+				<li> 2 <span>...</span> <span><img src="#" width="32px"></span> </li>
+				<li> 3 <span>...</span> <span><img src="#" width="32px"></span> </li>
+				<li> 4 <span>...</span> <span><img src="#" width="32px"></span> </li>
+				<li> 5 <span>...</span> <span><img src="#" width="32px"></span> </li>
+				<li> 6 <span>...</span> <span><img src="#" width="32px"></span> </li>
+				<li> 7 <span>...</span> <span><img src="#" width="32px"></span> </li>
+			</ul>
            
         </header>
         <script>
-        
+        	
+        	$('body').click(function(e){
+        		var id = e.target.getAttribute('id');
+        		
+        		if(id != "zzzz"){
+        			$(".popular-search").css("display","none");	
+        		}else{
+        			$(".popular-search").css("display","block");
+        		}
+        	});
+        	
+        	/* $("body").not("ul.popular-search, input.input-non-border-box").click(function(){
+        		
+        		
+        	}); */
+        	
+        	/* $(".popular-search").blur(function(){
+    			$(".popular-search").css("display","none");
+    		} */
 	        (function () {
 	            //여기에 스크립트 추가
 	            
@@ -171,7 +206,7 @@
 	            const insideMenu = $(".side_box");
 
 	            //헤더네비게이션(게시판) 마우스 온 아웃했을때
-	            navContainer.mouseover(function () {
+	            /* navContainer.mouseover(function () {
 	
 	                $("#nav_board_li_icon , #nav_board_li_title").css("display", "none");
 	                insideMenu.css("position", "absolute");
@@ -182,7 +217,7 @@
 	            navContainer.mouseout(function () {
 	                $("#nav_board_li_icon , #nav_board_li_title").css("display", "block");
 	                insideMenu.css("display", "none");
-	            });
+	            }); */
 	            
 	        })();
         </script>   

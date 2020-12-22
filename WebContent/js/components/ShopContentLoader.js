@@ -1,6 +1,7 @@
 import { Component } from "./Component.js";
 import {blobData, imgSrc, mainImg} from "../services/data.js";
 import { DataLoader } from "./DataLoader.js";
+import { ImagePath } from "./ImagePath.js";
 
 export class ShopContentLoader extends Component {
     
@@ -9,8 +10,8 @@ export class ShopContentLoader extends Component {
 
         this._currentCards = 0; // 현재 카드 갯수
         this._fetchCards = 10; // 새로 가져올 카드 갯수
-        this._maxCards = 150; // 최대 카드 갯수
-        this._interval = 400; // 이벤트 과대 실행 방지 용 실행 간격 800ms
+        this._maxCards = 20; // 최대 카드 갯수
+        this._interval = 100; // 이벤트 과대 실행 방지 용 실행 간격 100ms
         this._data = {};
 
         this._loaders = {};
@@ -111,7 +112,7 @@ export class ShopContentLoader extends Component {
                 // 로컬 모드일 경우, 로컬에 있는 이미지 데이터를 사용합니다.
                 if(this._isLocalMode) {
                     const {gndr, shopType} = this._dataLoader;
-                    parent.createNewStyleSheet("d-"+idx, `/images/shop/${gndr}/${shopType}/${filename.url}`);     
+                    parent.createNewStyleSheet("d-"+idx, ImagePath.getShopPath(gndr, shopType, filename.url));     
                 } else {
                     parent.createNewStyleSheet("d-"+idx, imgSrc + mainImg[filename.url]);     
                 }
@@ -124,19 +125,24 @@ export class ShopContentLoader extends Component {
                 });
 
                 $(myCard).html(`
-                    <a href="${filename.link} target='_blank'>
+                    <a href="${filename.link}" target='_blank'>
                         <i class="shop-hot-icon" data-title="HOT"></i>
                         <h2 class="contents-shop-name">${filename.shopName}</h2>
                         <p class="shop-contents">${ lines }</p>
                         <div class="shop-button-container" data-id="${filename.id}">
                             <button class="shop-button all-item-button">전체 상품</button>
-                            <button class="shop-button">
-                                <p class="shop-button-text">마이샵</p>
+                            <button class="shop-button" onclick="return false">
+                                <p class="shop-button-text" onclick="return false">마이샵</p>
                                 <i class="shop-button-icon"></i>
                             </button>
                         </div>                    
                     </a>
                 `);
+
+                // 상위 노드에 걸린 클릭 이벤트의 실행을 방지합니다.
+                $(myCard).find(".shop-button-container button").on("click", (ev) => {
+                    return false;
+                })
 
                 // 전체 상품 버튼이 클릭되었을 때 실행되어야 하는 내용을 정의하세요.
                 $(`div[data-id='${filename.id}'] > button.all-item-button`).on("click", (ev) => {

@@ -78,8 +78,8 @@ export class LoginButton extends Component {
 		
 		document.head.appendChild(script); //or something of the likes
 		
-	}
-
+    }
+    
     static id() {
         return LoginButton;
     }

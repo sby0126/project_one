@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <% request.setCharacterEncoding("UTF-8"); %>
-<%@ page import="freeBoard.vo.PageInfo"%>
-<%@ page import="freeBoard.vo.BoardBean"%>
+<%@ page import="vo.board.free.PageInfo"%>
+<%@ page import="vo.board.free.BoardBean"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.io.PrintWriter" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  

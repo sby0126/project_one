@@ -2,10 +2,10 @@ package service;
 
 import java.sql.ResultSet;
 import java.util.List;
-import javax.servlet.http.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 import vo.ProductVO;
-import dao.ContentDAO;
 
 public class DetailInputService {
 
@@ -28,9 +28,5 @@ public class DetailInputService {
 		
 		return success;
 	}
-	
-	
-	
-	
 	
 }

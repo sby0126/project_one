@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ page import="dao.ContentDAO, org.json.simple.*" %>
+<%@ page import="dao.*, vo.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%
 	response.setHeader("Cache-Control","no-store"); 
@@ -45,10 +46,16 @@
                 <div class="header-right">
                 	<%
                 		String id = (String)session.getAttribute("id");
+                	CustomerDAO dao = CustomerDAO.getInstance();
                 	%>
                 	<c:set var="id" value="<%=id %>" />
                 	<c:choose>
                 		<c:when test="${id != null}">
+							<%
+								CustomerVO vo = dao.getMember(id);
+							%>                   		
+							<c:set var="isSNS" value="<%= dao.isSNSMember(id) %>" />
+							<div class="header-right-login-button">(<%= vo.getCtmtype() %>)</div>							
                 			<a class="header-right-login-button" href="${pageContext.request.contextPath}/members/modifyMemberForm.do?id=${id}">회원 정보 수정</a>
                 			<c:if test="${id=='admin'}">
                 				<a class="header-right-login-button" href="${pageContext.request.contextPath}/admin">관리자 페이지</a>
@@ -66,43 +73,47 @@
                 <div class="header-popup-container">
                     <ul class="header-menu-list">
                         <li class="menu">
-                            <a href="${pageContext.request.contextPath}" class="menu-link">
+                            <a href="${pageContext.request.contextPath}/pages/recently_viewed_shop.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
-                                <p class="menu-title">최근 본 샵 <em>0</em></p>
+                                <p class="menu-title">최근 본 샵 <em id="recently_shop_count">0</em></p>
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="${pageContext.request.contextPath}" class="menu-link">
+                            <a href="${pageContext.request.contextPath}/pages/recently_viewed_item.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
-                                <p class="menu-title">최근 본 상품 <em>0</em></p>
+                                <p class="menu-title">최근 본 상품 <em id="recently_item_count">0</em></p>
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="${pageContext.request.contextPath}" class="menu-link">
+                            <a href="${pageContext.request.contextPath}/pages/myshop.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">MY SHOP</p>
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="${pageContext.request.contextPath}" class="menu-link">
+                            <a href="${pageContext.request.contextPath}/pages/interested_item.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">관심 상품</p>
                             </a>
                         </li>
-                        <li class="menu" id="nav_board_li">
-                            <a href="#" class="menu-link" id="asdasd2">
-                                <div class="menu-icon" id="nav_board_li_icon"></div>
-                                <p class="menu-title" id="nav_board_li_title">1:1 문의</p>
-                            	<div class="side_box" >
-                             		<ul class="side_menu">
-		                            	<a href="/boardList.abc"><li>자유게시판</li></a>
-		                            	<a href="/pages/board-default.jsp"><li>1:1 문의</li></a>
-		                            	<a href="#"><li>OO게시판</li></a>
-                           			 </ul>
-                            	</div>
-                            </a> 
-                           <%--  ${pageContext.request.contextPath}/pages/board-default.jsp --%>
-                        </li>
+                        <li class="menu">
+                            <a href="#" class="menu-link">
+                                <div class="menu-icon"></div>
+                                <p class="menu-title">공지 사항</p>
+                            </a>
+                        </li>                         
+                        <li class="menu">
+                            <a href="/pages/board-default.jsp" class="menu-link">
+                                <div class="menu-icon"></div>
+                                <p class="menu-title">1:1 문의</p>
+                            </a>
+                        </li>                          
+                        <li class="menu">
+                            <a href="/boardList.abc" class="menu-link">
+                                <div class="menu-icon"></div>
+                                <p class="menu-title">자유 게시판</p>
+                            </a>
+                        </li>     
                         <li class="menu">
                             <a href="${pageContext.request.contextPath}/pages/map.jsp" class="menu-link">
                                 <div class="menu-icon"></div>

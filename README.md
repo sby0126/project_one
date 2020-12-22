@@ -1,20 +1,35 @@
 # Introduction
-본 페이지는 쇼핑몰 클론 프로젝트이며,
-<a href="https://biud436.github.io/project_one/">https://biud436.github.io/project_one/</a>에서 호스팅되고 있습니다.
+We have implemented a template site through JSP(Java Server Page)
+and the project called 'Project One' consists with below specs :
 
-# 주의 사항
-
-- CSS 작성 규칙
-    - CSS ```class``` 와 ```id``` 명은 소문자로 남겨주세요. 
-    - CSS는 각 명사를 하이픈(-)으로 구분합니다.
-    - 주석을 철저하게 작성해주시기 바랍니다.
-    - 자바스크립트 변수는 ```카멜 표기법```을 사용해주시기 바랍니다.
-    - 파일 작성 시 상단에 작성자 명을 반드시 추가해주시기 바랍니다.
-
+|Name|Version|
+|--|--|
+|JDK|java 15 2020-09-15, Java(TM) SE Runtime Environment (build 15+36-1562)|
+|Maria DB|10.3.25-MariaDB-0ubuntu0.20.04.1|
+|Tomcat|9|
+|port|9988|
 
 # License
 
-- jQuery (MIT) - https://jquery.org/license/
-- QuillJS (BSD 3-Clause)  - https://github.com/quilljs/quill/blob/develop/LICENSE
-- SCSS (MIT) - https://github.com/duojs/sass/blob/master/license
-- undercore.js(MIT) - https://github.com/jashkenas/underscore/blob/master/LICENSE
+|Name|License|URL|
+|--|--|--|
+| Tomcat | Apache License 2.0 | http://tomcat.apache.org/ |
+| MariaDB | LGPL | https://mariadb.com |
+| jQuery | MIT | https://jquery.org/license/ |
+| QuillJS | BSD 3, Clause  | https://github.com/quilljs/quill/blob/develop/LICENSE |
+| SCSS | MIT | https://github.com/duojs/sass/blob/master/license |
+| undercore.js | MIT | https://github.com/jashkenas/underscore/blob/master/LICENSE |
+| 네이버 로그인 API | https://developers.naver.com/products/terms/ | https://developers.naver.com/docs/login/overview/ |
+| 카카오 로그인 API | MIT | https://developers.kakao.com/docs/latest/ko/kakaologin/common |
+| 다음 우편 번호 서비스 | Free | http://postcode.map.daum.net/ |
+| EmailJS | Free Version | https://www.emailjs.com/ |
+| JSON.simple | Apache 2.0 | https://mvnrepository.com/artifact/com.googlecode.json|simple/json|simple/1.1.1 |
+| JavaBeans(TM) Activation Framework | CDDL 1.0 | https://mvnrepository.com/artifact/javax.activation/activation/1.1.1 |
+| JSON Web Token Support For The JVM | Apache 2.0 | https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt/0.9.0 |
+| JavaMail API | CDDL, GPL 2.0 | https://mvnrepository.com/artifact/javax.mail/mail/1.4.7 |
+| Java MultipartRequest | http://www.servlets.com/cos/license.html | http://www.servlets.com/cos/ |
+| Selenium | Apache 2.0 | https://www.selenium.dev/ |
+| Font Awesome | https://fontawesome.com/license/free | https://fontawesome.com/ |
+| Bootstrap | MIT | https://getbootstrap.com/docs/4.0/about/license/ |
+| jQuery.filterTable | MIT | https://github.com/sunnywalker/jQuery.FilterTable |
+| jQuery.fancyTable | MIT | https://github.com/myspace-nu/jquery.fancyTable |

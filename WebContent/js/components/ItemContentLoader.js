@@ -2,6 +2,8 @@ import { Component } from "./Component.js";
 import { getDataManager } from "../DataManager.js";
 import { itemData, imgSrc, itemImg } from "../services/itemData.js";
 import { DataLoader } from "./DataLoader.js";
+import { Request } from "../Request.js";
+import { ImagePath } from "./ImagePath.js";
 
 /**
  * @author 어진석
@@ -88,9 +90,6 @@ export class ItemContentLoader extends Component {
             return;
         }
 
-        // const blobData = await this.loadJsonAsync(`json/item/item_data${this._index++}.json`);
-        // const first = currentCards;
-
         // 카드를 새로 가져옵니다.
         for(let idx = currentCards; idx < (currentCards + fetchCards); idx++) {
             const card = this._items[idx];
@@ -100,6 +99,7 @@ export class ItemContentLoader extends Component {
             }            
             
             // let myImgData = itemData[idx];
+
             let myImgData = this._data.contentData[idx];
             const imgSrc = this._data.imageUrl;
             const itemImg = this._data.imageData;            
@@ -115,7 +115,26 @@ export class ItemContentLoader extends Component {
                 card.querySelector("p").setAttribute("d-"+idx, "");
         
                 const filename = myImgData;
-                parent.createNewStyleSheet("d-"+idx, imgSrc + itemImg[filename.url]);     
+                
+                let isOtherCDN = false;
+                
+                /**
+                 * 파일명이 http로 시작하면
+                 * @type {String}
+                 */
+                const startUrl = itemImg[filename.url];
+                if(startUrl.startsWith("http")) {
+                    isOtherCDN = true;
+                }
+
+                const {gndr, shopType} = this._dataLoader;
+                let imgUrl = ImagePath.getItemPath(gndr, shopType, filename.url);
+
+                if(isOtherCDN) {
+                    imgUrl = filename.url;
+                }
+            
+                parent.createNewStyleSheet("d-"+idx, imgUrl);     
 
                 const myCard = card.querySelector("p");
                 const {title, price, shop} = myImgData;
@@ -135,22 +154,43 @@ export class ItemContentLoader extends Component {
 
                     const dataId = idx; // 기본키
 
+                    const request = new Request();
+
+                    const myData = {
+                        pageType: request.getParameter("pageType") || "shop",
+                        genderType: request.getParameter("gndr") || "M",
+                        shopType: request.getParameter("shopType") || "S",
+                        offset: {
+                            start: 0,
+                            count: 68,
+                        },
+                        imageUrl: "https://drive.google.com/uc?export=view&id=",
+                        contentData: [
+                            myImgData
+                        ],
+                        thumbnail: imgUrl,
+                    };
                     // 주소에 데이터 ID를 포함시킵니다.
                     // 이렇게 GET과 비슷한 식으로 URL을 만들면 로컬 스토리지 등을 이용하지 않아도 데이터를 간단히 전송할 수 있습니다.
-                    location.href = `pages/detail.jsp?date=${Date.now()}&title=${title}&price=${price}&shop=${shop}&dataId=${dataId}`;
+                    location.href = `pages/detail.jsp?data=${btoa(unescape(encodeURIComponent(JSON.stringify(myData))))}&id=${myImgData.id}`;
                 }
 
                 card.insertAdjacentHTML( 'afterbegin', `
                     <a href="${filename.link} target='_blank'>
                         <i class="shop-hot-icon"></i>
+                        </a>
                         <div class="item-button-container"> 
                             <h2>${title}</h2>
                             <p>${price}</p>
                             <p>${shop}</p>
                             <button class="like-button"></button>
                         </div>
-                    </a>
                 `);
+
+                $(card).find(".like-button").on("click", (ev) => {
+                    $(card).find(".like-button").toggleClass("active");
+                    return false;
+                })
 
                 // 카드의 갯수를 1 증감시킵니다.
                 if(this._currentCards < this._maxCards)

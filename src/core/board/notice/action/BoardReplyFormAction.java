@@ -3,9 +3,9 @@ package core.board.notice.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import svc.BoardDetailService;
-import vo.ActionForward;
-import vo.BoardBean;
+import core.board.notice.svc.BoardDetailService;
+import vo.board.notice.ActionForward;
+import vo.board.notice.BoardBean;
 
 public class BoardReplyFormAction implements Action {
 

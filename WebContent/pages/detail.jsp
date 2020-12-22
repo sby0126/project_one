@@ -237,6 +237,8 @@
             }
         });
         </script>
+        <jsp:include page="/pages/login.jsp"></jsp:include>
         <script type="module" src="../js/ItemDetailPage.js"></script>
+        <script type="module" src="/js/CookieServiceForItem.js"></script>
     </body>
 </html>

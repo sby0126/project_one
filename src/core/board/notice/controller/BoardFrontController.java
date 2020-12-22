@@ -9,15 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import action.Action;
-import action.BoardDeleteFormAction;
-import action.BoardDeleteProAction;
-import action.BoardDetailAction;
-import action.BoardListAction;
-import action.BoardReplyFormAction;
-import action.BoardReplyProAction;
-import action.BoardWriteProAction;
-import vo.ActionForward;
+import core.board.notice.action.Action;
+import core.board.notice.action.BoardDeleteFormAction;
+import core.board.notice.action.BoardDeleteProAction;
+import core.board.notice.action.BoardDetailAction;
+import core.board.notice.action.BoardListAction;
+import core.board.notice.action.BoardReplyFormAction;
+import core.board.notice.action.BoardReplyProAction;
+import core.board.notice.action.BoardWriteProAction;
+import vo.board.notice.ActionForward;
 
 
 @WebServlet("*.bo")

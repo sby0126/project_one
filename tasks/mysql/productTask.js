@@ -33,7 +33,7 @@ class SQLManagerImpl {
 
     async dropTable() {
         this._conn = await this.createConnection();
-        this._conn.query(`DROP TABLE if exists tblproduct`, (err, result) => {
+        this._conn.query(`DROP TABLE if exists tblproduct2`, (err, result) => {
             if(err) {
                 console.warn(err);
                 return;
@@ -46,7 +46,7 @@ class SQLManagerImpl {
 
     async createTable(conn) {
         
-        conn.query(`create table tblProduct ( id int(11) not null auto_increment, pageType varchar(4) not null, genderType varchar(1) not NULL, shopType varchar(1) not null, shopName varchar(20), texts varchar(80), contentUrl varchar(100) not null, title varchar(50), price varchar(10), term varchar(15), CONSTRAINT PRIMARY KEY tblProduct_pk (id) )`, (err, result) => {
+        conn.query(`create table tblproduct2 ( id int(11) not null auto_increment, pageType varchar(4) not null, genderType varchar(1) not NULL, shopType varchar(1) not null, shopName varchar(20), texts varchar(80), contentUrl varchar(100) not null, title varchar(50), price varchar(10), term varchar(15), CONSTRAINT PRIMARY KEY tblproduct2_pk (id) )`, (err, result) => {
             if(err) {
                 console.warn(err);
                 return;
@@ -59,7 +59,7 @@ class SQLManagerImpl {
 
     async insertAllData(conn) {
         try {
-            const query = `insert into tblProduct(pageType, genderType, shopType, shopName, texts, contentUrl, title, price, term) values(?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+            const query = `insert into tblproduct2(pageType, genderType, shopType, shopName, texts, contentUrl, title, price, term) values(?, ?, ?, ?, ?, ?, ?, ?, ?)`;
             file.forEach(data => {
                 const {pageType, genderType, shopType, contentData} = data;
 

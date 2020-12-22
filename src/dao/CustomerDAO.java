@@ -91,7 +91,8 @@ public class CustomerDAO implements IDAO {
 					.setIsAdmin(    rs.getString("IS_ADMIN"))
 					.setLastLogin( 	rs.getString("LAST_LOGIN") )
 					.setFailedLoginCount( rs.getString("FAILED_LOGIN_COUNT") )
-					.setIsLock( 	rs.getString("IS_LOCK") );
+					.setIsLock( 	rs.getString("IS_LOCK") )
+					.setCtmtype( rs.getString("CTMTYPE"));
 				
 				cust = c;
 			}			
@@ -136,6 +137,7 @@ public class CustomerDAO implements IDAO {
 				String lastLogin = rs.getString("LAST_LOGIN");
 				String failedLoginCount = rs.getString("FAILED_LOGIN_COUNT");
 				String isLock = rs.getString("IS_LOCK");
+				String ctmType = rs.getString("CTMTYPE");
 				
 				CustomerVO c = new CustomerVO();
 				
@@ -149,7 +151,8 @@ public class CustomerDAO implements IDAO {
 					.setEmail(email)
 					.setZipCode(zipCode)
 					.setJoinDate(joinDate)
-					.setSalt(salt);
+					.setSalt(salt)
+					.setCtmtype(ctmType);
 				
 				c.setLastLogin(lastLogin);
 				c.setFailedLoginCount(failedLoginCount);
@@ -167,6 +170,36 @@ public class CustomerDAO implements IDAO {
 		}
 		
 		return customerList;
+	}
+	
+	public boolean isSNSMember(String id) {
+		boolean isOK = false;;
+		
+		ResultSet rs = null;
+		
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement("select * from tblCustomer where CTMID = ?");
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			while( rs.next() ) {
+				String ctmType = rs.getString("CTMTYPE");
+				if(ctmType.equals("네이버") || ctmType.equals("카카오")) {
+					return true;
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt, rs);
+		}
+		
+		return false;
 	}
 	
 	/**
@@ -299,6 +332,7 @@ public class CustomerDAO implements IDAO {
 			pstmt.setString(7, c.getZipCode());
 			pstmt.setString(8, c.getIsAdmin());
 			pstmt.setString(9, c.getSalt());
+			pstmt.setString(10, c.getCtmtype());
 			
 			if(pstmt.executeUpdate() > 0) {
 				conn.commit();
@@ -347,6 +381,62 @@ public class CustomerDAO implements IDAO {
 		}
 		
 		return ret;
+	}
+	
+	public boolean secessionCustomer(String id, String password) {
+		boolean isSecession = false;
+		
+		try {
+			conn = pool.getConnection();
+			
+			CustomerVO vo = getMember(id);
+						
+			String salt = vo.getSalt();
+			
+			if(password == null) {
+				password = "0";
+			}
+			
+			String hashedPassword = SHA256Util.getEncrypt(password, salt);
+			
+			boolean isValid = vo.getPassword().equals(hashedPassword);
+			
+			if(vo.getCtmtype().equals("카카오") || vo.getCtmtype().equals("네이버")) {
+				isValid = true;
+			}
+			
+			// 비밀 번호 확인 처리
+			if(isValid) {
+				
+				// 외래키가 걸린 게시물의 댓글 삭제
+				pstmt = conn.prepareStatement("delete from tblQNABoardComments where authorID = ?");
+				pstmt.setString(1, id);
+				pstmt.executeUpdate();
+				
+				// 외래키가 걸린 게시물 삭제
+				pstmt = conn.prepareStatement("delete from tblQNABoard where authorID = ?");
+				pstmt.setString(1, id);
+				pstmt.executeUpdate();
+				
+				// 회원 탈퇴 처리
+				pstmt = conn.prepareStatement("delete from tblCustomer where CTMID = ?");
+				pstmt.setString(1, id);
+				if(pstmt.executeUpdate() > 0) {
+					isSecession = true;
+					conn.commit();
+				}
+				
+			}	
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+		return isSecession;
 	}
 	
 	/**
@@ -415,6 +505,40 @@ public class CustomerDAO implements IDAO {
 		}
 		
 		return isValidID && isValidEmail;
+	}
+	/**
+	 * 이메일이 DB에 있는지 확인합니다. 
+	 *  
+	 * @param id
+	 * @param email
+	 * @return
+	 */
+	public boolean checkEmail(String email) {
+		boolean isValidEmail = false;
+		
+		ResultSet rs = null;
+		
+		try {
+			
+			conn = pool.getConnection();
+			String query = "select CTMID, EMAIL from tblCustomer where email = ?";
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, email);
+			
+			rs = pstmt.executeQuery();
+			
+			isValidEmail = rs.next();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+		return isValidEmail;
 	}
 	
 	/**

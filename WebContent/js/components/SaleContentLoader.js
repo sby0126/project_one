@@ -1,6 +1,7 @@
 import { Component } from "./Component.js";
 import {saleData, imgSrc, saleImg} from "../services/saleData.js";
 import { DataLoader } from "./DataLoader.js";
+import { ImagePath } from "./ImagePath.js";
 
 export class SaleContentLoader extends Component {
 
@@ -90,8 +91,9 @@ export class SaleContentLoader extends Component {
                 card.querySelector("p").setAttribute("d-"+idx, "");
 
                 const filename = myImgData;
+                const {gndr} = this._dataLoader;
                 // 이미지 영역을 생성합니다.
-                parent.createNewStyleSheet("d-"+idx, imgSrc + saleImg[filename.url]);     
+                parent.createNewStyleSheet("d-"+idx, ImagePath.getSalePath(gndr, filename.url));     
 
                 const myCard = card.querySelector("p");
                 const {title, shop} = myImgData;

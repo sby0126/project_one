@@ -1,5 +1,4 @@
-<%@page import="bbsnotice.PageInfo"%>
-<%@page import="bbsnotice.BoardBean"%>
+<%@page import="core.board.notice.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.text.SimpleDateFormat"%>

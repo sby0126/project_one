@@ -29,7 +29,6 @@ recent-product-container.html
 recent-product-container.jsp
 recently_viewed_item.jsp
 recently_viewed_shop.jsp
-shop-detail.html
 shop-detail.jsp
 shop.jsp
 terms.jsp

@@ -65,7 +65,13 @@ export class FilterBoxButtons extends Component {
         /**
          * @type {HTMLDivElement[]}
          */
-        const filterBoxButtons = Array.from(document.querySelector(".header-filter-box-header").children);
+        let filterBoxHeader = document.querySelector(".header-filter-box-header");
+        if(!filterBoxHeader) {
+            filterBoxHeader = {children: []};
+            return;
+        }
+
+        const filterBoxButtons = Array.from(filterBoxHeader.children);
 
         // 필터 버튼이 2개 있을 때 활성화 버튼을 토글 처리합니다.
         if(filterBoxButtons.length < 3) {

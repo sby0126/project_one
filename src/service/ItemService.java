@@ -51,6 +51,7 @@ public class ItemService extends ContentService {
 			newContentData.put("shop", vo.getShopname());
 			newContentData.put("url", vo.getContenturl());
 			newContentData.put("link", vo.getLink());
+			newContentData.put("id", vo.getId());
 			
 			contentData.add(newContentData);
 			imageData.put(vo.getContenturl(), vo.getImgid());
@@ -85,6 +86,7 @@ public class ItemService extends ContentService {
 			newContentData.put("shop", vo.getShopname());
 			newContentData.put("url", vo.getContenturl());
 			newContentData.put("link", vo.getLink());
+			newContentData.put("id", vo.getId());
 			
 			contentData.add(newContentData);
 			imageData.put(vo.getContenturl(), vo.getImgid());

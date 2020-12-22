@@ -1,7 +1,5 @@
 package vo;
 
-import java.util.Date;
-
 import utils.SHA256Util;
 
 /**
@@ -27,6 +25,8 @@ public class CustomerVO {
 	private String lastLogin;
 	private String failedLoginCount;
 	private String isLock;	
+	
+	private String ctmtype;
 
 		
 	public String getId() {
@@ -180,6 +180,14 @@ public class CustomerVO {
 		this.isLock = isLock;
 		
 		return this;
+	}
+
+	public String getCtmtype() {
+		return ctmtype;
+	}
+
+	public void setCtmtype(String ctmtype) {
+		this.ctmtype = ctmtype;
 	}
 
 }

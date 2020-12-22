@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <!DOCTYPE html>
 
-<%@ page import="freeBoard.vo.BoardBean"%>
+<%@ page import="vo.board.free.BoardBean"%>
 <%
 	BoardBean article = (BoardBean)request.getAttribute("article");
     String nowPage = (String)request.getAttribute("page");
