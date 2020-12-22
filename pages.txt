@@ -23,6 +23,7 @@ map.jsp
 modifyMemberForm.jsp
 myshop.jsp
 outer-link-page.jsp
+payments-form.jsp
 payments.jsp
 post.html
 recent-product-container.html
