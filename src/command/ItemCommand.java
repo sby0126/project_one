@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONObject;
 
 import action.ActionResult;
+import service.ContentsSearchService;
 import service.ItemService;
 
 public class ItemCommand extends Command {
@@ -32,7 +33,14 @@ public class ItemCommand extends Command {
 		}
 		
 		ItemService itemService = new ItemService();
-		JSONObject data = itemService.getItem(pageType, genderType, shopType, category, ages);
+		JSONObject data = new JSONObject();
+		
+		if(keyword != null) {
+			ContentsSearchService sv = new ContentsSearchService();
+			data = sv.getItem(pageType, genderType, shopType, category, ages, keyword);
+		} else {
+			data = itemService.getItem(pageType, genderType, shopType, category, ages);	
+		}
 		
 		response.setCharacterEncoding("UTF-8");
 		

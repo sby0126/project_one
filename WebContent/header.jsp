@@ -55,7 +55,7 @@
                 			<button class="header-right-login-button">로그인</button>		
                 		</c:otherwise>
                 	</c:choose>
-                    <input type="text"  class="input-non-border-box" name="" id="zzzz" placeholder="검색어를 입력하세요">
+                    <input type="text" class="input-non-border-box" name="" id="my-search-box" placeholder="검색어를 입력하세요">
                 </div>
             </div>
                 <!-- 숨겨진 메뉴 -->
@@ -174,8 +174,13 @@
             </c:if>
            <ul class="popular-search">
 				<h4>인기검색어</h4>
+				<c:set var="i" value="0"></c:set>
+				<c:set var="flag" value="false"></c:set>
 				<c:forEach var="m" items="${searchList}" varStatus="stat">
-					<li> ${stat.count} <span>${ m.getKeyword() }</span>&nbsp;<span>${ m.getCount() }</span> </li>
+					<c:if test="${i <= 8}">
+						<li> ${stat.count} <span>${ m.getKeyword() }</span>&nbsp;<span>${ m.getCount() }</span> </li>
+						<c:set var="i" value="${i + 1}" />
+					</c:if>
 				</c:forEach>
 <!-- 				<li> 2 <span>...</span> <span><img src="#" width="32px"></span> </li> -->
 <!-- 				<li> 3 <span>...</span> <span><img src="#" width="32px"></span> </li> -->
@@ -190,7 +195,7 @@
         	$('body').click(function(e){
         		var id = e.target.getAttribute('id');
         		
-        		if(id != "zzzz"){
+        		if(id != "my-search-box"){
         			$(".popular-search").css("display","none");	
         		}else{
         			$(".popular-search").css("display","block");

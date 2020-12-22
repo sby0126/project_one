@@ -30,9 +30,9 @@ caller.on("getCookie", (name) => {
     const id = request.getParameter("id");
 
     if( value ) {
-        caller.emit("createCookie", [cookieName, `${value},` + id]);
+        caller.emit("createCookie", cookieName, `${value},` + id);
     } else {
-        caller.emit("createCookie", [cookieName, id]);
+        caller.emit("createCookie", cookieName, id);
     }
 });
 

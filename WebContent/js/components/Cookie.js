@@ -51,7 +51,7 @@ class Cookie extends Component {
      * 쿠키를 생성합니다.
      */
     create() {
-        let cookie = encodeURIComponent(this._name)
+        let cookie = this._name
                     + "=" 
                     + encodeURIComponent(this._value)
                     + "; path=" 
@@ -105,9 +105,9 @@ class Cookie extends Component {
         arr.forEach(kv => {
             const v = kv.split("=");
             const key = v[0];
-            if(!v[1]) {
-                v[1] = "0";
-            }
+            // if(!v[1]) {
+            //     v[1] = "0";
+            // }
             const value = decodeURIComponent( v[1] );
 
             // 중복된 값을 제거합니다.

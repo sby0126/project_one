@@ -13,7 +13,7 @@ class Impl extends EventEmitter {
 
 const caller = new Impl();
 const request = new Request();
-const cookieName = `recentlyItems`;
+const cookieName = "recentlyItems";
 
 // 쿠키 생성
 caller.on("createCookie", (name, value) => {
@@ -27,15 +27,19 @@ caller.on("getCookie", (name) => {
     const cookie = new ConstantCookie();
     const value = cookie.get(name);
 
-    console.log(value);
+    console.log(name);
 
     const id = request.getParameter("id");
 
+    console.log(value);
+
     if( value ) {
-        caller.emit("createCookie", [cookieName, `${value},` + id]);
+        caller.emit("createCookie", cookieName, `${value},` + id);
     } else {
-        caller.emit("createCookie", [cookieName, id]);
+        caller.emit("createCookie", cookieName, id);
     }
 });
 
 caller.emit("getCookie", cookieName);
+
+export {caller};
