@@ -1,5 +1,6 @@
 package dao;
 
+import java.net.URLDecoder;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -194,6 +195,7 @@ public class ContentDAO implements IDAO {
 			}
 		}
 		
+		searchKeyword = URLDecoder.decode(searchKeyword);
 		
 		System.out.println("카테고리 : " + category);
 		System.out.println("연령대 : " + ages);
@@ -212,6 +214,7 @@ public class ContentDAO implements IDAO {
 			pstmt.setString(2, genderType);
 			pstmt.setString(3, shopType);
 			
+			
 			int i = 3;
 			
 			if(category != null) {
@@ -222,6 +225,11 @@ public class ContentDAO implements IDAO {
 			if(ages != null) {
 				i += 1;
 				pstmt.setString(i, "%" + ages + "%");
+			}		
+			
+			if(searchKeyword != null) {
+				i += 1;
+				pstmt.setString(i, "%" + searchKeyword + "%");
 			}			
 			
 			rs = pstmt.executeQuery();

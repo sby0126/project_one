@@ -3,6 +3,7 @@ import { JoinButton } from "./components/JoinButton.js";
 import {LoginButton} from "./components/LoginButton.js";
 import {ItemDetailLoader} from "./components/ItemdDetailLoader.js";
 import {parseBodyFromString} from "./utils/bodyParser.js";
+import { RecentlyItems } from "./components/RecentlyItems.js";
 
 /**
  * ==============================================
@@ -70,7 +71,8 @@ class ItemDetailPage extends App {
     onLoad() {
         JoinButton.builder(this).run();
         this.emit("loginView:ready");
-        ItemDetailLoader.builder().run();
+        ItemDetailLoader.builder(this).run();
+        RecentlyItems.builder(this).run();
     }
 
 }

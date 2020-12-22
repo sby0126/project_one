@@ -52,7 +52,12 @@ export class DataLoader extends Component {
             // 
             // ${pageType}.do?pageType=${pageType}&shopType=S&gndr=F
             // xhr.open("GET", `json/prebuilt.json`); 
-            xhr.open("GET", `/contents/${pageType}.do?pageType=${pageType}&shopType=${this.shopType}&gndr=${this.gndr}&category=${this.category}&ages=${this.ages}`);
+            if(pageType === 'item' && this.keyword) {
+                xhr.open("GET", `/contents/${pageType}.do?pageType=${pageType}&shopType=${this.shopType}&gndr=${this.gndr}&category=${this.category}&ages=${this.ages}&keyword=${this.keyword}`);
+            } else {
+                xhr.open("GET", `/contents/${pageType}.do?pageType=${pageType}&shopType=${this.shopType}&gndr=${this.gndr}&category=${this.category}&ages=${this.ages}`);
+            }
+            
             xhr.onload = () => {    
                 resolve([].concat(JSON.parse(xhr.responseText)));
             }

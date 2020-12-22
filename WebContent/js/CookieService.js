@@ -1,4 +1,4 @@
-import {Cookie, ConstantCookie} from "./components/Cookie.js";
+import {Cookie, ConstantCookie, getCookie, setCookie, unique} from "./components/Cookie.js";
 import {EventEmitter} from "./EventEmitter.js";
 import {Request} from "./Request.js";
 
@@ -17,22 +17,21 @@ const cookieName = `recentShopItems`;
 
 // 쿠키 생성
 caller.on("createCookie", (name, value) => {
-    console.log(name, value);
-    const cookie = new Cookie(name, value);
-    cookie.create();
+    // value = unique(value.split(",")).join(",");
+    setCookie(name, value);
 });
 
 // 쿠키 획득
 caller.on("getCookie", (name) => {
     const cookie = new ConstantCookie();
-    const value = cookie.get(name);
+    const value = getCookie(name);
 
     const id = request.getParameter("id");
 
     if( value ) {
-        caller.emit("createCookie", [cookieName, `${value},` + id]);
+        caller.emit("createCookie", cookieName, `${value},` + id);
     } else {
-        caller.emit("createCookie", [cookieName, id]);
+        caller.emit("createCookie", cookieName, id);
     }
 });
 

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import action.ActionResult;
 import command.AllContentsCommand;
 import command.Command;
+import command.ContentsSearchCommand;
 import command.ItemCategoryCommand;
 import command.ItemCommand;
 import command.RecentlyShopListCommand;
@@ -68,10 +69,14 @@ public class ContentController extends HttpServlet {
 			case "/recentlyShopList.do":
 				command = new RecentlyShopListCommand();
 				break;
+
 			case "/pay.do":
 			case "/cart.do":
 				System.out.println("실행됨");
 				command = new DetailInputCommand();
+
+			case "/search.do":
+				command = new ContentsSearchCommand();
 				break;
 			}
 			

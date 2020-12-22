@@ -1,5 +1,5 @@
 import {Component} from "./Component.js";
-import {Cookie, ConstantCookie} from "./Cookie.js";
+import {Cookie, ConstantCookie, getCookie} from "./Cookie.js";
 
 const IDS = {
     SHOP: `#recently-shop-count`,
@@ -18,7 +18,8 @@ class RecentlyItems extends Component {
 
         // 최근 본 아이템 또는 상품의 갯수를 정수로 가져옵니다.
         const cookie = new ConstantCookie();
-        let raw = decodeURIComponent( cookie.get(`recentShopItems`) ) || "";
+        let raw = getCookie(`recentShopItems`) || "";
+
         let count1 = 0;
         let count2 = 0;
         /**
@@ -34,8 +35,11 @@ class RecentlyItems extends Component {
         $(IDS.SHOP).text(count1);
 
         // 최근 아이템 갯수
-        raw = decodeURIComponent( cookie.get("recentlyItems") ) || "";
-        let items2 = raw.split(",").map(i => i.trim());
+        let raw2 = getCookie("recentlyItems") || "";
+
+        console.log("최근 아이템 갯수 : " + raw2, cookie.get("recentlyItems"));
+
+        let items2 = raw2.split(",").map(i => i.trim());
         count2 = items2.length || 0;
 
         $(IDS.ITEMS).text(count2);

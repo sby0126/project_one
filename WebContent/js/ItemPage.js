@@ -2,6 +2,7 @@ import {App} from "./app.js";
 import {LoginButton} from "./components/LoginButton.js";
 import { ItemContentLoader } from "./components/ItemContentLoader.js";
 import { CardStyleSheetBuilder } from "./components/CardStyleSheetBuilder.js";
+import { SearchBox } from "./components/SearchBox.js";
 
 /**
  * ==============================================
@@ -79,8 +80,6 @@ class ItemPage extends App {
 
     onLoad() {
         super.onLoad();
-
-        // ItemCategory.builder.run(this);
 
         this.emit("loginView:ready");
         this.emit("contents:ready"); 
