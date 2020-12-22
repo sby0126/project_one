@@ -28,7 +28,7 @@
             <div class="contents-wrapper">
             		<div class="post">
     	<h2>쓰기</h2>
-		<form name="postFrm" id = "postFrm" method="post" action="boardWritePro.abc" >
+		<form name="postFrm" id = "postFrm" method="post" action="boardWritePro.abc"  enctype="multipart/form-data">
 			<ul>
 				<li><input readonly placeholder="<%=userId%>"></li>
 				<li><input type="hidden" name="name" value="<%=userId%>"></li>
@@ -92,12 +92,13 @@
  		//이미지 올리기 버튼 생성
  		function chchch(obj){	
 			 if((obj.value.split(".")[1]) == 'jpg' || (obj.value.split(".")[1]) == 'png'){
-				 $('#' + obj.id).parent().append("<button type='button' >이미지올리기</button>");
+				 alert("이미지를 삽입하고 싶으면 우측상단에 사진 기능을 이용하세요.");
+				 /* $('#' + obj.id).parent().append("<button type='button' >이미지올리기</button>"); */
              } 
  		}
  		
  		//이미지 업로드
- 		function abcdef(objId){
+ 		/* function abcdef(objId){
  		   var formData = new FormData();
 		   var a ;    
   		   formData.append('uploadFile', $('#' + objId.id)[0].files[0]);
@@ -114,7 +115,7 @@
   		        }
   		    });
 
- 		}
+ 		} */
     </script>
     <jsp:include page="/pages/login.jsp"></jsp:include>
     <!-- index.js는 메인 용이므로 알맞은 스크립트를 사용해야 합니다-->

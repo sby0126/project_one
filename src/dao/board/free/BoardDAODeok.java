@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 
 import utils.DBConnectionMgr;
 import vo.board.free.BoardBean;
+import vo.board.free.Board_file;
 import vo.board.free.Re_boardBean;
 
 
@@ -78,53 +79,66 @@ public class BoardDAODeok {
 
    }
    
-   public int insertArticle(BoardBean article){
-	   
+   public int insertArticle(BoardBean article, ArrayList<Board_file> board_file_list){
+	      
+	     
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      int num =0;
+	      String sql="";
+	      int insertCount=0;
+
+	      try{
+	         con = pool.getConnection();
+	          pstmt=con.prepareStatement("select max(num) from board");
+	          rs = pstmt.executeQuery();
+
+	          if(rs.next())
+	             num =rs.getInt(1)+1;
+	          else
+	             num=1;
+
+	          sql="insert into board (num,name,pass,subject,";
+	          sql+="content,re_ref,"+
+	                "re_lev,re_seq,readCount,"+
+	                "date) values(?,?,?,?,?,?,?,?,?,now())";
+	          pstmt = con.prepareStatement(sql);
+	          pstmt.setInt(1, num);
+	          pstmt.setString(2, article.getName());
+	          pstmt.setString(3, article.getPass());
+	          pstmt.setString(4, article.getSubject());
+	          pstmt.setString(5, article.getContent());
+	          pstmt.setInt(6, num);
+	          pstmt.setInt(7, 0);
+	          pstmt.setInt(8, 0);
+	          pstmt.setInt(9, 0);
+	          
+	          insertCount = pstmt.executeUpdate();
 	  
-      PreparedStatement pstmt = null;
-      ResultSet rs = null;
-      int num =0;
-      String sql="";
-       int insertCount=0;
+	          
+	         
+	           sql="insert into board_file (file_real_name, file_server_name, file_board_num, file_seq) values(?,?,?,0)"; 
+	           for(int i=0; i<board_file_list.size(); i++) { 
+	              pstmt = con.prepareStatement(sql); 
+	              pstmt.setString(1, board_file_list.get(i).getFile_real_name()); 
+	              pstmt.setString(2, board_file_list.get(i).getFile_server_name()); 
+	              pstmt.setInt(3, num);
+	              pstmt.executeUpdate();   
+	           
+	           }
+	          
+	       
+	      }catch(Exception ex){
+	         System.out.println("boardInsert 에러 : "+ex);
+	      }finally{
+	         //close(rs);
+	        // close(pstmt);
+	         pool.freeConnection(con,pstmt,rs);
+	      }
+	     
+	      return insertCount;
 
-      try{
-    	  con = pool.getConnection();
-          pstmt=con.prepareStatement("select max(num) from board");
-          rs = pstmt.executeQuery();
-
-          if(rs.next())
-             num =rs.getInt(1)+1;
-          else
-             num=1;
-
-          sql="insert into board (num,name,pass,subject,";
-          sql+="content,re_ref,"+
-                "re_lev,re_seq,readCount,"+
-                "date) values(?,?,?,?,?,?,?,?,?,now())";
-          pstmt = con.prepareStatement(sql);
-          pstmt.setInt(1, num);
-          pstmt.setString(2, article.getName());
-          pstmt.setString(3, article.getPass());
-          pstmt.setString(4, article.getSubject());
-          pstmt.setString(5, article.getContent());
-          pstmt.setInt(6, num);
-          pstmt.setInt(7, 0);
-          pstmt.setInt(8, 0);
-          pstmt.setInt(9, 0);
-
-          insertCount=pstmt.executeUpdate();
-
-      }catch(Exception ex){
-         System.out.println("boardInsert 에러 : "+ex);
-      }finally{
-         //close(rs);
-        // close(pstmt);
-    	  pool.freeConnection(con,pstmt,rs);
-      }
-
-      return insertCount;
-
-   }
+	   }
 
    public ArrayList<BoardBean> selectArticleList(int page,int limit,String keyField,String keyWord){
 
@@ -524,6 +538,9 @@ public class BoardDAODeok {
 
 	      PreparedStatement pstmt = null;
 	      String re_board_delete_sql="update board_re set del_yn='Y' where re_num=?";
+			/*
+			 * String re_board_absolute_delete_sql="delete board_re where del_yn='Y' and "
+			 */
 	      int deleteCount=0;
 
 	      try{

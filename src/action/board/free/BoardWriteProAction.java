@@ -1,6 +1,8 @@
 package action.board.free;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Enumeration;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -12,22 +14,35 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import service.board.free.BoardWriteProService;
 import vo.board.free.ActionForward;
 import vo.board.free.BoardBean;
+import vo.board.free.Board_file;
 
 public class BoardWriteProAction implements Action {
 
    
    public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-      
-      ActionForward forward=null;
-      BoardBean boardBean = null;
-      boardBean = new BoardBean();
-      boardBean.setName(request.getParameter("name"));
-      boardBean.setPass(request.getParameter("pass"));
-      boardBean.setSubject(request.getParameter("subject"));
-      boardBean.setContent(request.getParameter("content"));
-
-      BoardWriteProService boardWriteProService = new BoardWriteProService();
-      boolean isWriteSuccess = boardWriteProService.registArticle(boardBean);
+         ActionForward forward=null;
+         String saveFolder="C:\\Users\\User\\Desktop\\fileUpload";
+         int fileSize=5*1024*1024;      
+         MultipartRequest multi=new MultipartRequest(request,
+             saveFolder,
+               fileSize,
+               "UTF-8",
+               new DefaultFileRenamePolicy());
+         BoardBean boardBean = new BoardBean();     
+         ArrayList<Board_file> board_file_list = new ArrayList<Board_file>();
+         boardBean.setName(multi.getParameter("name"));
+         boardBean.setPass(multi.getParameter("pass"));
+         boardBean.setSubject(multi.getParameter("subject"));
+         boardBean.setContent(multi.getParameter("content"));         
+         Enumeration fileNames = multi.getFileNames();
+         while(fileNames.hasMoreElements()) {
+            String name= (String)fileNames.nextElement(); 
+            board_file_list.add(new Board_file(multi.getOriginalFileName(name),multi.getFilesystemName(name)));
+         }
+                 
+           BoardWriteProService boardWriteProService = new BoardWriteProService();
+           boolean isWriteSuccess = boardWriteProService.registArticle(boardBean,board_file_list);
+          
 
       if(!isWriteSuccess){
          response.setContentType("text/html;charset=UTF-8");
@@ -47,5 +62,4 @@ public class BoardWriteProAction implements Action {
       
    }     
 }
-
 
