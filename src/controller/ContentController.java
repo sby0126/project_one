@@ -15,11 +15,13 @@ import command.Command;
 import command.ContentsSearchCommand;
 import command.ItemCategoryCommand;
 import command.ItemCommand;
+import command.RecentlyItemsCommand;
 import command.RecentlyShopListCommand;
 import command.SaleCommand;
 import command.SearchShopItemCommand;
 import command.ShopCommand;
 import command.DetailInputCommand;
+import command.AddInterestCommand;
 
 @WebServlet("/contents/*")
 public class ContentController extends HttpServlet {
@@ -69,12 +71,16 @@ public class ContentController extends HttpServlet {
 			case "/recentlyShopList.do":
 				command = new RecentlyShopListCommand();
 				break;
-
+			case "/addInterest.do":
+				command = new AddInterestCommand();
+				break;
+			case "/recentlyItems.do":
+				command = new RecentlyItemsCommand();
+				break;
 			case "/pay.do":
 			case "/cart.do":
-				System.out.println("실행됨");
 				command = new DetailInputCommand();
-
+				break;
 			case "/search.do":
 				command = new ContentsSearchCommand();
 				break;
