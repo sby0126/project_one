@@ -2,17 +2,6 @@ package vo;
 
 public class PaymentVO {
 	
-//	buyer_name VARCHAR(8) NOT NULL,
-//	buyer_email VARCHAR(20),
-//	buyer_tel VARCHAR(20),
-//	buyer_addr VARCHAR(150),
-//	buyer_postcode VARCHAR(10),
-//	product_id INT(11) NOT NULL,
-//	product_name VARCHAR(50) ,
-//	paid_amount INT(8) NOT NULL,
-//	merchant_uid VARCHAR(100),
-//	payment_status VARCHAR(10)
-	
 	private String buyerName;
 	private String buyerEmail;
 	private String buyerTel;
@@ -24,6 +13,21 @@ public class PaymentVO {
 	private String merchantUid;
 	private String paymentStatus;
 	
+	private String impUid;
+	private String regdate;
+	
+	public String getImpUid() {
+		return impUid;
+	}
+	public void setImpUid(String impUid) {
+		this.impUid = impUid;
+	}
+	public String getRegdate() {
+		return regdate;
+	}
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
+	}
 	public String getBuyerName() {
 		return buyerName;
 	}
