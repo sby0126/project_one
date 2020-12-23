@@ -238,8 +238,7 @@
                  }
              }
 
-
-         })
+         });
 
             // 상품명 옆에 x버튼 클릭시 목록제거
             function add(obj){
@@ -271,91 +270,92 @@
             function del(obj){
                 obj.parent("li").remove();
             }
-        /*
-         function pay() {
-            var lilength = $(".productlist_add li").length;
-            console.log(lilength);
-            
-            if(lilength == 0) {
-                alert("선택된 상품이 없습니다");
-                return false;
-            }
-            
-            if(lilength != null) {
-               for(var i = 0; i < lilength; i++) {
-               var str = $(".productlist_add > li > span").text();
-               console.log(str);
-               
-               var array = new Array();
-               array = str.split(" ");
-                console.log(array);
-                
-                
-               var obj = new Object();
-                   
-                   obj.product = [
-                      option = array[i],
-                            
-                      qty = array[i+1]
-                   ]                   
-
-                   
-                console.log(obj);
-                
-                
-                obj.title = $("#detail-item-title").text();
-                obj.allPrice = ($(".allPrice").text());
-            	console.log(array);
-               
-               
-              // var jsonStr = JSON.stringfy(array);
-               
-              // var json = JSON.parse(jsonStr);
-               }
-            }
-            
-            $("#needVal").attr("action", "/pay.do");
-           //$("#needVal").submit();
-        }
         
-        function cart() {
-           var lilength = $(".productlist_add li").length;
-            console.log(lilength);
-            
-            if(lilength == 0) {
-                alert("선택된 상품이 없습니다");
-                return false;
-            }
-            
-            if(lilength != null) {
-               for(var i = 0; i < lilength; i++) {
-               var str = $(".productlist_add > li > span").text();
-               console.log(str);
-               
-               var array = new Array();
-               array = str.split(" ");
-                console.log(array);
-                
-                
-               var obj = new Object();
-                   
-                   obj.product = [
-                      option = array[i],
-                            
-                      qty = array[i+1]
-                   ]                   
-
-                   
-            console.log(obj);
-                
-                
-            obj.title = $("#detail-item-title").text();
-            obj.allPrice = ($(".allPrice").text());
-         console.log(array);
-            $("#needVal").attr("action", "/cart.do");
-           //$("#needVal").submit();
+	         function pay() {
+	            var lilength = $(".productlist_add li").length;
+	            console.log(lilength);
+	            
+	            if(lilength == 0) {
+	                alert("선택된 상품이 없습니다");
+	                return false;
+	            }
+	            
+	            if(lilength != null) {
+	               for(var i = 0; i < lilength; i++) {
+	               var str = $(".productlist_add > li > span").text();
+	               console.log(str);
+	               
+	               var array = new Array();
+	               array = str.split(" ");
+	                console.log(array);
+	                
+	                /*
+	               var obj = new Object();
+	                   
+	                   obj.product = [
+	                      option = array[i],
+	                            
+	                      qty = array[i+1]
+	                   ]                   
+	
+	                   
+	                console.log(obj);
+	                */
+	                
+	                array.add($("#detail-item-title").text());
+	                array.add(($(".allPrice").text()));
+	                console.log(array);
+	               
+	              // var jsonStr = JSON.stringfy(array);
+	               
+	              // var json = JSON.parse(jsonStr);
+	               }
+	            }
+	            
+	            $("#needVal").attr("action", "/pay.do");
+	           //$("#needVal").submit();
+	        }
+        
+	        function cart() {
+	           var lilength = $(".productlist_add li").length;
+	            console.log(lilength);
+	            
+	            if(lilength == 0) {
+	                alert("선택된 상품이 없습니다");
+	                return false;
+	            }
+	            
+	            if(lilength != null) {
+	               for(var i = 0; i < lilength; i++) {
+	               var str = $(".productlist_add > li > span").text();
+	               console.log(str);
+	               
+	               var array = new Array();
+	               array = str.split(" ");
+	                console.log(array);
+	                
+	               /* 
+	               var obj = new Object();
+	                   
+	                   obj.product = [
+	                      option = array[i],
+	                            
+	                      qty = array[i+1]
+	                   ]                   
+	
+	                   
+	            console.log(obj);
+	                */
+	                
+	            array.add($("#detail-item-title").text());
+	            array.add($(".allPrice").text());
+	            console.log(array);
+	
+	            $("#needVal").attr("action", "/cart.do");
+	           //$("#needVal").submit();
+	        	}
+	        }
         }
-        */
         </script>
         <jsp:include page="/pages/login.jsp"></jsp:include>
         <script type="module" src="/js/ItemDetailPage.js"></script>
