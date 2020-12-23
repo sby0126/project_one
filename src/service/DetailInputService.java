@@ -8,7 +8,7 @@ import vo.ProductVO;
 
 public class DetailInputService {
 
-	public boolean inputDetail(HttpServletRequest req, String title, String price, int qty) {
+	public boolean inputDetail(HttpServletRequest req, String title, String price) {
 
 		List<ProductVO> list = null;
 		boolean success = false;
@@ -24,7 +24,7 @@ public class DetailInputService {
 		
 		System.out.println(list);
 		
-		success = itemService.getDAO().insertDetail(id, list, qty);
+		success = itemService.getDAO().insertDetail(id, list);
 		
 		return success;
 	}

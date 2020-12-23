@@ -493,7 +493,7 @@ public class ContentDAO implements IDAO {
 		return list;
 	}
 	
-	public boolean insertDetail(String id, List<ProductVO> p, int qty) {
+	public boolean insertDetail(String id, List<ProductVO> p) {
 		
 		boolean success = false;
 		ResultSet rs = null;
@@ -517,7 +517,6 @@ public class ContentDAO implements IDAO {
 			pstmt.setString(1, id);
 			pstmt.setString(2, list.getTitle());
 			pstmt.setString(3, list.getPrice());
-			pstmt.setInt(4, qty);			
 			}			
 			
 			if(pstmt.executeUpdate() > 0) {
