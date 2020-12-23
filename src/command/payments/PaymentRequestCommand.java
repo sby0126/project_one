@@ -23,6 +23,7 @@ public class PaymentRequestCommand extends Command {
 		GetCustomerService customerService = new GetCustomerService();
 		HashMap<String, String> customerInfo = customerService.getCustomer(id);
 		
+		// 다음 정보로 결제 페이지를 요청합니다.
 		request.setAttribute("name", customerInfo.get("name"));
 		request.setAttribute("email", customerInfo.get("email"));
 		request.setAttribute("phone", customerInfo.get("phone"));

@@ -2,6 +2,8 @@
 <%@ page import="java.lang.Integer" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
+	// 카카오페이 결제 처리를 위한 페이지입니다.
+
 	// 구매자 정보
 	String name = (String)request.getAttribute("name");
 	String email = (String)request.getAttribute("email");
@@ -28,6 +30,7 @@
 	<title>Payment Form</title>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>  
 	<script>
@@ -59,16 +62,27 @@
 	                
 	                alert(msg);
 	                
+	                // 결제 검증
 	                $.ajax({
 	                    type: "GET", 
 	                    url: "/payments/check",
 	                    data: {
 	                    	"imp_uid" : rsp.imp_uid,
 	                    	"merchant_uid": merchant_uid,
-	                    	"productName": '<%=productName%>',
-	                    	"productId": <%=productId%>,
+	                    	"product_name": '<%=productName%>',
+	                    	"product_id": <%=productId%>,
 	                    	"paid_amount": rsp.paid_amount
 	                    },
+	                }).done(function(data) { // 응답 처리
+	                    switch(data.status) {
+	                    case: "vbankIssued":
+	                      // 가상계좌 발급 시 로직
+	                      break;
+	                    case: "success":
+	                      // 결제 성공 시 로직
+	                      console.log("결제 성공");
+	                      break;
+	                  }
 	                });
 	                
 	                location.href = '<%=request.getContextPath()%>/payments/success?msg='+msg;
