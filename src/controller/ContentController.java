@@ -74,6 +74,7 @@ public class ContentController extends HttpServlet {
 			case "/cart.do":
 				System.out.println("실행됨");
 				command = new DetailInputCommand();
+				break;
 
 			case "/search.do":
 				command = new ContentsSearchCommand();

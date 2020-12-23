@@ -14,7 +14,7 @@
 	Gson gson = new GsonBuilder().create();
 	JSONObject root = (JSONObject)request.getAttribute("root");
 	List<ProductVO> list = gson.fromJson(root.toString(), List.class);
-	
+	int qty = Integer.parseInt(request.getParameter("qty"));
 	int totalPrice = 0;
 
 	
@@ -68,9 +68,9 @@
                             %>
                             <tr>
                                 <td><input type="checkbox" name="chk" class="chkbox"></td>
-                                <td><img src='' class="product-img"></td> <!-- 구매할 상품 이미지 -->
+                                <td><img src='<%=img%>' class="product-img"></td> <!-- 구매할 상품 이미지 -->
                                 <td><p class="product-name"><a href="#"><%=title%></a></p> </td> <!-- 구매할 상품 이름 -->
-                                <td><input type="number" class="product-num" placeholder="1" min="1"></td> <!-- 구매 갯수 -->
+                                <td><input type="number" class="product-num" placeholder="<%=qty%>" min="1"></td> <!-- 구매 갯수 -->
                                 <td><P class="product-price"> <%=price%> </P></td> <!-- 상품 가격-->
                                 <td><P class="product-discnt"> <%=discnt%> </P></td> <!-- 할인 -->
                                 <td><P class="product-rltprice"> <%=rltprice%> </P> </td> <!-- 상품 금액 -->

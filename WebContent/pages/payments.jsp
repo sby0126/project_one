@@ -1,4 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="javax.servlet.*" %>
+<%@ page import="vo.ProductVO" %>
+<%@ page import="com.google.gson.*" %>
+<%@ page import="org.json.simple.*"%>
+<%@ page import="java.util.*" %>
+<%  
+
+	String id = (String)session.getAttribute("id");
+	Gson gson = new GsonBuilder().create();
+	JSONObject root = (JSONObject)request.getAttribute("root");
+	List<ProductVO> list = gson.fromJson(root.toString(), List.class);
+	int qty = Integer.parseInt(request.getParameter("qty"));
+	int totalPrice = 0;
+
+	
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -97,14 +113,30 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <% 
+                                        if(list != null) {
+                                            for(int i = 0; i < list.size(); i++) {
+                                                
+                                                String title = list.get(i).getTitle();
+                                                String img = list.get(i).getContenturl();
+                                                String uri = list.get(i).getLink();
+                                                int price = Integer.parseInt(list.get(i).getPrice());
+                                                int discnt = 0;
+                                                int rltprice = price - discnt;
+                                                totalPrice += rltprice;
+                                    %>
                                     <tr>
-                                        <td><img src="#" class="item-img"></td> <!-- 구매할 상품 이미지 -->
-                                        <td><a href="#" class="item-name">상품명 1234</a></td> <!-- 구매할 상품 이름 -->
-                                        <td class="item-num"><p>1</p></td> <!-- 구매 갯수 -->
-                                        <td class="item-price"><p>Price 원</p></td> <!-- 상품 금액 -->
+                                        <td><img src="<%=img%>" class="item-img"></td> <!-- 구매할 상품 이미지 -->
+                                        <td><a href="#" class="item-name"><%=title%></a></td> <!-- 구매할 상품 이름 -->
+                                        <td class="item-num"><p><%=qty%></p></td> <!-- 구매 갯수 -->
+                                        <td class="item-price"><p><%=price%> 원</p></td> <!-- 상품 금액 -->
                                         <td class="item-discount"><p>DIS 원</p></td> <!-- 할인 금액 -->
-                                        <td class="result-cost"><p>Price-DIS 원</p></td> <!-- 최종 가격 -->
+                                        <td class="result-cost"><p> <%=totalPrice%> 원</p></td> <!-- 최종 가격 -->
                                     </tr>
+                                <%
+                            		}
+                            	}                            	
+                                %>
                                 </tbody>
                             </table>
                         </div> <!-- item 클래스 종료 -->
