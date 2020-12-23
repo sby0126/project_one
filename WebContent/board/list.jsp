@@ -99,10 +99,10 @@
 				<%if(userId== null) {%>
 				<a href="javascript:abc()">글쓰기</a>
 			 	<% }else {%>	
-		 		<a href="boardWriteForm.abc">글쓰기</a>
+		 		<a href="boardWriteForm.abc?page=<%=nowPage%>">글쓰기</a>
 		 		<% }%>
 				
-		 		<a href="#">처음으로</a>
+		 		<a href="boardList.abc">처음으로</a>
 		 	</div>
 		
 		</div>

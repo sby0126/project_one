@@ -538,9 +538,6 @@ public class BoardDAODeok {
 
 	      PreparedStatement pstmt = null;
 	      String re_board_delete_sql="update board_re set del_yn='Y' where re_num=?";
-			/*
-			 * String re_board_absolute_delete_sql="delete board_re where del_yn='Y' and "
-			 */
 	      int deleteCount=0;
 
 	      try{

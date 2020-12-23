@@ -44,6 +44,7 @@
 	overflow:hidden;
 	border-bottom: 2px solid #EAEAEA;
 	max-height: 17px;
+	min-height: 17px;
 }
 
 .listPM {

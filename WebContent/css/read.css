@@ -6,7 +6,7 @@
 }
 
 .readBox {
-	width: 50%;
+	width: 60%;
 	margin: 0 auto;
 }
 
@@ -41,8 +41,7 @@
 .readBox > .readBox3 {
 	
 	display: inline-block;
-	margin-top: 30px;
-	margin-bottom: 30px;
+	margin-bottom: 45px;
 	
 }
 
@@ -50,10 +49,6 @@
 	padding: 10px;	
 	margin-bottom: 15px;
 	display:inline-block; 
-}
-
-.readBox > .replyBox > div > span {
-	/* margin-right: 25px; */
 }
 
 .readBox3 button {
@@ -112,4 +107,17 @@
 	margin-right: 25px;
 }
 
+.upupupBtn {
+	border: none;
+    font-weight: bold;
+    font-size: 12px;
+    border-radius: 5px 5px 5px 5px;
+    line-height: 12px;
+    background-color: #D5D5D5;
+    height: 22px;
+}
+
+#textBox {
+	margin: 45px 0 45px 0;
+}
 
