@@ -5,19 +5,24 @@
 <%@ page import="java.net.*" %>
 <%@ page import="vo.*" %>
 <%
-	// Create a cookie service.	
-	CookieService cookieService = new CookieService();
-	HashMap<String, String> cookie = cookieService.getKeyValue(request);
-	String value = cookie.get("recentlyItems");
-	// String value = "0";
 	
-	String num = "";
+	String myList = request.getParameter("myList");
+	String num = myList;
+	String value = myList;
 	
-	if(value != null) {
-		num = URLDecoder.decode(value);
-		// num = request.getParameter("recentlyShopItem");
-	} else {
-		value = "0";
+	if(myList == null) {
+		// Create a cookie service.	
+		CookieService cookieService = new CookieService();
+		HashMap<String, String> cookie = cookieService.getKeyValue(request);
+		value = cookie.get("recentlyItems");
+		// String value = "0";
+		
+		if(value != null) {
+			num = URLDecoder.decode(value);
+			// num = request.getParameter("recentlyShopItem");
+		} else {
+			value = "0";
+		}		
 	}
 	
 	Vector<ProductVO> list = null;
@@ -26,7 +31,6 @@
 		RecentlyItemService service = new RecentlyItemService(num);
 		list = service.getCards();
 	}
-
 
 %>
 <!DOCTYPE html>
