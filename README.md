@@ -7,7 +7,7 @@ and the project called 'Project One' consists with below specs :
 |JDK|java 15 2020-09-15, Java(TM) SE Runtime Environment (build 15+36-1562)|
 |Maria DB|10.3.25-MariaDB-0ubuntu0.20.04.1|
 |Tomcat|9|
-|port|9988|
+|port|8080, 9988(dev-channel)|
 
 # License
 
@@ -17,6 +17,7 @@ and the project called 'Project One' consists with below specs :
 | MariaDB | LGPL | https://mariadb.com |
 | jQuery | MIT | https://jquery.org/license/ |
 | QuillJS | BSD 3, Clause  | https://github.com/quilljs/quill/blob/develop/LICENSE |
+| 네이버 스마트 에디터 | https://developers.naver.com/products/terms/ | https://github.com/naver/smarteditor2 |
 | SCSS | MIT | https://github.com/duojs/sass/blob/master/license |
 | undercore.js | MIT | https://github.com/jashkenas/underscore/blob/master/LICENSE |
 | 네이버 로그인 API | https://developers.naver.com/products/terms/ | https://developers.naver.com/docs/login/overview/ |

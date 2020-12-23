@@ -11,7 +11,7 @@
 <%@ page import="java.util.List"%>
 <%@ page import="core.*"%>
 <%@ page import="controller.*"%>
-<%@ page import="dao.board.qna.*, dao.*"%>
+<%@ page import="dao.board.qna.*, dao.*, utils.*"%>
 <%@ page import="service.*"%>
 <%@ page import="vo.*"%>
 <%@ page import="org.json.simple.JSONArray, org.json.simple.JSONObject"%>
@@ -88,11 +88,11 @@
                       <ul class="dropdown-menu">
                         <li><a href="#manage-whole-member">전체 멤버 관리</a></li>
                         <li><a href="#manage-forced-secession">강제 탈퇴 관리</a></li>
-                        <li><a href="#ip-ban-list">IP 차단 설정</a></li>
+                        <li><a href="#currently-login-members">현재 로그인 멤버</a></li>
                       </ul>
                     </li>
                     <li><a href="#board-manage">게시물 관리</a></li>
-                    <li><a href="#all-post">상품</a></li>
+<!--                     <li><a href="#all-post">상품</a></li> -->
                     <li><a href="#log">접속 로그</a></li>
                     <li><a href="#uploads">파일 관리</a></li>
                   </ul>
@@ -177,9 +177,26 @@
                    	</table>         	
                 </div>
                 <div id="manage-forced-secession" class="content jumbotron">
-                	<a name="ip-ban-list"></a>
-                    <p>IP 차단 설정</p>
-                    <p>현재 관리자 IP : <%= request.getRemoteAddr() %> </p>
+                	<a name="currently-login-members"></a>
+                	<p>현재 로그인중인 멤버</p>
+                    <table class="table" style="height: 220px; overflow:scroll;">
+                    <%
+                    	List<CurrentLoginMembersVO> currentlyMembers = AdminUtil.getInstance().getCurrentLoginMembers();
+                    %>
+                   		<thead>
+                   			<th>ID</th>
+                   			<th>IP</th>
+                   			<th>접속 시간</th>
+                   		</thead>
+                    <c:set var="currentlyMembers" value="<%= currentlyMembers %>" />
+                    	<c:forEach var="item" items="${currentlyMembers }">
+                    		<tr>
+                    			<td>${ item.getId() }</td>
+                    			<td>${ item.getIp() }</td>
+                    			<td>${ item.getConnectTime() }</td>
+                    		</tr>
+                    	</c:forEach>
+                    </table>
                 </div>
                 <div id="board-manage" class="content jumbotron">
                 	<a name="board-manage"></a>
@@ -224,19 +241,19 @@
                     		int rowSize = json.size();
                     		int pageCounts = (int)(Math.ceil(rowSize / 10)); 
                     	%>
-                    		<div class="panel panel-default">
-                    			<form class="form-inline">                    		
-	                    			<div class=" form-group">
-	                    				<label for="tablename">테이블 명 :</label>
-	                    			 	<input type="text" class="form-control" name="tablename">                    			
-	                    			</div>
-                    			</form>                    			
-                    		<button class="btn btn-primary">새로운 테이블 만들기</button>
-                    		</div>
+<!--                     		<div class="panel panel-default"> -->
+<!--                     			<form class="form-inline">                    		 -->
+<!-- 	                    			<div class=" form-group"> -->
+<!-- 	                    				<label for="tablename">테이블 명 :</label> -->
+<!-- 	                    			 	<input type="text" class="form-control" name="tablename">                    			 -->
+<!-- 	                    			</div> -->
+<!--                     			</form>                    			 -->
+<!--                     		<button class="btn btn-primary">새로운 테이블 만들기</button> -->
+<!--                     		</div> -->
                     	</tfoot>
                     </table>
                 </div>
-				<div id="all-post" class="content jumbotron">
+				<div id="all-post" class="content jumbotron" style="display:none;">
 					<a name="all-post"></a>
                     <p>상품</p>
                     <canvas id="myChart" width="400" height="200"></canvas>
@@ -287,15 +304,40 @@
                     	}
                     });
 
-					</script>
+                    </script>
                 </div>   
 				<div id="log" class="content jumbotron">
 					<a name="log"></a>
-                    <p>접속 로그</p>
+                    <p><strong>접속 로그</strong></p>
+                    <div class="panel panel-default">
+                    비회원은 접속 기록이 남지 않습니다.
+                    </div>
+                   	<div class="form-group">
+                   		<label class="panel panel-default"><input id="hide-local-ip" type="checkbox" value="hide"><span>로컬 IP 숨김</span></label>
+                   	</div>                    
+                    <table class="table" id="ip-logging-table" style="height: 220px; overflow:scroll;">
+                    <%
+                    	List<IpLogger> logger = AdminUtil.getInstance().getIpLogger();
+                    %>
+                   		<thead>
+                   			<th>IP</th>
+                   			<th>접속 시간</th>
+                   		</<thead>
+                    <c:set var="logger" value="<%= logger %>" />
+                    	<c:forEach var="item" items="${logger }">
+                    		<tr>
+                    			<td>${ item.getIp() }</td>
+                    			<td>${ item.getConnectTime() }</td>
+                    		</tr>
+                    	</c:forEach>
+                    </table>
                 </div>                               
 				<div id="uploads" class="content jumbotron">
 					<a name="uploads"></a>
                     <p>업로드된 파일 관리</p>
+                    <div class="panel panel-default">
+                    서버 환경이 <em>리눅스</em>인 경우, 파일 보기를 지원하지 않습니다.
+                    </div>                    
                     <table class="table">
                     <thead>
                     	<th>파일명</th>
@@ -478,6 +520,27 @@
     	$(window).on("click", function(ev) {
     		if(ev.target.classList.contains("modal")) {
     			$(".modal").hide();
+    		}
+    	});
+    	
+   	    function verifyIp(ip) {
+   	        return /^(([1-9]?\d|1\d\d|2[0-4]\d|25[0-5])(\.(?!$)|(?=$))){4}$/.test(ip||"");
+   	    }
+    	
+    	$("#hide-local-ip").on("click", () => {
+    		const isChecked = $("#hide-local-ip").prop("checked");
+    		
+    		if(isChecked) {
+    			$("#ip-logging-table tr").each((index, elem) => {
+    				const text = $(elem).find("td:nth-child(1)").text();
+    				if(text.indexOf("192") >= 0) {
+    					$(elem).hide();
+    				}
+    			})
+    		} else {
+    			$("#ip-logging-table tr").each((index, elem) => {
+    				$(elem).show();
+    			});
     		}
     	});
     	

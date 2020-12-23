@@ -1,6 +1,8 @@
 package command.customer;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import action.ActionResult;
 import command.Command;
 import dao.CustomerDAO;
+import utils.AdminUtil;
 
 public class LoginCommand extends Command {
 	@Override
@@ -25,6 +28,13 @@ public class LoginCommand extends Command {
 		String pw = request.getParameter("pw");
 		
 		boolean isValidLogin = customerDAO.processLogin(id, pw);
+		
+		if(isValidLogin) {
+			Socket socket = new Socket();
+			socket.connect(new InetSocketAddress("google.com", 80));	
+			AdminUtil.getInstance().loggingIP(id, socket.getLocalAddress().toString().substring(1));
+			socket.close();
+		}
 		
 		String referer = request.getHeader("referer");
 		

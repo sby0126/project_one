@@ -267,12 +267,12 @@ public class CustomerDAO implements IDAO {
 				}				
 			}
 			
-			rs.close();
-			
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} catch(Exception e) {
 			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt, rs);
 		}
 		
 		return ret;

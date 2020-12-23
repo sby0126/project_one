@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import action.ActionResult;
 import command.Command;
+import utils.AdminUtil;
 
 public class LogoutCommand extends Command {
 	
@@ -19,6 +20,9 @@ public class LogoutCommand extends Command {
 		
 		// 로그아웃 처리
 		HttpSession session  = request.getSession();
+		String id = (String)session.getAttribute("id");
+		AdminUtil.getInstance().eraseIPFromLog(id);
+		
 		session.invalidate();
 		
 		String referer = request.getHeader("referer");
