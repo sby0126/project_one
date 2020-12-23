@@ -44,7 +44,7 @@ request.setCharacterEncoding("UTF-8");
 				<li><textarea id ="popContent" rows="10" cols="50" name="content"><%=article.getContent() %></textarea></li>
 			</ul>
 				<input type="submit" id="registBtn" value="수정" class="update-btn">
-				<input type="button" class="update-btn" value="돌아가기" onclick="location.href='boardDetail.abc?board_num=<%=article.getNum()%>&page=<%=nowPage%>'">
+				<input type="button" class="update-btn" value="이전으로" onclick="location.href='boardDetail.abc?board_num=<%=article.getNum()%>&page=<%=nowPage%>'">
 				<input type="button" class="update-btn" value="리스트" onclick="location.href='boardList.abc?page=<%=nowPage%>'">
 				<input type="hidden" name="num" value="<%=article.getNum()%>">
 				<input type="hidden" name="pass" value="<%=article.getPass()%>">

@@ -61,7 +61,7 @@
 			<li><%=articleList.get(i).getNum()%></li>		
 			<li><%=articleList.get(i).getName()%></li>	
 			<li><%if(articleList.get(i).getRe_lev()!=0){ %> <%for(int a=0;a<=articleList.get(i).getRe_lev()*2;a++){ %>
-					&nbsp; <%} %> 답글: <%}else{ %>  <%} %> <a
+					&nbsp; <%} %>답글:<%}else{ %>  <%} %> <a
 					href="boardDetail.abc?board_num=<%=articleList.get(i).getNum()%>&page=<%=nowPage%>">
 						<%=articleList.get(i).getSubject()%>
 				</a></li>
@@ -74,33 +74,33 @@
 		<div class="listPM">
 			<div class="listPMPage">
 				<%if(nowPage<=1){ %>
-				[이전]&nbsp;
+					[이전]
 				<%}else{ %>
-				<a href="boardList.abc?page=<%=nowPage-1 %>">[이전]</a>&nbsp;
+					<a href="boardList.abc?page=<%=nowPage-1 %>">[이전]</a>
 				<%} %>
 		
 				<%for(int a=startPage;a<=endPage;a++){
-						if(a==nowPage){%>
-				[<%=a %>]
-				<%}else{ %>
-				<a href="boardList.abc?page=<%=a %>">[<%=a %>]
-				</a>&nbsp;
-				<%} %>
+					if(a==nowPage){%>
+						[<%=a %>]
+					<%}else{ %>
+						<a href="boardList.abc?page=<%=a %>">[<%=a %>]</a>
+					<%} %>
+			
 				<%} %>
 		
 				<%if(nowPage>=maxPage){ %>
-				[다음]
+					[다음]
 				<%}else{ %>
-				<a href="boardList.abc?page=<%=nowPage+1 %>">[다음]</a>
+					<a href="boardList.abc?page=<%=nowPage+1 %>">[다음]</a>
 				<%} %>
 				
 			</div>
 			<div class="listPMMove">
-				<%if(userId== null) {%>
+				<% if(userId== null) {%>
 				<a href="javascript:abc()">글쓰기</a>
-			 	<% }else {%>	
+			 	<% } else {%>	
 		 		<a href="boardWriteForm.abc?page=<%=nowPage%>">글쓰기</a>
-		 		<% }%>
+		 		<% } %>
 				
 		 		<a href="boardList.abc">처음으로</a>
 		 	</div>
