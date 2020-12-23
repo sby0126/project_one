@@ -442,6 +442,37 @@
     	
     	$( ".forced-secession" ).on("click", function() {
     		alert("강제로 탈퇴시킬 회원 번호는 " + $(this).data("number"));
+    		
+    		const self = this;
+    		
+    		const id = $(this).data("number");
+    		
+    		if(id === "admin") {
+    			alert("관리자는 탈퇴시킬 수 없습니다.");
+    			return false;
+    		}
+    		
+    		$.ajax({
+    			url: "/members/foclySecessionMember.do?id=" + id,
+    			method: "GET",
+    			success: function(data) {
+    				if(data.status === "success") {
+    					alert("탈퇴 처리가 완료되었습니다");
+    					// $("button.forced-secession[data-number='1568304956']").eq(0).parent().parent()[0]
+    					$(self).parent().parent().remove();
+    				}
+    			},
+    			error: function(err) {
+    				if(err.code === 401) {
+    					alert("권한이 없습니다");
+    				} else if(err.code === 402) {
+    					alert("글이 남아있는 상태입니다.");
+    				} else {
+    					console.warn(err);
+    				}
+    			}
+    		})
+    		
     	});
     	
     	$(window).on("click", function(ev) {
