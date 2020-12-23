@@ -21,6 +21,7 @@ import command.SaleCommand;
 import command.SearchShopItemCommand;
 import command.ShopCommand;
 import command.DetailInputCommand;
+import command.InterestListCommand;
 import command.AddInterestCommand;
 
 @WebServlet("/contents/*")
@@ -73,6 +74,9 @@ public class ContentController extends HttpServlet {
 				break;
 			case "/addInterest.do":
 				command = new AddInterestCommand();
+				break;
+			case "/getInterest.do":
+				command = new InterestListCommand();
 				break;
 			case "/recentlyItems.do":
 				command = new RecentlyItemsCommand();
