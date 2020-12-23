@@ -646,7 +646,7 @@ public class ContentDAO implements IDAO {
 		
 		try {
 			conn = pool.getConnection();
-			pstmt = conn.prepareStatement("insert into tblInterest values(?, ?)");
+			pstmt = conn.prepareStatement("insert into tblInterest(cust_id, product_id) values(?, ?)");
 			pstmt.setString(1, customerId);
 			pstmt.setInt(2, productId);
 			
