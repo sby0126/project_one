@@ -73,24 +73,24 @@
                                 <p class="menu-title">최근 본 상품 <em id="recently-item-count">0</em></p>
                             </a>
                         </li>
-                        <li class="menu">
+                       <%--  <li class="menu">
                             <a href="${pageContext.request.contextPath}/pages/myshop.jsp" class="menu-link">
-                                <div class="menu-icon"></div>
-                                <p class="menu-title">MY SHOP</p>
-                            </a>
-                        </li>
+                                 <div class="menu-icon"></div>
+                                 <p class="menu-title">MY SHOP</p>
+                            </a> 
+                        </li>	 --%>
                         <li class="menu">
                             <a href="${pageContext.request.contextPath}/pages/interested_item.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">관심 상품</p>
                             </a>
                         </li>
-                        <li class="menu">
+                     <!--    <li class="menu">
                             <a href="#" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">공지 사항</p>
                             </a>
-                        </li>                         
+                        </li>  -->                        
                         <li class="menu">
                             <a href="/pages/board-default.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
@@ -109,12 +109,12 @@
                                 <p class="menu-title">소개 및 약관</p>
                             </a>
                         </li>
-                        <li class="menu">
+                       <%--  <li class="menu">
                             <a href="${pageContext.request.contextPath}/pages/outer-link-page.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">마케팅 센터</p>
                             </a>
-                        </li>
+                        </li> --%>
                     </ul>
                 </div>      
             <c:if test="${isHide != true}">
