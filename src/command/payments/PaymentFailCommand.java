@@ -25,7 +25,7 @@ public class PaymentFailCommand extends Command {
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
 		out.println("alert('결제에 실패하였습니다');");
-		out.println("history.go(-1);");
+		out.println("history.go(-2);");
 		out.println("</script>");
 		
 		return null;
