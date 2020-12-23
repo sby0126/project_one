@@ -574,7 +574,6 @@ public class ContentDAO implements IDAO {
 	}
 	
 	public List<SearchVO> getBestKeyword() {
-		boolean isOK = false;
 		ResultSet rs = null;
 		
 		List<SearchVO> list = new ArrayList<>();
@@ -594,11 +593,6 @@ public class ContentDAO implements IDAO {
 				vo.setCount( rs.getInt(3) );
 				
 				list.add(vo);
-			}
-			
-
-			if(pstmt.executeUpdate() > 0) {
-				isOK = true;
 			}
 			
 		} catch (SQLException e) {
