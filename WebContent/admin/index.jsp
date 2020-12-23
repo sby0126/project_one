@@ -527,6 +527,7 @@
    	        return /^(([1-9]?\d|1\d\d|2[0-4]\d|25[0-5])(\.(?!$)|(?=$))){4}$/.test(ip||"");
    	    }
     	
+   	    // 로컬 IP 숨김 기능
     	$("#hide-local-ip").on("click", () => {
     		const isChecked = $("#hide-local-ip").prop("checked");
     		
