@@ -76,3 +76,4 @@ SELECT REGEXP_SUBSTR(content, '<img src=(.*)>', 1, 1, 'mi') FROM tblqnaboard WHE
 
 tblproduct
 
+ㅜㅜ

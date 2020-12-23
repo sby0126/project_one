@@ -23,9 +23,14 @@ public class PaymentsController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doHandle(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doHandle(request, response);
+	}
+	
+	public void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pathInfo = request.getPathInfo();
 		Command command = null;
 		ActionResult result = null;
@@ -33,16 +38,16 @@ public class PaymentsController extends HttpServlet {
 		
 		try {
 			switch(pathInfo) {
-			case "/request":
+			case "/request.do":
 				command = new PaymentRequestCommand();
 				break;
-			case "/check":
+			case "/check.do":
 				command = new PaymentCheckCommand();
 				break;
-			case "/success":
+			case "/success.do":
 				command = new PaymentSuccessCommand();
 				break;
-			case "/fail":
+			case "/fail.do":
 				command = new PaymentFailCommand();
 				break;
 			}			
@@ -61,7 +66,7 @@ public class PaymentsController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-		}
+		}		
 	}
 
 }

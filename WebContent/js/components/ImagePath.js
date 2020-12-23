@@ -1,13 +1,18 @@
 
 const config = {
     // 트래픽 월 100GB
+    isLocalMode: false,
     githubCDN: "https://raw.githubusercontent.com/biud436/project_one/main/WebContent",
 };
 
 class ImagePath {   
 
     static getParentPath() {
-        return ""; // 깃허브로 변경하고자 할 땐, config.githubCDN으로 변경할 것.
+        if(config.isLocalMode) {
+            return "";
+        } else {
+            return config.githubCDN;
+        }
     }
 
     static getPath(pageType, genderType, shopType, filename) {

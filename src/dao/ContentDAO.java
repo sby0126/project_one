@@ -28,7 +28,7 @@ public class ContentDAO implements IDAO {
 	
 	public final String[] CATEGORY = {
         "", 
-        "트렌드", 
+        "트랜드", 
         "댄디", 
         "유니크", 
         "레플리카·제작", 
@@ -573,7 +573,6 @@ public class ContentDAO implements IDAO {
 	}
 	
 	public List<SearchVO> getBestKeyword() {
-		boolean isOK = false;
 		ResultSet rs = null;
 		
 		List<SearchVO> list = new ArrayList<>();
@@ -593,11 +592,6 @@ public class ContentDAO implements IDAO {
 				vo.setCount( rs.getInt(3) );
 				
 				list.add(vo);
-			}
-			
-
-			if(pstmt.executeUpdate() > 0) {
-				isOK = true;
 			}
 			
 		} catch (SQLException e) {

@@ -18,6 +18,7 @@
     <script src="https://kit.fontawesome.com/a99df0f94f.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/underscore@1.11.0/underscore-min.js"></script>
+    <script src="../js/smarteditor2/js/HuskyEZCreator.js"></script>
     <link rel="stylesheet" href="css/reply.css">
 </head>
 <body>
@@ -44,12 +45,13 @@
 				<li><input placeholder="<%=userId %>" readonly></li>
 				<input type="hidden" name="name" value="<%=userId %>">
 				<li><input name ="subject" placeholder="제목"></li>
-				<li><textarea name="content" rows="10" cols="50" placeholder="내용"></textarea></li>
+				<li><textarea id="popContent" name="content" rows="10" cols="50" placeholder="내용"></textarea></li>
 				<li><input type="password" name ="pass" placeholder="비밀번호"></li>
 				<li>
-					<input type="submit" value="등록" class="reply-btn">
+					<input id="registBtn" type="submit" value="등록" class="reply-btn">
 					<input type="reset" value="다시쓰기" class="reply-btn">	
-					<a href="boardList.abc?page=<%=nowPage%>"><input type="button" value="리스트" class="reply-btn"></a>	<!-- 경로수정하기 -->
+					<a href="boardList.abc?page=<%=nowPage%>"><input type="button" value="리스트" class="reply-btn"></a> <!-- 경로수정하기 -->
+					<a href="boardDetail.abc?board_num=<%=article.getNum()%>&page=<%=nowPage%>"><input type="button" value="이전으로" class="reply-btn"></a>	
 				</li>
 			</ul>
 			
@@ -65,6 +67,25 @@
     <div id="light-box-container">
     </div>
     <jsp:include page="/pages/login.jsp"></jsp:include>
+    <script>
+	    var oEditors = [];
+		nhn.husky.EZCreator.createInIFrame({
+		    oAppRef: oEditors,
+		    elPlaceHolder: "popContent",  //textarea ID
+		    sSkinURI: "../js/smarteditor2/SmartEditor2Skin.html",  //skin경로
+		    fCreator: "createSEditor2",
+		    htParams : {
+		    	bUseToolbar : true,
+		    	bUseVerticalResizer : true,
+		    	bUseModeChanger : true
+		    }
+		});
+	
+	
+		$("#registBtn").click(function(){
+			oEditors.getById["popContent"].exec("UPDATE_CONTENTS_FIELD",[]);
+		});
+    </script>
     <!-- index.js는 메인 용이므로 알맞은 스크립트를 사용해야 합니다-->
     <script type="module" src="<%=application.getContextPath()%>/js/MorePage.js"></script>
 </body>

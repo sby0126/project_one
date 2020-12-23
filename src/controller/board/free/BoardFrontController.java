@@ -51,6 +51,8 @@ public class BoardFrontController extends HttpServlet {
       }
       else if(command.equals("/boardWriteForm.abc")){
             forward=new ActionForward();
+            String nowPage = request.getParameter("page");
+            request.setAttribute("page", nowPage);
             forward.setPath("/board/post.jsp");
       }
       else if(command.equals("/boardWritePro.abc")){
