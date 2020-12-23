@@ -58,6 +58,7 @@ public class PaymentCheckCommand extends Command {
 			e.printStackTrace();
 		}
 
+		response.setContentType("application/json; charset=utf-8");
 		response.setCharacterEncoding("UTF-8");
 		
 		PrintWriter out = response.getWriter();

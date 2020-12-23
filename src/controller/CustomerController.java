@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.ActionResult;
 import command.Command;
+import command.customer.FoclySecessionMemberCommand;
 import command.customer.ListMembersCommand;
 import command.customer.LoginCommand;
 import command.customer.LogoutCommand;
@@ -68,6 +69,9 @@ public class CustomerController extends HttpServlet {
 				break;
 			case "/secessionMember.do":
 				command = new SecessionMemberCommand();
+				break;
+			case "/foclySecessionMember.do":
+				command = new FoclySecessionMemberCommand();
 				break;
 			case "/login.do":
 				command = new LoginCommand();
