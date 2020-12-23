@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <!DOCTYPE html>
 <% String userId = (String)session.getAttribute("id"); %>
+<% String nowPage = (String)request.getAttribute("page"); %>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -32,16 +33,16 @@
 			<ul>
 				<li><input readonly placeholder="<%=userId%>"></li>
 				<li><input type="hidden" name="name" value="<%=userId%>"></li>
-				<li><input name ="subject" placeholder="제목"></li>
+				<li><input name ="subject" placeholder="제목" id="subject"></li>
 				<li><textarea style="display:none" name="content" id ="popContent" rows="10" cols="50" style="width: 500px; height: 412px;" placeholder="내용"></textarea></li>
-				<li><input type="password" name="pass" placeholder="비밀번호"></li>
+				<li><input type="password" name="pass" placeholder="비밀번호" id="pass"></li>
 				<li><button type="button" class="post-btn" onclick="addFile()">파일+1</button> <button type="button" class="post-btn" onclick="minusFile()">파일-1</button></li>
 				<li><input type="file" name="file1" onchange ="chchch(this)" id="fileArrays1"></li>	
 			
 				
 			</ul>
-			<a href="boardList.abc"><input type="button" value="리스트" class="post-btn">	</a>	<!-- 경로수정하기 -->
-				<input type="submit" id="registBtn" value="등록" class="post-btn">
+			<a href="boardList.abc?page=<%=nowPage%>"><input type="button" value="이전으로" class="post-btn"></a>	
+				<input type="button" id="registBtn" value="등록" class="post-btn">
 				<input type="reset" value="다시쓰기" class="post-btn">	
 		</form>
 	</div>
@@ -71,22 +72,37 @@
     		}
     	} 
     	
-    	var oEditors = [];
-    	nhn.husky.EZCreator.createInIFrame({
-    	    oAppRef: oEditors,
-    	    elPlaceHolder: "popContent",  //textarea ID
-    	    sSkinURI: "../js/smarteditor2/SmartEditor2Skin.html",  //skin경로
-    	    fCreator: "createSEditor2",
-    	    htParams : {
-    	    	bUseToolbar : true,
-    	    	bUseVerticalResizer : true,
-    	    	bUseModeChanger : true
-    	    }
-    	});
-
-
- 		$("#registBtn").click(function(){
- 			oEditors.getById["popContent"].exec("UPDATE_CONTENTS_FIELD",[]);
+   		var oEditors = [];
+		nhn.husky.EZCreator.createInIFrame({
+		    oAppRef: oEditors,
+		    elPlaceHolder: "popContent",  //textarea ID
+		    sSkinURI: "../js/smarteditor2/SmartEditor2Skin.html",  //skin경로
+		    fCreator: "createSEditor2",
+		    htParams : {
+		    	bUseToolbar : true,
+		    	bUseVerticalResizer : true,
+		    	bUseModeChanger : true
+		    }
+		});
+	
+	
+			$("#registBtn").click(function(){
+				oEditors.getById["popContent"].exec("UPDATE_CONTENTS_FIELD",[]);
+			});
+    	
+		//글쓰기 내용입력 안할시
+ 		$("#registBtn").click(function(){	
+ 	    	   	
+ 			if($("#subject").val()==""){
+ 				alert("제목을 입력하세요");
+ 				return;
+ 			}		
+ 			if($("#pass").val()==""){
+ 				alert("비밀번호를 입력하세요");
+ 				return;
+ 			}			
+ 		
+ 			$("#postFrm").submit();
  		});
  		
  		//이미지 올리기 버튼 생성
@@ -97,25 +113,7 @@
              } 
  		}
  		
- 		//이미지 업로드
- 		/* function abcdef(objId){
- 		   var formData = new FormData();
-		   var a ;    
-  		   formData.append('uploadFile', $('#' + objId.id)[0].files[0]);
-  		 
-  		   $.ajax({
-  		        url: '/ImgUpload.z',
-  		        data: formData,
-  		        contentType: false,
-  		    	processData: false,
-  		        type: 'POST',
-  		        success: function (data) {
-  		        	
-  		  
-  		        }
-  		    });
 
- 		} */
     </script>
     <jsp:include page="/pages/login.jsp"></jsp:include>
     <!-- index.js는 메인 용이므로 알맞은 스크립트를 사용해야 합니다-->

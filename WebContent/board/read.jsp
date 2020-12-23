@@ -47,7 +47,7 @@
 			
 		</ul>
 		<div class="readBox3">
-			<a href="boardList.abc?page=<%=nowPage%>"><button>리스트</button></a>
+			<a href="boardList.abc?page=<%=nowPage%>"><button>이전으로</button></a>
 			
 			<%if(userId != null ){%>
 			<a href="boardReplyForm.abc?board_num=<%=article.getNum() %>&page=<%=nowPage%>"><button>답변</button></a>
@@ -86,12 +86,12 @@
 									  <!-- 세션에 아이디값이 본인 댓글일 경우 -->
 									  
 									  <%if(userId.equals(re_articleList.get(i).getRe_name())){ %>
- 									    <button id="xx" onclick="reply('<%=re_articleList.get(i).getRe_name() %>','<%=re_articleList.get(i).getRe_num() %>','<%=re_articleList.get(i).getRe_num2() %>','<%=re_articleList.get(i).getRe_re_ref() %>','<%=re_articleList.get(i).getRe_re_lev() %>','<%=re_articleList.get(i).getRe_re_seq() %>','<%=re_articleList.get(i).getRe_date() %>','<%=userId %>','<%=i %>','<%=nowPage %>','<%=article.getNum()%>')" class="rerere<%=i %>">댓글달기</button>
-										<button onclick="updateReple('<%=re_articleList.get(i).getRe_name() %>','<%=re_articleList.get(i).getRe_num() %>','<%=re_articleList.get(i).getRe_content() %>','<%=re_articleList.get(i).getRe_date() %>','<%=i %>','<%=nowPage %>','<%=article.getNum()%>')" class="upupup<%=i %>">수정</button>
+ 									    <button id="replyButton" onclick="reply('<%=re_articleList.get(i).getRe_name() %>','<%=re_articleList.get(i).getRe_num() %>','<%=re_articleList.get(i).getRe_num2() %>','<%=re_articleList.get(i).getRe_re_ref() %>','<%=re_articleList.get(i).getRe_re_lev() %>','<%=re_articleList.get(i).getRe_re_seq() %>','<%=re_articleList.get(i).getRe_date() %>','<%=userId %>','<%=i %>','<%=nowPage %>','<%=article.getNum()%>')" class="rerere<%=i %>">댓글달기</button>
+										<button id="updateButton" onclick="updateReple('<%=re_articleList.get(i).getRe_name() %>','<%=re_articleList.get(i).getRe_num() %>','<%=re_articleList.get(i).getRe_content() %>','<%=re_articleList.get(i).getRe_date() %>','<%=i %>','<%=nowPage %>','<%=article.getNum()%>')" class="upupup<%=i %>">수정</button>
 										<button onclick="location.href='boardReDeletePro.abc?re_num=<%=re_articleList.get(i).getRe_num() %>&num=<%=article.getNum() %>&nowPage=<%=nowPage %>'">삭제</button>
 									  <!-- 세션에 아이디값이 본인 댓글이 아닐 경우 -->
 									  <%}else{ %>
-									  	<button id="xx" onclick="reply('<%=re_articleList.get(i).getRe_name() %>','<%=re_articleList.get(i).getRe_num() %>','<%=re_articleList.get(i).getRe_num2() %>','<%=re_articleList.get(i).getRe_re_ref() %>','<%=re_articleList.get(i).getRe_re_lev() %>','<%=re_articleList.get(i).getRe_re_seq() %>','<%=re_articleList.get(i).getRe_date() %>','<%=userId %>','<%=i %>','<%=nowPage %>','<%=article.getNum()%>')" class="rerere<%=i %>">댓글달기</button>
+									  	<button id="replyButton" onclick="reply('<%=re_articleList.get(i).getRe_name() %>','<%=re_articleList.get(i).getRe_num() %>','<%=re_articleList.get(i).getRe_num2() %>','<%=re_articleList.get(i).getRe_re_ref() %>','<%=re_articleList.get(i).getRe_re_lev() %>','<%=re_articleList.get(i).getRe_re_seq() %>','<%=re_articleList.get(i).getRe_date() %>','<%=userId %>','<%=i %>','<%=nowPage %>','<%=article.getNum()%>')" class="rerere<%=i %>">댓글달기</button>
 									    <button onclick='alert("권한이 없습니다.")'>수정</button>
 									   	<button onclick='alert("권한이 없습니다.")'>삭제</button>
 									  <%}%>
@@ -115,12 +115,12 @@
 								<% if(userId !=null){%>
 									  <!-- 세션에 아이디값이 본인 댓글일 경우 -->
 									  <%if(userId.equals(re_articleList.get(i).getRe_name())){ %>
-										<button id="xx" onclick="reply('<%=re_articleList.get(i).getRe_name() %>','<%=re_articleList.get(i).getRe_num() %>','<%=re_articleList.get(i).getRe_num2() %>','<%=re_articleList.get(i).getRe_re_ref() %>','<%=re_articleList.get(i).getRe_re_lev() %>','<%=re_articleList.get(i).getRe_re_seq() %>','<%=re_articleList.get(i).getRe_date() %>','<%=userId %>','<%=i %>','<%=nowPage %>','<%=article.getNum()%>')" class="rerere<%=i %>">댓글달기</button>
-										<button onclick="updateReple('<%=re_articleList.get(i).getRe_name() %>','<%=re_articleList.get(i).getRe_num() %>','<%=re_articleList.get(i).getRe_content() %>','<%=re_articleList.get(i).getRe_date() %>','<%=i %>','<%=nowPage %>','<%=article.getNum()%>')" class="upupup<%=i %>">수정</button>
+										<button id="replyButton" onclick="reply('<%=re_articleList.get(i).getRe_name() %>','<%=re_articleList.get(i).getRe_num() %>','<%=re_articleList.get(i).getRe_num2() %>','<%=re_articleList.get(i).getRe_re_ref() %>','<%=re_articleList.get(i).getRe_re_lev() %>','<%=re_articleList.get(i).getRe_re_seq() %>','<%=re_articleList.get(i).getRe_date() %>','<%=userId %>','<%=i %>','<%=nowPage %>','<%=article.getNum()%>')" class="rerere<%=i %>">댓글달기</button>
+										<button id="updateButton" onclick="updateReple('<%=re_articleList.get(i).getRe_name() %>','<%=re_articleList.get(i).getRe_num() %>','<%=re_articleList.get(i).getRe_content() %>','<%=re_articleList.get(i).getRe_date() %>','<%=i %>','<%=nowPage %>','<%=article.getNum()%>')" class="upupup<%=i %>">수정</button>
 										<button onclick="location.href='boardReDeletePro.abc?re_num=<%=re_articleList.get(i).getRe_num() %>&num=<%=article.getNum() %>&nowPage=<%=nowPage %>'">삭제</button>
 									  <!-- 세션에 아이디값이 본인 댓글이 아닐 경우 -->
 									  <%}else{ %>
-									  	<button id="xx" onclick="reply('<%=re_articleList.get(i).getRe_name() %>','<%=re_articleList.get(i).getRe_num() %>','<%=re_articleList.get(i).getRe_num2() %>','<%=re_articleList.get(i).getRe_re_ref() %>','<%=re_articleList.get(i).getRe_re_lev() %>','<%=re_articleList.get(i).getRe_re_seq() %>','<%=re_articleList.get(i).getRe_date() %>','<%=userId %>','<%=i %>','<%=nowPage %>','<%=article.getNum()%>')" class="rerere<%=i %>">댓글달기</button>
+									  	<button id="replyButton" onclick="reply('<%=re_articleList.get(i).getRe_name() %>','<%=re_articleList.get(i).getRe_num() %>','<%=re_articleList.get(i).getRe_num2() %>','<%=re_articleList.get(i).getRe_re_ref() %>','<%=re_articleList.get(i).getRe_re_lev() %>','<%=re_articleList.get(i).getRe_re_seq() %>','<%=re_articleList.get(i).getRe_date() %>','<%=userId %>','<%=i %>','<%=nowPage %>','<%=article.getNum()%>')" class="rerere<%=i %>">댓글달기</button>
 									   	<button onclick='alert("권한이 없습니다.")'>수정</button>
 									   	<button onclick='alert("권한이 없습니다.")'>삭제</button>
 									  <%}%> 
@@ -141,7 +141,7 @@
 		
 		
 	
-		<form action="repleform.abc" method="post" >
+		<form id="textBox" action="repleform.abc" method="post" >
 		<% if(userId != null){ %>
 		
 			<textarea name="content" rows="5" cols="50" placeholder="댓글달기" ></textarea>
@@ -165,12 +165,11 @@
 	
 	<script>
 	var clickCtn=0;
+	var clickCtn2=0;
 		/* 댓글달기 함수 */
 		function reply(name,num,num2,ref,lev,seq,date,userId,i,page,articleNum){
-			if(clickCtn==0){
-				
-			
-				$(".rerere" + i).parent().after("<br id='yy'><div id='zz'><form action='replePlay.abc' method='post'><textarea id='tt' rows='5' cols='50' name='content'></textarea>"
+			if(clickCtn==0){		
+				$(".rerere" + i).parent().after("<br id='replyBr'><div id='replyDiv'><form action='replePlay.abc' method='post'><textarea id='replyArea' rows='5' cols='50' name='content'></textarea>"
 						+"<input type='hidden' name='name' value=" + userId + ">"		
 						+"<input type='hidden' name='num' value= " + num + ">"
 						+"<input type='hidden' name='num2' value=" + num2 +">"
@@ -180,7 +179,7 @@
 						+"<input type='hidden' name='date' value=" + date + ">"
 						+"<input type='hidden' name='page' value=" + page + ">"
 						+"<input type='hidden' name='articleNum' value=" + articleNum + ">"
-						+"<input type='submit' value='등록'></form></div>");
+						+"<input class='upupupBtn' type='submit' value='등록'></form></div>");
 			}
 			clickCtn++;
 		};
@@ -189,12 +188,12 @@
 		$('body').click(function(e){
     		var id = e.target.getAttribute('id');
     		
-    		if(id != "xx"){
+    		if(id != "replyButton"){
     			
-    			if(id == "tt") {
+    			if(id == "replyArea") {
     				return;
     			}
-    			$("#yy, #zz").css("display","none");	
+    			$("#replyBr, #replyDiv").css("display","none");	
     			clickCtn=0;
     		
     		}else{
@@ -203,21 +202,39 @@
     		}
     
     	});
-		
-		
+				
 		/* 댓글수정 함수 */
 		function updateReple(name,num,content,date,i,page,articleNum){
-			
-			$(".upupup" + i).parent().after("<br><div><form action='replePlayUpdate.abc' method='post'><textarea rows='5' cols='50' name='content'>"+content+"</textarea>"
+			if(clickCtn2==0){	
+			$(".upupup" + i).parent().after("<br id='updateBr'><div id='updateDiv'><form action='replePlayUpdate.abc' method='post'><textarea id='updateArea' rows='5' cols='50' name='content'>"+content+"</textarea>"
 					+"<input type='hidden' name='name' value=" + name + ">"		
 					+"<input type='hidden' name='num' value= " + num + ">"
 					+"<input type='hidden' name='content' value=" + content +">"
 					+"<input type='hidden' name='date' value=" + date + ">"
 					+"<input type='hidden' name='page' value=" + page + ">"
 					+"<input type='hidden' name='articleNum' value=" + articleNum + ">"
-					+"<input type='submit' value='수정'></form></div>");
-			
+					+"<input class='upupupBtn' type='submit' value='수정'></form></div>");	
+			}
+			clickCtn2++;
 		}
+		
+		$('body').click(function(e){
+    		var id = e.target.getAttribute('id');
+    		
+    		if(id != "updateButton"){
+    			
+    			if(id == "updateArea") {
+    				return;
+    			}
+    			$("#updateBr, #updateDiv").css("display","none");	
+    			clickCtn2=0;
+    		
+    		}else{
+    		
+    			return;
+    		}
+    
+    	});
 		
 		
 		
