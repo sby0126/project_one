@@ -28,7 +28,7 @@ public class ContentDAO implements IDAO {
 	
 	public final String[] CATEGORY = {
         "", 
-        "트렌드", 
+        "트랜드", 
         "댄디", 
         "유니크", 
         "레플리카·제작", 
