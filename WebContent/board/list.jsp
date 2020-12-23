@@ -81,9 +81,9 @@
 		
 				<%for(int a=startPage;a<=endPage;a++){
 					if(a==nowPage){%>
-						[<%=a %>]
+						<span style="background-color:#D5D5D5;">&nbsp;<%=a %>&nbsp;</span>
 					<%}else{ %>
-						<a href="boardList.abc?page=<%=a %>">[<%=a %>]</a>
+						<a href="boardList.abc?page=<%=a %>">&nbsp;<%=a %>&nbsp;</a>
 					<%} %>
 			
 				<%} %>
@@ -140,6 +140,11 @@
 		var a = $(".listSearch").offset().top;
 		var b = $(".listSearch").height();
 		$(".listBox").height(a+b);
+		
+		
+	
+			
+	
 	</script>
     <!-- 라이트 박스-->
     <div id="light-box-container">
