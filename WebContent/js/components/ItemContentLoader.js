@@ -183,12 +183,31 @@ export class ItemContentLoader extends Component {
                             <h2>${title}</h2>
                             <p>${price}</p>
                             <p>${shop}</p>
-                            <button class="like-button"></button>
+                            <button class="like-button" data-id=${myImgData.id}></button>
                         </div>
                 `);
 
                 $(card).find(".like-button").on("click", (ev) => {
-                    $(card).find(".like-button").toggleClass("active");
+                    const likeButton = $(card).find(".like-button");
+
+                    // 토글
+                    likeButton.toggleClass("active");
+                    const productId = likeButton.data("id")
+
+                    // AJAX를 요청합니다.
+                    $.ajax({
+                        url: `/contents/addInterest.do?productId=${productId}`,
+                        method: "GET",
+                        success: function(data) {
+                            if(data.status === "success") {
+                                alert("관심 상품에 추가가 완료되었습니다.");
+                            }
+                        },
+                        error: function(err) {
+                            console.warn("관심 상품 추가에 실패하였습니다.");
+                        }
+                    })
+
                     return false;
                 })
 

@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.Arrays"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.*" %>
+<%@ page import="service.RecentlyItemService, service.*" %>
+<%@ page import="java.net.*" %>
+<%@ page import="vo.*" %>
 <%
 	String requestURI = request.getRequestURI();
 	boolean isOpen = false;
@@ -11,8 +15,30 @@
 		isOpen = requestURI.indexOf("/pages/") == -1;	
 	}
 	
+	// Create a cookie service.	
+	CookieService cookieService = new CookieService();
+	HashMap<String, String> cookie = cookieService.getKeyValue(request);
+	String value = cookie.get("recentlyItems");
+	
+	String num = "";
+	
+	if(value != null) {
+		num = URLDecoder.decode(value);
+		// num = request.getParameter("recentlyShopItem");
+	} else {
+		value = "0";
+	}
+	
+	Vector<ProductVO> list = null;
+	
+	if(!value.equals("0")) {
+		RecentlyItemService service = new RecentlyItemService(num);
+		list = service.getCards();
+	}	
+	
 %>
 <c:set var="isOpen" value="<%= isOpen %>"></c:set>
+<c:set var="recentlyShopList" value="<%= list %>" />
 <c:choose>
 <c:when test="${isOpen == true}">
 <link rel="stylesheet" href="/css/recent-product-container.css">
@@ -60,16 +86,25 @@
 		if(!json) {
 			return;
 		}
-		var contentData = json.contentData;		
+		
+		// 컨텐츠를 가져옵니다.
+		var contentData = json.contentData;
+		
+		// 마지막 컨텐츠를 가져옵니다 
 		var content = contentData[currentCount - 1];
 		
+		// 컨텐츠가 없으면 빠져나갑니다.
 		if( !content ) {
 			return;
 		}
 		
-		var imageRoot = json["imageUrl"]
-		var imageID = json["imageData"][content.url];
-		var realImagePath = imageRoot + imageID;
+		// 메인 URL 주소
+		String mainUrl = "https://raw.githubusercontent.com/biud436/project_one/main/WebContent";
+
+		const realImagePath = mainUrl + "/images/item/" 
+				+ gndr + "/"
+					+ shopType + "/"
+					+ contentUrl;
 		
 		const img = $(".recent-product-container img")[0];
 		img.src = realImagePath;

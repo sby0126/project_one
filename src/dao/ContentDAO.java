@@ -14,6 +14,7 @@ import org.json.simple.JSONArray;
 import core.SQLHelper;
 import sql.ContentLoader;
 import utils.DBConnectionMgr;
+import vo.InterestVO;
 import vo.ProductVO;
 import vo.SearchVO;
 
@@ -630,6 +631,70 @@ public class ContentDAO implements IDAO {
 		}
 		
 		return true;
+	}
+	
+	/**
+	 * 관심 상품을 DB에 추가합니다.
+	 * 
+	 * @param customerId
+	 * @param productId
+	 * @return
+	 */
+	public boolean checkInterest(String customerId, int productId) {
+		
+		boolean isOK = false;
+		
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement("insert into tblInterest values(?, ?)");
+			pstmt.setString(1, customerId);
+			pstmt.setInt(2, productId);
+			
+			if(pstmt.executeUpdate() > 0) {
+				isOK = true;
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+		return isOK;
+	}
+	
+	/**
+	 * 관심 상품을 List로 가져옵니다.
+	 * @param customerId
+	 * @param productId
+	 * @return
+	 */
+	public List<InterestVO> getInterests(String customerId) {
+		
+		List<InterestVO> list = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement("select * from tblInterest where cust_id = ?");
+			pstmt.setString(1, customerId);
+			
+			rs = pstmt.executeQuery();
+			
+			list = SQLHelper.putResult(rs, InterestVO.class);			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+		return list;
 	}
 	
 //	public List<ProductVO> findThumbnail(String shopName) {
