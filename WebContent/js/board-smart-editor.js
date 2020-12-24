@@ -160,8 +160,6 @@
 
         let prevJson = JSON.stringify(result);
 
-        navigator.clipboard.writeText(prevJson);
-
         const param = new URLSearchParams(location.search);
         const postNumber = param.get("postNumber") || 0;
 
