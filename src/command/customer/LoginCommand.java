@@ -30,10 +30,12 @@ public class LoginCommand extends Command {
 		boolean isValidLogin = customerDAO.processLogin(id, pw);
 		
 		if(isValidLogin) {
-			Socket socket = new Socket();
-			socket.connect(new InetSocketAddress("google.com", 80));	
-			AdminUtil.getInstance().loggingIP(id, socket.getLocalAddress().toString().substring(1));
-			socket.close();
+//			Socket socket = new Socket();
+//			socket.connect(new InetSocketAddress("google.com", 80));	
+//			AdminUtil.getInstance().loggingIP(id, socket.getLocalAddress().toString().substring(1));
+//			socket.close();
+			
+			AdminUtil.getInstance().loggingIP(id, request.getRemoteAddr());
 		}
 		
 		String referer = request.getHeader("referer");

@@ -58,34 +58,34 @@ public class CustomerController extends HttpServlet {
 		try {
 			switch(pathInfo) {
 			
-			case "/members.do":
+			case "/members.do": // 멤버 리스트 조회
 				command = new ListMembersCommand();
 				break;
-			case "/modifyMemberForm.do":
+			case "/modifyMemberForm.do": // 회원 정보 수정 폼
 				command = new ModifyMemberFormCommand();
 				break;
-			case "/modifyMember.do":
+			case "/modifyMember.do": // 회원 정보 수정
 				command = new ModifyMemberCommand();
 				break;
-			case "/secessionMember.do":
+			case "/secessionMember.do": // 자진 탈퇴
 				command = new SecessionMemberCommand();
 				break;
-			case "/foclySecessionMember.do":
+			case "/foclySecessionMember.do": // 강제 탈퇴
 				command = new FoclySecessionMemberCommand();
 				break;
-			case "/login.do":
+			case "/login.do": // 로그인
 				command = new LoginCommand();
 				break;
-			case "/logout.do":
+			case "/logout.do": // 로그아웃
 				command = new LogoutCommand();
 				break;
-			case "/signUp.do":
+			case "/signUp.do": // 회원 가입
 				command = new SignUpCommand();
 				break;
-			case "/naverLogin.do":
+			case "/naverLogin.do": // 네이버 로그인
 				command = new SocialLoginCommand("네이버");
 				break;
-			case "/kakaoLogin.do":
+			case "/kakaoLogin.do": // 카카오 로그인
 				command = new SocialLoginCommand("카카오");
 				break;
 			}

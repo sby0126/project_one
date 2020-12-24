@@ -10,7 +10,7 @@
 	String num = myList;
 	String value = myList;
 	
-	if(myList == null) {
+	if(myList == null || myList.isEmpty()) {
 		// Create a cookie service.	
 		CookieService cookieService = new CookieService();
 		HashMap<String, String> cookie = cookieService.getKeyValue(request);
@@ -144,7 +144,12 @@
 		                    <img class="item_selected_none_img" src="../images/b527471.png">
 		                    <div class="item_selected_none_sp">최근 본 샾이 없습니다.</div>
 		                    <a href="/index.jsp"><button class="item_selected_none_button">샾 메인으로 이동</button></a>
-		                </div>            		
+		                </div>
+		                <script>
+	                		setTimeout(function() {
+	                			$(".header-right-login-button").trigger("click");	
+	                		}), 500);
+		                </script>
             		</c:otherwise>
             	</c:choose>
 

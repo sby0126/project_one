@@ -50,8 +50,10 @@ export class ItemDetailLoader extends Component {
         $("#detail-item-title, #title").text(myItem.title);
 
         // 상품 가격
-        $("#detail-item-price, .allPrice, #price").text(myItem.price);
-
+        $("#detail-item-price, #price").text(myItem.price);
+        
+        $(".allPrice").text(0);
+        
         // 이미지 주소
         $(".imgArea > img").attr("src", imgSrc);
 

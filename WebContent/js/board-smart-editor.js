@@ -160,7 +160,8 @@
 
         let prevJson = JSON.stringify(result);
 
-        navigator.clipboard.writeText(prevJson);
+        // 리눅스에서 동작 안함....
+        // navigator.clipboard.writeText(prevJson);
 
         const param = new URLSearchParams(location.search);
         const postNumber = param.get("postNumber") || 0;

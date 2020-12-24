@@ -71,7 +71,9 @@
     <!-- 컨테이너의 시작 -->
     <div class="container">
         <!-- 헤더의 시작 -->
-        <jsp:include page="/header.jsp"></jsp:include>
+        <jsp:include page="/header.jsp">
+        	<jsp:param value="true" name="isHide"/>
+        </jsp:include>
         <!-- 본문의 시작 -->
         <section>
             <!-- 본문이 들어가는 래퍼 -->

@@ -133,7 +133,9 @@
                 <a href="#item_content" id="item_top"><span class="item_top_button">top</span></a>
                 <a href="#productPayInfo" id="item_bottom"><span class="item_bottom_button">bottom</span></a>
             </div>
-        </div>
+		<!-- 라이트 박스-->
+		<div id="light-box-container"></div>
+	</div>
     <script>
         // 색상버튼은(ul태그안에 li목록중 3번째줄), 사이즈버튼은(ul태그안에 li목록중 4번째줄)
 
@@ -232,9 +234,10 @@
                      $(".productlist_add").append(str);
                      
                      price = Number(price);
-                     var qty = Number($(".productlist_add li").length);
+                     var curPrice = Number($(".allPrice").text());
+                     /* var qty = Number($(".productlist_add li").length); */
                      
-                     $(".allPrice").text(price * qty);
+                     $(".allPrice").text(price+curPrice);
                  }
              }
 
@@ -252,6 +255,12 @@
                 obj.val(cnt);                                   // 선택한 버튼태그의 value값을 가져와서 1 증가시켜 준뒤 그 값을 다시 value 값으로 설정한다. 
                 obj.parent("li").find(".minus_button").val(cnt);// 마이너스 버튼 태그의 value 값도 똑같이 1증가된 상태를 value값으로 설정한다. 
                 obj.parent("li").find("span").text(text);       // span 태그에 블랙,Free 2개 를 넣는다.
+            
+            	var price = $("#detail-item-price").text().replace(",","");
+                price = Number(price);
+                
+                var curPrice = Number($(".allPrice").text());
+                $(".allPrice").text(curPrice + price);
             }
 
             // 상품명 옆에 -버튼 클릭시 상품 개수를 내려주는 함수
@@ -263,11 +272,24 @@
                     obj.val(cnt);
                     obj.parent("li").find(".add_button").val(cnt);
                     obj.parent("li").find("span").text(text);
+                    
+                    var price = $("#detail-item-price").text().replace(",","");
+                    price = Number(price);
+                    
+                    var curPrice = Number($(".allPrice").text());
+                    $(".allPrice").text(curPrice - price);
                 }
             }
 
             // 상품명 옆에 x버튼 클릭시 목록제거
             function del(obj){
+            	var cancel = Number(obj.parent("li").find(".add_button").val());
+            	var curPrice = Number($(".allPrice").text());
+            	var price = $("#detail-item-price").text().replace(",","");
+            	price = Number(price);
+            	curPrice = curPrice - cancel*price;
+            	 $(".allPrice").text(curPrice);
+            	
                 obj.parent("li").remove();
             }
         
@@ -357,6 +379,7 @@
 	        }
         }
         </script>
+        
         <jsp:include page="/pages/login.jsp"></jsp:include>
         <script type="module" src="/js/ItemDetailPage.js"></script>
         <script type="module" src="/js/CookieServiceForItem.js"></script>
