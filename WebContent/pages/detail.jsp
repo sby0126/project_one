@@ -133,7 +133,9 @@
                 <a href="#item_content" id="item_top"><span class="item_top_button">top</span></a>
                 <a href="#productPayInfo" id="item_bottom"><span class="item_bottom_button">bottom</span></a>
             </div>
-        </div>
+		<!-- 라이트 박스-->
+		<div id="light-box-container"></div>
+	</div>
     <script>
         // 색상버튼은(ul태그안에 li목록중 3번째줄), 사이즈버튼은(ul태그안에 li목록중 4번째줄)
 
@@ -377,6 +379,7 @@
 	        }
         }
         </script>
+        
         <jsp:include page="/pages/login.jsp"></jsp:include>
         <script type="module" src="/js/ItemDetailPage.js"></script>
         <script type="module" src="/js/CookieServiceForItem.js"></script>
