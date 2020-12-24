@@ -99,12 +99,15 @@
 		}
 		
 		// 메인 URL 주소
-		String mainUrl = "https://raw.githubusercontent.com/biud436/project_one/main/WebContent";
-
+		mainUrl = "https://raw.githubusercontent.com/biud436/project_one/main/WebContent";
+		
+		var gndr = "M";
+		var shopType = "S";
+		
 		const realImagePath = mainUrl + "/images/item/" 
 				+ gndr + "/"
 					+ shopType + "/"
-					+ contentUrl;
+					+ content.url;
 		
 		const img = $(".recent-product-container img")[0];
 		img.src = realImagePath;

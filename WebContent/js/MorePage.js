@@ -1,6 +1,8 @@
 import {App} from "./app.js";
+import { JoinButton } from "./components/JoinButton.js";
 import {LoginButton} from "./components/LoginButton.js";
 import { RecentlyItems } from "./components/RecentlyItems.js";
+import {SearchBox } from "./components/SearchBox.js";
 
 /**
  * ==============================================
@@ -34,8 +36,10 @@ class MorePage extends App {
     }
 
     onLoad() {
-        this.emit("loginView:ready");
+        JoinButton.builder(this).run();
+        SearchBox.builder(this).run();
         RecentlyItems.builder().run();
+        this.emit("loginView:ready");
     }
 
 }
