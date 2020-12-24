@@ -232,7 +232,15 @@
 	            
 	        })();
         </script>   
-        
+		<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+		<script type="text/javascript">
+		if(!wcs_add) var wcs_add = {};
+		wcs_add["wa"] = "a7387d0c713560";
+		if(window.wcs) {
+		  wcs_do();
+		}
+		</script>        
+		        
    	    <c:if test="${isHide != true}">
    	    	<div style="display:block; height: 4em; width:100%;">
    	    	</div>
