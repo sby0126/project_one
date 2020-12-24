@@ -158,7 +158,7 @@
 		                <div class="item_selected_none">
 		                    <button class="item_selected_none_all_del">전체삭제</button>
 		                    <img class="item_selected_none_img" src="../images/b527471.png">
-		                    <div class="item_selected_none_sp">최근 본 샾이 없습니다.</div>
+		                    <div class="item_selected_none_sp">최근 본 상품이 없습니다.</div>
 		                    <a href="/index.jsp"><button class="item_selected_none_button">샾 메인으로 이동</button></a>
 		                </div>            		
             		</c:otherwise>

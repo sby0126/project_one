@@ -13,10 +13,10 @@
 		id = "";
 	}
 	
-	if(session.getAttribute("id") == null) {
-		response.sendRedirect("/");
-		return;
-	}
+// 	if(session.getAttribute("id") == null) {
+// 		response.sendRedirect("/");
+// 		return;
+// 	}
 	
 	String myList = "";
 	

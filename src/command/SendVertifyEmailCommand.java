@@ -38,7 +38,7 @@ public class SendVertifyEmailCommand extends Command {
 			String token = JWTUtils.createToken(data, JWTUtils.MINUTE * 2L);
 			
 			// 서비스 객체 생성
-			SendMailService mailService = new SendMailService("/mail.properties");
+			SendMailService mailService = new SendMailService(request.getServletContext().getRealPath("/mail.properties"));
 			
 			String tokenURL = "http://biud436.com/vertify/vertifyEmail.do?accessToken=" + token;
 			
