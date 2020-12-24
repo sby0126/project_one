@@ -679,7 +679,7 @@ public class ContentDAO implements IDAO {
 		
 		try {
 			conn = pool.getConnection();
-			pstmt = conn.prepareStatement("select * from tblInterest where cust_id = ?");
+			pstmt = conn.prepareStatement("select distinct * from tblInterest where cust_id = ?");
 			pstmt.setString(1, customerId);
 			
 			rs = pstmt.executeQuery();

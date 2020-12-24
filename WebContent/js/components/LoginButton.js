@@ -67,10 +67,10 @@ export class LoginButton extends Component {
 		script.src = "https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js";
 		script.onload = function() {
 			
-		  	var naver_id_login = new window.naver_id_login("7ImHSjL7FtzCQoKe84Jc", "http://localhost:9988/pages/callback.jsp");
+		  	var naver_id_login = new window.naver_id_login("7ImHSjL7FtzCQoKe84Jc", "http://biud436.com/pages/callback.jsp");
 		  	var state = naver_id_login.getUniqState();
 		  	naver_id_login.setButton("green", 3,40);
-		  	naver_id_login.setDomain("http://localhost:9988");
+		  	naver_id_login.setDomain("http://biud436.com/");
 		  	naver_id_login.setState(state);
 		  	naver_id_login.init_naver_id_login();
 	
