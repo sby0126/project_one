@@ -45,6 +45,13 @@ public class AdminUtil {
 		}
 	}
 	
+	/**
+	 * 아이피를 기록합니다.
+	 * 
+	 * @param ID
+	 * @param IP
+	 * @return
+	 */
 	public boolean loggingIP(String ID, String IP) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

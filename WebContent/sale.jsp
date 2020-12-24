@@ -64,12 +64,12 @@
                                 <p class="menu-title">최근 본 상품 <em>0</em></p>
                             </a>
                         </li>
-                        <li class="menu">
+                        <!-- <li class="menu">
                             <a href="#" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">MY SHOP</p>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="menu">
                             <a href="pages/interested_item.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
@@ -88,12 +88,12 @@
                                 <p class="menu-title">소개 및 약관</p>
                             </a>
                         </li>
-                        <li class="menu">
+                        <!-- <li class="menu">
                             <a href="pages/outer-link-page.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">마케팅 센터</p>
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>            
             <!-- 검색 필터 -->
