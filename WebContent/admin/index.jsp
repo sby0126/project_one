@@ -102,6 +102,9 @@
                     <p>관리자 페이지에 오신 것을 환영합니다.</p>
                     <p><span class="col-md-2"><%=id %></span>님 환영합니다. </p>
                     <p>서버 플랫폼 : <%=System.getProperty("os.name") %></p>
+                    <p>서버 경로 : <%= request.getServletContext().getRealPath("/") %></p>
+                    <p>mail.properties 경로 : <%= request.getServletContext().getRealPath("/mail.properties") %></p>
+                    <p>서버 파일 구분자 : <%= File.separator %></p>
                 </div>
                 <div id="manage-whole-member" class="content jumbotron">
                    	<%
@@ -111,7 +114,7 @@
                    	<c:set var="customerList" value="<%= customerList %>" />                   	
                 	<a name="manage-whole-member"></a>
                     <p>전체 멤버 목록입니다 (총 멤버수 : ${ customerList.size() }명)</p>
-                    <table class="table">
+                    <table id="manage-whole-member-table" class="table">
                     	<thead>
                     		<th>회원 번호</th>
                     		<th>ID</th>
@@ -139,8 +142,8 @@
                    	<tfoot>
                    		<div class="form-group">
                    			<label for="search">검색 하기</label>
-                   			<input type="search" name="search" class="form-control">
-                   			<input type="submit" value="검색하기" class="btn btn-default">
+                   			<input type="search" name="search" id="search-specific-member" class="form-control">
+                   			<input type="submit" value="검색하기" class="btn btn-default" id="search-specific-member-button">
                    		</div>
                    	</tfoot>
                     </table>
@@ -544,6 +547,35 @@
     			});
     		}
     	});
+   	    
+   	    /**
+   	     * 멤버 검색 기능입니다.
+   	     */
+   	    function searchMemberTable(keyword) {
+   	    	const items = $("#manage-whole-member-table tbody tr").filter((index, elem) => {
+   	    		// 특정 검색어가 없으면   	    		
+   	    		return $(elem).text().indexOf(keyword) === -1;
+   	    	});
+   	    	
+   	    	if(items.length == 0) {
+   	    		$("#manage-whole-member-table tbody tr").show();
+   	    	} else {
+   	    		items.hide();
+   	    	}
+   	    }
+   	    
+   	    // 특정 멤버를 검색합니다.
+    	$("#search-specific-member").on("change", function() {
+    		const target = $(this);
+    		const val = target.val() || "";
+    		searchMemberTable(val.trim());
+    	});
+   	    
+   	    $("#search-specific-member-button").on("click", () => {
+   	    	const val = $("#search-specific-member").val();
+   	    	searchMemberTable(val.trim());
+   	    	return false;
+   	    })
     	
     </script>
 </body>
