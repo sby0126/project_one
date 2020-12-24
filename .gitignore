@@ -208,3 +208,5 @@ local.properties
 *.project
 *.classpath
 WebContent/settings.json
+food
+id_pw

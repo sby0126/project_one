@@ -102,6 +102,9 @@
                     <p>관리자 페이지에 오신 것을 환영합니다.</p>
                     <p><span class="col-md-2"><%=id %></span>님 환영합니다. </p>
                     <p>서버 플랫폼 : <%=System.getProperty("os.name") %></p>
+                    <p>서버 경로 : <%= request.getServletContext().getRealPath("/") %></p>
+                    <p>mail.properties 경로 : <%= request.getServletContext().getRealPath("/mail.properties") %></p>
+                    <p>서버 파일 구분자 : <%= File.separator %></p>
                 </div>
                 <div id="manage-whole-member" class="content jumbotron">
                    	<%
@@ -111,7 +114,7 @@
                    	<c:set var="customerList" value="<%= customerList %>" />                   	
                 	<a name="manage-whole-member"></a>
                     <p>전체 멤버 목록입니다 (총 멤버수 : ${ customerList.size() }명)</p>
-                    <table class="table">
+                    <table id="manage-whole-member-table" class="table">
                     	<thead>
                     		<th>회원 번호</th>
                     		<th>ID</th>
@@ -139,8 +142,8 @@
                    	<tfoot>
                    		<div class="form-group">
                    			<label for="search">검색 하기</label>
-                   			<input type="search" name="search" class="form-control">
-                   			<input type="submit" value="검색하기" class="btn btn-default">
+                   			<input type="search" name="search" id="search-specific-member" class="form-control">
+                   			<input type="submit" value="검색하기" class="btn btn-default" id="search-specific-member-button">
                    		</div>
                    	</tfoot>
                     </table>
@@ -441,110 +444,6 @@
     		<img src="">
     	</div>
     </div>        
-        
-    <script>
-    
-    	function closeMemberInformation() {
-    		$("#light-box").removeClass("active");
-    		$(".member-information-form").hide();
-    	}
-    	
-    	function showMemberInformation(postNumber) {
-    		$("#light-box").addClass("active");
-    		$(".member-information-form").show();
-    	}
-    	
-    	function openImageView(src) {   
-    		$("#light-box").addClass("active");
-    		$("#image-view").show();
-    		$("#image-view img").attr("src", src);
-    	}
-    	
-    	function hideImageView() {
-    		$("#light-box").removeClass("active");
-    		$("#image-view").fadeOut();
-    	}
-    
-    	function getPostNumber() {
-    		return parseInt( $(this).data("number") ); 
-    	}
-    
-    	$( ".post-modify" ).on("click", function() {		
-    		alert("글 수정 번호는 " + getPostNumber.call(this));
-    	});
-    	
-    	$( ".post-delete" ).on("click", function() {
-    		alert("글 삭제 번호는 " + getPostNumber.call(this));
-    	});
-    	
-    	$(".whole-member").on("click", function() {
-    		const memberId = $(this).data("number");
-    		location.href = `/members/modifyMemberForm.do?id=` + memberId;
-    	});
-    	
-    	$( ".forced-secession" ).on("click", function() {
-    		alert("강제로 탈퇴시킬 회원 번호는 " + $(this).data("number"));
-    		
-    		const self = this;
-    		
-    		const id = $(this).data("number");
-    		
-    		if(id === "admin") {
-    			alert("관리자는 탈퇴시킬 수 없습니다.");
-    			return false;
-    		}
-    		
-    		$.ajax({
-    			url: "/members/foclySecessionMember.do?id=" + id,
-    			method: "GET",
-    			success: function(data) {
-    				if(data.status === "success") {
-    					alert("탈퇴 처리가 완료되었습니다");
-    					// $("button.forced-secession[data-number='1568304956']").eq(0).parent().parent()[0]
-    					$(self).parent().parent().remove();
-    				}
-    			},
-    			error: function(err) {
-    				if(err.code === 401) {
-    					alert("권한이 없습니다");
-    				} else if(err.code === 402) {
-    					alert("글이 남아있는 상태입니다.");
-    				} else {
-    					console.warn(err);
-    				}
-    			}
-    		})
-    		
-    	});
-    	
-    	$(window).on("click", function(ev) {
-    		if(ev.target.classList.contains("modal")) {
-    			$(".modal").hide();
-    		}
-    	});
-    	
-   	    function verifyIp(ip) {
-   	        return /^(([1-9]?\d|1\d\d|2[0-4]\d|25[0-5])(\.(?!$)|(?=$))){4}$/.test(ip||"");
-   	    }
-    	
-   	    // 로컬 IP 숨김 기능
-    	$("#hide-local-ip").on("click", () => {
-    		const isChecked = $("#hide-local-ip").prop("checked");
-    		
-    		if(isChecked) {
-    			$("#ip-logging-table tr").each((index, elem) => {
-    				const text = $(elem).find("td:nth-child(1)").text();
-    				if(text.indexOf("192") >= 0) {
-    					$(elem).hide();
-    				}
-    			})
-    		} else {
-    			$("#ip-logging-table tr").each((index, elem) => {
-    				$(elem).show();
-    			});
-    		}
-    	});
-    	
-    </script>
+    <script src="./js/admin.js"></script>
 </body>
 </html>
