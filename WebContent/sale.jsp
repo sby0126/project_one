@@ -83,6 +83,12 @@
                             </a>
                         </li>
                         <li class="menu">
+                            <a href="/boardList.abc" class="menu-link">
+                                <div class="menu-icon"></div>
+                                <p class="menu-title">자유 게시판</p>
+                            </a>
+                        </li>
+                        <li class="menu">
                             <a href="pages/map.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">소개 및 약관</p>

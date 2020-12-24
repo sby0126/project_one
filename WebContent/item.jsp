@@ -102,12 +102,12 @@
                                 <p class="menu-title">관심 상품</p>
                             </a>
                         </li>
-                        <li class="menu">
+                        <!-- <li class="menu">
                             <a href="#" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">공지 사항</p>
                             </a>
-                        </li>                         
+                        </li> -->                         
                         <li class="menu">
                             <a href="/pages/board-default.jsp" class="menu-link">
                                 <div class="menu-icon"></div>

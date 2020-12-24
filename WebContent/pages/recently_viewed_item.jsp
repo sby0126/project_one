@@ -144,7 +144,7 @@
 		                    <img class="item_selected_none_img" src="../images/b527471.png">
 		                    <div class="item_selected_none_sp">최근 본 샾이 없습니다.</div>
 		                    <a href="/index.jsp"><button class="item_selected_none_button">샾 메인으로 이동</button></a>
-		                </div>            		
+		                </div>
             		</c:otherwise>
             	</c:choose>
 
