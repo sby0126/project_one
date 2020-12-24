@@ -10,7 +10,7 @@
 	String num = myList;
 	String value = myList;
 	
-	if(myList == null) {
+	if(myList == null || myList.isEmpty()) {
 		// Create a cookie service.	
 		CookieService cookieService = new CookieService();
 		HashMap<String, String> cookie = cookieService.getKeyValue(request);
