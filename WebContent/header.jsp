@@ -192,7 +192,7 @@
 				<c:set var="flag" value="false"></c:set>
 				<c:forEach var="m" items="${searchList}" varStatus="stat">
 					<c:if test="${i <= 8}">
-						<li> ${stat.count} <span>${ m.getKeyword() }</span>&nbsp;<span>${ m.getCount() }</span> </li>
+						<li> <i>${stat.count}.</i> <span>${ m.getKeyword() }</span>&nbsp;<span>${ m.getCount() }</span> </li>
 						<c:set var="i" value="${i + 1}" />
 					</c:if>
 				</c:forEach>

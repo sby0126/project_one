@@ -184,55 +184,39 @@
                     </div>
                 </div>
             </div>
-          <ul class="popular-search">
-			<h4>인기검색어</h4>
-			<c:set var="i" value="0"></c:set>
-			<c:set var="flag" value="false"></c:set>
-			<c:forEach var="m" items="${searchList}" varStatus="stat">
-				<c:if test="${i <= 8}">
-					<li> ${stat.count} <span>${ m.getKeyword() }</span>&nbsp;<span>${ m.getCount() }</span> </li>
-					<c:set var="i" value="${i + 1}" />
-				</c:if>
-			</c:forEach>
-		   </ul>            
+           <ul class="popular-search">
+				<h4>인기검색어</h4>
+				<c:set var="i" value="0"></c:set>
+				<c:set var="flag" value="false"></c:set>
+				<c:forEach var="m" items="${searchList}" varStatus="stat">
+					<c:if test="${i <= 8}">
+						<li> <i>${stat.count}.</i> <span>${ m.getKeyword() }</span>&nbsp;<span>${ m.getCount() }</span> </li>
+						<c:set var="i" value="${i + 1}" />
+					</c:if>
+				</c:forEach>
+			</ul>       
         </header>   
         <script>
         	
-        	$('body').click(function(e){
-        		var id = e.target.getAttribute('id');
-        		
-        		if(id != "my-search-box"){
-        			$(".popular-search").css("display","none");	
-        		}else{
-        			$(".popular-search").css("display","block");
-        		}
-        	});
+	    	// 인기 검색어 창을 표시합니다. 
+	    	$('body').click(function(e){
+	    		var id = e.target.getAttribute('id');
+	    		
+	    		if(id != "my-search-box"){
+	    			$(".popular-search").css("display","none");	
+	    		}else{
+	    			$(".popular-search").css("display","block");
+	    		}
+	    	});
+	
+	        // 로그인 창을 표시합니다.
+			function openLoginModal() {
+	    		setTimeout(function() {
+	    			$(".header-right-login-button").trigger("click");	
+	    		}, 200);
+			}
     
-        </script>                
-        <script>
-        
-	        (function () {
-	            //여기에 스크립트 추가
-	            
-	            const navContainer = $("#nav_board_li");
-	            const insideMenu = $(".side_box");
-
-	            //헤더네비게이션(게시판) 마우스 온 아웃했을때
-	            navContainer.mouseover(function () {
-	
-	                $("#nav_board_li_icon , #nav_board_li_title").css("display", "none");
-	                insideMenu.css("position", "absolute");
-	                insideMenu.css("display", "block");
-	
-	            });
-	
-	            navContainer.mouseout(function () {
-	                $("#nav_board_li_icon , #nav_board_li_title").css("display", "block");
-	                insideMenu.css("display", "none");
-	            });
-	            
-	        })();
-        </script>          
+        </script>                       
         <!-- 본문의 시작 -->
         <section>
             <!-- 본문이 들어가는 래퍼 -->

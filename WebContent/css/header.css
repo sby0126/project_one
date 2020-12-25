@@ -587,6 +587,55 @@ header {
     color: #FF6B00;
 }
 
+.popular-search {
+	list-style-type: none;
+	border: 1px solid #E0E4E6;
+	min-width: 200px;
+	padding: 10px;
+	position: absolute;
+	top: 64px;
+	right: 0;		
+	display: none; 
+	
+	background-color: #FFFFFF;
+	color: #888888;
+	font-size: 0.675em;
+}
+
+.popular-search h4 {
+	color: #000000;
+	font-weight: bold;
+}
+
+.popular-search > li {
+	margin: 10px 0 10px 0;
+	height: 1em;
+	line-height: 1em;
+}
+
+.popular-search > li i:first-child {
+	color: #FD8632;
+	font-style: normal;
+}
+.popular-search > li:hover {
+	background-color: #F5F5F5;
+	cursor: pointer;
+}
+
+/* @keyframes zoom-text { */
+/* 	from { */
+/* 		font-size: 0.675em; */
+/* 	} */
+	
+/* 	to { */
+/* 		font-size: 0.8em; */
+/* 	} */
+/* } */
+
+.popular-search > li span:last-child {
+	color: #0F0F0F;
+}
+
 @media only screen and (min-width: 320px) {
     .header-wrapper {
         justify-content: center;
@@ -654,18 +703,5 @@ header {
     }
 }
 
-.popular-search {
-		list-style-type: none;
-		border: 1px solid black;
-		min-width: 200px;
-		padding: 10px;
-		position: absolute;
-		top: 64px;
-		right: 0;		
-		display: none; 
+
 	
-		
-	}
-.popular-search > li {
-		margin: 10px 0 10px 0;
-	}
