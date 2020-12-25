@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ page import="java.net.URLEncoder" %>
 <%@ page import="dao.*, vo.*, service.*, java.util.*" %>
 <%
 	// 최근 검색어 & 인기 검색어
@@ -191,8 +192,12 @@
 				<c:set var="i" value="0"></c:set>
 				<c:set var="flag" value="false"></c:set>
 				<c:forEach var="m" items="${searchList}" varStatus="stat">
-					<c:if test="${i <= 8}">
-						<li> <i>${stat.count}.</i> <span>${ m.getKeyword() }</span>&nbsp;<span>${ m.getCount() }</span> </li>
+					<c:if test="${i <= 8}">									
+						<li> 
+							<a href="/item.jsp?pageType=item&shopType=S&gndr=M&ages=all&keyword=${ URLEncoder.encode(m.getKeyword()) }">
+								<i>${stat.count}.</i> <span>${ m.getKeyword() }</span>&nbsp;<span>${ m.getCount() }</span>
+							</a>
+						</li>
 						<c:set var="i" value="${i + 1}" />
 					</c:if>
 				</c:forEach>

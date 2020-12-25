@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <%@ page import="dao.ContentDAO, org.json.simple.*" %>
 <%@ page import="dao.*, vo.*, service.*, java.util.*" %>
+<%@ page import="java.net.URLEncoder" %>
 <%
 	BestItemListService service = new BestItemListService();
 	List<SearchVO> searchList = service.getList();
@@ -189,12 +190,16 @@
 				<c:set var="i" value="0"></c:set>
 				<c:set var="flag" value="false"></c:set>
 				<c:forEach var="m" items="${searchList}" varStatus="stat">
-					<c:if test="${i <= 8}">
-						<li> <i>${stat.count}.</i> <span>${ m.getKeyword() }</span>&nbsp;<span>${ m.getCount() }</span> </li>
+					<c:if test="${i <= 8}">									
+						<li> 
+							<a href="/item.jsp?pageType=item&shopType=S&gndr=M&ages=all&keyword=${ URLEncoder.encode(m.getKeyword()) }">
+								<i>${stat.count}.</i> <span>${ m.getKeyword() }</span>&nbsp;<span>${ m.getCount() }</span>
+							</a>
+						</li>
 						<c:set var="i" value="${i + 1}" />
 					</c:if>
 				</c:forEach>
-			</ul>       
+			</ul>     
         </header>   
         <script>
         	
