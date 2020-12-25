@@ -145,11 +145,6 @@
 		                    <div class="item_selected_none_sp">최근 본 샾이 없습니다.</div>
 		                    <a href="/index.jsp"><button class="item_selected_none_button">샾 메인으로 이동</button></a>
 		                </div>
-		                <script>
-	                		setTimeout(function() {
-	                			$(".header-right-login-button").trigger("click");	
-	                		}), 500);
-		                </script>
             		</c:otherwise>
             	</c:choose>
 

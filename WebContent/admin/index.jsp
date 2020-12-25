@@ -74,10 +74,18 @@
   	.member-information-form {
   	}
   	
+  	header {
+  		display: fixed;
+  		top: 0;
+  	}
+  	
   </style>
 </head>
 <body>
     <div class="container col-md-12">
+    	<header class="col-md-12 jumbotron">
+    		
+    	</header>
         <section class="col-md-12">
             <div class="left wall col-md-3">
                 <ul class="nav nav-pills nav-stacked">

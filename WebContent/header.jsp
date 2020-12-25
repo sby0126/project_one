@@ -2,9 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ page import="dao.*, vo.*, service.*, java.util.*" %>
 <%
+	// 최근 검색어 & 인기 검색어
 	BestItemListService service = new BestItemListService();
 	List<SearchVO> searchList = service.getList();
-%>
+	
+%>		
 		<c:set var="searchList" value="<%= searchList %>" />
         <!-- 헤더의 시작 -->
         <header>
@@ -79,12 +81,24 @@
                                  <p class="menu-title">MY SHOP</p>
                             </a> 
                         </li>	 --%>
-                        <li class="menu">
-                            <a href="${pageContext.request.contextPath}/pages/interested_item.jsp" class="menu-link">
-                                <div class="menu-icon"></div>
-                                <p class="menu-title">관심 상품</p>
-                            </a>
-                        </li>
+	                        <li class="menu">
+		                        <c:choose>
+		                        <c:when test="${id != null}">
+		                            <a href="${pageContext.request.contextPath}/pages/interested_item.jsp" class="menu-link">
+		                                <div class="menu-icon"></div>
+		                                <p class="menu-title">관심 상품</p>
+		                            </a>
+		                        </c:when>
+		                        <c:otherwise>
+		                            <a href="javascript:openLoginModal()" class="menu-link">
+		                                <div class="menu-icon"></div>
+		                                <p class="menu-title">관심 상품</p>
+		                            </a>		                        
+		                        </c:otherwise>
+		                        </c:choose>
+	                        </li>                        
+                        	
+
                      <!--    <li class="menu">
                             <a href="#" class="menu-link">
                                 <div class="menu-icon"></div>
@@ -182,16 +196,11 @@
 						<c:set var="i" value="${i + 1}" />
 					</c:if>
 				</c:forEach>
-<!-- 				<li> 2 <span>...</span> <span><img src="#" width="32px"></span> </li> -->
-<!-- 				<li> 3 <span>...</span> <span><img src="#" width="32px"></span> </li> -->
-<!-- 				<li> 4 <span>...</span> <span><img src="#" width="32px"></span> </li> -->
-<!-- 				<li> 5 <span>...</span> <span><img src="#" width="32px"></span> </li> -->
-<!-- 				<li> 6 <span>...</span> <span><img src="#" width="32px"></span> </li> -->
-<!-- 				<li> 7 <span>...</span> <span><img src="#" width="32px"></span> </li> -->
 			</ul>
         </header>
         <script>
         	
+        	// 인기 검색어 창을 표시합니다. 
         	$('body').click(function(e){
         		var id = e.target.getAttribute('id');
         		
@@ -201,38 +210,15 @@
         			$(".popular-search").css("display","block");
         		}
         	});
-        	
-        	/* $("body").not("ul.popular-search, input.input-non-border-box").click(function(){
-        		
-        		
-        	}); */
-        	
-        	/* $(".popular-search").blur(function(){
-    			$(".popular-search").css("display","none");
-    		} */
-	        (function () {
-	            //여기에 스크립트 추가
-	            
-	            const navContainer = $("#nav_board_li");
-	            const insideMenu = $(".side_box");
 
-	            //헤더네비게이션(게시판) 마우스 온 아웃했을때
-	            /* navContainer.mouseover(function () {
-	
-	                $("#nav_board_li_icon , #nav_board_li_title").css("display", "none");
-	                insideMenu.css("position", "absolute");
-	                insideMenu.css("display", "block");
-	
-	            });
-	
-	            navContainer.mouseout(function () {
-	                $("#nav_board_li_icon , #nav_board_li_title").css("display", "block");
-	                insideMenu.css("display", "none");
-	            }); */
-	            
-	        })();
-    		
-        </script>
+	        // 로그인 창을 표시합니다.
+			function openLoginModal() {
+	    		setTimeout(function() {
+	    			$(".header-right-login-button").trigger("click");	
+	    		}, 200);
+			}
+	        
+		</script>        
    		<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
    		<script type="text/javascript">
    		if(!wcs_add) var wcs_add = {};
