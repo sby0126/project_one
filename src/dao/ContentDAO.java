@@ -697,39 +697,4 @@ public class ContentDAO implements IDAO {
 		return list;
 	}
 	
-//	public List<ProductVO> findThumbnail(String shopName) {
-//		
-//		ResultSet rs = null;
-//		List<ProductVO> list = null;
-//		String sql = null;
-//		
-//		try {
-//			conn = pool.getConnection();
-//			sql = "SELECT COUNT(DISTINCT b.title) AS cnt, b.title, "
-//				+ "b.price, b.genderType, b.shopType, b.shopName, "
-//				+ "b.pageType, c.Contenturl, a.imgId "					
-//				+ "FROM tblImageHash a, tblproduct b, tblproduct c "
-//				+ "WHERE b.title IS NOT NULL "
-//				+ "and b.pageType = 'item' "
-//				+ "AND c.pageType = 'shop' "
-//				+ "AND a.imgUrl = b.contentUrl"
-//				+ "AND b.shopName = c.shopName"
-//				+ "GROUP BY b.shopname "
-//				+ "order by cnt DESC";
-//			
-//			pstmt = conn.prepareStatement(sql);			
-//			rs = pstmt.executeQuery();
-//			
-//			list = SQLHelper.putResult(rs, ProductVO.class);
-//			
-//		} catch(SQLException e) {
-//			e.printStackTrace();
-//		} catch(Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//			pool.freeConnection(conn, pstmt, rs);
-//		}
-//		
-//		return list;
-//	}
 }

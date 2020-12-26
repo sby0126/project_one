@@ -83,9 +83,6 @@
 </head>
 <body>
     <div class="container col-md-12">
-    	<header class="col-md-12 jumbotron">
-    		
-    	</header>
         <section class="col-md-12">
             <div class="left wall col-md-3">
                 <ul class="nav nav-pills nav-stacked">
@@ -109,10 +106,14 @@
                 <div id="main" class="content jumbotron media">
                     <p>관리자 페이지에 오신 것을 환영합니다.</p>
                     <p><span class="col-md-2"><%=id %></span>님 환영합니다. </p>
-                    <p>서버 플랫폼 : <%=System.getProperty("os.name") %></p>
+                    <p>서버 OS : <%=System.getProperty("os.name") %></p>
+                    <p>파일 구분자 : <%= File.separator %></p>
+                    <p>&nbsp;</p>
                     <p>서버 경로 : <%= request.getServletContext().getRealPath("/") %></p>
-                    <p>mail.properties 경로 : <%= request.getServletContext().getRealPath("/mail.properties") %></p>
-                    <p>서버 파일 구분자 : <%= File.separator %></p>
+                    <p>&nbsp;</p>
+                    <p>프로토콜 : <%= request.getScheme() %></p>
+                    <p>호스트 주소 : <%= request.getRemoteHost()%> </p>
+                    <p>포트 : <%= request.getRemotePort()%> </p>
                 </div>
                 <div id="manage-whole-member" class="content jumbotron">
                    	<%

@@ -11,6 +11,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.servlet.ServletContext;
 
@@ -28,6 +30,8 @@ public class DataManager {
 	private boolean isReady;
 	
 	public List<String> staffMembers;
+	
+	private final Timer mainScheduler = new Timer();
 	
 	public DataManager() {
 		initWithMembers();
@@ -51,6 +55,20 @@ public class DataManager {
 		ary.add("admin");
 		
 		mConfig.put("staffMembers", ary);		
+	}
+	
+	@SuppressWarnings("unused")
+	private void initWithScheduler() {
+
+		// 1시간 마다 실행합니다.
+		mainScheduler.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				// 파일 정리
+				// 웹소켓을 통한 로깅 작업
+				
+			}
+		}, 0L, 1000L*60L*60L*1L);	
 	}
 	
 	/**
