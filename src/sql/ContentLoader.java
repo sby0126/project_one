@@ -66,6 +66,8 @@ public class ContentLoader {
 		
 		qlList.put("getMyShop", "SELECT * FROM tblMyShop WHERE ctm_id = ?");
 		qlList.put("addMyShop", "INSERT INTO tblMyShop(ctm_id, shop_id) values(?, ?)");
+		qlList.put("deleteMyShop", "DELETE FROM tblMyShop where ctm_id = ? and shop_id = ?");
+		qlList.put("deleteAllMyShop", "DELETE FROM tblMyShop where ctm_id = ?");
 		
 	}
 	

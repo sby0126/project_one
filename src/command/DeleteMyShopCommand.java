@@ -13,9 +13,7 @@ import org.json.simple.JSONObject;
 import action.ActionResult;
 import service.MyShopService;
 
-public class AddMyShopCommand extends Command {
-	
-	@SuppressWarnings("unchecked")
+public class DeleteMyShopCommand extends Command {
 	@Override
 	public ActionResult execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -28,30 +26,26 @@ public class AddMyShopCommand extends Command {
 			result.sendError(401, "");
 			return result;
 		}
-		
+
 		String customerID = (String)session.getAttribute("id");
 		int shopId = Integer.parseInt(request.getParameter("shopId"));
 		
 		MyShopService service = new MyShopService();
-		boolean isOK = service.addMyShop(customerID, shopId);
+		boolean isOK = service.deleteMyShop(customerID, shopId);
 		
 		// 상태 정보를 반환합니다.
 		JSONObject statusText = new JSONObject();
 		
 		if(isOK) {
-			statusText.put("status", "success");
-			statusText.put("customerID", customerID);
-			statusText.put("shopId", shopId);
+			response.setContentType("application/json; charset=utf-8");
+			response.setCharacterEncoding("UTF-8");
+			
+			PrintWriter out = response.getWriter();
+			out.println(statusText.toJSONString());			
 		} else {
 			result.sendError(401, "");
 			return result;
 		}
-		
-		response.setContentType("application/json; charset=utf-8");
-		response.setCharacterEncoding("UTF-8");
-		
-		PrintWriter out = response.getWriter();
-		out.println(statusText.toJSONString());
 		
 		return null;
 	}

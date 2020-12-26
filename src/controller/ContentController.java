@@ -15,6 +15,7 @@ import command.AddMyShopCommand;
 import command.AllContentsCommand;
 import command.Command;
 import command.ContentsSearchCommand;
+import command.DeleteMyShopCommand;
 import command.DetailInputCommand;
 import command.InterestListCommand;
 import command.ItemCategoryCommand;
@@ -91,6 +92,9 @@ public class ContentController extends HttpServlet {
 				break;
 			case "/addMyShop.do":
 				command = new AddMyShopCommand();
+				break;
+			case "/deleteMyShop.do":
+				command = new DeleteMyShopCommand();
 				break;
 			}
 			

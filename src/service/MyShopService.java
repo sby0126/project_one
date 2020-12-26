@@ -50,6 +50,22 @@ public class MyShopService {
 	}
 	
 	/**
+	 * 마이샵을 추가합니다.
+	 * 
+	 * @param customerID
+	 * @param shopId
+	 * @return
+	 */
+	public boolean deleteMyShop(String customerID, int shopId) {
+		boolean isOK = false;
+		
+		ContentDAO contentDAO = ContentDAO.getInstance();
+		isOK = contentDAO.deleteMyShop(customerID, shopId);
+		
+		return isOK;
+	}
+	
+	/**
 	 * customerID에 대한 마이샵 목록을 List<ProductVO>로 반환합니다.
 	 * 
 	 * @param customerID

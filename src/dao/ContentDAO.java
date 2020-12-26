@@ -747,4 +747,50 @@ public class ContentDAO implements IDAO {
 		
 		return myShopList;
 	}
+	
+	public boolean deleteMyShop(String customerID, int shopId) {
+		boolean isOK = false;
+		
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement(getQL("deleteMyShop"));
+			pstmt.setString(1, customerID);
+			pstmt.setInt(2, shopId);
+			
+			if(pstmt.executeUpdate() > 0) {
+				isOK = true;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+		return isOK;
+	}	
+	public boolean deleteAllMyShop(String customerID) {
+		boolean isOK = false;
+		
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement(getQL("deleteAllMyShop"));
+			pstmt.setString(1, customerID);
+			
+			if(pstmt.executeUpdate() > 0) {
+				isOK = true;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+		return isOK;
+	}	
 }
