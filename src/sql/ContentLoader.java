@@ -64,6 +64,8 @@ public class ContentLoader {
 				+ " where a.imgUrl = b.contentUrl"
 				+ " AND b.id = ?");
 		
+		qlList.put("", "SELECT * FROM tblMyShop WHERE ctm_id = ?");
+		
 	}
 	
 	public String get(String command) {
