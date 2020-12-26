@@ -11,7 +11,6 @@
 	ShopDetailService service = new ShopDetailService(id, pageType);
 	
 	List<ProductVO> list = service.getList();
-	
 %>
 <c:set var="list" value="<%= service.getList() %>" />
 <c:set var="thumbNailImage" value="<%= service.getThumbNailImage() %>" />
@@ -24,7 +23,6 @@
 </c:if>
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -187,7 +185,6 @@
 		<jsp:include page="/header.jsp">
 			<jsp:param value="true" name="isHide" />
 		</jsp:include>
-
 		<!-- 본문의 시작 -->
 		<section>
 			<!-- 본문이 들어가는 래퍼 -->
@@ -238,8 +235,8 @@
 					<c:choose>
 						<c:when test="${list != null}">
 							<%
-                    	for(ProductVO card : list) {
-                    %>
+                    			for(ProductVO card : list) {
+                   			 %>
 							<c:set var="card" value="<%= card %>" />
 							<div class="card">
 								<p d-<%= card.getId() %>></p>
@@ -252,8 +249,8 @@
 								</div>
 							</div>
 							<%
-                    	}
-                    %>
+                    			}
+                    		%>
 						</c:when>
 						<c:otherwise>
 							<div class="item_selected_none">
@@ -267,7 +264,6 @@
 						</c:otherwise>
 					</c:choose>
 				</div>
-
 			</div>
 		</section>
 	</div>
@@ -276,9 +272,8 @@
 	</div>
 	<jsp:include page="/pages/login.jsp"></jsp:include>
 	<!-- index.js는 메인 용이므로 알맞은 스크립트를 사용해야 합니다-->
-	<script type="module" src="/js/itemPage.js"></script>
 	<script src="/js/shopDetailPage.js"></script>
+	<script type="module" src="/js/ItemPage.js"></script>
 	<script type="module" src="/js/CookieService.js"></script>
 </body>
-
 </html>

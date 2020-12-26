@@ -733,16 +733,14 @@ public class ContentDAO implements IDAO {
 			
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) {
-				myShopList = SQLHelper.putResult(rs, MyShopVO.class);	
-			}
+			myShopList = SQLHelper.putResult(rs, MyShopVO.class);	
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			pool.freeConnection(conn, pstmt);
+			pool.freeConnection(conn, pstmt, rs);
 		}
 		
 		return myShopList;

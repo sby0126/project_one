@@ -61,10 +61,14 @@ public class CookieService {
 		HashMap<String, String> map = new HashMap<String, String>();
 		
 		Cookie[] cookies = request.getCookies();
-		List<Cookie> list = Arrays.asList(cookies);
 		
-		for(Cookie c : list) {
-			map.put(c.getName(), c.getValue());
+		if(cookies != null) {
+			List<Cookie> list = Arrays.asList(cookies);
+			
+			for(Cookie c : list) {
+				map.put(c.getName(), c.getValue());
+			}
+						
 		}
 		
 		return map;

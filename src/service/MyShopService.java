@@ -107,5 +107,28 @@ public class MyShopService {
 		
 		return list;
 	}
+	
+	/**
+	 * Get the 'MyShop' that has an id value from database named 'mydb'
+	 * 
+	 * @param customerID
+	 * @return
+	 */
+	public List<Integer> getIdList(String customerID) {
+		
+		// DAO를 통해 마이샵 목록을 가져옵니다.
+		ContentDAO contentDAO = ContentDAO.getInstance();
+		List<MyShopVO> myShopList = contentDAO.getMyShop(customerID);
+		
+		List<Integer> iList = new ArrayList<>();
+		
+		// 마이샵 목록에서 샵 ID를 추출합니다.
+		for(MyShopVO vo : myShopList) {
+			System.out.println(vo.getShopId());
+			iList.add(vo.getShopId());
+		}
+		
+		return iList;
+	}
 
 }
