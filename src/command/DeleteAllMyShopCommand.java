@@ -13,7 +13,8 @@ import org.json.simple.JSONObject;
 import action.ActionResult;
 import service.MyShopService;
 
-public class DeleteMyShopCommand extends Command {
+public class DeleteAllMyShopCommand extends Command {
+	@SuppressWarnings("unchecked")
 	@Override
 	public ActionResult execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -28,10 +29,9 @@ public class DeleteMyShopCommand extends Command {
 		}
 
 		String customerID = (String)session.getAttribute("id");
-		int shopId = Integer.parseInt(request.getParameter("shopId"));
 		
 		MyShopService service = new MyShopService();
-		boolean isOK = service.deleteMyShop(customerID, shopId);
+		boolean isOK = service.deleteAllMyShop(customerID);
 		
 		// 상태 정보를 반환합니다.
 		JSONObject statusText = new JSONObject();

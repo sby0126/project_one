@@ -50,7 +50,7 @@ public class MyShopService {
 	}
 	
 	/**
-	 * 마이샵을 추가합니다.
+	 * 마이샵을 삭제합니다.
 	 * 
 	 * @param customerID
 	 * @param shopId
@@ -61,6 +61,22 @@ public class MyShopService {
 		
 		ContentDAO contentDAO = ContentDAO.getInstance();
 		isOK = contentDAO.deleteMyShop(customerID, shopId);
+		
+		return isOK;
+	}
+	
+	/**
+	 * 마이샵을 전부 삭제합니다.
+	 * 
+	 * @param customerID
+	 * @param shopId
+	 * @return
+	 */
+	public boolean deleteAllMyShop(String customerID) {
+		boolean isOK = false;
+		
+		ContentDAO contentDAO = ContentDAO.getInstance();
+		isOK = contentDAO.deleteAllMyShop(customerID);
 		
 		return isOK;
 	}
