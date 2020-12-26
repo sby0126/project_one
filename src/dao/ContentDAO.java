@@ -15,6 +15,7 @@ import core.SQLHelper;
 import sql.ContentLoader;
 import utils.DBConnectionMgr;
 import vo.InterestVO;
+import vo.MyShopVO;
 import vo.ProductVO;
 import vo.SearchVO;
 
@@ -697,4 +698,53 @@ public class ContentDAO implements IDAO {
 		return list;
 	}
 	
+	public boolean addMyShop(String customerID, int shopId) {
+		boolean isOK = false;
+		
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement(getQL("addMyShop"));
+			pstmt.setString(1, customerID);
+			pstmt.setInt(2, shopId);
+			
+			if(pstmt.executeUpdate() > 0) {
+				isOK = true;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+		return isOK;
+	}
+	
+	public List<MyShopVO> getMyShop(String customerID) {
+		List<MyShopVO> myShopList = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement(getQL("getMyShop"));
+			pstmt.setString(1, customerID);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				myShopList = SQLHelper.putResult(rs, MyShopVO.class);	
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+		return myShopList;
+	}
 }
