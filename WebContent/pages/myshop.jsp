@@ -108,14 +108,15 @@
         <!-- 본문의 시작 -->
         <section>
             <!-- 본문이 들어가는 래퍼 -->
-            <div class="contents-wrapper">
+            <div class="contents-wrapper"> 
 	            <div class="card-container">
 					<c:choose>
 					<c:when test="${ loginOK }">
 							<%
 								String customerID = (String)session.getAttribute("id");
 								List<Integer> idList2 = service.getIdList(customerID);
-							%>							
+							%>				
+
 							<c:forEach var="id" items="<%= idList2 %>">
 								<%
 									// jstl에 정의된 변수를 scriptlet으로 가져오기
@@ -167,18 +168,6 @@
     <div id="light-box-container">
     </div>
     <jsp:include page="/pages/login.jsp"></jsp:include> 
-    
-<%
-	if(session.getAttribute("id") == null) {
-%>
-<script>
-	setTimeout(function() {
-		$(".header-right-login-button").trigger("click");	
-	}, 200);
-</script>    
-<%
-	}
-%> 
 	<!-- index.js는 메인 용이므로 알맞은 스크립트를 사용해야 합니다-->
 	<script src="/js/shopDetailPage.js"></script>
 	<script type="module" src="/js/MorePage.js"></script>
@@ -213,5 +202,17 @@
     		
     	});
     </script>
+    
+<%
+	if(session.getAttribute("id") == null) {
+%>
+<script>
+	setTimeout(function() {
+		$(".header-right-login-button").trigger("click");	
+	}, 200);
+</script>    
+<%
+	}
+%>     
 </body>
 </html>
