@@ -3,6 +3,8 @@ package service;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.ContentDAO;
+import vo.MyShopVO;
 import vo.ProductVO;
 
 public class MyShopService {
@@ -13,7 +15,7 @@ public class MyShopService {
 	 * @param ids
 	 * @return
 	 */
-	public List<ProductVO> getList(Integer...ids) {
+	public List<ProductVO> getList(List<Integer> ids) {
 		
 		List<List<ProductVO>> demensionalList = new ArrayList<>(); 
 		List<ProductVO> myList = new ArrayList<>();
@@ -29,6 +31,49 @@ public class MyShopService {
 		demensionalList.forEach(myList::addAll);
 		
 		return myList;
+	}
+	
+	/**
+	 * 마이샵을 추가합니다.
+	 * 
+	 * @param customerID
+	 * @param shopId
+	 * @return
+	 */
+	public boolean addMyShop(String customerID, int shopId) {
+		boolean isOK = false;
+		
+		ContentDAO contentDAO = ContentDAO.getInstance();
+		isOK = contentDAO.addMyShop(customerID, shopId);
+		
+		return isOK;
+	}
+	
+	/**
+	 * customerID에 대한 마이샵 목록을 List<ProductVO>로 반환합니다.
+	 * 
+	 * @param customerID
+	 * @return
+	 */
+	public List<ProductVO> getMyShop(String customerID) {
+		
+		List<ProductVO> list = null;
+		
+		// DAO를 통해 마이샵 목록을 가져옵니다.
+		ContentDAO contentDAO = ContentDAO.getInstance();
+		List<MyShopVO> myShopList = contentDAO.getMyShop(customerID);
+		
+		List<Integer> iList = new ArrayList<>();
+		
+		// 마이샵 목록에서 샵 ID를 추출합니다.
+		myShopList.forEach(i -> {
+			iList.add(i.getShopId());
+		});
+		
+		// 리스트로 변환합니다.
+		list = getList(iList);
+		
+		return list;
 	}
 
 }
