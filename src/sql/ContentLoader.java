@@ -64,7 +64,8 @@ public class ContentLoader {
 				+ " where a.imgUrl = b.contentUrl"
 				+ " AND b.id = ?");
 		
-		qlList.put("", "SELECT * FROM tblMyShop WHERE ctm_id = ?");
+		qlList.put("getMyShop", "SELECT * FROM tblMyShop WHERE ctm_id = ?");
+		qlList.put("addMyShop", "INSERT INTO tblMyShop(ctm_id, shop_id) values(?, ?)");
 		
 	}
 	
