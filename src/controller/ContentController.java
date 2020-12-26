@@ -10,9 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.ActionResult;
+import command.AddInterestCommand;
+import command.AddMyShopCommand;
 import command.AllContentsCommand;
 import command.Command;
 import command.ContentsSearchCommand;
+import command.DetailInputCommand;
+import command.InterestListCommand;
 import command.ItemCategoryCommand;
 import command.ItemCommand;
 import command.RecentlyItemsCommand;
@@ -20,9 +24,6 @@ import command.RecentlyShopListCommand;
 import command.SaleCommand;
 import command.SearchShopItemCommand;
 import command.ShopCommand;
-import command.DetailInputCommand;
-import command.InterestListCommand;
-import command.AddInterestCommand;
 
 @WebServlet("/contents/*")
 public class ContentController extends HttpServlet {
@@ -87,6 +88,9 @@ public class ContentController extends HttpServlet {
 				break;
 			case "/search.do":
 				command = new ContentsSearchCommand();
+				break;
+			case "/addMyShop.do":
+				command = new AddMyShopCommand();
 				break;
 			}
 			
