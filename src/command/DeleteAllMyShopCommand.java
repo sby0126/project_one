@@ -46,7 +46,7 @@ public class DeleteAllMyShopCommand extends Command {
 			PrintWriter out = response.getWriter();
 			out.println(statusText.toJSONString());			
 		} else {
-			result.sendError(401, "");
+			result.sendError(402, "");
 			return result;
 		}
 		
