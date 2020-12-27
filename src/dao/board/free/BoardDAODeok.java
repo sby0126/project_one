@@ -146,20 +146,20 @@ public class BoardDAODeok {
 	      ResultSet rs = null;
 	      ArrayList<BoardBean> articleList = new ArrayList<BoardBean>();
 	      BoardBean board = null;
-	      int startrow=(page-1)*5; //읽기 시작할 row 번호..  
+	      int startrow=(page-1)*15; //읽기 시작할 row 번호..  
 	      String sql = "";
 
 	      try{
 	    	  con = pool.getConnection();
 	    	  if (keyWord == null || keyWord.equals("")) {
 					
-			 pstmt = con.prepareStatement("select * from board order by re_ref desc, re_seq asc limit ?,5");
+			 pstmt = con.prepareStatement("select * from board order by re_ref desc, re_seq asc limit ?,15");
 	         pstmt.setInt(1, startrow);
 	        
 	    	  }else {
 	    		  
 	    		    sql = "select * from  board where " + keyField + " like ? ";
-					sql += "order by re_ref desc, re_seq asc limit ? , 5";
+					sql += "order by re_ref desc, re_seq asc limit ? , 15";
 					pstmt = con.prepareStatement(sql);
 					pstmt.setString(1, "%" + keyWord + "%");
 					pstmt.setInt(2, startrow);

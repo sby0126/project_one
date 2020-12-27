@@ -6,12 +6,13 @@
 }
 
 .updateBox {
-	width: 55%;
+	width: 80%;
 	margin: 0 auto;
 }
 
 .updateBox > form > ul {
 	list-style-type: none;
+	margin-bottom: 10px;
 }
 
 .updateBox > form > ul > li > span:nth-child(1) {
@@ -19,7 +20,17 @@
 }
 
 .updateBox > form > ul > li {
-	margin: 2% 0 2% 0;
+	border: none;
+	width: 100%;
+	background-color:white;
+	border-top: solid 1px #CDCCCC; 
+	border-bottom: solid 1px #CDCCCC;
+}
+
+.updateBox > form > ul > li input {
+	border: none;
+	width: 100%;
+	padding: 15px 0 15px 0px;
 }
 
 .update-btn {
@@ -33,5 +44,7 @@
     height: 22px;
 }
 
-
+.updateBtn2 {
+	text-align: right;
+}
 

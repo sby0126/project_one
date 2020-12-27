@@ -49,7 +49,7 @@
 		<ul class="listTitle2" id="ListTitle1" style= "font-weight:bold; background-color:#EAEAEA">
 			<li>번호</li>		
 			<li>글쓴이</li>	
-			<li>제목</li>
+			<li style="text-align:center">제목</li>
 			<li>날짜</li>	
 			<li>조회수</li>
 		</ul>
@@ -60,8 +60,8 @@
 		<ul class="listTitle2" >
 			<li><%=articleList.get(i).getNum()%></li>		
 			<li><%=articleList.get(i).getName()%></li>	
-			<li><%if(articleList.get(i).getRe_lev()!=0){ %> <%for(int a=0;a<=articleList.get(i).getRe_lev()*2;a++){ %>
-					&nbsp; <%} %>답글:<%}else{ %>  <%} %> <a
+			<li><%if(articleList.get(i).getRe_lev()!=0){ %> <%for(int a=0;a<=articleList.get(i).getRe_lev()*2; a++){ %>
+					&nbsp; <%} %><span id="re"></span><%}else{ %>  <%} %> <a
 					href="boardDetail.abc?board_num=<%=articleList.get(i).getNum()%>&page=<%=nowPage%>">
 						<%=articleList.get(i).getSubject()%>
 				</a></li>
@@ -72,6 +72,7 @@
 		}%>
 		
 		<div class="listPM">
+			<div class="flexBox1"></div>
 			<div class="listPMPage">
 				<%if(nowPage<=1){ %>
 					[이전]

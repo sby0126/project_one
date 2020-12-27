@@ -28,22 +28,29 @@
             <!-- 본문이 들어가는 래퍼 -->
             <div class="contents-wrapper">
             		<div class="post">
-    	<h2>쓰기</h2>
+    	
 		<form name="postFrm" id = "postFrm" method="post" action="boardWritePro.abc"  enctype="multipart/form-data">
 			<ul>
 				<li><input readonly placeholder="<%=userId%>"></li>
 				<li><input type="hidden" name="name" value="<%=userId%>"></li>
 				<li><input name ="subject" placeholder="제목" id="subject"></li>
 				<li><textarea style="display:none" name="content" id ="popContent" rows="10" cols="50" style="width: 500px; height: 412px;" placeholder="내용"></textarea></li>
-				<li><input type="password" name="pass" placeholder="비밀번호" id="pass"></li>
-				<li><button type="button" class="post-btn" onclick="addFile()">파일+1</button> <button type="button" class="post-btn" onclick="minusFile()">파일-1</button></li>
-				<li><input type="file" name="file1" onchange ="chchch(this)" id="fileArrays1"></li>	
 			
+				<li><div id="flexDiv1"><button type="button" class="post-btn" onclick="addFile()">파일+1</button> <button type="button" class="post-btn" onclick="minusFile()">파일-1</button></div>
+					<div id="flexDiv2"><a href="boardList.abc?page=<%=nowPage%>"><input type="button" value="이전으로" class="post-btn"></a>	
+					<input type="button" id="registBtn" value="등록" class="post-btn">
+					<input type="reset" value="다시쓰기" class="post-btn">	
+				</div>
+				</li>
+				<li><input type="file" name="file1" onchange ="chchch(this)" id="fileArrays1"></li>	
+				
 				
 			</ul>
-			<a href="boardList.abc?page=<%=nowPage%>"><input type="button" value="이전으로" class="post-btn"></a>	
+			<input type="password" name="pass" placeholder="비밀번호" id="pass">
+			<%-- <div><a href="boardList.abc?page=<%=nowPage%>"><input type="button" value="이전으로" class="post-btn"></a>	
 				<input type="button" id="registBtn" value="등록" class="post-btn">
 				<input type="reset" value="다시쓰기" class="post-btn">	
+				</div> --%>
 		</form>
 	</div>
           

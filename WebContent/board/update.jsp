@@ -35,25 +35,27 @@ request.setCharacterEncoding("UTF-8");
             <!-- 본문이 들어가는 래퍼 -->
             <div class="contents-wrapper">
             		<div class="updateBox">
-    	<h2>수정</h2>
+    	
 		<form name="updateFrm" id="updateFrm" method="post" action="boardUpdatePro.abc">
 			<ul class="readBox2">
-				<li><span>이름</span><span><input placeholder="<%=article.getName() %>" readonly></span> </li>
-				<li><span>제목</span><span><input name="subject" value="<%=article.getSubject() %>"></span> </li>
-				<li><span>등록날짜</span><span><input placeholder="<%=article.getDate() %>" readonly></span> </li>
-				<li><textarea id ="popContent" rows="10" cols="50" name="content"><%=article.getContent() %></textarea></li>
+				<li><input placeholder="<%=article.getName() %>" readonly> </li>
+				<li><input name="subject" value="<%=article.getSubject() %>"> </li>
+				<li><input placeholder="<%=article.getDate() %>" readonly> </li>
+				<li><textarea id ="popContent" rows="10" cols="50" name="content" style="display:none"><%=article.getContent() %></textarea></li>
 			</ul>
-				<input type="submit" id="registBtn" value="수정" class="update-btn">
-				<input type="button" class="update-btn" value="이전으로" onclick="location.href='boardDetail.abc?board_num=<%=article.getNum()%>&page=<%=nowPage%>'">
-				<input type="button" class="update-btn" value="리스트" onclick="location.href='boardList.abc?page=<%=nowPage%>'">
-				<input type="hidden" name="num" value="<%=article.getNum()%>">
-				<input type="hidden" name="pass" value="<%=article.getPass()%>">
-				<input type="hidden" name="ref" value="<%=article.getRe_ref()%>">
-				<input type="hidden" name="lev" value="<%=article.getRe_lev()%>">
-				<input type="hidden" name="seq" value="<%=article.getRe_seq()%>">
-				<input type="hidden" name="page" value="<%=nowPage%>">
-				<input type="hidden" name="name" value="<%=article.getName() %>" >
-				<input type="hidden" name="regDate" value="<%=article.getDate() %>" >
+				<div class="updateBtn2">
+					<input type="submit" id="registBtn" value="수정" class="update-btn">
+					<input type="button" class="update-btn" value="이전으로" onclick="location.href='boardDetail.abc?board_num=<%=article.getNum()%>&page=<%=nowPage%>'">
+					<input type="button" class="update-btn" value="리스트" onclick="location.href='boardList.abc?page=<%=nowPage%>'">
+				</div>	
+					<input type="hidden" name="num" value="<%=article.getNum()%>">
+					<input type="hidden" name="pass" value="<%=article.getPass()%>">
+					<input type="hidden" name="ref" value="<%=article.getRe_ref()%>">
+					<input type="hidden" name="lev" value="<%=article.getRe_lev()%>">
+					<input type="hidden" name="seq" value="<%=article.getRe_seq()%>">
+					<input type="hidden" name="page" value="<%=nowPage%>">
+					<input type="hidden" name="name" value="<%=article.getName() %>" >
+					<input type="hidden" name="regDate" value="<%=article.getDate() %>" >
 				
 		</form>
 	</div>

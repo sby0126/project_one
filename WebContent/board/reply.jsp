@@ -34,7 +34,7 @@
             <!-- 본문이 들어가는 래퍼 -->
             <div class="contents-wrapper">
             		<div class="reply">
-    	<h2>답글</h2>
+    
 		<form name="replyFrm" method="post" action="boardReplyPro.abc">
 			<ul>
 				<input type="hidden" name="page" value="<%=nowPage %>" > 
@@ -45,7 +45,7 @@
 				<li><input placeholder="<%=userId %>" readonly></li>
 				<input type="hidden" name="name" value="<%=userId %>">
 				<li><input name ="subject" placeholder="제목"></li>
-				<li><textarea id="popContent" name="content" rows="10" cols="50" placeholder="내용"></textarea></li>
+				<li><textarea id="popContent" name="content" rows="10" cols="50" placeholder="내용" style="display:none"></textarea></li>
 				<li><input type="password" name ="pass" placeholder="비밀번호"></li>
 				<li>
 					<input id="registBtn" type="submit" value="등록" class="reply-btn">
