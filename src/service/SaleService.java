@@ -5,6 +5,7 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import vo.InterestVO;
 import vo.ProductVO;
 
 public class SaleService extends ContentService {
@@ -16,6 +17,23 @@ public class SaleService extends ContentService {
 		offset.put("count", 68);
 		
 		return offset;
+	}
+	
+	@Override
+	public void updateMyShop(JSONObject newContentData, int shopId, String customerId) {
+		InterestService service = new InterestService();
+		List<InterestVO> list = service.getInterest(customerId);
+		
+		// 관심 상품이 있는지 찾습니다.
+		boolean isValid = list.stream().filter(i -> {
+			return i.getProductId() == shopId;
+		}).findAny().isPresent();
+		
+		if(isValid) {
+			newContentData.put("active", true);
+		} else {
+			newContentData.put("active", false);
+		}
 	}
 	
 	/**
@@ -51,6 +69,7 @@ public class SaleService extends ContentService {
 			newContentData.put("term", vo.getTerm());
 			newContentData.put("url", vo.getContenturl());
 			newContentData.put("link", vo.getLink());
+			newContentData.put("id", vo.getId());
 			
 			updateMyShop(newContentData, vo.getId(), customerId);
 			

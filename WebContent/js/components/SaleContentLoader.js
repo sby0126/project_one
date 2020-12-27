@@ -98,15 +98,50 @@ export class SaleContentLoader extends Component {
                 const myCard = card.querySelector("p");
                 const {title, shop} = myImgData;
 
+                // 좋아요 버튼을 활성화 해야 할까요?
+                let active = "";
+                if(filename.active) {
+                    active = "active";
+                }
+
                 // 카드의 내용을 훼손시키지 않고 요소의 뒤에 새로운 내용을 추가합니다.
                 card.insertAdjacentHTML( 'afterbegin', `
                     <i class="shop-hot-icon" data-title="HOT"></i>
                     <div class="item-button-container"> 
                         <h2>${title}</h2>
                         <p>${shop}</p>
-                        <button class="like-button"></button>
+                        <button class="like-button ${active}"></button>
                     </div>
                 `);
+
+                $(card).find(".like-button").on("click", (ev) => {
+                    const likeButton = $(card).find(".like-button");
+                    const productId = filename.id;
+
+                    const isActive = $(card).find(".like-button").hasClass("active");
+                    const REST_API_TYPE = isActive ? "deleteInterest.do" : "addInterest.do";
+
+                    // AJAX를 요청합니다.
+                    $.ajax({
+                        url: `/contents/${REST_API_TYPE}?productId=${productId}`,
+                        method: "GET",
+                        success: function(data) {
+                            if(data.status === "success") {
+                                likeButton.toggleClass("active");
+                            }
+                        },
+                        error: function(err) {
+                            const code = err.status;
+                            if(code === 401) {
+                                console.warn("로그인이 되어있지 않습니다.");
+                            } else {
+                                console.warn("DB 작업에 실패하였습니다.");
+                            }
+                        }
+                    })
+
+                    return false;                    
+                });
 
                 // 톰캣 문제로 인해 링크 안에 요소가 있으면 링크가 동작하지 않습니다.
                 $(card).on("click", (ev) => {
