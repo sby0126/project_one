@@ -37,12 +37,12 @@
             <!-- 본문이 들어가는 래퍼 -->
             <div class="contents-wrapper">
             		<div class="readBox">
-        <h2>읽기</h2>
+      
 		<ul class="readBox2">
-			<li><span>번호 </span><span><%=article.getNum() %></span> </li>
-			<li><span>글쓴이</span><span><%=article.getName() %></span> </li>
-			<li><span>제목 </span><span><%=article.getSubject() %></span> </li>
-			<li><span>등록날짜</span><span><%=article.getDate() %></span> </li>
+			
+			<li><span><%=article.getName() %></span><span><%=article.getDate() %></span> </li>
+			<li><%=article.getSubject() %></li>
+			
 			<li><%=article.getContent() %></li>
 			
 		</ul>
@@ -65,22 +65,28 @@
 			<%} %>
 				
 		</div>
+		<div class="after">
+		</div>
 		
 		<div class="replyBox">
 			<% if(re_articleList.size() > 0 ){
 				for(int i=0; i<re_articleList.size();i++) { %>
 					<!-- 댓글의 댓글들경우 -->
-					<%if(re_articleList.get(i).getRe_re_lev()!=0){ 
-						
-						for(int a=0; a<=re_articleList.get(i).getRe_re_lev()*2; a++){ %>
-							&nbsp; 
+					<%if(re_articleList.get(i).getRe_re_lev()!=0){ %>
+					
+						<div class="flexBox">
+						<%  
+						for(int a=1; a<=re_articleList.get(i).getRe_re_lev(); a++){ %>
+							<div id="nulll"></div> 
 						<%} %> 
 							<!-- 삭제된 댓글일 경우 -->
 							<% if("Y".equals(re_articleList.get(i).getDel_yn())){%>
-							⇒ <div class="read-deleted-div">삭제된 게시물입니다.</div><br>
+						
+							<div id="re">re</div> <div class="read-deleted-div" id="read-deleted-div2">삭제된 게시물입니다.</div>
+						
 							<!-- 삭제되지 않은 경우-->
 							<%}else{ %>
-								⇒ <div class="read-exit-div"><span><%=re_articleList.get(i).getRe_name() %></span><span>(<%=re_articleList.get(i).getRe_date() %>)</span><span><%=re_articleList.get(i).getRe_content() %></span> 
+								<div id="re">re</div> <div class="read-exit-div" id="read-exit-div2"><span><%=re_articleList.get(i).getRe_name() %></span><span>(<%=re_articleList.get(i).getRe_date() %>)</span><span><%=re_articleList.get(i).getRe_content() %></span> 
 								<!-- 세션에 아이디값이 있을 경우 -->
 								<%if(userId !=null){ %>
 									  <!-- 세션에 아이디값이 본인 댓글일 경우 -->
@@ -101,16 +107,18 @@
 									<button onclick='alert("로그인이 필요합니다.")'>수정</button>
 									<button onclick='alert("로그인이 필요합니다.")'>삭제</button> 
 								<%} %>
-								</div><br>
+								</div>
 							<%} %>
+							</div>
 					<!-- 댓글일경우 -->
 					<%}else{%> 
+							<div class="flexBox">
 							<!-- 삭제된 댓글일 경우 -->
 							<% if("Y".equals(re_articleList.get(i).getDel_yn())){%>
-								<div class="read-deleted-div">삭제된 게시물입니다.</div><br>
+								<div class="read-deleted-div" id="read-deleted-div1">삭제된 게시물입니다.</div>
 							<!-- 삭제되지 않은 경우 -->
 							<%} else { %>
-								<div class="read-exit-div"><span><%=re_articleList.get(i).getRe_name() %></span><span>(<%=re_articleList.get(i).getRe_date() %>)</span><span><%=re_articleList.get(i).getRe_content() %></span> 
+								<div class="read-exit-div" id="read-exit-div1"><span><%=re_articleList.get(i).getRe_name() %></span><span>(<%=re_articleList.get(i).getRe_date() %>)</span><span><%=re_articleList.get(i).getRe_content() %></span> 
 								<!-- 세션에 아이디값이 있을 경우 -->
 								<% if(userId !=null){%>
 									  <!-- 세션에 아이디값이 본인 댓글일 경우 -->
@@ -130,30 +138,33 @@
 									<button onclick='alert("로그인이 필요합니다.")'>수정</button>
 									<button onclick='alert("로그인이 필요합니다.")'>삭제</button> 
 								<%} %>
-								</div><br>	
+								</div>
 							<%} %>
+							</div>
 					<%} %> 
-						
+							
 					<%}
+			
 				}%>
 		</div>
 		
 		
 		
-	
 		<form id="textBox" action="repleform.abc" method="post" >
 		<% if(userId != null){ %>
 		
-			<textarea name="content" rows="5" cols="50" placeholder="댓글달기" ></textarea>
+			<textarea name="content" rows="5" cols="50" placeholder="댓글달기" class="bbccdd"></textarea>
 			<input type="hidden" name="name" value="<%=userId%>">
 			<input type="hidden" name="num_2" value="<%=article.getNum() %>" >
 		
 			<input type="hidden" name="num" value="<%=article.getNum() %>">
 			<input type="hidden" name="page" value="<%=nowPage %>">
-			<input type="submit" value="등록" class="read-btn" >
+			<div class="aabbcc2">
+			<input type="submit" value="등록" class="read-btn" id="aabbcc">
+			</div>
 			<% } else {%>
 			
-			<textarea name="content" rows="5" cols="50" placeholder="로그인을 해주세요"></textarea>
+			<textarea name="content" rows="5" cols="50" placeholder="로그인을 해주세요" class="bbccdd"></textarea>
 			
 			<%} %>
 		</form>
@@ -164,12 +175,34 @@
 			
 	
 	<script>
+	
+	 /* $.each($(".flexBox"),function(i,obj){
+		debugger;
+		if($(obj).child("div").width() == $(obj).prev().child("div").width()){
+			if($(obj).child("div").width() <= $(obj).next().child("div").width()){
+					$(obj).css("display","none");
+			}else if($(obj).child("div").width() > $(obj).next().child("div").width()){
+					return;
+			} 
+		}
+		else if($(obj).child("div").width() > $(obj).prev().child("div").width()){
+			$(obj).css("display","none");
+		}
+		else if($(obj).child("div").width() < $(obj).prev().child("div").width()){
+			if($(obj).child("div").width() <= $(obj).next().child("div").width()){
+				$(obj).css("display","none");
+			}else if($(obj).child("div").width() > $(obj).next().child("div").width()){
+				return;
+			} 
+		} 
+	})  */
+	
 	var clickCtn=0;
 	var clickCtn2=0;
 		/* 댓글달기 함수 */
 		function reply(name,num,num2,ref,lev,seq,date,userId,i,page,articleNum){
 			if(clickCtn==0){		
-				$(".rerere" + i).parent().after("<br id='replyBr'><div id='replyDiv'><form action='replePlay.abc' method='post'><textarea id='replyArea' rows='5' cols='50' name='content'></textarea>"
+				$(".rerere" + i).parents(".flexBox").after("<br id='replyBr'><div id='replyDiv'><form action='replePlay.abc' method='post'><textarea id='replyArea' rows='5' cols='50' name='content'></textarea>"
 						+"<input type='hidden' name='name' value=" + userId + ">"		
 						+"<input type='hidden' name='num' value= " + num + ">"
 						+"<input type='hidden' name='num2' value=" + num2 +">"
@@ -183,6 +216,8 @@
 			}
 			clickCtn++;
 		};
+		
+		
 		
 		// 댓글달기 클릭시 텍스트창 중복열기 제거 / 텍스트창 외에 다른거 클릭하면 텍스트창 닫기
 		$('body').click(function(e){
@@ -206,7 +241,7 @@
 		/* 댓글수정 함수 */
 		function updateReple(name,num,content,date,i,page,articleNum){
 			if(clickCtn2==0){	
-			$(".upupup" + i).parent().after("<br id='updateBr'><div id='updateDiv'><form action='replePlayUpdate.abc' method='post'><textarea id='updateArea' rows='5' cols='50' name='content'>"+content+"</textarea>"
+			$(".upupup" + i).parents(".flexBox").after("<br id='updateBr'><div id='updateDiv'><form action='replePlayUpdate.abc' method='post'><textarea id='updateArea' rows='5' cols='50' name='content'>"+content+"</textarea>"
 					+"<input type='hidden' name='name' value=" + name + ">"		
 					+"<input type='hidden' name='num' value= " + num + ">"
 					+"<input type='hidden' name='content' value=" + content +">"
@@ -236,14 +271,7 @@
     
     	});
 		
-		
-		
-		
-		
-		
-		
-		
-		
+			
 		/* 댓글삭제 함수 */
 		
 		function deleteReple(re_num,num,nowPage){
@@ -254,7 +282,59 @@
 			+"<input type='hidden' name='nowPage' value=" + nowPage +">"
 			+"</form>"
 		}
-				
+		
+		/* var a = $(".readBox2").width();
+		var b = $("#aabbcc").width()+7;
+		$(".bbccdd").width(a-b);
+	 */
+		/* var preCnt = 0;
+		
+		$.each($(".replyBox > #read-exit-div2"),function(i,obj){	
+		
+			var a = $(".readBox2").width(); 
+			var re = $("#re").width()+50;
+			var nulll = $("#nulll").width();
+			
+			var ctn =  $(obj).prevAll("#nulll").length - preCnt;
+			if(ctn == 1) {
+				$(obj).width(a-re-nulll);
+			 }
+			else if(ctn > 1) {
+				$(obj).width(a-re-nulll*ctn);
+			 }	
+			preCnt = $(obj).prevAll("#nulll").length;
+		})  
+ */
+			
+			
+		/*  var preCnt2 = 0;		
+		 
+		 $(window).resize(function(){
+			 var a = $(".readBox2").width();
+			 var b = $("#aabbcc").width()+7;
+			 $(".bbccdd").width(a-b);				
+		 }) */
+		 
+		 
+		 
+	
+		 
+		 
+		 
+	
+		
+		
+			
+
+	/* 	function loof(){
+			var a = $(".readBox2").width();
+			var b = $("#aabbcc").width()+7;
+			$("#bbccdd").width(a-b);
+		};
+		
+		setInterval(loof, 1000); */
+
+		
 		
 	</script>
           

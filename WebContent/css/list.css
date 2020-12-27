@@ -11,7 +11,7 @@
 }
 
 .listBox {
-	width: 50%;
+	width: 80%;
 	margin: 0 auto;
 	position: relative;
 	
@@ -20,47 +20,103 @@
 .listTitle {
 	font-weight: bold;
 	font-size: 20px;
-	text-align: center;
 	display: block;
+	padding: 10px;
 }
 
-/* #listTitle1 {
-	background-color: gray;
-} */
+ #listTitle1 {
+    border-top: 2px solid #CDCCCC;
+	padding: 5px 0 5px 0;
+ }
+ 
 
 .listTitle2 {
 	list-style-type: none;
 	overflow: hidden;
-	margin: 10px 0 10px 0;
-	border-radius: 5px;
 	font-size: 13px;
-	/* background-color: #B2EBF4; */
-	
+	border-bottom: solid 1px #CDCCCC;	
+	padding: 5px 0 5px 0;
+}
+
+.listTitle2:hover {
+	background-color: #EDEDED;
 }
 
 .listTitle2 > li {
 	float:left;
-	width: 20%;	
 	overflow:hidden;
-	border-bottom: 2px solid #EAEAEA;
 	max-height: 17px;
 	min-height: 17px;
+
 }
 
-.listPM {
+
+.listTitle2 > li:nth-child(1) {
+	width: 5%;
+	text-align: center;
+}
+
+.listTitle2 > li:nth-child(2) {
+	width: 15%;
+	text-align: center;
+}
+
+.listTitle2 > li:nth-child(3) {
+	width: 60%;
+
+}
+
+.listTitle2 > li:nth-child(4) {
+	width: 10%;
+	text-align: center;
+}
+
+.listTitle2 > li:nth-child(5) {
+	width: 10%;
+	text-align: center;
+}
+
+
+/* .listPM {
+	padding-top: 10px;
 	position: relative;
+	border-top : 2px solid #CDCCCC;
+	margin-bottom: 10px;
+	
+} */
+
+.listPM {
+	padding: 15px;
+	display: flex;
+	border-top : 2px solid #CDCCCC;
 	
 }
 
-.listPM > .listPMPage {
+.flexBox1 {
+	flex: 1;
+}
+
+
+/* .listPM > .listPMPage {
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
+} */
+
+.listPM > .listPMPage {
+	flex: 1;
+	text-align:center;
 }
 
-.listPM > .listPMMove {
+
+/* .listPM > .listPMMove {
 	position: absolute;
 	right: 0;	
+} */
+
+.listPM > .listPMMove {
+	flex: 1;
+	text-align:right;
 }
 
 .listPM > .listPMMove > a {
@@ -69,7 +125,7 @@
 	font-size: 13px;
 }
 
-.listSearch {
+/* .listSearch {
 	position: relative;
 }
 
@@ -79,17 +135,42 @@
 	position: relative;
 	left:50%;
 	transform: translateX(-50%);
+} */
+
+.listSearch {
+	display: flex;
+	justify-content: center; 
+
 }
+
+.listSearch > .listSearchFrm {	
+	
+	
+
+} 
 
 .list-btn {
 	border: none;
     font-weight: bold;
-    font-size: 12px;
-   
+    font-size: 12px;   
     border-radius: 5px 5px 5px 5px;
     line-height: 12px;
     background-color: #D5D5D5;
     height: 22px;
+}
+
+#re:before {
+	content:"re";
+	/* border:1px solid black; */
+	border-radius:20px;
+	background-color:black;
+	color: white;
+	font-size: 12px;
+	line-height: 17px;
+	margin-right: 5px;
+	text-align: center;
+	padding: 0 3px 0 3px;
+	
 }
 
 

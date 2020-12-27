@@ -6,8 +6,7 @@
 }
 
 .reply {
-	width: 50%;
-	
+	width: 80%;	
 	margin: 0 auto;
 }
 
@@ -15,16 +14,45 @@
 	list-style-type: none;
 }
 
-.reply > form > ul > li {
-	margin: 1% 0 1% 0;
+.reply > form > ul > li:nth-of-type(1), 
+.reply > form > ul > li:nth-of-type(2) {
+	border: none;
+	width: 100%;
+	background-color:white;
+	border-top: solid 1px #CDCCCC; 
+	border-bottom: solid 1px #CDCCCC;	
+}	
+
+.reply > form > ul > li:nth-of-type(4) {
+	border: none;
+	border-top: solid 1px #CDCCCC; 
+	border-bottom: solid 1px #CDCCCC;
+	display: inline-block;
 }
+
+.reply > form > ul > li:nth-of-type(5) {
+	float: right;
+	margin-top: 10px;
+}
+
+.reply > form > ul > li:nth-of-type(4) input {
+	border: none;
+	padding: 10px 0 10px 0;
+}
+
+.reply > form > ul > li:nth-of-type(1) input,
+.reply > form > ul > li:nth-of-type(2) input {
+	border: none;
+	width: 100%;
+	padding: 15px 0 15px 0px;
+}
+
+
 
 .reply-btn {
 	border: none;
     font-weight: bold;
-    font-size: 12px;
-   
-    border-radius: 5px 5px 5px 5px;
+    font-size: 12px;  
     line-height: 12px;
     background-color: #D5D5D5;
     height: 22px;

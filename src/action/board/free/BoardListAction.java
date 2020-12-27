@@ -15,7 +15,7 @@ import vo.board.free.PageInfo;
        
       ArrayList<BoardBean> articleList=new ArrayList<BoardBean>();
       int page=1;
-      int limit=5;
+      int limit=15;
       
       String keyField="";
       String keyWord="";

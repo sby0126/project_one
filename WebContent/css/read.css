@@ -6,56 +6,75 @@
 }
 
 .readBox {
-	width: 60%;
+	width: 80%;
 	margin: 0 auto;
+	position: relative;
+	
 }
 
 .readBox > .readBox2 {
 	list-style-type: none;
+	background-color: white;
 }
 
 .readBox > .readBox2 > li {
-	margin: 2% 0 2% 0;
+	
 	position: relative;
 }
 
 .readBox > .readBox2 > li > span:nth-child(1) {
 	font-weight: bold;
-	margin-right: 10%;
+	margin-right: 5px;
+	
 }
 
 .readBox > .readBox2 > li > span:nth-child(2) {
-	position: absolute;
-	left: 13%;
+	font-size: 10px;
+	color: gray;
 }
-
-
-.readBox > .readBox2 > li:nth-child(5) {
-	border-radius: 5px;
+.readBox > .readBox2 > li:nth-child(1) {
 	background-color: #EAEAEA;
-	width: 50%;
-	padding: 5px;
-	
+	padding: 30px 30px 30px 30px;
+	border-top: 2px solid #CDCCCC;
 }
 
-.readBox > .readBox3 {
-	
+.readBox > .readBox2 > li:nth-child(2) {
+	color: brown;
+	font-size: 30px;
+	padding: 30px 0 0 30px;	
+	border-top: 1px solid #CDCCCC;
+
+}
+
+.readBox > .readBox2 > li:nth-child(3) {
+	padding: 30px 0 30px 30px;
+	border-bottom: 2px solid #CDCCCC;
+}
+
+.readBox > .readBox3 {	
 	display: inline-block;
-	margin-bottom: 45px;
-	
+	position: absolute;
+	right: 0;
+	padding-top: 10px;
 }
 
-.readBox > .replyBox > div   {
+/* .readBox > .replyBox > div   {
 	padding: 10px;	
-	margin-bottom: 15px;
-	display:inline-block; 
+	 display:inline-block; 
+
+} */
+
+
+.flexBox {
+	display: flex;
+	
 }
 
 .readBox3 button {
 	border: none;
+	
     font-weight: bold;
     font-size: 12px;  
-    border-radius: 5px 5px 5px 5px;
     line-height: 12px;
     background-color: #D5D5D5;
     height: 22px;
@@ -65,33 +84,62 @@
 	border: none;
     font-weight: bold;
     font-size: 12px;  
-    border-radius: 5px 5px 5px 5px;
     line-height: 12px;
-    background-color: #D5D5D5;
+    background-color: white;
     height: 22px;
+    border-bottom: 1px solid #D5D5D5;
 }
 
 .read-btn {
 	border: none;
     font-weight: bold;
     font-size: 12px;  
-    border-radius: 5px 5px 5px 5px;
-    line-height: 12px;
-    background-color: #D5D5D5;
+    line-height: 12px;    
+    background-color: #D5D5D5;    
     height: 22px;
 }
 
 .read-deleted-div {
-	background-color: #EAEAEA;
+	background-color: white;
 	border: none;
-	border-radius: 5px;
+	color: #a7a7a7;
+	font-weight: bold;
+	border-bottom: 1px solid #CDCCCC;
+	border-top: 1px solid #CDCCCC;
 }
 
-.read-exit-div {
-	background-color: #EAEAEA;
-	border: none;
-	border-radius: 5px;
+#read-deleted-div1 {
+	margin-top: 30px;
+	padding: 30px 10px 30px 10px;
+	flex: 1;
 }
+
+#read-deleted-div2 {
+	background-color: white;
+	padding: 30px 10px 30px 10px;
+	flex: 1;
+}
+
+
+.read-exit-div {
+	background-color: white;
+	border-bottom: 1px solid #CDCCCC;
+	border-top: 1px solid #CDCCCC;
+	
+}
+
+#read-exit-div1 {
+	margin-top: 30px;
+	padding: 30px 10px 30px 10px;
+	flex: 1;
+}
+
+#read-exit-div2 {
+	background-color: white;
+	flex: 1;
+	padding: 30px 10px 30px 10px;
+}
+
 
 .read-exit-div span:nth-child(1) {
 	font-weight: bold;
@@ -99,25 +147,88 @@
 }
 
 .read-exit-div span:nth-child(2) {
-	font-size: 6px;
-	margin-right: 25px;
+	font-size: 6px;	
+	 margin-right: 25px;
+       
 }
 
 .read-exit-div span:nth-child(3) {
-	margin-right: 25px;
+  	margin-right: 15px;
 }
 
 .upupupBtn {
 	border: none;
     font-weight: bold;
     font-size: 12px;
-    border-radius: 5px 5px 5px 5px;
     line-height: 12px;
-    background-color: #D5D5D5;
+    background-color: #D5D5D5; 
     height: 22px;
 }
 
 #textBox {
 	margin: 45px 0 45px 0;
+	display: flex;
 }
+
+#textBox > textarea {
+	border: 1px solid #CDCCCC;
+	flex: 10;
+
+	
+}
+
+.aabbcc2 {
+	flex: none;
+	width: 22px;
+	position: relative;
+}
+#aabbcc {
+	position: absolute;
+	bottom: 0;
+
+}
+
+
+/* #re:before {
+	content:"re";
+	border:1px solid black; 
+	border-radius:20px;
+	background-color:black;
+	color: white;
+	font-size: 12px;
+	line-height: 17px;
+	margin-right: 5px;
+	text-align: center;
+	padding: 0 3px 0 3px;
+	float: left;
+	
+
+*/
+
+#re {
+	border:1px solid black; 
+	background-color:black;
+	color: white;
+	border-radius:20px;
+	font-size: 12px;
+	padding: 0 3px 0 3px;
+	flex: none;
+	width: 15px;
+	height: 15px;
+	
+}
+.after {
+	height: 100px;
+}
+
+#nulll {
+	flex: none;
+	width: 20px;
+
+
+}
+
+
+
+
 
