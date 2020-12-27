@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 
@@ -14,6 +15,13 @@ import service.SaleService;
 
 public class SaleCommand extends Command {
 
+	public String getUserId(HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		
+		return (String)session.getAttribute("id");
+	}	
+	
 	@Override
 	public ActionResult execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -29,8 +37,11 @@ public class SaleCommand extends Command {
 			return null;
 		}
 		
+		// ID 값을 가져옵니다.
+		String id = getUserId(request);
+		
 		SaleService saleService = new SaleService();
-		JSONObject data = saleService.getSale(pageType, genderType, shopType);
+		JSONObject data = saleService.getSale(pageType, genderType, shopType, id);
 		
 		response.setCharacterEncoding("UTF-8");
 		

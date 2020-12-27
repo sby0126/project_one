@@ -124,6 +124,11 @@ export class ShopContentLoader extends Component {
                     return args[0] + "<br>";
                 });
 
+                let active = "";
+                if(filename.active) {
+                    active = "active";
+                }
+
                 $(myCard).html(`
                     <a href="${filename.link}" target='_blank'>
                         <i class="shop-hot-icon" data-title="HOT"></i>
@@ -131,7 +136,7 @@ export class ShopContentLoader extends Component {
                         <p class="shop-contents">${ lines }</p>
                         <div class="shop-button-container" data-id="${filename.id}">
                             <button class="shop-button all-item-button">전체 상품</button>
-                            <button class="shop-button" onclick="return false">
+                            <button class="shop-button myshop-button ${active}" onclick="return false">
                                 <p class="shop-button-text" onclick="return false">마이샵</p>
                                 <i class="shop-button-icon"></i>
                             </button>

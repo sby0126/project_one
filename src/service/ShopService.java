@@ -26,9 +26,8 @@ public class ShopService extends ContentService {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public JSONObject getShop(String pageType, String genderType, String shopType, String category, String ages) {
+	public JSONObject getShop(String pageType, String genderType, String shopType, String category, String ages, String customerId) {
 		List<ProductVO> list = null;
-		
 		
 		list = getDAO().getData(pageType, genderType, shopType, category, ages);
 		
@@ -55,6 +54,8 @@ public class ShopService extends ContentService {
 			newContentData.put("url", vo.getContenturl());
 			newContentData.put("id", vo.getId());
 			newContentData.put("link", vo.getLink());
+			
+			updateMyShop(newContentData, vo.getId(), customerId);
 			
 			contentData.add(newContentData);
 			imageData.put(vo.getContenturl(), vo.getImgid());

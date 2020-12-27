@@ -30,7 +30,7 @@ public class ContentsSearchService extends ContentService  {
 	
 	
 	@SuppressWarnings("unchecked")
-	public JSONObject getItem(String pageType, String genderType, String shopType, String category, String ages, String keyword) {	
+	public JSONObject getItem(String pageType, String genderType, String shopType, String category, String ages, String keyword, String customerId) {	
 		List<ProductVO> list = getDAO().searchData(pageType, genderType, shopType, category, ages, keyword);
 		JSONObject root = new JSONObject();
 		
@@ -56,7 +56,7 @@ public class ContentsSearchService extends ContentService  {
 			newContentData.put("url", vo.getContenturl());
 			newContentData.put("link", vo.getLink());
 			newContentData.put("id", vo.getId());
-			
+						
 			contentData.add(newContentData);
 			imageData.put(vo.getContenturl(), vo.getImgid());
 		}

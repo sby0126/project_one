@@ -130,5 +130,12 @@ public class MyShopService {
 		
 		return iList;
 	}
+	
+	public boolean isValidMyShop(int shopId, String customerID) {
+		
+		List<Integer> idList = this.getIdList(customerID);
+				
+		return !idList.isEmpty() && idList.contains(shopId);
+	}
 
 }
