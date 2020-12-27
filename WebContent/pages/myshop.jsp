@@ -117,6 +117,8 @@
 								List<Integer> idList2 = service.getIdList(customerID);
 							%>				
 
+							<c:choose>
+							<c:when test="<%= idList2.size() > 0 %>">
 							<c:forEach var="id" items="<%= idList2 %>">
 								<%
 									// jstl에 정의된 변수를 scriptlet으로 가져오기
@@ -124,36 +126,36 @@
 									ShopDetailService myService = new ShopDetailService(id, "item");
 									List<ProductVO> list = myService.getList();									
 								%>
-								<c:choose>
-								<c:when test="<%= list != null %>">
-									<%
-		                    			for(ProductVO card : list) {
-		                   			 %>
-									<c:set var="card" value="<%= card %>" />
-									<div class="card">
-										<p d-<%= card.getId() %>></p>
-										<i class="shop-hot-icon"></i>
-										<div class="item-button-container">
-											<h2>${card.getTitle()}</h2>
-											<p>${card.getPrice()}</p>
-											<p>${card.getShopname()}</p>
-											<button class="like-button"></button>
-										</div>
+								<c:if test="<%= list != null %>">
+								<%
+	                    			for(ProductVO card : list) {
+	                   			 %>
+								<c:set var="card" value="<%= card %>" />
+								<div class="card">
+									<p d-<%= card.getId() %>></p>
+									<i class="shop-hot-icon"></i>
+									<div class="item-button-container">
+										<h2>${card.getTitle()}</h2>
+										<p>${card.getPrice()}</p>
+										<p>${card.getShopname()}</p>
+										<button class="like-button"></button>
 									</div>
-									<%
-		                    			}
-		                    		%>									
-								</c:when>
-								<c:otherwise>
-					                <div class="item_selected_none">
-					                    <button class="item_selected_none_all_del" id="delete-all-my-shop">전체삭제</button>
-					                    <img class="item_selected_none_img" src="../images/b527471.png">
-					                    <div class="item_selected_none_sp">마이샵이 설정되어있지 않습니다.</div>
-					                    <a href="../index.jsp"><button class="item_selected_none_button">샾 메인으로 이동</button></a>
-					                </div>
-								</c:otherwise>
-								</c:choose>
+								</div>
+								<%
+	                    			}
+	                    		%>		
+	                    		</c:if>								
 							</c:forEach>
+							</c:when>
+							<c:otherwise>
+				                <div class="item_selected_none">
+				                    <button class="item_selected_none_all_del" id="delete-all-my-shop">전체삭제</button>
+				                    <img class="item_selected_none_img" src="../images/b527471.png">
+				                    <div class="item_selected_none_sp">마이샵이 설정되어있지 않습니다.</div>
+				                    <a href="../index.jsp"><button class="item_selected_none_button">샾 메인으로 이동</button></a>
+				                </div>							
+							</c:otherwise>
+							</c:choose>
 
 					</c:when>
 					<c:otherwise>
