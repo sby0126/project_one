@@ -149,11 +149,34 @@ export class ShopContentLoader extends Component {
                     return false;
                 });
 
-                $(`div[data-id='${filename.id}'] > .myshop-button`).on("click", function(ev) {
+                const myShopBtnClassName = `div[data-id='${filename.id}'] > .myshop-button`;
+
+                $(myShopBtnClassName).on("click", function(ev) {
                     const parent = $(this).parent();
                     const id = parent.data("id");
                     
-                    alert(id);
+                    const isActive = $(myShopBtnClassName).hasClass("active");
+
+                    const REST_API_TYPE = isActive ? "deleteMyShop.do" : "addMyShop.do";
+
+                    $.ajax({
+                        url: `/contents/${REST_API_TYPE}?shopId=${filename.id}`,
+                        method: "GET",
+                        success: function(data) {
+                            if(data && data.status === "success") {
+                                $(myShopBtnClassName).toggleClass("active");
+                            }
+                        },
+                        error: function(err) {
+                            const code = err.status;
+                            if(code === 401) {
+                                console.warn("로그인이 되어있지 않습니다.");
+                            } else {
+                                console.warn("DB 작업에 실패하였습니다.");
+                            }
+                        }
+                    });
+
                     return false;
                 });    	                
 

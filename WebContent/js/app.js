@@ -447,7 +447,7 @@ class App extends EventEmitter {
             })
             .catch(err => {
                 console.warn(err);
-                // this.onLoad();
+                this.onLoad();
             });
 
     }

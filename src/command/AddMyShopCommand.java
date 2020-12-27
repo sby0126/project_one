@@ -43,7 +43,7 @@ public class AddMyShopCommand extends Command {
 			statusText.put("customerID", customerID);
 			statusText.put("shopId", shopId);
 		} else {
-			result.sendError(401, "");
+			result.sendError(402, "");
 			return result;
 		}
 		
