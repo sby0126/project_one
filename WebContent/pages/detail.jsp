@@ -351,7 +351,7 @@
         	price,
         	amount,
         	productId,
-        }, "/contents/pay.do");
+        }, "/contents/payments.do");
         //$("#needVal").submit();
     }
     

@@ -42,7 +42,7 @@ public class ContentsSearchCommand extends Command {
 		
 		// 키워드가 정상적으로 삽입되었는가?
 		if(isOK) {
-			data = service.getItem(pageType, genderType, shopType, category, ages, keyword);
+			data = service.getItem(pageType, genderType, shopType, category, ages, keyword, null);
 		}
 		
 		// JSON으로 내보냄.

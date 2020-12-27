@@ -22,7 +22,8 @@ public class DetailInputCommand extends Command {
 		
 		String title = request.getParameter("title");
 		String price = request.getParameter("price");
-		int qty = Integer.parseInt(request.getParameter("qty"));
+		int productId = Integer.parseInt(request.getParameter("productId"));
+		int qty = Integer.parseInt(request.getParameter("amount"));
 		
 		String uri = null;
 		

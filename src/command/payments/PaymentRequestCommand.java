@@ -2,7 +2,6 @@ package command.payments;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +22,7 @@ public class PaymentRequestCommand extends Command {
 				
 		String id = (String)request.getSession().getAttribute("id");
 		int productId = Integer.parseInt(request.getParameter("productId"));
+		int amount = Integer.parseInt(request.getParameter("amount"));
 		
 		GetCustomerService customerService = new GetCustomerService();
 		HashMap<String, String> customerInfo = customerService.getCustomer(id);

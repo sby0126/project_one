@@ -37,13 +37,13 @@ public class AllContentsCommand extends Command {
 				for(int k = 0; k < TYPE_SHOP.length; k++) {
 					switch(TYPE_PAGE[j]) {
 					case "shop":
-						array.add ( shopService.getShop(TYPE_PAGE[j], TYPE_GNDR[i], TYPE_SHOP[k], "100", "all") );
+						array.add ( shopService.getShop(TYPE_PAGE[j], TYPE_GNDR[i], TYPE_SHOP[k], "100", "all", null) );
 						break;
 					case "item":
-						array.add( itemService.getItem(TYPE_PAGE[j], TYPE_GNDR[i], TYPE_SHOP[k], "100", "all") );
+						array.add( itemService.getItem(TYPE_PAGE[j], TYPE_GNDR[i], TYPE_SHOP[k], "100", "all", null) );
 						break;
 					case "sale":
-						array.add( saleService.getSale(TYPE_PAGE[j], TYPE_GNDR[i], TYPE_SHOP[k]) );						
+						array.add( saleService.getSale(TYPE_PAGE[j], TYPE_GNDR[i], TYPE_SHOP[k], null) );						
 						break;
 					}
 				}
