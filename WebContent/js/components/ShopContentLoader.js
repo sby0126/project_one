@@ -147,7 +147,15 @@ export class ShopContentLoader extends Component {
                 // 상위 노드에 걸린 클릭 이벤트의 실행을 방지합니다.
                 $(myCard).find(".shop-button-container button").on("click", (ev) => {
                     return false;
-                })
+                });
+
+                $(`div[data-id='${filename.id}'] > .myshop-button`).on("click", function(ev) {
+                    const parent = $(this).parent();
+                    const id = parent.data("id");
+                    
+                    alert(id);
+                    return false;
+                });    	                
 
                 // 전체 상품 버튼이 클릭되었을 때 실행되어야 하는 내용을 정의하세요.
                 $(`div[data-id='${filename.id}'] > button.all-item-button`).on("click", (ev) => {
