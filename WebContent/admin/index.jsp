@@ -160,8 +160,6 @@
                 <div id="manage-forced-secession" class="content jumbotron">
              	   <a name="manage-forced-secession"></a>
                     <p>강제 탈퇴 관리</p>
-                	<input class="form-control col-md-3" type="text" maxlength="20">
-                 	<button class="btn btn-default">차단 IP 설정</button>
                  	<p></p>
                     <table class="table">
                     	<thead>

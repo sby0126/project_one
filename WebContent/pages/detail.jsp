@@ -123,9 +123,10 @@
                 <form id="needVal" method="post" action="">
                    <input type="hidden" name="title" id="title" value="">
                    <input type="hidden" name="price" id="price" value="">
-                    <input type="hidden" name="img" id="img" value="">
-
-                   <input type="submit"/>
+                   <input type="hidden" name="amount" id="amount" value="">
+                   <input type="hidden" name="productId" id="product-id" value="">
+                   <!-- <input type="hidden" name="img" id="img" value="">  -->
+                   <!-- <input type="submit"/>  -->
                 </form>
             </div>
             <!-- 오른쪽하단 top.bottom 버튼 -->
@@ -137,247 +138,289 @@
 		<div id="light-box-container"></div>
 	</div>
     <script>
-        // 색상버튼은(ul태그안에 li목록중 3번째줄), 사이즈버튼은(ul태그안에 li목록중 4번째줄)
+    // 색상버튼은(ul태그안에 li목록중 3번째줄), 사이즈버튼은(ul태그안에 li목록중 4번째줄)
 
-        // 상품 색상버튼(3) 클릭시 발생하는 이벤트
-        $(".infoArea > ul > li:nth-child(3) button").on("click",function(){
-                var idx = $(this).index();
-                var sameYn = true;
-                var clickYn = false;
+    // 상품 색상버튼(3) 클릭시 발생하는 이벤트
+    $(".infoArea > ul > li:nth-child(3) button").on("click", function () {
+        var idx = $(this).index();
+        var sameYn = true;
+        var clickYn = false;
 
-            // 색상버튼(3)을 반복하면서 클릭여부 확인
-             $.each($(".infoArea > ul > li:nth-child(3) button"),function(i){
-                    if($(this).hasClass("click_button")){
-                        $(this).removeClass("click_button");
-                        if(idx == i){
-                            sameYn = false;
-                        }
-                    }
-                });
-            
-            
-            // 색상버튼(3)을 클릭시 클래스 추가
-             if(sameYn){
-                 $(this).addClass("click_button");
-                 clickYn = true;
-             }
-
-            // 색상버튼(3) 클릭시 사이즈버튼(4) 활성화 
-             if(clickYn){
-                 $(".infoArea > ul > li:nth-child(4) button").prop("disabled",false);
-             }else{
-                 $(".infoArea > ul > li:nth-child(4) button").removeClass("click_button");
-                 $(".infoArea > ul > li:nth-child(4) button").prop("disabled",true);
-             }
-         })
-
-        //사이즈버튼(4) 클릭시 발생하는 이벤트
-         $(".infoArea > ul > li:nth-child(4) button").on("click",function(){
-                var idx = $(this).index();
-                var sameYn = true;
-                var clickYn = false;
-
-            // 사이즈버튼(4)을 반복하면서 클릭여부 확인
-             $.each($(".infoArea > ul > li:nth-child(4) button"),function(i){
-                    if($(this).hasClass("click_button")){
-                        $(this).removeClass("click_button");
-                        if(idx == i){
-                            sameYn = false;
-                        }
-                    }
-                });
-
-            //사이즈버튼(4) 클릭시 클래스 추가 
-             if(sameYn){
-                 $(this).addClass("click_button");
-                 clickYn = true;
-             }
-
-            // 사이즈버튼(4)은 색상버튼이 클릭되어야 활성화된다
-
-            //사이즈버튼(4)이 클릭되면 색상과 사이즈(텍스트)를 받는 li태그와 버튼을 동적으로 생성
-             if(clickYn){
-
-                    var colorNm = ""; //선택된 컬럼명
-                    var sizeNm  = ""; //선택된 사이즈명
-                    var val = "";     //선택된 버튼의 value값
-                    //색상 버튼과 사이즈 버튼의 value값은 현재 앞에서부터 순서대로 1,2로 되어있다. 상품중복체크를 위해 사용되는변수
-                    
-                    $.each($(".infoArea > ul > li:nth-child(3) button"),function(i){
-                        if($(this).hasClass("click_button")){
-                            colorNm = $(this).text();
-                            val = $(this).val();    //선택된 컬러버튼(4)의 value 값
-                        }
-                    });
-                    
-                    sizeNm = $(this).text();
-                    val = val + $(this).val();     //선택한 색상과 사이즈버튼의 values값 ex) 11 , 12,  21 , 22 ...
-
-                    var existYn = true; //이미 존재하는 상품인지 확인하기 위한 변수
-
-
-                //이미 존재하는 상품인 경우 alert 처리
-                 $.each($(".productlist_add > li > .del_button"),function(i){     
-                        if($(this).val() == val){
-                            alert("이미 넣으신 상품입니다.");
-                            existYn = false; 
-                        }
-                    });
-
-
-                //이전에 없었던 상품을 넣을 경우 ul 태그에 새롭게 추가 , 최초에는 버튼의 value값을 1로 준다(최초에는 상품 1개를 넣는것이기 때문에 )
-                 if(existYn){
-                     //사이즈를 클릭시 선택한 색상과 사이즈 정보를 동적으로 생성
-                      var price = $("#detail-item-price").text().replace(",","");
-                    console.log(price); 
-                     var str = "<li><span>" + colorNm + "," + sizeNm + " " + "1개"+ "</span> <button class='add_button' value='1' onclick=add($(this));> + </button><button class='minus_button' value = '1' onclick=minus($(this));> - </button><button value = " + val + "  class='del_button' onclick=del($(this));> x </button></li>";
-                     $(".productlist_add").append(str);
-                     
-                     price = Number(price);
-                     var curPrice = Number($(".allPrice").text());
-                     /* var qty = Number($(".productlist_add li").length); */
-                     
-                     $(".allPrice").text(price+curPrice);
-                 }
-             }
-
-         });
-
-            // 상품명 옆에 x버튼 클릭시 목록제거
-            function add(obj){
-                var text = obj.parent("li").text();             // 선택한 버튼태그의 부모 li 에 있는 text 가져온다.
-                                                                // ex) 블랙,Free 1개
-                var cnt = Number(obj.val()) + 1;                // 선택한 버튼태그의 value값을 가져와서 1 증가시켜준다.
-                                                                // ex) 현재 1이면 2로 된다.
-                text = text.split(" ")[0] + " " + cnt + "개";   // text 를 공백으로 나누어서 0번째 데이터 가져온 뒤 새롭게 증가된 개수를 적용시킨다.
-                                                                // ex)가져온 text가  '블랙,Free 1개' 라면 공백으로 나누면 블랙,Free 와 1개로 나뉘고 0번째 데이터는 블랙,Free
-                                                                // text.split(" ")[0]  +  " " + cnt + "개"   --> 블랙,Free 2개 로 됨
-                obj.val(cnt);                                   // 선택한 버튼태그의 value값을 가져와서 1 증가시켜 준뒤 그 값을 다시 value 값으로 설정한다. 
-                obj.parent("li").find(".minus_button").val(cnt);// 마이너스 버튼 태그의 value 값도 똑같이 1증가된 상태를 value값으로 설정한다. 
-                obj.parent("li").find("span").text(text);       // span 태그에 블랙,Free 2개 를 넣는다.
-            
-            	var price = $("#detail-item-price").text().replace(",","");
-                price = Number(price);
-                
-                var curPrice = Number($(".allPrice").text());
-                $(".allPrice").text(curPrice + price);
-            }
-
-            // 상품명 옆에 -버튼 클릭시 상품 개수를 내려주는 함수
-            function minus(obj){
-                var text = obj.parent("li").text();             // 선택한 버튼태그의 부모 li 에 있는 text 가져온다.
-                var cnt = Number(obj.val()) - 1;                // 선택한 버튼태그의 value값을 가져와서 1 감소시켜준다.
-                if(cnt > 0){
-                    text = text.split(" ")[0] + " " + cnt + "개";
-                    obj.val(cnt);
-                    obj.parent("li").find(".add_button").val(cnt);
-                    obj.parent("li").find("span").text(text);
-                    
-                    var price = $("#detail-item-price").text().replace(",","");
-                    price = Number(price);
-                    
-                    var curPrice = Number($(".allPrice").text());
-                    $(".allPrice").text(curPrice - price);
+        // 색상버튼(3)을 반복하면서 클릭여부 확인
+        $.each($(".infoArea > ul > li:nth-child(3) button"), function (i) {
+            if ($(this).hasClass("click_button")) {
+                $(this).removeClass("click_button");
+                if (idx == i) {
+                    sameYn = false;
                 }
             }
+        });
 
-            // 상품명 옆에 x버튼 클릭시 목록제거
-            function del(obj){
-            	var cancel = Number(obj.parent("li").find(".add_button").val());
-            	var curPrice = Number($(".allPrice").text());
-            	var price = $("#detail-item-price").text().replace(",","");
-            	price = Number(price);
-            	curPrice = curPrice - cancel*price;
-            	 $(".allPrice").text(curPrice);
-            	
-                obj.parent("li").remove();
-            }
-        
-	         function pay() {
-	            var lilength = $(".productlist_add li").length;
-	            console.log(lilength);
-	            
-	            if(lilength == 0) {
-	                alert("선택된 상품이 없습니다");
-	                return false;
-	            }
-	            
-	            if(lilength != null) {
-	               for(var i = 0; i < lilength; i++) {
-	               var str = $(".productlist_add > li > span").text();
-	               console.log(str);
-	               
-	               var array = new Array();
-	               array = str.split(" ");
-	                console.log(array);
-	                
-	                /*
-	               var obj = new Object();
-	                   
-	                   obj.product = [
-	                      option = array[i],
-	                            
-	                      qty = array[i+1]
-	                   ]                   
-	
-	                   
-	                console.log(obj);
-	                */
-	                
-	                array.add($("#detail-item-title").text());
-	                array.add(($(".allPrice").text()));
-	                console.log(array);
-	               
-	              // var jsonStr = JSON.stringfy(array);
-	               
-	              // var json = JSON.parse(jsonStr);
-	               }
-	            }
-	            
-	            $("#needVal").attr("action", "/pay.do");
-	           //$("#needVal").submit();
-	        }
-        
-	        function cart() {
-	           var lilength = $(".productlist_add li").length;
-	            console.log(lilength);
-	            
-	            if(lilength == 0) {
-	                alert("선택된 상품이 없습니다");
-	                return false;
-	            }
-	            
-	            if(lilength != null) {
-	               for(var i = 0; i < lilength; i++) {
-	               var str = $(".productlist_add > li > span").text();
-	               console.log(str);
-	               
-	               var array = new Array();
-	               array = str.split(" ");
-	                console.log(array);
-	                
-	               /* 
-	               var obj = new Object();
-	                   
-	                   obj.product = [
-	                      option = array[i],
-	                            
-	                      qty = array[i+1]
-	                   ]                   
-	
-	                   
-	            console.log(obj);
-	                */
-	                
-	            array.add($("#detail-item-title").text());
-	            array.add($(".allPrice").text());
-	            console.log(array);
-	
-	            $("#needVal").attr("action", "/cart.do");
-	           //$("#needVal").submit();
-	        	}
-	        }
+
+        // 색상버튼(3)을 클릭시 클래스 추가
+        if (sameYn) {
+            $(this).addClass("click_button");
+            clickYn = true;
         }
+
+        // 색상버튼(3) 클릭시 사이즈버튼(4) 활성화 
+        if (clickYn) {
+            $(".infoArea > ul > li:nth-child(4) button").prop("disabled", false);
+        } else {
+            $(".infoArea > ul > li:nth-child(4) button").removeClass("click_button");
+            $(".infoArea > ul > li:nth-child(4) button").prop("disabled", true);
+        }
+    })
+
+    //사이즈버튼(4) 클릭시 발생하는 이벤트
+    $(".infoArea > ul > li:nth-child(4) button").on("click", function () {
+        var idx = $(this).index();
+        var sameYn = true;
+        var clickYn = false;
+
+        // 사이즈버튼(4)을 반복하면서 클릭여부 확인
+        $.each($(".infoArea > ul > li:nth-child(4) button"), function (i) {
+            if ($(this).hasClass("click_button")) {
+                $(this).removeClass("click_button");
+                if (idx == i) {
+                    sameYn = false;
+                }
+            }
+        });
+
+        //사이즈버튼(4) 클릭시 클래스 추가 
+        if (sameYn) {
+            $(this).addClass("click_button");
+            clickYn = true;
+        }
+
+        // 사이즈버튼(4)은 색상버튼이 클릭되어야 활성화된다
+
+        //사이즈버튼(4)이 클릭되면 색상과 사이즈(텍스트)를 받는 li태그와 버튼을 동적으로 생성
+        if (clickYn) {
+
+            var colorNm = ""; //선택된 컬럼명
+            var sizeNm = ""; //선택된 사이즈명
+            var val = ""; //선택된 버튼의 value값
+            //색상 버튼과 사이즈 버튼의 value값은 현재 앞에서부터 순서대로 1,2로 되어있다. 상품중복체크를 위해 사용되는변수
+
+            $.each($(".infoArea > ul > li:nth-child(3) button"), function (i) {
+                if ($(this).hasClass("click_button")) {
+                    colorNm = $(this).text();
+                    val = $(this).val(); //선택된 컬러버튼(4)의 value 값
+                }
+            });
+
+            sizeNm = $(this).text();
+            val = val + $(this).val(); //선택한 색상과 사이즈버튼의 values값 ex) 11 , 12,  21 , 22 ...
+
+            var existYn = true; //이미 존재하는 상품인지 확인하기 위한 변수
+
+
+            //이미 존재하는 상품인 경우 alert 처리
+            $.each($(".productlist_add > li > .del_button"), function (i) {
+                if ($(this).val() == val) {
+                    alert("이미 넣으신 상품입니다.");
+                    existYn = false;
+                }
+            });
+
+
+            //이전에 없었던 상품을 넣을 경우 ul 태그에 새롭게 추가 , 최초에는 버튼의 value값을 1로 준다(최초에는 상품 1개를 넣는것이기 때문에 )
+            if (existYn) {
+                //사이즈를 클릭시 선택한 색상과 사이즈 정보를 동적으로 생성
+                var price = $("#detail-item-price").text().replace(",", "");
+                console.log(price);
+                var str = "<li><span>" + colorNm + "," + sizeNm + " " + "1개" + "</span> <button class='add_button' value='1' onclick=add($(this));> + </button><button class='minus_button' value = '1' onclick=minus($(this));> - </button><button value = " + val + "  class='del_button' onclick=del($(this));> x </button></li>";
+                $(".productlist_add").append(str);
+
+                price = Number(price);
+                var curPrice = Number($(".allPrice").text());
+                /* var qty = Number($(".productlist_add li").length); */
+
+                $(".allPrice").text(price + curPrice);
+            }
+        }
+
+    });
+
+    // 상품명 옆에 x버튼 클릭시 목록제거
+    function add(obj) {
+        var text = obj.parent("li").text(); // 선택한 버튼태그의 부모 li 에 있는 text 가져온다.
+        // ex) 블랙,Free 1개
+        var cnt = Number(obj.val()) + 1; // 선택한 버튼태그의 value값을 가져와서 1 증가시켜준다.
+        // ex) 현재 1이면 2로 된다.
+        text = text.split(" ")[0] + " " + cnt + "개"; // text 를 공백으로 나누어서 0번째 데이터 가져온 뒤 새롭게 증가된 개수를 적용시킨다.
+        // ex)가져온 text가  '블랙,Free 1개' 라면 공백으로 나누면 블랙,Free 와 1개로 나뉘고 0번째 데이터는 블랙,Free
+        // text.split(" ")[0]  +  " " + cnt + "개"   --> 블랙,Free 2개 로 됨
+        obj.val(cnt); // 선택한 버튼태그의 value값을 가져와서 1 증가시켜 준뒤 그 값을 다시 value 값으로 설정한다. 
+        obj.parent("li").find(".minus_button").val(cnt); // 마이너스 버튼 태그의 value 값도 똑같이 1증가된 상태를 value값으로 설정한다. 
+        obj.parent("li").find("span").text(text); // span 태그에 블랙,Free 2개 를 넣는다.
+
+        var price = $("#detail-item-price").text().replace(",", "");
+        price = Number(price);
+
+        var curPrice = Number($(".allPrice").text());
+        $(".allPrice").text(curPrice + price);
+    }
+
+    // 상품명 옆에 -버튼 클릭시 상품 개수를 내려주는 함수
+    function minus(obj) {
+        var text = obj.parent("li").text(); // 선택한 버튼태그의 부모 li 에 있는 text 가져온다.
+        var cnt = Number(obj.val()) - 1; // 선택한 버튼태그의 value값을 가져와서 1 감소시켜준다.
+        if (cnt > 0) {
+            text = text.split(" ")[0] + " " + cnt + "개";
+            obj.val(cnt);
+            obj.parent("li").find(".add_button").val(cnt);
+            obj.parent("li").find("span").text(text);
+
+            var price = $("#detail-item-price").text().replace(",", "");
+            price = Number(price);
+
+            var curPrice = Number($(".allPrice").text());
+            $(".allPrice").text(curPrice - price);
+        }
+    }
+
+    // 상품명 옆에 x버튼 클릭시 목록제거
+    function del(obj) {
+        var cancel = Number(obj.parent("li").find(".add_button").val());
+        var curPrice = Number($(".allPrice").text());
+        var price = $("#detail-item-price").text().replace(",", "");
+        price = Number(price);
+        curPrice = curPrice - cancel * price;
+        $(".allPrice").text(curPrice);
+
+        obj.parent("li").remove();
+    }
+
+    Array.prototype.add = function (...param) {
+        this.push(...param);
+
+        return this;
+    };
+
+    function pay() {
+        var lilength = $(".productlist_add li").length;
+        console.log(lilength);
+
+        if (lilength == 0) {
+            alert("선택된 상품이 없습니다");
+            return false;
+        }
+
+        if (lilength != null) {
+            for (var i = 0; i < lilength; i++) {
+
+                var str = $(".productlist_add > li > span").text();
+                console.log(str);
+
+                var array = new Array();
+                array = str.split(" ");
+                console.log(array);
+
+                /*
+           var obj = new Object();
+               
+               obj.product = [
+                  option = array[i],
+                        
+                  qty = array[i+1]
+               ]                   
+
+               
+            console.log(obj);
+            */
+	            var title = $("#detail-item-title").text()
+	            var price = $(".allPrice").text();
+	        	var amount = $(".add_button").attr("value");
+	        	var productId = new URLSearchParams(location.search).get("id");
+
+                array.add(title);
+                array.add(price);
+                console.log(array);
+
+                // var jsonStr = JSON.stringfy(array);
+
+                // var json = JSON.parse(jsonStr);
+            }
+        }
+
+        processSubmit({
+        	title,
+        	price,
+        	amount,
+        	productId,
+        }, "/contents/pay.do");
+        //$("#needVal").submit();
+    }
+    
+    function processSubmit(data, url) {
+        $("#needVal").attr("action", url);
+        
+        var titleInput = $("#needVal").find("input[name='title']");
+        var amountInput = $("#needVal").find("input[name='amount']");
+        var productIdInput = $("#needVal").find("input[name='productId']");
+        var priceInput = $("#needVal").find("input[name='price']");
+        
+        if (titleInput.length > 0) priceInput.val(data.title);
+        if (amountInput.length > 0) priceInput.val(data.amount);
+        if (productIdInput.length > 0) priceInput.val(data.productId);
+        if (priceInput.length > 0) priceInput.val(data.price);
+
+        $("#needVal").submit();
+    }
+
+    function cart() {
+        var lilength = $(".productlist_add li").length;
+        console.log(lilength);
+
+        if (lilength == 0) {
+            alert("선택된 상품이 없습니다");
+            return false;
+        }
+
+        if (lilength != null) {
+            for (var i = 0; i < lilength; i++) {
+                var str = $(".productlist_add > li > span").text();
+                console.log(str);
+
+                var array = new Array();
+                array = str.split(" ");
+                console.log(array);
+
+                /* 
+           var obj = new Object();
+               
+               obj.product = [
+                  option = array[i],
+                        
+                  qty = array[i+1]
+               ]                   
+
+               
+        console.log(obj);
+            */
+
+                var title = $("#detail-item-title").text()
+                var price = $(".allPrice").text();
+            	var amount = $(".add_button").attr("value");
+            	var productId = new URLSearchParams(location.search).get("id");
+
+                array.add(title);
+                array.add(price);
+                console.log(array);
+                
+                processSubmit({
+                	title,
+                	price,
+                	amount,
+                	productId,
+                }, "/contents/cart.do");
+
+            }
+        }
+    }
         </script>
         
         <jsp:include page="/pages/login.jsp"></jsp:include>
