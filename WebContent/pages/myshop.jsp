@@ -116,7 +116,6 @@
 								String customerID = (String)session.getAttribute("id");
 								List<Integer> idList2 = service.getIdList(customerID);
 							%>				
-
 							<c:choose>
 							<c:when test="<%= idList2.size() > 0 %>">
 							<c:forEach var="id" items="<%= idList2 %>">
@@ -138,7 +137,7 @@
 										<h2>${card.getTitle()}</h2>
 										<p>${card.getPrice()}</p>
 										<p>${card.getShopname()}</p>
-										<button class="like-button"></button>
+										<!-- <button class="like-button"></button> -->
 									</div>
 								</div>
 								<%
@@ -146,10 +145,10 @@
 	                    		%>		
 	                    		</c:if>								
 							</c:forEach>
+							<button class="item_selected_none_all_del" id="delete-all-my-shop">전체삭제</button>						
 							</c:when>
 							<c:otherwise>
 				                <div class="item_selected_none">
-				                    <button class="item_selected_none_all_del" id="delete-all-my-shop">전체삭제</button>
 				                    <img class="item_selected_none_img" src="../images/b527471.png">
 				                    <div class="item_selected_none_sp">마이샵이 설정되어있지 않습니다.</div>
 				                    <a href="../index.jsp"><button class="item_selected_none_button">샾 메인으로 이동</button></a>

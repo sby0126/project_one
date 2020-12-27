@@ -28,7 +28,13 @@ class RecentlyItems extends Component {
         let items = [];
 
         // 최근 샵 갯수
-        items = raw.split(",").map(i => i.trim()).filter(i => i !== '');
+        items = raw.split(",").map(i => i.trim()).filter(i => {
+            // 정규표현식을 이용한 정교한 숫자 체크
+            if(/[\d]+/g.exec(i)) {
+                return true;
+            }
+            return false;
+        });
 
         count1 = items.length || 0;
         
@@ -39,7 +45,14 @@ class RecentlyItems extends Component {
 
         console.log("최근 아이템 갯수 : " + raw2, cookie.get("recentlyItems"));
 
-        let items2 = raw2.split(",").map(i => i.trim()).filter(i => i !== '');
+        let items2 = raw2.split(",").map(i => i.trim()).filter(i => {
+            // 정규표현식을 이용한 정교한 숫자 체크
+            if(/[\d]+/g.exec(i)) {
+                return true;
+            }
+            return false;
+        });
+
         count2 = items2.length || 0;
 
         $(IDS.ITEMS).text(count2);

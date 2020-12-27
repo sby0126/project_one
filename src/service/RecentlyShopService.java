@@ -26,7 +26,13 @@ public class RecentlyShopService {
 		List<Integer> idList = new ArrayList<>();
 		
 		for(String s: list) {
-			idList.add(Integer.parseInt(s));
+			
+			try {
+				int n = Integer.parseInt(s);
+				idList.add(n);
+			} catch(NumberFormatException e) {
+				//
+			}
 		}
 		initWithCards();
 		initWithShopDetailService(idList);
