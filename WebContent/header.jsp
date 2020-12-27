@@ -45,6 +45,8 @@
                 		<c:when test="${id != null}">
 							<%
 								CustomerVO vo = dao.getMember(id);
+		                		MyShopService myShopService = new MyShopService();
+		                		List<Integer> idList = myShopService.getIdList(id);
 							%>             
 							<c:set var="isSNS" value="<%= dao.isSNSMember(id) %>" />
 							<div class="header-right-login-button">(<%= vo.getCtmtype() %>)</div>
@@ -52,6 +54,7 @@
                 			<c:if test="${id=='admin'}">
                 				<a class="header-right-login-button" href="${pageContext.request.contextPath}/admin">관리자 페이지</a>
                 			</c:if>
+                			<a class="header-right-login-button" href="${pageContext.request.contextPath}/pages/myshop.jsp">마이샵 <span style="color: #FDA568;"><%=idList.size()%></span></a>
                 			<button class="header-right-login-button" id="logout-button" onclick="javascript:location.href='${pageContext.request.contextPath}/members/logout.do'">로그아웃</button>
                 		</c:when>
                 		<c:otherwise>

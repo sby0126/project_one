@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="dao.*, vo.*, service.*, java.util.*" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -36,8 +39,19 @@
                 <div class="header-right">
                 	<%
                 		String id = (String)session.getAttribute("id");
+                		CustomerDAO dao = CustomerDAO.getInstance();
                 		if(id != null) {
+                			CustomerVO vo = dao.getMember(id);
+	                		MyShopService myShopService = new MyShopService();
+	                		List<Integer> idList = myShopService.getIdList(id);                			
                 	%>
+                	<c:set var="isSNS" value="<%= dao.isSNSMember(id) %>" />
+                	<div class="header-right-login-button">(<%= vo.getCtmtype() %>)</div>
+                	<a class="header-right-login-button" href="${pageContext.request.contextPath}/members/modifyMemberForm.do?id=${id}">회원 정보 수정</a>
+                			<c:if test="${id=='admin'}">
+                				<a class="header-right-login-button" href="${pageContext.request.contextPath}/admin">관리자 페이지</a>
+                			</c:if>
+                			<a class="header-right-login-button" href="${pageContext.request.contextPath}/pages/myshop.jsp">마이샵 <span style="color: #FDA568;"><%=idList.size()%></span></a>                	
                     <button class="header-right-login-button" id="logout-button" onclick="javascript:location.href='/members/logout.do'">로그아웃</button>
                     <%
                 		} else {
@@ -64,17 +78,25 @@
                                 <p class="menu-title">최근 본 상품 <em>0</em></p>
                             </a>
                         </li>
-                        <!-- <li class="menu">
-                            <a href="#" class="menu-link">
-                                <div class="menu-icon"></div>
-                                <p class="menu-title">MY SHOP</p>
-                            </a>
-                        </li> -->
+                            <a href="${pageContext.request.contextPath}/pages/myshop.jsp" class="menu-link">
+                                 <div class="menu-icon"></div>
+                                 <p class="menu-title">MY SHOP</p>
+                            </a> 
                         <li class="menu">
-                            <a href="pages/interested_item.jsp" class="menu-link">
-                                <div class="menu-icon"></div>
-                                <p class="menu-title">관심 상품</p>
-                            </a>
+	                        <c:choose>
+	                        <c:when test="${id != null}">
+	                            <a href="${pageContext.request.contextPath}/pages/interested_item.jsp" class="menu-link">
+	                                <div class="menu-icon"></div>
+	                                <p class="menu-title">관심 상품</p>
+	                            </a>
+	                        </c:when>
+	                        <c:otherwise>
+	                            <a href="javascript:openLoginModal()" class="menu-link">
+	                                <div class="menu-icon"></div>
+	                                <p class="menu-title">관심 상품</p>
+	                            </a>		                        
+	                        </c:otherwise>
+	                        </c:choose>
                         </li>
                         <li class="menu">
                             <a href="pages/board-default.jsp" class="menu-link">
