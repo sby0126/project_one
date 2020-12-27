@@ -111,9 +111,9 @@
                     <p>&nbsp;</p>
                     <p>서버 경로 : <%= request.getServletContext().getRealPath("/") %></p>
                     <p>&nbsp;</p>
-                    <p>프로토콜 : <%= request.getScheme() %></p>
-                    <p>호스트 주소 : <%= request.getRemoteHost()%> </p>
-                    <p>포트 : <%= request.getRemotePort()%> </p>
+<%--                     <p>프로토콜 : <%= request.getScheme() %></p> --%>
+<%--                     <p>호스트 주소 : <%= request.getRemoteHost()%> </p> --%>
+<%--                     <p>포트 : <%= request.getRemotePort()%> </p> --%>
                 </div>
                 <div id="manage-whole-member" class="content jumbotron">
                    	<%

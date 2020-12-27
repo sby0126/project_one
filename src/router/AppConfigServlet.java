@@ -65,7 +65,6 @@ public class AppConfigServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		
 	}
 
 	/**
