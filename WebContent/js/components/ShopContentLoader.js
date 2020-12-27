@@ -124,6 +124,7 @@ export class ShopContentLoader extends Component {
                     return args[0] + "<br>";
                 });
 
+                // 마이샵 버튼을 활성화할 것인가?
                 let active = "";
                 if(filename.active) {
                     active = "active";
@@ -151,6 +152,7 @@ export class ShopContentLoader extends Component {
 
                 const myShopBtnClassName = `div[data-id='${filename.id}'] > .myshop-button`;
 
+                // 마이샵 버튼을 눌렀을 때의 처리
                 $(myShopBtnClassName).on("click", function(ev) {
                     const parent = $(this).parent();
                     const id = parent.data("id");

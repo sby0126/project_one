@@ -340,9 +340,6 @@
                 array.add(price);
                 console.log(array);
 
-                // var jsonStr = JSON.stringfy(array);
-
-                // var json = JSON.parse(jsonStr);
             }
         }
 
@@ -352,7 +349,7 @@
         	amount,
         	productId,
         }, "/contents/payments.do");
-        //$("#needVal").submit();
+        
     }
     
     function processSubmit(data, url) {
@@ -388,19 +385,6 @@
                 var array = new Array();
                 array = str.split(" ");
                 console.log(array);
-
-                /* 
-           var obj = new Object();
-               
-               obj.product = [
-                  option = array[i],
-                        
-                  qty = array[i+1]
-               ]                   
-
-               
-        console.log(obj);
-            */
 
                 var title = $("#detail-item-title").text()
                 var price = $(".allPrice").text();

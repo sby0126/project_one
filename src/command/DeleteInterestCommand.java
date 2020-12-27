@@ -13,7 +13,7 @@ import org.json.simple.JSONObject;
 import action.ActionResult;
 import service.InterestService;
 
-public class AddInterestCommand extends Command {
+public class DeleteInterestCommand extends Command {
 	
 	
 	@SuppressWarnings("unchecked")
@@ -37,7 +37,7 @@ public class AddInterestCommand extends Command {
 		int productId = Integer.parseInt(request.getParameter("productId"));
 		
 		InterestService service = new InterestService();
-		boolean isOK = service.insertInterest(customerId, productId);
+		boolean isOK = service.deleteInterest(customerId, productId);
 		
 		// 상태 JSON을 반환합니다.
 		JSONObject status = new JSONObject();
@@ -47,7 +47,7 @@ public class AddInterestCommand extends Command {
 		if(isOK) {
 			status.put("status", "success");	
 		} else {
-			result.sendError(401, "");
+			result.sendError(402, "");
 			
 			return result;
 		}

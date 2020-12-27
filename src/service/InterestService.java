@@ -7,11 +7,26 @@ import vo.InterestVO;
 
 public class InterestService {
 
-	
-	public boolean checkInterest(String customerId, int productId) {
+	public boolean insertInterest(String customerId, int productId) {
 		
 		ContentDAO contentDAO = ContentDAO.getInstance();
-		boolean isOK = contentDAO.checkInterest(customerId, productId);
+		boolean isOK = contentDAO.insertInterest(customerId, productId);
+		
+		return isOK;
+	}
+	
+	public boolean deleteInterest(String customerId, int productId) {
+		
+		ContentDAO contentDAO = ContentDAO.getInstance();
+		boolean isOK = contentDAO.deleteInterest(customerId, productId);
+		
+		return isOK;
+	}
+	
+	public boolean deleteAllInterest(String customerId) {
+		
+		ContentDAO contentDAO = ContentDAO.getInstance();
+		boolean isOK = contentDAO.deleteAllInterest(customerId);
 		
 		return isOK;
 	}

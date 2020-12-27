@@ -641,7 +641,7 @@ public class ContentDAO implements IDAO {
 	 * @param productId
 	 * @return
 	 */
-	public boolean checkInterest(String customerId, int productId) {
+	public boolean insertInterest(String customerId, int productId) {
 		
 		boolean isOK = false;
 		
@@ -655,6 +655,68 @@ public class ContentDAO implements IDAO {
 				isOK = true;
 			}
 			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+		return isOK;
+	}
+	
+	/**
+	 * 관심 상품을 DB에 추가합니다.
+	 * 
+	 * @param customerId
+	 * @param productId
+	 * @return
+	 */
+	public boolean deleteInterest(String customerId, int productId) {
+		
+		boolean isOK = false;
+		
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement("delete from tblInterest where cust_id = ? and product_id = ?");
+			pstmt.setString(1, customerId);
+			pstmt.setInt(2, productId);
+
+			if(pstmt.executeUpdate() > 0) {
+				isOK = true;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+		return isOK;
+	}
+	/**
+	 * 관심 상품을 DB에 추가합니다.
+	 * 
+	 * @param customerId
+	 * @param productId
+	 * @return
+	 */
+	public boolean deleteAllInterest(String customerID) {
+		
+		boolean isOK = false;
+		
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement("delete from tblInterest where cust_id = ?");
+			pstmt.setString(1, customerID);
+			
+			if(pstmt.executeUpdate() > 0) {
+				isOK = true;
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

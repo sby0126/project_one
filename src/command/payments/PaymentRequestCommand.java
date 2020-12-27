@@ -35,13 +35,14 @@ public class PaymentRequestCommand extends Command {
 		request.setAttribute("zipcode", customerInfo.get("zipcode"));
 		request.setAttribute("productName", request.getParameter("productName"));
 		request.setAttribute("productId", productId);
+		request.setAttribute("amount", amount);
 		
 		ContentDAO contentDAO = ContentDAO.getInstance();
 		ProductVO vo = contentDAO.findShopDataAsID(productId);
 
 		int price = Integer.parseInt(vo.getPrice().replaceAll("[\\,]+", ""));
 		
-		request.setAttribute("price", price);
+		request.setAttribute("price", price * amount);
 		
 		result.forward("/pages/payments-form.jsp");
 		

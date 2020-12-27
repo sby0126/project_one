@@ -175,6 +175,12 @@ export class ItemContentLoader extends Component {
                     location.href = `pages/detail.jsp?data=${btoa(unescape(encodeURIComponent(JSON.stringify(myData))))}&id=${myImgData.id}`;
                 }
 
+                // 좋아요 버튼을 활성화 해야 할까요?
+                let active = "";
+                if(filename.active) {
+                    active = "active";
+                }                
+
                 card.insertAdjacentHTML( 'afterbegin', `
                     <a href="${filename.link} target='_blank'>
                         <i class="shop-hot-icon"></i>
@@ -183,28 +189,35 @@ export class ItemContentLoader extends Component {
                             <h2>${title}</h2>
                             <p>${price}</p>
                             <p>${shop}</p>
-                            <button class="like-button" data-id=${myImgData.id}></button>
+                            <button class="like-button ${active}" data-id=${myImgData.id}></button>
                         </div>
                 `);
 
                 $(card).find(".like-button").on("click", (ev) => {
                     const likeButton = $(card).find(".like-button");
 
-                    // 토글
-                    likeButton.toggleClass("active");
                     const productId = likeButton.data("id")
+
+                    const isActive = $(card).find(".like-button").hasClass("active");
+
+                    const REST_API_TYPE = isActive ? "deleteInterest.do" : "addInterest.do";
 
                     // AJAX를 요청합니다.
                     $.ajax({
-                        url: `/contents/addInterest.do?productId=${productId}`,
+                        url: `/contents/${REST_API_TYPE}?productId=${productId}`,
                         method: "GET",
                         success: function(data) {
                             if(data.status === "success") {
-                                alert("관심 상품에 추가가 완료되었습니다.");
+                                likeButton.toggleClass("active");
                             }
                         },
                         error: function(err) {
-                            console.warn("관심 상품 추가에 실패하였습니다.");
+                            const code = err.status;
+                            if(code === 401) {
+                                console.warn("로그인이 되어있지 않습니다.");
+                            } else {
+                                console.warn("DB 작업에 실패하였습니다.");
+                            }
                         }
                     })
 
