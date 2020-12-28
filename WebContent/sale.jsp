@@ -78,10 +78,12 @@
                                 <p class="menu-title">최근 본 상품 <em>0</em></p>
                             </a>
                         </li>
+                        <li class="menu">
                             <a href="${pageContext.request.contextPath}/pages/myshop.jsp" class="menu-link">
                                  <div class="menu-icon"></div>
                                  <p class="menu-title">MY SHOP</p>
-                            </a> 
+                            </a>
+                        </li>
                         <li class="menu">
 	                        <c:choose>
 	                        <c:when test="${id != null}">
