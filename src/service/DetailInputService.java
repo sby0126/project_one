@@ -8,7 +8,7 @@ import vo.ProductVO;
 
 public class DetailInputService {
 
-	public boolean inputDetail(HttpServletRequest req, String title, String price) {
+	public boolean inputDetail(HttpServletRequest req, String title, int price, int amount) {
 
 		List<ProductVO> list = null;
 		boolean success = false;
@@ -20,7 +20,6 @@ public class DetailInputService {
 		
 		req.setAttribute("list", list);
 		req.setAttribute("id", id);
-		
 		
 		System.out.println(list);
 		

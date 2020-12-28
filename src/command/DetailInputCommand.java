@@ -21,15 +21,15 @@ public class DetailInputCommand extends Command {
 				
 		
 		String title = request.getParameter("title");
-		String price = request.getParameter("price");
+		int price = Integer.parseInt(request.getParameter("perPrice"));
 		int productId = Integer.parseInt(request.getParameter("productId"));
-		int qty = Integer.parseInt(request.getParameter("amount"));
+		int amount = Integer.parseInt(request.getParameter("amount"));
 		
 		String uri = null;
 		
 		DetailInputService detailInputService = new DetailInputService();
 		
-		boolean isSuccess = detailInputService.inputDetail(request, title, price, qty);
+		boolean isSuccess = detailInputService.inputDetail(request, title, price, amount);
 		boolean inputSuccess = false;
 		
 		uri = request.getPathInfo();
@@ -61,12 +61,12 @@ public class DetailInputCommand extends Command {
 				switch(choice) {
 					case 0 : result.forward(request.getContextPath() + "/pages/cart.jsp");
 							 request.setAttribute("title", title);
-							 request.setAttribute("price", price);
-							 request.setAttribute("qty", qty);
+							 request.setAttribute("perPrice", price);
+							 request.setAttribute("amount", amount);
 							 break;
 							 
 					case 1 : result = null;
-							 break;	
+							 break;
 				}
 				
 			}

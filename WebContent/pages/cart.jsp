@@ -5,19 +5,26 @@
 <%@ page import="javax.servlet.*" %>
 <%@ page import="vo.ProductVO" %>
 <%@ page import="com.google.gson.*" %>
+<%@ page import="dao.ContentDAO, command.DetailInputCommand" %>
 
 
 <!DOCTYPE html>
 <%  
 
 	String id = (String)session.getAttribute("id");
-	Gson gson = new GsonBuilder().create();
-	JSONObject root = (JSONObject)request.getAttribute("root");
-	List<ProductVO> list = gson.fromJson(root.toString(), List.class);
-	int qty = Integer.parseInt(request.getParameter("qty"));
-	int totalPrice = 0;
-
+	String title = request.getParameter("title");
+	int productId = Integer.parseInt(request.getParameter("productId"));
+	int amount = Integer.parseInt(request.getParameter("amount"));
+	int price = Integer.parseInt(request.getParameter("price"));
 	
+	Gson gson = new GsonBuilder().create();
+	
+	int perPrice = price / amount;
+	
+	List<ProductVO> list = ContentDAO.getInstance().getDetail(title, perPrice);
+	boolean success = ContentDAO.getInstance().insertDetail(id, list);
+	
+
 %>
 
 <html lang="ko">
@@ -58,22 +65,21 @@
                             	if(list != null) {
                             		for(int i = 0; i < list.size(); i++) {
                             			
-                            			String title = list.get(i).getTitle();
+                            			title = list.get(i).getTitle();
                             			String img = list.get(i).getContenturl();
                             			String uri = list.get(i).getLink();
-                            			int price = Integer.parseInt(list.get(i).getPrice());
+                            			perPrice = Integer.parseInt(list.get(i).getPrice());
                             			int discnt = 0;
                             			int rltprice = price - discnt;
-                            			totalPrice += rltprice;
                             %>
                             <tr>
                                 <td><input type="checkbox" name="chk" class="chkbox"></td>
                                 <td><img src='<%=img%>' class="product-img"></td> <!-- 구매할 상품 이미지 -->
-                                <td><p class="product-name"><a href="#"><%=title%></a></p> </td> <!-- 구매할 상품 이름 -->
-                                <td><input type="number" class="product-num" placeholder="<%=qty%>" min="1"></td> <!-- 구매 갯수 -->
-                                <td><P class="product-price"> <%=price%> </P></td> <!-- 상품 가격-->
+                                <td><p class="product-name"><a href="<%=uri%>"><%=title%></a></p> </td> <!-- 구매할 상품 이름 -->
+                                <td><input type="number" class="product-num" placeholder="<%=amount%>" min="1"></td> <!-- 구매 갯수 -->
+                                <td><P class="product-price"> <%=perPrice%> </P></td> <!-- 상품 가격-->
                                 <td><P class="product-discnt"> <%=discnt%> </P></td> <!-- 할인 -->
-                                <td><P class="product-rltprice"> <%=rltprice%> </P> </td> <!-- 상품 금액 -->
+                                <td><P class="product-rltprice"> <%=perPrice - discnt%> </P> </td> <!-- 상품 금액 -->
                             </tr>
                             <%
                             		}
@@ -95,7 +101,7 @@
 		                	<table class="page-pooterbox">
 		                		<tr>
 		                			<td class='total-num'><p>총</p><span><%=list.size()%> 개</span></td>
-		                			<td class='total-price'><span><%=totalPrice%>원</span></td>
+		                			<td class='total-price'><span><%=price%>원</span></td>
 		                		</tr>
 		                		<tr class="btn-zone">
                                     <td><button type="button" class="buy-product" onclick="">구매</button></td>
