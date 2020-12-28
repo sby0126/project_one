@@ -216,7 +216,7 @@ export class ShopContentLoader extends Component {
         const cardContainer = $(".card-container");
 
         cardContainer.each((index, elem) => {
-
+            
         });
     }
 
