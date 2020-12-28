@@ -17,6 +17,7 @@
 <!-- 	</nav>		 -->
 <!-- </div> -->
 <div id="db-editor" class="jumbotron content">
+	<p>상품 재고 관리</p>
 	<div class="alert alert-info">
 	  <strong>정보!</strong> 데이터를 수정하려면 시트를 클릭하십시오.
 	</div>
