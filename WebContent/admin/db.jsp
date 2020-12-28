@@ -1,28 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>DB 에디터</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!-- <!DOCTYPE html> -->
+<!-- <html> -->
+<!-- <head> -->
+<!-- <meta charset="UTF-8"> -->
+<!-- <title>DB 에디터</title> -->
 	<script src="https://bossanova.uk/jexcel/v3/jexcel.js"></script>
 	<link rel="stylesheet" href="https://bossanova.uk/jexcel/v3/jexcel.css" type="text/css" />
 	<script src="https://bossanova.uk/jsuites/v2/jsuites.js"></script>
 	<link rel="stylesheet" href="https://bossanova.uk/jsuites/v2/jsuites.css" type="text/css" />
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>	
-</head>
-<body data-spy="scroll" data-target=".navbar" data-offset="50">
-<div class="well">
-	<nav class="navbar navbar-fixed-top">
-		<ul class="nav nav-tabs nav-justified">
-		  <li class="active"><a href="#db-editor">tblExtItem 테이블</a></li>
-		  <li><a href="#">Menu 1</a></li>
-		</ul>	
-	</nav>		
-</div>
-<div id="db-editor" class="well well-lg">
+<!-- <div class="well"> -->
+<!-- 	<nav class="navbar navbar-fixed-top"> -->
+<!-- 		<ul class="nav nav-tabs nav-justified"> -->
+<!-- 		  <li class="active"><a href="#db-editor">tblExtItem 테이블</a></li> -->
+<!-- 		  <li><a href="#">Menu 1</a></li> -->
+<!-- 		</ul>	 -->
+<!-- 	</nav>		 -->
+<!-- </div> -->
+<div id="db-editor" class="jumbotron content">
 	<div class="alert alert-info">
 	  <strong>정보!</strong> 데이터를 수정하려면 시트를 클릭하십시오.
 	</div>
@@ -107,6 +101,6 @@ $("#upload").on("click", (ev) => {
 	});	
 })
 
-</script>
-</body>
-</html>
+<!-- </script> -->
+<!-- </body> -->
+<!-- </html> -->

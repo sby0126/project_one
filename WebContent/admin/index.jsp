@@ -99,26 +99,29 @@
   	
   </style>
 </head>
-<body>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
     <div class="container col-md-12">
         <section class="col-md-12">
             <div class="left wall col-md-3">
-                <ul class="nav nav-pills nav-stacked">
-                    <li class="active"><a href="#">메인</a></li>
-                    <li class="dropdown">
-                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">멤버 관리
-                      <span class="caret"></span></a>
-                      <ul class="dropdown-menu">
-                        <li><a href="#manage-whole-member">전체 멤버 관리</a></li>
-                        <li><a href="#manage-forced-secession">강제 탈퇴 관리</a></li>
-                        <li><a href="#currently-login-members">현재 로그인 멤버</a></li>
-                      </ul>
-                    </li>
-                    <li><a href="#board-manage">게시물 관리</a></li>
-<!--                     <li><a href="#all-post">상품</a></li> -->
-                    <li><a href="#log">접속 로그</a></li>
-                    <li><a href="#uploads">파일 관리</a></li>
-                  </ul>
+            	<nav class="navbar col-md-3 left">
+	                <ul class="nav nav-pills nav-stacked">
+	                    <li class="active"><a href="#main">메인</a></li>
+	                    <li class="dropdown">
+	                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">멤버 관리
+	                      <span class="caret"></span></a>
+	                      <ul class="dropdown-menu">
+	                        <li><a href="#manage-whole-member">전체 멤버 관리</a></li>
+	                        <li><a href="#manage-forced-secession">강제 탈퇴 관리</a></li>
+	                        <li><a href="#currently-login-members">현재 로그인 멤버</a></li>
+	                      </ul>
+	                    </li>
+	                    <li><a href="#board-manage">게시물 관리</a></li>
+	<!--                     <li><a href="#all-post">상품</a></li> -->
+	                    <li><a href="#log">접속 로그</a></li>
+	                    <li><a href="#uploads">파일 관리</a></li>
+	                    <li><a href="#db-editor">DB 에디터</a></li>
+	                  </ul>
+                  </nav>
             </div>
             <div class="right content-wrapper wall col-md-9">
                 <div id="main" class="content jumbotron media">
@@ -441,6 +444,7 @@
 					</tfoot>
 					</table>
                 </div>                               
+	            <jsp:include page="./db.jsp"></jsp:include>
             </div>
         </section>
         <button class="return-button btn btn-info" id="return-button"><i class="fas fa-door-open" style="color: white;">나가기</i></button>
@@ -484,6 +488,7 @@
     		<img src="">
     	</div>
     </div>        
+
     <script src="./js/admin.js"></script>
 </body>
 </html>
