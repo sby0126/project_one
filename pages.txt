@@ -12,6 +12,7 @@ detail-item-uploader.jsp
 detail.jsp
 error.jsp
 error2.jsp
+facebookLogin.jsp
 find_id.jsp
 find_id_ok.jsp
 find_password.jsp
