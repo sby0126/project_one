@@ -17,16 +17,21 @@
 <div class="well">
 	<nav class="navbar navbar-fixed-top">
 		<ul class="nav nav-tabs nav-justified">
-		  <li class="active"><a href="#db-editor">DB 에디터</a></li>
+		  <li class="active"><a href="#db-editor">tblExtItem 테이블</a></li>
 		  <li><a href="#">Menu 1</a></li>
-		  <li><a href="#">Menu 2</a></li>
-		  <li><a href="#">Menu 3</a></li>
 		</ul>	
 	</nav>		
 </div>
 <div id="db-editor" class="well well-lg">
+	<div class="alert alert-info">
+	  <strong>정보!</strong> 데이터를 수정하려면 시트를 클릭하십시오.
+	</div>
 	<div id="spreadsheet"></div>
-	<p><button id="add" class="btn btn-default">DB에 업로드하기</button></p>
+	<p>
+		<button id="upload" class="btn btn-default">DB에 업로드하기</button>
+		<button id="add" class="btn btn-default">새로운 행 추가</button>
+		<button id="delete" class="btn btn-default">마지막 행 삭제</button>
+	</p>
 </div>	
 <script>
 var data = [
@@ -59,14 +64,25 @@ jexcel(document.getElementById('spreadsheet'), {
         },        
         {
             type: 'calendar',
-            title:'regdate',
-            width:120
+            title:'등록일',
+            options: {format: 'YYYY/MM/DD'},
+            width: 120
         }
      ]
 });
 
-// 추가하기 버튼을 클릭하면 DB에 시트 내용을 삽입합니다.
+// 새로운 행 추가
 $("#add").on("click", (ev) => {
+	$("#spreadsheet").jexcel("insertRow");
+});
+
+// 마지막 행 삭제
+$("#delete").on("click", (ev) => {
+	$("#spreadsheet").jexcel("deleteRow");
+});
+
+// 추가하기 버튼을 클릭하면 DB에 시트 내용을 삽입합니다.
+$("#upload").on("click", (ev) => {
 	// 데이터만 뽑아냅니다.
 	$("#spreadsheet tr").siblings().each((index, elem) => {
 	    const raw = $(elem).find("td:gt(0)").map((i, e) => $(e).text());
