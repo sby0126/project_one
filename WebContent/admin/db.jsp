@@ -12,8 +12,9 @@
 	<link rel="stylesheet" href="https://bossanova.uk/jsuites/v2/jsuites.css" type="text/css" />
 </head>
 <body>
+<h2>tblExtItem</h2>
 <div id="spreadsheet"></div>
-<p><button id="add">추가하기</button></p>
+<p><button id="add">DB에 업로드하기</button></p>
 <script>
 var data = [
     ['1', '바지', 82000, 99, '2021-01-01'],
@@ -50,6 +51,33 @@ jexcel(document.getElementById('spreadsheet'), {
         }
      ]
 });
+
+// 추가하기 버튼을 클릭하면 DB에 시트 내용을 삽입합니다.
+$("#add").on("click", (ev) => {
+	// 데이터만 뽑아냅니다.
+	$("#spreadsheet tr").siblings().each((index, elem) => {
+	    const raw = $(elem).find("td:gt(0)").map((i, e) => $(e).text());
+	    const rs = raw.toArray();
+	    	    
+	    alert(rs);
+	    
+	    $.post("/myadmin/uploadProduct.do", {
+	    	id: rs[0],
+	    	title: rs[1],
+	    	price: rs[2],
+	    	stock: rs[3],
+	    	regdate: rs[4]
+	    }, function(result, status) {
+	    	if(status === "success") {
+	    		console.log(result);	
+	    	} else if(status === "error") {
+	    		// 오류 처리
+	    	}
+	    });
+	    
+	});	
+})
+
 </script>
 </body>
 </html>
