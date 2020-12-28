@@ -79,7 +79,7 @@
                                 <td><input type="number" class="product-num" placeholder="<%=amount%>" min="1"></td> <!-- 구매 갯수 -->
                                 <td><P class="product-price"> <%=perPrice%> </P></td> <!-- 상품 가격-->
                                 <td><P class="product-discnt"> <%=discnt%> </P></td> <!-- 할인 -->
-                                <td><P class="product-rltprice"> <%=perPrice - discnt%> </P> </td> <!-- 상품 금액 -->
+                                <td><P class="product-rltprice"> <%=rltprice%> </P> </td> <!-- 상품 금액 -->
                             </tr>
                             <%
                             		}
