@@ -388,15 +388,15 @@
 						<td>
 							<p>${ isValid }</p>
 							<form action="/myadmin/openFileBrowser.do">
-								<input type="hidden" name="filename" value="<%= request.getRealPath("uploads/" + path.getFileName()) %>"> 
+								<input type="hidden" name="filename" value="/uploads/${filename}"> 
 								<input type="submit" class="btn ${btnName}" onclick="openImageView('/uploads/${filename}')" value="업로드 폴더 열기">
 							</form>
 							<button class="btn ${btnName}" onclick="openImageView('/uploads/${filename}')">파일 보기</button>
 						</td>
 						<td>
 							<form action="/myadmin/fileDelete.do">
-								<input type="hidden" name="filename" value="${filename}">
-								<input type="submit" class="btn ${btnName}" data-filename="${filename}" value="파일 삭제">
+								<input type="hidden" name="filename" value="/uploads/${filename}">
+								<input type="submit" class="btn ${btnName}" data-filename="/uploads/${filename}" value="파일 삭제">
 							</form>
 						</td> 
 						</tr>

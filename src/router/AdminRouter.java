@@ -53,8 +53,12 @@ public class AdminRouter extends HttpServlet {
 			String filename = request.getParameter("filename");
 			
 			try {
-				File file = new File(filename);
+				String realFileName = request.getServletContext().getRealPath(filename);
+				
+				// 파일이 존재하는가?
+				File file = new File(realFileName);
 				if(file.exists()) {
+					// 존재한다면 삭제 처리합니다.
 					file.delete();
 				}					
 			} catch(Exception e) {
