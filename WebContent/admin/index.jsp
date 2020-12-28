@@ -364,12 +364,11 @@
 					<a name="uploads"></a>
                     <p>업로드된 파일 관리</p>
                     <div class="panel panel-default">
-                    서버 환경이 <em>리눅스</em>인 경우, 파일 보기를 지원하지 않습니다.
-                    <p>선택된 파일 갯수 <span id="selection-file-count">0</span>개입니다.
+                    	<p style="font-size: 12px;">선택된 파일 갯수 <span id="selection-file-count">0</span>개입니다.
                     </div>                    
                     <table class="table">
                     <thead>
-                    	<th>선택</th>
+                    	<th><input type="checkbox" id="all-file-selection"></th>
                     	<th>파일명</th>
                     	<th>파일 크기</th>
                     	<th>게시물 번호</th>

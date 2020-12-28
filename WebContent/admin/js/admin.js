@@ -155,8 +155,8 @@ Object.assign(window, {
         return true;
     })
 
-    $("#uploads").find("input[type='checkbox']").on("click", (ev) => {
-        const len = $("#uploads").find("input[type='checkbox']").filter((index, elem) => {
+    $("#uploads").find("input[name='file']").on("click", (ev) => {
+        const len = $("#uploads").find("input[name='file']").filter((index, elem) => {
             return $(elem).prop("checked") === true;
         }).length;
 
@@ -165,6 +165,20 @@ Object.assign(window, {
         } else {
             $("#multiple-files-delete-button").addClass("disabled");
         }
+
+        $("#selection-file-count").text(len);
+    });
+
+    // 전체 선택 구현
+    $("#all-file-selection").on("click", ev => {
+        $("#uploads").find("input[type='checkbox']").each((index, elem) => {
+            const isChecked = $("#all-file-selection").prop("checked");
+            $(elem).prop("checked", isChecked);
+        });
+
+        const len = $("#uploads").find("input[name='file']").filter((index, elem) => {
+            return $(elem).prop("checked") === true;
+        }).length;        
 
         $("#selection-file-count").text(len);
     });
