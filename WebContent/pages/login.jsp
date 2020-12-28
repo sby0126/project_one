@@ -21,6 +21,7 @@
                 <input class="input-button" type="submit" value="Login">
                 <div class="floating-login-view-button-panel floating-login-view-input-group">
                     <input class="input-button" id="join-button" type="button" value="회원가입">
+                    <input class="input-button" id="find-password-button" type="button" value="아이디 찾기" onclick="location.href='${contextPath}/pages/find_id.jsp'">
                     <input class="input-button" id="find-password-button" type="button" value="비밀번호 찾기" onclick="location.href='${contextPath}/pages/find_password.jsp'">
                 </div>
                 <div id="naver_id_login"></div>

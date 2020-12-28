@@ -122,8 +122,9 @@ $("#search-specific-member").on("change", function() {
     searchMemberTable(val.trim());
 });
    
-   $("#search-specific-member-button").on("click", () => {
-       const val = $("#search-specific-member").val();
-       searchMemberTable(val.trim());
-       return false;
-   });
+$("#search-specific-member-button").on("click", () => {
+    const val = $("#search-specific-member").val();
+    searchMemberTable(val.trim());
+    return false;
+});
+

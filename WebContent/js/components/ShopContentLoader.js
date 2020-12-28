@@ -211,6 +211,15 @@ export class ShopContentLoader extends Component {
 
     }
 
+    removeEmptyChildren() {
+        // 카드 컨테이너 선언
+        const cardContainer = $(".card-container");
+
+        cardContainer.each((index, elem) => {
+
+        });
+    }
+
     run() {
 
         // 입력 중에 콜백 함수가 과다하게 실행되는 것을 방지하는 쓰로틀링 (또는 디바운스로 교체 가능) 함수입니다.
@@ -236,6 +245,9 @@ export class ShopContentLoader extends Component {
         this._dataLoader.initWithUrlParams();
         this._dataLoader.load("shop", (data) => {
             
+            /**
+             * @type {Array}
+             */
             this._data = data;
 
             // 로딩 직후, 새로운 카드 이미지를 바로 생성합니다.

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.ActionResult;
 import command.Command;
+import command.customer.FindIdCommand;
 import command.customer.FoclySecessionMemberCommand;
 import command.customer.ListMembersCommand;
 import command.customer.LoginCommand;
@@ -66,6 +67,9 @@ public class CustomerController extends HttpServlet {
 				break;
 			case "/modifyMember.do": // 회원 정보 수정
 				command = new ModifyMemberCommand();
+				break;
+			case "/findId.do":
+				command = new FindIdCommand();
 				break;
 			case "/secessionMember.do": // 자진 탈퇴
 				command = new SecessionMemberCommand();

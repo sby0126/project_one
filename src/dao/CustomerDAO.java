@@ -631,4 +631,70 @@ public class CustomerDAO implements IDAO {
 		
 		return ret;
 	}
+	
+	public CustomerVO findId(String name, String email) {
+		String retId = null;
+		ResultSet rs = null;
+		
+		CustomerVO c = null;
+		
+		try {
+			conn = pool.getConnection();
+			
+			pstmt = conn.prepareStatement("select * from tblCustomer where CTMNM = ? and EMAIl = ?");
+			pstmt.setString(1, name);
+			pstmt.setString(2, email);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				String id = rs.getString("CTMID");
+				String hashedPassword = rs.getString("CTMPW");
+				int no = rs.getInt("CTMNO");
+				String rName = rs.getString("CTMNM");
+				String address = rs.getString("ADDR");
+				String tel = rs.getString("TEL");
+				String rEmail = rs.getString("EMAIL");
+				String zipCode = rs.getString("ZIPCODE");
+				String joinDate = rs.getString("joinDate");
+				String salt = rs.getString("salt");
+				String lastLogin = rs.getString("LAST_LOGIN");
+				String failedLoginCount = rs.getString("FAILED_LOGIN_COUNT");
+				String isLock = rs.getString("IS_LOCK");
+				String ctmType = rs.getString("CTMTYPE");
+				
+				c = new CustomerVO();
+				
+				c
+					.setId(id)
+					.setPassword(hashedPassword)
+					.setNo(no)
+					.setName(rName)
+					.setAddress(address)
+					.setTel(tel)
+					.setEmail(rEmail)
+					.setZipCode(zipCode)
+					.setJoinDate(joinDate)
+					.setSalt(salt)
+					.setCtmtype(ctmType);
+				
+				c.setLastLogin(lastLogin);
+				c.setFailedLoginCount(failedLoginCount);
+				c.setIsLock(isLock);
+				
+				return c;
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+		return c;
+ 		
+	}
 }

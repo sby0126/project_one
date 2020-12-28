@@ -395,7 +395,7 @@
 						</td>
 						<td>
 							<form action="/myadmin/fileDelete.do">
-								<input type="hidden" name="filename" value="<%= request.getRealPath("uploads/" + path.getFileName()) %>">
+								<input type="hidden" name="filename" value="${filename}">
 								<input type="submit" class="btn ${btnName}" data-filename="${filename}" value="파일 삭제">
 							</form>
 						</td> 
