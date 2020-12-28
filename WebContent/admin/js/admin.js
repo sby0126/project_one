@@ -112,6 +112,10 @@ Object.assign(window, {
                 const text = $(elem).find("td:nth-child(1)").text();
                 if (text.indexOf("192") >= 0) {
                     $(elem).hide();
+                } else if(text.indexOf("0:0:0:0:0:0:0:1") >= 0) {
+                    $(elem).hide();
+                } else if(text.indexOf("10.0.0.2") >= 0) {
+                    $(elem).hide();
                 }
             })
         } else {
@@ -235,3 +239,103 @@ Object.assign(window, {
     });
 
 })();
+
+class SelectionManager {
+    constructor() {
+        this._container = null;
+        this._allFileSelection = null;
+        this._multipleFilesButton = null;
+        this._selectionFileCount = null;
+    }
+
+    addContainer(container) {
+        this._container = container;
+        return this;
+    }
+
+    addAllFileSelection(elem) {
+        this._allFileSelection = elem;
+        return this;
+    }
+
+    addMultipleFilesButton(elem) {
+        this._multipleFilesButton = elem;
+        return this;
+    }
+
+    addSelectionFileCount(elem) {
+        this._selectionFileCount = elem;
+        return this;
+    }
+
+    addAction(action) {
+        $(this._multipleFilesButton).on("click", ev => {
+            const form = document.createElement("form");
+            form.action = "/myadmin/multipleFileDelete.do";
+    
+            /**
+             * @type {JQuery[]}
+             */
+            let items = [];
+    
+            $("#uploads").find("input[name='file']").each((index, elem) => {
+                if ($(elem).length > 0) {
+                    items.push($(elem));
+                }
+            });
+    
+            // 자식 체크 박스를 만듭니다.
+            items.forEach(elem => {
+    
+                const childInput = document.createElement("input");
+                childInput.name = elem.prop("name");
+                childInput.value = elem.val();
+    
+                form.appendChild(childInput);
+    
+            });
+    
+            // 활성화 되어있는 게 1개 이상이면 폼을 전송합니다.
+            const isPossibleToDelete = items.filter(i => i.prop("checked")).length > 0;
+    
+            if(isPossibleToDelete) {
+                document.body.appendChild(form);
+                
+                form.onsubmit = function() {
+                    setTimeout(function() {
+                        document.body.removeChild(form);
+                    }, 20);
+                    
+                    return true;
+                }
+                
+                form.submit();
+            }
+    
+        });
+    }
+
+    click() {
+
+        $(this._allFileSelection).on("click", ev => {
+            $(this._container).find("input[name='file']").each((index, elem) => {
+                const isChecked = $(this._allFileSelection).prop("checked");
+                $(elem).prop("checked", isChecked);
+            });
+    
+            const len = $(this._container).find("input[name='file']").filter((index, elem) => {
+                return $(elem).prop("checked") === true;
+            }).length;        
+    
+            if (len > 0) {
+                $(this._multipleFilesButton).removeClass("disabled");
+            } else {
+                $(this._multipleFilesButton).addClass("disabled");
+            }        
+    
+            $(this._selectionFileCount).text(len);
+        });
+
+    }
+
+}
