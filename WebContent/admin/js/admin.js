@@ -7,7 +7,7 @@ Object.assign(window, {
         $("#light-box").removeClass("active");
         $(".member-information-form").hide();
     },
-    
+
     /**
      * 멤버 정보 창을 표시합니다.
      * @param {Number} postNumber 
@@ -16,18 +16,18 @@ Object.assign(window, {
         $("#light-box").addClass("active");
         $(".member-information-form").show();
     },
-    
+
     /**
      * 이미지 보기 창을 표시합니다.
      * 
      * @param {String} src 
      */
-    openImageView(src) {   
+    openImageView(src) {
         $("#light-box").addClass("active");
         $("#image-view").show();
         $("#image-view img").attr("src", src);
     },
-    
+
     /**
      * 이미지 숨기기 창을 표시합니다.
      * 
@@ -36,81 +36,81 @@ Object.assign(window, {
         $("#light-box").removeClass("active");
         $("#image-view").fadeOut();
     },
-    
+
     getPostNumber() {
-        return parseInt( $(this).data("number") ); 
+        return parseInt($(this).data("number"));
     },
-    
+
 });
 
-(function() {
+(function () {
 
-    $( ".post-modify" ).on("click", function() {		
+    $(".post-modify").on("click", function () {
         alert("글 수정 번호는 " + getPostNumber.call(this));
     });
-    
-    $( ".post-delete" ).on("click", function() {
+
+    $(".post-delete").on("click", function () {
         alert("글 삭제 번호는 " + getPostNumber.call(this));
     });
-    
-    $(".whole-member").on("click", function() {
+
+    $(".whole-member").on("click", function () {
         const memberId = $(this).data("number");
         location.href = `/members/modifyMemberForm.do?id=` + memberId;
     });
-    
-    $( ".forced-secession" ).on("click", function() {
+
+    $(".forced-secession").on("click", function () {
         alert("강제로 탈퇴시킬 회원 번호는 " + $(this).data("number"));
-        
+
         const self = this;
-        
+
         const id = $(this).data("number");
-        
-        if(id === "admin") {
+
+        if (id === "admin") {
             alert("관리자는 탈퇴시킬 수 없습니다.");
             return false;
         }
-        
+
         $.ajax({
             url: "/members/foclySecessionMember.do?id=" + id,
             method: "GET",
-            success: function(data) {
-                if(data.status === "success") {
+            success: function (data) {
+                if (data.status === "success") {
                     alert("탈퇴 처리가 완료되었습니다");
                     // $("button.forced-secession[data-number='1568304956']").eq(0).parent().parent()[0]
                     $(self).parent().parent().remove();
                 }
             },
-            error: function(err) {
-                if(err.code === 401) {
+            error: function (err) {
+                if (err.code === 401) {
                     alert("권한이 없습니다");
-                } else if(err.code === 402) {
+                } else if (err.code === 402) {
                     alert("글이 남아있는 상태입니다.");
                 } else {
                     console.warn(err);
                 }
             }
         })
-        
+
     });
-    
-    $(window).on("click", function(ev) {
-        if(ev.target.classList.contains("modal")) {
+
+    $(window).on("click", function (ev) {
+        if (ev.target.classList.contains("modal")) {
             $(".modal").hide();
         }
     });
-    
+
     function verifyIp(ip) {
-        return /^(([1-9]?\d|1\d\d|2[0-4]\d|25[0-5])(\.(?!$)|(?=$))){4}$/.test(ip||"");
+        return /^(([1-9]?\d|1\d\d|2[0-4]\d|25[0-5])(\.(?!$)|(?=$))){4}$/.test(ip || "");
     }
-    
-       // 로컬 IP 숨김 기능
+
+    // 로컬 IP 숨김 기능
     $("#hide-local-ip").on("click", () => {
         const isChecked = $("#hide-local-ip").prop("checked");
-        
-        if(isChecked) {
+
+        if (isChecked) {
             $("#ip-logging-table tr").each((index, elem) => {
                 const text = $(elem).find("td:nth-child(1)").text();
-                if(text.indexOf("192") >= 0) {
+                if (text.indexOf("192") >= 0) {
                     $(elem).hide();
                 }
             })
@@ -120,34 +120,98 @@ Object.assign(window, {
             });
         }
     });
-       
+
     /**
-    * 멤버 검색 기능입니다.
-    */
+     * 멤버 검색 기능입니다.
+     */
     function searchMemberTable(keyword) {
         const items = $("#manage-whole-member-table tbody tr").filter((index, elem) => {
             // 특정 검색어가 없으면   	    		
             return $(elem).text().indexOf(keyword) === -1;
         });
-        
-        if(items.length == 0) {
+
+        if (items.length == 0) {
             $("#manage-whole-member-table tbody tr").show();
         } else {
             items.hide();
         }
     }
-       
-       // 특정 멤버를 검색합니다.
-    $("#search-specific-member").on("change", function() {
+
+    // 특정 멤버를 검색합니다.
+    $("#search-specific-member").on("change", function () {
         const target = $(this);
         const val = target.val() || "";
         searchMemberTable(val.trim());
     });
-       
+
     $("#search-specific-member-button").on("click", () => {
         const val = $("#search-specific-member").val();
         searchMemberTable(val.trim());
         return false;
     });
-        
+
+    $("#return-button").on("click", ev => {
+        location.href = "/index.jsp";
+        return true;
+    })
+
+    $("#uploads").find("input[type='checkbox']").on("click", (ev) => {
+        const len = $("#uploads").find("input[type='checkbox']").filter((index, elem) => {
+            return $(elem).prop("checked") === true;
+        }).length;
+
+        if (len > 0) {
+            $("#multiple-files-delete-button").removeClass("disabled");
+        } else {
+            $("#multiple-files-delete-button").addClass("disabled");
+        }
+
+        $("#selection-file-count").text(len);
+    });
+
+    $("#multiple-files-delete-button").on("click", ev => {
+        const form = document.createElement("form");
+        form.action = "/myadmin/multipleFileDelete.do";
+
+        /**
+         * @type {JQuery[]}
+         */
+        let items = [];
+
+        $("#uploads").find("input[type='checkbox']").each((index, elem) => {
+            if ($(elem).length > 0) {
+                items.push($(elem));
+            }
+        });
+
+        // 자식 체크 박스를 만듭니다.
+        items.forEach(elem => {
+
+            const childInput = document.createElement("input");
+            childInput.name = elem.prop("name");
+            childInput.value = elem.val();
+
+            form.appendChild(childInput);
+
+        });
+
+        // 활성화 되어있는 게 1개 이상이면 폼을 전송합니다.
+        const isPossibleToDelete = items.filter(i => i.prop("checked")).length > 0;
+
+        if(isPossibleToDelete) {
+            document.body.appendChild(form);
+            
+            form.onsubmit = function() {
+                setTimeout(function() {
+                    document.body.removeChild(form);
+                }, 20);
+                
+                return true;
+            }
+            
+            form.submit();
+        }
+
+    });
+
 })();

@@ -79,6 +79,24 @@
   		top: 0;
   	}
   	
+  	.container {
+  		position: relative;
+  	}
+  	
+  	.return-button {
+  		position: fixed;
+  		bottom: 5%;
+  		left: 5%;
+	    width: 60px;
+	    height: 60px;
+	    text-align: center;
+	    padding: 6px 0;
+	    font-size: 12px;
+	    line-height: 1.42;
+	    border-radius: 50%;
+	    color: #fff;  		
+  	}
+  	
   </style>
 </head>
 <body>
@@ -347,9 +365,11 @@
                     <p>업로드된 파일 관리</p>
                     <div class="panel panel-default">
                     서버 환경이 <em>리눅스</em>인 경우, 파일 보기를 지원하지 않습니다.
+                    <p>선택된 파일 갯수 <span id="selection-file-count">0</span>개입니다.
                     </div>                    
                     <table class="table">
                     <thead>
+                    	<th>선택</th>
                     	<th>파일명</th>
                     	<th>파일 크기</th>
                     	<th>게시물 번호</th>
@@ -366,6 +386,7 @@
 					%>
 						<tr>
 						<c:set var="filename" value="<%=path.getFileName() %>" />
+						<td><input type="checkbox" name="file" value="/uploads/${filename}"></td>
 						<td><%=path.getFileName()%></td>
 						<td><%= path.toFile().length() / 1024 %> KB</td>
 						
@@ -388,10 +409,19 @@
 						<td>
 							<p>${ isValid }</p>
 							<form action="/myadmin/openFileBrowser.do">
-								<input type="hidden" name="filename" value="/uploads/${filename}"> 
-								<input type="submit" class="btn ${btnName}" onclick="openImageView('/uploads/${filename}')" value="업로드 폴더 열기">
+								<input type="hidden" name="filename" value="/uploads/${filename}">
+								<%
+									String osType = System.getProperty("os.name");
+									if(osType == null) {
+										osType = "";
+									}
+									 boolean isWindows = osType.indexOf("Windows") >= 0; 
+								%> 
+								<c:if test="<%=isWindows %>" >
+									<input type="submit" class="btn ${btnName}" onclick="openImageView('/uploads/${filename}')" value="업로드 폴더 열기">
+								</c:if>
 							</form>
-							<button class="btn ${btnName}" onclick="openImageView('/uploads/${filename}')">파일 보기</button>
+							<button type="button" class="btn ${btnName}" onclick="openImageView('/uploads/${filename}')">파일 보기</button>
 						</td>
 						<td>
 							<form action="/myadmin/fileDelete.do">
@@ -407,10 +437,14 @@
                 	}
 					%>
 					</tbody>
+					<tfoot>
+						<button class="btn btn-default disabled" id="multiple-files-delete-button">삭제</button>
+					</tfoot>
 					</table>
                 </div>                               
             </div>
         </section>
+        <button class="return-button btn btn-info" id="return-button"><i class="fas fa-door-open" style="color: white;">나가기</i></button>
     </div>
     
     <!-- 회원 정보 수정 창  -->
