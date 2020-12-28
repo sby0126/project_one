@@ -2,6 +2,8 @@ package router;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,6 +27,15 @@ public class AdminRouter extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doHandle(request, response);
+	}
+	
+	public void deleteFile(String realFileName) {
+		// 파일이 존재하는가?
+		File file = new File(realFileName);
+		if(file.exists()) {
+			// 존재한다면 삭제 처리합니다.
+			file.delete();
+		}				
 	}
 	
 	protected void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -56,13 +67,19 @@ public class AdminRouter extends HttpServlet {
 				String realFileName = request.getServletContext().getRealPath(filename);
 				
 				// 파일이 존재하는가?
-				File file = new File(realFileName);
-				if(file.exists()) {
-					// 존재한다면 삭제 처리합니다.
-					file.delete();
-				}					
+				deleteFile(realFileName);				
 			} catch(Exception e) {
 				e.printStackTrace();
+			}
+			
+			response.sendRedirect("/admin");
+		} else if(path.equals("/multipleFileDelete.do")) {
+			
+			List<String> files = Arrays.asList(request.getParameterValues("file"));
+			
+			for(String s : files) {
+				String realFileName = request.getServletContext().getRealPath(s);
+				deleteFile(realFileName);		
 			}
 			
 			response.sendRedirect("/admin");
