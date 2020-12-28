@@ -32,6 +32,10 @@
 		<label for="action-src">액션 타겟: </label>
 		<input type="text" class="form-control" id="action-src" value="/myadmin/uploadProduct.do">
 	</div>
+	<div class="form-group">
+		<label for="sql">실행할 SQL 문: </label>
+		<input type="text" class="form-control" id="sql" value="">
+	</div>
 	<p>
 		<button id="upload" class="btn btn-default">DB에 업로드하기</button>
 		<button id="get-json" class="btn btn-default">JSON</button>	
