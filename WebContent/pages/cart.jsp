@@ -17,8 +17,6 @@
 	int amount = Integer.parseInt(request.getParameter("amount"));
 	int price = Integer.parseInt(request.getParameter("price"));
 	
-	Gson gson = new GsonBuilder().create();
-	
 	int perPrice = price / amount;
 	
 	List<ProductVO> list = ContentDAO.getInstance().getDetail(title, perPrice);

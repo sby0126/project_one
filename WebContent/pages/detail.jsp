@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="dao.ContentDAO, command.DetailInputCommand"%>
+<%@ page import="dao.ContentDAO, command.DetailInputCommand, vo.CartNPayVO"%>
+<%@ page import="com.google.gson.Gson, java.util.*" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,14 +48,17 @@
 		                        <li><span>가격</span><span id="detail-item-price">가격(데이터)</span></li>
 		                        <!-- 3. 색상 -->
 		                        <li><span>색상</span>
-		                            <div class="color_option"><button class="detail_button" value="1">블랙(데이터)</button><button
-		                                    class="detail_button" value="2">화이트(데이터)</button></div>
+		                            <div class="color_option">
+			                            <button data-type="color" data-value="B" class="detail_button" value="1">블랙(데이터)</button>
+			                            <button data-type="color" data-value="W" class="detail_button" value="2">화이트(데이터)</button>
+		                            </div>
 		                        </li>
 		                        <!-- 4. 사이즈 -->
 		                        <li><span>사이즈</span>
-		                            <div class="size_option"><button disabled="true" value="1"
-		                                    class="detail_button">FREE(데이터)</button><button disabled="true" value="2"
-		                                    class="detail_button">100(데이터)</button></div>
+		                            <div class="size_option">
+			                            <button data-type="size" data-value="M" disabled="true" value="1" class="detail_button">FREE(데이터)</button>
+			                            <button data-type="size" data-value="L" disabled="true" value="2" class="detail_button">100(데이터)</button>
+			                        </div>
 		                        </li>
 		                        <!-- 5. 색상버튼과 사이즈버튼클릭시 동적으로 li태그와 버튼생성 -->
 		                        <li>
@@ -220,16 +224,23 @@
             var colorNm = ""; //선택된 컬럼명
             var sizeNm = ""; //선택된 사이즈명
             var val = ""; //선택된 버튼의 value값
+            var NcolorNm = "";
+            var NsizeNm = "";
             //색상 버튼과 사이즈 버튼의 value값은 현재 앞에서부터 순서대로 1,2로 되어있다. 상품중복체크를 위해 사용되는변수
 
             $.each($(".infoArea > ul > li:nth-child(3) button"), function (i) {
                 if ($(this).hasClass("click_button")) {
                     colorNm = $(this).text();
                     val = $(this).val(); //선택된 컬러버튼(4)의 value 값
+                    
+                    NcolorNm = $(this).attr("data-value");
+                    console.log(NcolorNm);
                 }
             });
 
             sizeNm = $(this).text();
+            NsizeNm = $(this).attr("data-value");
+            console.log(NsizeNm);
             val = val + $(this).val(); //선택한 색상과 사이즈버튼의 values값 ex) 11 , 12,  21 , 22 ...
 
             var existYn = true; //이미 존재하는 상품인지 확인하기 위한 변수
@@ -249,14 +260,24 @@
                 //사이즈를 클릭시 선택한 색상과 사이즈 정보를 동적으로 생성
                 var price = $("#detail-item-price").text().replace(",", "");
                 console.log(price);
+//                 str = `
+//                 	<li>
+//                 		<span>${colorNm},${sizeNm} 1개</span>
+//                 		<button class='add_button' value='1' onclick=add($(this));> + </button>
+//                 		<button class='minus_button' value = '1' onclick=minus($(this));> - </button>
+//                 		<button value = ${val}  class='del_button' onclick=del($(this));> x </button>
+//                 	</li>
+//                 `;
                 var str = "<li><span>" + colorNm + "," + sizeNm + " " + "1개" + "</span> <button class='add_button' value='1' onclick=add($(this));> + </button><button class='minus_button' value = '1' onclick=minus($(this));> - </button><button value = " + val + "  class='del_button' onclick=del($(this));> x </button></li>";
                 $(".productlist_add").append(str);
-
+				$("#needVal").append("<input type='hidden' name='pdoption' id='pdoption' value='" + NcolorNm + "" + NsizeNm + "'>");
                 price = Number(price);
                 var curPrice = Number($(".allPrice").text());
                 /* var qty = Number($(".productlist_add li").length); */
+                
 
                 $(".allPrice").text(price + curPrice);
+                
             }
         }
 
@@ -336,7 +357,9 @@
                 var array = new Array();
                 array = str.split(" ");
                 console.log(array);
-
+				
+				
+				
                 /*
            var obj = new Object();
                
@@ -357,16 +380,17 @@
                 array.add(title);
                 array.add(price);
                 console.log(array);
-
+                
+                
             }
         }
 
-        processSubmit({
+        /* processSubmit({
         	title,
         	price,
         	amount,
         	productId,
-        }, "/contents/payments.do");
+        }, "/contents/payments.do"); */
         
     }
     
@@ -401,24 +425,36 @@
                 console.log(str);
 
                 var array = new Array();
-                array = str.split(" ");
+                array = str.split(" ").split();
                 console.log(array);
+                console.log(array[i]);
 
                 var title = $("#detail-item-title").text()
                 var price = $(".allPrice").text();
             	var amount = $(".add_button").attr("value");
             	var productId = new URLSearchParams(location.search).get("id");
 
-                array.add(title);
-                array.add(price);
-                console.log(array);
+            	
+            	//List list = new List();
+            	
+                list.add("title", title);
+                list.add("price", price/amount);
+                list.add("amount", amount);
+            	
+                var json_arr = {};
+                    json_arr["'product" + i + "'"] = list;
+
+                var json_string = JSON.stringify(json_arr);
                 
-                processSubmit({
+            	console.log(json_string);
+                
+                
+                /* processSubmit({
                 	title,
                 	price,
                 	amount,
                 	productId,
-                }, "/contents/cart.do");
+                }, "/contents/cart.do"); */
 
             }
         }

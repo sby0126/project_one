@@ -21,7 +21,7 @@ public class DetailInputCommand extends Command {
 				
 		
 		String title = request.getParameter("title");
-		int price = Integer.parseInt(request.getParameter("perPrice"));
+		int price = (Integer.parseInt(request.getParameter("price")) / Integer.parseInt(request.getParameter("amount")));
 		int productId = Integer.parseInt(request.getParameter("productId"));
 		int amount = Integer.parseInt(request.getParameter("amount"));
 		

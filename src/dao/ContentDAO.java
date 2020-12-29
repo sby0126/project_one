@@ -513,15 +513,15 @@ public class ContentDAO implements IDAO {
 			
 			
 			for(ProductVO list : p) {
-			query = "insert into cartNPay(id, title, price, amount, contentUrl, link) "
-				  + "values(?,?,?,?,?,?)";
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, id);
-			pstmt.setString(2, list.getTitle());
-			pstmt.setString(3, list.getPrice());
-			pstmt.setInt(4, amount);
-			pstmt.setString(5, list.getContenturl());
-			pstmt.setString(6, list.getLink());
+				query = "insert into cartNpay(id, title, price, amount, contentUrl, link) "
+					  + "values(?,?,?,?,?,?)";
+				pstmt = conn.prepareStatement(query);
+				pstmt.setString(1, id);
+				pstmt.setString(2, list.getTitle());
+				pstmt.setString(3, list.getPrice());
+				pstmt.setInt(4, amount);
+				pstmt.setString(5, list.getContenturl());
+				pstmt.setString(6, list.getLink());
 			}			
 			
 			if(pstmt.executeUpdate() > 0) {
