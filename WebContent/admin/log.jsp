@@ -21,9 +21,17 @@
 	            <p>포트 : <%= request.getRemotePort()%> </p>
 			</div>
 			<div class="col-md-6">
-				
+				<form>
+				<!-- 송신 메시지를 작성하는 텍스트 박스 -->
+				<input id="textMessage" type="text">
+				<!-- 메시지 송신을 하는 버튼 -->
+				<input onclick="sendMessage()" value="Send" type="button">
+				<!-- WebSocket 접속 종료하는 버튼 -->
+				<input onclick="disconnect()" value="Disconnect" type="button">
+				</form>	
 			</div>
 			<div class="col-md-6">
+			
 			</div>			
 		</section>
 	</div>

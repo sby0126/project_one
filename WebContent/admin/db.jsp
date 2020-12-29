@@ -34,7 +34,7 @@
 	</div>
 	<div class="form-group">
 		<label for="sql">실행할 SQL 문: </label>
-		<input type="text" class="form-control" id="sql" value="">
+		<input type="text" class="form-control" id="sql" value="insert into tblExtItem(id, title, price, stock, regdate) values(?, ?, ?, ?, ?)">
 	</div>
 	<p>
 		<button id="upload" class="btn btn-default">DB에 업로드하기</button>
@@ -105,24 +105,37 @@ $("#get-json").on("click", ev => {
 // 추가하기 버튼을 클릭하면 DB에 시트 내용을 삽입합니다.
 $("#upload").on("click", (ev) => {
 	
-	const raw = $("#spreadsheet").jexcel('getData');
+	const raw = $("#spreadsheet").jexcel('getJson');
 	raw.forEach(e => {
 		
 		const rs = e;
 		
-	    $.post($("#action-src").text(), {
-	    	id: rs[0],
-	    	title: rs[1],
-	    	price: rs[2],
-	    	stock: rs[3],
-	    	regdate: rs[4]
-	    }, function(result, status) {
-	    	if(status === "success") {
-	    		console.log(result);	
-	    	} else if(status === "error") {
-	    		// 오류 처리
-	    	}
-	    });
+		$.ajax({
+			url: $("#action-src").val(),
+			method: "POST",
+			data: {
+		    	sql: $("#sql").val(),
+		    	id: rs[0],
+		    	title: rs[1],
+		    	price: rs[2],
+		    	stock: rs[3],
+		    	regdate: rs[4]
+		    },
+		    success: function(result) {
+		    	if(result.status === "success") {
+		    		console.log(result);	
+		    		alert("DB에 상품이 입고되었습니다");
+		    	}
+		    },
+		    error: function(err) {
+		    	const code = err.status;
+		    	if(code == 401) {
+		    		alert("SQL 문이 잘못되었습니다")
+		    	} else {
+		    		alert("DB에 추가할 수 없었습니다 :" + err);
+		    	}
+		    }
+		});
 	});
 })
 

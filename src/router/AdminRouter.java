@@ -2,15 +2,22 @@ package router;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONObject;
+
+import utils.DBConnectionMgr;
 
 @WebServlet("/myadmin/*")
 public class AdminRouter extends HttpServlet {
@@ -54,6 +61,95 @@ public class AdminRouter extends HttpServlet {
 		
     	response.sendRedirect("/admin");	
 	}
+	public void deleteFileOnce(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String filename = request.getParameter("filename");
+		
+		try {
+			String realFileName = request.getServletContext().getRealPath(filename);
+			
+			// 파일이 존재하는가?
+			deleteFile(realFileName);				
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		response.sendRedirect("/admin");	
+	}
+	
+	public void deleteFileMultiple(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		List<String> files = Arrays.asList(request.getParameterValues("file"));
+		
+		for(String s : files) {
+			String realFileName = request.getServletContext().getRealPath(s);
+			deleteFile(realFileName);		
+		}
+		
+		response.sendRedirect("/admin");	
+	}
+	
+	public void uploadProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// 기본 매개변수를 가져옵니다.
+		String sql = request.getParameter("sql");
+		int id = Integer.parseInt(request.getParameter("id"));
+		String title = request.getParameter("title");
+		int price = Integer.parseInt(request.getParameter("price"));
+		int stock = Integer.parseInt(request.getParameter("stock"));
+		String regdate = request.getParameter("regdate");
+		
+		boolean isUpdated = false;
+		
+		// SQL 문이 없습니다.
+		if(sql == null) {
+			response.sendError(401);
+			return;
+		}
+		
+		// DAO와 서비스 없이 DB에 직접 연결합니다.
+		DBConnectionMgr pool = DBConnectionMgr.getInstance();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			// insert into tblExtItem(id, title, price, stock, regdate) values(?, ?, ?, ?, ?) 
+			pstmt.setInt(1, id);
+			pstmt.setString(2, title);
+			pstmt.setInt(3, price);
+			pstmt.setInt(4, stock);
+			pstmt.setString(5, regdate);
+			
+			if(pstmt.executeUpdate() > 0) {
+				isUpdated = true;
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+		if(!isUpdated) {
+			response.sendError(402);
+			return;
+		}
+		
+		JSONObject statusText = new JSONObject();
+		statusText.put("status", "success");
+		
+		
+		response.setContentType("application/json; charset=utf-8");
+		response.setCharacterEncoding("UTF-8");
+		
+		PrintWriter out = response.getWriter();
+		out.println(statusText.toJSONString());
+	}
 	
 	protected void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String reqeustURI = request.getRequestURI();
@@ -65,30 +161,11 @@ public class AdminRouter extends HttpServlet {
 			openExplorer(request, response);
 	    	
 		} else if(path.equals("/fileDelete.do")) { // 파일 삭제
-			String filename = request.getParameter("filename");
-			
-			try {
-				String realFileName = request.getServletContext().getRealPath(filename);
-				
-				// 파일이 존재하는가?
-				deleteFile(realFileName);				
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-			
-			response.sendRedirect("/admin");
+			deleteFileOnce(request, response);
 		} else if(path.equals("/multipleFileDelete.do")) { // 다중 파일 삭제
-			
-			List<String> files = Arrays.asList(request.getParameterValues("file"));
-			
-			for(String s : files) {
-				String realFileName = request.getServletContext().getRealPath(s);
-				deleteFile(realFileName);		
-			}
-			
-			response.sendRedirect("/admin");
+			deleteFileMultiple(request, response);
 		} else if(path.equals("/uploadProduct.do")) {
-			
+			uploadProduct(request, response);
 		}
 	}
 
