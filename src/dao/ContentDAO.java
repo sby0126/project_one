@@ -471,7 +471,7 @@ public class ContentDAO implements IDAO {
 		
 		try {
 			conn = pool.getConnection();
-			sql = "select b.id, b.title, b.price, a.imgUrl FROM tblImageHash a, tblproduct b"
+			sql = "select b.id, b.title, b.price, a.imgUrl, b.link FROM tblImageHash a, tblproduct b"
 				  + " where title = ? and price = ?"
 				  + " and a.imgUrl = b.contentUrl"
 				  + " group by contentUrl";
@@ -495,7 +495,7 @@ public class ContentDAO implements IDAO {
 		return list;
 	}
 	
-	public boolean insertDetail(String id, List<ProductVO> p) {
+	public boolean insertDetail(String id, List<ProductVO> p, int amount) {
 		
 		boolean success = false;
 		ResultSet rs = null;
@@ -513,12 +513,15 @@ public class ContentDAO implements IDAO {
 			
 			
 			for(ProductVO list : p) {
-			query = "insert into cartNPay(id, title, price, qty) "
-				  + "values(?,?,?,?)";
+			query = "insert into cartNPay(id, title, price, amount, contentUrl, link) "
+				  + "values(?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, id);
 			pstmt.setString(2, list.getTitle());
 			pstmt.setString(3, list.getPrice());
+			pstmt.setInt(4, amount);
+			pstmt.setString(5, list.getContenturl());
+			pstmt.setString(6, list.getLink());
 			}			
 			
 			if(pstmt.executeUpdate() > 0) {
