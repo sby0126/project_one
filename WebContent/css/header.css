@@ -636,6 +636,11 @@ header {
 	color: #0F0F0F;
 }
 
+.mobile-menu {
+    display: none;
+    justify-self: left;
+}
+
 @media only screen and (min-width: 320px) {
     .header-wrapper {
         justify-content: center;
@@ -652,6 +657,9 @@ header {
     .header-filter-box-footer-right {
         justify-content: space-between;
     }
+    .header-popup-container {
+        overflow: scroll;
+    }
 }
 
 @media only screen and (min-width: 480px) {
@@ -666,7 +674,10 @@ header {
     }
     .header-filter-box-footer-left, .header-filter-box-footer-center {
         display: flex;
-    }          
+    }
+    .header-popup-container {
+        overflow: scroll;
+    }
 }
 
 @media only screen and (max-width: 720px) {
@@ -688,6 +699,9 @@ header {
         font-size: 1.1em;
         color: #fff;
     }
+    .mobile-menu {
+        display: block;
+    }
     
 }
 
@@ -700,7 +714,7 @@ header {
     }
     .header-right {
         display: flex;
-    }
+    }    
 }
 
 

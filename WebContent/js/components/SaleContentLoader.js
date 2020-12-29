@@ -10,7 +10,7 @@ export class SaleContentLoader extends Component {
 
         this._currentCards = 0; // 시작 갯수
         this._fetchCards = 3; // 새로 가져올 카드 갯수
-        this._maxCards = 50; // 최대 카드 갯수
+        this._maxCards = 100; // 최대 카드 갯수
         this._interval = 800; // 스크롤 이벤트 실행 간격 (과다 실행 방지용)
 
         /**
