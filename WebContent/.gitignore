@@ -206,3 +206,6 @@ local.properties
 mail.properties
 settings.properties
 settings*.properties
+
+*.jks
+*.cer

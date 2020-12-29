@@ -125,6 +125,12 @@ img, a {
 						%>
 						<div class="panel panel-default">
 							<div class="panel-body">카카오와 연결된 계정입니다.</div>
+						</div>					
+						<% } else if( vo.getCtmtype().equals("페북") ) {
+							type = "readonly";
+						%>
+						<div class="panel panel-default">
+							<div class="panel-body">페이스북과 연결된 계정입니다.</div>
 						</div>
 						<% } %>						
 						<div class="form-group">

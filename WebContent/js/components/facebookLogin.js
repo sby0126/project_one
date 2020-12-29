@@ -3,7 +3,6 @@
  * @description 페이스북으로 로그인하기입니다.
  */
 (function() {
-
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '1607859732738975',

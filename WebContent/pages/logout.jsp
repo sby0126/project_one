@@ -17,6 +17,7 @@
             const loginView = document.querySelector(".floating-login-view-wrapper");
             loginView.style.left = "0";
         });
+         
     </script>
     <style>
         

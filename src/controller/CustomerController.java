@@ -92,6 +92,9 @@ public class CustomerController extends HttpServlet {
 			case "/kakaoLogin.do": // 카카오 로그인
 				command = new SocialLoginCommand("카카오");
 				break;
+			case "/facebookLogin.do":
+				command = new SocialLoginCommand("페북");
+				break;
 			}
 			
 			result = command.execute(request, response);

@@ -1,6 +1,7 @@
-FB.getLoginStatus(function(response) {
+
+  FB.getLoginStatus(function(response) {
     statusChangeCallback(response);
-});
+  });
 
 /**
  * 페이스북으로 로그인하기
@@ -58,6 +59,42 @@ function statusChangeCallback(response) {
         const {accessToken, expiresIn, signedRequest, userID} = authResponse;
 
         console.log(authResponse);
+
+        FB.api('/me?fields=id,name,email', function(response) {
+            var fb_data = jQuery.parseJSON(JSON.stringify(response));
+            var data = "<br/>fb_id : "+fb_data.id;
+            data += "<br/>email : "+fb_data.email;
+            data += "<br/>name : "+fb_data.name;
+
+            let email = fb_data.email;
+            let emails = email.split("@");
+            
+            const form = document.createElement("form");
+            form.action = "/members/facebookLogin.do";
+            form.method = "POST";
+
+            const id = fb_data.id.substr(0, 10);
+            $(`
+                <input type="hidden" name="id" value="${id}">
+                <input type="hidden" name="pw" value="${id}">
+                <input type="hidden" name="name" value="${fb_data.name}">
+                <input type="hidden" name="address1" value="">
+                <input type="hidden" name="address2" value="">
+                <input type="hidden" name="tel" value="">
+                <input type="hidden" name="zipcode" value="">
+                <input type="hidden" name="email1" value="${emails[0]}">
+                <input type="hidden" name="email2" value="${emails[1]}">
+                <input type="hidden" name="joinDate" value="">
+            `).appendTo($(form))
+
+            $(form).appendTo("body");
+            form.submit();
+
+            form.remove();
+        });
+
+        
+
 
     }
 

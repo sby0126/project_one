@@ -32,6 +32,8 @@ public class SocialLoginCommand extends Command {
 		
 		CustomerDAO customerDAO = CustomerDAO.getInstance();
 		
+		response.setCharacterEncoding("UTF-8");
+		
 		// 회원 가입 폼에서 전달 받은 매개변수를 가져옵니다.
 		String id = request.getParameter("id");
 		String password = request.getParameter("pw");
