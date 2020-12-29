@@ -97,9 +97,35 @@ export class FilterBoxButtons extends Component {
                     // 아예 새로 고침이므로 CSS를 지울 필요가 없음.
                     location.search = param.toString();
                 } else {
-                    // 로그인 창을 켭니다.
-                    if(this._index > 0) {
-                        $(".header-right-login-button").trigger("click");
+
+                    /**
+                     * ! sale 페이지일 때의 처리입니다.
+                     */
+
+                    const ENUM = {
+                        ALL: 0,
+                        MYSHOP: 1,
+                        INTEREST: 2,
+                    };
+                    
+                    const type = this._index;
+
+                    switch(type) {
+                        case ENUM.ALL:
+                            $(".card-container > .card").show();                            
+                            break;
+                        case ENUM.MYSHOP:
+                            $(".card-container > .card").show().filter((index, elem) => {
+                                return !$(elem).find("button").hasClass("isMyShop")
+                            }).hide();
+
+                            break;                           
+                        case ENUM.INTEREST:
+                            $(".card-container > .card").show().filter((index, elem) => {
+                                return !$(elem).find("button").hasClass("active")
+                            }).hide();
+
+                            return false;
                     }
                 }
 

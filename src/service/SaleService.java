@@ -71,6 +71,21 @@ public class SaleService extends ContentService {
 			newContentData.put("link", vo.getLink());
 			newContentData.put("id", vo.getId());
 			
+			if(customerId != null) {
+				MyShopService service = new MyShopService();
+				List<Integer> iList = service.getIdList(customerId);
+				
+				if(iList.contains(vo.getId())) {
+					newContentData.put("isMyShop", true);
+				} else {
+					newContentData.put("isMyShop", false);
+				}
+				
+				newContentData.put("id", vo.getId());	
+			} else {
+				newContentData.put("isMyShop", false);
+			}
+			
 			updateMyShop(newContentData, vo.getId(), customerId);
 			
 			contentData.add(newContentData);

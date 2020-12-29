@@ -144,7 +144,7 @@ public class ContentDAO implements IDAO {
 					+ (category != null ? " AND texts LIKE ?" : "")
 					+ (ages != null ? " AND texts LIKE ?" : "")
 					+ " group by contentUrl"
-					+ " limit 40"
+					+ " limit 150"
 					);
 			pstmt.setString(1, pageType);
 			pstmt.setString(2, genderType);

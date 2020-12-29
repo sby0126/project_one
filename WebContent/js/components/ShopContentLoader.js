@@ -129,6 +129,9 @@ export class ShopContentLoader extends Component {
                 if(filename.active) {
                     active = "active";
                 }
+                if(filename.isMyShop) {
+                    active += " myShop";
+                }
 
                 $(myCard).html(`
                     <a href="${filename.link}" target='_blank'>

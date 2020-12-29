@@ -55,7 +55,12 @@ export class DataLoader extends Component {
             if(pageType === 'item' && this.keyword) {
                 xhr.open("GET", `/contents/${pageType}.do?pageType=${pageType}&shopType=${this.shopType}&gndr=${this.gndr}&category=${this.category}&ages=${this.ages}&keyword=${this.keyword}`);
             } else {
-                xhr.open("GET", `/contents/${pageType}.do?pageType=${pageType}&shopType=${this.shopType}&gndr=${this.gndr}&category=${this.category}&ages=${this.ages}`);
+                if(pageType !== "sale") {
+                    xhr.open("GET", `/contents/${pageType}.do?pageType=${pageType}&shopType=${this.shopType}&gndr=${this.gndr}&category=${this.category}&ages=${this.ages}`);
+                } else {
+                    xhr.open("GET", `/contents/${pageType}.do?pageType=${pageType}&shopType=${this.shopType}&gndr=${this.gndr}`);
+                }
+                
             }
             
             xhr.onload = () => {    
