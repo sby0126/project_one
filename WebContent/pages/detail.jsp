@@ -10,17 +10,19 @@
     <link rel="stylesheet" type="text/css" href="/css/detail.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <div id="fb-root"></div>
-	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v9.0" nonce="N37Q5mSE"></script>
 </head>
 
 <body>
+
+	<div id="fb-root"></div>
+	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v9.0&appId=1607859732738975&autoLogAppEvents=1" nonce="61MSR8tI"></script>
+
     <jsp:include page="/header.jsp">
        <jsp:param value="true" name="isHide"/>
     </jsp:include>
 
-    <div class="container">
-    
+
+    <div class="container">   
         <!-- 본문의 시작 -->
         <section>
             <!-- 본문이 들어가는 래퍼 -->
@@ -95,7 +97,7 @@
 		                </div>
 		                <!-- 페이스북으로 댓글 달기 -->
 		                <div class="facebook-comments" style="display:flex; justify-contents: center;">
-		                	<div class="fb-comments" data-href="http://localhost:9988/" data-width="1300" data-numposts="10"></div>
+		                	<div class="fb-comments" data-href="http://localhost:9988/pages/detail.jsp" data-width="1200" data-numposts="5"></div>
 		                </div>
 		                
 		                <!-- 상품결제정보 -->
