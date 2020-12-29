@@ -139,6 +139,4 @@ $("#upload").on("click", (ev) => {
 	});
 })
 
-<!-- </script> -->
-<!-- </body> -->
-<!-- </html> -->
+</script> 

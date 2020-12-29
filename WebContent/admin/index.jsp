@@ -120,6 +120,7 @@
 	                    <li><a href="#log">접속 로그</a></li>
 	                    <li><a href="#uploads">파일 관리</a></li>
 	                    <li><a href="#db-editor">상품 입고 시스템</a></li>
+	                    <li><a href="#product">상품 진열 시스템</a></li>
 	                  </ul>
                   </nav>
             </div>
@@ -445,6 +446,7 @@
 					</table>
                 </div>                               
 	            <jsp:include page="./db.jsp"></jsp:include>
+	            <jsp:include page="./product.jsp"></jsp:include>
             </div>
         </section>
         <button class="return-button btn btn-info" id="return-button"><i class="fas fa-door-open" style="color: white;">나가기</i></button>

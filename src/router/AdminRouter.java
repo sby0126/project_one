@@ -151,6 +151,81 @@ public class AdminRouter extends HttpServlet {
 		out.println(statusText.toJSONString());
 	}
 	
+	public void uploadItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// 기본 매개변수를 가져옵니다.
+		String sql = request.getParameter("sql");
+		int id = Integer.parseInt(request.getParameter("id"));
+		String pageType = request.getParameter("pageType");
+		String genderType = request.getParameter("genderType");
+		String shopType = request.getParameter("shopType");
+		String shopName = request.getParameter("shopName");
+		String texts = request.getParameter("texts");
+		String contentUrl = request.getParameter("contentUrl");
+		String title = request.getParameter("title");
+		String price = request.getParameter("price");
+		String term = request.getParameter("term");
+		String link = request.getParameter("link");
+		
+		boolean isUpdated = false;
+		
+		// SQL 문이 없습니다.
+		if(sql == null) {
+			response.sendError(401);
+			return;
+		}
+		
+		// DAO와 서비스 없이 DB에 직접 연결합니다.
+		DBConnectionMgr pool = DBConnectionMgr.getInstance();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			// insert into tblproduct(pageType, genderType, shopType, shopName, texts, contentUrl, title, price, term, link) values(?, ?, ?, ?, ?, ?, ?, ?,?,?)
+			pstmt.setString(1, pageType);
+			pstmt.setString(2, genderType);
+			pstmt.setString(3, shopType);
+			pstmt.setString(4, shopName);
+			pstmt.setString(5, texts);
+			pstmt.setString(6, contentUrl);
+			pstmt.setString(7, title);
+			pstmt.setString(8, price);
+			pstmt.setString(9, term);
+			pstmt.setString(10, link);
+			
+			
+			if(pstmt.executeUpdate() > 0) {
+				isUpdated = true;
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+		if(!isUpdated) {
+			response.sendError(402);
+			return;
+		}
+		
+		JSONObject statusText = new JSONObject();
+		statusText.put("status", "success");
+		
+		
+		response.setContentType("application/json; charset=utf-8");
+		response.setCharacterEncoding("UTF-8");
+		
+		PrintWriter out = response.getWriter();
+		out.println(statusText.toJSONString());
+	}
+	
 	protected void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String reqeustURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
@@ -166,7 +241,10 @@ public class AdminRouter extends HttpServlet {
 			deleteFileMultiple(request, response);
 		} else if(path.equals("/uploadProduct.do")) {
 			uploadProduct(request, response);
+		} else if(path.equals("/uploadItem.do")) {
+			uploadItem(request, response);
 		}
+		
 	}
 
 }
