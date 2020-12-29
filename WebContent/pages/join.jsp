@@ -6,6 +6,7 @@
 	response.setDateHeader("Expires",0); 
 	if (request.getProtocol().equals("HTTP/1.1"))
 	        response.setHeader("Cache-Control", "no-cache");
+
 	%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -29,6 +30,7 @@
 	</script>
 </head>
 <body>
+<% request.setCharacterEncoding("UTF-8"); %>
 <!-- 컨테이너의 시작 -->
 <div class="container">
     <jsp:include page="/header.jsp">
@@ -46,7 +48,7 @@
                     <h2 class="title">회원가입</h2>
                     <span>회원정보를 입력해주세요.</span>
                     <!-- <hr class="line_top"> -->
-                    <form id="join_form" name="user_form" method="post" action="/members/signUp.do">
+                    <form id="join_form" name="user_form" method="post" action="/members/signUp.do" accept-charset="utf-8">
                         <ul class="form_list">
                             <li>
                                 <!-- 아이디 --> 
@@ -167,9 +169,6 @@
                         		}
                         	
                         	}
-                        	
-                        	
-                        	
                         	
                         	
                         

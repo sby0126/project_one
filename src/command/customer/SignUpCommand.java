@@ -21,6 +21,8 @@ public class SignUpCommand extends Command {
 			throws ServletException, IOException {
 		result.start(request, response);
 		
+		request.setCharacterEncoding("UTF-8");
+		
 		CustomerDAO customerDAO = CustomerDAO.getInstance();
 		
 		// 회원 가입 폼에서 전달 받은 매개변수를 가져옵니다.
