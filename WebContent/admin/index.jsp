@@ -119,7 +119,7 @@
 	<!--                     <li><a href="#all-post">상품</a></li> -->
 	                    <li><a href="#log">접속 로그</a></li>
 	                    <li><a href="#uploads">파일 관리</a></li>
-	                    <li><a href="#db-editor">SQL 매니저</a></li>
+	                    <li><a href="#db-editor">상품 입고 시스템</a></li>
 	                  </ul>
                   </nav>
             </div>

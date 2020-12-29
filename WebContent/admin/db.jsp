@@ -17,9 +17,9 @@
 <!-- 	</nav>		 -->
 <!-- </div> -->
 <div id="db-editor" class="jumbotron content">
-	<p>SQL 매니저(상품 재고 관리)</p>
+	<p>상품 입고 시스템</p>
 	<div class="alert alert-info">
-	  <strong>정보!</strong> SQL 매니저는 신규 데이터 삽입만 가능합니다.
+	  <strong>정보!</strong> 상품 입고 시스템은 신규 데이터 삽입만 가능합니다.
 	</div>
 	<div id="spreadsheet"></div>
 	<p>
