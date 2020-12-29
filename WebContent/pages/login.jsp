@@ -31,11 +31,11 @@
 				    width="185"
 				  />
 				</a>        
-				<div id="fb-root"></div>
-				<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v9.0&appId=1607859732738975&autoLogAppEvents=1" nonce="nUSXN8Z4"></script>
-				<div class="fb-login-button" data-width="" data-size="medium" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
+<!-- 				<div id="fb-root"></div> -->
+<!-- 				<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v9.0&appId=1607859732738975&autoLogAppEvents=1" nonce="nUSXN8Z4"></script> -->
+<!-- 				<div class="fb-login-button" data-width="" data-size="medium" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div> -->
 				<script src="/js/components/kakaoLogin.js"></script>
-				<script src="/js/components/facebookLogin.js"></script>
+<!-- 				<script src="/js/components/facebookLogin.js"></script> -->
             </form>
         </div>
     </div>

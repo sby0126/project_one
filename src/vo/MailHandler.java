@@ -1,5 +1,11 @@
 package vo;
 
+/**
+ * 메일 전송을 처리하는 클래스입니다.
+ * 
+ * @author 어진석
+ *
+ */
 public class MailHandler {
 	
 	private String to;

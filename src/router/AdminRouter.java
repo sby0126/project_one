@@ -38,29 +38,33 @@ public class AdminRouter extends HttpServlet {
 		}				
 	}
 	
+	public void openExplorer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String platform = System.getProperty("os.name");		
+		String filename = request.getParameter("filename");
+		
+		// 실행 환경이 윈도우즈 인가?
+		if(platform.indexOf("Windows") >= 0) {
+	    	try {
+				Runtime.getRuntime().exec("explorer.exe /select," + filename);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}				
+		}
+		
+    	response.sendRedirect("/admin");	
+	}
+	
 	protected void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String reqeustURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String command = reqeustURI.substring(contextPath.length());
 		String path = request.getPathInfo();
 
-		if (path.equals("/openFileBrowser.do")) {
-			String platform = System.getProperty("os.name");		
-			String filename = request.getParameter("filename");
-			
-			// 실행 환경이 윈도우즈 인가?
-			if(platform.indexOf("Windows") >= 0) {
-		    	try {
-					Runtime.getRuntime().exec("explorer.exe /select," + filename);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}				
-			}
-			
-	    	response.sendRedirect("/admin");
+		if (path.equals("/openFileBrowser.do")) { // 폴더 열기 (Windows 전용)
+			openExplorer(request, response);
 	    	
-		} else if(path.equals("/fileDelete.do")) {
+		} else if(path.equals("/fileDelete.do")) { // 파일 삭제
 			String filename = request.getParameter("filename");
 			
 			try {
@@ -73,7 +77,7 @@ public class AdminRouter extends HttpServlet {
 			}
 			
 			response.sendRedirect("/admin");
-		} else if(path.equals("/multipleFileDelete.do")) {
+		} else if(path.equals("/multipleFileDelete.do")) { // 다중 파일 삭제
 			
 			List<String> files = Arrays.asList(request.getParameterValues("file"));
 			
@@ -83,6 +87,8 @@ public class AdminRouter extends HttpServlet {
 			}
 			
 			response.sendRedirect("/admin");
+		} else if(path.equals("/uploadProduct.do")) {
+			
 		}
 	}
 

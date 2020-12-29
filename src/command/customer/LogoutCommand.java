@@ -11,6 +11,10 @@ import action.ActionResult;
 import command.Command;
 import utils.AdminUtil;
 
+/**
+ * 로그 아웃 기능입니다.
+ *
+ */
 public class LogoutCommand extends Command {
 	
 	@Override

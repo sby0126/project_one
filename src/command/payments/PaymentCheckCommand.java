@@ -14,6 +14,10 @@ import action.ActionResult;
 import command.Command;
 import service.payments.PaymentService;
 
+/**
+ * 카카오 페이를 이용한 결제 처리 기능입니다.
+ * 우선 액세스 토큰을 획득하고 구매 정보를 가져오게 됩니다.
+ */
 public class PaymentCheckCommand extends Command {
 	@SuppressWarnings("unchecked")
 	@Override
@@ -39,7 +43,7 @@ public class PaymentCheckCommand extends Command {
 			
 			// 액세스 토큰을 생성합니다.
 			String access_token = service.getAccessToken();
-			System.out.println(access_token + "(액세스 토큰)을 획득하였습니다.");
+//			System.out.println(access_token + "(액세스 토큰)을 획득하였습니다.");
 			
 			// 획득한 액세스 토큰으로 카카오 페이 결제를 시도합니다.
 			boolean isSuccess = service.orderKakaoPay(imp_uid, id, productId, paid_amount, access_token);

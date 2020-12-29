@@ -13,6 +13,9 @@ import org.json.simple.JSONObject;
 import action.ActionResult;
 import service.MyShopService;
 
+/**
+ * 마이샵을 추가합니다.
+ */
 public class AddMyShopCommand extends Command {
 	
 	@SuppressWarnings("unchecked")

@@ -13,6 +13,9 @@ import dao.ContentDAO;
 import service.payments.GetCustomerService;
 import vo.ProductVO;
 
+/**
+ * 결제 처리를 요청합니다.
+ */
 public class PaymentRequestCommand extends Command {
 	
 	@Override

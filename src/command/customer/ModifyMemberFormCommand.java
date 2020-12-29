@@ -30,7 +30,6 @@ public class ModifyMemberFormCommand extends Command {
 		
 		if(sid.equals(id) || sid.equals("admin")) {
 			CustomerVO member = CustomerDAO.getInstance().getMember(id);
-			System.out.println(member.getId());
 			request.setAttribute("member", member);
 			
 			result.forward("/pages/modifyMemberForm.jsp");			

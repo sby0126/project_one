@@ -12,6 +12,9 @@ import command.Command;
 import dao.CustomerDAO;
 import utils.AdminUtil;
 
+/**
+ * 일반 로그인을 구현합니다.
+ */
 public class LoginCommand extends Command {
 	@Override
 	public ActionResult execute(HttpServletRequest request, HttpServletResponse response)

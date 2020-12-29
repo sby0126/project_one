@@ -11,6 +11,10 @@ import action.ActionResult;
 import command.Command;
 import dao.CustomerDAO;
 
+/**
+ * 자진 탈퇴 기능입니다.
+ *
+ */
 public class SecessionMemberCommand extends Command {
 	@Override
 	public ActionResult execute(HttpServletRequest request, HttpServletResponse response)

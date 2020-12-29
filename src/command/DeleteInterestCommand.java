@@ -13,6 +13,9 @@ import org.json.simple.JSONObject;
 import action.ActionResult;
 import service.InterestService;
 
+/**
+ * 관심 상품을 삭제합니다.
+ */
 public class DeleteInterestCommand extends Command {
 	
 	

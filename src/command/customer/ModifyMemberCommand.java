@@ -12,6 +12,12 @@ import command.Command;
 import dao.CustomerDAO;
 import vo.CustomerVO;
 
+/**
+ * 회원 정보를 수정하는 기능입니다.
+ * 
+ * 관리자도 다른 사람의 회원 정보를 수정할 수 있습니다.
+ *
+ */
 public class ModifyMemberCommand extends Command {
 	@Override
 	public ActionResult execute(HttpServletRequest request, HttpServletResponse response)

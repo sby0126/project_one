@@ -13,6 +13,9 @@ import org.json.simple.JSONObject;
 import action.ActionResult;
 import service.MyShopService;
 
+/**
+ * 마이샵을 삭제합니다.
+ */
 public class DeleteMyShopCommand extends Command {
 	@Override
 	public ActionResult execute(HttpServletRequest request, HttpServletResponse response)

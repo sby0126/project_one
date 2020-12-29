@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import action.ActionResult;
 import command.Command;
 
+/**
+ * 결제에 성공했을 때 메시지를 띄우는 기능입니다.
+ */
 public class PaymentSuccessCommand extends Command {
 	
 	@Override

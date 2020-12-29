@@ -21,13 +21,13 @@ public class FindIdCommand extends Command {
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		
-		System.out.println(name);
-		System.out.println(email);
+//		System.out.println(name);
+//		System.out.println(email);
 		
 		FindIdService service = new FindIdService();
 		String id = service.getId(name, email);
 		
-		System.out.println("찾아낸 ID는 " + id + "입니다");
+//		System.out.println("찾아낸 ID는 " + id + "입니다");
 		
 		if(id != null) {
 			

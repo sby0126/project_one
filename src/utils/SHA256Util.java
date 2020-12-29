@@ -5,6 +5,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
 /***
+ * 비밀번호를 단방향 암호화로 암호화 처리하는 기능입니다.
+ * 
  * 256 bits (64자리)
  * 
  * @link 

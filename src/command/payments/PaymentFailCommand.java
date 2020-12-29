@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import action.ActionResult;
 import command.Command;
 
+/**
+ * 결제 실패 처리입니다.
+ */
 public class PaymentFailCommand extends Command {
 	
 	@Override

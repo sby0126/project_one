@@ -15,6 +15,10 @@ import command.Command;
 import dao.CustomerDAO;
 import manager.DataManager;
 
+/**
+ * 강제 탈퇴 기능입니다.
+ *
+ */
 public class FoclySecessionMemberCommand extends Command {
 	@SuppressWarnings("unchecked")
 	@Override

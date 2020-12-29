@@ -11,6 +11,12 @@ import command.Command;
 import dao.CustomerDAO;
 import vo.CustomerVO;
 
+/**
+ * 카카오 및 네이버 로그인을 처리합니다.
+ * 
+ * ! 페이스북 로그인은 https 환경 도입 문제로 동작하지 않습니다.
+ *
+ */
 public class SocialLoginCommand extends Command {
 	
 	private String socialType;

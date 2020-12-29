@@ -15,6 +15,9 @@ import action.ActionResult;
 import service.BestItemListService;
 import vo.SearchVO;
 
+/**
+ * 인기 검색어 목록을 반환합니다.
+ */
 public class BestItemListCommand extends Command {
 	@Override
 	public ActionResult execute(HttpServletRequest request, HttpServletResponse response)

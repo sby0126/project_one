@@ -14,6 +14,9 @@ import service.ItemService;
 import service.SaleService;
 import service.ShopService;
 
+/**
+ * 모든 컨텐츠를 JSON으로 내보냅니다.
+ */
 public class AllContentsCommand extends Command {
 
 	@Override

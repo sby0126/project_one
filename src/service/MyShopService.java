@@ -124,7 +124,7 @@ public class MyShopService {
 		
 		// 마이샵 목록에서 샵 ID를 추출합니다.
 		for(MyShopVO vo : myShopList) {
-			System.out.println(vo.getShopId());
+//			System.out.println(vo.getShopId());
 			iList.add(vo.getShopId());
 		}
 		

@@ -14,6 +14,9 @@ import org.json.simple.JSONObject;
 import action.ActionResult;
 import service.ContentsSearchService;
 
+/**
+ * 아이템 검색 기능을 제공합니다.
+ */
 public class ContentsSearchCommand extends Command {
 	@Override
 	public ActionResult execute(HttpServletRequest request, HttpServletResponse response)

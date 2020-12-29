@@ -11,6 +11,10 @@ import command.Command;
 import dao.CustomerDAO;
 import vo.CustomerVO;
 
+/**
+ * 회원 가입을 처리합니다.
+ *
+ */
 public class SignUpCommand extends Command {
 	@Override
 	public ActionResult execute(HttpServletRequest request, HttpServletResponse response)

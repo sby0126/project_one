@@ -18,126 +18,134 @@
     </jsp:include>
 
     <div class="container">
-
-        <div class="item_content" id="item_content">
-            <!-- 상품이미지, 상품정보 -->
-            <div class="productArea">
-                <!-- 상품이미지 -->
-                <div class="imgArea">
-                    <img src="https://dummyimage.com/480x500/000/fff">
-
-                </div>
-                <!-- 상품구매정보 -->
-                <div class="infoArea">
-                    <ul>
-                        <!-- 1. 상품명 -->
-                        <li>
-                            <h2 id="detail-item-title">후드후드후드(데이터)</h2>
-                        </li>
-                        <!-- 2. 가격 -->
-                        <li><span>가격</span><span id="detail-item-price">가격(데이터)</span></li>
-                        <!-- 3. 색상 -->
-                        <li><span>색상</span>
-                            <div class="color_option"><button class="detail_button" value="1">블랙(데이터)</button><button
-                                    class="detail_button" value="2">화이트(데이터)</button></div>
-                        </li>
-                        <!-- 4. 사이즈 -->
-                        <li><span>사이즈</span>
-                            <div class="size_option"><button disabled="true" value="1"
-                                    class="detail_button">FREE(데이터)</button><button disabled="true" value="2"
-                                    class="detail_button">100(데이터)</button></div>
-                        </li>
-                        <!-- 5. 색상버튼과 사이즈버튼클릭시 동적으로 li태그와 버튼생성 -->
-                        <li>
-                            <ul class="productlist_add">
-                                <!-- <li><span>상품 색상과 사이즈를 선택해주세요 (최소주문1개이상)</span></li>
-                                    <li><span>상품 색상과 사이즈를 선택해주세요 (최소주문1개이상)</span></li>
-                                    <li><span>상품 색상과 사이즈를 선택해주세요 (최소주문1개이상)</span></li>
-                                    <li><span>상품 색상과 사이즈를 선택해주세요 (최소주문1개이상)</span></li>
-                                    <li><span>상품 색상과 사이즈를 선택해주세요 (최소주문1개이상)</span></li> -->
-                 
-                                </ul>
-                            </li>
-                            <!-- 6. 총상품금액 -->
-                            <li><span>총상품금액</span><span class="allPrice">종합가격(데이터)</span></li>
-                            <!-- 7. 구매하기.장바구니 버튼 -->
-                            <li>
-                               <div>
-                                  <button class="detail_button" type="button" onClick="javascript:pay();">구매하기</button>
-                                  <button class="detail_button" type="button" onClick="javascript:cart();">장바구니</button>
-                               </div>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                </div>
-
+    
+        <!-- 본문의 시작 -->
+        <section>
+            <!-- 본문이 들어가는 래퍼 -->
+            <div class="contents-wrapper">  
+		
+		        <div class="item_content" id="item_content">
+		            <!-- 상품이미지, 상품정보 -->
+		            <div class="productArea">
+		                <!-- 상품이미지 -->
+		                <div class="imgArea">
+		                    <img src="https://dummyimage.com/480x500/000/fff">
+		
+		                </div>
+		                <!-- 상품구매정보 -->
+		                <div class="infoArea">
+		                    <ul>
+		                        <!-- 1. 상품명 -->
+		                        <li>
+		                            <h2 id="detail-item-title">후드후드후드(데이터)</h2>
+		                        </li>
+		                        <!-- 2. 가격 -->
+		                        <li><span>가격</span><span id="detail-item-price">가격(데이터)</span></li>
+		                        <!-- 3. 색상 -->
+		                        <li><span>색상</span>
+		                            <div class="color_option"><button class="detail_button" value="1">블랙(데이터)</button><button
+		                                    class="detail_button" value="2">화이트(데이터)</button></div>
+		                        </li>
+		                        <!-- 4. 사이즈 -->
+		                        <li><span>사이즈</span>
+		                            <div class="size_option"><button disabled="true" value="1"
+		                                    class="detail_button">FREE(데이터)</button><button disabled="true" value="2"
+		                                    class="detail_button">100(데이터)</button></div>
+		                        </li>
+		                        <!-- 5. 색상버튼과 사이즈버튼클릭시 동적으로 li태그와 버튼생성 -->
+		                        <li>
+		                            <ul class="productlist_add">
+		                                <!-- <li><span>상품 색상과 사이즈를 선택해주세요 (최소주문1개이상)</span></li>
+		                                    <li><span>상품 색상과 사이즈를 선택해주세요 (최소주문1개이상)</span></li>
+		                                    <li><span>상품 색상과 사이즈를 선택해주세요 (최소주문1개이상)</span></li>
+		                                    <li><span>상품 색상과 사이즈를 선택해주세요 (최소주문1개이상)</span></li>
+		                                    <li><span>상품 색상과 사이즈를 선택해주세요 (최소주문1개이상)</span></li> -->
+		                 
+		                                </ul>
+		                            </li>
+		                            <!-- 6. 총상품금액 -->
+		                            <li><span>총상품금액</span><span class="allPrice">종합가격(데이터)</span></li>
+		                            <!-- 7. 구매하기.장바구니 버튼 -->
+		                            <li>
+		                               <div>
+		                                  <button class="detail_button" type="button" onClick="javascript:pay();">구매하기</button>
+		                                  <button class="detail_button" type="button" onClick="javascript:cart();">장바구니</button>
+		                               </div>
+		                            </li>
+		                        </ul>
+		                    </div>
+		                    
+		                </div>
+		
+		            </div>
+		       
+		            <div class="productArea2">
+		                <!-- 중간 상품상세설명, 상품결제정보 버튼 -->
+		                <div class="productArea2_button">
+		                    <ul class="productArea2_buttonList">
+		                        <li><a href="#productArea2_detailImg">상품상세설명</a></li>
+		                        <li><a href="#productPayInfo">상품결제정보</a></li>
+		                    </ul>
+		                </div>
+		                <!-- 상품상세설명 -->
+		                <div class="productArea2_detailImg" id="productArea2_detailImg">
+		                    <img src="../images/img1info.jpg">
+		                </div>
+		                <!-- 상품결제정보 -->
+		                <div class="productPayInfo" id="productPayInfo">
+		                    <h3>교환/반품</h3>
+		                    <div>
+		                        <h4>교환 및 환불이 가능한 경우</h4>
+		                        <span>상품을 공급 받으신 날로부터 7일이내 단, 가전제품의
+		                            경우 포장을 개봉하였거나 포장이 훼손되어 상품가치가 상실된 경우에는 교환/반품이 불가능합니다.
+		                        </span>
+		                        <h4>교환 및 반품이 불가능한 경우</h4>
+		                        <span>고객님의 책임 있는 사유로 상품등이 멸실 또는 훼손된 경우. 단,상품의 내용을 확인하기 위하여
+		                            포장 등을 훼손한 경우는 제외
+		                        </span>
+		                    </div>
+		                    <div>
+		                        <h3>결제안내</h3>
+		                        <span>고객결제의 경우 안전을 위해 카드사에서 확인전화를 드릴 수도 있습니다. 확인과정에서 도난 카드의 사용이나 타인 명의의 주문등 정상적인 주문이
+		                            아니라고 판단될 경우 임의로 주문을 보류 또는 취소할 수 있습니다.
+		                        </span>
+		                    </div>
+		                    <div>
+		                        <h3>배송정보</h3>
+		                        <span>배송 방법: 택배<br>
+		                            배송 지역: 전국지역<br>
+		                            배송 비용: 2,500원<br>
+		                            배송 기간: 3일 ~ 7일<br>
+		                            배송 안내 : 산간벽지나 도서지방은 별도의 추가금액을 지불하셔야 하는 경우가 있습니다.
+		                        </span>
+		                    </div>
+		
+		                </div>
+		                <!-- 오른쪽하단 top.bottom 버튼 -->
+		                <div class="item_top_bottom">
+		                    <a href="#item_content" id="item_top"><span class="item_top_button">top</span></a>
+		                    <a href="#productPayInfo" id="item_bottom"><span class="item_bottom_button">bottom</span></a>
+		                </div>
+		                <form id="needVal" method="post" action="">
+		                   <input type="hidden" name="title" id="title" value="">
+		                   <input type="hidden" name="price" id="price" value="">
+		                   <input type="hidden" name="amount" id="amount" value="">
+		                   <input type="hidden" name="productId" id="product-id" value="">
+		                   <!-- <input type="hidden" name="img" id="img" value="">  -->
+		                   <!-- <input type="submit"/>  -->
+		                </form>
+		            </div>
+		            <!-- 오른쪽하단 top.bottom 버튼 -->
+		            <div class="item_top_bottom">
+		                <a href="#item_content" id="item_top"><span class="item_top_button">top</span></a>
+		                <a href="#productPayInfo" id="item_bottom"><span class="item_bottom_button">bottom</span></a>
+		            </div>
+				<!-- 라이트 박스-->                
             </div>
-       
-            <div class="productArea2">
-                <!-- 중간 상품상세설명, 상품결제정보 버튼 -->
-                <div class="productArea2_button">
-                    <ul class="productArea2_buttonList">
-                        <li><a href="#productArea2_detailImg">상품상세설명</a></li>
-                        <li><a href="#productPayInfo">상품결제정보</a></li>
-                    </ul>
-                </div>
-                <!-- 상품상세설명 -->
-                <div class="productArea2_detailImg" id="productArea2_detailImg">
-                    <img src="../images/img1info.jpg">
-                </div>
-                <!-- 상품결제정보 -->
-                <div class="productPayInfo" id="productPayInfo">
-                    <h3>교환/반품</h3>
-                    <div>
-                        <h4>교환 및 환불이 가능한 경우</h4>
-                        <span>상품을 공급 받으신 날로부터 7일이내 단, 가전제품의
-                            경우 포장을 개봉하였거나 포장이 훼손되어 상품가치가 상실된 경우에는 교환/반품이 불가능합니다.
-                        </span>
-                        <h4>교환 및 반품이 불가능한 경우</h4>
-                        <span>고객님의 책임 있는 사유로 상품등이 멸실 또는 훼손된 경우. 단,상품의 내용을 확인하기 위하여
-                            포장 등을 훼손한 경우는 제외
-                        </span>
-                    </div>
-                    <div>
-                        <h3>결제안내</h3>
-                        <span>고객결제의 경우 안전을 위해 카드사에서 확인전화를 드릴 수도 있습니다. 확인과정에서 도난 카드의 사용이나 타인 명의의 주문등 정상적인 주문이
-                            아니라고 판단될 경우 임의로 주문을 보류 또는 취소할 수 있습니다.
-                        </span>
-                    </div>
-                    <div>
-                        <h3>배송정보</h3>
-                        <span>배송 방법: 택배<br>
-                            배송 지역: 전국지역<br>
-                            배송 비용: 2,500원<br>
-                            배송 기간: 3일 ~ 7일<br>
-                            배송 안내 : 산간벽지나 도서지방은 별도의 추가금액을 지불하셔야 하는 경우가 있습니다.
-                        </span>
-                    </div>
+        </section>    
 
-                </div>
-                <!-- 오른쪽하단 top.bottom 버튼 -->
-                <div class="item_top_bottom">
-                    <a href="#item_content" id="item_top"><span class="item_top_button">top</span></a>
-                    <a href="#productPayInfo" id="item_bottom"><span class="item_bottom_button">bottom</span></a>
-                </div>
-                <form id="needVal" method="post" action="">
-                   <input type="hidden" name="title" id="title" value="">
-                   <input type="hidden" name="price" id="price" value="">
-                   <input type="hidden" name="amount" id="amount" value="">
-                   <input type="hidden" name="productId" id="product-id" value="">
-                   <!-- <input type="hidden" name="img" id="img" value="">  -->
-                   <!-- <input type="submit"/>  -->
-                </form>
-            </div>
-            <!-- 오른쪽하단 top.bottom 버튼 -->
-            <div class="item_top_bottom">
-                <a href="#item_content" id="item_top"><span class="item_top_button">top</span></a>
-                <a href="#productPayInfo" id="item_bottom"><span class="item_bottom_button">bottom</span></a>
-            </div>
-		<!-- 라이트 박스-->
-		<div id="light-box-container"></div>
 	</div>
+	<div id="light-box-container"></div>
     <script>
     // 색상버튼은(ul태그안에 li목록중 3번째줄), 사이즈버튼은(ul태그안에 li목록중 4번째줄)
 
@@ -411,5 +419,6 @@
         <jsp:include page="/pages/login.jsp"></jsp:include>
         <script type="module" src="/js/ItemDetailPage.js"></script>
         <script type="module" src="/js/CookieServiceForItem.js"></script>
+        <script id="dsq-count-scr" src="//projectone-1.disqus.com/count.js" async></script>
     </body>
 </html>

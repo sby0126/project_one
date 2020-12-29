@@ -13,6 +13,9 @@ import org.json.simple.JSONObject;
 import action.ActionResult;
 import service.MyShopService;
 
+/**
+ * DB에 등록된 특정 ID에 대한 마이샵을 모두 제거하는 기능입니다.
+ */
 public class DeleteAllMyShopCommand extends Command {
 	@SuppressWarnings("unchecked")
 	@Override

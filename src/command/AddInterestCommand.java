@@ -13,6 +13,9 @@ import org.json.simple.JSONObject;
 import action.ActionResult;
 import service.InterestService;
 
+/**
+ * 관심 상품을 추가합니다.
+ */
 public class AddInterestCommand extends Command {
 	
 	
