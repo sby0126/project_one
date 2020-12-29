@@ -23,7 +23,7 @@ public class DetailInputService {
 		
 		System.out.println(list);
 		
-		success = itemService.getDAO().insertDetail(id, list);
+		success = itemService.getDAO().insertDetail(id, list, amount);
 		
 		return success;
 	}

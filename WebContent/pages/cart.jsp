@@ -22,7 +22,7 @@
 	int perPrice = price / amount;
 	
 	List<ProductVO> list = ContentDAO.getInstance().getDetail(title, perPrice);
-	boolean success = ContentDAO.getInstance().insertDetail(id, list);
+	boolean success = ContentDAO.getInstance().insertDetail(id, list, amount);
 	
 
 %>
@@ -74,7 +74,7 @@
                             %>
                             <tr>
                                 <td><input type="checkbox" name="chk" class="chkbox"></td>
-                                <td><img src='<%=img%>' class="product-img"></td> <!-- 구매할 상품 이미지 -->
+                                <td><img src="<%=img%>" href="<%=uri%>" class="product-img"></td> <!-- 구매할 상품 이미지 -->
                                 <td><p class="product-name"><a href="<%=uri%>"><%=title%></a></p> </td> <!-- 구매할 상품 이름 -->
                                 <td><input type="number" class="product-num" placeholder="<%=amount%>" min="1"></td> <!-- 구매 갯수 -->
                                 <td><P class="product-price"> <%=perPrice%> </P></td> <!-- 상품 가격-->
