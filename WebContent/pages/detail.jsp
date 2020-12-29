@@ -10,6 +10,8 @@
     <link rel="stylesheet" type="text/css" href="/css/detail.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <div id="fb-root"></div>
+	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v9.0" nonce="N37Q5mSE"></script>
 </head>
 
 <body>
@@ -91,6 +93,11 @@
 		                <div class="productArea2_detailImg" id="productArea2_detailImg">
 		                    <img src="../images/img1info.jpg">
 		                </div>
+		                <!-- 페이스북으로 댓글 달기 -->
+		                <div class="facebook-comments" style="display:flex; justify-contents: center;">
+		                	<div class="fb-comments" data-href="http://localhost:9988/" data-width="1300" data-numposts="10"></div>
+		                </div>
+		                
 		                <!-- 상품결제정보 -->
 		                <div class="productPayInfo" id="productPayInfo">
 		                    <h3>교환/반품</h3>
@@ -419,6 +426,5 @@
         <jsp:include page="/pages/login.jsp"></jsp:include>
         <script type="module" src="/js/ItemDetailPage.js"></script>
         <script type="module" src="/js/CookieServiceForItem.js"></script>
-        <script id="dsq-count-scr" src="//projectone-1.disqus.com/count.js" async></script>
     </body>
 </html>
