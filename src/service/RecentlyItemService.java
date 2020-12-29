@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import dao.ContentDAO;
 import vo.ProductVO;
@@ -30,10 +32,31 @@ public class RecentlyItemService {
 		for(String s: list) {
 			idList.add(Integer.parseInt(s));
 		}
+		
+		idList = uniqueArray(idList);
+		
 		initWithCards();
 		initWithShopDetailService(idList);
 		
 	}	
+	
+	/**
+	 * 중복 제거
+	 * 
+	 * @param list
+	 * @return
+	 */
+	public List<Integer> uniqueArray(List<Integer> list) {
+		List<Integer> idList = new ArrayList<Integer>();
+		for(Integer val: list) {
+		  if(!list.contains(val)) {
+			  idList.add(val);
+		  }
+		}
+		
+		return list;
+
+	}
 	
 	/**
 	 * 카드 빈을 생성합니다.

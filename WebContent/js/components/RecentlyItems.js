@@ -11,6 +11,10 @@ class RecentlyItems extends Component {
         super(parent);
     }
 
+    unique(array) {
+        return [...new Set(array)];
+    }
+
     /**
      * 
      */
@@ -36,6 +40,8 @@ class RecentlyItems extends Component {
             return false;
         });
 
+        items = this.unique(items);
+
         count1 = items.length || 0;
         
         $(IDS.SHOP).text(count1);
@@ -52,6 +58,8 @@ class RecentlyItems extends Component {
             }
             return false;
         });
+
+        items2 = this.unique(items2);
 
         count2 = items2.length || 0;
 
