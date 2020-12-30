@@ -71,9 +71,9 @@
                             </div>
                             <!-- 게시물 공유 및 삭제 버튼 -->
                             <div class="board-post-header-function col-sm-1">
-                                <a href="" id="post-share-button"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+                               <!--  <a href="" id="post-share-button"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
                                 <a href="" id="post-delete-button"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                <a href="" id="post-more-function-button"><i class="fas fa-ellipsis-v"></i></a>
+                                <a href="" id="post-more-function-button"><i class="fas fa-ellipsis-v"></i></a> -->
                             </div>                            
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                                 </div>
                                 <!-- 게시물 목록 / 공유  -->
                                 <div class="board-article-function-share">
-                                    <a href="" id="post-share-button2"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+                                    <!-- <a href="" id="post-share-button2"><i class="fa fa-share-alt" aria-hidden="true"></i></a> -->
                                 </div>
                             </div>
                         </div>

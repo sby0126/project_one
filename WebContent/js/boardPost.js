@@ -160,9 +160,9 @@ const FUNC = {
         const self = parentComment.after(`
             <div class="detail-area" data-depth=${depth} data-pos=${parentPos + 1} data-uuid=${uuid}>
                 <div class="add-comment-button-area">
-                    <button class="btn btn-default" id="close-sub-button" onclick="window['${'func_' + uuid}']()">닫기</button>
                     <textarea id="child-comment-textarea" name="text"></textarea>
                     <input href="#" type="submit" id="child-comment-ok-button" class="btn btn-default" value="등록">
+                	<button class="btn btn-default" id="close-sub-button" onclick="window['${'func_' + uuid}']()">닫기</button>
                 </div>
             </div>
         `);
