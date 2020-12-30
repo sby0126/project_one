@@ -112,15 +112,27 @@ export class FilterBoxButtons extends Component {
 
                     switch(type) {
                         case ENUM.ALL:
+                            $(".card-container").css({
+                                "justify-content": "space-around",
+                                "column-gap": "0"
+                            });                                                
                             $(".card-container > .card").show();                            
                             break;
-                        case ENUM.MYSHOP:
+                        case ENUM.MYSHOP:   
+                            $(".card-container").css({
+                                "justify-content": "flex-start",
+                                "column-gap": "1em"
+                            });                                                             
                             $(".card-container > .card").show().filter((index, elem) => {
                                 return !$(elem).find("button").hasClass("isMyShop")
                             }).hide();
 
                             break;                           
                         case ENUM.INTEREST:
+                            $(".card-container").css({
+                                "justify-content": "flex-start",
+                                "column-gap": "1em"
+                            });                                                
                             $(".card-container > .card").show().filter((index, elem) => {
                                 return !$(elem).find("button").hasClass("active")
                             }).hide();
