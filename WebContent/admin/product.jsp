@@ -82,7 +82,7 @@ jexcel(document.getElementById('spreadsheet2'), {
             width:90
         },
         {
-        	type: 'text',
+        	type: 'image',
             title:'contentUrl',
             width:240
         },
