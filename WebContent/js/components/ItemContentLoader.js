@@ -17,7 +17,7 @@ export class ItemContentLoader extends Component {
 
         this._currentCards = 0;
         this._fetchCards = 10;
-        this._maxCards = 50;
+        this._maxCards = 100;
         this._interval = 800;
 
         this._loaders = {};
@@ -43,13 +43,27 @@ export class ItemContentLoader extends Component {
 
         for(let i = 0; i < count; i++) {
             setTimeout(() => {
-                const lastChildCount = document.querySelector(".card-container").children.length;
-                const cloneNode = document.querySelector(".card").cloneNode(true);
-                cloneNode.querySelector("p").setAttribute("d-"+(lastChildCount+i), "");
-                this._currentCards++;
-                parent.append(cloneNode);
+                // const lastChildCount = document.querySelector(".card-container").children.length;
+                // const cloneNode = document.querySelector(".card").cloneNode(true);
+                
+                // cloneNode.querySelector("p").setAttribute("d-"+(lastChildCount+i), "");
+
+                // this._currentCards++;
+                // parent.append(cloneNode);
+                const child = $(                `
+                <div class="card">
+                    <p>
+                    </p>
+                </div>                
+                `);
+                parent.append(child);
+
+                this._items.push(child.get()[0]);
             }, 0);
         }
+
+        this.appendCards();
+
     }    
 
     /**
@@ -105,6 +119,7 @@ export class ItemContentLoader extends Component {
             const itemImg = this._data.imageData;            
 
             if(!card) {
+                console.log("데이터가 없습니다");
                 continue;
             }            
 
@@ -253,20 +268,25 @@ export class ItemContentLoader extends Component {
             this._dataLoader.setParameter("gndr", "M");
         });
 
+        // 카드 컨테이너 생성
+        $("<div class='card-container'></div>").appendTo(".contents-wrapper");
+
         // 데이터를 가져옵니다.
         this._dataLoader.initWithUrlParams();
         this._dataLoader.load("item", (data) => {
             this._data = data;
 
             // 기본적으로 
-            this.appendCards();
+            this.addFetchData(20);
 
             // 전역 스크롤 이벤트 선언
             // 스크롤 할 때 마다 많은 스크롤 이벤트가 실행됩니다.
             // 그것을 막지하는 기법을 '쓰로틀링'이라고 하고, 언더스코어 라이브러리에서 지원하는 쓰토틀링 라이브러리로
             // 문제를 해결했습니다.
             const throttled  = _.throttle(() => {
-                this.appendCards();
+                if(this._data.length > this._currentCards + this._fetchCards) {
+                    this.addFetchData(10);
+                }
             }, this._interval);
 
             // 쓰로틀링 함수는 반드시 개별 전달되어야 합니다.

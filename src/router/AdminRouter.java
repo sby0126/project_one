@@ -1,13 +1,17 @@
 package router;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
+import utils.Base64Util;
 import utils.DBConnectionMgr;
 
 @WebServlet("/myadmin/*")
@@ -166,6 +171,20 @@ public class AdminRouter extends HttpServlet {
 		String price = request.getParameter("price");
 		String term = request.getParameter("term");
 		String link = request.getParameter("link");
+		
+		byte[] rawBytes = Base64Util.decode(contentUrl);
+		
+//		if(!pageType.equals("sale")) {
+//			
+//			Paths.get(request.getServletContext().getRealPath("/uploads"), pageType, genderType, shopType, UUID.randomUUID() + ".png");
+//			
+//			String realPath =  + "/" + pageType + "";
+//			Files.copy(new ByteArrayInputStream(bytes),)	
+//		} else {
+//			
+//		}
+//		
+		
 		
 		boolean isUpdated = false;
 		
