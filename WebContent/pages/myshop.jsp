@@ -140,6 +140,11 @@
 										<!-- <button class="like-button"></button> -->
 									</div>
 								</div>
+								<script>
+									$("p[d-<%=card.getId()%>]").on("click", function() {
+										window.open("<%= card.getLink() %>", "_blank");
+									});
+								</script>
 								<%
 	                    			}
 	                    		%>		
