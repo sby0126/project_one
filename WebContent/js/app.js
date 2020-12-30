@@ -116,7 +116,7 @@ class App extends EventEmitter {
 
     }
 
-    selectMenu(idx) {
+    selectMenu(idx, isNotSlideDown = false) {
 
         const menuItems = Array.from(document.querySelectorAll(ID.MENU_ITEMS));
         const item = menuItems[idx];
@@ -147,7 +147,9 @@ class App extends EventEmitter {
 
         // 다른 메뉴를 선택하거나 다른 곳을 선택하면 닫습니다.
         if(idx === lastMenuIndex) {
-            $(ID.SLIDE_POPUP_MENU).slideDown();
+			if(!isNotSlideDown) {
+            	$(ID.SLIDE_POPUP_MENU).slideDown();
+			}
             $(ID.CONTAINER)
                 .not(ID.SLIDE_POPUP_MENU)
                 .on("mouseup", (ev) => {
@@ -157,7 +159,7 @@ class App extends EventEmitter {
                                              .filter(i => i.indexOf("menu") >= 0);
 
                     if(classFilter.length == 0) {
-                        this.slideUp();
+						this.slideUp();
                     }
                 }
             );
@@ -193,7 +195,7 @@ class App extends EventEmitter {
             });
         });        
 
-        this.selectMenu(this._menuIndex);
+        this.selectMenu(this._menuIndex, true);
     }
 
     addEventListeners() {
