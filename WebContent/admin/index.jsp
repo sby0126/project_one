@@ -115,12 +115,12 @@
 	                        <li><a href="#currently-login-members">현재 로그인 멤버</a></li>
 	                      </ul>
 	                    </li>
-	                    <li><a href="#board-manage">게시물 관리</a></li>
+	                    <li><a href="#board-manage" style="display:none">게시물 관리</a></li>
 	<!--                     <li><a href="#all-post">상품</a></li> -->
 	                    <li><a href="#log">접속 로그</a></li>
 	                    <li><a href="#uploads">파일 관리</a></li>
-	                    <li><a href="#db-editor">상품 입고 시스템</a></li>
-	                    <li><a href="#product">상품 진열 시스템</a></li>
+	                    <li><a href="#db-editor" style="display:none">상품 입고 시스템</a></li>
+	                    <li><a href="#product" style="display:none">상품 진열 시스템</a></li>
 	                  </ul>
                   </nav>
             </div>
@@ -230,7 +230,7 @@
                     	</c:forEach>
                     </table>
                 </div>
-                <div id="board-manage" class="content jumbotron">
+                <div id="board-manage" class="content jumbotron" style="display:none">
                 	<a name="board-manage"></a>
                     <p>게시판 관리</p>
                     <table class="table" style="height: 200px; overflow:scroll;">
@@ -284,7 +284,7 @@
 <!--                     		</div> -->
                     	</tfoot>
                     </table>
-                </div>
+                </div>                
 				<div id="all-post" class="content jumbotron" style="display:none;">
 					<a name="all-post"></a>
                     <p>상품</p>
@@ -445,8 +445,8 @@
 					</tfoot>
 					</table>
                 </div>                               
-	            <jsp:include page="./db.jsp"></jsp:include>
-	            <jsp:include page="./product.jsp"></jsp:include>
+<%-- 	            <jsp:include page="./db.jsp"></jsp:include> --%>
+<%-- 	            <jsp:include page="./product.jsp"></jsp:include> --%>
             </div>
         </section>
         <button class="return-button btn btn-info" id="return-button"><i class="fas fa-door-open" style="color: white;">나가기</i></button>
