@@ -101,7 +101,7 @@
             const filename = file.name || "";
             let mimeType = '';
 
-            if(filename.indexOf(".png") >= 0) {
+            if(filename.toLowerCase().indexOf(".png") >= 0) {
                 console.log("이미지입니다.")
                 mimeType = "image";
             } else if(filename.indexOf(".zip") >= 0) {
