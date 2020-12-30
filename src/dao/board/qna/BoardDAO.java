@@ -484,7 +484,7 @@ public class BoardDAO implements IDAO {
 	
 	public void updatePostViewCount(int articleID) {
 		try {
-			execute(getQL("updatePostViewCount"), articleID);
+			execute(getQL("조회수증감"), articleID);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

@@ -34,7 +34,7 @@ public class BoardSQL {
 				+ " GROUP BY articleID");
 		
 		// 조회수 증가
-		qlList.put("updatePostViewCount", "update tblQNABoard set viewCount = viewCount + 1 where articleID = ?");
+		qlList.put("조회수증감", "update tblQNABoard set viewCount = viewCount + 1 where articleID = ?");
 		
 		// 글을 읽습니다.
 		qlList.put("readPost", "select articleID, articleType, title, authorID, content, regdate, viewCount, recommandCount, ctmnm from tblQNABoard q, tblCustomer c where articleID = ? and ctmid = authorID");
