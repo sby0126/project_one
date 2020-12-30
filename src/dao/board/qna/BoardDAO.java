@@ -506,7 +506,6 @@ public class BoardDAO implements IDAO {
 			
 			System.out.println("다음 코멘트 번호 : " + nextCommentID);
 			
-			conn = pool.getConnection();
 			pstmt = conn.prepareStatement(getQL("writeComment"));
 			pstmt.setInt(1, articleID);
 			pstmt.setString(2, authorID);
@@ -558,6 +557,15 @@ public class BoardDAO implements IDAO {
 				
 		try {
 			conn = pool.getConnection();
+			
+//			pstmt = conn.prepareStatement(getQL("updateCommentPos"));
+//			pstmt.setInt(1, parentCommentID);
+//			pstmt.setInt(2, pos);
+//			
+//			if(pstmt.executeUpdate() > 0) {
+//				isOK = true;
+//			}			
+//			
 			pstmt = conn.prepareStatement(getQL("writeChildComment"));
 			pstmt.setInt(1, articleID);
 			pstmt.setString(2, authorID);

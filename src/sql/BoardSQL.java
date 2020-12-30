@@ -67,6 +67,7 @@ public class BoardSQL {
 		qlList.put("modifyComment", "UPDATE tblQNABoardComments SET content = ? WHERE commentID = ? AND authorID = ?");
 		
 		// 댓글을 삭제합니다.
+		qlList.put("updateCommentPos", "update tblQNABoardComments set pos = pos + 1 WHERE parent_articleID = ? and pos > ?");
 		qlList.put("deleteComments", "delete from tblQNABoardComments WHERE parent_articleID = ?");
 		qlList.put("deleteComment", "delete from tblQNABoardComments WHERE commentID = ?");
 		
