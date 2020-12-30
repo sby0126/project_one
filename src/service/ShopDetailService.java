@@ -63,7 +63,7 @@ public class ShopDetailService {
 		mainUrl = "https://drive.google.com/uc?export=view&id=";
 		link = "#";
 		
-		if(list != null) {
+		if(list != null && !list.isEmpty()) {
 			link = list.get(0).getLink();
 		}
 	}
