@@ -47,8 +47,6 @@ public class ReplyCommand extends Command {
 		param.depth = Integer.parseInt(request.getParameter("depth"));
 		param.parentID = Integer.parseInt(request.getParameter("parentID"));
 		param.pos = Integer.parseInt(request.getParameter("pos"));
-		
-		System.out.println("방법: " + param.methods);
 	}
 	
 	public void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
