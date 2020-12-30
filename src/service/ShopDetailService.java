@@ -2,6 +2,9 @@ package service;
 
 import java.util.List;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import dao.ContentDAO;
 import vo.ProductVO;
 
@@ -138,6 +141,46 @@ public class ShopDetailService {
 
 	public void setThumb(List<ProductVO> thumb) {
 		this.thumb = thumb;
+	}
+	
+	public JSONObject toJSONObject() {
+		List<ProductVO> list = getList();
+		
+		JSONObject root = new JSONObject();
+		
+		
+		
+		root.put("pageType", pageType );
+		root.put("genderType", "M" );
+		root.put("shopType", "S" );
+		root.put("offset", new JSONObject());		
+		root.put("imageUrl", "https://drive.google.com/uc?export=view&id=");
+		
+		JSONArray contentData = new JSONArray();
+		JSONObject imageData = new JSONObject();
+		
+		root.put("contentData", contentData);
+		root.put("imageData", imageData);
+		
+		for(ProductVO vo : list) {
+			JSONObject newContentData = new JSONObject();
+			
+			newContentData.put("category", vo.getShoptype());
+			newContentData.put("title", vo.getTitle());
+			newContentData.put("price", vo.getPrice());
+			newContentData.put("shop", vo.getShopname());
+			newContentData.put("url", vo.getContenturl());
+			newContentData.put("link", vo.getLink());
+			newContentData.put("id", vo.getId());
+			
+			// updateMyShop(newContentData, vo.getId(), customerId);
+			newContentData.put("active", false);
+			
+			contentData.add(newContentData);
+			imageData.put(vo.getContenturl(), vo.getImgid());
+		}
+		
+		return root;
 	}
 	
 }
