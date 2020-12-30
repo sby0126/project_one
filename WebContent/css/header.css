@@ -192,7 +192,7 @@ header {
     display: none;
 
     width: 100%;
-    height: 6.875em;
+    height: 6.875rem;
     top: 3.75em;
     font-size: 0.75;
 
@@ -702,6 +702,9 @@ header {
     .mobile-menu {
         display: block;
     }
+    .header-popup-container {
+    	overflow: visible;
+    }    
     
 }
 
@@ -715,6 +718,9 @@ header {
     .header-right {
         display: flex;
     }    
+    .header-popup-container {
+    	overflow: visible;
+    }
 }
 
 
