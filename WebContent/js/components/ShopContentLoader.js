@@ -130,7 +130,7 @@ export class ShopContentLoader extends Component {
                     active = "active";
                 }
                 if(filename.isMyShop) {
-                    active += " myShop";
+                    active += " isMyShop";
                 }
 
                 $(myCard).html(`

@@ -28,7 +28,7 @@
 	
 </form>
 <script type="text/javascript">
-  var naver_id_login = new naver_id_login("7ImHSjL7FtzCQoKe84Jc", "http://biud436.com/members/naverLogin.do");
+  var naver_id_login = new naver_id_login("7ImHSjL7FtzCQoKe84Jc", "https://biud436.com:9001/members/naverLogin.do");
   // 네이버 사용자 프로필 조회
   naver_id_login.get_naver_userprofile("naverSignInCallback()");
   // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
