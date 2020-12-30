@@ -274,7 +274,7 @@
                 $(".productlist_add").append(str);
                 // 상품 목록 추가 시 동적으로 히든 입력 영역에 각각 옵션값, 수량값에 해당하는 input 생성 
 				$("#needVal").append("<input type='hidden' name='pdoption' id='pdoption' value='" + NcolorNm + "" + NsizeNm + "'>");
-				$("#needVal").append("<input type='hidden' name='pdoption' id='pdqty_" + NcolorNm + "" + NsizeNm + "' value='" + qty + "'>");
+				$("#needVal").append("<input type='hidden' name='pdoption' id='pdqty_" + NcolorNm + "" + NsizeNm + "' value='1'>");
                 
 				price = Number(price);
                 var curPrice = Number($(".allPrice").text());
@@ -302,7 +302,7 @@
         obj.parent("li").find("span").text(text); // span 태그에 블랙,Free 2개 를 넣는다.
         pdcode = obj.parent("li").find("span").attr("data-value"); // 버튼의 data-value값을 조합해 코드를 생성
 		qty = cnt;
-        $("#needVal #pdqty_"+pdcode+"").val(qty); // 해당 코드에 맞는 수량값을 증가
+        $("#needVal #pdqty_"+pdcode+"").val(qty); // 해당 코드에 맞는 수량값을 처리
         
         var price = $("#detail-item-price").text().replace(",", "");
         price = Number(price);
@@ -321,7 +321,7 @@
             obj.parent("li").find(".add_button").val(cnt);
             obj.parent("li").find("span").text(text);
             qty = cnt;	
-            $("#needVal #pdqty_"+pdcode+"").val(qty);	// 히든 입력 영역에 해당하는 id값을 가진 수량값에 변경된 값을 val로 처리
+            $("#needVal #pdqty_"+pdcode+"").val(qty); // 해당 코드에 맞는 수량값을 처리
 
             var price = $("#detail-item-price").text().replace(",", "");
             price = Number(price);

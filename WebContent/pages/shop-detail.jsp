@@ -154,10 +154,13 @@
 			margin: 0 3px;
 			padding: 0 10px;
 			font-size: 11px;
+			text-align: center;
 			vertical-align: middle;
 			cursor: pointer;
 			border: 1px solid #E6E9EB;
 			position: relative;
+			width: 7em;
+			height: 2.5em;
 		}
 
 		.plus::after {
