@@ -4,6 +4,7 @@
 <%@ page import="service.RecentlyItemService, service.*" %>
 <%@ page import="java.net.*" %>
 <%@ page import="vo.*" %>
+<%@ page import="java.util.stream.Collectors" %>
 <%
 	
 	String myList = request.getParameter("myList");

@@ -12,7 +12,10 @@ class RecentlyItems extends Component {
     }
 
     unique(array) {
-        return [...new Set(array)];
+        // return [...new Set(array)];
+        return array.filter((e, i, a) => {
+            return a.indexOf(e) == i;
+        });
     }
 
     /**

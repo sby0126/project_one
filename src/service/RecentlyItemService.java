@@ -2,10 +2,10 @@ package service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Vector;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 import dao.ContentDAO;
 import vo.ProductVO;
@@ -24,7 +24,14 @@ public class RecentlyItemService {
 		
 		System.out.println(num);
 		
+		String raw = null;
+		
 		String str[] = num.split(",");
+		raw = String.join(",", str);
+		str = raw.split(" ");
+		raw = String.join(",", str);
+		str = raw.split(",");
+		
 		List<String> list = Arrays.asList(str);
 		
 		List<Integer> idList = new ArrayList<>();
@@ -33,7 +40,7 @@ public class RecentlyItemService {
 			idList.add(Integer.parseInt(s));
 		}
 		
-		idList = uniqueArray(idList);
+		idList = uniqueArray(idList);	
 		
 		initWithCards();
 		initWithShopDetailService(idList);
@@ -49,12 +56,12 @@ public class RecentlyItemService {
 	public List<Integer> uniqueArray(List<Integer> list) {
 		List<Integer> idList = new ArrayList<Integer>();
 		for(Integer val: list) {
-		  if(!list.contains(val)) {
+		  if(!idList.contains(val)) {
 			  idList.add(val);
 		  }
 		}
 		
-		return list;
+		return idList;
 
 	}
 	
@@ -77,7 +84,7 @@ public class RecentlyItemService {
 		list.forEach(id -> {
 			ProductVO vo = contentDAO.findShopDataAsID(id);
 			cards.add(vo);
-		});
+		});		
 	}
 
 	public Vector<ProductVO> getCards() {

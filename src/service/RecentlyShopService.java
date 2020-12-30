@@ -34,6 +34,9 @@ public class RecentlyShopService {
 				//
 			}
 		}
+		
+		idList = uniqueArray(idList);	
+		
 		initWithCards();
 		initWithShopDetailService(idList);
 		
@@ -45,6 +48,24 @@ public class RecentlyShopService {
 	public void initWithCards() {
 		cards = new Vector<ProductVO>();
 	}
+	
+	/**
+	 * 중복 제거
+	 * 
+	 * @param list
+	 * @return
+	 */
+	public List<Integer> uniqueArray(List<Integer> list) {
+		List<Integer> idList = new ArrayList<Integer>();
+		for(Integer val: list) {
+		  if(!idList.contains(val)) {
+			  idList.add(val);
+		  }
+		}
+		
+		return idList;
+
+	}	
 	
 	/**
 	 * ID에 맞는 카드 데이터를 가져옵니다.
