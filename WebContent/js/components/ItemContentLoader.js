@@ -16,7 +16,7 @@ export class ItemContentLoader extends Component {
         super.initMembers(parent);
 
         this._currentCards = 0;
-        this._fetchCards = 10;
+        this._fetchCards = 20;
         this._maxCards = 100;
         this._interval = 800;
 
@@ -106,7 +106,7 @@ export class ItemContentLoader extends Component {
 
         // 카드를 새로 가져옵니다.
         for(let idx = currentCards; idx < (currentCards + fetchCards); idx++) {
-            const card = this._items[idx];
+            let card = this._items[idx];
 
             if(this._loaders[idx]) {
                 continue;
@@ -118,12 +118,22 @@ export class ItemContentLoader extends Component {
             const imgSrc = this._data.imageUrl;
             const itemImg = this._data.imageData;            
 
-            if(!card) {
-                console.log("데이터가 없습니다");
-                continue;
-            }            
-
             if(myImgData) {
+
+                if(!card) {
+                    const child = $(                `
+                    <div class="card">
+                        <p>
+                        </p>
+                    </div>                
+                    `);
+
+                    $(".card-container").append(child);
+    
+                    this._items.push(child.get()[0]);
+
+                    card = child.get(0);
+                }   
 
                 this._loaders[idx] = true;
 
@@ -277,7 +287,7 @@ export class ItemContentLoader extends Component {
             this._data = data;
 
             // 기본적으로 
-            this.addFetchData(20);
+            this.addFetchData(10);            
 
             // 전역 스크롤 이벤트 선언
             // 스크롤 할 때 마다 많은 스크롤 이벤트가 실행됩니다.
