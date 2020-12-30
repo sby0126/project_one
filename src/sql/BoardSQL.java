@@ -47,10 +47,16 @@ public class BoardSQL {
 		qlList.put("deletePost", "delete from tblQNABoard where articleID = ?");
 		
 		// 특정 게시물에 있는 코멘트를 읽습니다.
-		qlList.put("readComments", 
-					"select q.*, ctmnm, ( (parentID * 5) + depth * 0.015) AS level " 
-				+ "from tblQNABoardComments q, tblCustomer c "
-				+ "where parent_articleID = ? and ctmid = authorID ORDER BY level, pos");
+//		qlList.put("readComments", 
+//					"select q.*, ctmnm, ( (parentID * 5) + depth * 0.015) AS level " 
+//				+ "from tblQNABoardComments q, tblCustomer c "
+//				+ "where parent_articleID = ? and ctmid = authorID ORDER BY level, pos");
+				
+		qlList.put("readComments", "select q.*, ctmnm" 
+				+ " from tblQNABoardComments q, tblCustomer c "
+				+ " WHERE parent_articleID = ?"
+				+ " and ctmid = authorID "
+				+ " ORDER BY parentID asc, pos");
 		
 		qlList.put("maxCommentID", "SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'mydb' AND TABLE_NAME = 'tblQNABoardComments'");
 		
@@ -66,8 +72,10 @@ public class BoardSQL {
 		// 댓글을 수정합니다.
 		qlList.put("modifyComment", "UPDATE tblQNABoardComments SET content = ? WHERE commentID = ? AND authorID = ?");
 		
+		// 댓글 작성 시 댓글 업데이트
+		qlList.put("updateCommentPos", "update tblQNABoardComments set pos = pos + 1 WHERE parentID = ? and pos > ?");
+		
 		// 댓글을 삭제합니다.
-		qlList.put("updateCommentPos", "update tblQNABoardComments set pos = pos + 1 WHERE parent_articleID = ? and pos > ?");
 		qlList.put("deleteComments", "delete from tblQNABoardComments WHERE parent_articleID = ?");
 		qlList.put("deleteComment", "delete from tblQNABoardComments WHERE commentID = ?");
 		

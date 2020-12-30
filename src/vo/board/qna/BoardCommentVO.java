@@ -9,7 +9,7 @@ public class BoardCommentVO {
 	private String content;
 	private Date regdate;
 	private int pos;
-	private int parentID;
+	private int parentid;
 	private int depth;
     private String ctmnm;
     
@@ -55,11 +55,11 @@ public class BoardCommentVO {
 	public void setPos(int pos) {
 		this.pos = pos;
 	}
-	public int getParentID() {
-		return parentID;
+	public int getParentid() {
+		return parentid;
 	}
-	public void setParentID(int parentID) {
-		this.parentID = parentID;
+	public void setParentid(int parentID) {
+		this.parentid = parentID;
 	}
 	public int getDepth() {
 		return depth;

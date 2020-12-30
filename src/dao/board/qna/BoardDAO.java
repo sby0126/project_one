@@ -501,11 +501,11 @@ public class BoardDAO implements IDAO {
 		ResultSet rs = null;
 		
 		try {
-			
 			int nextCommentID = nextCommentID();
-			
 			System.out.println("다음 코멘트 번호 : " + nextCommentID);
 			
+			conn = pool.getConnection();
+					
 			pstmt = conn.prepareStatement(getQL("writeComment"));
 			pstmt.setInt(1, articleID);
 			pstmt.setString(2, authorID);
@@ -558,21 +558,21 @@ public class BoardDAO implements IDAO {
 		try {
 			conn = pool.getConnection();
 			
-//			pstmt = conn.prepareStatement(getQL("updateCommentPos"));
-//			pstmt.setInt(1, parentCommentID);
-//			pstmt.setInt(2, pos);
-//			
-//			if(pstmt.executeUpdate() > 0) {
-//				isOK = true;
-//			}			
-//			
+			pstmt = conn.prepareStatement(getQL("updateCommentPos"));
+			pstmt.setInt(1, parentCommentID);
+			pstmt.setInt(2, pos);
+			
+			if(pstmt.executeUpdate() > 0) {
+				isOK = true;
+			}			
+			
 			pstmt = conn.prepareStatement(getQL("writeChildComment"));
 			pstmt.setInt(1, articleID);
 			pstmt.setString(2, authorID);
 			pstmt.setString(3, contents);
-			pstmt.setInt(4, pos);
+			pstmt.setInt(4, pos + 1 );
 			pstmt.setInt(5, parentCommentID);
-			pstmt.setInt(6, depth);
+			pstmt.setInt(6, depth + 1);
 			
 			if(pstmt.executeUpdate() > 0) {
 				isOK = true;
@@ -628,7 +628,7 @@ public class BoardDAO implements IDAO {
 				JSONObject data = new JSONObject();
 				data.put("commentID", vo.getCommentid());
 				data.put("pos", vo.getPos());
-				data.put("parentID", vo.getParentID());
+				data.put("parentID", vo.getParentid());
 				data.put("depth", vo.getDepth());
 				data.put("author", vo.getCtmnm());
 				data.put("create_at", vo.getRegdate().toString());

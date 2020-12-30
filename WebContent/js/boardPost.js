@@ -114,7 +114,7 @@ const FUNC = {
         // 부모 코멘트의 번호
         const parentCommentOrder = $(".comment-author").index(parentComment) + 1;
 
-        const parentCommentID = parentComment.parent().data("commentid");
+        const parentCommentID = parentComment.parent().data("parentid");
 
         // 현재 쿼리값 파싱
         const params = new URLSearchParams(location.search);	
@@ -127,15 +127,14 @@ const FUNC = {
 		// TODO: 부모 코멘트에 댓글이 하나 이상 있을 때, 
 		// 부모 코멘트의 깊이보다 1 정도 큰,  
         // 마지막 자식 코멘트의 pos 값을 가져옵니다.
-        
-		
+
 		// 부모 댓글의 순번
 		// 같은 깊이의 댓글이 달리면 pos가 1, 2, 3으로 이어집니다.
 		// 작성일순으로 정렬하면 pos도 필요 없지만 현재로썬 댓글 정렬을 위해 필요합니다.
 		let parentPos = parseInt(parentComment.data("pos"));
-		if(parentPos) {
-			parentPos += 1;
-		}
+//		if(parentPos) {
+//			parentPos += 1;
+//		}
 		
 		if(!parentComment.data("depth")) {
 			parentComment.data("depth", 0);
@@ -143,9 +142,9 @@ const FUNC = {
 		
 		// 부모 코멘트에서 깊이 값을 찾습니다.
 		let depth = parseInt(parentComment.data("depth"));
-		if(depth) {
-			depth++;
-        }
+//		if(depth) {
+//			depth++;
+//        }
 		
 		// 부모 코멘트에서 닉네임을 찾습니다.
 		const nickname = parentComment.find("span").text();
@@ -157,6 +156,7 @@ const FUNC = {
             $(`div[data-uuid='${uuid}']`).remove();
         };
 
+		const parent = $(ev.target).parents(".comment-area")[0];
         const self = parentComment.after(`
             <div class="detail-area" data-depth=${depth} data-pos=${parentPos + 1} data-uuid=${uuid}>
                 <div class="add-comment-button-area">
@@ -190,7 +190,8 @@ const FUNC = {
 		
 		        if(texts.length > 0) {
 					
-					const parentID = parentCommentOrder;
+					// const parentID = parentCommentOrder;
+					const parentID = $(parent).data("parentid");
 			
 		            $.get(
 		                {
@@ -200,10 +201,10 @@ const FUNC = {
                                 postNumber: postNumber,
                                 contents: texts,
                                 method: "writeChild",
-                                depth: depth + 1,
+                                depth: depth,
                                 parentID: parentID,
                                 parentCommentID: parentCommentID,
-                                pos: parentPos + 1
+                                pos: parentPos
                             },
 		                    success: function(data) {
 		                        location.reload();
@@ -229,10 +230,15 @@ const FUNC = {
 	        const params = new URLSearchParams(location.search);
 	        const postNumber = params.get("postNumber");
 			const texts = "empty";
+			
+			const parent = $(ev.target).parents(".comment-area")[0];
+			
+			// 코멘트 ID로 삭제
+			const commentID = $(parent).data("commentid");
 
             $.get(
                 {
-                    url: `/board/qna/postReply.do?postNumber=${postNumber}&contents=${texts}&method=delete&depth=0&parentID=0&pos=0&commentOrder=${commentOrder}`,
+                    url: `/board/qna/postReply.do?postNumber=${postNumber}&contents=${texts}&method=delete&depth=0&parentID=0&pos=0&commentOrder=${commentOrder}&commentID=${commentID}`,
                     method: "GET",
                     contentType: false,
                     processData: false,

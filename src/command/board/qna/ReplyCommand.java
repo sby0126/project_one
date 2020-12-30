@@ -142,13 +142,15 @@ public class ReplyCommand extends Command {
 		
 		// 댓글 번호를 파싱합니다.
 		int commentOrder = Integer.parseInt(commentOrderRAW);
+		int commentID = Integer.parseInt(request.getParameter("commentID"));
 		
 		// 댓글 삭제가 가능한지 확인합니다.
 		boolean isValid = getDAO().checkValidByAuthorIDForComment(parentArticleID, commentOrder, param.authorID);
 		
 		// 삭제 가능하다면 삭제합니다.
 		if(isValid) {
-			getDAO().deleteCertainComment(parentArticleID, commentOrder);			
+			// getDAO().deleteCertainComment(parentArticleID, commentOrder);
+			getDAO().deleteCertainComment2(commentID);
 		}
 	}
 	
