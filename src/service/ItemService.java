@@ -8,8 +8,8 @@ import org.json.simple.JSONObject;
 import vo.InterestVO;
 import vo.ProductVO;
 
-public class ItemService extends ContentService {
 	
+public class ItemService extends ContentService {
 	public JSONObject getOffset() {
 		JSONObject offset = new JSONObject();
 		
@@ -79,7 +79,7 @@ public class ItemService extends ContentService {
 		
 		return root;
 	}
-	
+		
 	@SuppressWarnings("unchecked")
 	public JSONObject searchAsShop(String pageType, String shopName) {
 		List<ProductVO> list = getDAO().searchAsShopName(pageType, shopName);

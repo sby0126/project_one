@@ -143,7 +143,7 @@
 		                   <input type="hidden" name="title" id="title" value="">
 		                   <input type="hidden" name="price" id="price" value="">
 		                   <input type="hidden" name="amount" id="amount" value="">
-		                   <input type="hidden" name="productId" id="product-id" value="">
+		                   <input type="hidden" name="productId" id="productId" value="">
 		                   <!-- <input type="hidden" name="img" id="img" value="">  -->
 		                   <!-- <input type="submit"/>  -->
 		                </form>
@@ -224,8 +224,10 @@
             var colorNm = ""; //선택된 컬럼명
             var sizeNm = ""; //선택된 사이즈명
             var val = ""; //선택된 버튼의 value값
-            var NcolorNm = "";
-            var NsizeNm = "";
+            var NcolorNm = ""; //data-value 조합값 중 색상
+            var NsizeNm = ""; //data-value 조합값 중 사이즈
+            var qty = ""; //수량 임시값
+            var pdcode = ""; // 물품 옵션 조합값
             //색상 버튼과 사이즈 버튼의 value값은 현재 앞에서부터 순서대로 1,2로 되어있다. 상품중복체크를 위해 사용되는변수
 
             $.each($(".infoArea > ul > li:nth-child(3) button"), function (i) {
@@ -268,10 +270,13 @@
 //                 		<button value = ${val}  class='del_button' onclick=del($(this));> x </button>
 //                 	</li>
 //                 `;
-                var str = "<li><span>" + colorNm + "," + sizeNm + " " + "1개" + "</span> <button class='add_button' value='1' onclick=add($(this));> + </button><button class='minus_button' value = '1' onclick=minus($(this));> - </button><button value = " + val + "  class='del_button' onclick=del($(this));> x </button></li>";
+                var str = "<li><span data-value='" + NcolorNm + "" + NsizeNm + "'>" + colorNm + "," + sizeNm + " " + "1개" + "</span> <button class='add_button' value='1' onclick=add($(this));> + </button><button class='minus_button' value = '1' onclick=minus($(this));> - </button><button value = " + val + "  class='del_button' onclick=del($(this));> x </button></li>";
                 $(".productlist_add").append(str);
+                // 상품 목록 추가 시 동적으로 히든 입력 영역에 각각 옵션값, 수량값에 해당하는 input 생성 
 				$("#needVal").append("<input type='hidden' name='pdoption' id='pdoption' value='" + NcolorNm + "" + NsizeNm + "'>");
-                price = Number(price);
+				$("#needVal").append("<input type='hidden' name='pdoption' id='pdqty_" + NcolorNm + "" + NsizeNm + "' value='" + qty + "'>");
+                
+				price = Number(price);
                 var curPrice = Number($(".allPrice").text());
                 /* var qty = Number($(".productlist_add li").length); */
                 
@@ -295,7 +300,10 @@
         obj.val(cnt); // 선택한 버튼태그의 value값을 가져와서 1 증가시켜 준뒤 그 값을 다시 value 값으로 설정한다. 
         obj.parent("li").find(".minus_button").val(cnt); // 마이너스 버튼 태그의 value 값도 똑같이 1증가된 상태를 value값으로 설정한다. 
         obj.parent("li").find("span").text(text); // span 태그에 블랙,Free 2개 를 넣는다.
-
+        pdcode = obj.parent("li").find("span").attr("data-value"); // 버튼의 data-value값을 조합해 코드를 생성
+		qty = cnt;
+        $("#needVal #pdqty_"+pdcode+"").val(qty); // 해당 코드에 맞는 수량값을 증가
+        
         var price = $("#detail-item-price").text().replace(",", "");
         price = Number(price);
 
@@ -312,6 +320,8 @@
             obj.val(cnt);
             obj.parent("li").find(".add_button").val(cnt);
             obj.parent("li").find("span").text(text);
+            qty = cnt;	
+            $("#needVal #pdqty_"+pdcode+"").val(qty);	// 히든 입력 영역에 해당하는 id값을 가진 수량값에 변경된 값을 val로 처리
 
             var price = $("#detail-item-price").text().replace(",", "");
             price = Number(price);
@@ -331,6 +341,8 @@
         $(".allPrice").text(curPrice);
 
         obj.parent("li").remove();
+        $("#needVal #pdoption").val(pdcode).remove();
+        $("#needVal #pdqty_" + pdcode + "").remove();
     }
 
     Array.prototype.add = function (...param) {
@@ -376,12 +388,37 @@
 	            var price = $(".allPrice").text();
 	        	var amount = $(".add_button").attr("value");
 	        	var productId = new URLSearchParams(location.search).get("id");
+	        	
+	        	console.log(title, price, amount, productId);
 
-                array.add(title);
-                array.add(price);
-                console.log(array);
                 
+                if(($(".productlist_add li").length > 0)) {
+                    var code;
+
+                    var dataArray = new Array();
+
+                    var orderInfo = new Object();
+                    
+                    for(var i = 0; i < $(".productlist_add li").length; i++) {
+                    
+                        code = "";
+
+                        orderInfo = {
+                            "title" : title,
+                            "amount" : amount,
+                            "price" : price/amount,
+                            "productId" : productId,
+                            "allprice" : price
+                        };
+                        
+                        code = $("#needVal #pdoption").val() + "," + $("#needVal #pdqty" + pdcode + "").val();
+                        orderInfo.pdoption = code;
+                    
+                        data.push(orderInfo);
                 
+                    }                     
+                    
+                }                
             }
         }
 
@@ -425,29 +462,65 @@
                 console.log(str);
 
                 var array = new Array();
-                array = str.split(" ").split();
+                array = str.split(" ");
                 console.log(array);
                 console.log(array[i]);
 
+                // var title = $("#detail-item-title").text()
+                // var price = $(".allPrice").text();
+            	// var amount = $(".add_button").attr("value");
+            	// var productId = new URLSearchParams(location.search).get("id");
+
+            	
+            	// //List list = new List();
+            	
+                // list.add("title", title);
+                // list.add("price", price/amount);
+                // list.add("amount", amount);
+            	
+                // var json_arr = {};
+                //     json_arr["'product" + i + "'"] = list;
+
+                // var json_string = JSON.stringify(json_arr);
+                
+                // console.log(json_string);
+                
                 var title = $("#detail-item-title").text()
-                var price = $(".allPrice").text();
-            	var amount = $(".add_button").attr("value");
-            	var productId = new URLSearchParams(location.search).get("id");
+	            var price = $(".allPrice").text();
+	        	var amount = $(".add_button").attr("value");
+	        	var productId = new URLSearchParams(location.search).get("id");
+	        	
+	        	console.log(title, price, amount, productId);
 
-            	
-            	//List list = new List();
-            	
-                list.add("title", title);
-                list.add("price", price/amount);
-                list.add("amount", amount);
-            	
-                var json_arr = {};
-                    json_arr["'product" + i + "'"] = list;
+                
+                if(($(".productlist_add li").length > 0)) {
+                    
+                    var code;
 
-                var json_string = JSON.stringify(json_arr);
-                
-            	console.log(json_string);
-                
+                    var dataArray = new Array();
+
+                    var orderInfo = new Object();
+                    
+                    for(var i = 0; i < $(".productlist_add li").length; i++) {
+                    
+                        code = "";
+
+                        orderInfo = {
+                            "title" : title,
+                            "amount" : amount,
+                            "price" : price/amount,
+                            "productId" : productId,
+                            "allprice" : price
+                        };
+                        
+                        code = $("#needVal #pdoption:nth-child(i)").val() + "," + $("#needVal #pdqty" + pdcode + "").val();
+                        orderInfo.pdoption = code;
+                    
+                       data.push(orderInfo);                        
+                        
+                    }                
+            
+                } 
                 
                 /* processSubmit({
                 	title,

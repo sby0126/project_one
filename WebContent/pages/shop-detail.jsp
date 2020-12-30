@@ -37,12 +37,15 @@
 	<link rel="stylesheet" href="../libs/themes/wrunner-default-theme.css">
 	<script src="../libs/wrunner-jquery.js"></script>
 	<style>
+	
 		.card-container {
 			display: flex;
 			flex-direction: row;
 			justify-content: left;
 			align-items: center;
 			background-color: #fff;
+			padding-bottom: 6%;
+		
 		}
 
 		.item_selected_none {
@@ -66,6 +69,11 @@
 				flex: auto auto auto;
 				flex-direction: column;
 				border: 1px solid #F2F5F9;
+				margin-left: 0.4em;
+			}
+			
+			.card:nth-child(0) {
+				margin-left: 1em;
 			}
 
 			.card p[d-<%=vo.getId()%>]::before {
@@ -113,20 +121,22 @@
 			column-gap: 0.5em;
 		}
 
-		/* 세로로 배치, 여러줄로 표시 */
-		.detail-trailer-list {
-			display: flex;
-			flex-direction: column;
-			flex-wrap: wrap;
-		}
-
 		/* 가로로 배치, 한 줄로 표시 */
 		.shop-detail {
 			display: flex;
 			flex-direction: row;
 			flex-wrap: no-wrap;
 			justify-content: space-around;
+		}		
+		
+		/* 세로로 배치, 여러줄로 표시 */
+		.detail-trailer-list {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			width: 50px;
 		}
+
 
 		/* 세로로 배치, 여러줄로 표시, 간격 0.5em */
 		.list-container {
@@ -164,16 +174,39 @@
 			background-size: cover;
 		}
 
-		.similar-shop {
+		.shop-info {
 			width: 100%;
-			text-align: center;
+			white-space: nowrap;
+			overflow: visible;
+		}
+		
+		.shop-info div > h2 {
+			position: relative;
+			min-width: 800%;
+			width: auto;
+			left: -1.4em;
+			padding-right: 1.6em;
+			font-size: 1.8em;
+			font-family: 'Nanum Gothic', sans-serif;
+			text-align: right;
+			
 		}
 
-		.similar-shop>p {
+		.shop-info div > p {
+			position: relative;
+			min-width: 600%;
+			width: auto;
+			left: -1.6em;
 			font-family: 'Nanum Gothic', sans-serif;
-			font-size: 12px;
-			margin-bottom: 4px;
-			display: block;
+			font-size: 0.85em;
+			margin-top: 1em;
+		}
+		
+		.blank {
+			width: 100%;
+			margin: 0;
+			height: 10%;
+			background-color: #F2F5F9;
 		}
 	</style>
 </head>
@@ -193,35 +226,34 @@
 					<section>
 						<div class="shop-detail">
 							<div class="detail-trailer-list">
-								<div class="similar-shop">
-									<p>비슷한 샵</p>
-								</div>
-								<ul class="face-area">
-									<li>
-										<a href="#"><img src="https://dummyimage.com/64x64/000/fff"></a>
-									</li>
-									<li>
-										<a href="#"><img src="https://dummyimage.com/64x64/000/fff"></a>
-									</li>
-									<li>
-										<a href="#"><img src="https://dummyimage.com/64x64/000/fff"></a>
-									</li>
-									<li>
-										<a href="#"><img src="https://dummyimage.com/64x64/000/fff"></a>
-									</li>
-								</ul>
-							</div>
-							<div class="centered">
-								<a href="#"><img src="${ thumbNailImage }"></a>
-							</div>
-							<div>
-								<div class="list-container">
+								<div class="shop-info">
 									<div>
 										<h2><%= service.getShopName() %></h2>
 									</div>
 									<div>
 										<p>스트릿·도매스틱</p>
 									</div>
+								</div>
+								<!-- <ul class="face-area">
+									<li>
+										<a href="#"><img src="https://dummyimage.com/64x64/000/fff"></a>
+									</li>
+									<li>
+										<a href="#"><img src="https://dummyimage.com/64x64/000/fff"></a>
+									</li>
+									<li>
+										<a href="#"><img src="https://dummyimage.com/64x64/000/fff"></a>
+									</li>
+									<li>
+										<a href="#"><img src="https://dummyimage.com/64x64/000/fff"></a>
+									</li>
+								</ul> -->
+							</div>
+							<div class="centered">
+								<a href="#"><img src="${ thumbNailImage }"></a>
+							</div>
+							<div>
+								<div class="list-container">
 									<div>
 										<a class="btn" href="<%= service.getLink() %>">바로가기</a>
 										<a class="btn plus" href="<%= service.getLink() %>">&nbsp;</a>
@@ -230,8 +262,8 @@
 							</div>
 						</div>
 					</section>
-
-					<jsp:include page="/pages/components/filterbox.jsp"></jsp:include>
+					<div class="blank"></div>
+					<%-- <jsp:include page="/pages/components/filterbox.jsp"></jsp:include> --%>
 					<c:choose>
 						<c:when test="${list != null}">
 							<%
@@ -245,9 +277,14 @@
 									<h2>${card.getTitle()}</h2>
 									<p>${card.getPrice()}</p>
 									<p>${card.getShopname()}</p>
-									<button class="like-button"></button>
 								</div>
 							</div>
+
+							<script>
+								$("p[d-<%= card.getId() %>]").on('click', function() {
+									window.open(${card.getLink()},"_blank");
+								})
+							</script>
 							<%
                     			}
                     		%>
