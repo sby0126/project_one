@@ -51,23 +51,33 @@
         `);
 
             $("#search-button").on("click", () => {
+                this.search();
+            });
 
-                const params = new URLSearchParams(location.search);
-                
-                if(!params.get("type")) {
-                    params.set("type", "search");
-                    const searchQuery = $(".search-box").val();
-                    if(!searchQuery) {
-                        searchQuery = "";
-                    }
-                    params.set("searchQuery", searchQuery);
+            // 엔터키로 검색
+            $("body").keydown((ev) => {
+                if(ev.keyCode == 13) {
+                    this.search();
                 }
-
-                location.search = params.toString();
             });
 
             this.load(this.initWithEvent.bind(this));
             this.initWithPages();
+        },
+
+        search() {
+            const params = new URLSearchParams(location.search);
+                
+            if(!params.get("type")) {
+                params.set("type", "search");
+                const searchQuery = $(".search-box").val();
+                if(!searchQuery) {
+                    searchQuery = "";
+                }
+                params.set("searchQuery", searchQuery);
+            }
+
+            location.search = params.toString();            
         },
 
         /**
