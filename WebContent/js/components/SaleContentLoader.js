@@ -38,7 +38,6 @@ export class SaleContentLoader extends Component {
                 return;
             }
 
-            this._currentCards -= 20;
             this._data = data;
 
             if(this._currentCards >= this._maxCards) {

@@ -47,7 +47,6 @@ export class ShopContentLoader extends Component {
                 return;
             }
 
-            this._currentCards -= count;
             this._data = data;
 
             if(this._currentCards >= this._maxCards) {
@@ -286,17 +285,17 @@ export class ShopContentLoader extends Component {
 
                 if(this._currentCards < this._maxCards) {
                     
-                    // 새로운 카드를 생성합니다 (빈껍데기)
-                    for(let i = 0; i < this._fetchCards; i++) {
-                        const card = $(`
-                        <div class="card">
-                            <p>
-                            </p>
-                        </div>                    
-                        `)
-                        $(".card-container").append(card);
-                        this._items.push(card.get(0));
-                    }
+                    // // 새로운 카드를 생성합니다 (빈껍데기)
+                    // for(let i = 0; i < this._fetchCards; i++) {
+                    //     const card = $(`
+                    //     <div class="card">
+                    //         <p>
+                    //         </p>
+                    //     </div>                    
+                    //     `)
+                    //     $(".card-container").append(card);
+                    //     this._items.push(card.get(0));
+                    // }
 
                 }
                 this.appendCards();

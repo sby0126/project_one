@@ -20,7 +20,7 @@ public class ContentLoader {
 						+ " a.shopType = ? AND"
 						+ " a.imgUrl = b.contentUrl");
 		
-		qlList.put("전체 데이터 추출2", "SELECT *"
+		qlList.put("전체 데이터 추출2", "SELECT DISTINCT *"
 				+ " FROM tblproduct"
 				+ " WHERE pageType = ? AND"
 				+ " genderType = ? AND"
