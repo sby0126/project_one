@@ -35,46 +35,69 @@
             <div class="contents-wrapper">
                 <div class="contents-header">
                     <div class="contents-item-information">
-                    	<form action="/contents/itemUploader.do">
+                    	<form id="uploader" method="POST" action="/contents/itemUploader.do" enctype="multipart/form-data">
 	                        <div class="item">
+	                        
 	                            <div class="contents-item-title">
-	                                <input type="text" id="input-item-title">
-	                                <span>제목</span>                            
-	                            </div>
-	                            <div class="contents-item-title">
-	                                <input type="number" id="input-item-price" step="1000" min="1000">
-	                                <span>상품 가격</span>                            
-	                            </div>        
+	                                <span>페이지 타입</span>                            
+	                                <select style="margin-right: 1em;" name="pageType">
+	                                	<option value="shop" selected>SHOP</option>
+	                                	<option value="item">ITEM</option>
+	                                	<option value="sale">SALE</option>
+	                                </select>
+	                            </div>    
+	                             
 	                            <div class="contents-item-title">
 	                                <span>성별 : </span>                            
-	                                <select style="margin-right: 1em;">
+	                                <select style="margin-right: 1em;" name="genderType">
 	                                	<option value="M" selected>남자</option>
 	                                	<option value="F">여자</option>
 	                                </select>
-	                            </div>        
-	                            <div class="contents-item-title">
-	                            	<input type="text" value="">
-	                                <span>상점 이름</span>  
-	                            </div>                                 
+	                            </div>   	
+	                                                        
 	                            <div class="contents-item-title">
 	                                <span>상점 타입</span>                            
-	                                <select style="margin-right: 1em;">
+	                                <select style="margin-right: 1em;" name="shopType">
 	                                	<option value="S" selected>소호</option>
 	                                	<option value="B">브랜드</option>
 	                                </select>
-	                            </div>        
+	                            </div>  
+	                            
 	                            <div class="contents-item-title">
-	                            	<input type="text" value="">
-	                                <span>링크</span>  
-	                            </div>        
+	                            	<input type="text" name="shopName" value="">
+	                                <span>상점 이름</span>  
+	                            </div>     	 
+	                            
 	                            <div class="contents-item-title">
-	                            	<input type="text" value="">
+	                            	<input type="text" name="texts" value="">
 	                                <span>유형(예: 20대,30대트랜드·캐쥬얼)</span>  
-	                            </div>                                  
+	                            </div>
+	                            
 	                            <div class="contents-item-title">
 	                                <span style="margin-right: 1em;">상품 썸네일</span>                            
-	                                <input type="file" id="input-item-image" onchange="updateImage(this)">
-	                            </div>      
+	                                <input type="file" id="input-item-image" name="contentUrl" onchange="updateImage(this)">
+	                            </div>      	                                          	                                                       
+	                            	                                                         	                        
+	                            <div class="contents-item-title">
+	                                <input type="text" name="title" id="input-item-title">
+	                                <span>제목</span>                            
+	                            </div>
+	                            
+	                            <div class="contents-item-title">
+	                                <input type="number" name="price" id="input-item-price" step="1000" min="1000">
+	                                <span>상품 가격</span>                            
+	                            </div>        
+     
+	                            <div class="contents-item-title">
+	                                <input type="text" name="term" id="input-item-term">
+	                                <span>Term</span>                            
+	                            </div>
+
+	                            <div class="contents-item-title">
+	                            	<input type="text" name="link" value="">
+	                                <span>링크</span>  
+	                            </div>        
+                    
 	                        </div>
 	                        <div class="item">
 	                            <div class="contents-item-title content-item-thum">
@@ -89,7 +112,6 @@
                 <div class="contents-tail">
                     <button id="upload-ok">작성</button>
                     <button id="upload-cancel">취소</button>
-
                 </div>
             </div>
 
@@ -163,6 +185,103 @@
             placeholder: '상품 상세 정보를 작성하세요.',
             theme: 'snow',
         });
+        
+    	
+        /**
+         * 이미지를 업로드 합니다.
+         */
+//         function selectImage() {
+//             const input = document.createElement("input");
+//             input.type = "file";
+//             input.onchange = function () {
+//                 const formData = new FormData();
+//                 const file = $(this)[0].files[0];
+//                 formData.append('image', file);
+                
+//                 const pageType = $("*[name='pageType']").val();
+//                 const genderType = $("*[name='genderType']").val();
+//                 const shopType = $("*[name='shopType']").val();
+                
+//                 formData.append("pageType", pageType);
+//                 formData.append("genderType", genderType);
+//                 formData.append("shopType", shopType);
+
+//                 const filename = file.name || "";
+//                 let mimeType = '';
+
+//                 if(filename.toLowerCase().indexOf(".png") >= 0) {
+//                     console.log("이미지입니다.")
+//                     mimeType = "image";
+//                 }
+
+//                 // AJAX를 통해 이미지를 서버에 업로드합니다.
+//                 $.ajax({
+//                     type: "POST",
+//                     enctype: "multipart/form-data",
+//                     url: "/board/qna/imageUpload.do",
+//                     data: formData,
+//                     processData: false,
+//                     contentType: false,
+//                     success: function (data) {
+//                         const range = quill.getSelection();
+//                         if(mimeType == "image") {
+//                             quill.insertEmbed(range.index, 'image', "/images/" + pageType + "/" + genderType + "/" + shopType + "/" + data.url);
+//                         }
+//                     },
+//                     error: function (err) {
+//                         console.warn(err);
+//                     }
+//                 })
+//             }
+
+//             input.click();
+//         }       
+        
+	    /**
+	     * 이미지를 업로드 합니다.
+	     */
+	    function selectImage() {
+	        const input = document.createElement("input");
+	        input.type = "file";
+	        input.onchange = function () {
+	            const formData = new FormData();
+	            const file = $(this)[0].files[0];
+	            formData.append('image', file);
+	
+	            const filename = file.name || "";
+	            let mimeType = '';
+	
+	            if(filename.toLowerCase().indexOf(".png") >= 0) {
+	                console.log("이미지입니다.")
+	                mimeType = "image";
+	            }
+	
+	            // AJAX를 통해 이미지를 서버에 업로드합니다.
+	            $.ajax({
+	                type: "POST",
+	                enctype: "multipart/form-data",
+	                url: "/board/qna/imageUpload.do",
+	                data: formData,
+	                processData: false,
+	                contentType: false,
+	                success: function (data) {
+	                    const range = quill.getSelection();
+	                    if(mimeType == "image") {
+	                        quill.insertEmbed(range.index, 'image', "/uploads/" + data.url);
+	                    }
+	                },
+	                error: function (err) {
+	                    console.warn(err);
+	                }
+	            })
+	        }
+	
+	        input.click();
+	    }        
+        
+        quill.getModule("toolbar").addHandler('image', () => {
+            selectImage();
+        });
 
         // 썸네일 이미지 업데이트
         function updateImage(src) {
@@ -202,13 +321,14 @@
                 contents: quill.root.innerHTML
             };
 
-            alert("클립보드에 복사되었습니다.");
-
             navigator.clipboard.writeText(JSON.stringify(result));
 
             if(localStorage.getItem("thum")) {
                 localStorage.removeItem("thum");
             }
+            
+            const uploader = document.querySelector("#uploader");
+            uploader.submit();
         }
 
         // 상품 제목 입력 시, placeholder 제어
