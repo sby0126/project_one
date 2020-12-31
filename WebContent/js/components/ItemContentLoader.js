@@ -15,7 +15,7 @@ export class ItemContentLoader extends Component {
     initMembers(parent) {
         super.initMembers(parent);
 
-        this._currentCards = 20;
+        this._currentCards = 0;
         this._fetchCards = 20;
         this._maxCards = 100;
         this._interval = 800;
@@ -61,7 +61,7 @@ export class ItemContentLoader extends Component {
     
             const parent = $(".card-container");
     
-            for(let i = 0; i < this._offset.end - this._currentCards; i++) {
+            for(let i = 0; i < count; i++) {
                 setTimeout(() => {
                     // const lastChildCount = document.querySelector(".card-container").children.length;
                     // const cloneNode = document.querySelector(".card").cloneNode(true);
