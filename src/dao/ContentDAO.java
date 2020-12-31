@@ -140,11 +140,11 @@ public class ContentDAO implements IDAO {
 		try {
 			conn = pool.getConnection();
 			pstmt = conn.prepareStatement(
-					getQL("전체 데이터 추출")
+					getQL("전체 데이터 추출2")
 					+ (category != null ? " AND texts LIKE ?" : "")
 					+ (ages != null ? " AND texts LIKE ?" : "")
-					+ " group by contentUrl"
-					+ " ORDER BY b.id"
+//					+ " group by contentUrl"
+//					+ " ORDER BY b.id"
 					+ " limit 150"
 					);
 			pstmt.setString(1, pageType);

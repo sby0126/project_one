@@ -147,7 +147,7 @@ export class ItemContentLoader extends Component {
                  * 파일명이 http로 시작하면
                  * @type {String}
                  */
-                const startUrl = itemImg[filename.url];
+                const startUrl = itemImg[filename.url] || "";
                 if(startUrl.startsWith("http")) {
                     isOtherCDN = true;
                 }

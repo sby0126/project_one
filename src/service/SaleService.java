@@ -89,7 +89,7 @@ public class SaleService extends ContentService {
 			updateMyShop(newContentData, vo.getId(), customerId);
 			
 			contentData.add(newContentData);
-			imageData.put(vo.getContenturl(), vo.getImgid());
+//			imageData.put(vo.getContenturl(), vo.getImgid());
 		}
 		
 		return root;

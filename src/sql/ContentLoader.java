@@ -20,6 +20,13 @@ public class ContentLoader {
 						+ " a.shopType = ? AND"
 						+ " a.imgUrl = b.contentUrl");
 		
+		qlList.put("전체 데이터 추출2", "SELECT *"
+				+ " FROM tblproduct"
+				+ " WHERE pageType = ? AND"
+				+ " genderType = ? AND"
+				+ " shopType = ?"
+				);		
+		
 		qlList.put("나이 및 카테고리로 필터링", qlList.get("전체 데이터 추출")
 					+ " AND texts LIKE ? AND"
 					+ " texts LIKE ?"

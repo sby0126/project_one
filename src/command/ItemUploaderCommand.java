@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONObject;
 
 import com.oreilly.servlet.MultipartRequest;
@@ -53,14 +54,20 @@ public class ItemUploaderCommand extends Command {
 		String genderType = multi.getParameter("genderType");
 		String shopType = multi.getParameter("shopType");
 		
-		String targetPath = "/images/" + pageType + "/" + genderType + "/" + shopType; 
+		String targetPath = "/images/" + pageType + "/" + genderType + "/" + shopType;
+		
+		// 할인할 경우.
+		if(pageType.equals("sale")) {
+			targetPath = "/images/" + pageType + "/" + genderType;
+		}
+		
 		String realFilePath = context.getRealPath(targetPath);
 		
-		try {
-			Path filePath = Paths.get(realFolder + "\\" + multi.getOriginalFileName("contentUrl"));
-			Path filePathToMove = Paths.get(realFilePath);
+		try {			
+			File file = FileUtils.getFile(realFolder + "/" + multi.getOriginalFileName("contentUrl"));
+			File fileToMove = FileUtils.getFile(realFilePath);
 			
-			Files.move(filePath, filePathToMove);
+			FileUtils.moveFileToDirectory(file, fileToMove, false);
 			
 		} catch(Exception e) {
 			e.printStackTrace();
