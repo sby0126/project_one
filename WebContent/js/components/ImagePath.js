@@ -1,7 +1,7 @@
 
 const config = {
     // 트래픽 월 100GB
-    isLocalMode: false,
+    isLocalMode: true,
     githubCDN: "https://raw.githubusercontent.com/biud436/project_one/main/WebContent",
 };
 
