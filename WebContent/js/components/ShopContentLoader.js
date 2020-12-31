@@ -10,7 +10,7 @@ export class ShopContentLoader extends Component {
 
         this._currentCards = 0; // 현재 카드 갯수
         this._fetchCards = 20; // 새로 가져올 카드 갯수
-        this._maxCards = 20; // 최대 카드 갯수
+        this._maxCards = 100; // 최대 카드 갯수
         this._interval = 100; // 이벤트 과대 실행 방지 용 실행 간격 100ms
         this._data = {};
 
@@ -41,6 +41,11 @@ export class ShopContentLoader extends Component {
 
         const {start, end} = this._offset;
 
+        if(this._currentCards >= this._maxCards) {
+            alert("마지막 페이지 입니다.");
+            return;
+        }        
+
         this._dataLoader.load("shop", (data) => {
 
             if(data == null) {
@@ -48,10 +53,7 @@ export class ShopContentLoader extends Component {
             }
 
             this._data = data;
-
-            if(this._currentCards >= this._maxCards) {
-                console.log("새로 가져올 데이터가 필요합니다.");
-            }
+            this._maxCards = this._data.contentData.length;
 
             console.log("시작 %d, 종료: %d", this._offset.start, this._offset.end);          
     
