@@ -4,7 +4,7 @@ and the project called 'Project One' consists with below specs :
 
 |Name|Version|
 |--|--|
-|JDK|java 15 2020-09-15, Java(TM) SE Runtime Environment (build 15+36-1562)|
+|JDK|JDK 15 (Windows, Dev), Open JDK 11 (Linux)|
 |Maria DB|10.3.25-MariaDB-0ubuntu0.20.04.1|
 |Tomcat|9|
 |port|8080, 9988(dev-channel)|
@@ -22,6 +22,7 @@ and the project called 'Project One' consists with below specs :
 | undercore.js | MIT | https://github.com/jashkenas/underscore/blob/master/LICENSE |
 | 네이버 로그인 API | https://developers.naver.com/products/terms/ | https://developers.naver.com/docs/login/overview/ |
 | 카카오 로그인 API | MIT | https://developers.kakao.com/docs/latest/ko/kakaologin/common |
+| 페이스북 로그인 API | MIT | - |
 | 다음 우편 번호 서비스 | Free | http://postcode.map.daum.net/ |
 | EmailJS | Free Version | https://www.emailjs.com/ |
 | JSON.simple | Apache 2.0 | https://mvnrepository.com/artifact/com.googlecode.json|simple/json|simple/1.1.1 |
