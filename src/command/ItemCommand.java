@@ -36,6 +36,9 @@ public class ItemCommand extends Command {
 		
 		String keyword = request.getParameter("keyword");
 		
+		int start = Integer.parseInt(request.getParameter("start"));
+		int end = Integer.parseInt(request.getParameter("end"));
+		
 		if(!pageType.equals("item")) {
 			return null;
 		}
@@ -46,10 +49,10 @@ public class ItemCommand extends Command {
 		String id = getUserId(request);
 		
 		if(keyword != null) {
-			ContentsSearchService sv = new ContentsSearchService();
-			data = sv.getItem(pageType, genderType, shopType, category, ages, keyword, id);
-		} else {
-			data = itemService.getItem(pageType, genderType, shopType, category, ages, id);	
+			ContentsSearchService sv = new ContentsSearchService();	
+			data = sv.getItem(pageType, genderType, shopType, category, ages, keyword, id, start, end);
+		} else {		
+			data = itemService.getItem(pageType, genderType, shopType, category, ages, id, start, end);	
 		}
 		
 		response.setCharacterEncoding("UTF-8");

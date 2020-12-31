@@ -13,6 +13,11 @@ export class SaleContentLoader extends Component {
         this._maxCards = 100; // 최대 카드 갯수
         this._interval = 800; // 스크롤 이벤트 실행 간격 (과다 실행 방지용)
 
+        this._offset = {
+            start: 20,
+            end: 20 + this._fetchCards
+        }; 
+
         /**
          * @type {DataLoader}
          */
@@ -25,21 +30,39 @@ export class SaleContentLoader extends Component {
      */
     addFetchData(count) {
 
-        if(this._currentCards >= this._maxCards) {
-            console.log("새로 가져올 데이터가 필요합니다.");
-        }
+        const {start, end} = this._offset;
 
-        const parent = $(".card-container");
+        this._dataLoader.load("sale", (data) => {
 
-        for(let i = 0; i < count; i++) {
-            setTimeout(() => {
-                const lastChildCount = document.querySelector(".card-container").children.length;
-                const cloneNode = document.querySelector(".card").cloneNode(true);
-                cloneNode.querySelector("p").setAttribute("d-"+(lastChildCount+i), "");
-                this._currentCards++;
-                parent.append(cloneNode);
-            }, 0);
-        }
+            if(data == null) {
+                return;
+            }
+
+            this._data = data;
+
+            if(this._currentCards >= this._maxCards) {
+                console.log("새로 가져올 데이터가 필요합니다.");
+            }
+    
+            this._offset.start = this._offset.end + 1;
+            this._offset.end = this._offset.start + count;
+    
+            console.log("시작 %d, 종료: %d", this._offset.start, this._offset.end);                
+    
+            const parent = $(".card-container");
+    
+            for(let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const lastChildCount = document.querySelector(".card-container").children.length;
+                    const cloneNode = document.querySelector(".card").cloneNode(true);
+                    cloneNode.querySelector("p").setAttribute("d-"+(lastChildCount+i), "");
+                    this._currentCards++;
+                    parent.append(cloneNode);
+                }, 0);
+            }
+        });
+
+
     }    
 
     /**
@@ -204,7 +227,7 @@ export class SaleContentLoader extends Component {
             }, this._interval);
 
             $(window).scroll(throttled);              
-        });
+        }, {start:0, end:20});
 
     }
 

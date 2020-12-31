@@ -33,6 +33,9 @@ public class SaleCommand extends Command {
 		
 		String keyword = request.getParameter("keyword");
 		
+		int start = Integer.parseInt(request.getParameter("start"));
+		int end = Integer.parseInt(request.getParameter("end"));
+						
 		if(!pageType.equals("sale")) {
 			return null;
 		}
@@ -41,7 +44,7 @@ public class SaleCommand extends Command {
 		String id = getUserId(request);
 		
 		SaleService saleService = new SaleService();
-		JSONObject data = saleService.getSale(pageType, genderType, shopType, id);
+		JSONObject data = saleService.getSale(pageType, genderType, shopType, id, start, end);
 		
 		response.setCharacterEncoding("UTF-8");
 		

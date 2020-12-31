@@ -113,7 +113,7 @@ public class ContentDAO implements IDAO {
 	 * @param shopType
 	 * @return
 	 */
-	public List<ProductVO> getData(String pageType, String genderType, String shopType, String category, String ages) {
+	public List<ProductVO> getData(String pageType, String genderType, String shopType, String category, String ages, int start, int end) {
 		
 		ResultSet rs = null;
 		List<ProductVO> list = null;
@@ -144,9 +144,9 @@ public class ContentDAO implements IDAO {
 					getQL("전체 데이터 추출2")
 					+ (category != null ? " AND texts LIKE ?" : "")
 					+ (ages != null ? " AND texts LIKE ?" : "")
-//					+ " group by contentUrl"
-//					+ " ORDER BY b.id"
-					+ " limit 150"
+					+ " group by contentUrl"
+					+ " ORDER BY id"
+					+ " limit ?, ?"
 					);
 			pstmt.setString(1, pageType);
 			pstmt.setString(2, genderType);
@@ -162,7 +162,13 @@ public class ContentDAO implements IDAO {
 			if(ages != null) {
 				i += 1;
 				pstmt.setString(i, "%" + ages + "%");
-			}			
+			}		
+			
+			i += 1;
+			pstmt.setInt(i, 0);
+			
+			i += 1;
+			pstmt.setInt(i, end);			
 			
 			rs = pstmt.executeQuery();
 			list = SQLHelper.putResult(rs, ProductVO.class);
@@ -178,7 +184,7 @@ public class ContentDAO implements IDAO {
 		return list;
 	}
 	
-	public List<ProductVO> searchData(String pageType, String genderType, String shopType, String category, String ages, String searchKeyword) {
+	public List<ProductVO> searchData(String pageType, String genderType, String shopType, String category, String ages, String searchKeyword, int start, int end) {
 		
 		ResultSet rs = null;
 		List<ProductVO> list = null;
@@ -207,12 +213,11 @@ public class ContentDAO implements IDAO {
 		try {
 			conn = pool.getConnection();
 			pstmt = conn.prepareStatement(
-					getQL("전체 데이터 추출")
+					getQL("전체 데이터 추출2")
 					+ (category != null ? " AND texts LIKE ?" : "")
 					+ (ages != null ? " AND texts LIKE ?" : "")
 					+ (searchKeyword != null ? " AND title like ?" : "")
-					+ " group by contentUrl"
-					+ " limit 40"
+					+ " limit ?, ?"
 					);
 			pstmt.setString(1, pageType);
 			pstmt.setString(2, genderType);
@@ -235,6 +240,12 @@ public class ContentDAO implements IDAO {
 				i += 1;
 				pstmt.setString(i, "%" + searchKeyword + "%");
 			}			
+			
+			i += 1;
+			pstmt.setInt(i, 0);
+			
+			i += 1;
+			pstmt.setInt(i, end);					
 			
 			rs = pstmt.executeQuery();
 			list = SQLHelper.putResult(rs, ProductVO.class);

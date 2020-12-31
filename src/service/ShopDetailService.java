@@ -53,6 +53,16 @@ public class ShopDetailService {
 		return myThumb;
 	}
 	
+	public String getTexts() {
+		String ret = "";
+		if(thumb != null && !thumb.isEmpty()) {
+			ret = thumb.get(0).getTexts();
+		}
+		
+		return ret;
+		
+	}
+	
 	public void createThumbnailImage() {
 		thumbNailImage = null;
 		

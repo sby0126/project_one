@@ -10,6 +10,7 @@ import vo.ProductVO;
 
 	
 public class ItemService extends ContentService {
+	
 	public JSONObject getOffset() {
 		JSONObject offset = new JSONObject();
 		
@@ -44,8 +45,8 @@ public class ItemService extends ContentService {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public JSONObject getItem(String pageType, String genderType, String shopType, String category, String ages, String customerId) {	
-		List<ProductVO> list = getDAO().getData(pageType, genderType, shopType, category, ages);
+	public JSONObject getItem(String pageType, String genderType, String shopType, String category, String ages, String customerId, int start, int end) {	
+		List<ProductVO> list = getDAO().getData(pageType, genderType, shopType, category, ages, start, end);
 		JSONObject root = new JSONObject();
 		
 		root.put("pageType", pageType );

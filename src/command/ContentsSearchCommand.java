@@ -32,6 +32,9 @@ public class ContentsSearchCommand extends Command {
 		String ages = request.getParameter("ages");		
 		String keyword = request.getParameter("keyword");
 		
+		int start = Integer.parseInt(request.getParameter("start"));
+		int end = Integer.parseInt(request.getParameter("end"));
+		
 		// 시간 값 획득
 		SimpleDateFormat format = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
 		Date time = new Date();
@@ -45,7 +48,7 @@ public class ContentsSearchCommand extends Command {
 		
 		// 키워드가 정상적으로 삽입되었는가?
 		if(isOK) {
-			data = service.getItem(pageType, genderType, shopType, category, ages, keyword, null);
+			data = service.getItem(pageType, genderType, shopType, category, ages, keyword, null, start, end);
 		}
 		
 		// JSON으로 내보냄.

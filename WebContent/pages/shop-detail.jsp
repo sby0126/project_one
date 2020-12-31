@@ -61,6 +61,16 @@
 		<%
 		 	for(int i = 0; i < list.size(); i++) {
 		 		ProductVO vo = list.get(i);
+		 		
+		 		String gndr = vo.getGendertype();
+		 		String shopType = vo.getShoptype();
+		 		String contentUrl = vo.getContenturl();		 		
+		 		
+		 		String imgUrl = "/images/item/" 
+							+ gndr + "/"
+							+ shopType + "/"
+							+ contentUrl;
+		 		
 		 %>
 		<style>
 			.card {
@@ -80,7 +90,7 @@
 				content: "";
 				width: 100%;
 				height: 78%;
-				background: url(<%=service.getMainUrl()+vo.getImgid()%>) left top;
+				background: url(<%=imgUrl%>) left top;
 				background-size: cover;
 				background-repeat: no-repeat;
 				position: absolute;
@@ -234,8 +244,11 @@
 										<h2><%= service.getShopName() %></h2>
 									</div>
 									<div>
-										<p>스트릿·도매스틱</p>
-									</div>
+										<p id="category"><%=service.getTexts() %></p>
+									</div>		
+									<script>
+										$("#category").text($("#category").text().replace(/([\d]+대\,[\d]+대\,[\d]+대)|([\d]+대[ ]*\,[ ]*[\d]+대)/, ""));									
+									</script>				
 								</div>
 								<!-- <ul class="face-area">
 									<li>
