@@ -127,6 +127,20 @@ export class FilterBoxButtons extends Component {
                                 return !$(elem).find("button").hasClass("isMyShop")
                             }).hide();
 
+                            if($(".card:visible").length === 0 && $(".item_selected_none").length === 0) {
+                                // $(".card-container").append(`
+                                // <div class="item_selected_none">
+                                //     <img class="item_selected_none_img" src="/images/b527471.png">
+                                //     <div class="item_selected_none_sp">상품이 없습니다.</div>
+                                //     <a href="#" onclick="history.go(-1);">
+                                //         <button class="item_selected_none_button">이전으로</button>
+                                //     </a>
+                                // </div>                                    
+                                // `).css({
+                                //     "width": "100%"
+                                // })
+                            }
+
                             break;                           
                         case ENUM.INTEREST:
                             $(".card-container").css({

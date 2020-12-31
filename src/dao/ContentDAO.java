@@ -43,7 +43,7 @@ public class ContentDAO implements IDAO {
 	};
 	
 	public String[] ITEM_CATEGORY = {
-			"", "상의", "아우터", "하의", "트레이닝", "수트", "신발", "가방", "액세서리"			
+			"", "ALL", "상의", "아우터", "하의", "트레이닝", "수트", "신발", "가방", "액세서리"		
 	};
 	
 	public final String[] AGES = {

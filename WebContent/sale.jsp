@@ -13,6 +13,7 @@
     <script src="https://kit.fontawesome.com/a99df0f94f.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/underscore@1.11.0/underscore-min.js"></script>
+    <link rel="stylesheet" href="../css/Recently_viewed_shop.css">
 </head>
 <body>
     <!-- 컨테이너의 시작 -->
@@ -181,15 +182,7 @@
         <!-- 본문의 시작 -->
         <section>
             <!-- 본문이 들어가는 래퍼 -->
-            <div class="contents-wrapper">
-				<div class="item_selected_none" style="display:none">
-					<!-- 		                    <button class="item_selected_none_all_del">전체삭제</button> -->
-					<img class="item_selected_none_img" src="/images/b527471.png">
-					<div class="item_selected_none_sp">상품이 없습니다.</div>
-					<a href="#" onclick="history.go(-1);">
-						<button class="item_selected_none_button">이전으로</button>
-					</a>
-				</div>                        
+            <div class="contents-wrapper">                    
             </div>
         </section>
     </div>
