@@ -10,7 +10,6 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 import action.ActionResult;
 import service.DetailInputService;
@@ -30,11 +29,16 @@ public class DetailInputCommand extends Command {
 		
 		DetailInputService detailInputService = new DetailInputService();
 		
-		String ctmid = request.getParameter("id");		
+		String ctmid = request.getParameter("id");
 		
 		List<String> pdOptionList = Arrays.asList(request.getParameterValues("pdoption"));
 		
-		List<CartNPayVO> cartList = new ArrayList<>();
+		if(pdOptionList == null) {System.out.println("상품 옵션 데이터가 없습니다");}
+		
+		System.out.println(pdOptionList);
+		
+		
+		List<CartNPayVO> cartList = new ArrayList<CartNPayVO>();
 		
 		List<ProductVO> pdlist = detailInputService.getProduct(request, title, price);
 		

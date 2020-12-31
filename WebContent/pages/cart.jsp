@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="org.json.simple.*"%>
 <%@ page import="org.json.*" %>
-<%@ page import="java.util.*" %>
+<%@ page import="java.util.*, java.util.Arrays" %>
 <%@ page import="javax.servlet.*" %>
 <%@ page import="vo.ProductVO" %>
 <%@ page import="vo.CartNPayVO" %>
@@ -12,15 +12,13 @@
 <%  
 
 	String id = (String)session.getAttribute("id");
-	String title = request.getParameter("title");
-	int productId = Integer.parseInt(request.getParameter("productId"));
-	int amount = Integer.parseInt(request.getParameter("amount"));
-	int price = Integer.parseInt(request.getParameter("price"));
 	
-	CartNPayVO cnp = null;
+	List dataList = Arrays.asList(request.getParameter("dataArray"));
 	
+	CartNPayVO cartlist = (CartNPayVO)dataList; 
 	
-
+	String ctmId = cartlist.getCtmId();
+	
 %>
 
 <html lang="ko">
@@ -58,30 +56,38 @@
                             </tr>
                             
                             <% 
-                            	if(list != null) {
-                            		for(int i = 0; i < list.size(); i++) {
+                            	int allQty = 0;
+                            	int perprice = 0;
+                            	int rltprice = 0;
+                            	if(cartlist != null) {
+                            		for(int i = 0; i < dataList.size(); i++ ) {
                             			
-                            			title = list.get(i).getTitle();
-                            			String img = list.get(i).getContenturl();
-                            			String uri = list.get(i).getLink();
-                            			perPrice = Integer.parseInt(list.get(i).getPrice());
+                            			String title = cartlist.getTitle();
+                            			int price = cartlist.getPrice();
+                            			int amount = cartlist.getAmount();
+                            			
+                            			String link = cartlist.getLink();
+                            			String contentUrl = cartlist.getContentUrl();
                             			int discnt = 0;
-                            			int rltprice = price - discnt;
+                            			perprice = price - discnt;
+                            			allQty += amount;
+                            			rltprice += perprice;
+                            			
                             %>
                             <tr>
                                 <td><input type="checkbox" name="chk" class="chkbox"></td>
-                                <td><img src="<%=img%>" href="<%=uri%>" class="product-img"></td> <!-- 구매할 상품 이미지 -->
-                                <td><p class="product-name"><a href="<%=uri%>"><%=title%></a></p> </td> <!-- 구매할 상품 이름 -->
+                                <td><a href="<%=link%>"><img src="<%=contentUrl%>" class="product-img"></a></td> <!-- 구매할 상품 이미지 -->
+                                <td><p class="product-name"><a href="<%=link%>"><%=title%></a></p> </td> <!-- 구매할 상품 이름 -->
                                 <td><input type="number" class="product-num" placeholder="<%=amount%>" min="1"></td> <!-- 구매 갯수 -->
-                                <td><P class="product-price"> <%=perPrice%> </P></td> <!-- 상품 가격-->
+                                <td><P class="product-price"> <%=price%> </P></td> <!-- 상품 가격-->
                                 <td><P class="product-discnt"> <%=discnt%> </P></td> <!-- 할인 -->
-                                <td><P class="product-rltprice"> <%=rltprice%> </P> </td> <!-- 상품 금액 -->
+                                <td><P class="product-rltprice"> <%=perprice%> </P> </td> <!-- 상품 금액 -->
                             </tr>
                             <%
                             		}
                             	}
                             
-                            	if(list == null) {
+                            	if(cartlist == null) {
                             	
                             %>
                             	  <h2> 장바구니에 상품이 없습니다 </h2>
@@ -96,8 +102,8 @@
                         <div class="page-pooter">
 		                	<table class="page-pooterbox">
 		                		<tr>
-		                			<td class='total-num'><p>총</p><span><%=list.size()%> 개</span></td>
-		                			<td class='total-price'><span><%=price%>원</span></td>
+		                			<td class='total-num'><p>총</p><span><%=allQty%> 개</span></td>
+		                			<td class='total-price'><span><%=rltprice%>원</span></td>
 		                		</tr>
 		                		<tr class="btn-zone">
                                     <td><button type="button" class="buy-product" onclick="">구매</button></td>
