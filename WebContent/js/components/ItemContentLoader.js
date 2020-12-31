@@ -63,13 +63,6 @@ export class ItemContentLoader extends Component {
     
             for(let i = 0; i < count; i++) {
                 setTimeout(() => {
-                    // const lastChildCount = document.querySelector(".card-container").children.length;
-                    // const cloneNode = document.querySelector(".card").cloneNode(true);
-                    
-                    // cloneNode.querySelector("p").setAttribute("d-"+(lastChildCount+i), "");
-    
-                    // this._currentCards++;
-                    // parent.append(cloneNode);
                     const child = $(                `
                     <div class="card">
                         <p>

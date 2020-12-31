@@ -9,7 +9,7 @@ export class ShopContentLoader extends Component {
         super.initMembers(parent);
 
         this._currentCards = 0; // 현재 카드 갯수
-        this._fetchCards = 10; // 새로 가져올 카드 갯수
+        this._fetchCards = 20; // 새로 가져올 카드 갯수
         this._maxCards = 20; // 최대 카드 갯수
         this._interval = 100; // 이벤트 과대 실행 방지 용 실행 간격 100ms
         this._data = {};
@@ -59,19 +59,19 @@ export class ShopContentLoader extends Component {
     
             for(let i = 0; i < count; i++) {
                 setTimeout(() => {
-                    const lastChildCount = document.querySelector(".card-container").children.length;
+                    const child = $(                `
+                    <div class="card">
+                        <p>
+                        </p>
+                    </div>                
+                    `);
+                    parent.append(child);
     
-                    // 기존 카드 데이터를 복제합니다 (자식 노드까지 복제 합니다)
-                    const cloneNode = document.querySelector(".card").cloneNode(true);
-    
-                    // 복제된 노드의 p 태그 데이터 속성을 변경합니다.
-                    cloneNode.querySelector("p").setAttribute("d-"+(lastChildCount+i), "");
-    
-                    // 현재 카드 값을 1 늘립니다.
-                    this._currentCards++;
-                    parent.append(cloneNode);
+                    this._items.push(child.get()[0]);
                 }, 0);
             }
+
+            this.appendCards();
 
         }, {start, end});
 
@@ -124,6 +124,21 @@ export class ShopContentLoader extends Component {
             }
 
             if(myImgData) {
+
+                if(!card) {
+                    const child = $(                `
+                    <div class="card">
+                        <p>
+                        </p>
+                    </div>                
+                    `);
+
+                    $(".card-container").append(child);
+    
+                    this._items.push(child.get()[0]);
+
+                    card = child.get(0);
+                }                   
 
                 this._loaders[idx] = true;
                 
@@ -206,7 +221,7 @@ export class ShopContentLoader extends Component {
                     });
 
                     return false;
-                });    	                
+                });
 
                 // 전체 상품 버튼이 클릭되었을 때 실행되어야 하는 내용을 정의하세요.
                 $(`div[data-id='${filename.id}'] > button.all-item-button`).on("click", (ev) => {
@@ -277,28 +292,15 @@ export class ShopContentLoader extends Component {
             this._data = data;
 
             // 로딩 직후, 새로운 카드 이미지를 바로 생성합니다.
-            this.appendCards();
+            this.addFetchData(20);  
             
             // 스크롤 시 새로운 카드 이미지를 일정 간격마다 추가합니다.
             const throttled  = _.throttle(() => {
-                console.log("실행됨");
+                const count = this._fetchCards;
+                if(this._data.length > this._currentCards + count) {
 
-                if(this._currentCards < this._maxCards) {
-                    
-                    // // 새로운 카드를 생성합니다 (빈껍데기)
-                    // for(let i = 0; i < this._fetchCards; i++) {
-                    //     const card = $(`
-                    //     <div class="card">
-                    //         <p>
-                    //         </p>
-                    //     </div>                    
-                    //     `)
-                    //     $(".card-container").append(card);
-                    //     this._items.push(card.get(0));
-                    // }
-
+                    this.addFetchData(count);
                 }
-                this.appendCards();
             }, this._interval);
 
             $(window).scroll(throttled);               
