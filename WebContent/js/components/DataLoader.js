@@ -46,19 +46,29 @@ export class DataLoader extends Component {
         
     }
 
-    load(pageType, success) {
+    load(pageType, success, option) {
         const prom = new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest();
-            // 
+            
+            let rangeQuery = "";
+            
+            // 불러올 데이터의 범위 제한 옵션입니다.
+            if(option) {
+                const {start, end} = option;
+                rangeQuery = "";
+                rangeQuery += `&start=` + start;
+                rangeQuery += `&end=` + end;
+            }
+            
             // ${pageType}.do?pageType=${pageType}&shopType=S&gndr=F
             // xhr.open("GET", `json/prebuilt.json`); 
             if(pageType === 'item' && this.keyword) {
-                xhr.open("GET", `/contents/${pageType}.do?pageType=${pageType}&shopType=${this.shopType}&gndr=${this.gndr}&category=${this.category}&ages=${this.ages}&keyword=${this.keyword}`);
+                xhr.open("GET", `/contents/${pageType}.do?pageType=${pageType}&shopType=${this.shopType}&gndr=${this.gndr}&category=${this.category}&ages=${this.ages}&keyword=${this.keyword}${rangeQuery}`);
             } else {
                 if(pageType !== "sale") {
-                    xhr.open("GET", `/contents/${pageType}.do?pageType=${pageType}&shopType=${this.shopType}&gndr=${this.gndr}&category=${this.category}&ages=${this.ages}`);
+                    xhr.open("GET", `/contents/${pageType}.do?pageType=${pageType}&shopType=${this.shopType}&gndr=${this.gndr}&category=${this.category}&ages=${this.ages}${rangeQuery}`);
                 } else {
-                    xhr.open("GET", `/contents/${pageType}.do?pageType=${pageType}&shopType=${this.shopType}&gndr=${this.gndr}`);
+                    xhr.open("GET", `/contents/${pageType}.do?pageType=${pageType}&shopType=${this.shopType}&gndr=${this.gndr}${rangeQuery}`);
                 }
                 
             }

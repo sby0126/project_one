@@ -14,6 +14,11 @@ export class ShopContentLoader extends Component {
         this._interval = 100; // 이벤트 과대 실행 방지 용 실행 간격 100ms
         this._data = {};
 
+        this._offset = {
+            start: 20,
+            end: 20 + this._fetchCards
+        };
+
         this._loaders = {};
 
         this._isLocalMode = true;
@@ -30,28 +35,47 @@ export class ShopContentLoader extends Component {
      * @param {Number} count 
      */
     addFetchData(count) {
+    
+        this._offset.start = this._offset.end + 1;
+        this._offset.end = this._offset.start + count;
 
-        if(this._currentCards >= this._maxCards) {
-            console.log("새로 가져올 데이터가 필요합니다.");
-        }
+        const {start, end} = this._offset;
 
-        const parent = $(".card-container");
+        this._dataLoader.load("shop", (data) => {
 
-        for(let i = 0; i < count; i++) {
-            setTimeout(() => {
-                const lastChildCount = document.querySelector(".card-container").children.length;
+            if(data == null) {
+                return;
+            }
 
-                // 기존 카드 데이터를 복제합니다 (자식 노드까지 복제 합니다)
-                const cloneNode = document.querySelector(".card").cloneNode(true);
+            this._currentCards -= count;
+            this._data = data;
 
-                // 복제된 노드의 p 태그 데이터 속성을 변경합니다.
-                cloneNode.querySelector("p").setAttribute("d-"+(lastChildCount+i), "");
+            if(this._currentCards >= this._maxCards) {
+                console.log("새로 가져올 데이터가 필요합니다.");
+            }
 
-                // 현재 카드 값을 1 늘립니다.
-                this._currentCards++;
-                parent.append(cloneNode);
-            }, 0);
-        }
+            console.log("시작 %d, 종료: %d", this._offset.start, this._offset.end);          
+    
+            const parent = $(".card-container");
+    
+            for(let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const lastChildCount = document.querySelector(".card-container").children.length;
+    
+                    // 기존 카드 데이터를 복제합니다 (자식 노드까지 복제 합니다)
+                    const cloneNode = document.querySelector(".card").cloneNode(true);
+    
+                    // 복제된 노드의 p 태그 데이터 속성을 변경합니다.
+                    cloneNode.querySelector("p").setAttribute("d-"+(lastChildCount+i), "");
+    
+                    // 현재 카드 값을 1 늘립니다.
+                    this._currentCards++;
+                    parent.append(cloneNode);
+                }, 0);
+            }
+
+        }, {start, end});
+
     }
 
     /**
@@ -258,6 +282,8 @@ export class ShopContentLoader extends Component {
             
             // 스크롤 시 새로운 카드 이미지를 일정 간격마다 추가합니다.
             const throttled  = _.throttle(() => {
+                console.log("실행됨");
+
                 if(this._currentCards < this._maxCards) {
                     
                     // 새로운 카드를 생성합니다 (빈껍데기)
@@ -277,7 +303,7 @@ export class ShopContentLoader extends Component {
             }, this._interval);
 
             $(window).scroll(throttled);               
-        });
+        }, {start:0, end:20});
 
     }
     

@@ -15,13 +15,18 @@ export class ItemContentLoader extends Component {
     initMembers(parent) {
         super.initMembers(parent);
 
-        this._currentCards = 0;
+        this._currentCards = 20;
         this._fetchCards = 20;
         this._maxCards = 100;
         this._interval = 800;
 
         this._loaders = {};
         this._index = 0;
+
+        this._offset = {
+            start: 20,
+            end: 20 + this._fetchCards
+        };
 
         /**
          * @type {DataLoader}
@@ -35,34 +40,50 @@ export class ItemContentLoader extends Component {
      */
     addFetchData(count) {
 
-        if(this._currentCards >= this._maxCards) {
-            console.log("새로 가져올 데이터가 필요합니다.");
-        }
+        this._offset.start = this._offset.end + 1;
+        this._offset.end = this._offset.start + count;
 
-        const parent = $(".card-container");
+        const {start, end} = this._offset;
 
-        for(let i = 0; i < count; i++) {
-            setTimeout(() => {
-                // const lastChildCount = document.querySelector(".card-container").children.length;
-                // const cloneNode = document.querySelector(".card").cloneNode(true);
-                
-                // cloneNode.querySelector("p").setAttribute("d-"+(lastChildCount+i), "");
+        this._dataLoader.load("item", (data) => {
 
-                // this._currentCards++;
-                // parent.append(cloneNode);
-                const child = $(                `
-                <div class="card">
-                    <p>
-                    </p>
-                </div>                
-                `);
-                parent.append(child);
+            if(data == null) {
+                return;
+            }
+            
+            this._data = data;
 
-                this._items.push(child.get()[0]);
-            }, 0);
-        }
+            if(this._currentCards >= this._maxCards) {
+                console.log("새로 가져올 데이터가 필요합니다.");
+            }
 
-        this.appendCards();
+            console.log("시작 %d, 종료: %d", this._offset.start, this._offset.end);        
+    
+            const parent = $(".card-container");
+    
+            for(let i = 0; i < this._offset.end - this._currentCards; i++) {
+                setTimeout(() => {
+                    // const lastChildCount = document.querySelector(".card-container").children.length;
+                    // const cloneNode = document.querySelector(".card").cloneNode(true);
+                    
+                    // cloneNode.querySelector("p").setAttribute("d-"+(lastChildCount+i), "");
+    
+                    // this._currentCards++;
+                    // parent.append(cloneNode);
+                    const child = $(                `
+                    <div class="card">
+                        <p>
+                        </p>
+                    </div>                
+                    `);
+                    parent.append(child);
+    
+                    this._items.push(child.get()[0]);
+                }, 0);
+            }
+    
+            this.appendCards();
+        }, {start, end});
 
     }    
 
@@ -287,21 +308,23 @@ export class ItemContentLoader extends Component {
             this._data = data;
 
             // 기본적으로 
-            this.addFetchData(10);            
+            this.addFetchData(20);            
 
             // 전역 스크롤 이벤트 선언
             // 스크롤 할 때 마다 많은 스크롤 이벤트가 실행됩니다.
             // 그것을 막지하는 기법을 '쓰로틀링'이라고 하고, 언더스코어 라이브러리에서 지원하는 쓰토틀링 라이브러리로
             // 문제를 해결했습니다.
             const throttled  = _.throttle(() => {
-                if(this._data.length > this._currentCards + this._fetchCards) {
-                    this.addFetchData(10);
+                const count = this._fetchCards;
+                if(this._data.length > this._currentCards + count) {
+
+                    this.addFetchData(count);
                 }
             }, this._interval);
 
             // 쓰로틀링 함수는 반드시 개별 전달되어야 합니다.
             $(window).scroll(throttled);            
-        });
+        }, {start:0, end:20});
 
 
     }

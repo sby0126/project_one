@@ -44,8 +44,8 @@ public class SaleService extends ContentService {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public JSONObject getSale(String pageType, String genderType, String shopType, String customerId) {	
-		List<ProductVO> list = getDAO().getData(pageType, genderType, shopType, null, null);
+	public JSONObject getSale(String pageType, String genderType, String shopType, String customerId, int start, int end) {	
+		List<ProductVO> list = getDAO().getData(pageType, genderType, shopType, null, null, start, end);
 		JSONObject root = new JSONObject();
 		
 		root.put("pageType", pageType );

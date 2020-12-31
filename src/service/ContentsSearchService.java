@@ -9,7 +9,7 @@ import dao.ContentDAO;
 import vo.ProductVO;
 
 public class ContentsSearchService extends ContentService  {
-
+	
 	public boolean searchKeyword(String keyword, String time) {
 		
 		ContentDAO contentDAO = ContentDAO.getInstance();
@@ -30,8 +30,8 @@ public class ContentsSearchService extends ContentService  {
 	
 	
 	@SuppressWarnings("unchecked")
-	public JSONObject getItem(String pageType, String genderType, String shopType, String category, String ages, String keyword, String customerId) {	
-		List<ProductVO> list = getDAO().searchData(pageType, genderType, shopType, category, ages, keyword);
+	public JSONObject getItem(String pageType, String genderType, String shopType, String category, String ages, String keyword, String customerId, int start, int end) {	
+		List<ProductVO> list = getDAO().searchData(pageType, genderType, shopType, category, ages, keyword, start, end);
 		JSONObject root = new JSONObject();
 		
 		root.put("pageType", pageType );
