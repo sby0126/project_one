@@ -9,7 +9,7 @@
         flex: 1 1 0;
 
         .item {
-            width: 48%;
+            width: 100%;
             .contents-item-title {
                 width: 100%;
                 position: relative;
@@ -59,9 +59,12 @@
 }
 
 .contents-tail {
-    display: inline-block;
+    display: flex;
     margin-top: 1em;
     text-align: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    margin-bottom: 2em;
 
     button {
         border-radius: 0;
@@ -70,13 +73,14 @@
         border-color: #0d6efd;
         outline: none;
         border-width: 1px;
+        column-gap: 1em;
 
         &:hover {
             color: #fff;
             background-color: #0b5ed7;
             border-color: #0a58ca;
         }
-        
+
     }
 
 }

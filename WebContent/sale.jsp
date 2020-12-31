@@ -67,13 +67,13 @@
                 <div class="header-popup-container">
                     <ul class="header-menu-list">
                         <li class="menu">
-                            <a href="pages/recently_viewed_shop.jsp" class="menu-link">
+                            <a href="/pages/recently_viewed_shop.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">최근 본 샵 <em>0</em></p>
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="pages/recently_viewed_item.jsp" class="menu-link">
+                            <a href="/pages/recently_viewed_item.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">최근 본 상품 <em>0</em></p>
                             </a>
@@ -101,7 +101,7 @@
 	                        </c:choose>
                         </li>
                         <li class="menu">
-                            <a href="pages/board-default.jsp" class="menu-link">
+                            <a href="/pages/board-default.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">1:1 문의</p>
                             </a>
@@ -113,7 +113,7 @@
                             </a>
                         </li>
                         <li class="menu">
-                            <a href="pages/map.jsp" class="menu-link">
+                            <a href="/pages/map.jsp" class="menu-link">
                                 <div class="menu-icon"></div>
                                 <p class="menu-title">소개 및 약관</p>
                             </a>
@@ -180,10 +180,16 @@
 
         <!-- 본문의 시작 -->
         <section>
-
-
             <!-- 본문이 들어가는 래퍼 -->
             <div class="contents-wrapper">
+				<div class="item_selected_none" style="display:none">
+					<!-- 		                    <button class="item_selected_none_all_del">전체삭제</button> -->
+					<img class="item_selected_none_img" src="/images/b527471.png">
+					<div class="item_selected_none_sp">상품이 없습니다.</div>
+					<a href="#" onclick="history.go(-1);">
+						<button class="item_selected_none_button">이전으로</button>
+					</a>
+				</div>                        
             </div>
         </section>
     </div>

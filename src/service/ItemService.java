@@ -74,7 +74,7 @@ public class ItemService extends ContentService {
 			updateMyShop(newContentData, vo.getId(), customerId);
 			
 			contentData.add(newContentData);
-			imageData.put(vo.getContenturl(), vo.getImgid());
+//			imageData.put(vo.getContenturl(), vo.getImgid());
 		}
 		
 		return root;
@@ -109,7 +109,7 @@ public class ItemService extends ContentService {
 			newContentData.put("id", vo.getId());
 			
 			contentData.add(newContentData);
-			imageData.put(vo.getContenturl(), vo.getImgid());
+//			imageData.put(vo.getContenturl(), vo.getImgid());
 		}
 		
 		return root;

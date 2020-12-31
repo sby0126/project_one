@@ -22,6 +22,7 @@ import command.DetailInputCommand;
 import command.InterestListCommand;
 import command.ItemCategoryCommand;
 import command.ItemCommand;
+import command.ItemUploaderCommand;
 import command.RecentlyItemsCommand;
 import command.RecentlyShopListCommand;
 import command.SaleCommand;
@@ -103,6 +104,9 @@ public class ContentController extends HttpServlet {
 				break;
 			case "/deleteAllMyShop.do":
 				command = new DeleteAllMyShopCommand();
+				break;
+			case "/itemUploader.do":
+				command = new ItemUploaderCommand();
 				break;
 			}
 			
