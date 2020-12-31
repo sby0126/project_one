@@ -36,6 +36,7 @@ class MainPage extends App {
     createNewStyleSheet(dataID, imagePath) {
 
         // 카드 스타일 시트 빌더는 특정한 이미지를 원형으로 만들어냅니다.
+        // (가상 요소에 클릭 이벤트 적용 : http://jsfiddle.net/ZWw3Z/70/)
         CardStyleSheetBuilder.builder(this, `
         
             .card p[${dataID}]::before {
@@ -49,6 +50,7 @@ class MainPage extends App {
                 left: calc(50% - 5.5em / 2);
                 top: 10%;
                 z-index: 0;
+                pointer-events: all;
             }
 
             .card p[${dataID}]:hover::before {

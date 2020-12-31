@@ -171,6 +171,10 @@ export class ShopContentLoader extends Component {
                     active += " isMyShop";
                 }
 
+                $(card.querySelector("p")).on("click", () => {
+                    window.open(filename.link, "_blank");
+                })
+
                 $(myCard).html(`
                     <a href="${filename.link}" target='_blank'>
                         <i class="shop-hot-icon" data-title="HOT"></i>
