@@ -55,7 +55,7 @@ public class ShopDetailService {
 	
 	public String getTexts() {
 		String ret = "";
-		if(thumb != null && !list.isEmpty()) {
+		if(thumb != null && !thumb.isEmpty()) {
 			ret = thumb.get(0).getTexts();
 		}
 		
