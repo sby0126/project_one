@@ -234,8 +234,11 @@
 										<h2><%= service.getShopName() %></h2>
 									</div>
 									<div>
-										<p>스트릿·도매스틱</p>
-									</div>
+										<p id="category"><%=service.getTexts() %></p>
+									</div>		
+									<script>
+										$("#category").text($("#category").text().replace(/([\d]+대\,[\d]+대\,[\d]+대)|([\d]+대[ ]*\,[ ]*[\d]+대)/, ""));									
+									</script>				
 								</div>
 								<!-- <ul class="face-area">
 									<li>
