@@ -277,10 +277,9 @@
                 var child = $(str);
                 $(".productlist_add").append(child);
                 // 상품 목록 추가 시 동적으로 히든 입력 영역에 각각 옵션값, 수량값에 해당하는 input 생성 
-                $("#needVal").append("<div data-value='pd_" + NcolorNm + "" + NsizeNm + "'>")
-				$("#needVal").append("<input type='hidden' name='pdoption' id='pdoption' value='" + NcolorNm + "" + NsizeNm + "'>");
-				$("#needVal").append("<input type='hidden' name='pdoption' id='pdqty_" + NcolorNm + "" + NsizeNm + "' value='1'>");
-				$("#needVal").append("</div>");
+                $("#needVal").append("<div data-value='pd_" + NcolorNm + "" + NsizeNm + "'>");
+				$("#needVal div[data-value=pd_" + NcolorNm + "" + NsizeNm + "]").append("<input type='hidden' name='pdoption' id='pdoption' value='" + NcolorNm + "" + NsizeNm + "'>");
+				$("#needVal div[data-value=pd_" + NcolorNm + "" + NsizeNm + "]").append("<input type='hidden' name='pdoption' id='pdqty_" + NcolorNm + "" + NsizeNm + "' value='1'>");
 				pdcode = child.find("span").data("value");
 				
 				console.log(">>>> %s", pdcode);
@@ -432,7 +431,7 @@
             
                 } 
                 
-//                processSubmit(orderInfo, "/contents/pay.do");
+                processSubmit(orderInfo, "/contents/pay.do");
 
             }
         }
@@ -509,29 +508,30 @@
 
                     var orderInfo = new Object();
                     
-                    orderInfo = {
-                            "title" : title,
-                            "amount" : amount,
-                            "price" : price,
-                            "productId" : productId,
-                            "allprice" : allprice
-                        };
-                    
                     for(var i = 0; i < $(".productlist_add li").length; i++) {
+                    
+                    	orderInfo = {
+                        
+                    			"title" : title,
+                    			"amount" : amount,
+                            	"price" : price,
+                            	"productId" : productId,
+                            	"allprice" : allprice
+                        };                    
                     
                         code = "";
                         
                         code = $("#needVal input[id=pdoption]:eq("+i+")").val() + "," + $("#needVal #pdqty_" + pdcode).val();
                         orderInfo.pdoption = code;
                     
-                       dataArray.push(orderInfo);
-                       console.log(dataArray);
+                        dataArray.push(orderInfo);
+                        console.log(dataArray);
                         
                     }                
             
                 } 
                 
-                //processSubmit(orderInfo, "/contents/cart.do");
+                processSubmit(orderInfo, "/contents/cart.do");
                 /* 
                 
 				int choice;
