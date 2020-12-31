@@ -3,6 +3,9 @@ package command;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +14,8 @@ import javax.swing.JOptionPane;
 
 import action.ActionResult;
 import service.DetailInputService;
+import vo.CartNPayVO;
+import vo.ProductVO;
 
 public class DetailInputCommand extends Command {
 	@Override
@@ -21,20 +26,53 @@ public class DetailInputCommand extends Command {
 				
 		
 		String title = request.getParameter("title");
-		int price = (Integer.parseInt(request.getParameter("price")) / Integer.parseInt(request.getParameter("amount")));
-		int productId = Integer.parseInt(request.getParameter("productId"));
 		int amount = Integer.parseInt(request.getParameter("amount"));
-		
-		String uri = null;
+		int price = Integer.parseInt(request.getParameter("price"));
+		int productId = Integer.parseInt(request.getParameter("productId"));
 		
 		DetailInputService detailInputService = new DetailInputService();
 		
-		boolean isSuccess = detailInputService.inputDetail(request, title, price, amount);
+		String ctmid = request.getParameter("id");		
+		
+		List<String> pdOptionList = Arrays.asList(request.getParameterValues("pdoption"));
+		
+		List<CartNPayVO> cartList = new ArrayList<>();
+		
+		List<ProductVO> pdlist = detailInputService.getProduct(request, title, price);
+		
+		ProductVO pd = (ProductVO)pdlist;
+		
+
+		for(int i = 0; i < pdOptionList.size();) {
+			
+			CartNPayVO cartVO = new CartNPayVO();
+							
+			String size = pdOptionList.get(i);
+			String qty = pdOptionList.get(i + 1);
+			
+			cartVO.setAmount(Integer.parseInt(qty));
+			cartVO.setPrice(price);
+			cartVO.setCtmId(ctmid);
+			cartVO.setLink(pd.getLink());
+			cartVO.setContentUrl(pd.getContenturl());	
+			
+
+			cartVO.setTitle(title + size);
+			
+			
+			cartList.add(cartVO);
+			
+			i+=2; 
+			
+		}
+		
+		boolean isSuccess = detailInputService.inputDetail(request, cartList);
+		
 		boolean inputSuccess = false;
 		
-		uri = request.getPathInfo();
+		String uri = request.getContextPath();
 		
-		int choice;
+		
 		
 		if(isSuccess) {
 			
@@ -51,23 +89,7 @@ public class DetailInputCommand extends Command {
 		
 		if(inputSuccess) {
 			if(uri.equals("/cart.do")) {
-				
-				choice = JOptionPane.showConfirmDialog(null, 
-						"상품이 장바구니에 담겼습니다 \n" 
-			 			 + "장바구니로 이동 하시겠습니까?", null, 1);					
-
-				// 출처: https://unikys.tistory.com/215 [All-round programmer]
-				
-				switch(choice) {
-					case 0 : result.forward(request.getContextPath() + "/pages/cart.jsp");
-							 request.setAttribute("title", title);
-							 request.setAttribute("perPrice", price);
-							 request.setAttribute("amount", amount);
-							 break;
-							 
-					case 1 : result = null;
-							 break;
-				}
+				result.forward(request.getContextPath() + "/pages/cart.jsp");
 				
 			}
 			
@@ -75,6 +97,7 @@ public class DetailInputCommand extends Command {
 				result.forward(request.getContextPath() + "/pages/payments.jsp");
 				
 			}
+			
 		} else {
 			PrintWriter out = response.getWriter();
 			out.println("<script>");

@@ -14,6 +14,7 @@ import org.json.simple.JSONArray;
 import core.SQLHelper;
 import sql.ContentLoader;
 import utils.DBConnectionMgr;
+import vo.CartNPayVO;
 import vo.InterestVO;
 import vo.MyShopVO;
 import vo.ProductVO;
@@ -496,7 +497,7 @@ public class ContentDAO implements IDAO {
 		return list;
 	}
 	
-	public boolean insertDetail(String id, List<ProductVO> p, int amount) {
+	public boolean insertDetail(String id, List<CartNPayVO> p) {
 		
 		boolean success = false;
 		ResultSet rs = null;
@@ -512,16 +513,15 @@ public class ContentDAO implements IDAO {
 			
 			if(rs.next()) {id = rs.getString("ctmid");}
 			
-			
-			for(ProductVO list : p) {
+			for(CartNPayVO list : p) {
 				query = "insert into cartNpay(id, title, price, amount, contentUrl, link) "
 					  + "values(?,?,?,?,?,?)";
 				pstmt = conn.prepareStatement(query);
 				pstmt.setString(1, id);
 				pstmt.setString(2, list.getTitle());
-				pstmt.setString(3, list.getPrice());
-				pstmt.setInt(4, amount);
-				pstmt.setString(5, list.getContenturl());
+				pstmt.setInt(3, list.getPrice());
+				pstmt.setInt(4, list.getAmount());
+				pstmt.setString(5, list.getContentUrl());
 				pstmt.setString(6, list.getLink());
 			}			
 			

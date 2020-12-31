@@ -139,7 +139,7 @@
 		                    <a href="#item_content" id="item_top"><span class="item_top_button">top</span></a>
 		                    <a href="#productPayInfo" id="item_bottom"><span class="item_bottom_button">bottom</span></a>
 		                </div>
-		                <form id="needVal" method="post" action="">
+		                <form id="needVal" method="post" action="" target="">
 		                   <input type="hidden" name="title" id="title" value="">
 		                   <input type="hidden" name="price" id="price" value="">
 		                   <input type="hidden" name="amount" id="amount" value="">
@@ -148,6 +148,8 @@
 		                   <!-- <input type="submit"/>  -->
 		                </form>
 		            </div>
+		            <!-- 장바구니 이동을 방지할 수 있는 iframe 활용 -->
+		            <iframe name="iframe" style="width:1px; height:1px; border:0; visibility:hidden;"></iframe>
 		            <!-- 오른쪽하단 top.bottom 버튼 -->
 		            <div class="item_top_bottom">
 		                <a href="#item_content" id="item_top"><span class="item_top_button">top</span></a>
@@ -160,8 +162,9 @@
 	</div>
 	<div id="light-box-container"></div>
     <script>
+    pdcode = "";
     // 색상버튼은(ul태그안에 li목록중 3번째줄), 사이즈버튼은(ul태그안에 li목록중 4번째줄)
-
+	
     // 상품 색상버튼(3) 클릭시 발생하는 이벤트
     $(".infoArea > ul > li:nth-child(3) button").on("click", function () {
         var idx = $(this).index();
@@ -227,7 +230,7 @@
             var NcolorNm = ""; //data-value 조합값 중 색상
             var NsizeNm = ""; //data-value 조합값 중 사이즈
             var qty = ""; //수량 임시값
-            var pdcode = ""; // 물품 옵션 조합값
+            
             //색상 버튼과 사이즈 버튼의 value값은 현재 앞에서부터 순서대로 1,2로 되어있다. 상품중복체크를 위해 사용되는변수
 
             $.each($(".infoArea > ul > li:nth-child(3) button"), function (i) {
@@ -271,11 +274,17 @@
 //                 	</li>
 //                 `;
                 var str = "<li><span data-value='" + NcolorNm + "" + NsizeNm + "'>" + colorNm + "," + sizeNm + " " + "1개" + "</span> <button class='add_button' value='1' onclick=add($(this));> + </button><button class='minus_button' value = '1' onclick=minus($(this));> - </button><button value = " + val + "  class='del_button' onclick=del($(this));> x </button></li>";
-                $(".productlist_add").append(str);
+                var child = $(str);
+                $(".productlist_add").append(child);
                 // 상품 목록 추가 시 동적으로 히든 입력 영역에 각각 옵션값, 수량값에 해당하는 input 생성 
+                $("#needVal").append("<div data-value='pd_" + NcolorNm + "" + NsizeNm + "'>")
 				$("#needVal").append("<input type='hidden' name='pdoption' id='pdoption' value='" + NcolorNm + "" + NsizeNm + "'>");
 				$("#needVal").append("<input type='hidden' name='pdoption' id='pdqty_" + NcolorNm + "" + NsizeNm + "' value='1'>");
-                
+				$("#needVal").append("</div>");
+				pdcode = child.find("span").data("value");
+				
+				console.log(">>>> %s", pdcode);
+				
 				price = Number(price);
                 var curPrice = Number($(".allPrice").text());
                 /* var qty = Number($(".productlist_add li").length); */
@@ -300,9 +309,9 @@
         obj.val(cnt); // 선택한 버튼태그의 value값을 가져와서 1 증가시켜 준뒤 그 값을 다시 value 값으로 설정한다. 
         obj.parent("li").find(".minus_button").val(cnt); // 마이너스 버튼 태그의 value 값도 똑같이 1증가된 상태를 value값으로 설정한다. 
         obj.parent("li").find("span").text(text); // span 태그에 블랙,Free 2개 를 넣는다.
-        pdcode = obj.parent("li").find("span").attr("data-value"); // 버튼의 data-value값을 조합해 코드를 생성
+        pdcode = obj.parent("li").find("span").data("value"); // 버튼의 data-value값을 조합해 코드를 생성
 		qty = cnt;
-        $("#needVal #pdqty_"+pdcode+"").val(qty); // 해당 코드에 맞는 수량값을 처리
+        $("#needVal #pdqty_" + pdcode).val(qty); // 해당 코드에 맞는 수량값을 처리
         
         var price = $("#detail-item-price").text().replace(",", "");
         price = Number(price);
@@ -320,8 +329,9 @@
             obj.val(cnt);
             obj.parent("li").find(".add_button").val(cnt);
             obj.parent("li").find("span").text(text);
+            pdcode = obj.parent("li").find("span").data("value");
             qty = cnt;	
-            $("#needVal #pdqty_"+pdcode+"").val(qty); // 해당 코드에 맞는 수량값을 처리
+            $("#needVal #pdqty_" + pdcode).val(qty); // 해당 코드에 맞는 수량값을 처리
 
             var price = $("#detail-item-price").text().replace(",", "");
             price = Number(price);
@@ -339,15 +349,14 @@
         price = Number(price);
         curPrice = curPrice - cancel * price;
         $(".allPrice").text(curPrice);
-
+		pdcode = obj.parent("li").find("span").data("value");
         obj.parent("li").remove();
-        $("#needVal #pdoption").val(pdcode).remove();
-        $("#needVal #pdqty_" + pdcode + "").remove();
+        $("#needVal #pdqty_" + pdcode).parent().remove();
     }
 
     Array.prototype.add = function (...param) {
         this.push(...param);
-
+		console.log(this);
         return this;
     };
 
@@ -384,65 +393,63 @@
                
             console.log(obj);
             */
-	            var title = $("#detail-item-title").text()
-	            var price = $(".allPrice").text();
+                var title = $("#detail-item-title").text()
+	            var allprice = $(".allPrice").text();
 	        	var amount = $(".add_button").attr("value");
 	        	var productId = new URLSearchParams(location.search).get("id");
+	        	var price = $("#detail-item-price").text();
 	        	
 	        	console.log(title, price, amount, productId);
-
+	        	console.log(allprice);
                 
                 if(($(".productlist_add li").length > 0)) {
+                    
                     var code;
 
                     var dataArray = new Array();
 
                     var orderInfo = new Object();
                     
+                    orderInfo = {
+                            "title" : title,
+                            "amount" : amount,
+                            "price" : price,
+                            "productId" : productId,
+                            "allprice" : allprice
+                        };
+                    
                     for(var i = 0; i < $(".productlist_add li").length; i++) {
                     
                         code = "";
-
-                        orderInfo = {
-                            "title" : title,
-                            "amount" : amount,
-                            "price" : price/amount,
-                            "productId" : productId,
-                            "allprice" : price
-                        };
                         
-                        code = $("#needVal #pdoption").val() + "," + $("#needVal #pdqty" + pdcode + "").val();
+                        code = $("#needVal div::eq("+i+") input[id=pdoption]").val() + "," + $("#needVal #needVal div::eq("+i+") input[id=pdqty_" + $("#needVal div::eq("+i+") input[id=pdoption]").val()).val();
                         orderInfo.pdoption = code;
                     
-                        data.push(orderInfo);
+                       dataArray.push(orderInfo);
+                       console.log(dataArray);
+                        
+                    }                
+            
+                } 
                 
-                    }                     
-                    
-                }                
+//                processSubmit(orderInfo, "/contents/pay.do");
+
             }
         }
-
-        /* processSubmit({
-        	title,
-        	price,
-        	amount,
-        	productId,
-        }, "/contents/payments.do"); */
-        
     }
     
     function processSubmit(data, url) {
         $("#needVal").attr("action", url);
         
-        var titleInput = $("#needVal").find("input[name='title']");
+        /* var titleInput = $("#needVal").find("input[name='title']");
         var amountInput = $("#needVal").find("input[name='amount']");
         var productIdInput = $("#needVal").find("input[name='productId']");
         var priceInput = $("#needVal").find("input[name='price']");
         
         if (titleInput.length > 0) priceInput.val(data.title);
-        if (amountInput.length > 0) priceInput.val(data.amount);
+        if (amountInput.length > 0) priceInput.val(data.amount); 
         if (productIdInput.length > 0) priceInput.val(data.productId);
-        if (priceInput.length > 0) priceInput.val(data.price);
+        if (priceInput.length > 0) priceInput.val(data.price); */
 
         $("#needVal").submit();
     }
@@ -486,12 +493,13 @@
                 // console.log(json_string);
                 
                 var title = $("#detail-item-title").text()
-	            var price = $(".allPrice").text();
+	            var allprice = $(".allPrice").text();
 	        	var amount = $(".add_button").attr("value");
 	        	var productId = new URLSearchParams(location.search).get("id");
+	        	var price = $("#detail-item-price").text();
 	        	
 	        	console.log(title, price, amount, productId);
-
+	        	console.log(allprice);
                 
                 if(($(".productlist_add li").length > 0)) {
                     
@@ -501,33 +509,50 @@
 
                     var orderInfo = new Object();
                     
+                    orderInfo = {
+                            "title" : title,
+                            "amount" : amount,
+                            "price" : price,
+                            "productId" : productId,
+                            "allprice" : allprice
+                        };
+                    
                     for(var i = 0; i < $(".productlist_add li").length; i++) {
                     
                         code = "";
-
-                        orderInfo = {
-                            "title" : title,
-                            "amount" : amount,
-                            "price" : price/amount,
-                            "productId" : productId,
-                            "allprice" : price
-                        };
                         
-                        code = $("#needVal #pdoption:nth-child(i)").val() + "," + $("#needVal #pdqty" + pdcode + "").val();
+                        code = $("#needVal input[id=pdoption]:eq("+i+")").val() + "," + $("#needVal #pdqty_" + pdcode).val();
                         orderInfo.pdoption = code;
                     
-                       data.push(orderInfo);                        
+                       dataArray.push(orderInfo);
+                       console.log(dataArray);
                         
                     }                
             
                 } 
                 
-                /* processSubmit({
-                	title,
-                	price,
-                	amount,
-                	productId,
-                }, "/contents/cart.do"); */
+                //processSubmit(orderInfo, "/contents/cart.do");
+                /* 
+                
+				int choice;
+                
+                choice = JOptionPane.showConfirmDialog(null, 
+						"상품이 장바구니에 담겼습니다 \n" 
+			 			 + "장바구니로 이동 하시겠습니까?", null, 1);
+                
+                switch(choice) {
+				case 0 : request.setAttribute("title", title);
+						 request.setAttribute("price", price);
+						 request.setAttribute("amount", amount);
+						 break;
+						 
+				case 1 : $("#needVal").attr("target","iframe");
+						 break;
+				} */
+
+				// 출처: https://unikys.tistory.com/215 [All-round programmer]
+				
+				
 
             }
         }

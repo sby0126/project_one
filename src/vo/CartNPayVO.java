@@ -2,18 +2,18 @@ package vo;
 
 public class CartNPayVO {
 
-	int CTMId;
+	String CtmId;
 	String title;
 	int price;
-	int amonut;
+	int amount;
 	String contentUrl;
 	String link;
 	
-	public int getCTMId() {
-		return CTMId;
+	public String getCtmId() {
+		return CtmId;
 	}
-	public void setCTMId(int cTMId) {
-		CTMId = cTMId;
+	public void setCtmId(String CtmId) {
+		this.CtmId = CtmId;
 	}
 	public String getTitle() {
 		return title;
@@ -27,11 +27,11 @@ public class CartNPayVO {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public int getAmonut() {
-		return amonut;
+	public int getAmount() {
+		return amount;
 	}
-	public void setAmonut(int amonut) {
-		this.amonut = amonut;
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
 	public String getContentUrl() {
 		return contentUrl;

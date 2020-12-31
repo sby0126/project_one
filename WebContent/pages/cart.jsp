@@ -4,9 +4,9 @@
 <%@ page import="java.util.*" %>
 <%@ page import="javax.servlet.*" %>
 <%@ page import="vo.ProductVO" %>
+<%@ page import="vo.CartNPayVO" %>
 <%@ page import="com.google.gson.*" %>
 <%@ page import="dao.ContentDAO, command.DetailInputCommand" %>
-
 
 <!DOCTYPE html>
 <%  
@@ -17,10 +17,8 @@
 	int amount = Integer.parseInt(request.getParameter("amount"));
 	int price = Integer.parseInt(request.getParameter("price"));
 	
-	int perPrice = price / amount;
+	CartNPayVO cnp = null;
 	
-	List<ProductVO> list = ContentDAO.getInstance().getDetail(title, perPrice);
-	boolean success = ContentDAO.getInstance().insertDetail(id, list, amount);
 	
 
 %>
