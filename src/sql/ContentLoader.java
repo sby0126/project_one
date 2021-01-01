@@ -52,13 +52,7 @@ public class ContentLoader {
 		qlList.put("번호 붙여 검색", qlList.get("전체 데이터 번호 붙여 추출")
 				+ " AND mytbl.texts LIKE ?");
 		
-		qlList.put("아이템 카테고리 생성", "SELECT trim(t.category) as category, count(t.category)"
-					+ " FROM (select REGEXP_REPLACE(texts, '[\\\\d]+(?:대)[,]*', '') AS category, pageType from tblproduct) AS t"
-					+ " WHERE t.pageType='item'"
-					+ " GROUP BY t.category"
-					+ " HAVING count(t.category) >= 1"
-					+ " ORDER BY COUNT(t.category) DESC"
-				);
+		qlList.put("아이템 카테고리 생성", "CALL getItemCategory()");
 		
 		qlList.put("브랜드 별 검색", "SELECT DISTINCT a.*, b.* FROM tblImageHash a, tblproduct b WHERE b.pageType = ? AND shopName = ? AND imgUrl = contentUrl GROUP BY contentUrl");
 		

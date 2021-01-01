@@ -16,19 +16,19 @@ public class BoardSQL {
 		
 		qlList.put("count", "select count(*) from tblQNABoard");
 		qlList.put("list", 
-				"select articleID, authorID, articleType, title, regdate, viewCount, recommandCount" 
+				"select articleID, authorID, articleType, title, CONVERT(regdate, DATE) AS regdate, viewCount, recommandCount" 
 					+ " from tblQNABoard q, tblCutsomer c"
 					+ " where c.ctmid == q.authorID"
 					+ " order by parentID desc, pos limit ?, ?");
 		
 		// 게시물 목록을 JSON으로 출력합니다 (추천수 집계)
-		qlList.put("toJSON", "select articleID, articleType, title, authorID, regdate, viewCount, (select COUNT(*) from tblQnaBoardRec where board_id = q.articleID) as recommandCount, ctmnm"
+		qlList.put("toJSON", "select articleID, articleType, title, authorID, CONVERT(regdate, DATE) AS regdate, viewCount, (select COUNT(*) from tblQnaBoardRec where board_id = q.articleID) as recommandCount, ctmnm"
 				+ " from tblQNABoard q, tblCustomer c, tblQnaBoardRec r"
 				+ " where ctmid = authorID"
 				+ " GROUP BY articleID");
 		
 		// 게시물 목록을 JSON으로 출력합니다 (추천수 집계)
-		qlList.put("toJSONFilter", "select articleID, articleType, title, authorID, regdate, viewCount, (select COUNT(*) from tblQnaBoardRec where board_id = q.articleID) as recommandCount, ctmnm"
+		qlList.put("toJSONFilter", "select articleID, articleType, title, authorID, CONVERT(regdate, DATE) AS regdate, viewCount, (select COUNT(*) from tblQnaBoardRec where board_id = q.articleID) as recommandCount, ctmnm"
 				+ " from tblQNABoard q, tblCustomer c, tblQnaBoardRec r"
 				+ " where ctmid = authorID AND title LIKE ?"
 				+ " GROUP BY articleID");
@@ -37,7 +37,7 @@ public class BoardSQL {
 		qlList.put("조회수증감", "update tblQNABoard set viewCount = viewCount + 1 where articleID = ?");
 		
 		// 글을 읽습니다.
-		qlList.put("readPost", "select articleID, articleType, title, authorID, content, regdate, viewCount, recommandCount, ctmnm from tblQNABoard q, tblCustomer c where articleID = ? and ctmid = authorID");
+		qlList.put("readPost", "select articleID, articleType, title, authorID, content, time_ago(regdate) as regdate, viewCount, recommandCount, ctmnm from tblQNABoard q, tblCustomer c where articleID = ? and ctmid = authorID");
 
 		// 글을 수정합니다.
 		qlList.put("updatePost", "UPDATE tblQNABoard SET title = ?, content=?, regdate = NOW() WHERE articleID = ?");
@@ -52,7 +52,7 @@ public class BoardSQL {
 //				+ "from tblQNABoardComments q, tblCustomer c "
 //				+ "where parent_articleID = ? and ctmid = authorID ORDER BY level, pos");
 				
-		qlList.put("readComments", "select q.*, ctmnm" 
+		qlList.put("readComments", "select q.*, ctmnm,  time_ago(q.regdate) as regdate" 
 				+ " from tblQNABoardComments q, tblCustomer c "
 				+ " WHERE parent_articleID = ?"
 				+ " and ctmid = authorID "

@@ -1,13 +1,11 @@
 package vo.board.qna;
 
-import java.util.Date;
-
 public class BoardCommentVO {
 	private int commentid;
 	private int parentArticleID;
 	private String authorid;
 	private String content;
-	private Date regdate;
+	private String regdate;
 	private int pos;
 	private int parentid;
 	private int depth;
@@ -43,10 +41,10 @@ public class BoardCommentVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getRegdate() {
+	public String getRegdate() {
 		return regdate;
 	}
-	public void setRegdate(Date regdate) {
+	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
 	public int getPos() {

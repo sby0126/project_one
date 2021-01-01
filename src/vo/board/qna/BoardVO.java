@@ -1,7 +1,5 @@
 package vo.board.qna;
 
-import java.util.Date;
-
 public class BoardVO {
 	private int articleid;
     private String authorid;
@@ -11,7 +9,7 @@ public class BoardVO {
     private int pos;
     private int parentid;
     private int depth;
-    private Date regdate;
+    private String regdate;
     private int recommandcount;
     private int viewcount;
     private String imagefilename;
@@ -73,10 +71,10 @@ public class BoardVO {
 	public void setDepth(int depth) {
 		this.depth = depth;
 	}
-	public Date getRegdate() {
+	public String getRegdate() {
 		return regdate;
 	}
-	public void setRegdate(Date regdate) {
+	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
 	public int getRecommandcount() {
