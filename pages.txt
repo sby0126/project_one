@@ -8,6 +8,7 @@ board.jsp
 callback.jsp
 cart.jsp
 components/
+cookieError.jsp
 detail-item-uploader.jsp
 detail.jsp
 error.jsp
