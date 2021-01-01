@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="/css/detail.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/underscore@1.11.0/underscore-min.js"></script>
 </head>
 
 <body>
@@ -76,8 +77,8 @@
 		                            <!-- 7. 구매하기.장바구니 버튼 -->
 		                            <li>
 		                               <div>
-		                                  <button class="detail_button" type="button" onClick="javascript:pay();">구매하기</button>
-		                                  <button class="detail_button" type="button" onClick="javascript:cart();">장바구니</button>
+		                                  <button id="pay-button" class="detail_button" type="button" onClick="javascript:pay();">구매하기</button>
+		                                  <button id="cart-button" class="detail_button" type="button" onClick="javascript:cart();">장바구니</button>
 		                               </div>
 		                            </li>
 		                        </ul>
