@@ -65,6 +65,11 @@ public class ContentLoader {
 				+ " where a.imgUrl = b.contentUrl"
 				+ " AND b.id = ?");
 		
+		qlList.put("상품 찾기", "SELECT *"
+				+ " FROM tblproduct"
+				+ " WHERE id = ?"
+				);
+		
 		qlList.put("getMyShop", "SELECT * FROM tblMyShop WHERE ctm_id = ?");
 		qlList.put("addMyShop", "INSERT INTO tblMyShop(ctm_id, shop_id) values(?, ?)");
 		qlList.put("deleteMyShop", "DELETE FROM tblMyShop where ctm_id = ? and shop_id = ?");

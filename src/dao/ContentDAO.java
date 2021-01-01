@@ -569,7 +569,7 @@ public class ContentDAO implements IDAO {
 		try {
 			conn = pool.getConnection();
 			
-			pstmt = conn.prepareCall(getQL("ID로 상품 찾기"));
+			pstmt = conn.prepareStatement(getQL("상품 찾기"));
 			pstmt.setInt(1, id);
 			
 			rs = pstmt.executeQuery();

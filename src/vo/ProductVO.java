@@ -15,7 +15,16 @@ public class ProductVO {
 	private String title;
 	private int id;
 	private String link;
+	private String regdate;
 	
+	public String getRegdate() {
+		return regdate;
+	}
+
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
+	}
+
 	public int getId() {
 		return id;
 	}
