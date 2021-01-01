@@ -145,7 +145,7 @@ public class ContentDAO implements IDAO {
 					+ (category != null ? " AND texts LIKE ?" : "")
 					+ (ages != null ? " AND texts LIKE ?" : "")
 					+ " group by contentUrl"
-					+ " ORDER BY id"
+					+ " ORDER BY cnt desc"
 					+ " limit ?, ?"
 					);
 			pstmt.setString(1, pageType);
@@ -452,10 +452,11 @@ public class ContentDAO implements IDAO {
 		
 		try {
 			conn = pool.getConnection();
-			pstmt = conn.prepareStatement(getQL("브랜드 별 검색"));
+			// pstmt = conn.prepareStatement(getQL("브랜드 별 검색"));
+			pstmt = conn.prepareStatement("CALL getItem(?)");
 			
-			pstmt.setString(1, pageType);
-			pstmt.setString(2, shopName);
+//			pstmt.setString(1, pageType);
+			pstmt.setString(1, shopName);
 			
 			rs = pstmt.executeQuery();
 			
