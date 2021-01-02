@@ -60,8 +60,9 @@ public class PaymentDAO implements IDAO {
 			pstmt.setString(6, vo.getBuyerPostcode());
 			pstmt.setInt(7, vo.getProductId());
 			pstmt.setString(8, vo.getProductName());
-			pstmt.setString(9, vo.getMerchantUid());
-			pstmt.setString(10, vo.getPaymentStatus());
+			pstmt.setInt(9, vo.getPaidAmount()); 
+			pstmt.setString(10, vo.getMerchantUid());
+			pstmt.setString(11, vo.getPaymentStatus());
 			
 			if(pstmt.executeUpdate() > 0) {
 				isOK = true;

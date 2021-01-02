@@ -58,7 +58,7 @@ public class PaymentCheckCommand extends Command {
 			
 			info.setBuyerAddr(customerVO.getAddress());
 			info.setBuyerEmail(customerVO.getEmail());
-			info.setBuyerName(customerVO.getEmail());
+			info.setBuyerName(customerVO.getName());
 			info.setBuyerPostcode(customerVO.getZipCode());
 			info.setBuyerTel(customerVO.getTel());
 			info.setImpUid(imp_uid);

@@ -72,6 +72,7 @@
                 $.ajax({
                     type: "POST", 
                     url: "/payments/check.do",
+                    dataType: 'json',
                     data: {
                     	"imp_uid" : rsp.imp_uid,
                     	"merchant_uid": rsp.merchant_uid,
@@ -81,18 +82,18 @@
                     },
                 }).done(function(data) { // 응답 처리
                     switch(data.status) {
-                    case "vbankIssued":
-                      // 가상계좌 발급 시 로직
-                      break;
                     case "success":
                       // 결제 성공 시 로직
                       console.log("결제 성공");
+                      location.href = '<%=request.getContextPath()%>/payments/success.do?msg='+msg;
                       break;
+                    default:
+                    	msg = '결제 실패';
+                    	location.href = '<%=request.getContextPath()%>/payments/success.do?msg='+msg;
+                    	break;
                   }
                 });
-                
-                location.href = '<%=request.getContextPath()%>/payments/success.do?msg='+msg;
-                
+                   
             } else {
                 var msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;
