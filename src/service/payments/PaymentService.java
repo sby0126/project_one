@@ -182,6 +182,7 @@ public class PaymentService {
 		JsonNode response = node.get("response");
 		int amount = response.get("amount").asInt();
 		int cancelAmount = response.get("cancel_amount").asInt(); 
+		String status = response.get("status").asText();
 		
 		PaymentDAO paymentDAO = PaymentDAO.getInstance();
 		PaymentVO vo = paymentDAO.getPayment(imp_uid);
@@ -189,7 +190,7 @@ public class PaymentService {
 		boolean isValid = false;
 		
 		// 아임포트로부터 받은 결제 금액과 실제 DB에 저장된 결제 금액과 일치하면 정상적으로 결제된 것임 (검증 완료)
-		if(vo.getPaidAmount() == amount) {
+		if(status.equals("paid") && vo.getPaidAmount() == amount) {
 			isValid = true;
 		} else {
 			isValid = false;

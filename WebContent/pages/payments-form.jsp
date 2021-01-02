@@ -70,7 +70,7 @@
                 
                 // 결제 검증
                 $.ajax({
-                    type: "GET", 
+                    type: "POST", 
                     url: "/payments/check.do",
                     data: {
                     	"imp_uid" : rsp.imp_uid,

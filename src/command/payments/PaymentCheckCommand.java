@@ -2,6 +2,8 @@ package command.payments;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,8 +15,10 @@ import org.json.simple.JSONObject;
 import action.ActionResult;
 import command.Command;
 import dao.CustomerDAO;
+import service.OrderService;
 import service.payments.PaymentService;
 import vo.CustomerVO;
+import vo.OrderVO;
 import vo.PaymentVO;
 
 /**
@@ -76,6 +80,19 @@ public class PaymentCheckCommand extends Command {
 				responseData.put("message", "결제에 성공하였습니다.");
 				
 				service.setStatus(imp_uid, "success");
+				
+				// 재고 감소 트리거 발동
+				List<OrderVO> orderList = new ArrayList<>();
+				
+				// 오더 서비스 생성
+				OrderService orderService = new OrderService();		
+				orderList = (List<OrderVO>)request.getSession().getAttribute("orderList");
+				
+				orderList.forEach(order -> {
+					orderService.processOrder(order);
+				});				
+				
+				request.getSession().removeAttribute("orderList");
 		
 			} else {
 				// 검증 실패... 뭔가 이상하다.
