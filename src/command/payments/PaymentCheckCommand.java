@@ -12,8 +12,10 @@ import org.json.simple.JSONObject;
 
 import action.ActionResult;
 import command.Command;
-import dao.PaymentDAO;
+import dao.CustomerDAO;
 import service.payments.PaymentService;
+import vo.CustomerVO;
+import vo.PaymentVO;
 
 /**
  * 카카오 페이를 이용한 결제 처리 기능입니다.
@@ -34,7 +36,7 @@ public class PaymentCheckCommand extends Command {
 			String imp_uid = request.getParameter("imp_uid");
 			String merchant_uid = request.getParameter("merchant_uid");
 			String productName = request.getParameter("product_name");
-			String productId = request.getParameter("product_id");
+			int productId = Integer.parseInt(request.getParameter("product_id"));
 			int paid_amount = Integer.parseInt(request.getParameter("paid_amount"));
 			
 			// 세션에서 아이디 값을 가져옵니다.
@@ -44,8 +46,27 @@ public class PaymentCheckCommand extends Command {
 			
 			// 액세스 토큰을 생성합니다.
 			String access_token = service.getAccessToken();
-//			System.out.println(access_token + "(액세스 토큰)을 획득하였습니다.");
+			System.out.println(access_token + "(액세스 토큰)을 획득하였습니다.");
 			
+			CustomerVO customerVO = CustomerDAO.getInstance().getMember(id);
+			
+			PaymentVO info = new PaymentVO();
+			
+			info.setBuyerAddr(customerVO.getAddress());
+			info.setBuyerEmail(customerVO.getEmail());
+			info.setBuyerName(customerVO.getEmail());
+			info.setBuyerPostcode(customerVO.getZipCode());
+			info.setBuyerTel(customerVO.getTel());
+			info.setImpUid(imp_uid);
+			info.setMerchantUid(merchant_uid);
+			info.setPaidAmount(paid_amount);
+			info.setProductId(productId);
+			info.setProductName(productName);
+			info.setPaymentStatus("ready");
+			
+			// 구매 처리
+			service.processKakaoPay(info);
+
 			// 획득한 액세스 토큰으로 카카오 페이 결제를 시도합니다.
 			boolean isSuccess = service.orderKakaoPay(imp_uid, id, productId, paid_amount, access_token);
 
@@ -54,11 +75,14 @@ public class PaymentCheckCommand extends Command {
 				responseData.put("status", "success");
 				responseData.put("message", "결제에 성공하였습니다.");
 				
-				PaymentDAO paymentDAO = PaymentDAO.getInstance();
+				service.setStatus(imp_uid, "success");
+		
 			} else {
 				// 검증 실패... 뭔가 이상하다.
 				responseData.put("status", "forgery");
 				responseData.put("message", "위조된 결제 시도입니다.");
+				
+				service.setStatus(imp_uid, "forgery");
 			}
 			
 		} catch(Exception e) {

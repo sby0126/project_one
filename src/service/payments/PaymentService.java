@@ -10,6 +10,9 @@ import java.util.Map;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import dao.PaymentDAO;
+import vo.PaymentVO;
+
 /**
  * 아임포트 REST API 호출 (결제 모듈)
  * 
@@ -65,6 +68,16 @@ public class PaymentService {
 		return access_token;
 	}
 	
+	public boolean processKakaoPay(PaymentVO vo) {
+		 PaymentDAO paymentDAO = PaymentDAO.getInstance(); 
+		 return paymentDAO.insertPayment(vo);
+	}
+	
+	public boolean setStatus(String imp_uid, String status) {
+		 PaymentDAO paymentDAO = PaymentDAO.getInstance(); 
+		 return paymentDAO.updatePayment(imp_uid, status);
+	}	
+	
 	/**
 	 * 
 	 * @param imp_uid 고유 결제 코드
@@ -75,7 +88,7 @@ public class PaymentService {
 	 * @return
 	 * @throws Exception
 	 */
-	public boolean orderKakaoPay(String imp_uid, String customerId, String productId, int paid_amount, String access_token) throws Exception {
+	public boolean orderKakaoPay(String imp_uid, String customerId, int productId, int paid_amount, String access_token) throws Exception {
 		
 		// GET 방식의 호출입니다.
 		// 주소로 전달합니다.
@@ -170,12 +183,18 @@ public class PaymentService {
 		int amount = response.get("amount").asInt();
 		int cancelAmount = response.get("cancel_amount").asInt(); 
 		
-		// 구매 시 DB에 값을 전달, 
-		// 아임포트로부터 받은 결제 금액과 실제 DB에 저장된 결제 금액과 일치하면 정상적으로 결제된 것임 (검증 완료)
+		PaymentDAO paymentDAO = PaymentDAO.getInstance();
+		PaymentVO vo = paymentDAO.getPayment(imp_uid);
+
 		boolean isValid = false;
 		
-		// isValid가 true면 구매 처리
-		
+		// 아임포트로부터 받은 결제 금액과 실제 DB에 저장된 결제 금액과 일치하면 정상적으로 결제된 것임 (검증 완료)
+		if(vo.getPaidAmount() == amount) {
+			isValid = true;
+		} else {
+			isValid = false;
+		}
+				
 		return isValid;
 	}
 }

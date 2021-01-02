@@ -79,6 +79,31 @@ public class PaymentDAO implements IDAO {
 		
 	}
 	
+	public boolean updatePayment(String imp_uid, String payment_status) {
+		boolean isOK = false;
+		
+		try {
+
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement("update tblPayment set payment_status = ? where imp_uid = ?");
+			pstmt.setString(1, payment_status);
+			pstmt.setString(2, imp_uid);
+			
+			if(pstmt.executeUpdate() > 0) {
+				isOK = true;
+			}			
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+		return isOK;
+	}
+	
 	public PaymentVO getPayment(String imp_uid) {
 		boolean isOK = false;
 		ResultSet rs = null;
@@ -103,7 +128,7 @@ public class PaymentDAO implements IDAO {
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			pool.freeConnection(conn, pstmt);
+			pool.freeConnection(conn, pstmt, rs);
 		}
 		
 		return payment;
