@@ -8,6 +8,7 @@ import java.util.List;
 
 import core.SQLHelper;
 import utils.DBConnectionMgr;
+import vo.OrderVO;
 import vo.PaymentVO;
 
 public class PaymentDAO implements IDAO {
@@ -106,6 +107,59 @@ public class PaymentDAO implements IDAO {
 		}
 		
 		return payment;
+	}
+	
+	public boolean insertOrder(OrderVO order) {
+		boolean isOK = false;
+		
+		String sql = "insert into tblOrder(user_id, product_name, order_amount) values(?, ?, ?)";
+		
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, order.getUserId());
+			pstmt.setString(2, order.getProductName());
+			pstmt.setInt(3, order.getOrderAmount());
+			
+			if(pstmt.executeUpdate() > 0) {
+				isOK = true;
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt);
+		}
+		
+		return isOK;
+		
+	}
+	
+	public List<OrderVO> getOrder(int orderNo) {
+		
+		List<OrderVO> list = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = pool.getConnection();
+			pstmt = conn.prepareStatement("select * from tblOrder where order_no = ?");
+			pstmt.setInt(1, orderNo);
+			
+			rs = pstmt.executeQuery();
+			
+			list = SQLHelper.putResult(rs, OrderVO.class);
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(conn, pstmt, rs);
+		}
+		
+		return list;
 	}
 	
 }

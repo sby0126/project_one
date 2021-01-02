@@ -12,6 +12,7 @@ import org.json.simple.JSONObject;
 
 import action.ActionResult;
 import command.Command;
+import dao.PaymentDAO;
 import service.payments.PaymentService;
 
 /**
@@ -52,6 +53,8 @@ public class PaymentCheckCommand extends Command {
 				// 검증 완료... 구매 완료 처리.
 				responseData.put("status", "success");
 				responseData.put("message", "결제에 성공하였습니다.");
+				
+				PaymentDAO paymentDAO = PaymentDAO.getInstance();
 			} else {
 				// 검증 실패... 뭔가 이상하다.
 				responseData.put("status", "forgery");
@@ -67,7 +70,6 @@ public class PaymentCheckCommand extends Command {
 		
 		PrintWriter out = response.getWriter();
 		out.println(responseData.toJSONString());
-		
 		
 		return null;
 	}

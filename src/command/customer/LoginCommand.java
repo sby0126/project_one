@@ -28,6 +28,12 @@ public class LoginCommand extends Command {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		
+		// XSS 공격 대응
+		if(id != null && pw != null) {
+			id = id.replaceAll("<", "&lt;");
+			pw = pw.replaceAll(">", "&gt;");
+		}		
+		
 		boolean isValidLogin = customerDAO.processLogin(id, pw);
 		
 		if(isValidLogin) {

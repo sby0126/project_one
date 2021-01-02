@@ -162,6 +162,7 @@
 
 	</div>
 	<div id="light-box-container"></div>
+	<script src="/js/itemPayCart.js"></script>
     <script>
     pdcode = "";
     // 색상버튼은(ul태그안에 li목록중 3번째줄), 사이즈버튼은(ul태그안에 li목록중 4번째줄)
@@ -436,11 +437,15 @@
                         dataArray.push(orderInfo);
                         console.log(dataArray);
                         
-                    }                
+                    }              
+                    
+                    
             
                 } 
+
+                Manager.processPay();
                 
-                processSubmit(dataArray, "/contents/pay.do");
+                
                 /* 
                 
 				int choice;

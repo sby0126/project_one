@@ -1,15 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ page import="java.lang.Integer" %>
+<%@ page import="java.util.*, vo.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	// 카카오페이 결제 처리를 위한 페이지입니다.
 
+	CustomerVO customer = (CustomerVO)request.getAttribute("customer");
+	List<OrderVO> orderList = (List<OrderVO>)request.getAttribute("orderList");
+	
 	// 구매자 정보
-	String name = (String)request.getAttribute("name");
-	String email = (String)request.getAttribute("email");
-	String phone = (String)request.getAttribute("phone");
-	String address = (String)request.getAttribute("address");
-	String zipcode = (String)request.getAttribute("zipcode");
+	String name = customer.getName();
+	String email = customer.getEmail();
+	String phone = customer.getTel();
+	String address = customer.getAddress();
+	String zipcode = customer.getZipCode();
 	int price = (int)request.getAttribute("price"); 
 	
 	// 상품명
@@ -45,7 +49,7 @@
             pg: 'kakao',
             pay_method: 'card',
             merchant_uid: 'merchant_' + new Date().getTime(),
-            name: '주문명 : 주문명 설정',
+            name: '<%= productName %>',
             amount: <%=price%>,
             buyer_email : '<%=email%>',
             buyer_name : '<%=name%>',
@@ -70,7 +74,7 @@
                     url: "/payments/check.do",
                     data: {
                     	"imp_uid" : rsp.imp_uid,
-                    	"merchant_uid": merchant_uid,
+                    	"merchant_uid": rsp.merchant_uid,
                     	"product_name": '<%=productName%>',
                     	"product_id": <%=productId%>,
                     	"paid_amount": rsp.paid_amount

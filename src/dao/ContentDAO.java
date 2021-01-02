@@ -134,10 +134,6 @@ public class ContentDAO implements IDAO {
 			}
 		}
 		
-		
-		System.out.println("카테고리 : " + category);
-		System.out.println("연령대 : " + ages);
-		
 		try {
 			conn = pool.getConnection();
 			pstmt = conn.prepareStatement(
@@ -206,9 +202,6 @@ public class ContentDAO implements IDAO {
 		}
 		
 		searchKeyword = URLDecoder.decode(searchKeyword);
-		
-		System.out.println("카테고리 : " + category);
-		System.out.println("연령대 : " + ages);
 		
 		try {
 			conn = pool.getConnection();
@@ -539,7 +532,6 @@ public class ContentDAO implements IDAO {
 			
 			if(pstmt.executeUpdate() > 0) {
 				conn.commit();
-				System.out.println("데이터 입력 완료.");
 				success = true;
 			};
 			

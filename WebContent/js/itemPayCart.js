@@ -1,7 +1,6 @@
 
 class Item {
     constructor() {
-        this.name = "";
         this.label = "";
         this.qty = 0;
     }
@@ -16,6 +15,15 @@ class Item {
 
     setQuantity(value) {
         this.qty = value;
+    }
+
+    toJson() {
+        const {label, qty} = this;
+        
+        return {
+            label,
+            qty
+        };
     }
 }
 
@@ -57,13 +65,15 @@ class Manager {
         $("div[data-value*=pd_]").each((i, e) => {
             const item = new Item();
 
+            // 색상&사이즈
             const label = $(e).find("input:first");
             item.setLabel(label.val())
 
+            // 수량
             const qty = $(e).find("input:last")
             item.setQuantity(qty.val());
 
-            itemList.push(item);
+            itemList.push(item.toJson());
         });
 
         return itemList;
@@ -86,5 +96,24 @@ class Manager {
         }
 
         return data;
+    }
+
+    static processPay() {
+        const json = JSON.stringify(this.toJson());
+
+        const form = document.createElement("form");
+        form.action = "/contents/pay.do";
+        form.method = "POST";
+        
+        const input = document.createElement("input");
+        input.type = "text";
+        input.value = json;
+        input.name = "data";
+        
+        form.appendChild(input);
+
+        document.body.appendChild(form);
+
+        form.submit();
     }
 }

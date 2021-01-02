@@ -23,6 +23,7 @@ import command.InterestListCommand;
 import command.ItemCategoryCommand;
 import command.ItemCommand;
 import command.ItemUploaderCommand;
+import command.PaymentOrderCommand;
 import command.RecentlyItemsCommand;
 import command.RecentlyShopListCommand;
 import command.SaleCommand;
@@ -90,6 +91,8 @@ public class ContentController extends HttpServlet {
 				command = new RecentlyItemsCommand();
 				break;
 			case "/pay.do":
+				command = new PaymentOrderCommand();
+				break;
 			case "/cart.do":
 				command = new DetailInputCommand();
 				break;
