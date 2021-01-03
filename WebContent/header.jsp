@@ -49,7 +49,7 @@
 		                		List<Integer> idList = myShopService.getIdList(id);
 							%>             
 							<c:set var="isSNS" value="<%= dao.isSNSMember(id) %>" />
-							<div class="header-right-login-button">(<%= vo.getCtmtype() %>)</div>
+							<a class="header-right-login-button" href="/pages/basket-tunnel.jsp">장바구니</a>
                 			<a class="header-right-login-button" href="${pageContext.request.contextPath}/members/modifyMemberForm.do?id=${id}">회원 정보 수정</a>
                 			<c:if test="${id=='admin'}">
                 				<a class="header-right-login-button" href="${pageContext.request.contextPath}/admin">관리자 페이지</a>
