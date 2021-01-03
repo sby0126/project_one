@@ -47,6 +47,7 @@ public class PaymentDAO implements IDAO {
 		boolean isOK = false;
 		
 		String query = "INSERT INTO tblPayment VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+		// String query = "call payment(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			conn = pool.getConnection();
