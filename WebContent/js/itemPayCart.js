@@ -3,6 +3,7 @@ class Item {
     constructor() {
         this.label = "";
         this.qty = 0;
+        this.link = "";
     }
 
     setName(value) {
@@ -17,12 +18,17 @@ class Item {
         this.qty = value;
     }
 
+    setLink(value) {
+        this.link = value;
+    }
+
     toJson() {
-        const {label, qty} = this;
+        const {label, qty, link} = this;
         
         return {
             label,
-            qty
+            qty,
+            link
         };
     }
 }
@@ -96,6 +102,29 @@ class Manager {
         }
 
         return data;
+    }
+
+    static processCart() {
+
+        let data = this.toJson();
+        data["link"] = location.search;
+
+        const json = JSON.stringify(data);
+
+        const form = document.createElement("form");
+        form.action = "/contents/cart.do";
+        form.method = "POST";
+        
+        const input = document.createElement("input");
+        input.type = "text";
+        input.value = json;
+        input.name = "data";
+        
+        form.appendChild(input);
+
+        document.body.appendChild(form);
+
+        form.submit();
     }
 
     static processPay() {

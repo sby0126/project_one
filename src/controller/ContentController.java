@@ -13,12 +13,12 @@ import action.ActionResult;
 import command.AddInterestCommand;
 import command.AddMyShopCommand;
 import command.AllContentsCommand;
+import command.CartCommand;
 import command.Command;
 import command.ContentsSearchCommand;
 import command.DeleteAllMyShopCommand;
 import command.DeleteInterestCommand;
 import command.DeleteMyShopCommand;
-import command.DetailInputCommand;
 import command.InterestListCommand;
 import command.ItemCategoryCommand;
 import command.ItemCommand;
@@ -94,7 +94,7 @@ public class ContentController extends HttpServlet {
 				command = new PaymentOrderCommand();
 				break;
 			case "/cart.do":
-				command = new DetailInputCommand();
+				command = new CartCommand();
 				break;
 			case "/search.do":
 				command = new ContentsSearchCommand();

@@ -568,7 +568,9 @@
             
                 } 
                 
-                processSubmit(dataArray, "/contents/cart.do");
+                Manager.processCart();
+                
+                // processSubmit(dataArray, "/contents/cart.do");
                 /* 
                 
 				int choice;

@@ -5,7 +5,34 @@ public class OrderVO {
 	private String userId;
 	private String productName;
 	private int orderAmount;
+	private int price;
+	private int productId;
+	private String link;
 	
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+
+	public int getProductId() {
+		return productId;
+	}
+
+	public void setProductId(int productId) {
+		this.productId = productId;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
 	public String getOrderNo() {
 		return orderNo;
 	}
