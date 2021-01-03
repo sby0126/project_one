@@ -22,6 +22,11 @@
 	    	 background: #F3F7FA;
 	    	 margin-bottom: 1em;
     	}
+    	
+    	header {
+    		height: calc(var(--header-box-height) / 2);
+    	}
+    	
     </style>
 </head>
 <body>
