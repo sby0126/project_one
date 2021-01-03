@@ -30,13 +30,19 @@ public class DeleteCartCommand extends Command {
 					.boxed()
 					.collect(Collectors.toList());
 		
+		System.out.println(ids);
+		
 		List<OrderVO> cartList = (List<OrderVO>)session.getAttribute("cartList");
 		
 		if(cartList != null && !cartList.isEmpty()) {
-			list.forEach(i -> {
-				if(cartList.remove(i)) {
-					System.out.println("장바구니에서 " + i + "를 제거했습니다.");
+			cartList.forEach(cart -> {				
+				int index = cartList.indexOf(cart);
+				
+				if(list.contains(index)) {
+					cartList.remove(cart);
+					System.out.println("장바구니에서 " + cart + "를 제거했습니다.");
 				}
+						
 			});
 		}
 		
