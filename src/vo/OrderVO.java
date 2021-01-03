@@ -1,5 +1,7 @@
 package vo;
 
+import org.json.simple.JSONObject;
+
 public class OrderVO {
 	private String orderNo;
 	private String userId;
@@ -8,7 +10,16 @@ public class OrderVO {
 	private int price;
 	private int productId;
 	private String link;
+	private JSONObject raw;
 	
+	public JSONObject getRaw() {
+		return raw;
+	}
+
+	public void setRaw(JSONObject raw) {
+		this.raw = raw;
+	}
+
 	public String getLink() {
 		return link;
 	}

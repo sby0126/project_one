@@ -113,9 +113,9 @@ public class CartCommand extends Command {
 			// 색상&사이즈
 			JSONArray options = (JSONArray)data.get("options");
 			
-			
-			
 			List<OrderVO> orderList = new ArrayList<>();
+			
+			final JSONObject ref = data;
 						
 			options.forEach(raw -> {
 				JSONObject opt = (JSONObject)raw;
@@ -135,15 +135,13 @@ public class CartCommand extends Command {
 					order.setPrice( qty * price );
 					order.setProductId(productId);
 					order.setLink(link);
+					order.setRaw(ref);
 					
 					orderList.add(order);
 					
 					totalPrice[0] += qty * price;
 					productNameList.add(order.getProductName());
 					
-//					if(orderService.processOrder(order)) {
-//						
-//					}
 				}
 					
 			});

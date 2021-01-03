@@ -100,11 +100,6 @@ public class PaymentOrderCommand extends Command {
 			
 			int[] totalPrice = {0};
 			
-			System.out.println(title);
-			System.out.println(amount);
-			System.out.println(price);
-			System.out.println(productId);
-			
 			String productName = "";
 			List<String> productNameList = new ArrayList<>();
 			
@@ -122,7 +117,6 @@ public class PaymentOrderCommand extends Command {
 				// 수량
 				int qty = Integer.parseInt((String)opt.get("qty"));
 
-				
 				for(int i = 0; i < qty; i++) {
 					OrderVO order = new OrderVO();
 					order.setProductName(title + "-" + label);
@@ -133,9 +127,6 @@ public class PaymentOrderCommand extends Command {
 					totalPrice[0] += qty * price;
 					productNameList.add(order.getProductName());
 					
-//					if(orderService.processOrder(order)) {
-//						
-//					}
 				}
 					
 			});

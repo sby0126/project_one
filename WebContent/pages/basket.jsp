@@ -89,9 +89,9 @@
 		                        </div>
 		                        <div class="extra">
 		                            <div class="ui right floated animated fade button" tabindex="0">
-		                                <div class="visible content">구매하기</div>
+		                                <div class="visible content">상품 보기</div>
 		                                <div class="hidden content">
-		                                    <a target="_parent" href="/pages/detail.jsp${cart.getLink()}">${ cart.getPrice() }</a>
+		                                	<a target="_parent" href="/pages/detail.jsp${cart.getLink()}">${ cart.getPrice() }</a>
 		                                </div>
 		                            </div>
 		                            <div class="ui huge star rating"></div>
@@ -132,8 +132,8 @@
         $("#delete-selection-cart").on("click", () => {
             const form = document.createElement("form");
             form.action = "/contents/deleteCart.do";
-            
-            let list = [];
+            form.method = "POST";
+            form.name = "content_form";
             
             $(".item").each((index, elem) => {
             	const input = $(elem).find("input[type=checkbox]");
@@ -146,6 +146,7 @@
             });
             
             document.body.appendChild(form);
+            document.content_form.target="_parent"; 
             form.submit();
         });
 
