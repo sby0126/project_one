@@ -65,13 +65,13 @@
                 
                 <c:choose>
                 <c:when test="<%= cartList == null || !cartList.isEmpty() %>">
-	                <c:forEach var="cart" items="${cartList}">
+	                <c:forEach var="cart" items="${cartList}" varStatus="cartStatus">
 	                	<%
 	                		ItemService service = new ItemService();
 	                		OrderVO vo = (OrderVO)pageContext.getAttribute("cart");
 	                		ProductVO productVO = service.getDAO().findShopDataAsID(vo.getProductId());
 	                	%>
-		                <div class="item">
+		                <div class="item" data-id="${ cartStatus.index }">
 		                    <div class="ui center checkbox">
 		                        <input type="checkbox" name="example">
 		                        <label></label>
@@ -107,8 +107,8 @@
 	            </c:otherwise>
             	</c:choose>
 	                <div class="item">
-	                    <button id="delete-all-cart" class="ui right floated primary button">
-	                    선택 삭제
+	                    <button id="delete-selection-cart" class="ui right floated primary button">
+	                    전체 삭제
 	                    </button>
 <!-- 	                    <button class="ui right floated button"> -->
 <!-- 	                    전체 구매 -->
@@ -120,12 +120,35 @@
     </div>
 
     <script>
+        // 전체 선택
 	    $("#all-select-checkbox").on("click", () => {
 	    	var c = $("#all-select-checkbox").prop("checked");
 	    	
 	        $("input[type='checkbox']").prop("checked", !c);  
 	        
-	    });
+        });
+        
+        // 장바구니 삭제
+        $("#delete-selection-cart").on("click", () => {
+            const form = document.createElement("form");
+            form.action = "/contents/deleteCart.do";
+            
+            let list = [];
+            
+            $(".item").each((index, elem) => {
+            	const input = $(elem).find("input[type=checkbox]");
+            	if(input.is(":checked")) {
+            		const id = document.createElement("input");
+            		id.name = "idList";
+            		id.value = $(elem).data("id");
+            		form.appendChild(id);
+            	}
+            });
+            
+            document.body.appendChild(form);
+            form.submit();
+        });
+
     </script>
 
 </body>

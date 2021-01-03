@@ -1,0 +1,50 @@
+package command;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import action.ActionResult;
+import vo.OrderVO;
+
+public class DeleteCartCommand extends Command {
+
+	@Override
+	public ActionResult execute(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		result.start(request, response);
+		
+		HttpSession session = request.getSession();
+		
+		// String to int 변환
+		String[] ids = request.getParameterValues("idList");
+		List<Integer> list = Arrays.asList(ids)
+					.stream()
+					.mapToInt(Integer::parseInt)
+					.boxed()
+					.collect(Collectors.toList());
+		
+		List<OrderVO> cartList = (List<OrderVO>)session.getAttribute("cartList");
+		
+		if(cartList != null && !cartList.isEmpty()) {
+			list.forEach(i -> {
+				if(cartList.remove(i)) {
+					System.out.println("장바구니에서 " + i + "를 제거했습니다.");
+				}
+			});
+		}
+		
+		session.setAttribute("cartList", cartList);
+		
+		result.sendRedirect("/pages/basket-tunnel.jsp");
+		
+		return result;
+	}
+	
+}

@@ -96,6 +96,9 @@ public class ContentController extends HttpServlet {
 			case "/cart.do":
 				command = new CartCommand();
 				break;
+			case "/deleteCart.do":
+				command = new DeleteCartCommand();
+				break;
 			case "/search.do":
 				command = new ContentsSearchCommand();
 				break;
