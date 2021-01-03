@@ -42,17 +42,19 @@
           <div class="content">
             <a class="header">My Neighbor Totoro</a>
             <div class="meta">
-              <span class="cinema">IFC Cinema</span>
+              <span class="cinema">제이브로스</span>
             </div>
             <div class="description">
               <p></p>
             </div>
             <div class="extra">
-              <div class="ui right floated primary button">
-                Buy tickets
-                <i class="right chevron icon"></i>
-              </div>
-              <div class="ui label">Limited</div>
+              <div class="ui right floated animated fade button" tabindex="0">
+                <div class="visible content">구매하기</div>
+                <div class="hidden content">
+                  12,000원
+                </div>
+              </div>              
+              <div class="ui label">한정판</div>
             </div>
           </div>
         </div>
@@ -63,16 +65,18 @@
           <div class="content">
             <a class="header">Watchmen</a>
             <div class="meta">
-              <span class="cinema">IFC</span>
+              <span class="cinema">제이브로스</span>
             </div>
             <div class="description">
               <p></p>
             </div>
             <div class="extra">
-              <div class="ui right floated primary button">
-                Buy tickets
-                <i class="right chevron icon"></i>
-              </div>
+              <div class="ui right floated animated fade button" tabindex="0">
+                <div class="visible content">구매하기</div>
+                <div class="hidden content">
+                  12,000원
+                </div>
+              </div>         
             </div>
           </div>
         </div>
