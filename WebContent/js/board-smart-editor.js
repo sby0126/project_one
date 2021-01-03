@@ -60,6 +60,15 @@
         placeholder: '내용을 작성하세요.',
         theme: 'snow',
     });
+
+    // let Inline = Quill.import('blots/inline');
+
+    // class XVideoBlot extends Inline { }
+    // XVideoBlot.blotName = 'div';
+    // XVideoBlot.tagName = 'a';
+    
+    // Quill.register(XVideoBlot);    
+    window.quill = quill;
     
 	function setTitle(text) {
 		$("#input-item-title").val(text);	
@@ -122,7 +131,8 @@
                     if(mimeType == "image") {
                         quill.insertEmbed(range.index, 'image', "/uploads/" + data.url);
                     } else {
-                        quill.insertEmbed(range.index + 1, "link", data.files[0].name);
+                        let href = "/download.do?filename=" + data.url;
+                        quill.clipboard.dangerouslyPasteHTML(range.index + 1, `<p><a href='${href}'><i class="fas fa-file-archive">${data.url}</i><a></p>`);
                     }
                 },
                 error: function (err) {
