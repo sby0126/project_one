@@ -1,4 +1,6 @@
 ./WebContent/pages/:
+basket-tunnel.jsp
+basket.jsp
 board-default.jsp
 board-native-editor.jsp
 board-post.jsp
