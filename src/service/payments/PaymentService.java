@@ -4,13 +4,22 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.http.HttpResponse.BodyHandlers;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import dao.PaymentDAO;
 import vo.PaymentVO;
@@ -106,128 +115,59 @@ public class PaymentService {
 	 * @return
 	 * @throws Exception
 	 */
+	@SuppressWarnings("deprecation")
 	public boolean orderKakaoPay(String imp_uid, String customerId, int productId, int paid_amount, String access_token) throws Exception {
 		
 		boolean isValid = false;
 		
-		URL url = new URL("https://api.iamport.kr/payments/" + imp_uid);
-		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-		
-		connection.setRequestMethod("GET");
-		connection.setConnectTimeout(1000 * 8);
-		
-		// 액세스 토큰을 같이 전달해야 합니다.
-		connection.setRequestProperty("Authorization", access_token);
-		connection.setRequestProperty("accept", "application/json");
-		
-		connection.setDoOutput(false); 
-		
-		if(connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+		if(access_token != null) {
+			HttpRequest httpRequest = HttpRequest.newBuilder()
+					.uri(URI.create("https://api.iamport.kr/payments/" + imp_uid))
+					.setHeader("Authorization", access_token)
+					.setHeader("accept", "application/json")
+					.GET()
+					.build();
 			
-			InputStream responseStream = connection.getInputStream();
+			HttpClient httpClient = HttpClient.newHttpClient();
 			
-			// 읽기
-			StringBuilder sb = new StringBuilder();
-			BufferedReader br = new BufferedReader(new InputStreamReader(responseStream, "UTF-8"));
-			String line = null;
-			
-			while ((line = br.readLine()) != null) {
-				sb.append(line).append("\n");
+			try {
+				HttpResponse<String> response = httpClient.send(httpRequest, BodyHandlers.ofString());
+				if(response.statusCode() == HttpURLConnection.HTTP_OK) {
+					
+					String contents = response.body();
+					
+					JsonParser parser = new JsonParser();
+					JsonElement root = parser.parse(contents);
+					JsonObject res = root.getAsJsonObject().get("response").getAsJsonObject();
+					
+					int amount = res.get("amount").getAsInt();
+					long cancelAmount = res.get("cancel_amount").getAsInt(); 
+					String status = res.get("status").getAsString();
+					
+					PaymentDAO paymentDAO = PaymentDAO.getInstance();
+					PaymentVO vo = paymentDAO.getPayment(imp_uid);
+					
+					// 아임포트로부터 받은 결제 금액과 실제 DB에 저장된 결제 금액과 일치하면 정상적으로 결제된 것임 (검증 완료)
+					if(status.equals("paid") && vo.getPaidAmount() == amount) {
+						isValid = true;
+					} else {
+						isValid = false;
+					}							
+					
+				}
+				
+			} catch(Exception e) {
+				e.printStackTrace();
 			}
-			br.close();
-			
-			JSONParser parser = new JSONParser();
-			
-			System.out.println(sb.toString());
-			
-			JSONObject raw = (JSONObject)parser.parse(sb.toString());
-			JSONObject response = (JSONObject)raw.get("response");
-		
-//			{
-//				  "code": 0,
-//				  "message": "string",
-//				  "response": {
-//				    "imp_uid": "string",
-//				    "merchant_uid": "string",
-//				    "pay_method": "string",
-//				    "channel": "pc",
-//				    "pg_provider": "string",
-//				    "pg_tid": "string",
-//				    "pg_id": "string",
-//				    "escrow": true,
-//				    "apply_num": "string",
-//				    "bank_code": "string",
-//				    "bank_name": "string",
-//				    "card_code": "string",
-//				    "card_name": "string",
-//				    "card_quota": 0,
-//				    "card_number": "string",
-//				    "card_type": "null",
-//				    "vbank_code": "string",
-//				    "vbank_name": "string",
-//				    "vbank_num": "string",
-//				    "vbank_holder": "string",
-//				    "vbank_date": 0,
-//				    "vbank_issued_at": 0,
-//				    "name": "string",
-//				    "amount": 0,
-//				    "cancel_amount": 0,
-//				    "currency": "string",
-//				    "buyer_name": "string",
-//				    "buyer_email": "string",
-//				    "buyer_tel": "string",
-//				    "buyer_addr": "string",
-//				    "buyer_postcode": "string",
-//				    "custom_data": "string",
-//				    "user_agent": "string",
-//				    "status": "ready",
-//				    "started_at": 0,
-//				    "paid_at": 0,
-//				    "failed_at": 0,
-//				    "cancelled_at": 0,
-//				    "fail_reason": "string",
-//				    "cancel_reason": "string",
-//				    "receipt_url": "string",
-//				    "cancel_history": [
-//				      {
-//				        "pg_tid": "string",
-//				        "amount": 0,
-//				        "cancelled_at": 0,
-//				        "reason": "string",
-//				        "receipt_url": "string"
-//				      }
-//				    ],
-//				    "cancel_receipt_urls": [
-//				      "string"
-//				    ],
-//				    "cash_receipt_issued": true,
-//				    "customer_uid": "string",
-//				    "customer_uid_usage": "issue"
-//				  }
-//				}		
-			
-			int amount = Integer.parseInt((String)response.get("amount"));
-			long cancelAmount = Integer.parseInt((String)response.get("cancel_amount")); 
-			String status = (String)response.get("status");
-			
-			PaymentDAO paymentDAO = PaymentDAO.getInstance();
-			PaymentVO vo = paymentDAO.getPayment(imp_uid);
-			
-			// 아임포트로부터 받은 결제 금액과 실제 DB에 저장된 결제 금액과 일치하면 정상적으로 결제된 것임 (검증 완료)
-			if(status.equals("paid") && vo.getPaidAmount() == amount) {
-				isValid = true;
-			} else {
-				isValid = false;
-			}			
-		} else {
-			System.out.println("액세스 토큰이 잘못되었거나 현재 코드가 유효하지 않습니다.");
-			isValid = false;
+								
 		}
-						
+			
 		return isValid;
 	}
 	
 	public static void main(String[] args) {
+		
+		String access_token = null;
 		
 		try {
 			URL url = new URL("https://api.iamport.kr/users/getToken");
@@ -272,7 +212,7 @@ public class PaymentService {
 				JSONObject raw = (JSONObject)parser.parse(sb.toString());
 				
 				JSONObject response = (JSONObject)raw.get("response");
-				String access_token = (String)response.get("access_token");
+				access_token = (String)response.get("access_token");
 				
 				System.out.println(access_token);
 					
@@ -283,6 +223,6 @@ public class PaymentService {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-				
+						
 	}
 }

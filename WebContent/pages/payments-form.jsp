@@ -72,6 +72,7 @@
                 $.ajax({
                     type: "POST", 
                     url: "/payments/check.do",
+                    // url: "vertifyPayment",
                     dataType: 'json',
                     data: {
                     	"imp_uid" : rsp.imp_uid,
@@ -81,6 +82,11 @@
                     	"paid_amount": rsp.paid_amount
                     },
                 }).done(function(data) { // 응답 처리
+                	             
+                	if(typeof(data) === "string") {
+                		data = JSON.parse(data);
+                	}
+                	
                     switch(data.status) {
                     case "success":
                       // 결제 성공 시 로직
@@ -88,7 +94,7 @@
                       location.href = '<%=request.getContextPath()%>/payments/success.do?msg='+msg;
                       break;
                     default:
-                    	msg = '결제 실패';
+                    	msg = 'vertify';
                     	location.href = '<%=request.getContextPath()%>/payments/success.do?msg='+msg;
                     	break;
                   }

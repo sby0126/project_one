@@ -70,6 +70,13 @@ public class PaymentCheckCommand extends Command {
 			
 			// 구매 처리
 			service.processKakaoPay(info);
+			
+			Thread.sleep(1);
+			
+			System.out.println(imp_uid);
+			System.out.println(id);
+			System.out.println(paid_amount);
+			System.out.println(access_token);
 
 			// 획득한 액세스 토큰으로 카카오 페이 결제를 시도합니다.
 			boolean isSuccess = service.orderKakaoPay(imp_uid, id, productId, paid_amount, access_token);

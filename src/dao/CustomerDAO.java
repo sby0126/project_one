@@ -504,10 +504,7 @@ public class CustomerDAO implements IDAO {
 			
 			if(pstmt.executeUpdate() > 0) {
 				ret = true;
-				conn.commit();
-			} else {
-				conn.rollback();
-			}			
+			}		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (Exception e) {

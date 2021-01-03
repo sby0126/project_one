@@ -120,9 +120,10 @@ public class PaymentDAO implements IDAO {
 			
 			List<PaymentVO> list = SQLHelper.putResult(rs, PaymentVO.class);
 			
-			if(rs.next()) {
-				payment = list.get(0);
+			if(!list.isEmpty()) {
+				payment = list.get(0);	
 			}
+			
 			
 		} catch(SQLException e) {
 			e.printStackTrace();
