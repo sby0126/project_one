@@ -1,6 +1,7 @@
 package command;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,9 +49,12 @@ public class DeleteCartCommand extends Command {
 		
 		session.setAttribute("cartList", cartList);
 		
-		result.sendRedirect("/pages/basket-tunnel.jsp");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("location.href = '/pages/basket-tunnel.jsp");
+		out.println("</script>");
 		
-		return result;
+		return null;
 	}
 	
 }
