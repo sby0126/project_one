@@ -50,8 +50,8 @@ section {
 .card-container > .card {
     position: relative;
 
-    /* flex-basis: 13.8em; */
-    flex-basis: 22.8%;
+    flex-basis: 13.8em;
+/*     flex-basis: 22.8%; */
     height: 18.3em;
     margin-bottom: 0.5em;
     
