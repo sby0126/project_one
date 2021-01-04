@@ -1,4 +1,5 @@
 ./WebContent/pages/:
+Recently_viewde_item.jsp
 basket-tunnel.jsp
 basket.jsp
 board-default.jsp
@@ -20,12 +21,15 @@ find_id.jsp
 find_id_ok.jsp
 find_password.jsp
 find_password_ok.jsp
+header.jsp
 infopolicy.jsp
 interested_item.jsp
+join.html
 join.jsp
 login.jsp
 logout.jsp
 map.jsp
+members.jsp
 modifyMemberForm.jsp
 myshop.jsp
 outer-link-page.jsp
