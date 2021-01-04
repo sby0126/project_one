@@ -1,0 +1,9 @@
+data.js
+
+해당 data 텍스트 파일
+
+텍스트 -> 엑셀 text 불러오기(구분자 활용)
+
+
+=CONCATENATE 함수 활용
+

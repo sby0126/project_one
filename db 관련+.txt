@@ -1,0 +1,66 @@
+세일 사용 값 
+category
+title
+shop
+term
+url
+
+일반 item 사용값 - 배열 구성
+
+genderType
+shopType
+offset
+imageUrl
+contentData
+imageData - url, key 값 배열로 구성  - 연관배열일 가능성 높음
+
+
+ContentData
+
+category
+shopName
+texts
+url
+
+----------
+shop&item 페이지 사용값
+(imageData) ????
+pageType
+genderType
+shopType
+offset --	로딩 idx min, max값
+imageUrl		-- 이미지 url 베이스
+contentData	-- pt : 's' - category(varchar), shopName, texts(연령 필터 및 카테고리 구분), url(실 uri값)
+		-- title, price, shop, url
+
+
+
+. insert SQL을 좀 더 쉽게 만드는 방법
+insert 대상이 되는 테이블의 컬럼이 많으면 일일이 변수명을 입력하고 순서가 맞는지 확인하기 힘듭니다. 이런 경우는 아래와 같이 파라미터를 객체로 넘기면 쉽습니다. 객체 변수명은 insert 테이블의 컬럼명과 동일하게 작성해야 합니다. 
+
+var clubMberObj = {
+  CLUB_SN : clubSn,
+  MBER_NM : mberNm,
+  MBER_SN : mberSn,
+  MNGR_YN : 'Y',
+  PROFILE_IMAGE : profileImage
+};
+
+//클럽회원 저장
+var sql = "INSERT INTO CLUB_MBER SET ? "
+
+dbconn.query(sql, clubMberObj, function(err, result){
+	...
+});
+
+
+https://www.python2.net/questions-934733.htm		-- json을 통한 oracle 배열값 탐색
+
+연관배열 참조
+&
+oracle 컬렉션 참조
+- https://gdtbgl93.tistory.com/155
+
+테이블 변수 타입 배열 선언 -  + 프로시저 사용???
+
+
